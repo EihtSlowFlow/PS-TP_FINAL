@@ -6,7 +6,7 @@
 - **Backend:** PHP ≥ 7.4 con **CodeIgniter 4** (MVC). 
 - **Base de datos:** MySQL (driver MySQLi). 
 - **Frontend:** HTML5, CSS3 (responsive) y JavaScript ES6 vanilla.
-- **Infraestructura:** LAMP (Apache, PHP, MySQL) en entorno local.
+- **Infraestructura:** LAMP/WAMP (Apache, PHP, MySQL) en entorno local.
 
 ## Alcance y módulos principales
 - Seguridad y autenticación (BCRYPT, filtros de sesión/rol). 
