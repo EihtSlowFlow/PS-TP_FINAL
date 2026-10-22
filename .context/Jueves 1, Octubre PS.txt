@@ -1,0 +1,407 @@
+todo gente, pero vamos a ver algo de SDD, o sea, de programación orientada a aspectos, con lo cual después va a evolucionar este proyecto en un flujo más moderno de desarrollo orientado al desarrollo con inteligencia artificial. ¿Está bien? Pero como les vengo diciendo, necesitan conocer qué es lo que está pasando y saber corregir a la inteligencia artificial, porque ciertamente Le R y le R, eh, así que bueno, necesiten, necesitamos hacer esto para la próxima clase. Coordinator con un nombrecito de proyecto, una alta, baja, modificación y consulta, ¿sí? El ABMC que ya hicieron con la misma tabla, todo pueden hacer reutilizarlo y implementarlo en Codinatir. Bien, hoy vamos a ver un agregado, algunas cositas, detalles de de ator, eh, que nos van a facilitar, obviamente, la vida. Eh, y vamos a ver qué más llegamos a ver, ¿sí?, del eh temas aparte. No creo que lleguemos a ver UX, pero sí vamos a ver e algo de de algún template para usar y bien,
+
+directamente no vamos a ver
+
+hoy.
+
+Ah, hoy
+
+sí, hoy,
+
+pero capaz que Sí, sí, sí, sí, si hay una clase directamente dedicada a creo que esta ya la está pul.
+
+Bueno, habíamos visto, terminamos de ver todo este flujo de las URL, el roto en coordinator, ¿sí? Cómo roteamos en el archivito de configuración de rutas, cómo se agregan los parámetros, eh eso va a un controlador, como en el controlador usamos los modelos con su patrón Active Record para acceder a la base de datos. Y hasta el momento las funcionalidades eran sencillas y fácil y funcionaba todo muy bien, ¿bien? Y perdón, y ahí devolvíamos la vista. Bien, eso es lo que habíamos visto hasta hoy. E no me acuerdo cómo había quedado esto. Vamos a No, esto no es. Es esto es lo que habíamos hecho. Sí. E una alta baja modificación y consulta de usuarios. Eliminado bastante bien y rápido. Cierto que no le había puesto ni cartel. Habíamos hecho el nuevo usuario, el editar y eliminar. ¿Sí se acuerdan que para el editar teníamos que tener el ID? Justamente porque para editar un registro de una base de datos tenemos que tener el identificador unívoco, la primary key. Eh, bien, hasta ahí vamos bien, ¿no se acuerdan? Hoy vamos a ver uno, una de las primeras cositas que quiero contarles, que es, si ustedes se fijan, hay un detallecito en Codinator, que es que me construye las URLs con un index.pchp arriba. Bien, hay un montón de formas de modificar eso. Sí, ciertamente hay que trabajar en realidad. ¿Por qué aparece ese index.php como les dije, todo entra por index.php de codinator del framework. Entonces, a la hora de construir eh las URL, Codinator le agrega ese public index php. Bien, para que vaya directamente al framework. Si ustedes se fijan en la documentación, eh, Por acá donde dice coordinator URLs, eh, hay una sección que es para remover ese index.php que quedan más amigables, ¿sí? Y pasar de una URL con el index.php ahí a sacarle y simplemente poner en la URL barra toda la URI. Bien. Y sacamos ese index.php y eso es configurando un archivito que se llama punto HT. Sí, lo leen acá. Es bastante fácil. Hay que tener activo el mod rewrite, un complemento de
+
+Está raro, ¿no?
+
+Viene la RAL del hijo.
+
+Raro, eh, un complemento de apache porque esto es una configuración del servidor web, ¿sí?, en particular del servidor Apache. ¿Qué hacemos con el mod rewrite? Lo que habilitamos acá es que cada cada portal pueda reescribir reglas del servidor web Apache. Sí, servidor web Apache tiene sus reglas, un poco las vimos, ¿sí? Donde decimos, bueno, ¿cuáles son los archivos por defecto a buscar? Index html, index php o cuánto puede llegar a ser el máximo de un del la subida de un archivo. Esos también son reglas y para parámetros que podemos configurar del servidor web. Está cuando habilitamos este red. Esperen que no es micrófono. Eh, lo que le estamos diciendo es que me permita a cada uno de los portales o de los sitios o de las páginas que están en mi carpeta www o HTDC, cualquiera de ellas, le permitimos escribir esas reglas y la forma de reescribir esas reglas es a través del de un archivito punhtess. Sí, ese archivito va a estar alojado por acá. HTC ya está construido. Fíjense que esto está, esperen, en public. Este, no, este, el de public HT Access. Sí, ya tiene un montón de reglas. Bueno, me parece que ya está. Todas estas reglas lo que van a hacer es intentar sacar ese index.php. Sí, muchas veces eso trae confusión y tenemos problemas con ese index.ph se los digo que puede ser que eso les traiga problema. Eh, esto ya está. Rewrite on. A ver si está el rewrite on. Si no no me va a dejar. Sí. Acá está. Bueno, ya está. Lo deberían tener funcionando. Si tienen el mod rewrite activo. El mod rewrite vamos a en este caso. Si ustedes tienen s es lo mismo. Y si no, si tienen el Apache, el servidor web configurado, instalado, eh independiente, tienen que ir a un archivo que se llama HTDC HTTPD o similar y ahí habilitar y deshabilitar los módulos. Sí, a mano. Eh, acá tengo los módulos listados y seguramente tengo el rewrite module habilitado, entonces yo ya no tengo problema con eso. Sí, eso es algo lo primero que les quería comentar. Sí, si tienen quilombo con el index.php ahí y no saben por qué, qué es lo que está pasando, Bueno, lo pueden buscar en coordinator, en coordinator URLs y ahí les va a aparecer e que tienen que configurar. Si básicamente lo que lo que nosotros buscamos es que esto funcione así directamente, ¿no? Sin escribir el index pun php. ¿Está bien? ¿Se entendió bien? Eh, esa es una primera truca. Vamos a la segunda y ahora vamos a hablar un poquito de interfaces de usuario y templates que andan dando vueltas. Sí, nosotros de por sí vamos a construir, en este caso, en la materia vamos a construir proyectos de gestión de información. Sí. Y esos proyectos de gestión de información muchas veces Eh, vamos a intentar hacer un formato de un sistema de administración. Bien, podemos diseñarlo como nosotros querramos. Está diseñar significa ya gráficamente diseñar dónde van a ir los menús, dónde van a ir los controles, dónde va a ir cada uno de los el los formularios, cómo se van a ver, si eso lo podemos diseñar, se lo podemos pedir a a cualquier inteligencia artificial que nos haga un diseño, pero hay algo que ya está preestablecido y que se conoce mucho que es template de administración. Sí, ustedes lo buscan. ¿Alguien conoce algún template para un sistema de administración? Así se llama. Sí, admin templates. Si ustedes buscan en Google o en la guía que más le convenga, admin templates, van a aparecer, bueno, a la venta obviamente un montón, pero si vamos acá 206 los DS admin templates
+
+son todos dashboard.
+
+Dashboard es una parte del del admin template. Dashboard sería como una una pantalla principal de resumen de información,
+
+pero admin template voy a entrar a cualquiera. Eh,
+
+claro, admin se refiere a
+
+sistemas de administración
+
+específic
+
+o paneles de administración.
+
+Claro.
+
+Básicamente lo que queremos lograr es esto, ¿no? Menú con un montón de funcionalidades y en el centro lo la información que vamos a administrar. En este caso es un dashboard, ¿sí?, que que nos muestra un resumen de toda la información, pero acá navegaríamos, iríamos a los crud de distintas entidades y nos manejaríamos en ese es el sentido de un admin template. Sí, esperen que vamos a una preview de esto. Me le cambian los botones de lugar. Este en particular se llama Lexa, es en nots. No pasa nada. Vean, vamos a ir a cualquiera. La mayoría son iguales, eh, o muy parecidos, pero generalmente, y esto sí ya lo deben, les debe sonar familiar, tienen un menú lateral, side na, sí, un menú lateral donde van entrando, vamos a suponer que es una administración de eh una clínica acá administrarían los pacientes, etcétera, etcétera, los doctores, los turnos. Sí, básicamente como nosotros desarrollamos sistemas de administración es una una formato conveniente super estudiado y que eh es fácil de usarlo. Sí. Entonces, estos admin templates y los van a encontrar por todos lados nos ofrecen ya algo estructurado, los colores, todos los componentes, tod cuadritos, ya todo armado, está en su momento habíamos visto Bootstrap, ¿se acuerdan? Borap. ¿Alguien no se acuerda de Boa? ¿Qué era? ¿Quién se anima a decirme? CSS.
+
+Un framework de CSS. Sí. Un framework de estilos predefinidos. Estamos CSS. ¿Se acuerdan que era CSS?
+
+Sí. Silipet. ¿Para qué servía CS? para dar estilo, todo
+
+para darle estilo, para cambiar lo visual, ¿sí? Para trabajar sobre cómo se veía y la estructura con qué se lo hacíamos.
+
+Muy bien.
+
+Algo va bien,
+
+bien.
+
+No me pregunté una semana.
+
+Estos admin templates, estos templates de administración combinan generalmente usan Boostrap o algún otro eh de framework de estilo y le dan su propio toque para hacer estas estructuras y dejarlo como un panel de administración y tener esos iconitos. Hagan llegan a lo Pero tienen todo un montón, un sinfín de iconos. Tenemos eh algunos ejemplos, por ejemplo, un calendar. Si le damos clic al calendar, tiene el calendar alarmado. Acá tiene, por ejemplo, una aplicación de muestra de cómo sería un mail. Sí, un inbox de No, no puedo, no puedo, no puedo. Dos eh de mails. Sí. Eh eh eh acá sería, por ejemplo, un uno de chat. Sí. Si yo quisiese hacer un chat dentro de la empresa, eso sería como el template lo que me ofrece. Eh, un cana, un seguramente esto lo puedo mover y mover. Sí,
+
+todo latín
+
+todo
+
+todo latín.
+
+Uh, no había leído. Tiene seguramente tiene internacionalización. Sí, no, no tiene. Pero bueno, nos ofrece y un montón de elementos. Sí, los alerts. Los alerts son estos que vemos acá. Botones. Me dice qué botones están así, cómo son los botones y cómo usar. los eh cards, las famosas cards y todos sus variantes. Eh, Lightbox, no sé qué son, es esto que está acá. Bueno, en definitiva, ah, y este usa Sweet Alert. Sweet Alert está buenísimo, que son estos popups animados, ¿sí? Que tienen todas unas animaciones bonitas y qué sé yo. Paso dos, paso tres, no, todo animado. Estos se pueden configurar, es JavaScript, ¿no? Bueno, acá están los iconos que usa. Sí, si queremos buscar iconos, tenemos todos los iconos que ya tiene preconfigurados y podemos usar el que querramos. En definitiva, eh, nos resuelve un montón, ¿no? Ya nos da una estructura. Si elegimos el que más nos gusta, Empezamos a construir sobre un template como esto y ya nos ahorramos un montón de dolores de cabeza.
+
+¿Cómo se llama la
+
+No, esta es uno que encontré por ahí,
+
+lo guié. Olvídense de ese. Esos seguros. Me voy a morir de verde. Voy a quedar. Ah, mira, y tiene el pie a juego.
+
+No sé si lo más cómodo que he usado
+
+la radio. Bien. Bueno, está se entiende que a qué me refiero. Generalmente tienen esto que está acá al costado que lo podemos cambiar de color y cambiaría. Está cambiando. Ahí está. Ahí va cambiando. Pero bueno, si buscan van a ver que casi todos los templates, esta es una página, esta en bato es una página que vende templates. Sí, casi todos van a ver que son similares. Sí, tienen sus diferencias, pero apuntan a lo mismo. Barra lateral, una barrita arriba que tiene el usuario, las notificaciones, si puede tener algo más y el centro va cambiando y va tomando. Eh, depende del link que aprendé, va renderizando. la el contenido. ¿Está bien? Bien. Entonces, en función de eso, vamos a ver algo en codinator para construir estos layouts. Sí, nosotros estuvimos viendo que el la barra de arriba va a ser siempre la misma, el menú lateral va a ser siempre lo mismo, el fo va a ser siempre lo mismo, ¿no? Voy a ir a cada vista y escribirle el HTML en cada una de las vistas y escribir todo el layout a cada una de las vistas en un coordinator. Sí, vamos a reutilizar esa parte. Entonces, una forma de reutilizar, ahora lo vamos a ver. Es sencillo usar en el controller cuando devolvemos la view ir anidando y ese ir anidando me va a ir renderizando distintas vistas. A ver, lo voy a buscar acá. Acá eh, first ser, no está. Quiero mostrarles cómo sería. Igual ahora lo vamos a hacer. Sí. Cuando devuelvo una vista dentro de un controlador, voy anidando las distintas vistas. Y es como ir escribiendo la HTML. Eso lo podemos hacer y va a funcionar. Sí, pero hay una forma mejor que es usar la el constructor de layouts del coordinator, donde podemos crear un layout bien con ciertos eh con ciertas acciones o helpers que nos da Coordinator y finalmente renderizar ese layout que va a funcionar perfecto. Bien. Eh, entonces vamos a empezar por el principio. Yo le quiero dar esa estructura a mi proyecto Codinator. Sigo estando en el mismo proyecto que vimos eh la clase pasada. Para dar para construir una vista, por supuesto, vamos a ir a nuestra carpeta views y ahí vamos a trabajar ahora vamos a trabajar en eso y por ahí en algunos hojas de estilo y JavaScript y algunas imágenes. Ahora bien, yo no quiero partir de cero y hacerlo yo mismo. Sí, vamos a partir de cero. Vamos a hacerlo. Creo una vamos a a crear una eh una folder, una carpeta. Acá le vamos a poner template o layout. Dentro del layout pas dentro de le vamos a poner header. PHP. Vamos a tener un eh na side, ¿no? Vamos a poner side nav punto php, ¿sí? Que sería la barra de navegación lateral, ¿eh? Y vamos a crear un footer footer.php. Bien, header, amigo. Crear el header. Crear el header. Dijiste que lo iba a hacer, Nico.
+
+Lo está haciendo
+
+¿Quién describió el plom tremendo ese? Eh,
+
+¿quién pagó los token?
+
+También
+
+us tarjeta. Estoy usando el pro. Se va a copar.
+
+Te faltó el Dale. Tanto va a tardar así no más. 5000\. Bueno, me está haciendo todo. Ahora vamos a hacerlo.
+
+Muy bien. Bueno, creo el heer que tiene, por supuesto, es esto. Tenemos que pensarlo como la estructura del HTML completa que la vamos a armar por partes. Entonces, el HIDER tiene que tener el inicio de la el HTML y apertura del tag HTML, el head propio de cualquier sitio HTML, los links o los estilos que voy a incorporar. Sí, fíjense que, perdón, que acá por ahora no tiene nada. El body, abro el cuerpo de mi HTML y un header con acá le escribí un NAV, que sería como la la barra de navegación superior porque es como el head. Y fíjense que sí,
+
+¿por qué el archivo PHP?
+
+Todo en coordinat PHP,
+
+¿no? Que sea todo en HTML.
+
+Sí, sí, sí. Em, el inicio del contenido principal. Si yo ahí abro un tag main que se va a cerrar después en el futer. Sí, si lo pensamos como partido en partes por acá, por el footer. tendría que tener el cierre del tag main, se entiende? Entonces, eso lo tenemos que pensar y visualizar para que eso quede consistente, porque después todo va a ser un solo HTML. Bien. Y fíjense que acá al final tengo el footer y cierro el body y cierro el HTML, completo lo de arriba. Bien. Y en el medio, en el medio del header y del footer, bueno, vamos a tener lo que sea y se va a escribir acá abajo. ¿Está? ¿Me siguen ahí? Bueno, entonces, ¿cómo usamos este header y este footer? Básicamente vamos a ir a nuestro controller, user controller en este caso, y se acuerdan que nosotros acá reenderizábamos la lista de usuarios. Bien, entonces si yo acá quisiera mantener esto, lo que vamos a hacer es view Acá le vamos a hacer layout. No es con punto, es con Ah, sí, con punto. Sí, porque con catena. Si el view, cuando yo llamo la función view lo que me devuelve es el texto plano de HTML que está ahí adentro, obviamente procesado. Al view del layout header le concateno. el view de userlist pasándole la lista de usuarios y después vamos a ponerle el punto acá view del layout footer. Sí. Entonces como escribir el header, escribir la lista de usuarios y escribir después el puter. Bien, entonces si ahora vamos a nuestra página, que no es esta, que no es esta, que es esta, y le damos refrescar. Tenemos el header con un inicio, lo mismo del usuario, y el footer por acá abajo. Sí, me muestra estos recuadros porque yo estoy en formato develop. Sí, en producción eso no se mostraría. No sé si lo puedo desactivar o activar con esto. ¿Se acuerdan? Para desactivar eso, vamos al punto environment. Y acá le decimos produ, ¿no? Si no escribo tanto. Sí. Y este sería nuestro
+
+hola nuestro sistema ya armado. Entonces cada vez que yo quiero renderizar algo dentro del proyecto o o si cambio algo en el footer o en el header, se va a cambiar para todos los controles. ¿Está bien? Bien, se entendió de esa forma. Ahora bien, lo cierto es que esto me da cierta independencia. ¿Por qué? Porque yo esto lo tengo que hacer en cada llamada a cada, esperen que lo acomodo acá. Cada llamada o cada controller me tiene que armar ese No, primero el header, después el contenido y después el footer. Entonces acá lo tenemos con este usuario en el save. No, no. Ah, es la única página que tenemos. Bien, ya vamos a tener otra funcionalidad, no se preocupen. Ahora, en cada uno de los controllers o las acciones, tengo que construirlo a mano. Me da flexibilidad porque y porque si yo quiero a cada sección le pongo un header distinto. Tengamos cuidado con eso, ¿no? Acá sí podemos hablar de un heer para la administración, un heer para el usuario común, un heer dependiendo del rol, cambiarle losers o lo o el menú de navegación. Sí. Entonces ahí puedo jugar. Pero también es peligroso y es agotador ir escribiendo para nosotros, no para la guía o va a ser agotador escribir todo la configuración de los view. La otra forma de construir estos layouts es directamente con el motor de layout, los view layouts de coordinator. Sí, el view layout de coordinator lo que nos propone es decir, bueno, construí un layout eh establecido ya en un en un sitio y todas tus páginas van a heredar de ese layout y van a reescribir las secciones. Está es como una herencia de objetos. Entonces, heredar de esa de ese layout y reescribí las secciones. ¿Está? Entonces, para lograr lo mismo que hicimos anteriormente, lo que podemos hacer es directamente hacer un layout. Yo le voy a poner dentro de layout, le vamos a crear una que sea template php. Imagínense que ese layout Incluso podemos hacer esto. Include. Control Z. Esperen que borré. No, está bien. Eh, esto lo sacamos. Include include footer. Bien. El template incluye el header, incluye el footer y en el medio le declaro algo que se llama render section. Sí. Y le doy un nombre content. Estamos. Yo acá ya tengo definido mi template. Ahora las vistas siguientes. Lo que van a hacer es eh, esperen que este es otro template. Es extend default. Vamos a extender del del template que nosotros queremos. Bien. Y le vamos a redefinir las secciones con estos accionarles. Entonces, la forma de yo usar este template sería ir al list, que es un quilombo. ¿Recuerdan? Esto tiene más código. Todo esto no debería estar acá. Vamos a perder todos los estilos. Perdón, esperen. Vamos a hacerlo bien. Esto lo deberíamos
+
+ener
+
+cortar y pasar a Heider. Exactamente. Y también tenemos mm Esperen que en el list acá abajo,
+
+entonces HP, que es la forma de definir las vistas con el motor de
+
+el nombre es el que ustedes quieran. Sí, esto yo le dije template.
+
+Claro, pero ustedes le pueden poner lo que ustedes pueden desear. Supónganse pueden hacer un layout visual para la administración. un layout cuando está logueado alguien y un layout visual distinto para cuando no está logueado alguien.
+
+Entonces le ponen eh login template o login layout o le ponen el nombre que quieran, obviamente para entender qué es les conviene la semántica de los de los nombres de los archivos. Yo lo que estoy haciendo ahora es simplemente construí contenido footer y ahora lo vamos a pasar al layout, o sea, a construir un layout en particular con el motor de coordinator. Entonces, lo que les había dicho, cuando ustedes quieren usar este template, lo que van a hacer es simplemente en la vista extender, esperen que me voy para allá arriba. Esto lo volamos porque ya no es necesario. Esto también lo volamos para que no haya tanto quilombo. Guardamos esto. Control Z. Esperen que me copio el código de acá. Entonces, lo que yo le estoy diciendo, bueno, extendé del layout que se llama L out template. Mi layout template es este, ¿sí? Que ya por defecto, ¿qué me va a hacer? Me va a importar el Heer, me va a importar el footer y en el medio va a crear algo que se llama content, una sección que se llama content. Entonces, lo que yo tengo que hacer es reescribir esa sección content. En la vista del listado le vamos a decir, bueno, la sección content va a tener esto que está acá, todo, ¿no? Entonces, lo que me va a hacer coordinator es me va a traer el layout y en la sección definida como con ese nombre content va a poner esto esta vista que está acá. ¿Está bien? Y después en lugar de construirla a cada instante directamente la renderizo como veníamos usando antes. Entonces, ¿qué es lo que cambia? Que en el controller, en lugar de yo tener que construirla toda mano, directamente voy a llamar a la vista por su nombre y toda la el layout se encarga la parte de la vista. Sí, esto es mucho más ordenado. ¿Por qué? Porque estamos delegando responsabilidades a la vista de construir la vista y al controlador que no se preocupe de construir la vista.
+
+Esa parte es renderizado, ¿no?
+
+Exactamente. Se encarga la parte de la vista, o sea, trabajamos separados model controller. De la otra forma, ¿quién era el encargado de saber cómo renderizar y el orden de todas estas vistas? El controller. Y eso está bien, ¿no?
+
+¿Qué genera
+
+dependencia?
+
+Al cumamiento.
+
+Alam Muy bien. Muy bien esa palabra. Exactamente. Estamos acoplando dos capas y eso no está bien. O no está tan bien. Entonces ahora debería funcionar de la misma forma, fíjense, sigue funcionando, pero ya tengo el header, tengo el footer, pero el controlador ni se ni se enteró que eso se iba a renderizar. ¿Está bien? Y ahora les voy a pasar a vamos a pasar a hacer algo. un poco más bonito que sería un template en particular.
+
+Sí,
+
+si es una reutilizadas con muchas páginas y cada una tiene su CS, digamos, el tiene todo el listado.
+
+Bien, acá pasan dos cosas. Sí, puede ser así que por lo general eh se usa así y después se usan cosas un poquito más complejas, pero Por lo general sí y importamos todos los SS o dos o tres y en esos dos o tres CSS hacemos todos los estilos que necesitamos. O si tengo un estilo en particular para una página, lo ponemos acá. Este es el listado. Lo importo acá a la hoja de estilo que necesito y solo se va a importar en en el listado y no en todo el sitio. Me explico,
+
+el link queda ahí en el main, digamos.
+
+Ah, claro, í adentro, pero no pasa nada,
+
+funciona igual en HTML funciona esto igual. Muchas de las páginas que van en el van a tener importados JavaScript y hojas de estilo por todos lados. No pasa nada, funciona igual y funciona así. ¿Qué pasa? CSS un mundo bastante más complejo del que del que hacemos y vimos hasta acá. Sí, la hoja de estilos también heredan, también podremos declarar variables en las hojas de estilo. Entonces, por lo general, todo lo que tiene que ver con la paleta de colores se declaran como variables, entonces se reutilizan en distintas planillas de CCS y es bastante más complejo también de lo que vimos simplemente dar un poquito de estilo. De hecho, creo que igual este me debe haber hecho si es prolijo. V. se define una paleta de colores y estas son variables que se fueron definiendo y eso se reutiliza de esta forma en las hojas de estilo. Sí, pero para que yo reutilice esas variables, los estilos tienen que estar definidos acá en esta hoja de estilo. Por eso, por lo general se usa una sola hoja de estilo o varias que se incluyen, así como decimos el include del header en PHP pasa lo mismo, se va conformando una gran hoja de estilo, eh, y se reutilizan variables, funciones, hay un montón, hay un mundo dentro de hojas de estilo, se entiende entonces si queremos un estilo para una pantalla en particular, se lo definimos ahí en esa en esa página,
+
+pero no va a depender de dónde pongas el porque si lo pones al final siempre te va a pisar con Tipo, como dijo le ponés adentro de, no sé, del layout serio, oír
+
+lo podemos poner en el header como tal, perdón, en el template como tal, que acá estoy importando el header, es lo mismo que yo venga y controlar esto más prolijo tendría que ser así. Sí. Y footer me lo copio y reescribo esto, ¿no? No, entonces queda más prolijo y más entendible mi template. Bien, entonces mi template principal, mi layout que estamos armando tiene el hit con los links a las distintas fuentes, el link a una hoja de estilo, ¿sí? Que en este caso se llama users y tiene lo único que tenemos hasta ahora users. Eh, y un estilito acá general nada. Sí. Y tiene todo esto. Entonces, yo diseño una nueva formulario y le agrego estilo a ese formulario, lo pongo en una hoja de estilo y puedo acá tranquilamente hacer el link a esa hoja de estilo. ¿Qué va a pasar? Va a estar disponible para todos los las páginas que usen este layout. Está ese estilo. ¿Es bueno o es malo? Y si yo pensé bien las clases de esa hoja de estilo, es bueno. Si yo pensé en general mi proyecto y quiero que todos los formularios se vean similares, voy a usar hojas de estilo similar, lo mismo. Entonces, está bien que así sea. Ahora, si quiero una hoja de estilo en particular para una pantalla en particular, voy a ir a esa pantalla, por ejemplo, en listado y acá o en donde yo quiera, en la sección, acá, cuando empiezo a redefinir la sección, le hago un link a la hoja de estilo. Sí. Leo el link a su hoja de estilo. No tiene sentido que la tenga en el otro lado. Ahora no. Si la tengo acá, vamos acá, le decimos, "Bueno, vola, volame la hoja de estilo." Y ahora vamos acá, refrescamos y sigue funcionando. La hoja de estilo se importó por acá. Si vamos al código, esto lo cerramos dentro del main. Fíjense, ahí está el link a la hoja de estilo. funciona igual porque las definiciones de los estilos están. ¿Se entendió? Sí, somos libres de hacer lo que querramos, pero hagámoslo ordenadamente o si lo hace la guía, entendamos que esto se puede hacer y que no está mal dependiendo de lo que nosotros pensamos construir. Bien, está claro. Bien, les presento un eh un template de administración de estos que les mostré recién, que les mostré uno en particular que no sé ni cuál era. Este en particular se llama admin LTE, ¿bien? Y es gratis, es descargable, lo tenemos a mano, lo podemos usar. Bien, ¿cómo lo usamos? Lo vamos y lo descargamos. Sí, en definitiva son hojas de estilo, JavaScript, HTML Entonces lo descargamos y lo tenemos. Esta es la versión 410 admin LT. Para decirles algo de él, esto es Boostrap, eh, hereda de Boostrapedefine ciertos componentes y nos construye algo bonito y no mucho más que eso, ¿no? Y nos da el template DC. Por supuesto que están las versiones pagas, los HTML. Ahora Son todas pagas. Acá hay una. Esta es free, esta es gratis. Esta es la que me gusta a mí. Que seguro que las que son pagas seguramente tienen un montón de componentes configurables, más páginas, más cositas. No quiero la gratis. Bueno, vamos acá. Esto seguro descargará la la gratis. Voy a descargar esta a A ver qué trae. M, la voy a descargar directamente en mi proyecto. Esto era mi proyecto de software. Vamos a ir a App, no, vamos a hacer c\*\*\*\*\*. Lo voy a descargar. Acá ya tenía el 400, ahora tengo el 410\. Esto nos va descargar un sí con la velocidad de internet de la uni. Vamos a ir a la carpeta admin LTE. Mm, esta tengo un montón. Sí, lo vamos a abrir. Me trae una carpeta que se llama Esto lo vamos a descomprimir. Lo estoy descomprimiendo en mi carpeta PHP. Digo, WW. ¿Qué pasó? Creó una carpeta. ¿Y ahora qué significa eso? Es un proyecto al cual puedes acceder.
+
+Muy bien. ¿A través de qué?
+
+URL.
+
+Bien.
+
+¿Y esa URL qué hace? ¿Qué Eh,
+
+manda la petición, después manda la
+
+10 puntos 10 puntos más
+
+local host barra dis, ¿sí? Porque no le cambié la la carpeta. Y tenemos nuestro admin LT. Bien, funcionando. Esto es todo PHP y JavaScript. Nos da estos dashboard. Esta es la parte gratis, ¿no? Y si nos fijamos tiene uno que se llama Start page. Bien. Start page. ¿Qué tiene en particular? Que está peladito, libre de de contaminación. ¿Por qué? Si yo voy y abro eh, por ejemplo, fíjense, voy a ir al dashw 1\. Este es index html. Si yo voy y abro index html, tiene, esperen que bajo, 1994 líneas de código. Es un HTML que tiene toda la información de estos componentitos, de estos mapitas, todos los JavaScript importados. Eh, fíjense estos datos seguramente son esto que está acá, ¿sí? Esos números, eh, No, esto es un calendario que anda saber de dónde vienes. Esto que está acá. Sí, esos números tiene todo el HTML. Cuando digo todo el HTML tiene todo esto. Los li seguramente son estos menús de acá. Sí. Si yo busco, por ejemplo, Start page, control starter, fíjense, acá está el link ese el li es el link este que está acá. que tiene su icono y el texto. Está. Si yo lo modifico acá, se va a modificar. Si yo refresco, ahora tiene a ah starter page. Básicamente eso es un HTML con todo el template puesto. Ahora si yo voy a starter page, esto va a disc starter HTML. Ese está un poquito más limpio. No tiene todos los gráficos, no tiene todo el quilombo, no tiene todo esto. Sí. Entonces, yo lo que voy a hacer ahora para hacer mi layout es tomar starter HTML, lo vamos a abrir, lo vamos a seleccionar todo, lo vamos a copiar y voy a ir a armar mi layout. Sí, mi layout. Lo voy a llamar default. PHP porque va a ser mi layout por defecto. Ese layout directamente pego todo lo que me compré, me copié del starter. Eh, esto se lo dejamos, dejamos todo como está. Sí. Después vamos a trabajar sobre el title y demás. Lo único que hay que asegurarse ahora, esto es JavaScript. Después lo podemos ir sacando. Meta, meta, keywords. Lo que hay que asegurarse, fíjense, es que, por ejemplo, hace referencia a un CSS admin.cs. Está
+
+eso. Lo tenemos en nuestro proyecto, ¿no? Lo tenemos, ¿no? Entonces, ¿qué tendríamos que hacer? Ir a copiarlo, que está por acá. Y por acá, ahí adentro seguro está bien. Acá está. Es este que está acá. En particular nosotros lo vamos a copiar a todos los lo vamos a hacer fácil. Vamos a la carpeta archivos. ¿Estás en la carpeta CSS?
+
+Sí, pero de la CSS del template que me acabo de descargar y descomprimir, no de mi proyecto. Tengo que ir pasando los archivos. Entonces, en mi proyecto lo voy a poner acá en CSS.
+
+Los puntos map esos que habían ahí que eran o es para encontr
+
+esto que está acá.
+
+Ah, bueno, cópienselo por las dudas. La fácil que pueden hacer es se copian todos los SS que están acá. Vamos a hacer así. Copiamos todo, pegamos en CCS. Listo, tenemos todo ahí. La otra cosa que seguro nos va a pedir es JavaScript JS. Eh, lo mismo, nos copiamos todo, lo guardamos acá en JS. Sí. Y lo más probable es que use imágenes y cosas así que están en adset image, ¿no? Tiene el el iconito y estas cosas. Copiamos ese esa carpeta image y vamos a nuestro assets y la pegamos ahí, ¿no? Entonces, todo lo público en public assets CCS Image JScript. Sí, ahí vamos a acceder.
+
+Igual ahí también tienes que cambiar la dirección para punto, ¿no?
+
+Exactamente. Para importar esto en particular no podemos hacerlo así no más porque lo tenemos que ir a buscar a nuestro servidor. Para ir a buscarlo a nuestro servidor vamos a ir nuestro template. Esperen que cierro esto que está acá. Nosotros estábamos haciendo el layout default. Ya no lo vamos a importar así. Lo que vamos a hacer acá es y no lo voy a hacer yo, lo va a hacer la IA base URL asset css admin. Sí, el base URL, ¿se acuerdan que era? Era un helper de coordinator que me completaba la URL, no importa dónde esté. Después cambiamos de ambiente, cambiamos a mi páginaweb.com.ar y solo actualizamos en un lugar y esto va funcionar y así tenían tendríamos que revisar los links. Olvídense, no van a funcionar, no no se preocupen. Pero acá lo que podemos hacer es este es el NAP bar, lo podemos ir separando, ¿no? Este formulario es del NATB bar. Después lo vamos a a ir limpiando un poco todo esto, ¿no? Este formulario que da Ahí estos son los links aside. Esto es seguro que es algo que se despliega. Y fíjense acá se referencia una imagen. Entonces si quieren hacerlo a esto, lo hacen. Pero fíjense que ahora apunta assets image admin. Esa sería la pregunta absoluta
+
+y la otra es la relativ
+
+exacto. Esto es absoluto. Lo que pasa que acá en imagen Y recursos tenemos que usar absoluto.
+
+Claro.
+
+Sí, es lo mejor. Bueno, esperen que voy. Estos son más links en la site y acá el main. Acá está el main. Fíjense que todo eso que está ahí es la barra de navegación y todo lo que está arriba, bien, del template. Eh, sería esto que está acá, todo eso y esto que y todo este menú y llegué a la partecita de el main, ¿sí? App main, que empieza con un una clase app main app contenter, que seguramente es esto que está acá. Sí, es esta row. Fíjense, starter page es el título. Si yo le acá le pongo mi page y refresco. No va a pasar nada porque estoy actualizando en otro lado, no lo voy a refrescar, pero básicamente eso es esa parte que está ahí arriba, si esta row, esa fila es lo que está ahí arriba. Lo que le sigue app content, que está dentro de un content fluid que tiene una fila y starter card. Vamos a ver qué es. Es esta card que Está acá. Eso eso que acabo de cerrar. Sí. Entonces esa CAR la vamos a volar. Pero estás mostrando dis,
+
+perdón,
+
+¿seguí trabajando en dis o estás en el proyecto?
+
+No, este es el proyecto.
+
+Ah, pero
+
+lo copié. Es default. PHP.
+
+Te está mostrando dis en la página.
+
+Sí, por eso no se actualiza. Todavía no. No llegué a implementarlo. Estoy limpiando todo esto. No quiero limpiar. sacar este car. Lo vamos a volar. Este car va a volar. Y acá vamos a renderizar nuestro content. ¿Se entiende? Yo armé el mismo layout que hicimos hoy, pero con el contenido de admin LT. Dejé todo el HTML y le dije, "Esto va a ser un contento. Acá va a tener una sección contento. ¿Me siguieron? ¿Quién no? Levante la mano. Leo no porque está chateando ahí. No sabemos por qué. Concula cuántica está chateando. Preguntando a chat GPT.
+
+¿Qué es un cubit?
+
+¿Qué es un cubito?
+
+¿Se entendió o no se entendió? Dígan si no lo repasamos un poquito. Sí, más o menos.
+
+Más o menos. Yo en un lo que estamos intentando ahora generar es esto, el layout. Vieron como hice en un principio para no no reescribir toda la estructura visual. Bien. Y además para una flexibilidad, primero para no acoplarnos al controlador, ¿sí? La forma que nos da Codinator es la definición de ese layout. ¿Cómo definimos ese layout? Construimos un HTML y le definimos secciones, las que nosotros querramos. ¿Sí? Entonces, por acá yo definí un layout, entonces empecé a escribir un HTML y dije, "Bueno, acá va a haber una sección que se llama contenido. ¿Y por qué va va a estar ahí? Y porque yo pretendo que todo mi contenido se muestre ahí y entonces después cuando lo voy a usar redefino lo que va. Ahí está. Hasta ahí. Vamos. Bien, lo hicimos con una página simple, un header simple y un footer simple. Y ahí vamos a poner nuestro contenido. Yo ahora lo que hice es agarrar la página de admin LTE, que tiene toda la estructura ya definida con la clase. Bonito, más lindo de lo que yo hice. Me copié ese HTML y busqué dónde tenía que ir a renderizar mi contenido y dónde tendría que ponerlo para que se muestre donde yo quiero, que es acá en el centro. Entonces esa sección se tiene que llamar como yo quiero. Yo le puse content porque soy hoy estoy inspirado. ¿Está bien? ¿Se entiende? Entonces todas las páginas que yo quiera van a heredar de esto y van a redefinir ese esa posición de contenido. Ahí fue mejor.
+
+Bien, eso es lo que acabo de hacer. Entonces, en mi default, en mi layout default, busqué esa parte, esa parte es esta que está acá y le definí que eso va a haber va a haber una sección que se llama content. Pasa que era
+
+No, no, no. El nombre que yo quiero.
+
+Claro, no, pero lo que he dicho phpio pusiste eh palabras reservadas de PHP para decir que está el contenido, ¿no?
+
+Sí. Ahora vamos a ese. Mira,
+
+¿ves? Si yo sigo mirando el HTML de admin LTE, termina es cierra. Esto no es una card. Sí. Termina la fila, termina el container, termina el lap container, va cerrando todos los divis de arriba, ¿no? Y acá abre un footer y está el copyright. Copyright. Yo no Esto lo hice yo, Nico. No quedemos, Nico. Sí, todos los derechos reservados. No me vuelvas a poner eso. Acá importa unos JavaScripts. Ojo acá, fíjense. Por eso yo quería llegar hasta abajo. Sí, acá otra vez. ¿Veis? URL. Y voy a buscar el Java. que me copia mi carpeta. Acá hay una función JavaScript. Después si quieren la estudiamos, pero no sé para qué es. La cierro. Todo comentario. Esto es para Hay que comentarlo para algo seguro. No lo voy a hacer. Y cierra el HTML. Sí, todo el HTML construido con una sección que se llama content. Listo. De eso ya nos olvidamos, ya la construimos. El layout se llama de HP y entonces vamos a ir ahora queremos que nuestra lista de usuarios se dibuje ahí adentro en ese en esa sección contenido. O sea, que herede de ese layout se construya todo el HTML y donde yo dije que iba a ir el contenido, vaya esta sección en particular con el listado de usuario. Está eso, ¿cómo lo hacemos? En la vista list de usuario. Le decimos que herede extienda del layout. Hoy le dijimos que extienda de la layout en play. Ahora default. Extienda de ese layout default y en la sección content. Sí. Se content en section. Entonces me va a agarrar esto y lo va a escribir en la donde dice section render section cont. Lo voy a escribir ahí pa. Estamos. Y entonces si ahora vamos a public users, esto va a generar una petición HTTP que va a llegar al servidor web. El servidor web va a buscar el recurso Según la URI, ese recurso en particular porque es Apache, va a ir a buscar adentro de la carpeta Miss Mi PS dentro de public. Se lo va a delegar al ruteo a Codinator porque es una aplicación Codinator. Codinator va a entrar en el ruteo, va a ir al controlador, el controlador va a hacer su tarea y va a devolver una vista. ¿Qué vista va a devolver ese controlador? Esperen que lo encuentro. Vamos. buscarlo así. Ese controlador me va a devolver la vista user list. User list la busco acá abajo. User list es justamente hereda del layout default y va a renderizar en la sección contento. Esto que está acá. Ese es todo el flujo. Si todo sale bien, tenemos una página espantosa, pero con nuestro layout funcional. Está. ¿Qué pasa acá? ¿Se están mezclando algunos estilos o algo falta que me está me está dibujando cosas raras? Sí. Vamos a hacer una cosa. Vamos a sacarle el estilo. Ay, ahí se va a rompo. Sí, efectivamente se rompió todo, ¿no? Porque acá tengo los popups y todo lo No, se lo podemos sacar. lamentablemente. Sí. Bueno, si ustedes tienen más suerte, háganlo antes de hacer una página de listado, pero básicamente, fíjense que ahora tenemos nuestro menú ya con sus funcionalidades. ¿Y qué es lo interesante de todo esto? Eh, yo estaba acá. ¿Qué es lo interesante de esto? Es que podemos usar todo lo que está acá. Sí, estos componentes los podemos usar, podemos usar los iconos, podemos usar los timelines, ¿sí? Y todo esto ya está hecho y armado y bonito. Sí, fíjense, yo tendría que usar esta tabla, no la que tenemos nosotros. Y a ver, el editar, el eliminar tiene un cartelito, new user tiene su formulario. Sí. Yo tendría que usar los componentes que están acá con los JavaScript que están acá. Yo ya arrastraba cosas armadas. Es un problemita. Bien, se entendió el flujo que hicimos. Ahora queremos hacer otra página distinta. Yo voy a usar, vamos a usar eh algo sencillo. Vamos a crear un formulario más fácil. Esto que está acá, me voy a copiar este componente. ¿Dónde está? Copy element. Yo acá vamos a suponer que queremos hacer el form de user. Le voy a pegar ese formulario, lo que acabo de de copiar. Esto no se formatea, es hermoso. Eh, sí, yo ahora tengo dos vistas, user list user form. Está. Entonces, para que esto extienda de mi layout default, usamos el ex Y para que reescriba el content, le decimos dentro de la sección content en section, reescribime y escribime el formulario este que está acá. Esto me lo hizo tabulado, pero lo vamos a correr un poquito para allá. Sí, está. Entonces vamos al controlador. Vamos a hacer algo así. En vez de save, delete, creemos. Vamos a crear esto aquí que está acá. Le ponemos form. Esto vuela. Y acá en vez de userlist, user form. Y no le pasamos ningún tipo de datos. ¿Qué nos falta? Rotearlo. Vamos a config. roots. No, vamos a copiar este, el get. Copiamos, pegamos users. Vamos a ponerle form. Está. Entonces, tenemos un ruteo donde acá tenemos users barra form. Y ahí nos quedó PV. Sí, ya que no no se en el otro se están chocando los SS y no me voy a poner a fijar que quilombo tenemos, pero en este ya como usamos puro el componente que nos indicó admin LTE y no le agregamos nada raro, funciona perfecto. Salvo la imagen que Alexander Pierce no se estaría renderizando, habría que buscar Hm. No la copié o no sé, no sé.
+
+Eh,
+
+no había borrado muchacho, creo.
+
+No sé si también le tenemos que leer el porque si no no sé si ese relativo, pero
+
+no
+
+no dice claro, no está el full. Exactamente, eso no está funcionando bien. Lo vamos a corregir. Vamos al Eso está layout seguramente en default. Control F. Alex. Alexander Pierce. Acá está la imagen de Isurl de Alexander y acá tenía otro. Dale. Muy bien. Y ahora lo tenemos Alex. Ahí está nuestro Alex P. Estamos. Se entendió. Ahora. Ya construimos nuestro layout, nuestro estilo, nuestra nuestro formato, nos podemos dedicar a construir vistas. Obviamente acá cuando nos casamos con un template de este estilo, vamos a intentar mantener lo que nos sugiere ese estilo. ¿Por qué? Porque todas las funcionalidades están adecuadas. Por ejemplo, el si cambio a light, todos estos componentes ya tienen el estilo que lo va a cambiar. Perfecto. directamente a nocturna y light de día. Cuando lo pongo, lo maximizo, está bien. Si uso los componentes, me va me va a funcionar perfecto, no va a tener problemas. Entonces, lo mantenemos eh intentamos mantener usando todos los componentes que nos sugiere ese template que elegir. Bien, no le dejamos ah A ver, ¿qué es esto? No, no lo dejamos a la Iera, ¿sí? Ahí tenemos que arnesearla. Muy probable que lo lea a ese template y no haga cualquier cosa, pero lo mejor es meterle skills, meterle hernessés para que no haga cualquier cosa la vida. ¿Dudas, preguntas? Bien. ¿Está esto lo hice con admin LTE, un template como vieron gratis que podemos usar? Hay 200 toneladas de esos admin templates. Sí, incluso gratis hay muchísimo. Bien, todos van a ser similares. Por supuesto, para modificar después el menú tengo que ir a buscar en el template todos los menú y voy Poniendo los que yo quiero. Sí. Por ejemplo, acá hay uno que es users, nos viene al pelo. Vamos a dejar ese sol pelado. Sí. Vamos acá. Users. Fíjense, lo encontramos acá. Esto tendría que ir al listado de usuarios, ¿no? Para ir al listado de usuarios, veis URL users. Eso me va a construir la URL a users. Y acá no vamos a dejar nada más. Multilevel. Vamos a hacer así. Esto lo vamos a borrar. Puede fallar le menú. Item. Eem. Cantidad de items que tiene esto, ¿no? Esto es cards componentes acá. Tukó solo users. Hm. No sé cómo dice para invocarle. Vamos a sacarle el view este div que está acá. Listo, voló.
+
+Y si le dan a explotar,
+
+explota.
+
+Explota porque vamos a hacerlo dark. Explota porque va, navega y como está renderizando la lista de usuarios, esta empieza a chocar todo lo del CCS. Y no está bueno. Y el JavaScript y es un quilombo acá. No sé si incluso sí funcionan esto. Eh, se quedó duplicado el y el porque lo habías puesto en el template y lo tenías aparte, ¿no? Porque ahora, ¿qué pasa? No se duplica porque yo lo tengo acá en el default, en el layout. Sí. Heer y demás. Y el footer. Este es el footer. Allright reserved Nico.
+
+Sí,
+
+está bien. Que está por acá abajo, ¿no? Allí arriba. Acá. Sí. Este es el footer y este es el layout. Y lo único que tiene el layout es un una sección que se llama content y el list de ese default, de ese layout y reescribe content y no tiene acá el footer,
+
+tiene el contenido.
+
+El footer. PHP nunca se usa ahí,
+
+¿no? Porque yo cambié la forma de usar
+
+esto, este footer y header, no lo estoy usando ahora. Esto lo usé hoy cuando lo construía por partes, cuando lo hacía a mano. Sí, pero ese construcción por partes lo hacía el controller. Entonces, yo le delegaba esa responsabilidad al controller que no está bien o no, ciertamente tiene ahí algunas cositas. Bien. Y la versión correcta es usar layout. Bien, las posibilidades están, podemos usar cualquiera de las dos. Sí, con esto, fíjense, yo directamente le cambio acá y le digo heredad de otro layout y fin, hereda de otro layout. Está, no hay, es mucho más sencillo. En cambio, en el otro tengo que ir y construir de forma distinta las cosas. Estamos, se entendió. Bueno, bien. Me alegro. Entonces, cositas eh que no tienen que ver con, bueno, si tienen que ver con Coordinator, pero es un poco más genérico. Manejo de sesión. Nosotros, yo estuve hablando, estuvimos hablando HTTP, el protocolo HTTP sin estado. Sí, sin estado. Eh, vamos a hacerlo cortito. Esto sí, pero pasamos, salimos de la vista, vimos cómo definir el layout. Ahora, Vamos a ver un temita que es sesión y datos en la sesión. Es como una introducción a lo que vamos a trabajar con seguridad, logo, y la forma de entender quién está eh del otro lado. ¿Sí? Entonces, recuerden esto y esto es de examen. La respuesta en realidad es esta.
+
+El protocolo http es sin Estado. ¿Qué significa eso? Que se hace una petición al servidor web. El servidor web la procesa, nos da la respuesta y se terminó lo que yo me acordaba de esa persona que hizo la petición de esa computadora de ese cliente. No sé quién es. Si esa misma estoy en la misma página y le vuelvo a hacer clic a otro menú, se hace otra petición. Cuando llega al servidor, ¿quién me está haciendo la petición? No sé si es El mismo de antes, uno nuevo es sin estado, no se recuerda el estado. Estamos, ténganlo bien en claro eso para nosotros recordar y llevar una lógica de alguien logueado y que conocer quién es el que está haciendo las peticiones, usamos dos herramientas. Cookies,
+
+cookies. Muy bien. Y sesiones. Estamos cookies son archivitos planos que viven en nuestra computadora, en la PC que ustedes usan están ahí. Y esos architos planos son los únicos que pueden leer por definición de cookie. El único que puede leer una cookie que se llama google.com es google.com. Sí. El único que está tiene permitido leer ese nombre de cookie. va a ser el dominio que la escribió. El dominio que la escribió, ¿sí? Coinator.com seguramente me escribió cookies cuando yo entré y el único que va a poder leer esa cookie va a ser codinator.com cuando entre. ¿Sí? ¿Qué significa leerla? No es que va a venir un el codinator a mi computadora, va a venir el archivo. Lo que significa que cuando yo hago una petición a codinator.com, el navegador le va estar enviando ese archivito plano, esa cookie se la envía, viaja en la petición. Sí, eso un poco lo vimos y lo pueden ver en el explorador. Si van a network, le voy a dar refresh. La petición, la primer petición de todas es esta. Si vamos al header, vamos a ver que acá no, no, no, acá fueron mis cookies. Sí, fue encriptado toda la información de las cookie que va un archivo ni nada va la información de la cookie encriptada. Bueno, a veces ni tanto encriptado, pero bueno. Se entiende.
+
+Y si alguien copiara pasaría o sea
+
+si alguien y esto entre no lo va a entender ni Dios. Pero sí,
+
+no. O sea, si la copiía, aunque Sí, yo puedo simular enviar otra grupo. Sí, tienen algunos factores de seguridad, pero sí, tranquilamente las podés saltar a eso tampoco son. El tema es que nosotros desarrolladores no vamos a guardar la password que el usuario ahí. No se se guardan clave de valor muy sencilla. El tema es esto viaja, vuela a Coordinator. Coordinator seguramente está en una porque me imagino que debe estar hecho en PHP, si no y en PHP nosotros tenemos la posibilidad de leer esa cup y hacer lo que querramos. Sí, con eso, eso es cookie. La otra es sesión. Sí, la sesión es una tabla de información, bien, también clave de valor que está guardada del lado del servidor. Y esto lo que va a pasar es que la primer petición que yo hacer al sitio, me va a dar, me va a iniciar una sesión, la va a crear. Crea la sesión, eso le da un ID único de sesión y lo que vuelve en el response es ese ID de sesión. Vuelve a mi navegador. ¿Para qué? Para que la siguiente petición que yo haga vaya ese ID de sesión para el otro lado. Y entonces yo voy a tener la tabla con los datos de sesión. en todas las peticiones. ¿Sí? Y esa tabla de sesión la podemos administrar, crear variables, ponerle datos, sacar variables, lo que querramos. ¿Sí? Y esto se usa para, che, me logueé, guardo en la sesión, ¿quién está logueado, qué rol tiene? ¿Cómo se llama? Ta ta ta ta ta. Sí, eso se usa para eso. Entonces, si ahora el que En cada petición HTTP es ese ID de sesión que me permite conocer quién es el otro del otro lado o al menos sospechar de que de que sé quién es. ¿Estamos? ¿Quedó claro? Vamos a hacer un manejo simple de datos en sesión. Les muestro cómo en coordinat es bastante sencillo. Y terminamos por hoy. Vamos a remitirnos, por supuesto, a a la documentación oficial de Codinator. Eh, Codinator usa una librería. Como yo les dije, en los controladores vamos a tener librerías, helpers, etcétera, etcétera, etcétera. Bien, esa librería es sesión. Sí, por defecto hay configuraciones de sesión que yo puedo hacer en mis archivos de configuraciones de coordinator. ¿Qué sería? ¿Cuánto dura una sesión? Le puedo poner tiempo ilimitado. Se vieron esas páginas que ustedes se loguearon una vez y toda su vida siguen logueado. Bueno, tienen el tiempo ilimitado de configuración de vida de una sesión.
+
+Correo electrónico, por ejemplo.
+
+El correo sí, de vez en cuando se cae, pero son como cu 5 días, una cosa así,
+
+¿no? Y lo que tiene es un refresh, o sea, Si vos justo pegaste que hizo el refresh y vos estás con con Google abierto, te actualiza
+
+la duración. Si vos no estás con Google abierto en ese refresh token, agarra y se cae la sesión y te hace poner de vuelta el bajo. Sí, pero bueno, eso es otras otro tipo de cosas. Pero básicamente nosotros va por la sesión por defecto se va a abrir, creo, hasta donde yo conocía de las versiones, quizás en esta versión no, pero por defecto se va a iniciar una sesión. ¿Qué nos va a dar esta librería? En realidad nos va a dar el manejo y el acceso un poquito más seguro y más fácil al arreglo asociativo global, a esa variable global que la vimos cuando vimos PHP, que es peso CIO. Sí, eso es puro de PHP. Directamente si yo voy al user controller, vamos a trabajar con el form, que es más lindo. que el que el listado users. Vamos a trabajar acá. Form form.
+
+Sí, este es más bonito. ¿Se acuerdan que acá user? Le vamos a poner user y le vamos a poner mi coraz. ¿Sí? ¿Qué hice yo ahí? Asigné en la posición users. en el arreglo asociativo session el valor nicolas. Bien, es un arreglo asociativo. Esto lo estoy haciendo es simple eh, PHP directamente, no estoy usando codinator ni la librería, pero esto es una forma de decir, bueno, esto lo asigno y ya va a quedar disponible para todas las peticiones que yo haga. Estamos. Entonces, imagínense en el form Si yo hago un refresh, o sea, voy ahí, va a entrar a esa función del controlador, va a entrar acá, va a asignar a esta variable ese nombre, Nicolás y después me va a mostrar el formulario. Yo ahora esto lo voy a comentar, no lo uso. Y ahora voy a ir al index, acá donde está el listado de usuarios. Está. Fíjense que no voy a entrar a a otra cosa, otra vez al fondo. Y lo que vamos a hacer para sencillo va a ser mostrar pesos sesión cookies sesión. Vamos a mostrar todo lo que está en sesión. ¿Sí? Entonces yo acá le saco en la URL o le vamos a dar clic a users que va al listado. Sí. Le doy click reventó. Vamos a ponerlo en develop. No me dejó hacer esto. A ver, ahora bien. Vamos a hacerlo más sencillo. Entonces vamos al listado y ahora acá donde teníamos la importación esta, vamos a poner un H. un acá vamos a poner hola. Hola. Y vamos a publicar session user. Sí, fíjense que del lado del servidor esto va a renderizar, va a ir a la tabla esa de sesión y va a buscar el valor que tenía en la variable users, que yo la seteé hoy. Hoy cuando entramos por primera vez. No está seteado, no está iniciada la sesión. Seguramente hay que configurarlo para que sea automático. No, acá dice que sí. Bueno, vamos a ver una cosa. Development. Bueno, nos viene bien esto. A ver qué está pasando. Que no está definida la variable sesión global. Tenés que seleccionarla con
+
+No, puede ser que puede ser que coordinator me la haya la haya oculto y la la red fina con el servicio. Vamos a entrar así, vamos a usar directamente acá. Dice,
+
+"Qué raro,
+
+pero si no está inicializada es porque no corriste la función. ¿Viste que dice peso session igual session paréntesis?"
+
+Sí, pero
+
+sí, pero session will typically run globally with cheat page lad. O sea, típicamente Eh, corre mágicamente, eh, mágic inicializado. Inicialice, no, que se inicializa sola.
+
+Esa función
+
+es rarísimo, ¿no? No hace falta. No debería hacer falta. Perdón. Eh, vamos a hacer esto. A ver qué onda. A ver si me lo deja mostrar con el helper. Sí, esto es user. No, bueno, y con este otro helper acá. Sí. A ver, user. A ver, ahora y probando y probando y probando. Bueno, no se rompió. Pero no está el la variable. Sí, vamos a hacer un set. Fíjense que vamos a usar vamos a trabajarla toda con eh con el helper de codinator. Está para setear un valor usamos el set. O eh esperen que está la función es más bonita porque esta de de la variable. Déjenme revisar. Bueno, vamos a usar el session set. Voy a intentar hacerlo desde una forma para no tener que trabajar tomando la sesión. Voy a hacer lo mismo dentro del controller. En el formulario, en lugar de setearlo así, voy a hacer así esto, pero en lugar de Vamos a usar la función session y vamos a llamar a set. Este session me devuelve el objeto sesión y le seteo user Nicolás. Sí, debería funcionar. Vamos a ir al formulario en form. Ahí se seteó en sesión la variable teóricamente. Y si yo ahora le voy a dar Click. Efectivamente, se seteó. Sí, me trabajó con un wpapper. No sé qué le hace al arreglo asociativo. Para mí no lo he inicializado. Puede ser lo que vos decís, que habría que en algún punto o alguna configuración poner que inicialice sola. Eh, vamos a ver si está la configuración Security Service session driver. Dver cookie. Acá está el expiration. Vieron que cero para que nunca expire o algo así. ¿Dónde lo escribe? How many seconds session match IP regenerate destroy background. Quiero ver si no no está service. No. Y en up por ahí hay algo local. Bueno, no parece.
+
+Más allá de que una pregunta tengo
+
+más allá de que de que persisten los los datos que pongas, ¿no?, de la sesión a través de de las distintas eh tiene algún nivel de de seguridad, es decir, evita que un usuario malicioso cambie los datos dentro de la sesión y los envíe, por ejemplo, no lo puedes
+
+no lo puedes hacer. Actuaría lo que sería JWT, o sea, haría la misma función que JWT en una aplicación Java, básicamente.
+
+Eh, sí, JWT trabaja similar pero distinto, porque nosotros cuando hacemos peticiones restamos cierta otra información en el en el token. Y bueno, JWT Java Web Token, no es un token que viaja y ahí podemos encriptar información del usuario que viaja, pero por detrás los datos están en sesión.
+
+El token lo que te lo que viaja es el encriptado que después me
+
+pero una sesión y permite que vos puedas con el mismo token acceder a esa sesión.
+
+Exacto.
+
+Eh, por eso lo di,
+
+pero como es un
+
+Se puede robar ese token como pasa con el robo de cookies.
+
+Sí. Sí, claro. Después vamos después si quieren hablamos un poco de JWT. No es no es el alcance, pero básicamente lo que para lo que usamos eso es justamente para tener la sesión del usuario logueado. Entonces, por ejemplo, e en nuestro layout podemos hacer un login, autenticar si eso es válido. Guardamos ese usuario en sesión y directamente ese usuario se da por logue y podemos guardar el rol, mostrar un menú si el rol es admin, mostrar otro menú si el rol es no es admin, está eso lo hacemos todo con eh con la sesión, con las variables de sesión. Sí.
+
+No, puesía setearlo, digo, y por ahí digo, capaz que alguien que acceda al código de a partir de que el navegador te tire un un set del rol, digamos, y no no cambie,
+
+¿no? que esto se sete, a ver, eso se llama inyección eh crosside script.
+
+Yo le tengo que inyectar para que el intérprete de PHP haga el seteo de de la variable en la sesión. Eh, si no no no puedo hacerlo de otra forma, no no puedo modificarlo desde el lado del cliente, así eso no se puede. E obviamente hay ataques de todo tipo y color Vamos a ver. CRF CR CSRF.
+
+Sí, acá es bastante fácil. Directamente se le ponés el en el formulario y del otro lado ya le habilitás un es parte de la seguridad de coordinator, ¿no? Ya.
+
+Sí.
+
+Casi todos los framewor
+
+Sí. Eh, hay un función que lo que nos permite es también de seguridad. Nosotros entramos al formulario, ¿no? Entramos a este formulario de D alta de usuarios. Eh, es el filtro de recursos por por rolos
+
+importa. Le digo cómo funciona y después ponemos nombre. Lo que hace es yo renderic entre este formulario Y esa medida de seguridad lo que intenta decir es, bueno, ¿quién puede hacer envío de un formulario? Solo vos. De este formulario es vos. ¿Cómo hace eso? Genera un código hash de la petición que lo pone adentro del formulario, vuela con el formulario y lo valida al lado del servidor. Entonces hace el match de, bueno, el que envió sos vos, el que le renderizó. Eso se es para no usar, por ejemplo, Yo sé que puedo crear usuarios en una plataforma y a partir de CURL, de cualquier otro método, agarro y me tiro un forage infinito, un for infinito de peticiones put eh perdón post al formulario y les mando les mando les mando para crearle 1000 millones de registros. Eso se evita a partir de esta de este sistema de seguridad. No puede porque que no tiene el código ese hash que lo generó el servidor. ¿Se entiende cómo funciona más o menos? Peticiones HTTP. Todo es peticiones http. ¿Está bien? Un formulario envía una petición HTTP al servidor. Esa petición HTTP yo la puedo hacer desde el navegador o desde cualquier herramienta para crear una petición HTTP. Sí, cualquier herramienta significa la más básica de todo por una consola, una que se llama URL es una función en Linux. Cur está eh ya instalada. En Windows tenemos que hacer un una instalación, pero escribimos CURL y les le ponemos la cabecera, todo texto, le escribimos toda la cabecera post ta ta. Entonces, podemos simular una petición a un servidor, no simular, hacer una petición. Entonces, imagínense tienen un formulario de registrarse en una página como usuarios. ese formulario que es una petición post al servidor que registra un usuario en una base de datos. Ahora yo gracioso agarro y digo, "A ver, voy a hago un script, lo programo en Python que genera nombres de usuario aleatorio. Yo ya tengo los campos, sé los nombres de de los inputs, los names, porque es fácil renderizar, te fijas los names." Entonces, simulada la petición post de ese formulario, Hago un script en Python que genera de acá hasta que alguien se mueve, hasta que me desenchu la computadora, crea usuarios en esa página. ¿Qué va a pasar con esa página? Reventas usar, le reventas la base de datos o le reventas el lo hac posta. Sí, es un ataque más simple imposible, pero que se hace y ese es bastante simple. Lo que vos intentarás además en el registro le mandás eh cross scripting, ¿sí? Le haces una inserción de un usuario y le intentás insertar que el rol sea admin o root y entonces vas jugando con eso. Sí, en algún momento p le pegaste y tenés un usuario root o administrador del sistema. Eh, para evitar esos ataques, lo que se hace según es una herramienta que es generar en el formulario de creación de un usuario desde el lado del servidor se genera un código hash único en el universo, un montón de letras locas, viene, se renderiza en el cliente, queda dentro del formulario ese input con ese hash reloco. Sí. Y entonces cuando yo uso unit el formulario para crear un usuario, ese código hash vuelve al servidor y valida que sea un envío desde el formulario. Entonces, yo ya de Python no puedo hacer eso porque tendría que invocarle a crear un hash que justo, no sé, no se puede. Sí. Entonces, evita ese ataque tan simple que lo puede hacer cualquier hijo de C. Bien. Entonces, ¿cómo se hace? A través de CRFC. Eso está nuevamente implementado. CRFC lo escribí mal seguro. No importa. Acá si van al build your first app. Eh, eh, bueno, esperen. Vamos al siguiente. Lo primero que hace es mostrarnos Eh, y decirnos, "Che, si vas a crear, no está el create eh page create view nos muestra es y esperen que lo encuentren. No crea la pantalla. Esto es una lista. Sí, directamente con este codiguito que está acá.
+
+Res Forger.
+
+Eh,
+
+R Forgery.
+
+Sí.
+
+Y Cese, ¿qué era CS?
+
+CS para evitar también es para evitar Sí, pero eso es para API Rest.
+
+Entonces, en el formulario yo lo que tendría que hacer, lo primero que hace es simplemente ejecutar esa función, ¿está? Y eso ya automáticamente me va a validar del lado del controller. Tengo que habilitar el la validación. A ver, lo voy a buscar. porque creo que tengo que habilitar el filtro. Puede que puede que ya esté crossite request for forgery crfc. Sí, lo tengo que cargar la librería. No, supongo que ya debe estar. Sí, que acá no explica bien. Bien. Security base config RC protection session. Yo creo que con eso alcanzaría para que funcione. Sí. Entonces, si yo voy a las configuraciones security, voy a security se en cookies. Le puedo decir cookie o són. Sí. estas dos formas de de comunicar, ¿sí? ¿Dónde lo guardo? A ese CRFC, pero ya está activado. Bien, ahí lo tengo por cookie y va a funcionar. Spire, todo.
+
+Yo en el formulario uso esta función, va a viajar en la cookie, ese código hash va a ir y cuando haga el submit de ese formulario va a venir al al servidor y entonces el servidor te va a dejar pasar. Si no, si hacen una petición desde afuera, no va a funcionar directamente. Está. Nos metimos en esa, no sé para qué, pero nos metimos.
+
+Bueno,
+
+sí,
+
+estábamos en sesión, sí. Los datos de sesión, manejarlos a partir de esa sesión y acá donde tenemos el user, ¿cómo que se llamaba? Nuestro amigo Alex. Control F. Alex. Alex Pierce. En vez de Alex Pierce acá debería ir eh igual session user. Sí. Entonces acá a donde entre va a tener el nombre del user. Sí. E un login en la distribución. Si nosotros nos vamos a acá tenemos un login, vamos a abrirlo. Estos son HTML. Sí, lo tenemos que abrir y copiar para hacerlo. PHP. Voy a hacer un login acá por lo general. out se pone como nombre login.php. Mis vistas en coordinator son punto php, por más que sea todo HTML. Y acá lo único que me va a faltar es importar correctamente las hojas de estilo y los JavaScript. ¿Está? Entonces, esto con la ayuda de mi gran amigo Lo escribe solo. Acá hay otro, ¿no? Dale, Min LTE. Bueno, seguramente las imágenes no se van a ver, no nos preocupemos. Bueno, acá hay un JavaScript. Esto nos tendríamos que asegurar en cada cosa que copiemos para que nos reviente. Bueno, ahí estamos. Ahora vamos a routear ese login. Vamos a roots. Vamos a ir acá. Vamos a routear. No reconoce la las direcciones relativas, o sea, es solo para HP porque tenés que tenés que usar esa función más B URL RL para llegar a la para usar un poo relativo.
+
+Lo que pasa que Cuando nosotros estamos probando programando del lado del servidor acá, el PHP es relativo a donde se está ejecutando el PHP, donde se está interpretando. Entonces, relativo a ¿dónde? A view app
+
+PHP está en una carpeta. Lo que yo tengo que devolver es un HTML absoluto y que vaya a buscar los CS. CL, pero no lo hace lo hace automáticamente, o sea, tenés que por eso usar la función pro R para darle el paso absoluto. Así llega podría tranquilamente hacerlo el el combinador.
+
+Y lo que pasa que vos no sabés a dónde querés direccionar. Si querés vos ir a otro lado a buscar, yo puedo ir a buscar a Ves, fíjate. Absoluto.
+
+Claro. Pero la mayoría de los lenguajes te permiten las dos cosas, o sea, o le pones un paso absoluto y si te lo reconoce como un reativo y relativo. Ojo, esto es porque esto va a HTML, no tiene nada que ver con PHP, lo es relativo al navegador o absoluto al navegador porque esto lo se renderiza del lado del navegador,
+
+¿no? En PHP. Entonces, yo tengo un framework que lo voy a buscar. Si yo lo hago relativo, va a ser relativo acá a esto, a esta URL. Y como las URLs nosotros las construimos amigable, etcétera, etcétera. Si yo lo hago relativo un pasito para atrás, porque a dónde voy a buscar el estilo a public CCS. Entonces, relativo yo tendría que ir desde form, para atrás voy a user, para atrás voy a public CS y el y lo que yo quiera. Ahora, si yo le agrego un pad acá, tengo que hacer tres. Entonces, ya la relatividad ya no no me sirve. Se entiende,
+
+eh. Sí, sí, digo, pero hay otros lenguajes que lo tratan. Es el mismo escenario.
+
+No, no hay forma. Lo es es vos pensar en cómo se va a renderizar del lado del del cliente. No hay otra. Si vos cambiá eso, lo relativo y lo absoluto es separado lo que tenés del lado del servidor y del lado del cliente. Si vos usas, obviamente si usas, por ejemplo, Angular View o o React, claro, porque todo el lado del el cliente. Eso es relativo relativo al proyecto. Ahora, no hay forma de que PHP sepa la URL que vos vas se va te va a ocurrir hacer, entonces cómo va a quedar de los lados del cliente. Se entiende,
+
+sí. No, no me lo termino, no me cierra el camino, pero bueno, te creo que si decí que no hay forma
+
+es que no no hay no hay. ¿Cómo yo le digo a cómo construyo yo dinámicamente en PHP una una posición activa a la URL que va a haber del lado del cliente. ¿Cómo te lo imaginas? Esto va para la forma de hacerlo relativo es barra barra va a ir al local host. Sí, barra es va a ir al local host.
+
+Sí, sí. Ahora, o sea, entiendo porque está claro, es la parte del servidor que tiene que mandar la la barra entrera para el cliente que la tiene que recibir. Está haciendo las dos cosas.
+
+Claro que vos no sabés dónde va a estar, si va a estar en una subdominio, en un
+
+ese bas el que personalizado del punto N,
+
+no del bueno, puede ser del punto N, pero si no en config app. Config.
+
+Bueno, yo acá creé el login. Lo que estábamos eh haciendo es ir acá. Login. Login. Sí. Home. Logine. Pero yo voy a ir a home y lo voy a crear. No, yo lo voy a crear la IA. Ah,
+
+lo creaba.
+
+Ahí está. Ahí lo creó la Ahí lo único que hace es crear la función login que me va a renderizar el la página out login, si, que acabo de copiar de admin LTE, la pegué acá y ahí está. Está bien. Entonces, si yo voy a por acá login, bueno, ahí tenemos un login. Ahora, este formulario, ¿a dónde lo envía? Vamos a ir Y vamos a ver esto. login.php. Busquemos el formulario form. Acá está. Me manda index 3\. HTML. No me sirve. Vamos a mandar un post a Burlog para no complicarnos. Ahora, esto es método post. Sí, vamos a roots. Entonces, el método post en vez de login tampoco va a ser save, va a ser out. Vamos a ponerle outate. No quiero. Deberíamos hacer un controller de autenticación, va a ser más más prolijo, pero vamos al home controller que lo tenemos acá. Bien. Y acá vamos a hacer así. If, vamos a extraerlo. Vamos a hacerlo pasito a pasito. user igual this request. No, no this no. Request get post. Vamos a ver cómo se llama el nombre del formulario. Login email se llama, no se llama, no tiene nombre. Vamos a ponerle name igual email. Y acá al password le vamos a poner name password. No somos grandes, no nos vamos a esforzar tanto. ¿Qué pasó? home. Esto vuela. Esto es email. Esto no es user, es email. Y password. Ya, ahora sí me lo hizo bien. Basta. Una seguridad sers segura donde admin le vamos a poner control Z. ¿Qué hizo? Cambi
+
+¿Qué fue eso? Eh, @ mail.com password 1 2 3\. Entonces, si se lo vio acá, session set user admin y redirecciono y usas. Si no, devuelvo esto. Vamos a ponerle un els y acá tendría que estar el cartelito. Error, error, mano. Está le rasta el password. Sí. Entonces formulario va a enviar por método post. A través del routeo, el método post va a authenticate del controller home. El controller home en authenticate toma los valores que se enviaron por post del formulario en dos variables. Si esto es igual a admin@mail.com y el password es 1 2 3, me guarda el usuario en sesión y me dirige a user.
+
+Ahí tendrías que conar la En realidad,
+
+sí, claro. También bajallado, sale y todo eso.
+
+Entonces,
+
+si todo funciona bien, 1 2 3 lo envío. Reventó, no lo refresqué. Perdón.
+
+Te llevó a index 3 todavía.
+
+Sí, sí, porque estaba Sí, ahí refresqué, no lo había refrescado el formulario y me mandaba a index 3\. Ahora sí va. al login. Sí. Entonces vamos con esta. 1 2 3\. Bueno,
+
+si cambia el error es algo bueno.
+
+Sí, llegó retun B de tipo string. Ah, porque miren lo que me puso. Por alguna razón me puse stream. Ahí está. Le di refresh, hizo otra vez el post y ahora soy el mismo. Sí, logout. Si tenemos el autenticate, también podemos tener el logout. Public functionout funciona. Podemos hacer dos cosas. Removemos el usuario de la sesión o matamos la sesión. Eh, destroy, ¿sí? Y redirigimos al login. Obviamente logout hay que rotearlo. Entonces, vamos a hacer un get de log out. Logout, que vaya a home logout. Y ahora tenemos que ir a la vista y hacer que al hacer clic en logout vaya al logout. Entonces vamos a la vista. Eso estaba en nuestro layout default en Pierce. Acá Alexander Pierce con el desplegable. Cuando se desplegaba acá hay un botón que dice perfil y otro que dice sing out. Vamos a poner log out. Y acá veis URL logout. Entonces yo refresco acá y esto ahora dice logout y hace una petición http a logout roteado o al controller al controller home al método logout. El método logout me destruye la sesión y me redirige al login. No tenemos más. La sesión se terminó ahí. No, no está más. Matamos todo. Si nos volvemos a loguear. Admin la mata del lado del servidor.
+
+La sesión es del lado del servidor.
+
+Claro. Y de ahí cuando le tira con el mismo token.
+
+No es un token, pero es un un ID de sesión. Sí, pero sí es eso. Si vos vas acá a la, por ejemplo, Por ejemplo, acá por acá abajo, eh, en cookies, uno de estos se la divide sesión, una cosa de por acá,
+
+se session abajo, creo.
+
+Se session, ese es la tabla de sesión, pero ahora no existe más eso.
+
+Cuando yo inicio una nueva la va a cambiar, ¿sí? Va a crearla de vuelta. Si acá eh ponemos cualquier cosa, es un sistema muy seguro, no entra. Sí. Y ahí no tenemos sesión. Sí. Si nosotros vamos a users, fíjense que no tengo nombre porque la variable de sesión no está seteada. Es un sistema muy seguro. Si volvemos al login, ¿qué pasó? Y nos volvemos a loguear. Admin mail.com 1 2 3 y nos logueamos. Ahora sí tengo nombre admin. Sí, bien. Final épico. Bueno, listo por hoy. Vimos un poquito, repasamos lo que tenía que ver con conectator. Vimos la parte de layouts. Sí, las vistas y nos metimos vimos templates también, templates, cómo cómo armar los layouts a partir de estos templates genéricos que existen con Bootstrap. Y vimos la parte de sesión que va a ser muy importante, ¿bien? En cuanto a la seguridad, imagínense ahí vamos a guardar el rol y según el rol le vamos a renderizar algunas acciones y otras no. Bien, recuerden que todo Eso ocurre del lado del servidor. Bien. Bueno, preguntas.
+
+Sí, una pequeña. ¿Cuándo va a estar la consigna del trabajo final?
+
+La semana que viene.
+
+Okay, ya está definido.
+
+No
+
+se acertan ideas todavía.
+
+Yo
+
+no sé si vamos todos presos. Yo seguro si llegamos a hacer un casino. Sí. ¿Cómo?
+
+Simulador de casino.
+
+Simulador de casino. Me plata de verdad. FL de mentira.
+
+No me encha No pescamos

@@ -1,0 +1,139 @@
+Sabemos que vamos a terminar adentro de un ciclo de desarrollo scram. Ya lo sabemos, sí, el final, pero de todas formas quiero que entiendan que estamos acá, todavía no entramos al desarrollo, ustedes tienen que pensar que están antes de que esto empiece a fluir. Entonces, antes de eso, nosotros lo que vamos a hacer cuando ustedes elijan, porque seguramente lo van a elegir antes de la clase que viene, tenemos que empezar a a hacer lo que hacemos antes de empezar a desarrollar. ¿Y qué se hacía? A ver, ¿qué actividades podemos llegar a empezar a hacer o deberíamos hacer? Una es fundamental, creo que la estuvimos hablando en las últimas clases.
+
+Bueno, modelado todavía no.
+
+Planificar no lo hiciste el problema.
+
+Análisis de requerimiento.
+
+Análisis de requerimiento. Bien. Un pequeño relevamiento. No sé quién habló de Ahí análisis de requerimiento, sí, un relevamiento no exhaustivo, pero sí por lo menos tener esa lista de requerimientos. Si bien el enunciado van a estar pueden hacer preguntas.
+
+El tema de tipo de usuario, ¿cómo va a ser el flujo?
+
+La tipología de usuarios está bueno. Está bueno. Sí. Sí. Listado de requerimientos. tipología de usuarios, ¿no?, en profundidad. Tipología de usuarios para esta altura, con saber que hay varios usuarios y que van a tener y que van a tener distintas responsabilidades o cómo va a ser ese filtro, nos alcanza y nos sobra, porque después a partir de ahí después definimos más en precisión esa parte. Pero bueno, vamos, un listado de requerimientos listado Simplemente no al detalle. Tipología de usuarios. ¿Qué más? ¿Qué otras actividades? Hasta ahí va de relevamiento, ¿no? ¿Qué otras actividades podemos hacer acá?
+
+Recuerden que estamos acá, eh, estamos ahí hablando con A ver si había una por acá. Estamos. Recuerden que estábamos antes de empezar, o sea, hay varias actividades que no tienen que ver con relevamiento también. Eh, ¿qué se les ocurre? Algo muy importante. Plata riesgos, sí, riesgos y plan de acción y evaluación de esos riesgos. Bien, eso llama análisis de riesgo y contingencia. Sí o sí lo tienen que hacer. Sí o sí. Si no están muertos, por más mínimo que sea, el análisis de los riesgos lo tienen que hacer. Bien. Y lo vamos a hacer la clase que viene y después viene a partir del riesgo. Analizando los riesgos, nosotros podemos primero encontrar que no es viable hacer el proyecto. Segundo, es viable, pero muy riesgoso. ¿En qué va a impactar eso?
+
+Eh,
+
+en el costo, sí. Cuando Uno habla de riesgos, sí se cubre con plata. Claramente otra posibilidad que podemos analizar es es viable, no tiene muchos riesgos, pero tiene una dificultad alta el proyecto que también, ¿dónde impacta?
+
+En el costo. Sí. Imaginemos que necesita una mano de obra, un un perfil especial, ¿no? Que implementa algún tipo de No sé, análisis de datos, ¿sí?, de big data o o de inteligencia artificial o algún perfil mucho más complejo. Buenas. Entonces, eso es más costoso. Eh, todo ese análisis. Bien, ven acá mando de equipo. Por ahí necesitamos máquinas costosas. Sí, tenemos que desarrollar sobre con una computadora que es mucho más costosa. una notebook que es la que tenemos. Sí. Entonces eso va de presupuesto y ahí lesé la otra actividad que podríamos hacer antes de empezar a desarrollar. Todavía no empezamos eh requerimientos, tipología de usuarios, análisis de riesgo eh y una estimación de tiempo y costo. Sí, va a medio de la mano porque una estimación a grandes rasgos. de lo que me va a llevar el tiempo me va a dar una parte del costo de mano de obra, ¿está bien? O de la cantidad de licencia que voy a necesitar del presidente judicial o la cantidad de tokens. Bien, sí. Todo eso se tiene que hacer antes de empezar a desarrollar un software, está después viene la otra partecita donde la factibilidad está hecha. donde el contrato está hecho, me aceptaron el presupuesto, me lo bajaron a la mitad seguramente e llegamos a la etapa de desarrollo y ahí viene configuración de entorno, eh armado de los equipos, eh un relevamiento o armado del productock un poquito más en profundidad, planificación de los sprint y empezamos y ahí empieza análisis más en profundidad. Ahí si toca en el primer sprint seguridad, roles de usuario, login y registro y toda esa cosa. Entonces ahí sí vamos a venir y nos vamos a sentar. Bueno, ¿cuántos roles de usuario vas a usar además de estos tres que ya sabemos? ¿Puede existir otro rol de usuario en un futuro con diferentes permisos? Tres, cuatro preguntitas y ya lo pulos, lo detallamos más en profundidad, está recién cuando empezamos, porque si detallamos antes de empezar, ¿qué nos pasa? Estamos una vida haciendo un relevamiento quizás por algo que no va prosperar, está obviamente que la experiencia eso te lo facilita por el tipo de proyecto, uno ya sabe más o menos cómo funciona, por hacer cierto as preguntas puntuales antes de arrancar o para saber hasta dónde llega y no entrar en detalle en cada uno de los requerimientos. Sí, las experiencias como en todo en la vida eh hace evitar errores. Algunos no, pero bueno, siguen cometiéndole el mismo error, pero bueno, pero eh es así, ¿sí? Entonces, un relevamiento previo de la lista de requerimientos es fundament al análisis de riesgo, etcétera, etcétera. Sí, acuérdense muy bien de todas estas actividades. ¿Por qué? Ustedes tienen que separar estos ciclos, son cosas distintas, no es lo mismo. Bien, está bueno. Bien. Entonces, vamos a empezar con los enunciados. Voy a ir rápido porque son cuatro, son un montón para los que no estaban. Grupos de mínimo tres, máximo tres.
+
+Me van a sobrar dos personas.
+
+29 son. Después me fijo bien que dos de cu. o uno de
+
+o uno de dos, pero es el de dos lo que está matando.
+
+Dos de cuatro o cuatro de dos o uno de dos. Uno de dos.
+
+Uno de dos. Y bueno, antes que uno de dos, dos de cuatro.
+
+Sí, pero viste, capaz que es siendo dos es más fácil, ¿viste? Uno tiene un poquito de de consideración, ¿no? Que sacamos un requerimiento. Ah, bueno, eso distingue o dos. Le ponemos uno más por ser diferente. por no cumplir la primer regla que era 3 o tres. Bien. Eh, entonces dijimos grupo de tres o tres eh va a ser por orden de llegada a cada uno de los proyectos. Entonces, ya obviamente ya me los imagino cuando yo les diga ya no vamos a les voy a hacer una explicación que ahí va a ser por orden de llegada. El que se anota primero va él
+
+para que sea lo más gusto posible, que sea de manera random cuando
+
+a la med de la noche ahí lo subí.
+
+Cuando yo decida lo voy a subir, le va a llegar un mensaje plataforma un profesor acá que te daba aquel que tiene Ah, sí,
+
+el marido Marita.
+
+Sí, sí, sí. Eh, a cualquier hora
+
+no. Igual a la noche prefiero dormir. Eh,
+
+deja un corón que se sol,
+
+pero bueno, va a ser así. Está bien. Empezamos primero este que ya les había hablado. Sí. Plataforma de gestión y control de servicios de inmuebles. Esta parte es eh bueno, la descripción del sistema, ¿sí? En la limitación de propiedad de inmueble, tanto de uso residencial como comercial o corporativo, uno de los principales desafíos operativos radica en la falta de centralización y trazabilidad del control de los servicios públicos y privados. Energía eléctrica, agua potable, gas natural, internet, tas municipales, expensa, etcétera. La dispersión de fechas de vencimiento, ausencia de registro de consumo histórico y omisión ocasional de pagos derivan en recargos por mora, cortes no planificados del suministro y severas eh fricciones entre propietarios, inquilinos y administradores. Eh, para resolver esta problemática, la cátedra propone el desarrollo de la plataforma Servismueble 2026, una solución web integral diseñada para centralizar la gestión de inmuebar sus servicios asociados con sus respectivas identificadores de cuenta medidor registrar el ingreso de facturas con métricas de consumo y fecha de vencimiento, procesar la rendición de pagos y generar reportes analíticos de evolución de consumo a lo largo del tiempo. Bien, funcionades principales, las leo rapidísimo y no vamos a entrar en detalle. Pero alta de un inmueble, modificación y baja de un inmueble, consulta y listado de los inmuebles, gestión de catálogos, eh, gestión de catálogo, de servicio, sea de catálogo, tip, perdón, eh acá hizo cualquier catálogo de servicios, eh, Gestión de los tipos de servicios, gestión de servicios de un inmueble. Sí, hay por un lado tipos de servicios como es electricidad, internet, e, luz, luz y electricidad, lo mismo, gas, agua y después está el servicio particular de cada inmueble, está, que sería esta parte, la gestión del servicio de un inmueble. Entonces, el alta del servicio, el estado de ese servicio y la baja del servicio Después, gestión de las facturas, cargar un comprobante, eh atributo de la factura, esto eh y después pago de facturas. Acá están los roles, administrador, usuario propietario y usuario inquilino. Este lo vamos a simplificar en algún punto. Sí, para Eh, sí, en la parte de atrás decía opcional, opcional inquilino o opcional el ocupante, o sea,
+
+sí, sí, esto no, esta parte de inquirino no lo vamos a sacar. Mira,
+
+solucionado,
+
+solucionado el tema. Este en sí nos vamos a concentrar en dar de alta inmuebles con todos sus datos, dar de alta tipos de servicios por todos sus datos y dar de alta servicios para esos inmuebles. Y esos servicios me van a generar pagos, yo los tengo que pagar, vencimientos, está y entonces vamos a gestionar los pagos de esos vencimientos. ¿Está? Sí, estamos de acuerdo. Ese es el core núcleo de este trabajo. Bien, esto va a ser para todos, así que lo voy a una sola vez. Sí, en particular cada uno de los trabajos va a tener su descripción, pero todos van a tener una cierta lista de requerimientos para aprobar la cursada y otros requerimientos para aprobar el final. Está. Entonces, para aprobar la cursada, estos son los requerimientos que voy a van a tener que desarrollar, está Lo de para aprobar el final es si aprueban la cursada se tienen que presentar al final y terminar los requerimientos que quedan pendientes. ¿Estamos de acuerdo?
+
+Todos va a ser lo mismo. Todos tienen la misma división. Entonces, y todos tienen las mismas dificultades, ¿sí? Para llegar a probar la cruzada. Bien. Y esto también lo voy a leer una única. vez la forma de entrega. Sí, la entrega de para probar la cursada es una presentación oral junto con un demo. Está está bien descriptoado. La entrega consiste en una presentación grupal del desarrollo del proyecto junto con un demo del producto funcionando. Está y un archivo SI RAR el que más le guste con el proyecto completo, los script de base de datos y la documentación e que hayan usado. La documentación para probar no hace falta tanto con la presentación al caso. Bien, para aprobar la cursada. ¿Alguna duda de eso? ¿Estamos todos de acuerdo? ¿Se entendió? Entonces, presentación grupal del proyecto de software. La presentación no es del desarrollo del Todo, todo completo. Sí, empezando con los riesgos, sí, hacen toda la perata de esa, la planificación, todo eso. Bien, todo lo que es proyecto, presentación demo y la y entregan todos los archivos. El tema de la presentación oral es de cómo hicimos la aplicación o yaamos solo de cómo funciona.
+
+Todo,
+
+todo, todo.
+
+Empiezan, nos encontramos con este problema. A partir de de ahí hicimos un relevamiento, analizamos los riesgos, nos dio una estimación de desarrollo, así este es el equipo que vamos a desarrollar. Hola. Y encaramos la solución de esta forma, con esta arquitectura, con este software, con esta framework, con este entorno de desarrollo y este equipo de desarrollo. Nos dividimos el sprint dental todo completo. Estamos y después la ejecución de ese scr de ese desarrollo. Estuvimos avanzando así, así, así. Bien,
+
+¿qué?
+
+No, ya está.
+
+No, pero resumir loss como los temas que que vieron calent.
+
+¿Alguien quiere un sándwich de qué calentito? ¿De qué?
+
+De Milana.
+
+De Milana. Uno de Milan. ¿Qué tal les cuentas? Hoy vamos a ver los trabajos. Ah, sí,
+
+estamos viendo. Ya vimos uno, les dije equipos tres mínimos, tres máximos y hay cuatro enunciados. Capaz que saco alguno, no sé, pero ahí se van a tener que lo vamos a distribuir equitativamente para la clase que viene o antes, quizás mañana, yo les voy a mandar un mensaje y por orden de llegada a la inscripción se van a poder acomodar elegir primero y si no van a tener que elegir otro.
+
+Así es. Eh,
+
+y empezamos a ver el primero, que es sobre eh administración de los servicios de los inmuebles. Un poco le había contado, pero el core del problema es vamos a dar de alta inmuebles, vamos a dar de alta tipos de servicio para cada inmueble. Vamos Vamos a dar de alta los servicios particulares de eso de ese inmueble y después va a haber una sección de alta de facturas de esos servicios. Esas facturas producen vencimientos y esos vencimientos reciben un pago y después está toda la información, ¿no? Consumo anual, consumo comparado mes actual, mes del año que viene pasado. Bueno, toda esa data de informes que está bueno es Está bien. Ese es el core de este de este problema.
+
+Bien. Y les mencioné después presentación, la presentación y cómo es para aprobar la materia. Sí, para aprobar la materia se hace una presentación oral del proyecto del software con los requerimientos que son están determinados. Todavía ando un medio apartado que est eh esa presentación no es de el desarrollo del software es del proyecto completo del software, ¿sí? Donde contamos, bueno, está este problema, lo analizamos, eh se estimó eh se hizo un análisis de riesgo, se etcétera, etcétera, hacer un análisis de riesgo
+
+y mínimamente un mínimo análisis, ¿sí? No, nada sumamente completo, son dos prom que te vay
+
+no me vengan con que hay que hacerlo, hay que leerlo. Obviamente, pero sabemos que hoy la tienen fácil. Bien, estamos listo con el uno. Anotaron turno planner. Este es de una sugerencia, lo vamos a implementar en dónde era en donde les quede.
+
+Bien, los leo. Centrro de eh sistema de asignación de y turno y control, perdón, de turnos rotativos de enfermería. En los centros de salud y hospitales, la cobertura asistencial continúa eh continua exige una rigurosa planificación y supervisión de los turnos rotativos del personal de enfermería mañana, tarde, noche y guardias especiales. La administración de Estos esquemas requiere balancear las cargas horarias, garantizar dotaciones mínimas en áreas críticas, guardardia, neonatología y registrar las novedades o ausencias imprevistas sin desatender la continuidad asistencial. El sistema TUM Planner tiene como propósito centralizar la planificación, asignación, registro de asistencia y reportería de los turnos rotativos, elimitando las operaciones entre las coordinaciones del hospital, el personal de enfermería en plan funcionalidades principales. Bueno, ABC, eh ABC usuarios y personal, AMC sector de servicios del hospital, ABMC de tipos de turnos, planificación de cuadrícula, o sea, asignar un personal a un turno. Sí, gestión de contingencias y cobertura. Este me parece que lo vamos a sacar. Vamos a ver, dependiendo de de la evaluación de de hoy a la noche y después eh restablecimiento de contraseña. Acá está porque está dividido por por el rol de acá. Eh, registro, consulta de cronom. programa, registro de cumplimiento de turno, notificación y de inasistencia. Este es otro de los requerimientos que va con la gestión de contingencia y cobertura, ¿no? Una inasistencia lo que amerita es reprogramar o asignar alguien más. Los roles administrador y enfermero y régimen de aprobación. Sí, esto lo que les decía para aprobar la cursada, para aprobar el final de la materia, esa división Entonces, básicamente este sistema su principal core es, vamos a dar de alta personal eh un enfermero, qué sé yo, el personal turnos. Vamos a asignar esos turnos van a tener por este lado eh también algunas eh secciones que sería las áreas a cubrir y ese personal se lo vamos a asignar a los turnos. Bien, y por ahí lo que tenemos dando vuelta es que un uno de los enfermeros o de los empleados o el personal puede avisar la una inasistencia. Está esa sería el cor. Está básicamente estamos hablando de la misma cantidad de entidades por trabajo práctico. Sí, eso es lo que lo que vamos a alcanzar a hacer. Si yo les sigo agregando funcionalidades, sonamos bien. ¿Está? ¿Se entendió ese? Preguntas, dudas. Bueno, bien. Este es el otro que tiene que ver con la parte inmobiliaria, pero nos vamos para el otro sector o es complementario. Sí, les leo. El sector inmobiliario enfrenta cotidianamente una alta complejidad operativa derivada de la administración descentralizada de propiedades, el seguimiento de contratos locativos y el control de flujos financieros mensuales en las inmobiliarias tradicionales. La gestión manual de cobros de alquileres La verificación de comprobantes de pagos, el cálculo de comisiones administrativas y el posterior y la posterior liquidación a los propietarios genera frecuentes inconsistencias contables, moras en las acreditaciones y falta de transparencia hacia los clientes. Para dar respuesta a esta problemática, la empresa Nicotech requiere el diseño e implementación de una, no pago nada, eh, de una plataforma web integral de denominadaestión 2026\. El sistema actuará como un portal centralizado que conectará a la administración de la inmobiliaria con los propietarios de inmuebles, los inquilinos y el público en general en búsqueda de propiedad. El objetivo central del software es digitalizar todo el ciclo de vida de la enquilet, desde la publicación y catalogación del inmueble, el registro formal del contrato locativo, la emisión automática usual de cuotas de alquiler, la recepción y validación de pagos presentados por los inquilinos hasta la liquidación final de haberes a los propietarios con el correspondiente descuento de la comisión inmobiliar. Bueno, van a ver que tampoco es tanto todo el sitio, después se lo redujo. Bueno, funcionalidades alta, baja, modificación y consulta de personal de personas, perdón, o usuario. Eh, gestión de inmuebles, gestión de contratos de alquiler. Esto le voy a cambiar por gestión. Gón, ya lo vamos a decir. Gestión de contratos de alquiler, cobro y emisión de cuotas, liquidación a propietarios y después es dashwel de control. Bueno, todos tienen un dashwel de control. Sí. Y estas son las mismas, pero del otro lado. Sí. Registro en el sistema y edición de perfil y consulta de propiedades y contratos, consulta de liquidaciones y demás. Eh, esto es propietario inquirido. Está básicamente en lo que se centra este trabajo es tengo propio propiedades. Tengo propietarios e inquilinos. A ellos lo une un contrato. Sí. El contrato une propiedad que con un propietario y un inquilino está ahí en el medio. Esa ese contrato genera cuotas a pagar y el inquilino paga esas cuotas. Bien, más o menos estamos en el mismo quilombito que los otros trabajos. Si, pero eso es el cor. Entonces acá administramos contratos de alquilar.
+
+El primero se administra inmuebles
+
+y los servicios y los servicios
+
+acá inmuebles. Los contratos
+
+eh un usuario puede estar más un ampliar, o sea, puede estar más un contrato.
+
+Sí, ya empezó a hacer alamiento.
+
+Está, pero se entiende. ¿Estamos de acuerdo?
+
+Sí.
+
+¿Alguna otra duda? No. Y el último, a ver qué sale de este contagest.
+
+Si no me toca esto, me mato,
+
+eh.
+
+Si no me toca esto, me mato.
+
+Sistema de gestión de clientes y estados contables. Este es el aburrido. Va salud para No sé, al que le guste la contabilidad. Bueno, en la actualidad los estudios contables e impositivos se enfrentan el desafío de centralizar la administración de sus clientes, personas físicas, mono atributistas, responsable escrito y personas jurídicas fiber y mantener el orden de su documentación respaldatoria y estado fiscal. La falta de un canal unificado provoca pasajes en las fechas de liquidación inclusiva. Aa, ganancia, ingreso bruto, demora en la entrega de comprobantes y falta de visibilidad del contribuyente respecto a su situación contable mensual. El sistema Contagest tiene como propósito ofrecer una plataforma integral donde los contadores pueden gestionar los padrones de clientes, registrar concimientos impositivos, computar comprobantes y generar resúmenes de estado contable fiscal periódico, mientras que los clientes disponen de un portal de autogestión para consultar sus balances. descargar resúmenes y subir documentación tributaria. Funcionalidades principales, gestión de cliente y contribuyente, gestión de tipo de impuestos y obligaciones, gestión de periodos contables, generación del resumen de estado contable, baja, bandeja de documentación recibida. Sí, esto es gestión de documentación. Vamos a Gón Gestión de documentación probatoria. Eh, restablecimiento de contraso. Bueno, y después esto por cliente está separado por usuario. Resumen de estado contable, vencimiento impositivo, documento y factura yorial contable. Entonces, el core de este de este proyecto es clientes. Esos clientes tienen Y por otro lado, perdón, vencimientos contables. Esos clientes tienen toda una cierta de movimientos contables que son sus comprobantes. Se dan de alta esos comprobantes, generan un resultado, ese resultado se calcula y ahí tienen en los vencimientos el cálculo de su estado contable. Bien, simplificado lo vamos a hacer. No lo vamos a hacer un estado contable completo porque si no nos volvemos locos. Ingreso, egreso, tributa, no tributa y ya está. Sí, no nos vamos a poner exquisito porque si no hacemos un quilombo barra. Vas lo que quieras, algo que la guía quiera. Se entendió este buenard. Y lo contable tiene un ahí una vueltita de tuerca que es compleja, que es toda la parte tributaria y del estado contable que hay que saber cómo un eh un estado contable, pero no lo vamos a hacer. O sea, básicamente una persona tiene ingresos y tiene gastos. La resta de eso es mi es la ganancia, el resultado contable. Sí, simple, simple, simple. Lo que sí le vamos a agregar por ahí algún comprobante, comprobante que tributa y después el resto te resta. Entonces, V a tener que pagar IVA por un tanto por co en una fecha de vencimiento. Entonces, el los 21 de cada mesa acá el igual del el resultado anterior. Ingreso bruto lo mismo, ¿no? Vamos a poner las retenciones que si me retubo, que replico, no todo ese quilombo, no, no, gracias. Sí, pero más lo vamos a Si no nos volvemos locos. Están votando nuestro grupo. Sí.
+
+Asado pernil. ¿Qué sale?
+
+Bueno, listo. No hay más. No tengo más. ¿Alguna pregunta más de contable?
+
+Bueno, a en grupos. Después le paso el sistema de elección de pongan el nombre en el sistema le vamos a poner eh bueno, un representante que se que se loguee
+
+y que elija que quedan sueltos. que elijan. Después vemos en el camino. Vemos
+
+bien, dudas, consultas
+
+de todo esto. Entonces,
+
+entramos en la etapa
+
+inicial de un proyecto de sobra. Sí, vamos a tener que hacer todo este jueguito de analizar riesgos, de ver qué me conviene. Vamos a intentar presupuestar, vamos a hablar de a ver cuánto nos puede salir todo esto. La clase que viene. Eh, y por supuesto, eh, ese análisis del riesgo, si yo quiero que hagamos un pequeño análisis de riesgo, lo igual lo chasteamos, ¿sí? Se lo preguntamos a a Chat GPT, pero hablémoslo acá. Eh, y después la planificación. Después sí vamos a entrar entrar en una etapa de planificación. Ahí sí si quieren usar chat GPT o digamos la inteligencia artificial, úsenla. No sirve para mucho en la estimación le va a dar una base, pero le pifia como un campeón. Eh, y de hecho hoy hoy día no hay nadie que sepa este, pero está bueno que que hagamos esos contrastes. Así que la clase que viene se viene con un par de tokens libres y hacemos eso. Hacemos riesgo. presupuest eh estimación y presupuesto.
+
+¿Qué día se entrega? Ah,
+
+¿qué día?
+
+Todos los TP cuando les suba, van a tener esta parte donde van a tener el régimen de aprobación con los los requerimientos que entran en la primera etapa, aprobación de la materia y aprobación final de la materia, los requerimientos aprobación final y Y las fechas de entrega son aproximadamente el 17 al 24 de noviembre, que depende dónde cierre el ciclo lectivo alguien la nota. Bien, estamos. Esperen que voy a pensar. Déjenme. de pensar. Vamos a hagan, ahora vamos a hacer un ejercicio de UX. Está vamos a agarrar un requerimiento común, ¿sí?, que van a tener que hacer todos, que es la administración de usuario. Sí, alta o baja modificación y consulta de usuario. Está la idea de ahora es que hagamos con lápiz y papel. Si quieren ajúntense y vamos a hacer, no tienen que demorar más de 15 minutos, como mucho igual, 15, pero la idea es que planteen el flujo del alta. el flujo de la baja, la modificación y la consulta de los usuarios. Está a dibujar en el grupo acá. Te quedas ahí, ¿eh? planta baja. Ahora No tenemos convenio.
+
+Bueno, muchachos, ¿cómo vienen ustedes con este Patri?
+
+Ya entendéis muy bien si nos vamos a hacer y él elige elige que hacemos nosotros como tenemos el básicamente uniones. El primero que se mete al proyecto

@@ -1,0 +1,329 @@
+Ya hicieron de todo, ya hicieron el proyecto.
+
+Ahí vemos. Cuéntenme, ¿vanzaron en algo? Además de seleccionarlo, ¿lo leyeron? No,
+
+no está punto.
+
+Lo imaginamos.
+
+Todo lo que se podía hacer lo hicimos.
+
+Bien, hoy lo voy a publicar. Es más, ya mismo primero hacemos esta este enunciado y ya eh, perdón, vemos esta parte que es la estimación de esfuerzos y para la segunda mitad de la clase de hoy, lo que vamos a avanzar es justamente eso, leer el enunciado, hacer preguntas más genéricas y hacer un esfuerzo o una estimación de esfuerzo. Sí. y vamos a ver cómo cómo funciona el eh la estimación de esfuerzo. Para la clase que viene vamos a hacer un presupuesto. Van a tener que traer un presupuesto del del proyecto en sí. Sí. A ver, quizá así sin muchas herramientas. Lo vamos a hacer a ojo y después lo discutimos acá. Bien, ¿qué vamos a ver? Eh, rápidamente es la estimación de esfuerzo, ¿sí? ¿En qué nos basamos y cómo vamos a encarar una estimación de esfuerzo? Van a ver que eh yo me voy a meter de lleno en el desarrollo, ¿está? Pero ahora les vamos les voy a hablar al principio de que o o al final lo vamos a relacionar con que hay dos fases donde vamos a estimar esfuerzo. Sí. La que nos importa a nosotros como desarrolladores o como equipo de desarrollo es la que ya conocen de Scram. Sí, el planer. Ese lo conocen. ¿Dónde están Planning Pcker? ¿No conocen el plan poker de Scram?
+
+No, no
+
+dieron estimación de
+
+de algo de historia de usuario.
+
+Sí.
+
+¿Y cómo la estimaron?
+
+Eh,
+
+las dificultad que veíamos y el tiempo que
+
+que Imaginamos que íbamos atrás de la sala.
+
+Bien.
+
+Y eso es como una escala, digamos.
+
+Ah, había que
+
+usando la escala
+
+había que diseñar una escala.
+
+Bien. Okay. Así al al aire.
+
+Eh, se usaba la escala de ¿Cómo se llama?
+
+Tibonacci iner. No vieron. Entonces
+
+es el de las cartas.
+
+Sí.
+
+El que perdí plata en el casino. Siempre
+
+no. Bueno, bueno,
+
+usamos,
+
+lo vamos a ver. Entonces,
+
+siempre lo usamos para ciertos cas para los casos dulcesos, o sea, caso le le definíamos un
+
+unos puntos. Claro. Bueno, lo vamos a ver ahora. Eh, bien, como les decía, está esa planificación, esa estimación de esfuerzo de la editoria de usuario y por otro lado está una estimación previa que es la visión general donde uno va a presupuestal que tiene eh una correlación, por supuesto, ¿no? Cuando uno hace un análisis de un relevamiento de requisitos, a cada requisito le tiene que poner puntos de esfuerzo, tener un una noción de lo que le va a llevar para cotizar y poder evaluar si es viable el proyecto, ¿no? Entonces, vamos a balancear esas dos cosas. Vamos a hacer para la semana que viene un presupuesto sobre el proyecto que eligieron, balanceando la estimación que vamos a ver hoy y después en el transcurso del desarrollo vamos a hacer ejercicios de estimación, pero en particular ya de la historia de usuario. Bien,
+
+entonces vamos a ver un poquito de qué va esto de la estimación o de la eh puntuación de esta historia de usuario o del esfuerzo que nos conlleva desarrollar un requerimiento. la historia de usuario varias, un conjunto, un módulo. Bien, entonces esas estimaciones pueden ser por eh distintos factores. Lo que sí tenemos que saber es que estimar y planificar es fundamental a la hora de encarar un proyecto. Es crucial. Sí. Y hay varios factores que que nosotros tenemos que tener en cuenta. A saber es la dificultad de lo que nos lleva. eh el tiempo que nos están pidiendo, ¿no? Los requerimientos, lo que nos pide el cliente y después esa tabla o esa matriz de riesgos que tenemos que tener siempre en cuenta. Bien,
+
+la dificultad sería el esfuerzo,
+
+no sería complejidad,
+
+va más por la complejidad, la dificultad. Sí. Eh, a ver, vamos a separar esas cosas, esos dos términos. No, porque puede ser algo que te lleve mucho tiempo porque es algo largo, porque es muy muy no complejo, sino que es tenés que hacer muchas cosas y te lleva tiempo, pero sabes que no va a tener ninguna dificultad o puede ser algo que sea complejo de hacer, difícil, ¿sí?, que requiera otros skills, otro conocimiento, ¿sí? Y no por eso es es tiempo, es largo. Bien, entonces va por ahí. y uno le pone cuando hablamos de dificultad o complejidad, le esos son los factores que van a influir, ¿no? Va a influir eh el conocimiento que se requiere para hacerlo, para llevarlo adelante. Eh, los factores externos, o sea, si necesitas máquinas especiales para que para poder hacer lo que necesitas hacer, eh, si dependés de otras cosas que sucedan en el mundo, está. Si dependés de otras cosas que no tenés control, eso aumenta la dificultad y eso tiene que estar en la matriz de riesgos. Sí, cuando hay algo que no depende de nosotros, siempre es un riesgo porque puede no suceder y como no depende de nosotros no hay forma de controlarlo. Entonces todo eso tiene influye en lo que me refiero como dificultad, como complejidad. Sí está. Eh, y eso abuena a esto. a tener un una percepción, una visión de cuán complejo es el producto del desarrollo del software que vamos a llevar adelante. Eso es el foco que tenemos que llevar adelante a la hora de estimar. Bien. Eh, siempre la lo primero que nosotros hacemos es el producto no les dije, nos vamos a enfocar directamente en lo que es desarrollo, ¿sí? Y estimación. dentro del desarrollo. Nosotros el desarrollo lo conocemos como lo como lo llevamos adelante con Scram y a donde apuntamos en la materia es desarrollo de un productlock. Ese productlock lleva a partir de esos requerimientos llevamos adelante una primera estimación o ya la deberíamos haber hecho, ¿no? Con sus dificultades y demás, pero siempre es el primer paso. que tenemos que hacer antes de empezar a desarrollar, ¿sí? Tener un listado de todos los requerimientos que vamos a llevar adelante, siempre, todos, lo más completo que podamos. No significa que esté detallado ese requerimiento. Sí, el requerimiento puede llegar a ser simplemente el título de lo que tenemos que hacer. Si es entendible, si es algo repetitivo, se va a entender. ¿Sí? Si yo les digo una alta baja, modificación y consulta de una entidad persona, no hace falta que lo describa mucho. ¿no? Entonces, en el primer análisis que ustedes hacen y el primer relevamiento de requerimientos, tienen que enfocarse en eso, en detectar primero aquellos requerimientos triviales, estos altas, bajas, modificaciones y consultas que no llevan eh mayor dificultad. Y después, dependiendo del proceso de negocio que están relevando y analizando, cuáles son las entidades o los flujos de de información mucho más complejos, donde sí van a tener que hacer repreguntas. Está no es lo mismo que yo les diga una alta baja, modificación y consulta de un pago para un sistema que vende eh productos, cualquiera de ellos, productos de electrónica, que una alta baja modificación y consulta de un pago en un sistema contable. Está el pago, un si doy de alta un pago en un sistema de venta de productos, simplemente se registra el pago y si el pago está es total, listo, no hay problema. En un sistema contable es un poquito más complejo. Sí, lleva un flujo donde se tiene que imputar en una cuenta eh como ingreso, como de dónde se pagó, sale como agreso. Bueno, tiene una complejidad distinta al otro. Sí. Entonces así esos procesos de negocio tienen que ser relevados con un poquito más un poco mayor detalle. Tenemos que tener en cuenta eso. ¿Sí? Entonces, el primer paso que nosotros vamos a enfocarnos es en producir ese producto a conciencia y ahí está la habilidad que ustedes tienen que desarrollar es de preguntar y entender el modelo de negocios que están llevando adelante en ese relevamiento. Bien, entonces ahí nos ponemos el sombrero de analistas funcionales. y preguntamos y repreguntamos y vamos en profundidad con lo que consideramos que es importante para el modelo de negocio. ¿Sí? Siempre en el análisis ustedes se tienen que enfocar en entender el modelo de negocio, de qué estamos hablando. No es lo mismo hablar de una fábrica de autos que de venta de productos online. Está los sistemas son distintos los modelos de negocio y los problemas que tenemos que resolver. son distintos, los usuarios son distintos. Ese es el foco que ustedes tienen que lograr entender a la hora de analizar. Eh, tienen que entender el el negocio cómo funciona. ¿Para qué? Porque por lo general un relevamiento nos nos lleva a y más hoy a generar la documentación. Y si nosotros no profundizamos y no diseñamos en el camino de ese relevamiento, no hacemos las preguntas indicadas, no llegamos a resolver el problema. Sí, si hacemos preguntas nada más, ¿qué quiere el cliente? Lo que vamos a llegar simplemente es hacerle un sistema de lo que el cliente cree que necesita. Está esa es la habilidad que tienen que lograr. Bien, bien. Una vez que tenemos claro esos requerimientos bien profundamente y entendimos de dónde vienen y para qué sirven y cuáles son los problemas que va a resolver cada uno de esos requerimientos, Vamos a avanzar a hacer la puntuación. Sí, cada requerimiento, no necesariamente con una descripción muy grande, sí entendidos por cada uno, tenemos que puntuarlos. Ponerle un punto. Ese punto eh va a estar influenciado por lo que yo les vengo diciendo. Riesgo. Bien, ahí tenemos que diferenciar entre dos riesgos, bien, riesgo que eh que tiene dentro del proyecto ese requerimiento en particular, o sea, si es un requerimiento que que depende de otras cosas que son ajenas a mí, si es un requerimiento complejo que necesita maquinaria especial, si es un requerimiento eh complejo que requiere conocimientos que el equipo no tiene, sí, eso ese tipo de riesgos eh un requerimiento que solo puede desar una persona del equipo. Sí, ahí tendríamos un riesgo. ¿Qué pasa si no está esa persona en el equipo? Sí, esos riesgos son internos, son los riesgos que nosotros podemos eh que que tiene este requerimiento. Y otro riesgo que tenemos que detectar es qué pasa si este requerimiento no se lleva adelante. Bien, el impacto, los riesgos que produce o el impacto que que produce el desarrollo de ese requerimiento. Eh, por ejemplo, el login de usuario con roles y la administración de usuarios generalmente producen un impacto fuerte en una arquitectura de software. ¿Sí? ¿Qué significa? Que si nosotros vamos a llevar adelante un desarrollo de un software que depende de permiso para ciertos roles de usuario y no tenemos esa estructura y esa arquitectura desarrollada en nuestro software, Después incorporar toda esa arquitectura y esa permisos a una etapa avanzada de desarrollo del software es muy complejo. Sí. Conlleva muchos cambios sobre un montón de cosas que quizás hasta no podamos hacerlo y tengamos que volver a empezar. ¿Sí? Entonces requerimiento sumamente complejo. Sí. Usuarios, roles, permisos, no tiene ninguna complejidad. Ahí donde Decimos, "Bueno, esto no tiene complejidad, no tiene riesgo, no hay que ser un gran desarrollador para llevarlo adelante, ¿no?
+
+Ahora, si yo lo desarrollo a mitad del proyecto, podemos llegar a chocarnos con tr una pared, porque hay que intervenir un montón de entidades que de repente son eh filtros de permisos que no tuvimos en cuenta en el desarrollo de está, fíjense, como algo que quizás no es riesgoso para el desarrollo. para desarrollarlo si es riesgoso para el flujo de desarrollo de nuestro proyecto. Entonces, dentro de lo de la evaluación de riesgo, nosotros le ponemos un puntaje solo, no le no distinguimos entre los dos riesgos, pero a la hora de pensar cuánto es de riesgoso, pensamos para los dos lados. Otra cosa que tenemos en cuenta es la valoración del cliente. Hm. Y eso se primero se ve y se analiza, no se le pregunta cuánto valor le pondría usted a este requerimiento. Se tiene que hacer un poquito más eh delicadamente. Si el usuario es experto, sí le podemos preguntar eso, pero la valoración es cómo impacta ese requerimiento desarrollado para el cliente, o sea, cuántos problemas le saca de encima. Bien. Y Eso lo tenemos que ver obviamente en el relevamiento. Va a depender del modelo de negocio, va a depender de un montón de cosas. Sí, vamos a suponer una inmobiliaria. Bueno, eh seguramente le va a sacar uno de los requerimientos más valorados para alguien de una inmobiliaria va a ser, bueno, poder ver el estado de los contratos de alquiler. Sí, nosotros sabemos que para ver el estado de esos contratos de alquiler tenemos que hacer un montón de requer entos antes, pero sabemos que el foco es ese. Es ese es el requerimiento con mayor valor agregado para el cliente. ¿Sí? Entonces, le ponemos mayor valor. Esto, ¿qué lo va a hacer? Lo va a subir en a la hora de priorizarlo. Está. Y finalmente la estimación, el esfuerzo que sale de una estimación. No sé si acá tengo la de planker. Sí. Ese esfuerzo, esa estimación, como ustedes bien lo saben, se hace con unas cartas de con los números de en realidad se hace con números de la sucesión de Fibonacci. ¿Por qué la sucesión de Fibonacci? Porque quedó lindo y le gustó a alguien, no sé por qué. E pero básicamente se se mide el esfuerzo que puede llegar a llevar desarrollar eso que estamos hablando, ese el requerimiento. ¿Sí? Entonces decimos, bueno, alta o baja, modificación y consulta de usuarios. ¿Cuánto nos puede llevar de esfuerzo? ¿Cómo funciona el planning pcker? Básicamente agarramos la historia de usuario, decimos, "Bueno, hay que hacer, vamos a, vamos a hacer un ejercicio. Juntamos al equipo, cada uno de los integrantes del equipo tiene cartas." Sí. Toda la sucesión de Fibonacci más un signo de pregunta. un café y un infinito, creo, no me acuerdo qué otra cosa. Eh, y entonces el team leader agarra la historia de usuario, dice, "Bueno, hay que hacer una un login de usuarios con roles que según el rol eh me muestre un dashboard o un dashboard particular para cada uno de los usuarios del para cada uno de los roles." Bien, en ese mismo constante se describe, se hacen algunas preguntas. Sí, los desarrolladores tendrían que preguntar, "Che, pero y con qué es login a ver, ¿qué preguntarían ustedes ante esa?"
+
+No, si vas a intentar o o qué métodiación vas aar en base o vas a a variar con, por ejemplo, con out para logar con distintas cuentas.
+
+Perfecto. O out dos, ¿alguien sabe lo que es? No. Out 2 es un metodolog ía un protocolo de autenticación que usan cuando es ingresar con Google. Sí, vieron que ustedes eso lo redirige a Google, toma su correo. Bueno, eso es O2, es el protocolo que se usa.
+
+Eso para evitarte tener que manejar las valiaciones, la seguridad de las cuentas, todo eso. Directamente la delegada se cubre, que sea caro. H.
+
+Si quieren, si quieren después veremos cómo funciona. Pero bueno, básicamente es eso. Una muy buena la pregunta sería, bueno, ¿cómo va a ser tu ingreso al sistema? Usuario y contraseña o algún O2
+
+o correo puede ser
+
+correo y contraseña. Y si yo les digo, bueno, sí, va a ser con O2, o sea, va a ser con proveedor externo. Otra pregunta,
+
+¿qué servicio?
+
+Sí, que con cuántos por lo menos con cuáles bien, ¿eso incrementa la dificultad o no? Bien, entonces estamos haciendo el ejercicio, estamos estimando el esfuerzo de hacer el login con la redirección al dashward. ¿Qué más preguntarían?
+
+Contraseña plana fallada.
+
+Ya no pregunt el resto quiero que el resto pregunte. Lo que se guarda la sesión lo hace Google o lo hace la aplicación. La
+
+eso la
+
+¿Cómo funciona eso? Vamos rápido, te cuento más o menos rápido. Lo que se hace es vos, obviamente para configurarlo por detrás, vos necesitás entrar a Google, crear una una aplicación y te da un código. Ese código vos lo ponés en tu aplicación propia. Cuando vos redirigís desde tu aplicación a Google con ese código se loguea en Google y Google le devuelve un token a tu aplicación. Sí, ese token te lo devuelve a donde vos quieras que te lo devuelva. Sí. Y tu aplicación hace lo que quiere con ese token. Por lo general, lo que vos haces, ese token es el que usas para mantener la sesión activa, pero además lo guardás en la base de datos o verificas que esa esos datos del que se los vio en Google ya estén creados como usuario, estén habilitados, buscas el rol, todo eso en tu base,
+
+tiene que estar habilitada la aplicación para eso o directamente
+
+entonces algo que se podría preguntar.
+
+Sí, totalmente. Sí. ¿Qué otra cosa preguntaría? A ver, ¿cuánto tiempo quieres que se mantenga?
+
+Bueno, bien. E podría ser el tiempo.
+
+A mí se me ocurre, no sé, con qué patrón de diseño se se quiere usar. Si yo quiero usar roles como un patrón state o quiero usar roles como otra cosa.
+
+Bueno,
+
+como se diseña
+
+la arquitectura sería
+
+bien
+
+que se quiere.
+
+Recuerden esto, eh, estamos buscando estimar el esfuerzo. Sí, todas estas preguntas todos tienen que estar escuchando y al mismo tiempo diciendo, "Bueno, esto va a ser más difícil, más fácil." Sí. ¿Alguna otra pregunta? Sí, está bien, digamos, por ahí si se si se quiere respetar algún arquitect un patrón de diseño o arquitectura ya preestablecida.
+
+Si se puede ingresar como invitado sin tener que lograrse.
+
+Bueno, bien, bien también. Bueno, a ver, algún ingreso público sinarse como invitado. Está bueno.
+
+Puede haber dos computadoras iniciadas semanas.
+
+Bueno, también contraseña cambiar
+
+sería otro requerimiento.
+
+Sí,
+
+una cosa. Ulta y si usaock hay que, o sea, no haces nada o eso funciona por detrás como lo dijiste. Es como fake clock. Es exactamente como un pero ahí en sí es muy bueno el trabajo porque deja bonito del K y
+
+no es lo mismo. Ah, trabajo. No sé para vos si es menos trabajo está bien. Perdón, pero Klock es lo mismo que que hacerlo con Uber que do porque justamente K hace eso. Lo que pasa que centraliza todos los servicios de autenticación y permisos, pero no importa. Sí, vamos a suponer que sí. Tu pregunta sería cuál.
+
+No, no. Porque viste que por ahí cuando
+
+Pero acordate esto, estamos preguntando para ver si va a ser más fácil o menos fácil este regimo. Me quería hacer esa duda.
+
+Y la pregunta sería,
+
+no, no había pregunta, ¿qué? ¿Cómo funciona por detrás?
+
+Ah, profe, ¿y la la UI entraría dentro de esas preguntas? O sea, yo puedo preguntar algo gráfico que quiera, no sé, de cada rato.
+
+Sí, sí, porque por lo general la historia de usuario cuando las definimos como requerimientos, esto incluye todo, front y back, todo junto.
+
+Sí. Bien, terminado la ronda de preguntas. Sí. ¿Qué hace el equipo de de desarrollo? Tiramos cartas. Ca
+
+el primer cartas, ¿no? Bueno, esas cartas dependiendo de lo que tiene cada desarrollador se va a discutir, ¿no? En esas cartas puede uno tirar un uno, o sea, muy fácil. Pueden tirar un dos, un tres, un 12, ¿sí? Y eso lo que se evalúa es, bueno, por ahí vino él y tiró un uno y todo el resto tiró un cinco, por ejemplo. Porque dijeron, "Bueno, es una dificultad mediana, ¿no? O capaz que uno tiró es muy complejo para mí." Entonces, ¿de qué sirve este ejercicio? ¿A quién le vamos a dar el requerimiento? La carta más.
+
+El que la más baja. ¿Por qué? ¿Qué pasa? Esto se pregunta, se dialoga. ¿Por qué un uno? Todos tiran un dos y vos tiras un uno ya hice siete de estos.
+
+Entonces, listo, se lo da. O sea, se lo das. Porque le queda de esfuerzo uno. Si mi equipo ya hizo siete, una persona hizo siete veces. Esto sí
+
+igual en en la dificultad también contemplass el tiempo o es otra
+
+todavía tiempo no hablamos,
+
+¿no? Digo, capaz que dentro de la dificultad también valoras la cantidad de tiempo que te llevas para algo que puede ser difícil, pero
+
+es que primero ahora dificultad. Sí. En esto que ya hice cinco. ¿Y cuánto tiempo te va a llevar? y la mitad que al que le que no lo hizo nunca, pero porque esa percepción es indiscutible. O sea, alguien que percibe algo de difícil piensa que le va a llevar mucho tiempo porque no porque piensa que es difícil.
+
+Bueno, por eso, o sea, por ahí yo por ahí le ha una tarea que yo diga, bueno, la sé hacer porque hice 10, pero sé que me va a llegar un mes, así que tiro 15\.
+
+No tiene que ver con tiempo, ¿no?
+
+¿Y qué pasa si esa persona que lo sabe hacer no tiene el tiempo para hacerlo? Tiene que 15 o tien algo soy yo.
+
+Sí, claro, porque puede ser que la persona esa siempre tire uno en todo, pero no pue
+
+puede hacer todo. Bueno, por ahora es eso, dificultad.
+
+Otra duda dentro de este juego de póker, o sea, una vez que vos tiras una carta, la que más, o sea, no puedes 15, no de vuelta. Y entonces ahí en equipo se decide qué número ponerle.
+
+Está, se le pone un número.
+
+Y ahí eso en qué se basa en un promedio o No, no, en en el equipo, che. Uno,
+
+cinco, cinco, cinco. Va, pongámosle un tres. Porque si es verdad puede estar ocupado, tampoco le tiene que enseñar. Le preguntamos, "Che, uno, yo ya hice un montón y tardamos un montón, pero bueno." Y le ponés punto. Está más o menos. Y es un promedio por esto, porque el equipo justamente no puede hacer todo el que sabe hacerlo. El equipo en promedio les llevaría tres puntos hacer esa historia de usuario. ¿Se entiende? Y ahora sí va, vamos a a partir de eso jugamos. Bueno, está el signo de pregunta. Eh, no entendí nada. Signo de pregunta si el que tira signo de pregunta creo que hay un un comodín shoker y hay están por ahí por ahí Eh, signo de pregunta, el café es porque las sesiones por ahí se hacen largas y ya están cansados. El que está cansado tira un café, vamos a tomar un café porque yo no quiero estimar más nada. Eh, y después
+
+estaría inestimable. El signo pregunta tarea inestimable.
+
+Claro. Y el signo de pregunta sí,
+
+infinito dice también enorme. Es algo que infinito es tarea gigante, va vamos a demorar muchísimo. Y el signo de pregunta es, bueno, tarea inestimable, pero ¿por qué es inestimable? No sabes ni qué hacer, porque si no, ¿por qué no la podría estimar? O falta de información o algo de eso. Bien. Y no me acuerdo qué otra carta especial había.
+
+Por ejemplo, la otra vez que hicimos dije dos semanas en horas.
+
+Bien. en el ABM
+
+con PHP.
+
+Bueno, y eso ahora vamos a eso. Entonces, eh después de ponerle puntos todavía no. Obviamente que dentro de los puntos sabemos que va el tiempo asociado, es es implícito, pero todavía no le metimos tiempo. Eh, lo que sí tenemos que tener en el camino o antes o después esa evaluación. del cliente, el product owner, ¿sí? Ese cuánto valor le da a esa a cada uno de los requerimientos que nos lleva a una priorización, ¿sí? Entre la valoración del cliente o del product owner para con los requerimientos y la dificultad o los puntos que nosotros y y riesgos que tiene esos requerimientos, nosotros tenemos que hacer un un listado priorizado. ¿Sí? Entonces, vamos a al ejemplo de esto. Bueno, Por ejemplo, si el requerimientos con mayor valor para un para el product owner de la inmobiliaria es tener el listado de los contratos eh y su estado, vamos a hacer todos los requerimientos que dependen eh de que depende el listado del contrato y sus estados, ¿no? Entonces, vamos a hacer el alta del contrato, el alta del inquilino, el alta del eh el inmueble y vamos a intentar llegar lo más rápido posible a hacer el listado de los contratos eh y subestados, está ahí nos va a dar una prioridad. Vamos a hacer esos AVM primero y no los que le siguen. Eh, si fuese un sistema grande, completo, vieron que tenemos dos de inmobiliaria, tenemos listado de contrato y por otro lado tenemos en la administración de servicios, eso podría llegar a ser un único sistema. Entonces, si las prioridades son los contratos, no vamos para el lado de los contratos, dejamos de lado los servicios. Sí, ahí está clarísimo una priorización de a dónde y cómo poner para arriba las historias usuarios. Una vez que priorizamos, si ya vamos a una estimación. Ahí sí convertimos esos puntos con esos riesgos y esa prioridad en tiempo. Está. Y acá es donde absolutamente No le van a pegar nunca en la vida. Yo sé que los acabo de frustrar, pero es así. Esto es muy difícil de que, como dijo ella, pensé que iba a me una semana, lo hice en 3 horas. Es así.
+
+Es que tampoco puedes decir
+
+y qué va a pasar. Perdón, ¿qué?
+
+¿Que tampoco puedes decir que te va a tomar 10 horas porque no vas a estar las 10 horas seguidas haciendo eso. Vas a capaz que las repartís durante la semana.
+
+Sí. Pero igual acá al el a conciencia es las horas trabajadas que te llevan. O sea, vos te sentaste 2 horas, te fuiste a tu casa, son 2 horas, no son trabajaste. Sí, se estima así, ¿cuántas horas de sentado o parado, no sé, trabajen como quieran, pero cuántas horas de trabajo nos lleva? A lo que iba es ella pensó que le iba a llevar dos días, tres días, no sé cuánto dijiste.
+
+Cuando la otra vez que hablamos de estimación, eh, yo dije dos semanas.
+
+Dos semanas.
+
+¿Y lo habías dicho a conciencia?
+
+Eh, no, porque era para definir el presupuesto.
+
+Okay.
+
+Cuando se habló el tema,
+
+me ibas a cobrar de más.
+
+Claro, era para cobrar de más. Para eso, para decir, "Puedo cobrar por dos semanas y capaz que te 3 horas."
+
+Bien. ¿Y cuánto te llevó?
+
+3 horas.
+
+3 horas. ¿Y si lo hace de vuelta, ¿cuánto piensan que le va a llevar? menos
+
+hora y media profe el mismo
+
+por lo menos una hora menos seguro porque ya sabe dónde está,
+
+ya lo sabe hacer
+
+copia y pega
+
+y si lo hace por tercera vez y que copia pega le lleva 15 minutos por eso no lo van a poder estimar nunca
+
+porque la los desarrolladores evolucionan, las tecnologías evolucionan, todo cambia
+
+queda más cerca
+
+y uno va estimando sobre un mismo equipo. o no, pero ese mismo equipo o esas mismas personas ya no día a día va cambiando su velocidad de
+
+Sí. Y su rendimiento idea de la ponernos
+
+ya no sé
+
+y más ahora ya ahora
+
+que los imagínate que
+
+por to
+
+yo esto andaba muy bien haciendo esto y ahora ya no sé qué decir. dicen hacer unación de un proyecto.
+
+No te sé, no sé qué decirte porque hay hay equipos, hay personas que así todo con la llevan llevan mucho tiempo, hacen las cosas mal, no lo llevan bien al desarrollo con y hay otros que sorprendentemente rinden el pero tremendamente con la i Sí, también es como muy aleatorio. Hay mucha gente que usa muy mal la y pensando que la lleva, ah, mira, me hizo tal cosa. Sí, a veces es un desastre, eh, y así que yo estoy realmente perdidísimo en estimar el tiempo. Si yo puedo estimar por mí.
+
+Claro. Y esto generalmente se hace para poder comunicarse con el cliente y que tenga una idea.
+
+Esto es Es importante para el cliente, pero mucho más importante para nosotros. Mucho más importante. Estamos hablando. Recuerden que nosotros no solo hablamos de proyectos chiquitos como lo que estamos viendo acá y en proyectos grandes, muy muy grandes, esto tiene que estar totalmente coordinado. No siempre vamos a en proyectos muy grandes, no siempre se van a requerir los mismos roles en una suerte de tiempo. Sí, vamos a tener equipos de teste que no siempre van a estar todo el tiempo trabajando y yo eso lo tengo que tener muy coordinado. Digo, bueno, voy a terminar este spring esta semana para mitad de semana tengo que tener el equipo de testing activo en este proyecto y los equipos de testing se comparten entre proyectos. Entonces eso tiene que estar sumamente coordinado. Bien. Y se hace así. Yo tengo un equipo de de testing para un proyecto y lo lo comprometo en un gant, en un calendar, bueno, de tal fecha a tal fecha, ese equipo tiene que estar testeando tal aplicación. Está para que la esté testeando, nosotros tenemos que llegar con los desarrollos. Para llegar con los desarrollos, por lo menos tenemos que tener una noción de tiempo que nos va a llevar. Entonces, eso es bastante difícil, pero es clave tanto interno como para con el cliente. El cliente tiene que ser saber qué es lo que está pasando. Entonces ahí viene esta difícil tarea, ¿no? Convertir esas historias de usuario que tienen una evaluación, tienen un esfuerzo, tienen un riesgo o dos riesgos de implicancia en tiempo. Bien. Y el y eso es un aprendizaje constante. Sí. No les voy a decir la máxima jamás. Lo vamos a hacer. tienen que hacer el ejercicio cada vez que tomen y con los proyectos de ahora se paren en historia de usuario, le van a poner número, le van a poner tiempo, lo van a hacer, lo van a desarrollar. Cada historia de usuario cuando la agarren, la van a volver a analizar, le van a volver a poner tiempo, lo van a desarrollar y van a tener que ver cuánto les llevó en relación a lo que ustedes estimaron. Al siguiente requerimiento lo van a tomar, van a ver cuánto le pusieron de estimación. Al principio van a volver a estimarlo, van a desarrollar y tienen que ver el gap que tuvieron entre la estimación primera, la segunda estimación y lo que les llevó. Está con el desarrollo normal. ¿Qué pasaba en un ciclo de desarrollo scram eh de vamos a suponer cinco sprints? Vamos a poner un ciclo de cinco sprint. Lo que pasaba siempre es la estimación no alcanza. Sí, el primer sprint no se termina de desarrollar lo que uno piensa que va a desarrollar, le quedan cosas pendientes. El segundo sprint se llega con pero muy con lo justo y el tercero se pasa para el otro lado, se sobreestima y nos sobra tiempo de desarrollo y eso se debía a a esta evolución del equipo de desarrollo, ¿sí? En un sprint el equipo de desarrollo ya está familiarizado con todo el proyecto, ya sabe dónde copiar y pegar y cómo, ya sabe cómo desarrollar las cosas rápidamente. ¿Sí? Entonces, uno al principio estima con una noción más o menos la curva de aprendizaje, la curva de proyecto es más difícil, entonces el tiempo se va, no llegamos a terminar los los requerimientos. El segundo sprint dice, "Bueno, vamos a tener que ajustar. Ajustar, se ajusta un poquito y el equipo aprendió, entonces el tiempo es va desarrollando más y ya el tercero mantienen ese ajuste, pero el equipo va totalmente acelerado al doble de velocidad que el primer sprint y lo que pasaba era eso, el tercer sprint sobra un montón de tiempo y a partir de ahí se intenta ir ajustando y cuando uno más o menos le va pegando Al tiempo también jamás se le pega al tiempo. Jamás. No he visto nadie que le pegue, o sea, exacto el tiempo. Bien. Y hoy día, bueno, no sé, no tengo ni idea. Yo creo que debe ser más difícil.
+
+Vamos a ver, va a ser esta experiencia a ver qué pasa. Bueno, esto es un es lo que recién les venía contando. Sí. Calcular la velocidad. que el equipo completa los objetivos. Ahora bien, tiene que tener en cuenta esto. Si el tiempo que nos lleva desarrollar se calcula en puntos de estimación eh desarrollados a través del tiempo, está esos puntos que le pusimos, esos esfuerzos, S3, S 5, S12, son puntos de estimación y esos puntos son los que nosotros vamos a va intentar pulir o o incorporar en un sprint. Esto sigue siendo igual, lo que pasa que las velocidades son más difíciles de calcular, pero lo que uno dice es dice, "Bueno, este equipo de desarrollo puede llevar adelante eh 80 puntos en un en un sprint." Bien, entonces, ¿qué hacemos? Agarramos la lista de requerimientos Y vamos pasando este sprint. Va a llevar esto, esto, esto, esto. Che, ya tenemos 80\. Listo. No ponga más nada. A ver si lo tenía eso por acá. Ah, no, esto del el verd. Eh, sí, el Y entonces empezamos a desarrollar, pusimos los 80 puntos. Volvemos para acá. 80 puntos. Justo, mira, le pegué. Y entonces al día uno vamos y evaluamos, che, cuántos puntos hicimos. Si cerramos algún alguna historia de usuario, ¿no? A medida que vamos cerrando historia de usuario, vamos poniendo los puntos que desarrollamos. Si cerramos, por ejemplo, acá cerramos una historia de unos 20 20 y pico de puntos. ¿Se entiende? Le descontamos 20 puntos. La línea roja es la ideal. Vamos quemando puntos y al fin del sprint llegamos consumiendo todos los puntos. Está la línea azul es lo que vamos dibujando día a día. ¿Sí? Esto es una una herramienta de scram ver down charter. Por lo general debería estar en un pizarrón y lo van dibujando o en una aplicación, en un televisor. Entonces, fíjense, al día dos se cerró una historia de usuario que consumió estos puntos. 20 y pico, 25, pongámosle, ¿no? Al día 3 se cerró otra historia de usuario que va de unos, no sé, 20 puntos, 15 puntos. Entonces, bajé 15 puntos más. y así. Y entonces esto lo que nos va mostrando es qué bien que estamos, qué mal que estamos. Está si estamos de aquel lado de la línea ideal es porque no estamos quemando puntos. Sí. Y el no estar quemando puntos es no vamos a llegar a terminar. ¿Está se entiende
+
+el chart? El gráfico. Bien. Esto para un un print. Bien, por un esfuerzo estimado. ¿Qué la estimación? ¿Qué fue? Que nuestro equipo llegaba a completar 80 puntos. Lo hicimos nosotras esa estimación. Bueno, si no llegamos acá, sí se llegó. Llegó con lo justo. Llegaron, me parece, arañando. Ahora si no llegamos primero retrospectiva, ¿qué fue lo que pasó? ¿Por qué no se llegó? Y ahí el por qué puede tener un montón de respuestas. Sí, se enfermaron, pero los desarrolladores, h algún riesgo que teníamos pasó real y se transformó en un problema. Sí, dependíamos de un sistema externo y el sistema se cayó. Eso es un riesgo que finalmente cuando pasa se transforma en problema. Puede pasar eso o puede ser que, bueno, no estimamos muy mal, no, no pasó nada, desarrollamos a toda máquina. Todo iba en como trabajamos bien, nadie se enfermó, todos trabajaron eh y no no llegamos o no estimamos mal o contamos mal los puntos o le pusimos mal los puntos a alguna historia de usuario, le que sobreestimamos, o sea, eh que no le dimos la dificultad que tenía o pusimos mal la cantidad de puntos que podíamos hacer. llegar a ser capaces de llevar adelante. Bien,
+
+claro. Y además la ejecución trabajando siempre la misma, o sea, la performance del desarrollador.
+
+Y eso es para ese el análisis es para ese sprint en particular.
+
+El próximo sprint, ya te digo, va a ser distinto. Quizás sí se llega a los 80 puntos y también va a haber que analizarlo, porque por ahí esos 80 puntos también diferan la dificultad de la victoria de usuario o el equipo evolucionó. y ahora desarrolla más puntos por Entonces es algo muy subjetivo y que va fluctuando mucho
+
+en el desarrollo. Por eso es muy difícil de atinarle a las estimaciones, está lo que sí, esos errores de estimación se van achicando. Sí, porque yo voy conociendo el equipo, todos se van conociendo y como es algo repetitivo ya en desarrollos muy grande, lo la lo van a ver o o ya lo pueden ver en que son alta baja modificación y consulta. Básicamente sobre lo mismo, eso repetitivo lo vamos a ir haciendo muchas veces uno ya sabe cuánto le va a llevar, ¿no? Y con más experiencia esos errores se van achicar, no significa que le vayamos a pegar porque por ahí agarra aparece la inteligencia artificial y de vuelta pum, nos cambia todo. Está. Entonces tenemos eso. Está esa esas variaciones, muchas variables para lograr pegarle a un tiempo. ¿Sí? Bien, finalmente con todas estos peros y y porque sí, lo que sí viene una parte de costo, ¿no? De cómo nosotros establecemos el costo y acá hay que en realidad, perdón, la calidad E y acá dentro de la del de la estimación o de lo que ya pasa presupuesto, nos basamos en el triángulo de proyecto, ¿sí? Donde la calidad de ese de un proyecto va a depender de estos tres factores y nunca los voy a poder modificar sin modificar la calidad. Sí, estas tres puntas nosotros vamos a tener el costo el tiempo y el alcance. Sí. Si yo quiero modificar alguna de esas puntas, lo que se me va a estar modificando es la calidad, ¿está? Entonces, yo lo que voy a establecer es una estimación, un presupuesto para un software que está teniendo en claro estas variables y fijando esas variables, yo te voy a decir, esto te va a costar tanto para ese alcance específico relevado, estas historias de usuario que incluyen estos estas actividades y en este tiempo en particular y eso me va a dar un software con esta calidad, ¿está? Entonces, en un presupuesto nosotros lo que tenemos que es fijar correctamente y claramente, obviamente el costo, el alcance, fijar correctamente el alcance tener cuidadísimo el tiempo que se va a dar y la calidad que con la cual se está presupuestando. Está una vez fijado eso, van a ver que si el product owner cliente mueve una de estas variables, lo que se va a afectar es la calidad. ¿Sí? Si yo le agrego alcance en el mismo tiempo y por el mismo costo, ¿qué va a pasar?
+
+Necesitamos más dinero y más tiempo,
+
+¿no? Si yo le agrego alcance con el mismo tiempo y el mismo costo, ¿qué es lo que va a pasar?
+
+Baja la calidad.
+
+Va a bajar la calidad. Lo vamos a hacer todo rápido, sin probar y que y así y va a bajar la calidad. Si yo dejo el alcance, dejo el costo, pero digo, bueno, un mes me parece mucho, hacémelo en 15 días, lo mismo. va a bajar la calidad y si nos pagan poco, ¿qué va a bajar?
+
+La calidad.
+
+La calidad. Sí. Es todas esas variables influyen en la calidad. Entonces, a la hora de presupuestar, siempre tenemos que tener en cuenta este esta pirámide donde nosotros tenemos que dejar bien establecida esos esos puntos, el costo, el alcance y el tiempo que se va que va a llevar para llegar a un software de calidad. Está bien. Preguntas. Ya mismo les voy a subir los enunciados. La idea es que lo lean, me pregunten cosas, hagamos una sesión de preguntas y para la clase que viene traen cada uno un presupuesto, cada equipo, ¿no? Ya empezamos. a trabajar en equipo eh presupuesto de el proyecto. Hm. No me cobren mucho en pesos argentinos, por favor. Nada de dólares. No tengo. Ya le subo eso. ¿Qué silencio? 100% objeto de punto conectate. referencia.
+
+Bueno, ya están en la sección trabajo final para era páginas páginas. No,
+
+no El de arriba son cinco.
+
+Hay uno que tiene tres.
+
+Y este tiene hay uno que tiene tres.
+
+Ah, pero era es el de la enfermería.
+
+Literalmente el p más largo del mala leche. Pasa que está más detallado.
+
+No lo podemos capaz que sentencias.
+
+Bueno, está ya tienen subido los proyectos. Sí, cada uno se descarga. El que eligió lo lee. La idea es, ya les digo, empezar a hacer sus notas. La clase que viene vamos a ver presupuestos que hayan hecho y vamos a empezar a ver toda la parte de arnés, ¿sí?, de desarrollo, empezar a estructurar un poco el desarrollo con inteligencia artificial.
+
+Deja la buena.
+
+Lo que sí Les adelanto lo siguiente. Creo que se los vengo diciendo. Todo el desarrollo con inteligencia artificial eh nos propone levantar otros skills, que es lo que yo vengo remarcando en toda la en toda la materia. Ustedes tienen que lograr entender los modelos de negocio. Sí, la inteligencia artificial es buenísima. Program sí, programa sola, va bien, le agarra un montón. Ahora que programe lo que nosotros queremos depende de cómo nosotros se lo estructuramos, cómo se lo pedimos. Está no vamos a entrar, no vamos a hacer clase de prompting porque ya acá lo deben saber, lo deben tener más claro que yo, pero sí a la hora de llevar adelante una historia de usuario, un requerimiento con inteligencia artificial y bajo algún tipo de metodología existente, requieren que esté especificado lo que nosotros queremos. Y necesitamos esa especificación, ¿de dónde sale?
+
+Sí. ¿Y de qué etapa sale?
+
+Análisis.
+
+Del análisis. Exactamente. Y el análisis tiene que conllevar una un profundo entendimiento del modelo de negocio que se está analizando. Entonces, los skills o la habilidad más grande que ustedes pueden desarrollar hoy día en Esta carrera es la de lograr ser mejores analistas y especificar eso a la inteligencia artificial y lograr hacer el canal entre el problema de que se está intentando solucionar los modelos de negocio existente y la inteligencia artificial. Está porque hoy día es está revolucionado el mundo. Cualquiera que sabe de su tu modelo de negocio y se da un poquito de maña de informática, tiene muchas más posibilidades de desempeñarse como desarrollador que un desarrollador. Sí, no quiere decir que esté bien y que lleguen a buenos resultados en un montón de cosas, pero sí en pequeñas cosas, pequeñas aplicaciones, porque el poder está en saber explicarle el modelo de negocio a la inteligencia artificial. Ahí está el poder. Y es un poquito de lo que va la clase que viene. Sí. Entonces, lean los enunciados, entiendan bien cuál es el modelo de negocio y cuál es el problema solucionar y después lo van a desarrollar con inteligencia artificial de forma mucho más sencilla. Pero sin ese análisis estamos perdidos, sin entender los problemas y los modelos de negocio están necesidades.
+
+Sí. Entonces, vamos ahora a leer y háganme preguntas las que quieran. Vamos a definir. Yo soy el ro, así que voy a ir definiendo. Son muchos trabajos, así que vamos a ver cómo resulta para mí también.
+
+Yo tengo una pregunta, pero no sobre el trabajo. Hay entrega TP final. Entrega TP final y entrega fin deada. ¿Qué sería? AC lo mismo. Eh, sí.
+
+¿Y cuál fecha tomamos? Porque encima tien diferentes fechas.
+
+No, claro. Entrega AT TP final es el final.
+
+Ah, final.
+
+Rendir la materia. Lo voy a cambiar de sección
+
+y si logramos desarrollar todo lo del final, ¿lo entregamos ahora o lo entregamos cuando nos anotamos al final?
+
+Hagan como quieran. Yo yo el final lo evalúa en el final.
+
+No cuenta como promoción,
+
+¿no? Que se rompe rompe Una consulta del jueves. El jueves
+
+presupuesto y
+
+vamos a empezar con

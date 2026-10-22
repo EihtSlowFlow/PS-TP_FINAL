@@ -1,0 +1,1173 @@
+Bueno, hoy somos poquitos. ¿Qué pasó?
+
+Más tarde
+
+están en base de datos. No, más tarde no. Ya está. Más tarde. Son las 6:15\. Bueno, vamos a hacer un un breve repaso a ver que nos acordamos de los que vimos la clase pasada. Bien. Eh, les pasé unos links superdivtidos, cortitos, ¿no? Uno que habla de un poquito de son unos muchachos que hacen un stream, que ellos anduvieron por todos lados trabajando. Hay algunos que son saben y son grosos. Ese que habla de de qué aprender en esta era de la informática, ¿no?
+
+Que son dos dos pibes los uno que tiene barba.
+
+Sí, pero no son pibes.
+
+No, no pibe, pero barba.
+
+Claro, esos son en realidad son unos tipos que que hacen stream y hablan de tecnología y son tipos que han estado laando. TikTok
+
+es
+
+de TikTok y que han estado laborando en varios lugares. y tienen idea de lo que hablan. Está bueno. Yo en realidad les voy a empezar a mandar video así, a decir les haqueo el algoritmo y le empieza a salir videos de gatitos peleándose
+
+y empezamos a usar TikTok.
+
+Nadie usa TikTok.
+
+Yo no lo uso.
+
+Él lo usa todo el día cuando va manejando. Por eso,
+
+eh, bueno, no importa. Voy aquear en el Muy bueno. Pero bueno, un poco orienta a qué tenemos que aprender. Habla de de cómo va a ser el futuro, o al menos como a él le parece que va a ser el futuro. Cada uno en esta etapa está medio proyectando de cómo va a ser la cosa, pero nadie sabe. Estamos todos medio Sí, está claro que hay mucha más gente con más encia que puede dar más rápido en el clavo o acertar un poquito más a la predicción, pero está rara la cosa, ¿no? Lo cierto es que al menos al corto plazo con esto de la inteligencia artificial, eh quienes estén más capacitados en conceptos y entiendan de lo que hablan, eh, van a ser los que se destaquen, porque Al momento lo que es agentes de inteligencia artificial, si bien bien usados reemplazan un montón de situaciones, lo que sí reemplaza eh definitivamente es al programador junio. Sí, programador junio. A veces lo reemplaza seguro.
+
+¿En qué momento sab que es junior
+
+o sor poner?
+
+No, tiene que decir alguien, lo dice alguien. Claro, este ya es s Traí,
+
+te lo dice alguien. Tra mí, bueno, sí, obvio. Tra mí no hay no hay que ser, digamos, ya sabes programar, fino. Ahí sostení.
+
+Ah, okay.
+
+O sea, sabés de cualquier lenguaje, sosten ser programador.
+
+Junior y Junior
+
+sabes un poquito más y así en la realidad te lo te lo tiene que decir alguien con más experiencia que sos. y que no son justamente si soy desarrollador o por ejemplo el analista de base de datos parte de base de datos depende para mí también del puesto o no.
+
+Sí, pero para todos tiene hay un rango de de señority que se se establece y se mantiene. Les voy a buscar un videío que hable de eso porque eso
+
+es en función de otra experiencia.
+
+Totalmente experiencia y conocimiento.
+
+Pero, ¿cuánt un montón de experiencia para son años de trabajo? Para mí son las veces que caíste, caíste y se viste cómo resolverlo. O sea,
+
+claro.
+
+A ver, les doy un les doy una una clasificación super vara. Junior eh toma requerimientos eh y programa. Sí. No resuelve problemas. Junior no resuelve un problema.
+
+Está tenés que hacer un login. Vay, hacer un login. Eh, Ah, el login va a ser con eh un single sign. ¿Cómo se hace? Lo hago con un single sign, no lo hago con un single sinon. Hago esto, no hago aquello. Lo tenés que hacer con la arquitectura modelo vista controlador. Sí, se lo dicen. El junior no decide, no resuelve problema.
+
+Cuando ya podés resolver problemas por tu cuenta, semiciño. tomar decisiones, decir, bueno, esto en realidad es mejor hacerlo así, no así.
+
+Claro. Ah, entonces no es tanto en función de la experiencia, sino más bien de las responsabilidades,
+
+¿eh? No, al revés, la responsabilidad te va a llegar a medida que vos lo puedas hacer, o sea, que vos sepas hacerlo,
+
+o sea, nadie te va a dar la responsabilidad. O sí,
+
+puede pasar que te den una responsabilidad y que sea la primera vez que lo tengas que hacer.
+
+Sí, sí, sí, sí. Y difícil Pero sí puede pasar. El tema es así. Yo les doy una clasificación simple. Sí. Tiene más cositas. Semenior, tomá decisiones, decidís tecnología, podés decidir eh patrones. Aplicas exactamente todos los patrones que aprendieron. Te das cuenta cuando está mal, cuando no están aplicados. Semicño se tiene que dar cuenta de eso. se tiene que dar cuenta que eh algo el código se está repitiendo, resolverlo de antemano. Eh, un servicinio tiene que saber de varias tecnologías, ¿no? No solo del lenguaje que programa, tiene que saber de de varios lenguajes y ciertas y todo lo que engloba a esos lenguajes, a los ambientes, tiene que saber de redes, conexiones y semisñor es uno de los más amplios. porque es largo el camino delicidio. Y ya senior, pasás al nivel un poquito más alto. Definís arquitecturas, definís eh resolver problemas mucho más complejos eh directamente la arquitectura de un proyecto en general con todos sus componentes. Sabés de eh muchas más tecnologías, de muchos más problemas, saber de más patrones. etcétera, si acumulas conocimiento. Hm. ¿Cómo es el camino de todo eso? Y eso que digo es para todo. O sea, yo te estoy hablando de de qué podés hacer un desarrollador. Yo ahí entro en una disputa entre los que dicen el desarrollador frontend senior. Sí, pero si sos frontend y no sabes a quién, no sos tan sillo. Para mí, mi punto de vista, eh, para Tambén un desarrollador senior tiene que saber front, back y la combinación de todos esos unos senior. Eh eh, ¿por qué? Porque están están involucrados, se van de la mano. Si vos en teoría podés resolver todo un proyecto complejo por tu cuenta y tené que saber de las dos tecnologías. Hm. Entonces, desarrollador ahora Ahora está red de moda, back y front. Y para mí el senior tiene que saber las dos, ¿eh? Y después el bueno, después semico, sí, eh, podés tener un semicio totalmente orientado back orientado front. En algún momento lo va a tener que aprender para evolucionar. Pero bueno, lo que sí está claro es que la IA lo que El las tareas que te saca de encima son los la programación trainy. Ya trainy no porque la ya no programa trainy programa más junior que train comete muchos errores más que nada de patrones y si uno no los controla e y no se da cuenta, esos errores los arrastra en a Así que bueno, la inteligencia artificial nos va a resolver ese quilómetro a medida que nosotros evolucionemos en conceptos más amplios, que sea semicínio, un signio y sepamos de arquitectura, sepamos de problemas que después se van a dar a lo largo de la vida, del siglo de vida, de un de un proyecto de software, nos anticipamos. Entonces, le decimos a la guía que no haga las cosas malas, le vamos metiendo más con más conocimiento al herné que lo que la mantienen a raya. Hm. E pero bueno, el punto de eso es que ustedes entiendan que tienen que ver qué es lo que hace, entenderlo y cuestionarlo. Sí. A esa que programó, cuestónenla porque no hace las cosas bien. Y si ustedes aprenden a darse cuenta de lo que hizo mal y lo que hizo bien, estamos están en problemas. Yo no, ustedes sí van a estar en problemas porque directamente ustedes cortan su aprendizaje, ¿está? Y van a depender de la siempre de que esté ahí para resolver cualquier problema que su y eso no está bueno. Bien, después les compartí para insistirles sobre HTTP No sé si lo vieron, parece que no. E en definitiva era para reforzar por ahí los conocimientos y la lo que habíamos hablado acá. Acá repasamos y vimos todo lo que tenía que ver con PHP. Sí. Fuimos a la práctica, hablamos de de entornos, ¿no? De configurar esos entornos de de más local e a esta altura y ya Para la clase que vienen deberían tener un entorno local configurado. Sí. Así que avancen con la parte práctica en sus máquinas, en sus entornos. Configuren un entorno de de desarrollo PHP. ¿Sí? ¿Cuál es la idea de hoy? La idea de hoy es más que nada un repaso. Vamos a ver PHP orientado a objetos, ¿no? Esto que está acá. es cortito y no tiene mucha ciencia. Sí, vamos a charlar un poquito sobre lo que hicimos la clase pasada para que no se enfríe. Sí, este ADM que hicimos. Vamos a discutir y ahí les toca a ustedes hablar o le preguntamos a la A. Sí, esto es válido. Le vamos a preguntar a la inteligencia artificial o hagan lo que quieran, pero la idea es que charlemos sobre la entrega de este está va a ser sencillo, va a ser más complejo, pero hoy sería como eh el spring planning, ¿sí? Donde nos vamos a sentar, vamos a discutir sobre el requerimiento de entrega de este sprint, vamos a pensarlo, vamos a desglosarlo en tareas. Sí, como es un requerimiento simple, lo vamos a desglosar en tareas. Sí, ese desglose en tareas, la idea es que lo charlemos, pero al mismo tiempo que ustedes se pongan el sombrero de analista diseñador, IPM y nos pongamos a justamente planificar ese sprint, pensar las tareas, diseñar cómo lo vamos a llevar adelante y dejar ya todo acomodadito como para empezar a hacer a desarrollar ese Ese ese sprint, sí, este requerimiento. Estamos es sencillo, pero quiero que lo hagamos como lo mismo que hicimos la la el sprint pasado. Sí, lo hacemos con algo sencillo, como para después ir agregándole complejidad. Estamos, esa es la idea de hoy. Vamos a charlar y a planificar nuestro sprint. ¿Está bien? ¿Se entiende? Bien, eh, clase que viene seguramente es virtual. Sí, estaré estaremos en Bariloche, como recién lo charlamos. Eh, clase que viene Codinator. Vamos a ver. Y hoy si terminamos relativamente temprano de charlar, vamos a charlar un poquito de trabajo final. Sí, el trabajo entregable final. Bien, hasta ahí. Bien, para meternos en tema, vamos a charlar de programación orientada a objetos con PHP. ¿Quién sabe lo que es la programación orientada a objetos? Levante la mano. El que no sabe.
+
+Me pueden sorprender. Pero todos saben, ¿no? Bien. Bueno, PHP a partir de su versión siete cco y pico, seis por ahí eh es totalmente orientado a objetos. ¿Sí? Entonces, lo que vamos a hacer nosotros es manejar objetos, así como lo conocen ustedes. Vamos a ver. HPad objetos, la definición de clases, propiedades, herencia de objetos y está. Eh, las propiedades eh fundamentales de un lenguaje orientado a objeto, ¿sí? Herencia, polimorfismo y la definición de clases y operadores de resolución de ámbito. Esto es lo vamos a pasar rápido, eh, no tiene mucha senso. Bien, a partir de cinco ya empezaba, en realidad se hizo totalmente eh orientado objeto un poquito más adelante, ¿sí? A las 6 5.76 por ahí. Podemos decir que a partir de las 7 en adelante sí es totalmente orientado objetos y aplica absolutamente todo lo que tiene que ver con eh la programación orientada a objeto. ¿Sí? Bien, definición de clases. No van a aprender nada nuevo. Sí, la definición de una clase eh, vamos a usar la palabra reservada. class. Vamos a poner el nombre de la clase y vamos a abrir entre llaves la definición de esa clase. Sí, adentro de la clase las los atributos de la clase son variables. Sí, son las vamos a definir como con su eh con la definición de de visibilidad public o const o private. Bien, la el nombre del atributo o propiedad y podemos asignarle un valor por defecto. Seguimos teniendo a PHP débilmente tipado, está con lo cual esto es bastante anárquico. Sí. Las clases en PHP. Sí.
+
+Yo te iba a decir que en la versión 7 ya arreglaron eso. Bueno, entre muchas comillas y para sacar esa anarquía silla tenés que definir el tipo con dos seguido de dos puntos en la función.
+
+El tipo, el de retorno.
+
+Retorno. Claro.
+
+Eso es Sí, eso es acá.
+
+En realidad no lo tenés que hacer, no hace falta hacerlo por ahí. Algún IDE lo que te va a decir es ojo que no estás no estás definiendo el tipo, pero no da error. Si no lo
+
+Sí, es verdad. Todo eso lo fueron en la anarquía de eso, eh, se se va resolviendo un poco igual, no pasa nada si Bueno, propiedades, incluso si no le definimos el alcance o el scope, sí, eh directamente lo podemos definir como como una variable. Declaraciones de métodos sí son lo que nosotros conocemos como función con funcion y también obviamente un unificador
+
+un modificador de de me sale
+
+de acceso o de alcance. Eh, la palabra función, el nombre de la función, los parámetros. Acá estamos de vuelta ante la anarquía de definición de funciones. Podemos definir los parámetros, podemos no definirlo, eso sigue igual. Aunque a medida que avanzamos en PHP te sugiere, "Che, definirme los tipos, definirme las variables, los parámetros, etcétera, etcétera." Sí. Y para en Java ustedes conocen como métodos, procedimientos y funciones. Sí,
+
+los procedimientos no necesariamente devuelven algo. Las funciones tienen que devolver algo. Nosotros conocemos en PHP, todo es función. Y si queremos devolver, lo devolvemos con return, no con eco. Eco es, acuérdense, eco es para imprimir algo. Sí, return usamos. No sé por qué dice eco ahí. Bien, ¿cómo usamos la definición de esa clase? Igual que Java con el operador new. Bien, por supuesto. El new, ¿qué hace el new?
+
+Instancia una clase
+
+bien. Y más bajo nivel. Él, ¿qué hace?
+
+Lo reservan así,
+
+un poquito más arriba del nivel muy abajo.
+
+¿Y qué hace? ¿Qué hace cuando yo instancio una clase?
+
+Declara,
+
+eh, no declarar es cuando la declaramos, decimos cuando la definimos. Eso sería declararla. Cuando yo la distancio, el new llama al constructor. No sé si se acordaban. Sí, por defecto en Java, toda clase hereda de
+
+object y el constructor por defecto hace un llamado al constructor de objet. Sí. Bueno, en en PHP lo mismo. Sí, el new llama a un constructor. ¿Podemos definirlo o no? Igual que está que tomo el mate que está un poquito larguito larguirucho. Eh, detalles de cómo podemos usar los constructores. En PHP nosotros podemos usar un literal, ¿sí?, como la definición del nombre de una clase y hacer el llamado a ese literal eh como si fuese un constructor. Sí, defino un string con el nombre de la clase y si hace un si hago con un llamado con new a ese string me va a instanciar la clase. ¿Está? Entonces, fíjense que yo acá estoy definiendo la la un literal, un string que se llama for. Si hay una clase que se llama, que está definida, que se llama for, hago un new con esa variable y le paso, lo paso como función, es lo mismo que hacer un new de la clase for. ¿Qué? más fácil. Puede ser. Ahora si por ahí esto facilitaría, por ejemplo, un un factory, ¿sí? El patrón factory aplicado así rara, rara y rara, ¿no? Voy y le tiro el string y que ya lo instancia, ¿no? En lugar de hacer un patrón factory y que me instanciee una clase dependiendo de un atributo, ya directamente el atributo vale el nombre de la clase, me distancio ese ese atributo, ¿no? O esa variable, por ejemplo, estoy inventando en el aire, ¿no? Pero no te caigas. Pero bueno, se puede hacer, no significa que lo tengas que hacer. Está eh una vez instanciado, nosotros vamos a a acceder a los atributos y a los métodos con el menos mayor. Sí, como una flechita. Me gusta más el punto de Java, si ustedes me me permiten, pero bueno. Acá tenemos el menos mayor. La flechita es para acceder a los atributos y a los métodos de esa instancia, de esa clase. Estamos.
+
+No tiene mucha ciencia,
+
+¿eh? las propiedades y sus modificadores de alcance o de o de visibilidad. Tenemos publiced y private igual que en Java. Eh, el tipo de las de propiedades, eh, seguimos con como son débilmente tipados, no hace falta definir su tipo. Eh, si quieren se lo pueden pueden definir si no quieren, no. Eh eh acceso, ya les dije cómo vamos a acceder a las propiedades y a las a los métodos a partir de ese comando o ese esos caracteres y eh a las a las variables o funciones estáticas. Sí, saben las clases estáticas de qué trata. Si no hace falta instanciarlas, esas clases vamos a usar con el 2.2 pun, ¿sí? Vamos a acceder a partir del eh del accionar 2.2\. ¿Sí? Bien. Gerencia de objetos, lo mismo que en Java. Sí, heredamos de objetos. Cuando heredamos, heredamos sus atributos, toda su definición y por lo general lo hacemos para extender funcionamiento o extender comportamiento y y atributos. Y lo hacemos a partir de la palabra reservada extendse, damos todo hasta ahí vamos todo igual. Bien, entonces eh si tenemos la clase F, por ejemplo, que tiene un método print y un método print php, printem, perdón, y un método print php, podemos extender o heredar de esa clase FO de la siguiente forma. Fíjense que está en minúscula acá, eh, yo las clases con mayúscula. Hm. Pero es cuestión de una convención. En en Java está como más estricto. Sí.
+
+Acá no,
+
+en realidad en Java tampoco.
+
+Claro, depende de cada persona,
+
+eh.
+
+Sí, depende de cada persona.
+
+Sí, pero yo seguiría una la definición de una clase con mayúscula y después las variables. Sí, como ustedes quieran. Eh, definición de clase. extiende del po lo que y puedo eh redefinir la función y los métodos. Bien, estamos hasta ahí. No les voy a contar nada nuevo. Si esto es un ejemplo de lo que pasaría si si instancio una variable y su su variable inmediata y después el operador de resolución de ámbito. Esto es más que nada para e ingresar o entrar a constantes en una clase. Eh, cualquier clase que yo defina en PHP, si le defino una constante adentro de esa clase, eh, pasa a ser de ámbito estático, está voy a poder acceder cuando yo quiera, como quiera, con el operador de doble dos puntos. Estamos, se entiende. Entonces, defino una clase en algún no hace falta instanciarla para acceder a esa constante. Directamente ingreso con el nombre de la clase 2 pun dos puntos y la constante está. Eh, ¿para qué se usaría? Depende. Sí, yo lo usaría, por ejemplo, para definir en una clase eh, vamos a suponer un state, la clase estado. definir un enum con los estados que pueden pueden existir. Sí, si no lo traigo de la base de datos, que esté ahí por lo menos en un enum bien o alguna cosa así. Bien. Bueno, ahí está el ejemplo. Sí, fíjense, si yo tengo cualquier clase una constante, después puedo acceder class 2.2 pun a ese valor de esa constante, sin necesidad de distanciar. Bueno, ahí está hp.net es la la fuente de original. Ahí tienen que acceder para sacarse todas las dudas de PHP o si quieren, si no a W3 Cool, que tiene toda esa parte W3 cool, que está bastante bien armado o pueden seguir Tranquilamente toda la parte de PHP, inclusive toda esta parte de orientación a objetos. Sí, PHP orientación a objetos está bastante bien definido. Está toda la parte de Myqu Date. Ajax.
+
+Bueno, tienen un montón. Acá está PHP. Seguramente acá está más orientado objetos. A ver, vamos a ver. Están todas las funciones, todas las que ya empezamos a usar. My con acá está con él. Ah, pero estas son funciones de la clase, ¿no? A ver. Sí, my, fíjense la instancia, un objeto myquali, new myqu usa la clase myquali i y en el constructor constructor propio de mysquali i era como la función que usábamos, ¿vieron? Nosotros usamos myqu y un bajo connect y le pasamos esos parámetros. Esa función por defecto adentro hace esto, ¿sí? Hace un newqu i y le pasa los parámetros que nosotros leamos. Esto lo que hace es devolvernos un objeto. Acá ya trabajamos con un objeto. ¿Qué significa? Que vamos a usar el operador guion más para acceder a todos sus métodos. Bien, eso ya es un objeto instanciado de Myquali y lo vamos a tratar como si fuese tal. No vamos a hacer como usamos la clase basada que usamos funciones. Estamos. Entonces son dos formas de trabajar con eh fíjense, acá está objeto orientado a objetos, lo que recién acabamos de ver, ¿sí? Instancio una clase myqual i le paso los parámetros de conexión y de forma
+
+procedural eh uso directamente una función ya predefinida las librerías de PHP y me hago genero esa conexión. Bien. Eh,
+
+consulta Nico, para SQ también usa Link.
+
+Sí.
+
+Bien. ¿Alguna duda consulta hasta acá? Bien. T pam. Sprint 2\. Se ve bien. Sí. Bien. Ahora quiero que deje los celulares. ¿Qué botón? Voy a bajar los puntos por botones. Eh, vamos a ahora lo van a poder agarrar a los celulares. Abren todos todos sus chats de todos los que tengan de GPT, Gemini, Cloud, COD, Open Cod, DIC. Kimik 4 gentle
+
+no gentle no esent
+
+es un orquestador la gente
+
+eh
+
+un open code 2.0
+
+no esent
+
+un orquestador
+
+síent es un aplicador de sd
+
+claro
+
+sí lo us
+
+hay una versión nueva que está
+
+ayer laicé bien todos sus chats. Bien, sprint dos. Ahora vamos a usar los chats, pero lo vamos a usar para en formato project managers. Sí, project managers. Y vamos a incluir ahí actividades y roles y cuestiones que tengan que ver con eh análisis y diseño. Ya está. Entonces, Pónganse, háganse la idea. Yo no sé si me está escuchando o está escuchando un partido. Me está escuchando. No, no pasa nada. Vamos. El pongan háganse la idea de que tenemos que iniciar un proyecto de software. Sí. Y nuestro proyecto de software es el siete. Está. Entonces, ¿se acuer Recuerden que hablamos en un principio que hay que hacer todo lo que hay que hacer para llevar adelante un proyecto de software, ¿no? Definir bien el problema, a ver cómo lo vamos a solucionar, con qué armar los equipos, planificar, estimar, ver posibles problemas que podamos tener, hacer un listado de riesgos, ¿sí? Análisis de riesgos, todo eso hay que hacerlo. Bien, entonces vamos a ir por ahí. Esto es bastante chiquito y simple, pero vamos a hacerlo con esto para que después cuando lo hagamos con un proyecto completo no nos abrume. Bien, tenemos que desarrollar un ABM ABMC, vamos a ponerle sobre una entidad en particular. Sí, se requiere desarrollar un listado formulario de alta y edición y la funcionalidad de eliminar registros de usuarios. Eh, la entidades, usuarios. De los usuarios se conoce su nombre y apellido. su nickname o nombre de usuario, su email y su rol. Un usuario podrá tener un único rol, mientras que un rol podría estar relacionado con una de con más de un usuario. Eh, de un rol se conoce su nombre y su descripción. Se tiene que desarrollar la siguiente requerimiento. Modelar entidad relación, implementar la base de datos, implementación de backend, implementación de frontend y se requiere que el ABMC se desarrolle en lenguaje bien. Bien. Eso
+
+cuando dice listado es la tabla de usuarios que traí.
+
+Sí, puede ser esa, puede ser otra.
+
+Eso es lo que vamos a hacer ahora, analizarlo justamente y definirlo. Entonces vamos a empezar por el principio, ¿no? Nos dan est requerimiento. ¿Por dónde arrancamos? nuestro proyecto de software.
+
+Idea,
+
+¿cómo idea de lo que queres hacer?
+
+Sí. Bien. Esto, digamos, acá tenemos un poquito definida la idea. ¿Qué podemos qué podríamos hacer más de esta idea, digamos, eso que vos dijiste, sí, la idea. Bien. ¿Qué más de la idea? Esto desarrollar bastante Bien. Bueno, en cuanto a en cuanto a la a la parte de proyecto del software, ¿sí? ¿Qué tendríamos que evaluar en el instante en que nos proponen esto? Sí, imagínense que
+
+costo, o sea, de dinero tiempo.
+
+Bien, no estaría mal. En la vida profesional lo primero que les van a pedir es un Por supuesto, me parece si son si son independientes, ¿no? Eh, por ahí si no son independientes, le van a decir que lo ha eh como proyecto de software lo primero que te deberíamos evaluar en cuanto a esto es la factibilidad, si podemos o no hacerlo. Bien, entonces lo primero que nos tenemos que preguntar es, ¿tengo las capacidades o el equipo necesario para poder llevarlo adelante? Sí. Esto para ser éticos y responsables. Tengo los tokens necesarios para llevar adelante el proyecto.
+
+Bien, tengo la plata para pagar esos tokens. Sí. Y si no nos queda claro, vamos a pulir la idea. Perfecto. ¿Cómo la vamos a cómo pulimos una idea de un proyecto de software que lo propuso? Y eso, ¿cómo se llama? Stakeholder.
+
+Analista funcional. Es un el rol es el analista funcional. Sí, perfecto.
+
+Tiene distintos nombres esa actividad. ¿Cómo se llama la actividad de preguntar qué es lo que quer?
+
+En licitación de requerimientos. Discovery.
+
+¿Hablaste de cliente o de stakeholder o algo por estilo?
+
+No,
+
+por ahora no.
+
+Ya pasamos,
+
+ya lo saben. idea de no le preguntan al cliente, al product owner, le vamos a empezar a preguntar si necesitamos definir más, ¿no? En este requerimiento ustedes definirían algo más, necesitarían más especificación para saber si pueden o no pueden desarrollarlo. Recuérdense, el objetivo ahora es simplemente saber si vamos a poder desar Ar. Para esto nosotros tenemos que evaluar, saber bien qué es lo que se va a hacer o bien o más o menos tener una idea y al mismo tiempo hacer al menos una estimación de o una planificación de riesgos y sus posibles eh, ¿cómo sería? Su sus posibles eh implicaciones en el proyecto. Sí, hay riesgos que que no lo vamos a poder solventar y pueden ser muy peligrosos a la hora de llevar adelante el proyecto. Está. Ahora metámonnos acá este proyecto. Necesitan definir más, algo más.
+
+Sí, estáado. Se dice roll se conoce su nombre y su descripción. ¿Cuáles roles hay?
+
+Bien, pero acordémonos está. Si. Falta un montón de cosas definir. Ahora acordémonos del objetivo. Ustedes intenten responderse esto. ¿Soy capaz de desarrollarlo a esto? Sí, unimiento. Sí está.
+
+Hasta ahora vamos por ahí porque acuérdense estamos en el inicio del proyecto. Hasta ahora no vamos a definir, salvo que sea un algo crítico dentro del proyecto, no vamos a entrar en detalle. Sí nos incluye si son cinco o 10 roles.
+
+Eh, no, no,
+
+no,
+
+no es lo mismo. Sabemos que eso va a una base de datos, una tabla con la cantidad de roles que vos quieran. Está piensen en eso. ¿Hay algo crítico que tendríamos que definir? Van a tener
+
+bien. Bueno, pero por ahora como sí la respuesta sería, no hay muchas para responder. que es esto es una alta baja, no pasa nada. Bien, entonces la respuesta de cada uno de ustedes, quiero, ¿son capaces de desarrollar esto
+
+por ahora? Sí,
+
+alguien di alguien levante la mano, ¿quién dice que no? Muy bien, así me gusta. Todos con tokens. Bien, a partir de que nosotros en este inicio de nuestro proyecto del software. Dijimos que sí, nos ponemos manos a la bola, empezamos con este proyecto de software, tendremos que estimarlo y presupuestarlo. ¿Quién me lo puede estimar a esto? Estimación y a grandes rasgos, eh, cuando esto les va a pasar, les va a pasar y les va a pasar un montón de veces
+
+a mano o
+
+no a mano ya no
+
+c minutos.
+
+Bueno, la clase. Lo hici.
+
+Mira queero.
+
+Bueno, escuchen esto. Les va a pasar muchísimo esto.
+
+Necesito hacer un software de gestión de de biblioteca. Famoso ejemplo de la biblioteca.
+
+Cuántica. Así hablando así.
+
+La clave no es presupuestar bien el inicio, es presupuestar bien el mantenimiento. Ahí donde lo enganchas.
+
+Yo vamos por parte de yo les pregunto, ¿esto les va a pasar siempre? Sí tienen esto, esto presupuesto,
+
+pero para depende
+
+presupuesto di
+
+y un palo.
+
+Okay.
+
+Era car en serio.
+
+¿Alguien más?
+
+Ahí es difícilar el valor, o sea, cómo hacer eso, manobre trabajo
+
+y depende el tiempo que te lleve, pues. Si te tarda tres veces y lo cobraste un palo, lo cobraste gratis, pero si lo haces con la en dos semanas un palo está re bien. Pero dependiendo qué tan complejo sea modelar la entidad, que tanto tiempo te empieza a llevar. Pero
+
+bien, tal cual. Todo eso influye en cómo vamos a presupuestar. Es
+
+así.
+
+Ahora, eh, presupuesto, un palo. Él me cobra un palo.
+
+¿Cuánto contestaría? ¿Cuánto me cob
+
+si cobras por la regla de horas o de tiempo de desarrollo, tardas menos de un día no tees muy eh ritual de sacarle siete lucas que puede tardar en 3 horas? Eh, si lucas, no, 70 lucas tardas, 3 horas,
+
+70,000\. Mira, ya lo tu casa, papo.
+
+La hora de desarrollo estaba 20, 30,000 pesos.
+
+Sí, algo así. Era muy bajo.
+
+Como una empresa doméstica hasta la hora de desarrollo. Ahora, según la ¿Cómo se llama la cámara de
+
+Sí, ahí depende del del señor y dep
+
+Junior?
+
+Sí, Junior. Sí,
+
+sí, 20, 15, depende. Pues ya no está tan desvirtuado que no lo sé. Bueno, presupuestar es un tema. Sí, este ejercicio lo vamos a hacer, lo vamos a hacer después con el proyecto más complejo. Lo vamos a hacer, pero porque tiene todo un tema. Ahí involucraron por hombre. Sí, pero Para saber hora hombre, uno tiene que conocer de cuántas horas le puede llegar a llevar esto. Sí. Entonces involucra un montón de conocimiento y eh y de cuestiones que por ahí no la estamos no la estamos teniendo en cuenta acá, pero porque es un ejercicio nada más. Está. Entonces vamos a intentar aprender a presupuestar. Vamos a intentar. No significa que aprendamos. Yo hace 1000 años que no sé si 1000 Pero presupuesto hace un montón y todavía no aprendí. Sí, todos los días cambio. Bien, bien. Entonces vamos al paso siguiente. Sí. Lo que sí vamos a tener que hacer es por lo menos una estimación. Entonces, pensemos en una estimación. Ahí me dijeron 2 horas que yo tardé 2 horas.
+
+La clase pasada.
+
+La clase pasada, eh, vos habías estimado un día, ¿no? Un día siempre,
+
+un día sobrado.
+
+Un día. Bien. Alguien
+
+alguien que ave creo que media hora.
+
+Sí, eso iba a decir como media horita.
+
+Media horita.
+
+Yo le diría dos semanas.
+
+5 minutos. Dos semanas.
+
+Hola.
+
+Bueno, vamos, vamos a ver.
+
+Depende. que tan sincero sea porque le decía al cliente, "No, esto me lleva en una semana y está todos los días juguito y hacer el boludo.
+
+Si le decí dos semanas le puedes corrar.
+
+Esto ya no es cuestión del cliente, esto ya la estimación es para nosotros
+
+y yo creo que
+
+sí el equipo de desarrollo acá nos estamos estimando después de mentirle al que vos quieras. Estimá la estimación tiene que ser con certeza, porque vos tenés que saber cuánto estás mintiendo. Para saber cuánto estás mintiendo, Tené que saber cuánto te lleva y ese cuánto te lleva lo tenés que saber vos estimar
+
+como muchas dos horas con
+
+nada sino yo creo que capaz cuatro días un día para cada cosa
+
+este ejercicio,
+
+este ejercicio
+
+lo vamos a volver a hacer
+
+y nadie pregunta nada para estimar, o sea, como objetivo es estimar infraestructura y eso se tien en cuenta.
+
+Claro,
+
+claro. Muy bien. Ahí empiezan los quilopos. Ahí empezamos. Bien, ya ahora al momento de estimar tenemos que entrar un poquito más en detalle. Sí, no estamos presupuestando, queremos estimar cuánto nos va a llevar a hacer esto. Sí, la configuración del entorno lo estimamos y está dentro de las horas de trabajo
+
+y en teoría en teoría.
+
+Por supuesto. Vale, no lo estamos cotizando, no, no olvídense de precio. Acá queremos saber cuánto nos va a llevar y cuánto les va a llevar a ustedes entregar esto. Sí, que lo tienen que entregar la semana que viene. Comp,
+
+entonces nos llevaría tr semanas.
+
+Bueno, configuración de entorno, lo vimos. Sí, tiene sus cositas, tiene su sus cuestiones. Ahí hablamos de infraestructura. Eh, bueno, parte del eh del local es el ambiente local de desarrollo es infraestructura. Sí, porque voy a tener que configurar una base de datos local, voy a tener que configurar un servidor web. Sí, esto ya lo aprendimos la clase pasada. Voy a tener que armar es eh No, para que ustedes sepan, esto no lo vamos a publicar en ningún servidor, con lo cual la infra de testing ni de producción va a estar involucrado en todas esas configuraciones. A la hora de estimar y de ver qué es lo que tenemos que hacer, hay que tenerlo en cuenta. Sí, recuerden, estamos buscando una estimación de este proyecto de software lo más certero posible. Tenemos que saber nosotros como equipo de desarrollo cuánto nos va a llevar y qué tenemos que hacer. Estamos bien. ¿Qué más preguntarían sobre este proyecto a la hora de Eh, hacer una estimación. Sí, estamos en ese la modalidad de estimación.
+
+¿Quién es el cliente?
+
+Eso depende de la estimación también.
+
+Sí, porque no es lo mismo tener cliente a la universidad que tener cliente a al gobierno de China. Pero eso influye en lo que a vos te lleva infraestructura. Sí,
+
+pero
+
+ya que no. Así que no,
+
+pero no. Pero yo digo por la cantidad de usuarios, la cantidad de datos.
+
+Bueno, ahí podríamos preguntar igual el desarrollo lo mismo.
+
+¿Y en qué dispositivo mega?
+
+¿Para qué dispositivo? Más.
+
+Bueno, podríamos preguntar ahí podríamos ver más que nada es bueno, ¿cuál es el fin? ¿Cuál es el el front, ¿cuál es el back? No, sí podría ser una pregunta dentro de un proyecto de este tipo. Debería ser una pregunta. Bueno, la respuesta es fácil, es un esto es para hacer un un portal web, ¿sí? Un proyecto web. ¿Alguna otra pregunta que se les ocurra? No. Bueno, bien. Lo dejamos ahí. ¿Está bien?
+
+Sí. Para cuando lo quieres. Igual otra vez volvé. Te me estás c\*\*\*\*\*\*\*\* a presupuestar. Me estás yendo a presupuestar.
+
+Acá estamos en el equipo de desarrollo interno y estamos intentando saber cuánto nos va a llevar. Ahí simple. No nos importa el cliente. Tenemos que saber nosotros cuánto nos va a llevar esto. Sí. Después sí vamos y negociamos. Eh, para cuándo lo querés, eh, ahí te sale más caro, pero Pero no te me vayas para allá, estamos de este lado. Sí. Para saber cuánto nos puede llevar como equipo de desarrollo, estaba bien lo que íbamos viendo como qué infraestructura vamos a visitar o hasta dónde, cuál es el alcance, cuál es el los dispositivos donde se van a desplegar o qué se pretende. Si acá no dice si es un portal web, no dice si es mobile, no habla de eso. Entonces sería por ahí algo para preguntar. La respuesta es una página web. con alta, baja modificación y consulta en HTML, pelado y h esa sería la definición del producto. ¿Podrías preguntar cuántos trabajarán, cuántos tendrían que trabajar? No, no, no es ustedes son la entrega es individual, así que es individual un solo worker no lo entendieron sea
+
+ahora está claro, ¿no? No sé si el campo dice,
+
+no, no dice nada. Ya me fijé, es esto el enunciado. Así que y ahí no dice nada. En uno por nada. Bien. Bueno, por ahí vamos. Una vez que planificamos, ya sabemos, vamos a tardar uno dos semanas, uno va a tardar una semana, otro 7 horas, otro 5 minutos por acá.
+
+Eh,
+
+vos con tokens, eh,
+
+cu días. Cu días.
+
+Vos cu días.
+
+Pará. Pablo,
+
+le está rodando.
+
+Bueno, bueno. de las estimaciones más raras y bizarras que vi en mi vida. Y está bien porque la realidad es que hoy día la inteligencia artificial nos hace algo, nos juega una mala pasada. Bien, y más que nada para las estimaciones y está todo incierto. Okay.
+
+El tema radiado después lo que es optimizarlo y dejarlo
+
+cómo de vuelta se puede vos lo puedes en 30 minutos. aparecer, pero después
+
+arreglátela si termina
+
+bien estamos ahora lo vamos a tener bien. Bueno, pasamos a la fase inicial de un proyecto, ¿no? ¿Cuál es la fase inicial de un proyecto de software? En realidad no del proyecto de software, del la etapa de desarrollo, ¿sí? O sea, ahora estamos iniciando, ya definimos alcance, estimamos riesgos. ¿Quién me puede hablar de riesgos acá mismo? Y acá sí, ahí sí incluye, por ejemplo, un riesgo. Les tiro un ejemplo. El cliente lo quiere de una semana para antes de ayer o está apurado. Sí, eso sería un cliente. El cliente Este no tiene plata, eso sería un riesgo. Tremendo. No tenemos tokens,
+
+no tenemos tokens. Toca agarrar la pala. Toca toca teclear. Sí, esos son riesgos.
+
+Eh, ¿qué más? ¿Quién se le ocurre otros riesgos?
+
+El equipo está capacitado para llevarlo adelante. Acuérdense, el equipo son cada uno de ustedes. Entonces, piensen. en su equipo monopersona,
+
+nosotros monou
+
+no usuario, monopersona, equipo de ustedes mismos. Entonces, la pregunta es, ¿el equipo está capacitado para llevar adelante el proyecto? Pero
+
+para pensar
+
+muy bien nosotros y
+
+con lo que sea. La sé usar a la para crear al proyecto sería la pregunta. Entonces está la IA es una herramienta Recuérdenlo, está implícita en nuestras vidas ahora, así que el equipo está capacitado para llevarlo adelante. Es una pregunta que ahora se la tienen que hacer ustedes porque son equipos de una persona, pero todo proyecto de software requiere definir riesgos y uno de los riesgos es si el equipo está capacitado para llevar adelante todas las tareas de ese proyecto. ¿Sí? Ahora, ¿es esto tan sencillo? Ahora, cuando hablemos de microservicios de miles de millones de usuarios. Cuando hablemos de base de datos, no SQL, vectoriales, cuando hablemos de análisis de datos profunda, eh, inteligencia artificial, tenemos el equipo para llevar adelante todo ese proyecto. Ahí se pone, por eso lo hacemos al ejercicio que estamos bien.
+
+Uno tiene que decir que sí, después se
+
+Sí, con él reales. Sí, si no te caen multas. Sí,
+
+ponele que no pase. He conocido multas asperísimas.
+
+Lani dijo, ustedes digan que sí, después preguntan.
+
+Sí, para clientes normalitos sirve para un cliente en serio, no
+
+cuerpo son desastre, lo mismo que el estado así puedes metirle todo lo que quier.
+
+Bueno, vamos a avanzar. tenemos nuestro nuestra tabla de riesgos. A esa tabla de riesgos se le asocien eh contingencias. Sí, contingencia significa che, ¿qué pasa si sucede este riesgo? No, eso después lo vamos a ver más adelante. Bien, ¿qué sigue? Ya entramos en Scram, ¿no? Y ahora empezamos en el sprint cero de Scram. ¿Qué sigue ahí?
+
+Eh, definir la historia.
+
+Definir La historia de usuario. Perfecto. Sí, en realidad los requerimientos historia de usuario. Sí. Product barrón. ¿Lo tienen algún lado. Bueno, ¿qué historia de usuario sacamos de esto? ¿Cómo?
+
+Eh, como usuario,
+
+como usuario quiero un formulario,
+
+quiero darle de baja,
+
+quiero darle baja. Y
+
+bien. O de baja, esa de alta. y alguien que quiera mirar el listado. Así hacemos todo. Y un editar me falta.
+
+Bien. Bueno, el requerimiento es bastante sencillo. La historia de usuario están ahí. Sí, como usuario quiero eh ingresar a un a un portal y ver el listado de usuarios eh que existen en ese portal. Como usuario quiero poder dar de alta un nuevo usuario en el portal como usuario. Quiero poder editar los datos de un usuario del portal y quiero poder eliminar los usuarios del portal. Sí, son cuatro historias de usuario bastante sencillas. Acá hay un siempre hay un gris entre el nivel de historia de usuario o son tareas de una historia de usuario. Sí. Cuando es tan sencillo, por lo general Estos son pequeñas tareas dentro del desarrollo de un requerimiento. ¿Sí? Entonces, la historia de usuario es el ABMC de usuario. Tan sencillo. Si es sencillo. Hay altas de usuarios muy complejas que si pasamos a detallecito. Sí. Imagínense si acá tendría validación de mail, notificación y doble validación, si es un single signon, si eh etcétera. Si cuando doy de alta creo una, tengo que crear una cuenta, sí se puede complejizar muchísimo. Está una simple alta de un usuario. Bien, definimos nuestro producto. Las validaciones eran los criterios de aceptación.
+
+Validaciones son criterios de aceptación. Sí, raro.
+
+Cuando, por ejemplo, esto que vos mencionaste de que puede tener validaciones. Lo incluís dentro de
+
+no es lo mismo. Yo hablaba de validación. Cuando dije validación, lo que hablo es de una doble validación de un, no sé, te mando un SMS para saber que sos vos.
+
+Sí, una alta de un usuario o eso ha hablado como validación del mail. Entonces, manda un mail que vos tengas que hacer clic. Entonces, para hacer eso se tiene que crear un hash. Ese hash se envía por mail. Bueno, tiene un un grado de complejidad más que simple que un simple formulario de alta. Claro,
+
+eso es lo que decía con validación. Criterios de aceptación tienen que ver con
+
+lo mínimo que esperaba, ¿no?
+
+Son que se tienen que dar
+
+y son casi fundamentales al día de hoy. Son las condiciones que espera el usuario de esa historia de usuario. Entonces, cuando yo un criterio de hacer, a ver, digamos, criterios de validación, de aceptación, perdón, para el alta de un usuario.
+
+Y capaz definir la historia que cuando le das el alta eh envío una notificación y no llegaste a hacerlo y solamente le da el alta, o sea, el criterio mínimo de explicación sería por lo menos que le de alta, ¿no?
+
+Vamos a definimos la historia de usuario simple, ¿sí? Un formulario que da de alta un usuario, no no hay manda mail, no hace nada. Criterios de aceptación de esa Historia de usuario. A ver, ¿quién le puede
+
+usuario de alta base de alta?
+
+Perfecto. Que quede persistido. El usuario quedó de alta. Perfecto. ¿Algún otro criterio de aceptación?
+
+No hay notificación.
+
+Podría ser que valide que no exista ya ese usuario.
+
+Bueno, podría llegar a ser eso en su criterio de aceptación que no de alta usuarios duplicados
+
+o con, no sé, con mail duplicado, no sé. Eso sería un criterio de aceptación. Sí. Y seguido de ese, ¿qué sería otro? Y ahí podemos jugar, ¿no?
+
+Multirroll, ya lo mencionaron,
+
+no sé que tenga, cállense, administrador, facturante, ingrese, el que ingresa los datos, s que una persona puede ser tanto médico como liquidante. Persona que
+
+ah, no, no lo mencionamos, pero estaba definido acá. Puede tener un único Claro.
+
+Bueno, esos son criterios de aceptación.
+
+Sí podría haber algún criterio de aceptación que por ahí no entendí bien lo que vos no no es una notificación, pero sí puedo tener criterios de aceptación más de usabilidad que tienen que ver con si por ejemplo para el alta de un usuario un criterio de aceptación podría llegar a decir que si el mail está repetido mostrar un cartel informando eh el error o la situación. Sí, serían pequeños criterios de aceptación. Bien, bien. Listo. Definimos la historia del usuario con todos sus criterios de aceptación. Hay que hacerlo. Sí, háganlo. No hace falta que en el sprint cero lo hagamos. Sí. La historia de usuario, una vez que la agarramos, que la agarra el desarrollador, ahí se empieza a definir todo. Ahí sí digo, "Che, puede haber dos usuarios con el mismo mail, empiezo a hacer preguntas al analista y el analista tiene que responderlas si no las escribió." ¿Está bien? ¿Qué sigue? Ya está, definimos el producto. Sprint cero, ¿qué sigue
+
+y
+
+del proyecto?
+
+Pueden chatear con con chat GPT. ¿Qué sería, mano? A la obra. Estamos, ya estamos, mano, estamos trabajando. Esto son obras de trabajo. Yo te las cobro.
+
+Sí, estamos, vamos a usar scram. Estamos en el spring cero de scram. Ya definimos el producto qué más se define en el sprint cer ambientes. Sprint cer. Configuramos ambiente.
+
+Git init y arrancamos.
+
+No, falta algo más importante antes de get init. ¿Qué tan importante?
+
+Patrones fundamental. Lo más importante de un proyecto de software
+
+el nombre.
+
+Definir patrones
+
+pod arquitectura.
+
+Arquitectura, patrones.
+
+Exactamente. La arquitectura tiene que ver con los patrones, pero es un poquito más alto nivel la arquitectura. Sin eso no vamos a ningún lado hoy y más voy con la inteligencia artificial. Esto sí Es una actividad que podemos hacer con la con el chat amigo, pero la tenemos que definir concretamente qué arquitectura vamos a usar. Está, por supuesto, esto lo hace un arquitecto de soft. Bien, es un un arquitecto sería un sñor para arriba. Estamos un arquitecto. Pregúntenle a la ¿Qué arquitectura usaría para MBC? Monolito hermoso.
+
+Monolito, por supuesto, como siempre, toda la vida, como Dios manda.
+
+Como Dios manda.
+
+Dios patria y monolito.
+
+Bien, alguien no tienen ni token, ¿no? Ya se lo gastaron preguntándole, "¿Mañana va a llover?" Bueno, arquitectura es clave.
+
+Modelo vista controlador. y me dijo que tardaría 18 horas de trabajo.
+
+Pero si hay MBC.
+
+Bueno,
+
+MBT,
+
+unango en templat.
+
+Bien, modela vista controlador. Estoy de acuerdo. Nosotros a esto lo vamos a aplicar con HB crud y duro. Sí, lo van a hacer ustedes. No quita que no puedan usar modelo de vista controlador. Se les va a complicar un poquito si por lo menos separamos en capa. mínimas capas. Está
+
+sí, sí, simple. Un servicio de acceso a base de datos y ya está.
+
+Está. Pero de todas formas cerebralmente defínenlo o hacen un dibujito. Bueno, mi HTML de repente se va a comunicar con ¿qué? Con otro objeto, otra capa. ¿Cómo voy a definir eso?
+
+¿Me explico? Sí. Entonces, por ejemplo, va a llegar una petición que me devuelva el listado de objetos. Bueno, de ¿dónde va a consultar eso objeto? ¿Se acuerdan? Yo lo hice todo, el select lo hice todo en un mismo HTML, ¿no? Que no está para nada bien. Lo correcto sería prepararlo a un usuarios controller. Vamos a suponer así, sí, una clase usuario Controller que se encargue de qué, de consultar usuarios, de dar de alta usuario, ¿sí? Con sus métodos para eso y del usuario controller para allá, ¿qué tienen? La base de datos. Y ante la base de datos, bueno, algo que va a reutilizar todos los controllers de mi proyecto que voy a usar, no vamos a usar JDBC nosotros. Nosotros vamos a usar conexiones a la base de datos. Bueno, alguien que administre esa conexión a la base de datos. No, que administre. ¿Qué significa que el controller agarre y diga, "Bueno, devolveme la conexión." El controller no tiene por qué saber el usuario, el password y el host de la base de datos. Entonces, va a haber otro objeto por allá. Lo podemos llamar repositorio. Yo voy, me adelanto a cómo es la vida, ¿no? Y ese repositorio, además ahí va a aparecer otra capa. En realidad un no es otra capa, sino que va a ser un objeto que en definitiva controle las conexiones, que me devuelva una conexión y cierre la conexión y que ejecute las consultas y el repositorio se va a encargar de construir esos celeciscos from porque va a ser el que conozca la base de datos. Bien, entonces ahí estuvimos definiendo arquitectura de software. Sí. dijimos, bueno, va a tener estas capas. Cada una de estas capas va a estar encargado de hacer eso que recién charlamos. Bien, ahí estuvimos haciendo arquitectura de soft. Bien, una vez definida esa arquitectura, ¿qué es lo que sigue? Spring cero hoy día. ¿Qué sería lo que le sigue a ese sprincer y toda la guía?
+
+¿Cómo?
+
+Todo lo que lo comentaste lo Ahí
+
+exactamente. Ahora hay que definir,
+
+yo personalmente definiría los que son loss, por ejemplo, o sea, ¿qué qué se espera que que que se resuelva? O sea, en este caso, eh, digamos,
+
+ojo con end points la palabra porque no vamos estamos haciendo vas a traer justamente alta baja eh consulta eh digamos, ¿cómo lo vas a llevar para hacerlo directamente? Eh,
+
+me pierdo. ¿Qué sería? A ver, un ejemplo si te sale.
+
+Yo, por ejemplo, no sé, consultar el rol un usuario. Eh, quizás, por ejemplo, es bastante más complicado de algo simple como el ABC, pero
+
+eh no sé, lo pienso yo como que directamente desea consultar algún botón o o directamente que te lo muestre completo tod usuarios.
+
+Bueno, ahí vamos a hacer en un ratito. Eso lo primero que tenemos que hacer ahora y lo siguiente que yo haría el arnés, el canal el arnés del proyecto. En ese arnés definir los skills. Sí, vamos a ver más adelante algo de ya estuvimos viendo alito, ¿no? Es agent.md con sus skills, con su Sí, eso estuvimos viendo algo. Vamos a ver un poquito más. más adelante, pero definir eso, el arnés. ¿Por qué lo definimos ahora? Porque ya tenemos claro qué arquitectura vamos a usar, ya tenemos claro la tecnología, ya tenemos claro cómo lo vamos a llevar adelante. Está y entonces tranquilamente podemos definir eso. Podemos definir, "Che, armame." Se lo pedimos a la armuna res, eh agentes de necesarios y los skin necesarios para llevar adelante este proyecto con esta especificación, esta arquitectura, estas capas, esto, esto y esto. Sí. Entonces hacemos un buen prom para armar ese armés.
+
+¿Está claro? ¿Estamos de acuerdo? Eso me va a armar ya un arnecito, sus carpetitas. Bien, ¿qué es lo que sigue ahora? Y ahora vamos a meter un poquito de actividades. un poco manual, ¿sí? Para no hacer toco de ahí. Sí, vamos a hablar un poquito de UX. Si bien más vamos a ver un algo que tiene que ver con UX, vamos a tener una clase un poco más de desarrollada, vamos a ver una cosita de hoy. ¿Y por qué? Porque lo nombró. ¿Qué cosa sí tenemos que tener claro hoy y también se lo tendríamos que agregar a ese arnés? ¿Cómo voy a interactuar o cómo el usuario va a terminar interactuando? con esa aplicación, ¿no? Y definir pequeñas cosas. ¿Qué definirán? ¿Qué definirían ustedes de la usabilidad de este proyecto?
+
+Primero que sea entonces.
+
+Eso sería un sí, una definición podría llegar a serlo. ¿Qué otra cosa se les ocurre para definir sobre esta requerimiento? El que tenga que ver con la usabilidad de cómo se usa No, no tiene que ver más con el frontend, como la interacción con el usuario,
+
+la internacionalización y el acceso a las personas que tienen discapacidades visuales.
+
+Bueno, claro que sea sencillo.
+
+Bueno, y el ahí está que sea sencillo. ¿Qué es sencillo?
+
+Claro, que no tenga muchos muchos elementos o que no sea muy
+
+que no tenga muchos pasos. ¿Ustedes cómo lo ven? Esto tiene un menú h un botón que dice alta y me redirecciona a una pantalla limpio con un formulario, me arma un popup, me despliega un formulario del lateral, me baja el formulario desde arriba, sale el formulario en otra computadora. ¿Cómo lo ven a eso? Cuando lo doy de alta, vuelvo
+
+al al listado de usuarios con que el primer paso sea el tipo el lobby y si no tenes una cuenta que te haga crear una cuenta. Bueno, ya me me armaste un quilombo. Es solo la alta baja modificación y consulta de usuario. No tenemos login como
+
+un formulario.
+
+Claro. Pero, ¿se dan cuenta las preguntas que estoy haciendo?
+
+Sí,
+
+claro. Los ejemplos que no serían eficientes porque no tendría sentido que el usuario ingrese y que se abra en otro computador.
+
+No, ese no.
+
+Sí, sí, sí, sí. Es si llegan a hacer algo así, los mato, ¿no? Claro, pero eso lo tengo que definir, o sea, y ustedes se lo tienen que imaginar. Hay técnicas, ¿no?, para definirlo, pero ustedes usan un montón de software, ¿no? Entonces, eso tienen que empezar a detectar cuál es sencillo y cuándo uso una técnica y cuándo uso otra. Sí. ¿Cómo lo harían? O sea, ¿cómo llegarían adelante? Acá sí ya. Se los pregunto a ustedes y cada uno me puede responder cómo cómo armarían el ABMC de estos usuarios detallado. ¿Quieren dibujarlo?
+
+Hacer un
+
+lo en algún momento vamos a dibujar, pero
+
+un Warframe.
+
+Claro, pero ahora no vamos a hacer Wframe,
+
+lo vamos a hacer porque es una técnica de de UXOP.
+
+Hacer mocups. Exacto. Pregúntenle Figma make, ¿alguien sabe usarlo?
+
+Intentamos. Fracasamos rotundamente
+
+para usar el Figma make,
+
+¿no? Figma normal. El make es el que tiene la no
+
+Figma make le pedís una pantalla y
+
+es como el Stitch ese
+
+como Stitch.
+
+Nossamos Figma para el año pasado un proyecto y casamos rotundamente.
+
+Okay. Bueno, o Stitch de Google es obviamente un MOC. Ahora ustedes piénsenlo y pídanselo ustedes a Stitch. Le pueden pedir que la quiera, pero después evalúenlo con criterio lo que les devuelve. Sí,
+
+claro. También hay que tener conocimientos de diseño específico.
+
+Sí.
+
+O sea, si querés hacer eso dos veces como diseño de que tener.
+
+Sí, sí, hay detalles que sí, sí, sí, totalmente. Ahora sí podemos definir nosotros si lo queremos todo en una pantalla, que el formulario esté arriba. Siempre se acuerdan el que hice yo, el formulario estaba a un costado, el listado estaba acá. Bueno, podemos definir Si el formulario está arriba, todo es lineal, aparece o desaparece y el listado abajo, los filtros, si quiero ordenamiento en la tabla, no quiero ordenamiento, si quiero filtros, si al eliminar me pregunta realmente desea eliminar al usuario sí. Sí, esas pequeñas cosas mínimamente sí las tenemos que empezar a definir con criterio. está nosotros no firmamente. Sí estamos
+
+es todo un área de estudio la experiencia del usuario.
+
+Totalmente. Sí, sí, sí, sí.
+
+Hay gente que se dedica específicamente a UEX. Sí, vamos a tener una clase de UEX. Es más complejo de lo que obviamente estamos viendo ahora, pero totalmente ustedes tienen que empezar a pensar en eso. en cómo responde. ¿Por qué? Porque teniendo las herramientas que tienen con la inteligencia artificial es muy fácil y rápido moquear. Entonces agarran y le dicen, "Che, bueno, este formulario es bastante complejo." Complejo, me refiero a tener 500 campos, subir un archivo, tiene un montón.
+
+Lo harían en la misma pantalla, un lo harían en un popup,
+
+poder hacerlo por pasos, pod hacerlo de distintas formas y eso es criterio que tienen que tener ustedes y a la hora de pedírselo a FMA main le dan ese criterio, ¿sí?, de usabilidad, los colores, los botones dónde lo va a poner y que todo eso se lo dejan a ellos, a los que saben, a la inteligencia artificial, pero sí ese criterio de decir, "Lo hago todo en una en un popup a un formulario externo, no." Claramente no, porque va a quedar todo amuchado. No me no lo voy a poder hacer responsivo porque cómo hago responsivo una cosa así de la identidad visual el cliente ya tiene la identidad visual. Es total.
+
+Sí, eso es así. Muchas veces es así, pero bueno, tiene que ver con eso, sí, con la usabilidad orientada a criterios lógicos de usabilidad, ¿no? De cómo va a ser nuestra aplicación. Está. Imagínense un formulario eterno y ustedes llenan 70 campos, le dan guardar y le faltó el un campo y tienen que volver a llenar la mitad de los campos o no o no saben cuál le da error y por allá arriba hay uno que está en rojo y que dice falta cargar este campo. No, no está bien, ¿no? Entonces eso lo tienen que ir viendo ustedes, por más que no lo diseñen ustedes, son criterios. Está. Entonces, formulario gigante donde yo lo puedo hacer por paso, lo hago por paso. Entonces, hago las validaciones de a poquitos pasos. Formulario con carga de documentos, bueno, cargo o alta de fotos, una foto, varias fotos. Bueno, tengo que ir viendo cómo lo bien y se lo pido a la guía a de esa forma. Entonces, bien, ahí definimos el cómo va a ser nuestro. Hagan eso. Estos pasos que yo le estoy diciendo ahora, háganlo para este proyecto, está como la técnica para hacer eso wireframes. Sí, lo dibujo. Ustedes la tienen fácil, piénsenlo. Se lo piden a Stitch o a Figma Make o a X o a Z o al que quieran. Sí, todos le van a hacer un templatito en HTML,
+
+todos iguales,
+
+que va a quedar todos iguales. No, ustedes hagan, pídanle el criterio que ustedes consideren, pero háganlo, hagan esos esos HTML, bien y díganle, "No, lo quiero rojo, no lo quiero azul, lo quiero celesti blanco." Bien, háganlo. Esa actividad, háganla. Esos pasos llévenlo adelante. Bien. ¿Algo más para el sprint cero que se les ocurra? No hay mucho más, ¿no? Las historias de usuario, usuario que, o sea, cuando tenés un proyecto, podes definir la feature templ son como funciones
+
+el feature, sí,
+
+son requerimientos future y requerimiento es más o menos lo mismo.
+
+Lo único que la el alcance de un future tiene que ver con un incremento funcional dentro de un proyecto.
+
+O sea, eh una historia de usuario puede ser parte de future.
+
+Ah, es
+
+eh no future por lo general igual depende, puede ser, ¿eh?
+
+Ah, no, las ISU son están dentro del estudio.
+
+Ah, las ISU son tareas, son más chiquititas.
+
+Las tareas de son los que definimos. Habría que definir
+
+eh se puede si es
+
+ah porque ahora como no hace
+
+lo podés definir dependiendo si necesitas definirla porque es un historia y acá va en la experti de cada uno. Yo ya sé cómo hacer esto. Yo ya lo sé. No necesito, no necesito dividirlo para saber qué es lo que tengo que hacer. Si la historia de usuario es mucho más compleja, sí conviene dividirla para saber bien qué nos estamos a qué nos estamos enfrentando, con qué objetivo lo dividimos para estimarlo, para saber qué complejidad tiene esto. H Bien, terminamos nuestro sprint cero. Ya tenemos nuestra arquitectura, nuestro entorno andando. Ahora sí, manos al chat, manos al prom, bien, a promtear y se empieza a desarrollar. Está se asigna el historio usuario del desarrollador. Como el equipo es monoequipo, eh, lo asignamos y acá viene el quilombo, un desarrollador incluso junior, ya debería empezar a hacer testing, desarrollar eh con cobertura, lo vamos a ver el año que viene esto, y generar la batería del test necesaria para llevar adelante un buen desarrollo y seguro. Estamos Esa lo tenemos a la inteligencia artificial. Claramente. Bien, ¿alguna pregunta? Hasta ahí. Ya ahí llegamos al sprint un sprint uno es tomo una historia de usuario y la desarrollo. Ya sé cómo es la arquitectura. Entonces, en base a la arquitectura que definimos recién, voy a tener que definir el HTML. De ese HTML voy a instanciar un controlador. Ese controlador me va a devolver el listado de usuarios. ¿Cómo me lo va a devolver? Y el controlador va a instanciar un repositorio o una un objeto que que maneje la conexión a la base de datos y va a traer la conexión, va a generar el SQL, va a dificultar la conexión, la la SQL, le va a traer los objetos, lo va a devolver, el otro lo va a interar y va a construir la tabla. Ya está. Sí, lo programé programé el listado como hicimos la clase pasada y así siguiente historia de usuario. Siguiente his bien, ¿está claro? ¿Alguna duda, consulta sobre eso? Ya con eso podemos llegar a la entrega todos, entrega individual del proyectito. Bien. ¿Qué hora es?
+
+Estamos temprano, no se me duerme. Bien, hasta acá. Y para este sprint 2 y para el ABM C ya estamos completos. ¿Está bien?
+
+Okay. Bien. 29 de septiembre entrega.
+
+¿Estás bien vos también?
+
+Está rojo, amigo. Está bien.
+
+Boostrapos. Sí lo vimos. Vimos que es un framework de desarrollo de CSS que podemos usar componentes. ¿Sí se acuerdan? Y y tiene algo de JavaScript que viene. Vamos a ver coordinator está. No quiere decir que el ABMC lo tengan que entregar con Codin Editor. Está acá vamos a aprender Codin Editor, pero simplemente para que al 10 de octubre podamos iniciar o antes con el proyecto final. Está Vamos.
+
+Igual esta primera semana sería bueno solo vainilla con PHP.
+
+Sí,
+
+esto es PHP
+
+sin JQU sin
+
+Sí, no jquery sí
+
+JavaScript pueden usar JQU y
+
+cómo y pero lo lo vamos a ver la clase que viene. Es un framework para desarrollo en PHP. Este proyecto esto. que van a entregar PHB1 ustedes la IA y el PHP está HTML, CSS y JavaScript, ni más ni menos. Y concéntrense en lo que están haciendo. Petición de recursos, http les tiene que quedar pero tatuado. Estamos bien. Listo. Voy a cambiar de tema, así que necesito Que esto quede clarísimo. Avísenle a sus compañeros que no vinieron. Había partido. ¿Qué pasó? Que no. Bien. Vamos a cambiar de tema. Proyecto final. Ideas. ¿Qué tiene que ser un AB con algo más o
+
+el final?
+
+Sí, tiene que ser un software productivo.
+
+Por ejemplo, el año pasado hicimos, ¿quieren verlo?
+
+Eh, sí, sí. Nunca repetí. Estoy tocando cualquiera. Dame un segundo. Estoy diciendo era acá. Hell trracker era el año pasado, una plataforma digital que permite a los profesionales de la salud gestionar los planes de cuidado de sus pacientes y a los pacientes su cumplimiento y consulta de la trayectoria a lo largo de su tratamiento. Esta plataforma tiene como objetivo centralizar la información relevante de la vida médica de un paciente ofreciendo un espacio donde pueda mostrar la evolución estadística y cumplimiento tanto de profesionales de la salud como de ellos mismos. Se propone desarrollar una plataforma digital que funcione como una red de gestión de planes de cuidado dentro del ámbito de la salud, similar a las plataformas de seguimiento, pero con funcionalidad específica para este sector. Esta plataforma G tra Tracker, así se llamaba permitirá a los profesionales en la salud crear planes de cuidado, conectar con pacientes y otras entidades médicas y gestionar la trayectoria de tratamiento de materia integral. Gestión de perfiles y administrador, profesional de la salud y paciente. Un administrador crea gestión de usuarios, eh restablecimiento de contraseña y gestión de entidades médicas, o sea, clínicas y hospitales, profesional de la salud, creación de perfil con información sobre especialidades y el paciente creación de perfil con información personal, pida médica y Eso sus planes de cuidado. Em, generación y registro de planes de cuidado profesional, creación de un plan de cuidado. Estos ya son requerimientos, ¿no? Funcionalidades. Un un profesional crea un plan de cuidado para un paciente específico vinculado a un diagnóstico con fecha de inicio y finalización. El plan incluirá metas, tareas, dosis de medicación, terapia, ejercicio. Un administrador puede gestionar, o sea, alta baja modificación y consulta de tipos de diagnóstico y planes. cuidado estandarizado. Un paciente hace un registro del cumplimiento de esas tareas que se le asignaron o metas del plan, incluyendo fechas, duración y comentarios. Permite al paciente informar sobre el uso de cumplimiento de cada una de las partes del plan. Hay una fase de funcionalidad de seguimiento, validación y estadística. Un profesional hace la validación y el del cumplimiento de las tareas reportadas por los pacientes. Trazabilidad y métricas, generación de estadísticas automáticas. y análisis de rendimiento eh y cumplimiento de para pacientes. No estamos acá, ¿no? Eh, nos conviene estar acá, me parece. Componente de gestión de documentación. Un paciente puede gestionar documentación médica, o sea, subir estudios, recetas, informes. El administrador consulta el estado general de los planes de cuidado. Sí. Sobre La implementación ta ta. Eso no se lo voy a decir.
+
+Sí o sí. Coordinator.
+
+Sí.
+
+Seguridad, login de usuario, administrador. Estos son ya la editoria de usuario, ¿no? Registrar registro en el sistema, alta baja modificación de usuario, establecimiento, contraseña, todo eso es más o menos. Ese es el alcance. No, lo mismo con
+
+eh no
+
+s es muy parecido. Es igual, más fácil. Bien, no sé, ese es una Yo eso lo leí para que vean el alcance de un proyecto final. El proyecto final se hace en el equipo de tres mínimo, máximo Elijan ustedes. Eh, el punto es, ¿qué se les ocurre? Ideas.
+
+Un turnero.
+
+No, basta de turnero.
+
+Nos podemos alejar de la salud, por favor.
+
+Nos podemos alejar lo más posible de la salud.
+
+Sí,
+
+gracias.
+
+No, no es que no está está en blanco. Turnero.
+
+Turnero es como
+
+un turnero siempre va Facturador de la FIP.
+
+Un facturador para la FIP.
+
+Facturador para FIP. Bueno, a ver,
+
+un sistema para contadores, administración de clientes, contadores y que tengan una ayudita para hacer factura si tienen que entrar a la web de la FI.
+
+Una,
+
+bueno, es una idea.
+
+Ya hice una W. Ya hicimos una
+
+acá dice una Pokédex.
+
+Uh,
+
+una
+
+una Pokéx con la API.
+
+Consumí la API y listo.
+
+Ahí est tirando idea. Una qué?
+
+Una Pokédex.
+
+¿Qué es eso?
+
+El de los Pokémones que ten
+
+la enciclopedia de Pokémon.
+
+Sí.
+
+No sé qué es. ¿Qué es un posta que no sé qué es?
+
+Podría ahí.
+
+No, no. Tenía
+
+los terminé en medio.
+
+Ah, tenés Pokémones y y no sé qué hacés. Esta está buena. Le podemos replicar para jugamos un picón. Es un sistema de organización de fútbol 5,
+
+se llamaba así. Administración de excursiones, gimnasio, estadísticas deportivas, gestión de reservas,
+
+tickets del comedor. Hicimos todo un sistema de de tickets para el comedor, de venta de ticket. para viandas en el comedor.
+
+Ah, bueno. Billetera virtual en el 20 ya habíamos hecho.
+
+Eh, estacionamiento, medio y pago.
+
+Competimos
+
+un prode el 22 que estaba el mundial que hicimos un sistema de prod. Eh, perdí mi billetera, estaba buenísimo. Plataforma de crowfounding, plataforma de perfil deportivo, eh, plataforma Hell Tracker. Sí. Bueno, esas son todas las acá hay ideas.
+
+No, esa son secreta. Bueno, ahí tiraron una tenemos hasta ahora una idea, ¿no? Contadores, administración contable y con facturación,
+
+¿no? Algo como una administración de negocio, eh, con inventario, para un quequito, poquito publicidad, de finanzas. Claro. Lo de los Pokémon
+
+todos juntan pokémones,
+
+¿no? Pero es una arte que tiene una banda de todos los Pokémones.
+
+Levante la mano a qui no le gusta Pokémon.
+
+Solo los consumí y te muestra la foto con
+
+Pero, ¿y qué haces? Digamos hacer nada.
+
+Es una Ray con todos los
+
+Pokémones
+
+y pero y eso no tiene nada de
+
+No, porque eso es para aprender a usar las Claro.
+
+Ah, bueno. No, bien.
+
+Era
+
+Sí, sí, sí. No pensé que hacían, no sé que lo hacía, coleccionaba un Pokémon, se lo vendía a otro, no sé, qué sé yo.
+
+Podemos hacer pelear.
+
+Bien. ¿Qué otra idea tenemos? Hasta ahora va por lo financiero por este lado, ¿no? Contador, administración de de Kosco,
+
+stock y esos son muy clásicos. Está bueno. Va, tengo uno ahí, pero hace muy complejo, así que ese no lo vamos a hacer. Pero idea, por lo menos
+
+si es rentable, a lo mejor
+
+algún comercio se puede hacer complejo.
+
+Algún comercio,
+
+sí, que basesem o algo así como una billetera.
+
+¿Por qué debe vender es?
+
+No entendí. Niclón,
+
+¿cómo sería un comercio?
+
+Comprar y vender algo,
+
+una tienda. vender tienda de lo que sea.
+
+Bueno, eso es, digamos, e el gran
+
+ecommerce sería no
+
+te hago un tienda nube y te lo presento. Nico,
+
+bueno, eso sí es e-commerce, tienda nube. Eh, vos lo que decís es la gestión de un comercio, donde vos tenés de alta tus clientes, tenés de alta tus proveedores, contratas eh compras o hacés órdenes de compra. Esas órdenes de compra son por producto, los productos tienen categoría. vendés esos productos. Eso
+
+sí, un sistema de stock sería básicamente eso, ¿no? Que le agreg un contable y tenéis un negocio, cualquiera sea no porque producto es producto, pueden ser zapatillas, pueden ser chicle, sí, todo lo que son comercios son igual.
+
+Claro.
+
+Eh, se se trabaja con exactamente el mismo sistema.
+
+Le agregad dos trquimientos mayos un RT. Bueno, dos o tres más complejo, pero bueno, le agregas toda la parte de procesos y haces un p, no vamos a llegar a eso. Sí, un gestión de stock está, pero bueno, no tiene mucho desafío, digamos. O sea, llegamos a cumplir requerimiento. Es aburrido lo que sí le digo. l
+
+¿Qué más? A ver, ¿qué otra idea tienen? ¿Alguna idea así brillante que nos saque del montón y nos muestre algo mejor? Decía su No,
+
+una
+
+bueno un chat no es difícil, más es fácil hacer un chat. Es que pt para después usarlo, no para hacerlo. Hacerlo es fácil usarlo.
+
+La buena
+
+no hay más ideas. Me van a hacer pensar a mí
+
+un clon de IOC PDF.
+
+Eso sí es difícil, ¿no?
+
+Sí,
+
+está todo pensor sabido. CR para convertir de lo que sea Marl, de lo que sea PDF. Sí, sí. Pero tiene que funcionar.
+
+No hay muchas ideas.
+
+Un buen frontend para FFMPG.
+
+FFMPG para streaming.
+
+Es también un conversor de lo que sea, lo que sea.
+
+Un conversor de P a cu. Así dejo de buscar en Google convertor de PDF a los claro,
+
+claro. PDF eso me pena.
+
+Estoy gastando tiempo en buscar algo que ya encontré 20 millones de veces, ¿no?
+
+Y el quitador de de fondo eso y quitar el fondo de una imagen, ¿no? Esa es la búsqueda más Che, qué poca idea, ¿eh? A ver, tu taller de imágenes sin apuro y sin salir de casa. ¿Qué hace eso? Pregúntale a CH GPT alguna buena idea. Permiso.
+
+Ah, limpiar fondo.
+
+Mejorar. Eso contra qué modelo es una plataforma son open de sacar fondo, de limpiar, de mejorar esos
+
+claro pero modelo por detrás no sabí
+
+son todos clonados de públicos aplicación lo haces con modelo como
+
+ahoritos rumores pero no sabes crisis
+
+che eh pídanle ideas a a sus cuándoas tan buenos.
+
+Pero entonces puede hacer cualquier cosa, profe, que quede andando en tres meses, en un mes.
+
+El el chiste sería hacer unir PDF, vivir PDF. Sí, no lo usa nadie a eso. Sí, sí, sí. Es PDF dos, ¿o no?
+
+Mm, más o menos es
+
+acá, acá hay una mezcla de varias herramientas open source también. Acá Sí, yo nunca usé eso, pero bueno, no lo necesité. Si hay gente, si hay es porque hay gente que lo usa, ¿no?
+
+Yo
+
+eh acá tengo, a ver, la cosa es un segundito y y vemos esa idea. Es ver un rubro que nos interese. Por ejemplo, el 2022 metimos el proe porque está mundial. Eh, no sé, algo que le interese. Si le interesa los Pokémon, bueno, buscamos buscamos una idea de los Pokémon. Eh, yo después adapto la idea para el alcance de la materia. Pasa que hacer, porque si no hacer tipo un gestor de stock en definitiva vamos a hacer más o menos lo mismo. Vamos, el desarrollo va a ser igual porque va a ser distinto del modelo de negocio. Ah, a ver.
+
+Ah, no me gust
+
+que sea multitant. Bueno,
+
+que sea multitenant, que sea
+
+y eso sería genial, ¿no? Pero no llegamos
+
+un para conseguirleo.
+
+Sí, hicimos
+
+SSO.
+
+Este tenía
+
+SSO y MFA. Listo. Perfecto. Estoy leyendo acá también está por decir el desafío río negro que te había leído durante el otro día.
+
+Ah, ¿cuál era ese? El de la
+
+plataforma digital. para trabajadores independientes y servicios de la economía social.
+
+Desarrollamos una plataforma digital integradora que conecte trabajadores independientes, emprendedores de la economía social y prestadores de servicios locales con la demanda de la comunidad, reduciendo la informalidad y precariedad laboral.
+
+¿Escucharon?
+
+Ese está bueno. Es el LinkedIn delo, tacista y carpintero. Básicamente va por ahí. Hm. El concepto por ahí que suban los trabajadores de la informalidad, como lo llaman ahí, suba sus capacidades y hace curso. Eso que le arme un una suerte de currículum y cuando uno necesita busca es como el Uber de los del trabajador.
+
+El de Uber está muy bueno. Manda la casa. todo el tema del mapa dice para camina.
+
+Bueno, de mapas eh si vieron había uno que decía poy puntos eh pui era puntos universitarios de interés o punto de interés universitario, piu, así, punto de interés universitario, era gestión geolocalizada de todos los por categoría, no tenía bibliotecas, tenía, no sé, Eh, o sea, gestionar puntos de interés lo localizado, mostrarlos en el mapa, de YouTube,
+
+es un logo que cuenta noticias de diarias de la tecnología
+
+y su benchmark es hacer un horinder.
+
+Bueno, ese Tenemos otro, ya tenemos dos orientaciones, más o menos, dos ideas. Una, la parte
+
+me decía una subasta inversa.
+
+Ese ya lo hicimos.
+
+Podría ser.
+
+Ojo que después del viaje podemos hacer algo cuántico. Terminamos.
+
+¿Algún otro nicho de interés?
+
+Música.
+
+Bueno, puede ser. Por ejemplo,
+
+música.
+
+Vente de música.
+
+A ver qué se qué se nos ocurre con la música.
+
+Transposer de de acordes
+
+para poder acordar.
+
+¿Qué sería un trabajo capacitador? Claro, con un capotraste, pero
+
+Ah, pero bueno, no sé, no sé mucho de música. Eh, no sé, partituras online. Gestión de las partituras.
+
+Le compartimos a cifra PR.
+
+Algo de pesca.
+
+Uy, si hay uno que está Estaba buenísimo. La red social de la pesca. Ese no nos pidieron varias veces de acá de de vieron los laboratorios que están allá, eh,
+
+que pescan y analiz estudian los pescados.
+
+Pero, ¿qué qué hac salen de vez en cuando a pescar? Eh,
+
+o sea, era una obligación para reunir pescadores. ¿En qué termin
+
+la el aite? Venía así. Eh, ellos necesitan en realidad necesitan información de qué se se qué hay y en cada lugar, en cada zona, con qué picar. Eso es para el pescador. Ellos como investigan para saber la salud de la fauna marina o del río, tienen que más o menos tener una idea en tiempo real en cada zona. Y ellos para hacerlo van ellos a pescar. Entonces se van a pescar acá para arriba arriba y se fijan, che, está saliendo, no sale. Vienen acá. Uh, salió un pescarrey. Okay. Y tienen una red de gente que va a pescar y les dice, "Che, está saliendo tal cosa. O se o miran fotos." Entonces, elite venía así, hacer una red social de pesca donde Hay que darle un incentivo al pescador para que suba la foto de lo que pescó ahí. ¿Y cuál es el incentivo del pescador?
+
+Yabio,
+
+eh,
+
+una birra, no sé.
+
+Sí, un sistema de que puedesar por premio. Vaya lo vio por ahí en realidad presumir su lo que pescó o no.
+
+Entonces la idea del de la aplicación era una aplicación que vos puedas sacar una foto y te diga la medida que mida, el tamaño del pescado, te diga la especie eh de que lo identifique, diga cualquier especie, ¿no?, de los pescados, eh, y bueno, eso lo puedas compartir geolocalizado obviamente con el GPS del celular y entonces obviamente te da puntos o subir, te da, no sé, la idea era que te den ciertos puntos de depende del tamaño de no sé qué de la especie. Bueno, eso después las reglas hay que ponerlas, pero te va a punto y esos puntos los canjeaba, no sé, por carnada en tal lugar y así. En vez de coleccionar Pokémon, estamos coleccionando peces
+
+a la vista de los Ahí va. Eso es un incentivo, ¿no? Si completas tenés que sacar un un vanila, un panzón, un
+
+un carro y así. Y cuando completar ese son desafíos. Vieron que ahora Todos los jueguitos son por desafíos. Desafío de la semana, pescar cinco corbinas. Si llegas a las cinco corbinas, retrucho, le sacas cinco foto la misma cor,
+
+¿no?
+
+Nico, consulta. Y por ahí preguntarle a a Barrios o algún director de carrera si se ocurra alguna idea copada. Tengo firma de implicancia real.
+
+Uh, pero acá tenemos para ser dulce.
+
+Se ha divertido. No le vaya a preguntar a abogía porque preguntar Veronica Vicone lo aburrimos todo,
+
+¿no? Bueno, esto era de coso de ambiente. Claro,
+
+lo que yo te digo de la pesca, tenemos y ahí tengo un montón eh de ideas para eso. Hay un Bueno, lo podemos hacer igual, obviamente eso nada de esto va a ser productivo, sépanlo. Se van a dar cuenta solo de ustedes cuando lo terminen, eh, pero sí puede haber ideas copadas.
+
+A mí me gustó la idea. Ya me ya me Viste la pesca está bueno. Sí, está buena la idea. Obviamente que no llegamos a hacer todo eso que recién hablamos. Está buena la idea, pero hay que ver que no se coman el pescado. Es que se ve a dónde está.
+
+Sí, sí, tal cual. Bueno, ¿qué más? A ver.
+
+Me par una idea. Puede ser
+
+la mejor.
+
+Porque ya que estaba buena la idea. No, la de pescado.
+
+Ah, de pescadores.
+
+Sí.
+
+Ah, escuché.
+
+No, no es es una red social de pescadores. Sí. Después había una. Esta está buenísima. Esta se le había ocurrido a mi novia. Eh, Uber de estacionamiento.
+
+Eh,
+
+eh, Airbnb de estacionamiento. Reservar el estacionamiento.
+
+Te pongo en mi casa y
+
+vos claro, vos suponete te va tenés un garage en allá en el centro para acá en vierno.
+
+Ah, eso no existe, ¿verdad?
+
+Sí,
+
+existe.
+
+Sí, hace poco.
+
+Eh, a nosotros se nos ocurre la idea que a los 15 minutos ya existe, ya está desarrollado. Siempre le pasó eso, eh, pero estaba bueno, o sea, era el leer BNB de tu garage de estacionamiento.
+
+Eh, la otra que alguna vez se me ocurrió y también al creo que al mes salió Mercado
+
+no era un eh, ¿qué sería? Lo mismo, el mismo concepto de Airbnb, Uber Uber de instructores de ski y snow que se, no sé, voy a la montaña, tenemos un instructor, buscar contratar, ya está, ya está, ya exist Existe la aplicación,
+
+el Uber de viajes compartidos.
+
+Ese está
+
+eh de hecho Uber tiene para podés poner la opción compartir viaje. Bueno, todo lo que sea Uber de la vida lo el tema es con esas aplicaciones que no vamos a llegar a hacer toda la capa de notificaciones no vamos a usar eh notificaciones. Sí, porque nos tenemos que meter en un quilombo verde y no el alcance del
+
+Le preguntamos a Juan que nos enseñe cómo levantar un SMTP y hacemos todo el
+
+no de correos
+
+MQTT se usa
+
+para para notificaciones
+
+por correo
+
+y sí por correo usamos gratis pero por eso no no vamos a usar la capa de notificación y todo eso. Y lo que pasa ahí es un, o sea, ma
+
+cómo
+
+ma no us
+
+no mail trap
+
+ah mail trap mail trap se puede usar para simular el envío de mail eh lo que pasa es que no es el alcance de la materia llevar adelante algo muy complejo. Sí, por eso siempre hacemos un sistema de gestión. Son formularios y base de datos. Ya, porque ya nos metemos en tecnologías un poco más avanzadas y y uno se empieza a enrollar, empieza a ver quilombo. Por más que la nos va a resolver muchos de los quilombos, van a ver que va a haber quilombo. Entonces, la idea es proyecto de software, o sea, generar ir llevando adelante todo ese proyecto de software con las distintas fases y etapas que tiene un proyecto de software. Hoy, hoy día lo vamos a hacer obviamente todo SDD o todo amnesiado y codeado por la IA, pero van a tener que saber qué es lo que está pasando. Sí. Entonces, el alcance del proyecto no llegamos a hacer un un mobile que eh tenga mensajería y todo eso, no es la no es el alcance. se nos va un poquito de la mano. Está bien. Entonces, tenemos contadores, tenemos pesca, tenemos eh economía y trabajadores informales. Tenemos tres hasta ahora, tres ideas, no quiere decir que ninguna de esas quede. Eh, yo después me voy a sentar, vamos a consultar la a ver qué dice.
+
+Todos tenemos que hacer lo mismo, profe, o cada uno, cada grupo una idea. Y por ahí separo este aburrido que
+
+por ahí separo. Lo que pasa es que tengo que prepararlo todo el enunciado vivo e la
+
+peleadías.
+
+¿Cómo?
+
+Claro. Si ni lo uso, ¿eh? No, me parece que voy a separar por lo menos. Sí, por lo menos dos o tres voy a hacer y va a ser Mitad y mitad, nada. La última vez que hice, la única vez que hice dos y los dejé elegir, un solo grupo hizo uno y el otro todo el resto hizo la otra idea. Aburricísimo.
+
+Lo hac con el que más rápido se
+
+podemos hacer una carrera, un 100 m ya y dividimos. Los primeros hacen un poco de deporte, si no la pasamos sentados. A los guantes mejor
+
+un casino. Ya se
+
+u casino no podemos por la por porque la universidad no puedo hacer eso. Manera local técnicamente
+
+de hecho hay un proyecto que nos pidieron es virtual.
+
+Podemos hacer un repaso de los desafíos.
+
+Simulador de casino,
+
+¿no?
+
+Simulador.
+
+Pero ahí para casino,
+
+¿no? Eh, la lotería nos pidieron en realidad un sistema de para vigilar las plataformas de juegos online ilegales, hacer como tipo un hacer con un búsqueda
+
+constante de de buscar buscar y buscar plataformas ilegales de de timba.
+
+Creo que las conoce todas
+
+mientras que gane
+
+vas arriba o vas abajo. No, sí, no, Timba no. Me arriesgué con el prode porque no apostábamos plata. Hicimos un
+
+che Mariloch hay casino, Nico.
+
+Sí, va ir.
+
+Sí, estaría bueno.
+
+Si ganas nos invitas la birra
+
+y el asado.
+
+Bueno,
+
+y si pierdo, me invitan ustedes.
+
+Jodete por
+
+¿Qué más? Bueno, les dejo la All más
+
+plataforma integrada de información meteorológica para prevención de incendios y gestión territorial en
+
+esas de de incendio en los desafíos hay, no sé qué les pasa con los incendios, hay 78 desafíos de para control inf Eh, buenas oportunidades de trabajar con la energía. Recuerden que nos está pasando algo por por las narices, que es gas y petróleo, más precisamente en las grutas y sierra que están metiendo caños de gas y petróleo. Ahí va a ver si se le ocurre por ese ámbito. Tenemos la Fundación IPF muy cerquita. Le podemos preguntar necesita
+
+desarrollan todo en cada
+
+es buena es eh
+
+desarrollan todo en cada
+
+ya el lenguaje no les debe ni recalentar
+
+acabo Buenos Air
+
+todo presencial
+
+no están todo en
+
+los defs
+
+sí va no todo ciertamente no pero y acá allá hay una mano levantada el tema de evaluación integral del candidato a conductor basado en inteligencia artificial. No existe una herramienta objetiva que mida el conocimiento y las competencias reales de los candidatos a primera licencia de conducir. Se fue
+
+ya que tenga p
+
+le vamos a hacer esa plataforma a él.
+
+Dale.
+
+A ver si la recuerda, amigo. Esa es es Pero no, pero le tenemos que meter inteligencia artificial. Vamos a intentar meterle inteligencia artificial. Sí, aunque sea algún servicito de de inteligencia artificial, algún manejito de algo, le vamos a meter. Así empezamos a integrar algunas acciones con inteligencia artificial
+
+local o una API,
+
+¿no? API. Eh, sí, con LM. Fácil. Sí. Así eso nos da la el la interacción con y pensamos, ¿sí? Porque hoy día todo es inteligencia artificial, pero hay que saber a dónde meterlo. Estamos. Entonces, algo le vamos a meter. Sea cual fuese el el tema que toquemos, les voy a suponer que hagan algo con inteligencia artificial. M, está bien. La IPF. Está bueno. lo del IPF y hay que pensar que eh no está fácil, pero podemos con quién hable la forma en que funciona la gestión de la energía o privada en España ustedes fue escond
+
+hay allá en España. Ese está bueno el el proyecto Eh, cualquiera puede eh armar eh cualquier privado puede tener un parque de generación de energía solar o eórico.
+
+Acá también,
+
+acá también, pero no te no todavía no está resuelto la inyección de ese parque, de esa energía, no te la pagan para inyectarla en la red, ¿no? Allá sí. All pon en un campo energía Eh, te inscribís y la energía que vos inyectas en la red te la pagas.
+
+Está. Y todo lo que tiene que ver con cuánto te pagan la energía tiene que ver con la demanda de esa energía. O sea, cuando hay picos de energía más cara, cuando baja más barata te la paga. Bien. Entonces, todo un sistema de oferta y demanda de energía. pasa que cómo simulamos eso hacemos para para un sistema de gestión de ese tipo no no tienen lo voy hablando y lo voy pensando, ¿no? En el ¿Cómo hago para simular la oferta y demanda? ¿Consiste alguna de algún especie simulada de oferta de
+
+Sí, ya es un chinazo porque eso en realidad funcionan en tiempo real. Básicamente es el punto es ese. No, eso no tiene sentido. A ver,
+
+bueno, cortamos entonces hasta hoy por hoy haciendo un resumen. Bueno, vimos la partecita de programación orientada a objetos de PHP y le dimos como un inicio al proyecto del, ¿no?, donde pensamos toda la fase inicial de un proyecto de software, nos metimos en tema, intentamos estimar, vimos la factibilidad, analizamos riesgos de ese proyecto. Después de analizar eso y dijimos, "Okay, sí lo podemos hacer, nos metimos de lleno en el desarrollo." Sí, el desarrollo lo íbamos a hacer. con metodología SCAM, o sea, una metodología ágil. Nos metimos en el sprint cero, analizamos los requerimientos, hicimos el producto definimos la arquitectura que íbamos a usar, vimos la funcionalidad o vimos un panorama de lo que pretendíamos como usabilidad de nuestro proyecto, todo sprint cero del desarrollo y dejamos planteado ya la editoria de usuario para el sprint 1\. del proyecto. Sí, eso es lo que vimos hoy y después nos pusimos a hablar pavada de Pokémon de Bien. Pero bueno, eso ya que les quedó claro. Ya inicien con la instalación del entorno, ya inicien con todo esto que definimos, planteamos las etapas que teníamos que definir, los arneses, que la arquitectura, que esto, que lo otro, hagan esas instancias les va a servir. Bien, van a aprender bien. Háganlo cona. Che, amigo Gémini, tengo que definir el sprint cero, la del product. ¿Qué me conviene hacer ahí? Eso, chateen eso. Bien, bien. Estamos y así para cada uno de esos del de los conceptos que hablamos recién. Bien, en cuanto a ideas de proyecto final, me llevo estas tres, cuatro que estuvimos. charlando recién y si se les ocurre algo en el camino me lo dicen la próxima clase. Estamos.
+
+Bueno, próxima clase vamos a ver codinator. No es virtual la próxima clase es presencial. Vemos codinator. Y la otra ya virtual. Eh, no sé qué. Vamos a ver. Sí. Listo, jefe. Repetir una cosita que dijiste la clase pasado. Vamos a reparar PHP, que era eh bueno, la versión de PHP, el servidor web. Eso, ¿cómo lo cómo lo habías pensado vos para hacerlo todo local? Yo lo usé con WAMP, o sea, yo instalé el servicio OneP. Eso te va a instalar servidor web es apache, te va a instalar el servidor de base datos que es My Sequel, ¿no? Y te va a instalar PHP. Y además esa ese componentito que tiene PHP My Admin, que no deja de ser un software en PHP, un software web, eh, y instala María DB, pero bueno, es otro servidor de base que no tiene sentir.
+
+Claro, eso es la configuración de nuestro entorno, ni más ni menos, el entorno local.
+
+Perfecto. Yo para para yaar bien se puede usar wam, SAM o LAM dependiendo del lo que usemos, bien, o directamente eh instalar cada uno de los componentes. O sea, el entorno en sí que tenemos que nosotros configurar en torno de desarrollo local es PHP con un servidor web. que es apache y my sequel y algún cliente que se conecte a My Sequel para administrar nuestras bases de datos. ¿Está? Entonces, ese es nuestro entorno local. ¿Qué herramienta usamos para instalar ese entorno? Bueno, incluso podemos dockerizar, ¿no? Vamos a dockerizar. El que se mete a dockerizar que dockerice. Yo no me venga a preguntar nada de Docker. Nada. Sí o sí puede poder ser eh o pobre y en vez de
+
+no me vengan a preguntar nada,
+
+no me vengan a preguntar nada de las alteraciones tecnológicas.
+
+Puede ser.
+
+Y si ya tenemos el SAM, no es necesario el WAM o
+
+no porque es lo mismo. Sam es lo mismo que WAM. Exactamente lo mismo. No sé. Concentren en la herramienta, concéntrense en los servicios que están instalando. O sea, Sam, ¿qué hace? ¿Qué nos instalache?
+
+Perfecto. Entonces, nosotros como entorno necesitamos un servidor web, Apache, PHP y un servidor de base de datos. My Sequel. Está listo. Si SAM ya lo instaló y lo tengo, ya lo tengo. Sí, One es exactamente lo mismo, la misma herramienta tiene instala los mismos servicios. Profe, y una idea de deporte, o sea, de que te detecte los pulsos, que hagas con, no sé, una pulsera y algo, vos vas consiguiendo puntos y lo puedes canquear por una botellita de cada uno como un premio simbólico, más que nada.
+
+Lo que pasa es que no nos vamos a entender en ¿Dónde sacamos la pasado? Que podamos hacerlo y no lidiemos con tecnologías. Eso es lo que

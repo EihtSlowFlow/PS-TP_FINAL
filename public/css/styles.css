@@ -1,0 +1,324 @@
+:root {
+    --primary: #4F46E5;
+    --primary-hover: #4338CA;
+    --danger: #EF4444;
+    --danger-hover: #DC2626;
+    --warning: #F59E0B;
+    --warning-hover: #D97706;
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+    --surface: rgba(255, 255, 255, 0.95);
+    --border: rgba(255, 255, 255, 0.4);
+    --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 3rem 1rem;
+    min-height: 100vh;
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    background: var(--surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem 3rem;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2 {
+    color: #111827;
+    margin-top: 0;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #E5E7EB;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.badge {
+    font-size: 0.8rem;
+    background: #E0E7FF;
+    color: #4338CA;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+h2 {
+    font-weight: 500;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+section {
+    margin-bottom: 2.5rem;
+}
+
+/* Formularios */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    align-items: flex-end;
+    background: #F9FAFB;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+    min-width: 220px;
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+input[type="text"], input[type="email"] {
+    padding: 0.65rem 1rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: #ffffff;
+}
+
+input[type="text"]:focus, input[type="email"]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Tablas */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+th {
+    background-color: #F9FAFB;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+tbody tr {
+    transition: background-color 0.2s;
+}
+
+tbody tr:hover {
+    background-color: #F3F4F6;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.fw-500 { font-weight: 500; }
+.text-muted { color: var(--text-muted); }
+
+/* Botones y Acciones */
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn {
+    padding: 0.55rem 1.1rem;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #fff;
+    padding: 0.65rem 1.5rem;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25);
+}
+
+.btn-edit {
+    background-color: var(--warning);
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background-color: var(--warning-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(245, 158, 11, 0.2);
+}
+
+.btn-delete {
+    background-color: var(--danger);
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background-color: var(--danger-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
+}
+
+/* Mensajes y Estados */
+.error-msg {
+    background: #FEF2F2;
+    color: #B91C1C;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #EF4444;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    animation: fadeIn 0.3s;
+}
+
+.success-msg {
+    background: #ECFDF5;
+    color: #065F46;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #10B981;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+    animation: fadeIn 0.3s;
+}
+
+.btn-secondary {
+    background-color: #E5E7EB;
+    color: #374151;
+}
+
+.btn-secondary:hover {
+    background-color: #D1D5DB;
+    transform: translateY(-1px);
+}
+
+.empty-state {
+    padding: 3rem;
+    text-align: center;
+    color: var(--text-muted);
+    background: #F9FAFB;
+    border-radius: 12px;
+    border: 2px dashed #D1D5DB;
+    font-weight: 500;
+}
+
+/* Clases utilitarias reemplazando estilos en línea */
+.form-actions {
+    flex: 0 0 auto;
+}
+
+th.th-actions {
+    width: 150px;
+}
+
+form.form-delete {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    width: auto;
+}
+
+form.form-inline-edit {
+    display: inline-flex;
+    gap: 0.5rem;
+    margin: 0; padding: 0; background: none; border: none; box-shadow: none;
+}
+
+form.form-inline-edit:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Clases para edición in-line */
+.edit-mode {
+    display: none;
+}
+
+tr.is-editing .view-mode {
+    display: none !important;
+}
+
+tr.is-editing .edit-mode {
+    display: flex;
+}
+
+tr.is-editing input.edit-mode.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    border: 1px solid var(--primary);
+    border-radius: 6px;
+}

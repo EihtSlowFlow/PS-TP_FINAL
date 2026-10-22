@@ -1,0 +1,693 @@
+Bueno, pasaron un corre
+
+apretar la contraseña la escribiste mal parece
+
+eh
+
+apretar los ojitos me parece que lo escribiste mal tan gracioso no
+
+leado sin muchas cosas
+
+donde se despidó le agarró la compra bueno
+
+tengo que recuperar la cond del Sí. ¿Cómo vienen con eso? Voy a necesitar unos días más
+
+a cualquiera le daría un par de días más, no sea vos.
+
+Una semanita más, por lo menos.
+
+Una semana.
+
+Dos días. Dos días.
+
+Hasta las 12, al menos.
+
+¿Cómo vienen? Vamos de paso.
+
+Él quiere unos días más. Unos días. No, maestro. Yo vi, yo desplegé una vez, incluso estaba pero eh el tema es que ahora estoy pensando que quizás lo hice demasiado simple porque mi intención fue hacer básicamente una tabla que te permita crear, modificar y borraros. O sea, básicamente eso, para eso está perfecto de cocina.
+
+Eso es eso que hacer
+
+porque después me dio la impresión de que quizás tenía que darle algún contexto, alguna página, algo como para digo, bueno, quizás me quedé corto.
+
+Nada. Hay que elegir una tabla eso.
+
+No, no hay que hacer mucho ni nada muy ambicioso. Sí. La idea es que hagan todo el proceso de una alta baja modificación y consulta, una tablita con PHP y nada más, no mucho más que eso.
+
+Alguno le falta hacer algo del trabajo práctico.
+
+No, no, si falta hacer algo, no entregar.
+
+A mí me falta, pero me falta una semana le falta o
+
+un trabajo que me lo estimaste. ¿Cuánto era?
+
+6 horas.
+
+Ahora estás pidiendo una semana. Yo dije una semana.
+
+Vos habías estimado una semana,
+
+una semana
+
+y me está pidiendo una semana, o sea, no hiciste nada. Se me complicó.
+
+¿Qué te pasó?
+
+No, tuvimos un viaje duro, una experiencia dura. Ustedes fueron a pasear, nosotros
+
+e hagamos una cosa. Si vos la clase que viene eh nos das toda una clase de computación cuántica y nos explicas bien lo que significa, para qué se usa y cómo se usa, te dejo una semana más.
+
+Dale. Te primo que entendí. No, no, bien, bien. Una computadora, la computación cuántica.
+
+Sí, sí. Traigo una diapo con foto, todo.
+
+¿Qué pasó ayer en el día? Bueno, acá estábamos estudiando cuántica.
+
+¿Qué va? Bueno, allá los falta temas y falta algo. Yo creo que capaz que A las 12 llego ahí justo. Si me das un día a que llega mejor. Dice, si las 12 llega, pero no lo entiendes. Si te da el día
+
+alguien más le falta algo para terminar
+
+y lo podría entender mejor más que el tcho.
+
+A vos te falta.
+
+Sí, más que nada la parte la parte de la vista.
+
+Bien, ¿alguien más? Bien, tenemos ahí tres tres ahí medio. Yo tuve el motivo.
+
+Vol el sprint, digamos, que cerraría hoy, así como hicimos el anterior. Bueno, cierra sprint. Esto es lo que pasó, esto es lo que hicimos, hasta acá tenemos y demás. También uno tiene que evaluar eso. Sí se acuerda en retrospectiva, hoy sería cierre de sprint donde ustedes presentan lo que hicieron. Eh, establecemos cuáles fueron las mejoras. Tenemos un feedback del project, del product owner, donde nos dice, "Qué bueno. Bueno, esto está bien, esto está mal, esto no me gusta, esto sí me gusta." Bien. Eh, y posteriormente una eh eh una retrospectiva, un análisis de qué es lo que se hizo bien, qué es lo que se hizo mal y por qué pasó lo que pasó, por qué no llegué a arrancar el sprint, por ejemplo, eso se plantea o qué es lo que nos falta. Bien,
+
+me quedé pegando la pesca,
+
+no llovió casi. Bueno, en ese sentido, háganlo ustedes mismos. Cada uno haga ese análisis. Sí. de qué fue lo que pasó y por qué no llegó. Y pensemos en el sprint que viene, que no vuelva a pasar. Sí, yo ya les digo que seguramente porque empezaron tarde, porque ciertamente es una actividad sencilla, todos la hicieron, todos la hicimos, no es una actividad que que lleven más de mucho tiempo y es verdad, ustedes pueden aplicarla todo lo que puedan porque un ABM puede ser tan sencillo como un formulario, una tabla y listo. Pero la idea es mantenerlo simple. Sí. Yo quiero que la experiencia vaya para otro lado, que ustedes entiendan del entorno, qué es lo que están haciendo. Sí, el envío de la información viene, va, va y viene. No quiero que hagan el mejor ABMC de la República. Bien. Sí. Y este sprint era para unir estas tres ambientes, ¿sí? Base de datos, PHP y el frontend de HTML y CCS. Bien. Y entender bien cómo es el flujo. Estamos. Bueno, vamos a ver qué pasa con los tiempos. Después vemos eh consultas de la entrega de hoy. Además de eso, ¿alguien tiene alguna duda? duda que le haya quedado. No, nada. Bien, la idea de hoy es volver a eh Codinator. Sí, habíamos empezado la clase pasada, no la anterior. Encima tuvieron esa otra clase para avanzar bien. La idea es volver a Codinator, ¿sí? A ponernos en tema, porque ya ahora el este sprint es el inicio del proyecto final, lo vamos a hacer con Coordinator. Así que vamos a ir haciendo distintas actividades en paralelo. Sí, una actividad va a ir siendo conocer del todo coordinator. Bien, para usarlo bien, vamos a conocer los filtros, el ruto. Vamos a conocer la parte de seguridad que la vamos a hacer con filtros. Eh, vamos a conocer eh bien el acceso a las bases de datos, cómo configurar los modelos, etcétera, etcétera. Y al mismo tiempo vamos a ir planteando eh la gestión y el inicio del proyecto de software final. ¿Sí se acuerdan al principio que yo les hablaba de un proyecto de software y todas esas fases iniciales que tiene un proyecto de software donde analizamos el problema, pensamos eh de dó cuál es el origen, de dónde viene, cómo puede ser la solución, analizamos, diseñamos un poquito, etcétera, etcétera. ¿Se acuerdan todo eso? Vemos las tecnologías que vamos a usar, diseñamos eh un poquito de arquitectura, planificamos en ese entonces también lo que hacemos es un poquito de análisis y le preguntamos al product owner para porque hay cosas que por ahí no están escritas o no lo dijeron en el desde el principio, o sea, refinamos la idea, ¿se acuerdan aquella al principio que les contaba yo? Y también hay una suerte de estimación, una breve estimación con los requerimientos. Sí, si hay siempre para estimar la primera estimación a qué lleva, ¿no? Hablando de una de un proyecto de software que vienen y me piden me piden a hacer x cosa. ¿Ustedes estiman y cuál es el feedback que dan además del tiempo? No,
+
+el costo,
+
+tiempo, costo, presupuesto.
+
+Sí, eso que nos confunde un poquito a la hora de volver. Bien, cuando viene alguien, si estamos en un en un proceso de de un de la fabricación de un producto o de un servicio que vamos a brindar, nos van a pedir, bueno, quiero hacer esto, ¿cuánto me cobrá? ¿No? ¿Y cuánto me cobrá? Está totalmente asociado a que al tiempo que voy a dedicarles, ¿no? Bueno, eso se hace a partir de un refinamiento pequeño del proyecto de y de la idea a desarrollar. No puedo estimar algo que no sé y no puedo estar haciendo un relevamiento de una semana para después estimarlo. Sí, porque si no Ya perdí una semana de trabajo que no lo voy a cobrar. Bien, entonces se hace un pequeño refinamiento. Sí, una idea. Por supuesto, eso van a depender mucho de las capacidades analíticas que tenga quien hace esas preguntas. Sí, las capacidades analítica es la capacidad de análisis del problema y de pensar una solución. Y obviamente el señor, alguien que ya hizo muchos proyectos, va a tener mayor capacidad de poder estimar y de poder decir cuánto cuesta algo y cuánto y dónde puede llegar a tener los problemas ese proyecto, ¿no? Problemas, me refiero a la estimación de eh de incidentes que pueden surgir y de riesgos, ¿no? Ese plan de riesgos con su plan de contingencia. Eso la experiencia nos va dando ya en el cerebro un una tabla de riesgo y contingencia y la asociamos muy rápidamente a los proyectos porque eso definitiva es lo que pasa cuando empezamos a desarrollar y no llegamos al tiempo. Bien. Bueno, entonces todo este sprint que viene va a ser eso. Vamos a refinar codinater y esa tecnología y vamos a ir puliendo eh el inicio del proyecto final. Está Eh, hoy la clase de hoy es repaso de Coinator. Vamos a hacer un repaso de lo que vimos. Sí. Y vamos a ver,
+
+hola. Vamos a ver ruteo. Vamos a repasar eh la instalación y la configuración de Codinator. Y otra vez vamos a hablar de los entornos y vamos a hacer un crud básico con codinator sencillo. Y que sea lo que Dios quiera. No sé si va a salir. Bueno. Ah, no, no sé por qué me siento. Bueno, coordinator 4 en este caso, sí, framework, framework de desarrollo, PHP. Bien. Framework de desarrollo que tiene esta arquitectura, este framework, este, todo este lenguaje o este código lo vamos a correr del lado del servidor. Está entonces todas las nuestras las peticiones que vienen de un cliente, cliente, navegador web, servidor, apache h viene una petición HTTP, llega a mi servidor Apache, Apache dice, "Che, me están pidiendo esto, voy a buscar ese recurso. Ese recurso llega a un framework coordinator y como encuentra que es un framework coordinator, le delega la petición, le dice, "Che, encontré, te están llamando, están pidiendo esto." Y viene acá index php routing. Sí, la configuración de ruto, que algo vimos. Esa configuración pasa por una instancia de de seguridad. Sí, vamos, eso lo vamos a ir viendo, pero todo llega a un controller en el framework codinator. Esta es la arquitectura que plantea codinator model view controller. Llega a un controller Ese controller usa distintos tipos de eh accesorios, herramientas que son drivers, models, library, helper, package y scripts. De todo. Principalmente nosotros vamos a usar models y de forma transparente librerías y drivers. Bien,
+
+normalmente el controlador es molécico o se separan distintos archivos.
+
+No, todos separados, lo más separado y ahí ya viene un
+
+lo va destruyendo, o sea, librería llada. en en el en el
+
+estos estos están separados en carpetas distintas, los models en la carpeta models, drivers en drivers y los controles están todos adentro de la carpeta controllers.
+
+Está bien, pero sí, pero no se escriben todos los controlers dentro de un mismo archivo. No, no,
+
+por función cada controller. Esto es totalmente orientado a objetos y acá sí asimilen la forma de programar un archivo, una clase.
+
+Sí. Un controller es una clase.
+
+Est pensando con la AM y se usa el control. No pasa nada. La ABMC puro PHP. Olvídense, háganlo como quieran. Sí, Coordinator ya no, ya empezamos a respetar un framework, una forma de programar. Está. Entonces, perdón, otra pregunta que se me acaba.
+
+¿Vos pretendías que usáramos eh modelo vista, la arquitectura de modelo vista controlador en el AM? También, ¿no? No, o sea, sí. Okay. Lo que quieran.
+
+Ah, yo en la prisión cuando lo hice lo había hecho como modelo de vista controlador. Bueno,
+
+es lo dentro de lo que quieran entra modelo de vista controlador, ¿no? Sí, libre era. Bueno, algunos requisitos, ¿se acuerdan? Algunas extensiones que hay que tener habilitadas para usar para el entorno y para que corra bien nuestro codinator. Eh, las carpetas. Bueno, la forma de compartir información entre la los controladores y la vista. Sí, la vista también son archivitos que están en una carpeta view. Esa vista, la forma de compartir información entre el controller y la vista es a través de la función view, eh, que va a ser un llamado a la vista propiamente dicha y le va a pasar como otro Segundo parámetro, los datos que quiero que esa vista tenga. Bien, entonces si yo quiero hacer un listado de usuarios, el controlador será el encargado de hacer la consulta a la base de datos, traerse la lista de usuarios y pasárselo a la vista en el parámetro data. Bien. Eh, la particularidad es que este la construcción de este parámetro que le vamos a pasar a la vista es un arreglo asociativo, donde cada índice de ese arreglo asociativo se va a convertir en una variable. ¿Sí? Entonces, si yo en data tengo el índice title, en la vista voy a tener una variable title que va a tener ese contenido. ¿Está está claro? Estamos bien. Ahí me frenen y me preguntan, ¿eh? Porque después vamos a acelerar. Bueno, otra vez acá. Ruting. Sí. routing. Siempre tener en cu. Hoy vamos a ver bien lo de routing, con lo cual tenemos que tener en claro esto, ¿no? Que desde un navegador que es un cliente que está en otro lado del mundo, voy a hacer peticiones HTTP. Si escribir en la URL es hacer una petición http get. Hacer clic en un link es hacer una petición. Enviar un formulario es hacer una petición. Está son todas peticiones HTTP que van a navegar por la internet y van a llegar a mi navegador web, a mi servidor web. Apache está. Si si le pego al IP, si le pego a la URL, llegarán a ese servidor y es el servidor el que va a encontrar mi recurso, mi proyecto Codinate. Estamos. Eh, hoy nos vamos a meter mucho en eso, así que el que no lo entienda lo pregunta. Bueno, algún detallecito. El rotinator se configura en un archivo de configuración, ¿se acuerdan? Hay una carpeta config dentro del proyecto. Cuando lo tenemos eh descomprimido, esa carpeta config tiene un archivito que se llama rotes.php. Dentro de ese archivito. Vamos a configurar todas las rutas. ¿Sí? Y las rutas, ¿qué es? Se conforma de dos, tiene dos secciones. La primera que es el URI, ¿sí? El recurso, la identificación del recurso y más que nada es un match, ¿sí? Un match de lo que viene, de la petición HTTP que viene. Y la segunda parte es el controlador con eh la función del controlador que voy a ejecutar. Ya está. Entonces, si me pidieron la URL miipágina.com/users, lo primero que hace es entrar acá al router y busca desde arriba para abajo la URL de este lado que coincide con el URI de la petición. ¿Se entiende eso? Sí. Entonces, si llaman a users, va a bajar y acá va users coincide. Sí, voy a redireccionar esa petición a el controller users a la función list. Bien, entonces voy a ir al controller users, que este archivo está en la carpeta controllers, se llama users.php y es una clase que extiende de base controller y tiene la función list. Sí,
+
+los dos puntitos que eran
+
+los dos puntitos acá porque usamos eh simplemente porque usa así, pero en realidad es para acceder a a clase a
+
+métod
+
+puntos estáticos y métodos estáticos. A ver,
+
+pero no es acá fíjate que es solo un texto. Acá después codinator lo que hace es bueno, te lo separo de los dos puntitos para allá. Yo sé que es un controller y los dos puntitos para allá.
+
+El método.
+
+Esos son los izquierda. Los endps como tal terminan siendo esto, ¿sí? Un endp se le llama como el punto del recurso, la identificación del recurso, que sería wwmipágina.com/us users/1/2\. Eso es un una llamada y por método Entonces ese end point llegaría acá, el ruteo lo encontraría y lo mapearía a esa función. Bien, vamos a seguir con ruto. Eh, bien, entonces, rutero bastante más ampliado. Tenemos la request, llega al router roots.php con sus configuraciones. La configuración me va a delegar esa petición a un controlador. El controlador trabajará y recibirá los métodos, digo, los parámetros que necesite. Bien, entonces ruta básica, nada que decir. Sí, recuerden que es lo que hace Codinater, es un match. de arriba para abajo. Ya está. Entonces, hay que tener cuidado con rotear de forma extraña. Hm. Vamos a ver por qué acá empiezan a aparecer comodinos. Entonces, si yo en una ruta me pueden llegar distintos parámetros, sean numéricos o texto o etcétera, lo voy a poder mapear acá. Entonces, por ejemplo, si yo en una ruta quiero que me llegue un parámetro numérico, voy a configurar una ruta que dice usuarios barra y le digo que me va a llegar un parámetro numérico, ¿está? Entonces, cualquier llamada que yo haga a la ruta, mi página web barra usuarios barra un número, va a machear con este formato. Estos son expresiones regulares lo que usa para para machear eso. Entonces, cualquier número que va acá va a pasar como parámetro a el método show del controller usuarios, se entiende, y que esté acá con barra. Lo que en realidad hace es un llamado a show con el parámetro que está llegando. Bien, entonces si yo llamo a usuarios con el con barra 25, va a marchar, ¿sí? Con la expresión regular esta que está acá me va a asignar este En un me lo va a asignar al parámetro pesos un que viene acá.
+
+El uno podría ser cualquier otro nombre.
+
+Sí, generalmente es el orden porque este es uno. Puedo tener muchos param
+
+pesos uno, que es el primer parámetro que veo acá, va a ser igual a 25\. Entonces va a ser el llamado al método show del controller usuarios con el parámetro 25\. Sí, es lo mismo que llamarlo al método con el parámetro 25\. Estamos, se entiende eso. Ese más peor lo tenemos que hacer nosotros,
+
+¿no? Esto sí. Hasta acá. Después construimos el controller con su método.
+
+O sea, hay que configurar el archivo
+
+sí hace ahí. Digo,
+
+está. Y entonces Entonces, en el método show, si se fijan, acá estaría la una implementación. Es un método, una función show que recibe un parámetro ID que no sabemos que va a llegar, pero en este caso, en ese llamado va a recibir el 25\. Si lo llamo con el 24, va a recibir en el parámetro el 24\. ¿Está? ¿Se entiende? Listo. Y eso después lo podemos podemos ir jugando. Por ejemplo, podemos tener usuario barra un número barra post barra otro número y ahí ya tenemos dos parámetros dentro de nuestra regex, digamos, de nuestro mapeo. Y yo lo que roteo, roteo esta URI a el controlador usuarios, al método post con los dos parámetros, pesos uno, peso dos. Bien. Y esto lo que va a hacer es llamar a la función post y la función post va a recibir esos dos parámetros,
+
+¿está claro? Entonces, después las URI se van a construir dinámicamente. Por ejemplo, usuarios 25, ese es el usuario ID, la variable usuario ID y el 103 es el post ID. Sí, en realidad porque pasa por el rut el pesos 1 igual a 25 y el pesos 2 a 103, justamente por el orden de aparición de los parámetros y eso hace el llamado al método con esos valores. ¿Se entiende? Esto se hace mucho
+
+el orden en este caso porque el chamaco está en el medio de los dos parámetros. Eso cambia si cambia el orden. El llamado post. Esto es solo un texto. Eh,
+
+claro, pero tenés usuarios y después tenés el primer parámetro.
+
+Después tenés post que es el método.
+
+No, esto es un texto,
+
+eso es una Uni que nosotros construimos. Le podemos poner lo que nosotros querramos.
+
+Claro, pero post tiene que tener el valor de la función.
+
+No, no,
+
+no, no. Lo que tiene que tener es esto de acá.
+
+Abajo.
+
+Esto es una URI. Yo le pongo lo que yo quiero,
+
+obviamente. con un con un sentido, ¿no? Tenemos que recordar que a este a estas URI son a las cuales yo voy a llamar después. Estamos entonces eh esto justo coincide el nombre post, ¿no? Ni siquiera. Fíjense que acá es con ese y acá es sin ese. Ni siquiera coincide. Sí, esto generalmente se usa para decir, "Bueno, dame todos los En el controlador, yo lo que tendría que programar para que esto tenga sentido es, dame todos los post del usuario del número, en este caso 25\. Dame todos los post en particular el post 103 del usuario 25\. Está. Entonces, por lo general se usa para eso, para filtrar. Si yo no le paso ningún número acá, me devolvería todos los posts del usuario 25\. o del que yo paso como parámetro acá. Sí, para eso generalmente se usan esos mapeos de de URLs para que sean semántica y usuario friendly se llama. Sí está, se entendió eso. Bien, así como tenemos num, tenemos segment y tenemos any. Sí, segment habla de los segmentos, ¿sí? De las barras directamente y a archivos, o sea, el segment me va a tomar el siguiente segmento de la UI, donde yo ponga el comodín y es multisegmento, o sea, va a entrar todo. Sí,
+
+lo anterior. Una una cosita, el uno es porque es el primero y es todo es porque el que le sigue.
+
+El segundo
+
+hubiera otro tercero.
+
+Sí.
+
+Okay, se entendió. Yo acá podría ponerle barra, eh. Y si quiero tomar
+
+cosas y otro número y
+
+si quiero tomar uno en vez de los dos,
+
+no le o no le doy bola acá o no construyo eso. Si si quiero hacer una URI con un solo parámetro, recuerden, esto lo hacen ustedes, que se lo impone nadie. Ustedes estas endar yo digo, bueno, voy a hacer un end que vaya a listar los post de un usuario en particular. Nosotros decidimos qué Uri poner. Ya pueden poner usuarios el ID del usuario post o post ID del usuario y nada más. O lo hacen ustedes, lo construyen ustedes a eso. Hm. Entonces si voy a solo recibir un un parámetro, hago un una URL que recibo un solo parámetro, ¿no? según la funcionalidad que yo quiera dar. Eh, ojo, acá claro algo más. O hago una genérica así y acá adentro de la función digo, bueno, si no recibo ningún post ID, nulo, no vino, listo todos los posts, pero hago una lógica que tenga sentido, pero eso lo pienso yo desde que podría llegar a ser, sí, pero son cosas que tenemos que decidir y diseñar. Hm. Bien. Bueno, segment, tenemos números, tenemos segmento y tenemos seno. ¿Qué significa? Que en un segment, en realidad lo que va a valer esa variable o ese esa porción parametrizado es una parte del segmento. Bien, y lo voy a poder usar como variable. Eh, y En directamente va a tomar cualquier cosa. Sí, todo lo que venga ahí lo voy a agarrar y lo voy a meter a en esa variable. Entonces, eh acá estamos usando N, no, esto es para Jason. Esto es para Appest. Como no lo vimos, no lo voy a ver. Rest. Esto también se los dejo igual queda ahí. Eh, y resto. Bueno, en resumen, cuando nosotros vamos a construir nuestro sistema, nuestros servicios, tenemos que pensar cómo va a ser la comunicación entre la vista y nuestro sistema. Si en todo momento tenemos que pensar eso. Bueno, yo si tiro una petición a un a una URL, ¿qué me devuelve? Eso está. Y si me devuelve un formulario, ese formulario después a ¿Dónde tiene que enviarse para que llegue el controlador y se persistan esos datos? Y eso que me devuelve, ¿cómo es esa navegación? Está, eso lo tenemos que diseñar y pensar. Al diseñar y pensar eso, después lo vamos a plantar en el ruteero. Vamos a plantear todas las rutas que nosotros vamos a querer hacer o que vamos a querer tener. Y por supuesto, eso nos va a dar el mapeo entre las rutas y los controladores. Eh, si necesitamos parámetros en esas rutas, ya sabemos cómo hacer. Usamos los comodines num o segment o ENI y los mapeamos a por orden a los segmentos de eh la petición al controller y finalmente llega el controller según el método y voy a poder acceder a esos atributos a través del request get post o get Jason, si esto no lo vimos porque son peticiones Jason, o sea, R appic, que no lo estamos viendo, pero sí, si el método fue post, la forma de recuperar esos esos parámetros es a través de request get post y si es por un query string, o sea, la URL o método get request get. Bien, bien. Hasta ahí rutas, preguntas. Tú das, ¿no? Un éxito. Eh,
+
+cuando lo empecemos a usar. Vamos a ver. Ahí está. Ahora vamos a hacer la otra vez hicimos algito, pero vamos a hacerlo de vuelta. En realidad vamos a repasar lo que hicimos y vamos a intentar avanzar un pasito más. Vale, tienen que hacer paso. tiene que prender la combo primero. Apagado, amigo. ¿Estás escuchando? Muy bien. Me parece muy bien. Bien. Vamos entonces. Eh, espera, vamos a coordinator. No hay user GI. Coordinator en particular. Esto es coordinat.com. Codiner. Lo digo de vuelta y me Se me traba. Coordinator 4\. Vamos a usar que es la última versión. Download. Coinater 4\. Bajamos. Se baja un ZIP. ¿Se acuerdan? Un archivo ZIP. Ese archivo ZIP, esperen que lo busco. Codinator 4\. Este que está acá. 4.7.4\. Está. Lo descomprimimos. Adentro tiene una carpeta que se tiene todo ese nombre raro. Directamente esa carpeta es la que vamos a desplegar en la carpeta de nuestro servidor Apache,
+
+HTD. En este caso, sería
+
+usted eh exam tenés.
+
+Bueno, ustedes tienen HT Docs en adentro de HT Docs. Yo tengo www. Entonces, adentro de wwwimos esa carpeta y por la forma en que Apache tiene de nosotros para entender los proyectos, para hacerlo más a menos, le directamente le cambiamos eh el nombre a la carpeta que acabamos de comprimir. Está. Yo descomprimí mi carpeta, le puse mi PS, mi proyecto de software, así derecho como estaba. Está Si yo tengo levantado los servicios de mi servidor, en este caso mis servicios son APH con PHP y my sequel. Sí, con eso debería alcanzar. Entonces yo ya directamente local host. ¿Quién me puede decir qué hacía local host
+
+cuando yo lo escribo acá en el una petición httpa, mi propio ID,
+
+http solo sin
+
+http
+
+está bien, te agregaste la S porque, bueno, avanzaste un pasito, pero es una petición
+
+ante todo seguro. Claro,
+
+genera una petición HTTP que es resuelta directamente por las capas de red al mi IP, a un IP en particular que es 127001 y eso hace referencia a la propia computadora. Ya está. Si yo pusiese acá un IP 10.114 10 lo que fuese, en realidad eso no se resolvería a mi propia computadora y lo iría a buscar la red. ¿Está? ¿Está bien? ¿Se entiend? Entonces yo puse local host acá y me lo buscó en Google local. Eso es
+
+Nico. Vamos a ver certificado TS. Eh, bien, esta página que estamos viendo acá es una página, un index simple que trae one. En este caso, el que tenga SAM o el que tenga otra forma de servicio, si usted instalaron un apache por independiente, van a entrar una página similar a esta, pero que de Apache, sí, Apache Web Server, no sé cuánto, no sé qué. Y de SAMP también una página en particular. Regresamos. Yo para ir al recurso que yo quiero ir, que es en mi caso mi proyecto de software, puedo poner mi proyecto de software y voy a entrar, voy a llegar a acceder. Pero, ¿qué pasa? En este caso no lo está tomando el framework. ¿Por qué? Porque la parte pública y el index está en la carpeta pública. F. Fíjense que acá no veo más nada, no veo todas las carpetas que tiene. Bien, si yo entro a mi proyecto, veo que mi PS, vamos a hacer así, mi PS, o sea, las carpetas, esto es lo que me descomprimió el proyecto. Tiene una carpeta app, una public system testable, t ta ta y yo por la web solo veo public y un par de ahí de archivitos. El comp Bueno, eso no se deberíamos. Bien. Ahora, si entro a la parte public, a la carpetita public, si ya voy a estar entrando en el ruteo de codinator. Bien, y voy a estar accediendo a el framework codinator y está haciendo todo el ciclo. ¿Qué está entrando y mapeando? Algo pasó. Ah, no, porque yo lo tenía en, ¿se acuerdan que lo puse para debugar? producción. Sí. Bien. Acá está haciendo todo el ciclo. Está routeando. Llegó al router. ¿Qué llegó al router? Barra nada. Barra nada. ¿A dónde va? Entonces voy a app, voy a config. Busco routes. Rutes barra nada. ¿A dónde va? Al controller home, al método index. Entonces bajo, busco en la carpeta controllers. Controllers home, método index existe. Me devuelve la vista viewe. Sí, esa vista la tengo que buscar. en la carpeta views welcome message. Sí, es esta que está acá. Y esto es lo que va a renderizar y me va a devolver. Estamos, ¿qué es esto que está acá? Ahora bien, yo voy a routes y fíjense que hay una r un ruteo configurado que es users, ¿está? Entonces, esto quiere decir que si yo Acá escribo users, va a pasar, va a venir acá, va a encontrar esa coincidencia en la URI y me va a redireccionar al user controller index. Entonces, acá en controllers existe un user controller, el método index, donde construíamos un arreglo asociativo con un montón de valor valores de usuarios, vamos a llamarlo. Cada uno de estos es un usuario, ¿no? Con un ID, un nombre, un username, la la la lala. Lo vamos a borrar esto. Acá ya lo hacíamos. Si, user model. Creamos el user model, lo buscábamos en la base de datos, debugábamos un poco y lo mandamos a la vista. users list y le pasábamos como datos a ese user list, una variable usuarios users, perdón, con el resultado de todos mis usuarios. Esto va a romperse porque la vista no está preparada para mostrar estos usuarios. ¿Sí se acuerdan? Yo voy a Voy a ir acá, le voy a dar enter y se va a romper. Sí. Si yo quiero ver qué pasó, che. Ups, ¿qué pasó? No me dice mucho, ¿no? Entonces acá le ponemos en el punto M. Sí. Si no lo tienen el archivito, lo tienen que crear. Seguramente está punto o environment o en le falta el punto. Sí. Estos archivitos se usan para poner variables de entorno. Acá le ponemos de Si le ponen development y lo guardan, coordinator nos va a ayudar un poquito. Ya, ahora lo voy a refrescar y fíjense que como está en versión en en un entorno de desarrollo, me va a decir qué es lo que pasó. ¿Qué pasó acá? Que no hay un arreglo el no hay una key username en el arreglo undefinite, ni siquiera Está definido usa. Sí, no está definido eso. Se acuer si se acuerdan, la vista estaba preparado para mostrar un montón de datos. La vista era users list. Entonces, yo voy a view, a la carpeta users, a la lista. Esta lista era tremenda. Me había hecho una cosa de una bestialidad. Yo le había hecho Sí, que ni yo sé lo que tiene esto. Lo que le vamos a hacer es lo siguiente. Voy a ir a user controller DD. ¿Se acuerdan que esto esto es directbook? ¿Sí? Lo que va a hacer esto dd y una variable me va a escupir a la vista en un formato bonito. ¿Qué tiene esa variable? Sí. ¿Qué es ese objeto? En particular lo puedo desplegar. Y fíjense es un es un arreglo que tiene otro arreglo y ese arreglo tiene un do 3 cu índices. Sí, arreglo asociativo, índice ID, email, name y password. Sí, vamos a hacer una cosa para hacerlo rápido. A ver si mi amiga se pone las filas. Adtame la vista de usuarios con estos. A ver qué hace, ¿no? Si es tan inteligente. Ah, está el pro high. Ese tiene que andar. Ahora vamos a hacer pasito a pasito controller modelo. Vamos a consultar la base de datos y vamos a la vista. Bien, esperen que quiero arreglar que arregle esto. Para algo le pago. Bueno, ¿alguna pregunta? Hasta ahí vimos cómo roteamos. Llegamos al controlador en el controlador en particular. Instanciamos un modelo, el modelo lo usamos para acceder a los datos y finalmente se lo pasamos a la vista. ¿Sí quedó claro eso? Más o menos
+
+todo esto lo hiciste la otra clase, profe.
+
+Sí,
+
+justo cuando no vengo te pones a laborar
+
+dos clases de cuántica va a tener que dar. Sí, pero ahí lo afectado somos nosotros, profe. Dale, que lo tenemos que escuchar.
+
+Presentar, pero si nadie nosotros acá
+
+vale traer tomates.
+
+No te van a dar punto de vista.
+
+Me borró 204 líneas.
+
+Yo no terminaba más y lo llegaban complicado. Una lista simple, amigo. Bueno, entonces si la amiga de la inteligencia artificial a le voy a dejar esto. Si ponen dos barritas es comentario. Sí, está comentado ese código. Funcionó, lo arregló. Sí. Entonces acá tenemos Ya listado desde la base de datos. Ya tiene el formulario de de edición. Bien, exporta. Estoy asombrado. No tengo nada. Se ve igual la que yo No, no tiene mucha ciencia un listado de usuarios, eh, pero bueno, bien.
+
+Está paginaando un
+
+Sí, no creo que hay que ver hasta cuándo. Bien, vamos a hacer un formulario sencillo, bien, de usuarios. Antes de hacer un formulario, Vamos a pensar una cosa. Sí. A ver, tenemos que encarar un crud. Un crud alta baja, modificación y consulta. Sí, ABMC. Eh, este es el requerimiento que ya lo hicieron anteriormente. ¿Qué es lo primero que piensan ustedes que deberíamos hacer? Los objetos objetos citadas.
+
+Bien, no voy a decir son las tablas tipo cómo va a ser el usuario, cómo va a ser
+
+Estamos cuando hablamos de tablas estamos hablando de las tablas de la base datos.
+
+Okay. Bien.
+
+Y yo también la empezar por la base
+
+base de datos. Después modelamos y después, ¿qué más? ¿Alguien lo piensa distinto? A ver, desde la ingeniería de software lo que plantearte cuál es el requerimiento, hacer las casas de uso después hacer el el modelado, después, o sea, definera, la tecnología, después el modelado y después con la presentación, pero digamos la mayoría de esos pasos no se salte.
+
+Yo defino arquitectura y tecnologías y después modelos para saber básicamente qué es lo que Pero sí, lo primero que mueve es base de datos y después eh en función de de la estructura que Voy, voy pensando cómo van los controladores y eventualmente las vistas, o sea, voy de de base a a backa vistas.
+
+Okay.
+
+Bien, vamos a hacer un resumen de algo. Nosotros acá en esta instancia donde estamos ya definimos arquitectura, ¿sí? Porque ya tenemos coordinator, ya definimos qué base de datos vamos a usar, ya definimos que va a ser web, que va a ser apache, eh nuestro servidor web. Sí, arquitectura en sí ya la definimos. Hay muchas cosas que ya tendríamos que haber definido en el spring cero de nuestro proyecto ahora que es un crude, ¿sí? Que sería si vamos a escribir las variables en mayúscula, si vamos a escribir en inglés, si vamos a hacer, bueno, un montón de cositas más que son, no tienen que ver con la arquitectura, pero sí son convenciones de programación del equipo de desarrollo. Ya está. Entonces ahí vamos. Cuando vamos a suponer que que vamos en el tercer sprint y nos toca hacer un crude porque hay un un ISU ahí pegado, un requerimiento, una historia de usuario, lo que fuese, que hay que hacer una alta baja modificación y consulta de una tabla. En esa instancia estamos, ¿sí? dentro de un sprint donde ya se definieron un montón de cosas. Bien, entonces en esa instancia está bien, digamos, me toca hacer ese ese alta ese esa historia de usuario que es en particular una BMC. Lo que vamos a hacer es pensar en en el modelo, en las tablas. Sí, yo soy yo en particular pienso en los datos, en la información. A mí me resulta más cómodo hacer eso. Hay muchos que piensan en el modelo. En definitiva, termina siendo lo mismo, eh, o casi igual, pero después hay una distancia hoy día más de moda que tiene que ver con el UEX, ¿no? Cómo va a fluir ese alta, baja, modificación y consulta y dónde va a estar metido eso No, más que nada cuando hablamos de X estamos hablando de frontend. Está cuando hablamos de frontend la usabilidad. Si bien en la carrera no somos expertos y no tenemos muchas materias que tengan que ver con el diseño y con la usabilidad y no van a tener porque no ese es el punto. Bueno, hay gente que se da más maña y gente que se da menos maña. Y en realidad hoy día la que más maña se da hoy es la inteligencia artificial. En eso hay distintas herramientas. Dos a destacar esigma y
+
+Stitch.
+
+Stitch. Gracias. Me había olvidado la de Google es la que más uso. Eh, Think My Stitch. Parece el parece el dibujito Lilo y Stitch. Bueno, pero de todas formas a ese Figma o a ese stitch, nosotros le tenemos que pedir lo que nosotros queremos. Y cuando hablamos de un CRUD, ¿cuántas variables imaginan ustedes de un crud? No. Alta, baja, modificación y consulta. ¿Cuántas variables tenemos de eso? Depende como usario o lo que quiera dar. Sí, pero estamos hablando de la vista. ¿Cuántas formas? distintas de hacer una alta baja modificación y consulta a ustedes se les ocurre. Vistas vistas. Estamos hablando usabilidad.
+
+En principio necesit necesitarías dos, una para hacer la carga inicial y otra para la edición o el borrado. O sea, normalmente una vez que haces la carga inicial que te despliegue lo que cargaste y un una vista para editar permite la vista inicial.
+
+Bien.
+
+Sí. ¿Cuáles van a ser los componentes fundamentales de un ABMC. Estamos hablando de la vista. ¿Cuáles son los componentes fundamentales que tenemos que tener?
+
+Formulari
+
+formularios. ¿Cómo hacemos la carga?
+
+Formulario fundamental visualizar los datos. Dep los datos que hay dentro con los datos.
+
+Bien, totalmente. Pero acuérdese esto. ABMC alta baja, modificación y consulta. La consulta es, quiero ver los datos. No es si quiero AB MC. Sí, formulario. Sin un formulario no puedo hacer un formulario solo, ¿eh? O más,
+
+no, otra para modificación.
+
+Puedes usar uno y reusarlo, o sea, cargar los datos en el
+
+¿Qué pasa si uso dos? Tengo que cada vez que le agrego un campo al la bendito atributo, tengo que cambiar los dos. Sí,
+
+los framework tienen esa facilidad de dejarme usar uno solo. Eh, nosotros vamos a reutilizar o si no lo programan a mano. Pero es así, un formulario que sería el alto de la modificación y una lista para ver los datos. ¿Y qué me falta? Eliminar.
+
+Botón
+
+de la misma lista.
+
+Es un botón de la lista. Bien. Y cuando hablamos de UX, si bien después vamos a charlar algunas técnicas de UX, nos tenemos que poner el sombrero de UX, que es lo que estamos haciendo ahora. Sí. Listo. No somos programadores, somos UX. Pensamos en la usabilidad. El formulario, ¿qué lo harían? ¿En un popup? ¿Lo harían en un que se despliegue de un costado, que se abra en una en otra pantalla? ¿Cómo lo harían ustedes?
+
+Que est ahí duro,
+
+eh,
+
+que está ahí duro. Sí,
+
+eh, yo lo haría un papá, o sea, para porque cuando tenés que editar no lo vas a tener cargado ahí directamente por paso el mismo formulario. caso fijo que tratarlo para consultar,
+
+pero el pop lo más común es que quiero recordarte no
+
+Entonces, papá,
+
+¿alguna otra opción por acá?
+
+Yo usé dos, uno fijo para la carga y el otro con un modal para modificar.
+
+Bien, bueno, bien. ¿Hay demás otra opción? ¿Qué pasa si el la tabla La que estoy cargando tiene 15 datos, tres combos aliados, ciudad, provin país, ciudad, país, provincias, ciudades y además tiene 15, 20 datos. Es como un popup.
+
+¿Qué pasa con la lo responsivo?
+
+La tabla,
+
+¿no? No, la del formulario en sí, porque en realidad el Pop up, ¿qué va a tener? El formulario. Cuando vos cuando hagas pop up,
+
+sí,
+
+va a tener un formulario dentro que para si es para la carga o para editar. ¿Qué pasa si eso tiene 20 campos y encima campos anidados?
+
+¿Es cómodo,
+
+bueno, puede ser?
+
+Un menú desplegable
+
+y vas vas desplegando secciones,
+
+¿no? Que así vas bajando todos los campos que aprete. Campo y se te corresqu el el
+
+eh ¿Qué pasa con lo responsivo? ¿Sabes lo que es un
+
+Sí, que que se que los tamaños se adaptan a al tamaño de la pantalla?
+
+Exactamente. O sea, que yo lo abro con mi dispositivo móvil y si lo había pensado en una pantalla muy ancha y entonces tenía un campo acá, nombre y el apellido al costado porque entraba, porque era grande, cuando lo abro en el dispositivo móvil se pone uno abajo el otro. No,
+
+pero cuál es el problema sea C Media Queries en el CSS, ¿no?
+
+Sí, sí, ya sé, pero el popup, ¿alguna vez lo abrieron popups en el celular? Son cómodos. Son
+
+como los anuncios que te aparecen ahí todos incómodos.
+
+Yo yo lo que haría sería para evitar popups renderizado condicional y listo.
+
+Bueno, está bien. Sí, son opciones. Son ¿Qué pasa? Con esto, ¿qué estoy haciendo? Que pensemos, no siempre la solución es la misma para todos. Cuando hay muchos campos, quizás deberíamos pensar en otras soluciónes. Sí, quizás es conveniente focalizarlo todo en un formulario independiente, solo, eh, sin tanto quilombo y poder trabajarlo. Si es muy muy grande, trabajarlo en pasos. Eso es bastante cómodo para el usuario. Eh, si ese formulario tiene mucha interacción, a lo que me refiero es a cambio un el hijo del país me va a buscar las provincias, el hijo de la provincia me va a buscar las ciudades, me valida dependiendo de la ciudad del código postal me lo va a buscar a no sé dónde, el teléfono también y así. Eso también carga de funcionalidad un popup. Si lo hago en popup, entonces siempre hay un hay un detallecito, no todo es siempre lo mismo. Lo vamos a decir en el momento en que estamos diseñando y us y pensando qué es la mejor solución para lo que estamos haciendo, está muchas veces hasta no lo definimos nosotros, lo define el usuario final porque las herramientas que nos va a dar UX va a ser esto, es proponerle, mirá, en un pop-up te quedaría así, el flujo sería así o como la carga es muy grande pensamos, ¿no?, en distintos pasos y eso se le muestra al usuario final en realidad o al usuario final o al product owner. Y el product owner va a decir, "Che, no, la verdad que no me gusta. A mí me gusta el popup." Bueno, te gusta lo hacemos el popup. Está y ahí después el renderizado condicional, todo lo que se después de definirse se trabaja lo que se definió. Bien, pero bueno, volvamos. Hicimos un ejercicio recién ahí, nos pusimos en UX, diseñamos un poquito lo que iba a ser nuestra pantalla. Entonces, volvimos. Ahora somos desarrolladores. Sí, por ahí ya tenemos. Vamos a hacer qué les gusta más, firma Make o Stitch. Figma make, ¿no?
+
+Sí, el
+
+Pero Figma make o Figma,
+
+no Figma cuando no tenía viejo antiguo. Eh, esto no es Bien. Eh, necesito un cruz de suas, un su a No lo hagan así, háganlo bien en sus casas.
+
+Acá es donde nosotros decimos, "Che, bueno, el usuario va a tener ciertos campos. Un usuario Los campos son username, email,
+
+pass word, password,
+
+nombre,
+
+nombre, apellido.
+
+Me gusta, Claro.
+
+Est.
+
+Acá le decimos, queremos que sea responsivo. Quiero sea responsivo. Eh, si usamos algún template se lo tendríamos que especificar, ¿sí? O algún framework de CSS utilizar Eh, explíquenlo mejor. Sí, promteen, promteen mejor, no como yo. Bien, me gustaría me gustaría que el que el formulario se despiegue. piegue piegue de la derecha, por decirle algo. Ahí le ponen que sea un popup, que el formulario sea parte. Y acá le dan la intención, sí tienen que haber hecho un análisis
+
+animaciones,
+
+animaciones, sí, que cuando se guarde me avise que se está guardando, que me haga que haga que los colores, la paleta de colores Es bueno, capaz que me lo pide ahora. Esperen que vamos a cambiar esta competencia Stitch. Así, hilo y Stitch. Lo mismo. Eh, esperen que cambiar la cuer Vamos a entrar con a ver Stitch. Stitch es más divertido como diseña, me parece. ¿A qué te referiste?
+
+Y porque va
+
+te va mostrando
+
+te va mostrando cómo dibuja Esto, ¿ves? Ahí poder jugar. Cambio este. Mir
+
+va me pregunta.
+
+Ah, la paleta de
+
+No, esa es la que va a usar. Ni me preguntó.
+
+Tampoco de
+
+Ah, no. O sí que te lo deja modificar sobre esto. ¿Qué hizo? Voy a construir.
+
+No está haciendo nada, muchacho. Este va es más divertido. Ver y se ve el mouseillo. Ver cómo va haciendo. Ah, el otro
+
+que es más divertido.
+
+Me lo hizo en celular.
+
+Ah,
+
+porque lo teníaado.
+
+Ah, lo tenía en mobile también.
+
+No pasa nada.
+
+No lo querías respons.
+
+No, este me lo empezó por la media.
+
+Es verdad. Este te deja elegir si una web acá abajo.
+
+Ya.
+
+Pero si se lo pediste response si no debería andar igual. No, no funcion
+
+no es usuario. Eh, ven, se plegó el costadito que como yo le pedí bastante fie, ¿no? Pero bueno, editar se despliega. Sí. Eliminar. Eliminado. me dice la
+
+Sí, el mensajito,
+
+el mensajito y esto, a ver si le doy play, se hace. Ah, este es el listado. Este edito, elimino. Nuevo Bueno, definir y este es la seguridad.
+
+Bueno,
+
+eh sí,
+
+ahora no no está listo. No está listo. p\*\*\*, es ela.
+
+Bueno, sí. Entonces, esto lo estas herramientas la usamos para prototipar, pero algo que pensamos nosotros, algo que nosotros le dijimos que hacer. Sí. Si no, obviamente va, muchas veces hacen cosas que están bien y están lindas y si nos queremos quedar con eso y ser el primero en tirarle un PR vacío, está bien, pero después refinemos, o sea, pensemos en lo que en lo que vamos a hacer. En ese pensemos ya teniendo una visión de la de si vamos a hacer un formulario, un popup, etcétera, etcétera, nos vamos a trabajar directamente acá, ¿sí?, a nuestro proyecto. Y entonces lo que vamos a tener que pensar es cómo eso se va a rotear, cómo lo tenemos que construir, etcétera, etcétera. Sí, tenemos a nuestro amigo Géminis, pero nosotros vamos a hacer un Un crud. ¿Qué es? Un crud de usuario. Sí, es básicamente el que tenemos ahí, la tablita que tenemos. Bien, de principio tenemos la lista de usuarios. Creo que todo construido, pero lo vamos a ir haciendo de a poco nosotros. Sí, el alta no está hecho. Sí, sepan algo. Estos popup sí son JavaScript. Está cómo funcionan con componentes JavaScript. Vamos a ir a va a ser medio un quilombo, por eso mismo. El formulario quizás va a estar por acá abajo. Acá está. Este es el formulario. Fíjense. Salud.
+
+Gracias.
+
+Y esto que me construyó es el modal. Sí, ese formulario modal que aparece. Esto que aparece acá está en el mismo PHP, en el mismo en realidad, en definitiva, HTML. Y lo que hace es, como vimos, cambiarle los estilos con JavaScript y después el el resto Una cuestión de CCS. Esto que está acá atrás transparente es el background, un background transparente. Esto que está acá delante simplemente es un DIP con ese estilo que si lo buscamos acá, lo ven acá. Este es el DIP, es el modal, que lo único tiene un display, tiene una, fíjense, si yo le saco la opacidad, chao, te fuiste, ¿eh? Si voy al modal car es el contenido propiamente del modal. El modal tiene un heer que tiene el título, ¿sí? Que son todos dips y acá tiene el formulario. Está no es otra ciencia, es todo HTML, CCS y JavaScript. Estamos bien. Entonces, nosotros, ¿qué tenemos que lograr? Que al cargar los datos acá y a apretar guardar. Usuario envíe ese formulario a un, o sea, construya la petición HTTP con los datos de ese formulario y lo envíe a un endpoint. Ese endpo lo tenemos que crear nosotros, que va a llegar a un controlador y lo tiene que persistir en la base de datos. ¿Estamos de acuerdo? Un escuché
+
+bien. En particular, este muchacho me hizo un handle submit. Seguramente en el shake, en el JavaScript tiene eh validaciones. Andas saber que qué c\*\*\*\*\* hace. Nosotros lo vamos a sacar a esto. Le vamos a poner un action y le vamos a poner esto. Se lo vamos a sacar. Va Y qué en la acción le vamos a poner barra users, bien, método post. Bien, entonces ahora este formulario estamos yendo a users método post. Vamos a ver qué pasa. Sí, acá. Nicolás correo nico@mail.com y contraseña 1 23\. Muy mal la mía guardado, dijo, ¿viste? Vamos de vuelta, Nicolás,
+
+entonces ya estás en barrus, ¿no?
+
+Sí, sí.
+
+Nico@mail.com No lo había recargado. Ah, si no lo recargo, refresco. Ahí me estaba haciendo el handsum. Nicolás nico@mail.com y 1 2 3\. Le doy guardar. Cuando le dé guardar va a ser, fíjense, local host users. Eso existe
+
+no existe para nada. ¿Qué es lo que está pasando ahí? La barra está diciendo and al origen del navegador. Lo La barra me saca todo lo que estaba ahí. Entonces, muchas veces lo que se usa acá es una función, un helper de coordinator que se llama base URL. Entonces, acá tenemos que escribir, bueno, me lo hizo solo, tenemos que escribir eh PHP. Para escribir PHP lo que hacemos es, ¿se acuerdan? El comodín este es lo mismo que el PHP e sí es como escribir PHP. Entonces, lo voy, esto lo guardo. ¿Qué hace el base URL? El helper me construye la URL completa. Está y tengo yo no tengo que preocuparme por lo que va antes de users. Hay un detalle, ese base URL, tenemos que ir a config y buscar esta variable base URL y ahí le completamos todo lo que va antes de mi UDI. Sí, en este caso loj ta ta ta ta. ¿Se entiende? Con eso el helper o esa función base URL me va a completar todo lo que está acá barra lo lo que yo le ponga. Bien, ahí ya estamos usando estos helpers que yo les mencionaba que ya existen. ¿Qué es lo bueno de esto? Imagínense que yo esto lo llevo a producción, a un servidor con una URL real
+
+www.mipágina.com.ar. Eh, cambio acá y ya todo el proyecto se actualiza y usa la URL que corresponde. También lo puedes consumir el punto de darle.
+
+Bueno, sí puedo tomar la variable del del punto environment. Claro. Para
+
+no tocar código solamente dejar un solo en cada una de las instancias y después tiraron la
+
+sería lo correcto. Exactamente. Sí. Pero cada configuración si yo lo publico en un lugar va a tener una URL. El día de mañana cambia la URL, le cambio acá y ya todo el proyecto funciona. Bien, entonces si yo ahora voy y refresco, vamos a ir para atrás, refresco esto y exploro mi formulario. Van a ver que el formulario ahora apunta a local host mi ps public users. Sí, me completó y me hizo toda la URL completa. Está bueno. Eso es un una facilidad que les va resolver un montón de dolores de cabeza. Y ahora vamos a ver qué pasa si completo esto. Vamos a poner 1 2 3\. Pongo guardar. ¿Se acuerdan que lo habíamos modificado? Bueno, ¿qué pasó? Mandamos una petición. http a este endpint que está acá con método post, obviamente me dio un 404\. Si vemos el payload es un formata con los datos del formulario, así que eso está bien, lo está mandando a esa URL, está mandando mi formulario. Ahora, ese ende. A ver qué hace. Existe Sendpoint en list,
+
+¿no? Acá lo mandó. Local host mi PS public users. Este es mi routero.
+
+Sí, lo tenés.
+
+Lo tengo.
+
+User
+
+tengo este,
+
+sí. Y ¿Qué método usamos?
+
+Le faltan los parámetros.
+
+Ah, había usado post.
+
+Post. Ah, create o save o lo que ustedes quieran. Vamos a leer ingles. ¿Qué hacemos acá? envío esto. ¿Qué va a pasar? Vamos a hacer un refresco. Detalle. Si yo acá refresco, presten atención a esto. Lo último que hice yo en el navegador fue un post. Esto que está acá. Si yo vuelvo a prestar refresh, es como que yo mande de vuelta el formulario. Eh, va a pasar lo mismo que si yo mandé el formulario.
+
+Hay que meter alguna condición por para protegernos de la inepotencia, para que quede independente la la operación. Sí, pero ahora me sirve.
+
+Si no la tres, Nicolás,
+
+si le pongo refrescar, fíjense, volvió a mandar el post y volvió a darle 404, pero acá en detalle me dice, "No encontró save."
+
+Falta hacer el método.
+
+Exactamente. Tenemos user controller, tenemos el mapeo, nos está faltando el se, ¿no? Miren la magia. de esto ni trabajan ustedes, ¿no? Program. Bien, me creó el método SA. No va a recibir parámetros. ¿Por qué? Porque estamos usando método post. Método post va a venir. Lo vamos a lo voy a sacar de acá. Y esto no lo vamos a hacer así. Fíjense, yo estoy enviando el nombre, el email, el password y un ID. Sí, está mandando un ID. ¿Para qué se imaginan que está mandando el ID el formulario es? El es invalido. Igual cuando ustedes editan, queremos editar un usuario en una base de datos. Sí, piensen en le digo a respond como nuevo no lo mandabas en el nuevo no lo mandas porque después tenés el auto incremento y de las de la tabla. Después si lo querés editar si tenés que referencial este usuario estos valores tal cual. Sí. ¿Cómo hacemos la actualización de los datos de un usuario en una base de datos? en una tabla usuarios. Si no me responden, le dio a sueño. En la
+
+en el
+
+así le va a decir a suña, te va a matar.
+
+Ya rendiste hace tres días. Mal seguro.
+
+Ya te lo digo.
+
+La rompí.
+
+¿Qué usamos?
+
+La romp.
+
+¿Qué sentencia SQL usamos para actualizar datos primero, no? Bien, estamos todos de acuerdo.
+
+Update. Alguien que me diga cómo armamos el update
+
+bien, van bien los dos. Update set,
+
+¿no? Set atributo valor atributo valor. ID igual a algo.
+
+Si no hay actualizamos todo. Se puede. del litingware también se puede.
+
+Bueno, pero todos estamos de acuerdo que necesitamos un ID para actualizar un usuario en particular, ¿no? Entonces ese formulario ya tiene un ID, pero como estoy creando un usuario, no tengo el ID, vacío. Cuando lo esté editando, va a tener que tener el ID del usuario que estoy editando. Si no, ¿a quién le cambio esos datos? ¿Estamos de acuerdo? Bien. Entonces, Va ID, va name, va email y va password. ID. Acá lo vamos a hacer a la vieja. Sí. Name y password. Control Z. Salí. Basta. Una ganas de programar. Me está gastando tokeno. Bien, no que después lo mandaron de 5 minutos.
+
+Bien, entonces en el s va a llegar por por post. Entonces nosotros al objeto request, ese objeto existe ya en mi clase. ¿Por qué? Porque existe this request. Porque yo estoy heredando de base controller del controlador de codinator. Y esto me lo armó bonito codinator. Lo voy a disponibilizar porque ya está ahí porque el framework se encargó de que esto esté bien y ese objeto request va a tener todos los datos del request y al cual le voy a pedir, por ejemplo, get post, porque yo sé que los atributos esos vienen por post y le voy a pedir los atributos que vienen en el post, que estos son los nombres de los inputs, ¿se acuerdan? El match HTML. Bien. Eso los guardo en una variable y acá vamos a hacer uso del model. Bien, ¿se acuerdan del model? Los model coordinator tiene algo que se llama eh olvid patrón de acceso a datos. Eh, se me borró el patrón. Eh, No me olvidé el nombre. Bueno, un punto menos para mí. Active record. Gracias. Apunté.
+
+Patrón Active Record. Sí. Coordinator usa para el acceso a datos algo que se llama patrón active record.
+
+Probado de Java o viceversa,
+
+¿no? Java usa DAO y Pero usa usa algo parecido a los récord, a los de Active Record.
+
+No, nada que ver,
+
+no
+
+va menos que yo conozca, o sea, se puede implementar. A ver,
+
+son patrones, vos en cualquier lenguaje lo puedes implementar. Pasa que Java, si usamos en un RMo, por ejemplo, eh Ibernate, el modelo lo usamos para tener el estado de persistencia y tiene otros flujos de estado, así que no más difícil implementarlo. ¿Qué dice este patrón Active Record? Que el modelo va a ser el que entienda y sepa cómo acceder a los datos. ¿Qué significa eso? Y va a ser quien se encargue de hacer consultas a la base de datos, quien se encargue y sepa cuál es el nombre de la tabla en la base de datos, ¿sí?, etcétera, etcétera. Todo lo que tenga que ver con la base de datos lo hace este modelo. Detalle. a conocer sobre esto. Vamos a, esperen, esperen. Acá codinator nos va a brindar un montón de funcionalidades ya implementadas, ¿sí?, y de métodos de acceso a la base de datos, pero además también nos va a dejar parametrizar un montón de cosas de eso ya implementado. Está Entre ellos la tabla. Sí, yo construyo un modelo y le tengo que decir qué tabla es a la cual tiene que ir a hacer consultas. Bueno, para eso yo declaro la variable table. Bien, también puedo tener una ser un raro, una rara y no usar el atributo ID como el ID. Y entonces se lo puedo cambiar acá. Primary key. Claro. O DNI. Yo le sugiero que toda tabla tenga su columna ID, ¿sí? No nombre de la tabla ID. Le sugiero que todas sean ID nada más y entonces no van a tener mayor cosa dificultad. Por defecto es así en Codinator. Si usa autoincremental, ¿qué va a ser lo que Ororna. Esto ahora lo vamos a ver si usa soft deletes. Sí, los soft deletes es una funcionalidad que ya nos brinda Coordinator, que lo que va a hacer es en lugar de eliminarlo físicamente de la tabla, hacer un delete, le va a poner una marca de fecha de cuándo fue borrado. Entonces eso ya coordinator en todas las consultas que yo haga no me los va a traer, me va me va a incorporar el we delete ad igual a nul. Ya lo si quieren lo vemos después, pero básicamente administra solo los soft del es la fecha.
+
+Sí.
+
+Ah, fila por fecha.
+
+Alowed fields es cuáles son los campos que yo permito para la persistencia. Sí, user time stamps. Eh, esto es si yo quiero guardar en una columna cuándo fue la última actualización y cuándo fue la la fecha de de creación, ¿sí? Hacer un una pseudo logueo o una auditoría de la manipulación de esos datos. E y acá están los created. Acá le digo qué columnas son cada cosa. Sí, le digo el created app en esta pseudo auditoría, ¿cuál va a ser la columna? ¿Cómo se va a llamar? Update field, o sea, cuando yo actualizo un dato y si lo tengo configur me va a actualizar esa fecha, cuál va a ser la columna y el deleted field es si tengo soft delete, ¿cuál es la columna? Está otra cosa eh puedo agregarle reglas de validación, puedo agregarle mensajes de validación, ¿sí? Para cada campo, si el le puedo decir si es requerido o no es requerido, si es el máximo de caracteres, etcétera, etcétera, etcétera. etcétera. Todo esto lo puedo agregar acá y le puedo agregar los mensajes si eso no es válido. Sí, esto sirve para la internacionalización. Sí, si lo quiero en español, lo quiero en turco, en árabe, etcétera. E y un skip validation también, otro parámetro. Sí, todo eso yo se lo puedo agregar y lo puedo ir en particular. Vamos a agregar esto sí para jugar un ratito. Entonces yo acá solamente le agregué, no, esperen, esto lo vamos a hacer así, obviamente puede tomar un un único valor. ¿Sí? Y fíjense otra cosa, nuestros modelos acá no tienen atributos, está no le tengo que declarar los atributos ahí. No, jugamos con la débil tipeo de PHP. No hace falta esta clase o este objeto, los objetos que yo instancé, eh, van a tomar los atributos que vengan de la base de datos, no importa cuáles sean ellos. ¿Se entiende? ¿Se entiende? ¿O más o menos dicen esto con qué se come? Es muy raro. Algo pasó acá. Ah, me falta el puntico acá porque lo comenté. Bien, entonces vamos a ver un poquito el vamos a terminar la persistencia. Entonces, lo que hago es crear un instanciar un objeto de mi clase user model y a ese user model vamos a llamar a la función save. Esto como mi user model hereda de El modelo de codinator ya tiene implementado un montón de funcionalidades, entre ellas el save. El save qué es guardar. Bien. Y el save me va a resolver solo si es un update o un create. No me tengo que preocupar.
+
+Si el ID es vacío,
+
+si el ID es vacío, me hace un create. Si el ID, en particular, el ID, ¿por qué? Porque yo no acá Le puse el primary key. Si le pongo primary key, otro campo lo va a buscar. H, ¿qué hago? Le tengo que pasar básicamente al save un objeto. Esto es lo mejor. Yo lo voy a construir acá. Pesos new user. ¿Qué va a ser una, por favor? Esto va a ser un arreglo asociativo que va a tener los campos. Sí, va a estar. Sí, tengo una variable, esto lo construyo como un arreglo asociativo. ese arreglo asociativo le pongo campo valor campo valor campo valor campo valor y al se le mando directamente ese arreglo asociativo. Está fijo acá lo estoy haciendo todo separado. Lo podemos hacer todo en una sola línea si queremos. Sí. De detalle el post, ¿se acuerdan de esos post? ¿Se acuerdan de esto? Eh, qué poco que están habladores, che. ¿Se acuerdan que era el peso post? Una variable global donde están todos los datos enviados por post, una variable global que ¿qué particularidad tiene? Es un arreglo asociativo. Y en los índices, ¿cuáles son? Los campos del formulari
+
+los campos del formulario, los name de los inputs y el contenido de cada uno de esos posiciones va a ser lo que escribimos en el input, básicamente lo que está acá. Esto es un wrapper. El request es un wpper a la variable asociativa post que lo hace un poquito más prolijo, está, no me tira error, no me da error fatal. Sí, si no está el ID no me va a dar error fatal y va a romper. En cambio, si yo acá en post le pongo ID como índice y no existe, rompo todo. Está. Ahora bien, ese arreglo asociativo es básicamente esto que está acá. O sea, yo lo estoy tomando a unas variables y volviendo a construir el arreglo asociativo, ya directamente si hago un save del post funciona. Luego podrías cambiar todo eso y por que sea postaría por una opción tipo siía el vacío guard. Ah, no lo hace solo el sa. Entonces vamos a ver qué pasó ahí. En particular, si llegamos hasta acá abrir la conexión con la de datos y todo. Ajá.
+
+El sí, el model tiene toda la librería de la base de datos y como la base de datos la habíamos configurado, ¿se acuerdan? En config, en config database con D, habíamos configurado cuál es mi servidor, cuál es el usuario, cuál es el password y cuál es la base de datos. La librería está funcional. Y entonces el modelo, nuestro user model ya usa la librería de la conexión a la base de datos sol. Hm. No tenemos que hacer nada. Si llegamos hasta acá vamos a usar esta magia del DD. Vamos a El direct deb lo que hace es mostrarnos el contenido de esa variable en la pantalla y corta la ejecución. Sí, va a llegar hasta acá, ¿no? Va a seguir, no va a guardar nada. Entonces, vamos a ver. Yo le voy a dar refrescar, ¿se acuerdan? Refrescar me va a mandar otra vez el post. Llegó hasta el direct de back y fíjense, imprimió. Bueno, fíjense si ven algo. Imprimió que new user es una variable, que es un arreglo y que tiene ID, nada, vacío. Nombre, Nicolás, ta ta ta ta. Bueno, llegaron, llegaron. Sí. Y a Ahora para que ustedes vean, si yo hago un DD de post, si fíjense, ahora va a llegar hasta acá y va a cortar ahí la ejecución. Le doy refrescar. Me imprimió post. Sí, estamos bien. Hasta ahí es lo mismo. No cambié nada. Tomé las variables de post, las puse en un arreglo asociativo y se las mando a guardar. Perdón, se me escapó.
+
+Bien,
+
+pero básicamente es lo mismo. Sí, yo lo estoy haciendo paso a paso para que miren un cacho de código. Ya sé que después no lo van a ver más. Entonces, es mi oportunidad de molestarlo. Está. Entonces, si todo funciona bien y yo mando al save esto, y hago un redirect to users. Esto me va me va a usar el base URL y en realidad me va a redireccionar al routeo users, pero get. Y el users get, ¿qué hacía? El listada, ¿no? Iba al list al index, perdón, iba acá al index, el routeo. Ese sí, yo retun le digo que redireccione al users. Eso lo que va a hacer es otra vez va a routear a barrausers, que es este que está acá, pero en método get, y va a ir al index y entonces va a venir acá, va a venir al index, va a hacer un find all, todo eso de vuelta está el redirect, vuelve al cliente y redirecciona. Está eso va en la cabecera del Entonces le doy refrescar, va a ser de vuelta al post. Sí,
+
+el necesita toda la
+
+reventó como un No necesita todo lo anterior, solamente barra
+
+cómo lo hace solo
+
+con el la variable del
+
+dice que no están permitidos los los fields, o sea, los campos. Tengo que especificar los campos permitidos en el model. Bueno, eso es algo nuevo. ¿Qué significa? Que yo estoy intentando insertar un algo en una base de datos y no le estoy diciendo cuáles son los campos permitivos. Sí, eso lo hacíamos con Alowed Field Protected lo hizo. No sé para qué me lo hace hacer y no lo hace antes que yo. Le al modelo, fíjense, yo fui al model cuáles son los campos permitidos para insertar en la base Está. Y en mi caso van a ser nombre, email y password. Creo. ¿Imonta el orden o
+
+no? No importa el orden. Le vamos a dar ya acá, ¿no? Ya acá. Si refresco, ¿no? Así. Nombre infield list. Me parece que no eran así. Name debe ser PHP My admin. My admin. PHP PHP admin. Ay, Dios mío. Rot ro rot por si me quieren hackear. Eh, PC26\. usuarios, email, name, password, name, email, password. Y vamos a ver si acá hicimos bien acá name tendría que ser y pa. Ahora sí vamos de vuelta refresh. Otro otro post. Recuerden, cada vez que hago refresh, estoy ejecutando esto. La última petición que hice, que sería un post con esos datos. Vamos de vuelta. Fue, lo insertó y me hizo un redirect, fíjense, a users, pero a con método get. Sí, me redireccionó con método get. El método get entró al roteo, vino acá, fue al index. vino acá, instanció este modelo, fue otra petición, está construyó, fue a la lista y finalmente me mostró el listado completo. Sí. Entonces, para que quede claro, yo hoy esto lo levanto en la misma pantalla el modal, pero cuando hago el submit del formulario va procesa en el en el servidor y retorna un redirect. Ese redirect vuelve al cliente y vuelve a ir a buscar el listado y vuelve a rentizar toda la página de nuevo. Estamos la construye en el backend y la devuelve nuevamente al front. Entonces, si acá lo ponemos a Messi, Messi @ @mail.com 1 2 3 y guardamos. Va a ser todo ese circuito. Va a ir el servidor, el servidor lo va a procesar, lo va a persistir en la base de datos, va a volver, pero lo que vuelve es una cabecera que dice redireccionate al listado. Va a volver a ir al servidor, el servidor va a rotear, va a consultar a la base de datos toda la lista que ya está insertado Messi, va a renderizar la vista de la lista y me va a valer la lista. operación dos peticiones. Exacto. Y ahí apareció Messi. Está quedó claro eso hicimos el alta. Hay que hacer el delete. Vamos a hacer el delete a ver qué qué tenemos acá. Vamos a explorarlo a ver qué hizo. Es una función JavaScript. Tiene para hacer el delete lo mismo. Vamos a la vista, vamos a necesitar este base URL y vamos a ir a el botoncito ese, que es esto que está acá. Está bueno porque me hace un mensajito seguramente detalles que van a ver y que hay acá. Ecc. Sí, eso me lo completó todo eh mi amigo Gémini, pero son funcionalidades que usa que nos provee Coordinator para evitar crossiz scripting. ¿Saben lo que es cross scripting? Es el ataque más básico criollo de la vida del mundo mundial. Cross scripting tiene como filosofía es así. Mira, yo acá yo sé cómo va a funcionar esto por detrás. Lo más probable que llegue algún lugar y se intente insertar en la base de datos el usuario que estoy creando, ¿no? meter un
+
+Y entonces acá yo digo, ¿y cómo se construye eso? Cterisco, eh, insert into no va a ser no where y pasa los nombres, pasa entre paréntesis el insert y pasa los valores. Entonces yo acá le completo si este es el último valor acá yo tendría que cerrar el script de base de datos y hacer un select a ter from users, porque me supongo que este debe tener una tabla users con todos los password de usuario que existen. Y entonces el inserto eh en este caso es SQL porque quiero atacar la base de datos, pero podría insertarle JavaScript, sí, crossiz scripting, interesa de la seguridad, búsquenlo. Esto de lo más de los ataques más usados, más fáciles de hacer del mundo mundial. Sí. Y así funciona. Sí. Y así se roban un montón de base de datos, ¿no? Es así como es el más usado también el que más función funciona y más hoy que todos programan con la con la IA y todo esto no lo tienen en cuenta. Bueno, Codinator nos da este tipo de funcion de funciones que hace un escape y, o sea, valida que no sea script esos campos y esas cosas. Bien, entonces eso sirve un montón. Bien, para eliminar, fíjense que lo que me creó e lo vamos a hacer derecho, sin mensaje. Sí, vamos a crear un que sería un link, ¿no? Para eliminarlo. Vamos a dejar el botón, se lo voy a dejar, pero también le voy a poner el SBG dentro del AHRF. Y acá vamos a cerrar el AHR, el A, perdón. ¿Qué pasó? ¿Qué hice? Tengo un botón y tengo un eh un link. Sí, el botón lo voy a dejar porque en realidad este botón me lo hizo Gémini y lo que me hizo es llamar una función on click que seguramente me un cartelito que me dice, "¿Estás seguro que desea eliminar? Está, pero yo primero quiero hacerlo sencillo, simple. Lo aprieto y se mueve, se elimina. Está ese simple y sencillo le tengo que decir. a qué tiene que ir, ahí tenemos que diseñar, ¿no? Ahí tenemos que pensar como desarrolladores, como diseñadores. Bueno, lo voy a mandar a users delete y le tengo que pasar el ID, si no, ¿a quién vamos a eliminar? No, un delete sin no existe. Bueno, ¿cómo lo hago? Ve URL y armo mi lo pienso o lo pienso antes o lo pienso ahora, pero yo voy a decir que es users delete y como parámetro o como va a ir el ID. Y entonces, ¿a dónde vamos? A roots, nuestro bien conocido roots. ¿Qué el link? ¿Qué método es dentro de HTTP?
+
+Un get. Muy bien. Entonces, vamos a rotear un get. Ya lo hizo todo por mí y Tenemos final épico. Tenemos el método users barra delete. Sí. Y el último segmento es el número, en particular el ID. Y entonces vamos a tener nuestro user controller al método delete y le va a pasar la variable por parámetro pesos 1, que es lo que vimos hoy de ruteo. No se escapen. Chao. Se va a cantar public dele. Va a recibir por parámetro nuestro ID. Está. Entonces recuerdan, user delete, cualquier número que va para pasar acá lo va a asignar al pesos un y el pesos 1 va a llegar como parámetro al delete del controlador user controller. Llega como parámetro nuestro ID instancia. nuestro modelo función que ya existe en coordinator. Delete. Le paso el ID. Ya sabe que es el ID porque lo va a hacer un delete por primary key. Y como yo usé en las tablas de la base de datos el campo ID como primary key, no tengo que decirle más nada, si no sí lo tenemos que corregir. Me va a hacer un delete y voy a hacer un redirect a users. Lo mismo, voy, elimino Vuelvo al cliente, vuelve a hacer el post y vuelvo a ir. Estamos vemos si funciona. Va a funcionar. Vamos a refrescar porque tiene que aparecer el otro. Eh, no apareció. No lo guardé. Okay,
+
+no es acá. A ver, esto no es la lista, no es la tabla. ¿O sí?
+
+m\*\*\*\*\*.
+
+Ex universidad. Explotado.
+
+No, pero no me aparece. No es una carta view. ¿Qué es esto?
+
+Ah, me parece que me lo hizo responsivo. Y esto es Alternative Greaz que lo usa flex abajo con el acá, me parece. Acá están los user, el listado de users. Ahora sí, acá, acá tiene que estar. Lo guardo y ahora si refresco. Ahora sí. Fíjense que el primer tachito es simplemente un link. Y el segundo tachito es un botón. Es más lindo el botón. Pero esto seguro, ¿ven? Que me hace un cartelito. Yo no quiero ese cartelito, quiero muerte. Entonces aprieto el botoncito. Lo que me hizo es lo Se lo voy a mostrar acá porque no lo vieron. Es una petición al Delete. Sí. Public user delete 4 por forget. Fíjense 302 found.
+
+No me acuerdo que era el 302\. Qué raro. Borrado será.
+
+Creo que movido temporalmente o algo así. El código 300 lo que se usa para redigir
+
+de debe ser eso, la radireección. Gracias. Eh, entonces llegó la respuesta fue una redirect a users y que la respu obviamente users me hizo el listado completo nuevamente, pero con estilo, ¿sí? Con el CCS está y entonces tengo como si fuese en realidad una sola pantalla, pero estoy yendo del servidor. Vengo, voy, vengo, voy, vengo, voy. Estamos y se está consultando la base de datos cada vez. Está estamos de acuerdo. Vamos bien. Ya terminamos. Eh, editar. ¿Qué debería pasar? ¿Debería completar estos campos en el editar con los datos de esta persona y además tener el ID el formulario. No,
+
+¿por qué no vas a editar el ID?
+
+No, tener el ID en el formulario, no modificar el ID, pero para yo enviarlo al servidor está ella
+
+estab debería estar. ¿Cómo está eso? Ven que no está acá
+
+está como hiden. Input type hiden. Este que está acá aparece ahí en la lista. Claro, está pero no aparece,
+
+¿no? Porque es tipo hiden. Parece los input de tipo hiden dentro de los formularios no muestran nada. Hiden oculto que sirven para esto, ¿sí? Para yo ponerle campos ocultos que se tienen que enviar en el set de datos. Entonces, yo cuando hago el submitieron que iba hoy la pero no está, no hay ningún campo ahí que yo vea. Está
+
+sería más lógico si uno piensa que para un cliente que al cliente no le interesa con el ID de su comprador de zapatillas, tal cual, ¿no? Es transparente y el y el campo este se rellena para rellenar un campo es el valúe. Sí, cuando relleno un campo, por ejemplo, el de editar, eh, esto va acá que andá saber a dónde va.
+
+Busca la clave de negocio y
+
+el no
+
+lo busca el Jason, pero bueno, lo que hace es completar este input que es el de ID form ID. El valúe le pone el ID del usuario que yo estoy editando. Sí. Y esto sí ya lo deberíamos ir a ver al JavaScript. Es medio un garrón, pero es así. Cuando usamos JavaScript, eh, Eh, public assets users. Esto es filtrar. Esto no sé qué es. Esto es copy. Esto no sé qué es. Open new. Close edit. Acá está el edit. Fíjense. Toma todos los formularios, o sea, todos los ID de cada input del formulario. Le cambia el título al formulario. Y acá en cada uno de los campos le pone el valúe, ponúe el el nombre del usuario y user valúe el del usuario. Así esto los recibió por parámetros. Estatus value y el ID no me lo está completando, así que no va a funcionar. O sea, ahí no lo va a enviar. Fíjense si yo acá tengo, Nicolás, esto y esto. Le voy a dar enviar y vamos a ver qué pasa. 1 2 3\. Fíjense que este fue la petición. Me hizo un envío post al método al lendpoint user, pero por método post, que es el que estábamos creando nosotros, y no le mandó el ID. Fíjense que Como les dije, no le mandó el ID y sin ID, ¿qué va a hacer? Insertó otro.
+
+Insertó otro en la base de datos. No le importó nada. ¿Está claro?
+
+Acá lo que le faltaría o me faltaría hacer es tomar esto que está acá. Esto es ID password ID form ID. ¿Por qué? get document get element by id. Tengo que buscar ese elemento HTML dentro del documento por este ID que está acá. Form ID. Sí, este es mi campito. ID input. Le voy a poner input. Así me gusta más.
+
+Lo que no llego a ver es dónde se le está asignando el valor. a ese elemento la formular. A ver, de un cuándo se asigna acá, pero esto es JavaScript.
+
+Sí,
+
+con JavaScript yo puedo manipular todos los objetos del formulario, del DOM, del dominio. El formulario es parte de eso. ¿Cómo lo manipulo? Document get element by id. Voy y lo busco a ese input. ¿Cuál es? Es este que está acá. Input id.
+
+Sí.
+
+Y este es el ID de ese componente HTML.
+
+Sí.
+
+Bien. Entonces acá lo busqué, lo tengo acá. Ese es mi input, el ID id. Esta variable contiene el elemento de HTML del formulario. Sí.
+
+Sí.
+
+Y acá le digo input pun vale. el valor de ese input
+
+asignale user el ID.
+
+Claro que en el front lo tenés, no lo no lo estás mostrando.
+
+No, no en el listado creo que se está mostrando, pero en el listado hace esta llamada, fíjate
+
+que tiene el numeral cuatro, numeral cinco. Ahí
+
+exacto. Se está mostrando acá, mira.
+
+Ahí está.
+
+De todas formas hace una cosa rara.
+
+¿Qué muestra? ¿Cómo? Eh, eh, ahí el código, ¿dónde estaría?
+
+Mira qué cosas raras hacen acá. Lo que hace raro es esto. Para cada en for each, digamos, recorro el listado de usuarios. Entonces, tomo cada usuario y empiezo. En particular, construyo en el cada div de estos. Acá construyo un un di, ¿no? Y le pone esto, usa estos atributos, data id, data name, data email. Eso es una forma de meter datos en contexto de JavaScript o de HTML. Sí, es una forma fácil de poner datos ahí. ¿Para qué me sirve? Y a esos atributos, fíjate que le pone el valor de la variable en PHP. Todo esto lo hace el lado de PHP. Entonces voy construyendo ese HTML y ahora yo esto ID, name, email lo tengo disponible y en particular a la función JavaScript edit user. Sí, esa es la función JavaP.
+
+Le paso por parámetro todo el user, pero convertido a Jon. Esto lo hago en PHP. Sí, si ustedes lo ven acá, vamos a la acá al botoncito. Fíjense, llamo a la función edit user llave ID6 email. Todos los datos del usuario, todo eso le estoy pasando a la función JavaScript user. Este en particular del 6 y tiene el ID 6\. Y el siguiente, si vamos al TR siguiente, buscamos en el último TD, acá está el action, acá está el edit, edit user del otro usuario, todos los valores del otro usuario, porque hice iterando en PHP, ¿sí? Al cliente llegó esto, texto plano. Ahora sí. Entonces este edit user cuando yo lo cliqueé va a venir para acá, va a recibir ese Jason de usuario. que tiene estos atributos, tiene name, tiene email, tiene ID. Sí, todos estos no no los tiene. Me los habré agregado de antes, pero no importa, no los tiene. Y ahora sí, el input al valúe le puse el valor del ID. Y entonces si yo refresco esto, lo vuelvo a cargar y le doy click, vamos a ver que acá arriba en el formulario está el input y el value. Si está seteado acá, ¿lo ven? Seis.
+
+Eso lo acabo de hacer recién con JavaScript. Entonces, ahora si le envío Nicolás editado, en teoría, al guardar me debería editar y no guardar uno nuevo. Efectivamente, me editó el se un éxito. Sí, ese formulario, fíjense que es el mismo que teníamos hoy. Mandó los datos al mismo lugar, se roteó exactamente igual, o sea, lo mandó a por método post a users y lo ruteamos a save del user controller. En user controller vinimos a save, tomamos todos estos datos, los pusimos en un new user, no era new, mentira, era el mismo. Bien, vamos a editar, instanciamos el modelo y se lo pasamos a C. Todo esto se resume a hacer método Sí, es lo mismo. Exactamente lo mismo. Sí, se acuerdan. Post tiene la misma estructura de la que construimos recién. Lo hicimos pasito a pasito, pero es lo mismo. Termina siendo lo mismo. Preguntas. Hicimos el alta con el envío de post. Hicimos el delete con directamente cosas que tengan tienen que tener cuidado con el delete. ¿Sí? ¿Qué pasa si yo acá pongo Delete barra 45\.
+
+No pasó nada.
+
+Tampoco eliminó nada
+
+directamente la ruta.
+
+La ruta existe porque no El delete, ¿qué hace? Recibe un parámetro y hace el delete y nos redirecciona. Codinator. El modelo está preparado para si, bueno, si no eliminó nada, no eliminó nada. Yo acá, ¿qué podría llegar a hacer? Y mandar algún mensajito de error de no existía, de 404, no sé. Y ahí se empieza a trabajar de distintas formas, pero A la hora de trabajar con esta forma delete y los parámetros, vamos a empezar a tener problemas de seguridad. Porque, ¿qué pasa si yo soy un usuario que no puedo eliminar? Sí, por mi rol este tachito no me aparece.
+
+Podría igual.
+
+Voy, escribo acá, delete. Perdón. Y le tiro el seis. A si no lo vamos a eliminar. Tiro el seis y van a ver como si se elimina. Chao. Volvó el seis. No prueben en las páginas públicas eso, eh, porque seguramente está todo muy pensado y no hacen esas cagadas. La página esa no va a poder ni entrar directamente.
+
+Está caída,
+
+¿no? El guaranino ese sí está bien. No funciona.
+
+No, eso está bien hecho.
+
+Tiene que entrar de las 7 de la mañana a las 9\.
+
+A ver, ahora son las 8:30\.
+
+Está fuera está fuera de servicio.
+
+Al que no pudo entrar al campo.
+
+El se lo hizo la plata o No, el guaraní es de
+
+Ah, no, para me parece. No, me estoy confundiendo con Siga. No te dije nada. No sé. Bueno, resumen y nos vamos. Enterame. Active Record como modelo. Simplemente declaramos la clase como modelo, le decimos qué tabla va a usar, le decimos, "Ah, no vimos los objetos." Bueno, la clase que eh le decimos qué campos están permitidos insertarse. Tenemos un montón de parámetros más, obviamente lo miran en la documentación si quieren saber más de eso y ya está funcional para un cru normal. controladores, sí, son los que reciben todas las peticiones que están roteadas en a través de nuestro router y las vistas, por supuesto, que es lo que vamos a mostrar. Bien, ahora tenemos un requerimiento. Lo primero que vamos a hacer es hacer un pequeño análisis. Si necesitamos preguntar, preguntamos. Diseñar, a la hora de diseñar tiene que ver con diseñar las tablas. diseñar los rotos o los points que van a involucrar, entre ellos en particular en Coordinator, los controladores y los modelos involucrados, qué campos voy a necesitar y un poquito de UX. Sí, vamos a pensar cómo vamos a hacer, ¿sí? ¿Cómo lo vamos a llevar adelante. Formulario acá, formulario muy grande en pasos, etcétera, etcétera. ¿Por qué? Porque ese en pasos me va a modificar el ruteo. Sí, yo voy a tener que hacer el ruteo y todos los necesario para soportar los pasos de un formulario. Paso uno, este es el uno, este dos y eso lo tenemos que diseñar y pensar. Una vez que lo pensamos, lo diseñamos, lo le pedimos un prom a la IA y se lo damos a Gem y lo hace bien. Consultas, dudas, comentarios de lo que vemos hoy. Necesito que todos tengan funcionando. Codinator listo, preparado. Ya que el R la carpeta. Descargamos el zip, lo descomprimimos. Esa carpetita que nos descomprime la ponemos en la carpeta del servidor web que tenemos instalado. Si es www, si es htt, si es la que fuese, la instalamos. Bien, bien. Y ahí le cambiamos el nombre y a partir de que le cambiamos el nombre es ya es un recurso alcanzable por nuestro servidor web. Sí. Entonces, local host barra ese nombre de la carpeta barra
+
+es el nuestro proyecto se crea todo el
+
+Sí, todo esto es ya se descomprime y yo le cambié el nombre a mi PS. No veo Sí, se entiende.
+
+Y eso ahí adentro va a ser todo nuestro proyecto, que es todo lo que me descomprimió Coordinator, salvo lo que yo estoy trabajando ahora, ¿no? Los controlers los creé yo, los models los voy a crear yo, las vistas las voy a crear yo, y Géminis.
+
+Calculo que en Docker no debe ser muy muy diferente a como es Shang, ¿no? Que le Plantas el contenedor,
+
+levantas el contenedor, le decís start y te hace toda la la arquitectura, la carpetita, levando el proyecto, las apps y eso. Dockerizar un PHP no es hacer nada, es simplemente levantar una para el codenator eh doeronado,
+
+haces el ingreso en el reinar, creo que menos chango, vos trabajas con un gestor de eh paquetes,
+
+¿okay?
+
+Y lo que te haces es te corre ese gestor de paquete para instalarte las dependencias.
+
+Claro.
+
+Acá esto es así y no usamos composer, o sea, no gestionamos dependencia. Entonces, lo para dockerizar es simplemente un docker con un enginex, con PHP o con apache
+
+que sirva al copia los datos y ya está. No, no tiene que hacer nada. Eh, unicorn y un sec.
+
+Bueno, pero ese es otro el otro servicio de Eh, dudas, consultas, comentarios. No, clase que viene vamos a ver un poquito que nos quedó el manejo de objetos y las respuestas de coordinator que tiene que ver con los models. Eh, Sí, esto object y un object en particular. Eh, vamos a ver layouts. Sí, una forma rápida de construir un layout. Y vamos a ver eh si llegamos X. Estamos y ya para la clase que viene deberíamos definir La idea,
+
+la idea, proyecto final. ¿Hubo alguien que se inspiró en estas vacaciones que tuvimos? No tuvimos vacaciones, importa. Bónico.
+
+Cuántico. ¿Qué hay? ¿Qué hay con lo cuántico?
+
+Yo me quemé. Me quemé.
+
+Se quemó.
+
+Pero, ¿qué hay para ser cuántico?
+
+No, nada. Unosibit.
+
+¿Cómo se llama? Solo quería. o algo, pero un verde te quemos
+
+un verde.
+
+Bueno, ¿y alguna otra idea?
+
+Eh, es bienvenida. Eh,
+
+¿cómo
+
+si tienen ideas eh, para hacer para hacer?
+
+Yo tengo un montón,
+
+pero la idea que se le interesen a ustedes, no a mí.
+
+Ahora teníamos tres. Recuerdo contable, contable.

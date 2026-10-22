@@ -1,0 +1,407 @@
+Me parece que le volví a rar otra cosa. Ahí está. Ahí está. Ahora sí. Tengo algunos coanfitriones que se hagan cargo de aceptar e admitir gente. Bien, bueno, eh, mientras esperamos que se vayan conectando igual, ¿cuántos somos? Somos 19\. Les mandé algunas algunos videítos divertidos. No sé si vieron, ¿alguien los vio?
+
+No, yo vi que lo mandó, pero no lo vi y recién salimos de base de datos.
+
+Bien. Bueno, Germán, alguien ahí me más contestó, pero no llega a escuchar.
+
+No, no te llego a escuchar, Lucas.
+
+¿Alguien más? No lo llega a escuchar. Soy yo.
+
+No, como que se escucha trabado.
+
+Sí, se escucha. Sí, se escucha medio.
+
+No, no pagó internet.
+
+¿Se me escucha ahora?
+
+Ahí sí.
+
+Ah, no, sí que yo miré los TikTok estos de Junior versus.
+
+Bien, buenísimo.
+
+Eh, ahí dice Mariano, "No llegué a verlos tampoco." Bueno, No. ¿Y qué te parecieron, Lucas? La clase pasada.
+
+Bien. ¿Alguien más lo vio?
+
+El de los juniors y seniors estaba bueno.
+
+Yo lo estoy viendo ahora.
+
+Mir, aprovecho el tiempo que hay en silencio ahora. Bueno, bueno, bien. Bueno, mírenlo. Es un poco lo que les comentaba la vez pasada con un poquito más de detalle, ¿no? Tenemos ahí esa eh nada, una explicación. Sí, hay hay distintas explicaciones y Más o menos todas van por el mismo lado. Bien, bien. Eh, bueno, vamos a empezar. Eh, atentos mis los coanfitriones de admitir a los invitados. Sí, por favor, manténganmelos admitir admitir. Eh, bien. Okay. Eh eh eh voyart entonces. Espérenme que vamos a hacer una cosita. Denme un segundo. Bueno, eh ahora sí voy a compartir la ventana completa. Ah, por ahí les puedo compartir. directamente le voy a compartir toda la la computadora. Déjenme un segundito que ahora sí toda la pantalla. Bueno, bien. ¿Están viendo ahí?
+
+Sí, se ve el antigravity y atrás el navegador.
+
+Perfecto. Bueno. Primero que nada, vamos a hacer un repasito de lo que venimos hablando. Bien. Eh, repasito muy corto, pero para ponernos en concepto. Sí, voy vuelvo a repasar estas las bases del desarrollo eh del desarrollo web. Sí, para que para molestarlos de vuelta, ¿eh? Y que nos quede bien claro. Sí, cliente, internet, servidor está. Y nosotros en la clase voy a cerrar esto que está acá, así que ya no los veo, no veo el chat. Me escriben, si necesitan decir algo, abren el micrófono. Bien. Bien. Entonces, cliente navegador web, Internet servidor. La clase pasada y la anterior, esto lo vimos y lo reevímos, pero lo que estuvimos haciendo es trabajando con eh todo lo que tenga que ver con procesos del lado del servidor. Bien, a esta altura ustedes ya deberían tener configurado un servidor en su propia computadora y al mismo tiempo, como es un entorno de desarrollo, Ustedes van a tener el cliente en su computadora, o sea, un navegador web. Ese va a ser el cliente que consuma o pida recursos al servidor. Eh, lo que vamos a tener, perdón, lo que vamos a tener acá es escasez de internet, pero de todas formas estuvimos viendo esto de las peticiones HTTP se dan de todas maneras. Va a haber una petición HTTP que si ponemos el DNS en local host propio servicio, la propia computadora y esa redirección o esa ruteo lo va a hacer a la propia computadora en la cual va a tener que tener configurado un servidor web. Ese servidor web va a ser apache en nuestro caso. Eh, entonces ese servidor Apache va a buscar los recursos que nosotros le vamos a pedir y va a tener que comunicarse con un servidor de base de datos que también va a estar instalado en nuestra computadora localmente. ¿Sí? Entonces, en con en conclusión y para cerrar, lo que nosotros vamos a estar haciendo es esta comunicación cliente servidor, pero localmente. Bien, a esta altura ustedes ya deberían tener eso configurado en sus computadoras. pregunta, ¿pudieron configurar este entorno y probarlo?
+
+Sí,
+
+me vuelvo para acá.
+
+Sí,
+
+bien. Alguien no pudo, tuvo problemas. Sí o no. Necesita resolverlo.
+
+Eh, solo para confirmar, no vaya a ser que es cuando vos ponés local host. Eh, y bueno, tu carpeta y te abre directamente el navegador, ¿verdad? O sea, cuando estás acá en el navegador y pones local host, la página de tu proyecto,
+
+eso sería la configuración. Eh, eso no es una configuración. Cuando uno escribe local host en un cliente acá, local host, este es un navegador y yo estoy escribiendo en este navegador que termina siendo está en mi computadora, pero es el cliente esto que siempre mencionamos cliente. El navegador, ¿qué va a hacer? ¿Se acuerdan qué hace cuando yo escribo local host y arro?
+
+Bien, primero que nada lo que hace Esto, memorícenlo, recuérdenlo, atento.
+
+La petición
+
+genera una petición http
+
+está. Esto genera una petición http. ¿A dónde? A este servicio, a local host. Está bien lo que dijiste por defecto. Si yo no le pongo el puerto, lo hace. por defecto al puerto 80\. No sé si se llega a ver por ahí, está muy chiquito.
+
+Sí, sabe, sí, sí.
+
+Pero los pasos son, escribo, le doy enter y eso genera una petición http algún lado. Está
+
+sí.
+
+Bien. Esa petición HTTP es atrapada por la capa de red y la rutea. En particular, local host va a ser route al IP 127.0.1 y ese IP siempre es me quiero comunicar con mi servidor inter, con mi computadora. O sea, la computadora dice, "Che, le voy a pedir a mí mismo 127001." Exactamente. El local host es lo mismo que ser 127.0.0.1\. Capaz que lo dije mal, pero es eso. Sí. Entonces, si nosotros vamos a ver las comunicaciones, yo hice esta petición local host y esta es la petición HTTP que se generó. Eh, con todo esto yo no tengo el servidor corriendo. La configuración del entorno local tiene que ver con instalar un servidor web, instalar PHP e instalar un servidor de base de datos, que es lo que vamos a usar nosotros para desarrollar eh con PHP. Esa es la configuración. ¿Quedó claro?
+
+Sí, sí, sí.
+
+Yo lo hice con, ahí lo estoy corriendo. Capaz que me choca con con Doca. A ver. Si hay algo corriendo, no hay nada corriendo, así que va a funcionar. Yo lo hice con, como les mencionaba, WAM me instala un servidor Apache, o sea, un servidor web, me instala PHP y me instala un servidor de base de datos y además tiene esta aplicacita que cuando uno lo corre inicia esos servicios. Si todo va bien, tengo la W verde acá abajo. ¿Lo ven? Tac. Ahí apareció. Y ahí tengo apache acá, PHP, My Sequal y María DB por si faltaba algo. Apach, PHP y My Sequel, que es todo lo que necesito. Entonces ahí inmediatamente se refrescó. Si yo voy a 127001 O si voy al local lo local host va a ser lo mismo. Es lo mismo. Esto bueno son acciones deprecadas y cosas del server que son viejas. ¿Quedó claro eso?
+
+Sí.
+
+Bien.
+
+Sí. Yo tengo una pregunta, pero relacionada con Antigravity.
+
+A la m\*\*\*\*\*. Antigravity, bueno, puede ser parte del entorno, así que está habilitada para preguntar sobre antigravity. A ver, ¿qué tan seguro es instalarlo en mi máquina? Es seguro.
+
+¿Por qué no sería seguro? ¿Qué este es antigravity?
+
+No sé. Eh, no sé. Es una es como que me da inseguridad instalarlo. Lo estoy probando, pero en una máquina virtual y como que todavía no lo quise instalar.
+
+Y ¿Dónde viste que puede llegar a ser peligroso?
+
+No, no sé. Eh, era es una pregunta que tengo.
+
+Ah, es pero no pensé que habías visto como que decían que es peligroso.
+
+Yo digo porque por los permisos que se le da, o sea, en teoría es como que
+
+vamos a hacer una cosa. Yo ya de de por sí te digo, no es peligroso para nada. En lo absoluto, talo.
+
+Claro.
+
+Nada, no hace nada. Nada en tu máquina. Está bien. Ahora,
+
+ah, está bien.
+
+Vamos a hacer, vamos a dejar pendiente una clase, vamos a hablar de esto de desarrollo aumentado y vamos a hablar de agentes, ¿sí? Pero en otra clase y vamos y ahí podemos mencionar de qué trata todos estos IDEs con su agente integrado. Está, pero lo vamos a hablar ahí. Hm. Eh, podemos hablar de Open. COD de antigravity, de cursor, de cloud, de de Cloud Code, de bueno, 100.000 seguro. Alguno, no, seguramente y no conozco todos, conozco alguno porque hay 100,000, pero bueno, esa charla va a ser interesante y la vamos a tener. Sí, por lo menos dos o tres clases de eso lo vamos a vamos a hablar, pero respuesta rápida a lo que me preguntás, no tiene nada de peligroso, nada cero.
+
+Okay. Y después, bueno, para más adelante tengo una pregunta relacionada con el trabajo práctico, pero la hago después.
+
+Vamos a dejarlo para después. Sí, dale.
+
+Okay.
+
+Eh, bien. Entonces, tenemos nuestro entorno corriendo. Lo tenemos que entender, gente. Ya lo tienen que tener instalado y hagan pruebas. Empiecen a probar cosas con o sin agente, pero entiéndanlo, entiendan qué es lo que está pasando. Como les dije, un servidor web, yo al servidor web le voy a estar haciendo peticiones de recursos y guárdense ese concepto, una petición de un recurso. Esa petición de un recurso va a llegar al servidor web y el servidor web va a tener que ir a buscarla algún lugar. está ese recurso lo tiene que ir a buscar a algún lugar. Ese recurso, en el caso de Apache instalado con WAM, está en la carpeta de WAM, donde yo instalé ese servicio. Adentro hay una que es www. Y ahí adentro voy a poner todos mis proyectos o todos los recursos que yo quiera que el servidor Apache pueda encontrar. Está claro. Sí,
+
+eh yo solo quería por si alguien aún no instaló WAMP. Eh, la carpeta WW eh, yo la tuve que crear, o sea, pero porque nunca tuve un proyecto ni nada, o sea, tuve que crear la carpeta W y ahí cargar el proyecto
+
+con OneP.
+
+Con WAMP,
+
+¿en serio? Qué raro.
+
+Sí, ¿no? Eh, yo estaba ahí viendo y yo no encontraba la carpeta W. Así que la creé y ahí lo subí
+
+y funcionó.
+
+Sí,
+
+rarísimo, porque por lo general trae como una página de bienvenida, que es esto que ustedes ven acá, espantoso, pero es lo que eh lo trae de de solo. Esto es una página web que trae one server, one digamos el servicio y por lo general trae todo esto. Pero bueno, bien. Si si no te lo trajo y lo creaste y funcionó, un lujo.
+
+Listo.
+
+Recuerden eso. La carpeta esa es nada más y nada menos que una configuración de nuestro servidor web. ¿Qué quiere decir? Yo al servidor web, si si ustedes interiorizan, van y investigan, lo pueden configurar para que vaya a buscar recursos a cualquier carpeta que ustedes quieran. Está. Entonces, si quieren tener una carpeta fuera que no sea la esa WW, bueno, van a tener que venir acá, venir a apache, venir a apache settings, eh, perdón, acá httpd, en particular puede ser los virtual host. Y en este archivito le van a decir, bueno, fíjense cuando vas a 8080 anda a tal carpeta. Yo acá tengo, bueno, un virtual host, pero ustedes acá pueden configurar distintos puertos que vayan a distintas carpetas de distinto lugar. Eh, ahí pueden ustedes configurarlo como ustedes quieran. Sí, por defecto es wwwamp en SAMP creo que es HTdc. la carpeta y así en distintos tipos de carpeta. Bien, por eso es distinto en eh según la aplicación que instalamos porque es una configuración de apache y el que hizo one dijo, "Bueno, yo le voy a poner así porque a mí me gusta que esté configurado así y lo hizo así. Ya está. Ustedes si quieren lo pueden cambiar. De todas formas lo que quiero que quede claro Ya tenemos nuestro servidor web y adentro de nuestro servidor web nosotros vamos a empezar a crear esas proyectos. Nosotros vamos a crear un proyecto por orden. Para tener mantener un orden, le ponemos un nombre a una carpetita dentro de WW. Yo escribí PS como proyecto del software y ahí vamos a tener nuestros recursos. ¿Está? ¿Cuáles son nuestros recursos? Bueno, index, php, abp js style.css. Bien, obviamente esto está desestructurado, es así no más. Ya acá lo abrí con mi ID y finalmente tengo esta. No me acuerdo que que tenía esto, pero vamos a ir rápidamente para ir local host y a local hostidor web le pedimos el recurso. ¿Cuál? PS/ index.php. Le pedimos ese recurso y fíjense, bueno, me tiró un error, ¿no? Validar credenciales. Bueno, porque estuve jugando, estoy llamando una función que no existe. No me acuerdo dónde ni cómo, pero está acá. ¿Se acuerdan? Esto esto era el ejemplo del login. Está que quedó truncado. Y si quiero el otro recurso, ab.php. Bien. Y se acuerdan acá teníamos el alta modificación y la consulta que era el listado de usuarios. Está. Entonces acá escribíamos Nicolás, apellido García, correo electrónico nico@mail.com, contraseña 1 2 3 y Le dábamos a registrar usuario. Esta acción, este formulario, ¿se acuerdan qué pasaba? ¿Qué tenía acá?
+
+No me acuerdo. Un post o un get. Mandabas los datos por una petición.
+
+Exactamente.
+
+Muy bien. Este formulario tiene el action, que es el recurso al cual yo voy a mandar todos los datos que están adentro de ese formulario HTML. Bien, y el método está descrpto acá en post. Entonces, ¿qué va a pasar cuando yo aprende submit de ese formulario? Se va a crear una petición HTTP. Lo voy a hacer. Voy a ejecutarlo. Eh, hago clic. Se va a crear una petición HTTP que ahora vamos a ver. Esa petición es esta que está acá. Si en network. Esta petición, esta petición en particular. los las cabeceras y todo el detalle es acá. Es una petición a este recurso, ¿lo ven? Con método post. Acá ya como es una cabecera general, me dice el estado que fue okay, esta es la respuesta del servidor, pero creó esta petición con todas estos estos header request header, o sea, la las cabeceras de petición. Esto es todo lo que que mandó el navegador sin que ustedes se den cuenta. Cuando hicieron clic en el formulario, en el enviar, cuando hicieron clic en el registrar usuario, envió todo esto. Todo esto. Bien. Fíjense quiénes están acá. Las cookies. Tuti. Un montón de cookies. O bueno, un montón. Un pa Origin. Todo. Todo esto lo armó. Esto es una petición HTTP armada por mi navegador. Y eso fue al servidor. Llegó al servidor, llegó al servidor y encontró ese recurso que es este que está acá, PS ABM. Lo encontró y entonces empezó como es un servidor apache y entiende PHP porque está instalado PHP, empezó, "Che, vino un parámetro ID por GET. Si vino, se tialo en esta variable. Si no vino, se tialo vacío. Instancia una variable mensaje vacía. Instancia una variable tipo de mensaje vacía. Hace este if. Si el ID es tal cosa, conectate la base de datos, hace esto que está acá, instancia esta variable. Si la petición es por post, hace todo esto que está acá. El método de la petición era un post. Justamente eso es lo que hicimos. Entonces entró acá y pidió la variable que venía por el post. Ta ta ta ta ta ta, ejecutar la conexión a la base de datos, eh hacer un insert ta. Bueno, bueno, bueno. Finalmente empezar. Esto es HTML, así que el navegador web dice, "Lo escribo así como está. Lo escribo así como está. Lo escribo así como está. Lo escribo todo como viene así. Acá de repente aparece un PHP, entonces le digo, "Che, si el mensaje no está vacío, hace esto que está acá, lo que está dentro del del if. Este, acá aparece el if. Empieza mi if. El if, n, y en. Sí, acá hay otro if, perdón. Bueno, hagan esto, hagan este ejercicio, familiarícense con esto que está acá, con la ida, con el código. Está, fíjense acá, muestro el mensaje y finalmente empiezo a dibujar de vuelta el formulario. De vuelta el formulario, el formulario, tacata. Todo el formulario, acciones para registrar y volver. Acá está el volver. Y acá por acá abajo el botón de registrar usuario. Si submit de registrar usuario. Y por acá más abajo, tengo un una acción en PHP que me conecto a la base de datos, consulto todos los usuarios, consulto la cantidad de usuarios y si hay más de un usuario, hago una tabla que está por acá y esa tabla recorre los usuarios. y los muestra bien. Y en ese mostrar genera por acá un eliminar y genera un editar. Bien. Bueno, en fin, esos eliminar y editar son estos que están acá. Este es el listado. El editar en sí es un link. Ahora es un link en particular que va a generar otra petición HTTP, pero con un parámetro que es es el ID. Entonces, yo le voy a hacer clic y va a ver va a editar usuario. PHP con el ID 5\. Bueno, esto no existe, fíjense. Está bueno, lo tendríamos que crear, tendríamos que crear esa ese recurso editar usuario. PHP para que esto funcione. Lo podemos crear. Acá podemos usar el mismo ABM, entonces podemos decir ABM PHP con el ID y si llega el ID hacer que esto se rellene y que sea editar el usuario. Uy, se eliminó eso. Justo si llegaba si llegaba la ID era eliminar. Lo liquidé. ¿Entendieron lo que pasó recién? Sí que tenías un método justante que era para eliminar era recibiendo el ID.
+
+Exactamente.
+
+Si lo recibió por allá arriba era porque era un geto, ¿no?
+
+Y bueno, está preparado para eso. Fíjense si tengo el ID y si el ID es distinto de vacío, lo elimino. ¿Alguien no entendió eso? Por favor, díganmelo. Es el momento de no entender y de hacer estas preguntas.
+
+Por mí se entendió
+
+bien. Bueno, ojalá que todos, que nadie me mienta y que todos lo entiendan y que nadie esté dormido. Hagan así, deditos, te metan le Ahí está. Si no, bien. Ahí está. Bien. ¿Qué pasó? Llegó el ID y lo eliminó porque yo lo había programado así. Acá lo que yo podría hacer es que el método sea delete, entonces hacerlo distinto, cambiarle el método. Nada, podríamos hacer un montón de cosas. Está, lo dejo en sus manos. Sí. Por eso el trabajo para de este sprint es llevar adelante ese ABMC de usuarios. Todo eso lo dejo en sus manos. Lo más lógico es que ustedes, además de modificar esto, creen, por ejemplo, un archivo que sea base de datos pun php y acá creen o una clase como lo vimos Sí, el PHP o creen un las funcionalidades, ¿sí?, de conectarte a la base de datos, de crear un usuario, de lo que fuese, pero que esté todo centrado. Entonces, vamos a imaginarnos que yo quiero generalizar todo esto. Entonces, acá lo que voy a hacer es PHP. Voy a guardar esto. Lo voy a hacer simple, no lo voy a hacer orientado. objetos, pero lo voy a hacer con funciones. Función le voy a decir con connect. Simplemente acá voy a tener variables como por ejemplo el host que va a ser local host, el usuario host usuario password y la base de datos. Y acá voy a tener la conexión. Sí. La podemos devolver, pero por ejemplo yo tengo función. Lo que podemos hacer es función eliminar bajo usuario. Sí, ya me lo hizo solo, pero fíjense directamente. Yo acá conect lo escribí mal porque en inglés es con doble n, ¿no? O no, no sé, pero fíjense. Entonces, esto lo voy a listar. Función list usuarios. Esto es una cosa de inglés y español espantosa. Eliminar usuario y conect. Bueno, no importa. Fíjense. Listar usuario. Reutilizo la conexión, selecciono los usuarios y retorno la lista. Obviamente acá ustedes pueden validar, pueden hacer eh directamente en vez de retornar el my sequel eh query retornar una lista de usuarios, entonces sería como más agradable. ¿Y qué van a hacer acá? Vamos a Acá abajo al listado, por ejemplo, se acuerdan que por acá abajo yo tenía todo esto. Bien, entonces acá esto me lo voy a llevar ya que estamos, perdonen, pero acá vamos a poner usuarios y acá sería estar usuario. Esto así como lo ven ustedes, perdón, esto va a ser response. Esto lo eliminamos y esto ya lo usamos acá abajo. ¿Se entiende? Estoy reutilizando y usando esta librería, una función. Ahora, esta función yo no la tengo declarada en este PHP que tenemos acá. Entonces, ¿qué nos faltaría hacer? Un requere PHP, base de datos, PHP. Está lo mismo que esto, esto yo ya no lo hago. acá ni esto tampoco. Lo que yo hago es res igual a eliminar. Era eliminar usuario.
+
+Sí, era sí.
+
+Y le paso el ID y la respuesta esisto. que está acá, porque eliminar usuario, si vamos acá, eliminar usuario se conecta, hace el delete y listo. Vamos a hacer asegurarnos que esto sea así. Sí, se entiende. Bueno, agregamos una capa a todo el quilombo, ¿no? Generalizamos nosotros si en otro en otro lugar necesitamos el listado de usuario y demás, Bueno, ya tenemos la capa. Esto en lugar de base de datos ya tendría que ser medio orientado de usuario, pero bueno, así aparecen las capas. ¿Me explico?
+
+Sí, se entienden.
+
+Pero deditos, todos, todos. Y el que no entiende, por favor, me lo Y acá aparecen todos los patrones que ustedes conocen de programación. Este, bajo acoplamiento, alta cohesión, etcétera, etcétera, etcétera. Bien. Bueno, por supuesto, todo esto además lo podemos aparar en carpetas, librería, podemos hacer librerías, controllers, servicios, eh bueno, ordenado, ¿está claro? Entonces, eso se lo dejo a ustedes. Eso es sobre el trabajo de este ¿Alguna duda sobre esto?
+
+Yo tengo una pregunta relacionada con el registro de usuario en el ABM
+
+para poder dar de alta un usuario, eh, o sea, un usuario que ingresa, ¿se puede dar de alta o es necesario que un administrador lo realice?
+
+Ah. Esto ya es más eh una pregunta funcional. Eh, hasta ahora lo que vamos a hacer es esto que vieron ustedes, un usuario, o sea, un formulario de usuarios que está ahí y ni siquiera eh discriminamos por rol ni nada. Está
+
+claro.
+
+Un formulario, doy de alta un usuario y eh lo listo, lo puedo editar y lo puedo eliminar. No, no importa si alguien lo puede, o sea, el que lo use a ese a eso que van a hacer ustedes, eh, lo va a poder dar de alta, eliminar y modificar.
+
+Okay. Entonces, eh, el entregable es sin esos permisos, o sea, cualquier usuario puede darse de alta.
+
+Es sin seguridad. Sí, claro.
+
+Okay.
+
+Eh, profe, algo que que dijo es que en el sprint eh que hay que entregar también tiene la asignación de rol. Entonces,
+
+entonces también da igual, o sea, que todos se puedan registrar con el rol que quieran.
+
+Da lo mismo.
+
+Okay. Listo.
+
+La diferencia que tiene, que acá yo no lo hice, que para ustedes los roles están en otra tabla de la base de datos. Entonces, van a tener que crear un select, ¿sí? Un componente select de los componentes select son los desplegables, ¿sí?, de HTML que yo lo haría, vamos a suponer, voy a hacer una cosa eh rápida acá. Esperen que no encuentro el formulario. Acá está el input del nombre. Bueno, ahí vamos a ver, vamos a ponerlo acá. Eh, este es apellido. Después tenemos un Row, que es el email y tenemos el password y después tenemos las acciones. Y acá quedó medio raro esto. Vamos a suponer que acá tenemos un input lle. Lo vamos a poner acá. Esto quedó medio raro. Y esto es un select. Vamos a hacer un select con idrol. Name roll, place holder no. Y los select adentro tienen options con su val y su eh el valúe es lo que se va a enviar al servidor del seleccionado y Lo que está dentro del option es lo que se escribe. ¿Si? Entonces yo acá voy a ir directamente y este es el select. Me está dice contraseña porque copié todo esto de acá, ¿no? Fíjense, este es el select que está acá. Fíjense, se rompió todo acá. No, no se preocupen. Pero ustedes tienen que crear ese cel con los roles que consultan a la base de datos. Entonces, el desafío es ese, es ordenar bien los archivitos, porque a este yo le pondría, vamos a suponerte, en vez de base de datos, yo tendría un eh user user eh repository pun php. Este sí tiene todas las conexiones a la de que y todas las funciones. que tienen que ver con el user y después tenemos user eh perdón roll repository pun php y este roll repository va a tener todas las funciones o todas las consultas a la tabla rol. Entonces voy a listar los roles, eliminar los roles, agregar un rol, etcétera. ABMC de roles, todo contra la base de datos. y este con lo de user. Y estos dos van a usar lo de la base de datos, simplemente el connect, ¿está? Entonces, user, vamos a poner así. Esto es PHP. Esto va a requerir requiere base de datos. ¿Se entiende? Y entonces yo acá en ABM C ya no uso base de datos, uso user repositorio. Si lo hacen orientado a objetos, los va a ser mucho más cómodo. Van a tener menos problemas. Sí. Eh, se le caracterí from usuario. Acá no sé por qué me tira error por acá la variable host user y password database en base a dato. Undefinite host user password barra database. ¿Qué pasó? Host password está loco. Bueno, no sé por qué hace eso. Ah, me tiró error en realidad de de conexión. R. Rot proyecto de software 2026\.
+
+¿Está bien, no? Los datos de conexión.
+
+Sí, se ve bien.
+
+Por acá está. Había otra otro. A ver,
+
+eh, no, más arriba en el persistir. local puntu. Bueno, user, password, post y base de datos. Bueno, Si no les gusta, le ponemos local host. A ver si le gusta ahí. ¿Le gustó? Bueno, Rari que no le haya gustado. Muy raro. Bueno, e se entendió ahí. Yo estoy entrando AM. Voy a usar, en lugar de usar eso, uso user repository. El user repository tiene una función que es eliminar usuario que usa la función para conectarse la base de datos de una librería base de datos que está acá. Entonces, tengo todo centralizado. Bien, ya tenemos dos capas de división. Vamos, en realidad tendríamos la vista y el repositori que bueno, ahí es el quilombo, la vista, mezcla, controlador, todo junto. Sí. Se va entendiendo esto.
+
+Sí, sí, se entiende.
+
+Buenísimo. Tá cover. ¿Qué pasó con esta cover?
+
+Hola, ¿se me escucha?
+
+Sí.
+
+Pues parece que PHP por Efecto no deja acceder eh variables fuera de la función. Creo que se tiene que declarar con global. Sí, global o const. Vamos a ponerle. Se pusieron estricto en PHP. Igual yo como sugerencia me eh y ahí sí pesos cost Bueno, igual yo como sugerencia eh úsenlo orientado a objetos. Sí, acá en PHP lo hacemos así. Es bastante sencillo, simple y va rápido. Por eso lo dejo eh de esta forma. Sí. Bien. Eh, ¿hace cuánto no entraba esta overflow? Buenísimo. Bien, hasta ahí alguna duda, consulta. Eso es lo que van a tener que hacer ustedes, completar este select con los roles que traigan de la base de datos y cuando persistan, la relación va a tener que ser eh con fory, o sea, el usuario va a tener una for al rol. Sí, ese es el desafío. Y cuando consulten. Los usuarios, van a tener que tener un join. Sí, para traer el rol. ¿Estamos de acuerdo con eso?
+
+Sí.
+
+Dedo, dedo. Entonces, siéntense, hagan las etapas del desarrollo del software, diséñenlo, piénsenlo, piensen. No. No solo en el UI, si piensen en esta arquitectura, en cómo, qué capas van a establecer ustedes, si va a ser orientado a objetos, dónde van a poner la página de la vista, el controlador, los repositorio, cómo se van a conectar a la base de dato, piénsenlo, diséñenlo. Esa es la etapa de diseño, ¿sí? Y de programación, todo ahí una mezcolanza. Y después programen, después pídanselo a la IA. Pero con todo eso pensado, díganle a la inteligencia artificial, haceme tal capa con tal eh atributo, con tal, perdón, con con tal responsabilidad en esa capa. Generarme un repositorio por cada una de las entidades, hacerlo de orientado a objetos en PHP, reutilizar una clase base de datos que tenga los datos de la conexión, pero primero diseñen y piénsenlo y escriban eso. Háganlo O sea, es mandatorio que hagan eso, si no van a quedar estancados. Bien, entonces, trabajo práctico y sprint 2\. ¿Quedó claro?
+
+Sí,
+
+sí, sí, claro.
+
+Un éxito. Y háganlo, no se queden sin hacerlo. y probarlo bien. Eh, bueno, y otra cosa, no lo hagan a último momento, háganlo ya está, porque a último momento no van a llegar, van a se van a encontrar con problemas y no van a poder hacer bien. Listo con este tema. Vamos a ir a a ver con ator está. Entonces partimos de la base. Acá los dejo de ver y ver el chat. A ver, lo voy a intentar dejar acá chiquitito. Más arriba, ¿no? Más chiquito, no se puede. Ah, pero sí más para allá. Bien. E partimos de la base del desarrollo. en PHP. Bien. Y en particular, eh primero más en general, perdón, no en particular, en general sería de las bases del desarrollo web. Vista de un cliente, petición HTTP, llego al servidor, el servidor encuentra el recurso que estoy buscando, como vimos recién, interpreta mi lenguaje PHP, hace lo que tiene que hacer. y nos da una respuesta, un response. Vuelve el cliente, el cliente dibuja ese HTML, eso es JavaScript y esos CSS y nos muestra lo que nos tiene que mostrar. Está esa es nuestra base. Ahora bien, eh van a ver y y lo van a tener que hacer ese ABMC programado a mano. Resulta que no se empiezan a surgir esto, tengo que separarlo en capa, tengo que reutilizar cosas. Esto se hace muchas veces y por qué no hay un eh un plugin que ya lo haga o un o una librería o lo que fuese que ya esté esto. Uh, tengo que volver a hacer esto que ya lo hice 70 veces, la seguridad, validar. Bueno, y para eso aparecen lo que conocemos como frameworks. ¿Quién no sabe o díganme todos eh, una opinión sobre qué es un framework. Es
+
+framework,
+
+bueno, parecido a lo que es coinator porque ya es un framework, ¿no? Es como un conjunto de herramientas que ya están definidas, lo puedes utilizar.
+
+Bien, perfecto. No sé si lo leíste acá. Se lo invitaste a Chat GPT, pero estuvo perfecto. Pregúntenle a Chat GPT ahora que estamos virtual,
+
+eh,
+
+que sí, justo lo está por decir. Pasó diapositiva y bueno, ahí ya lo dice más o menos.
+
+Perfecto. Igual eh lo dijiste fluido, así que parece que lo sabías. Entonces, bien. Y si lo sabías, mejor. Framework es justamente eso, es un conjunto de herramientas para cuando nosotros necesitamos crear esta aplicaciones, portales web y demás, ya están esas herramientas implementadas y desarrolladas y nosotros lo podemos usar. Entonces, no tenemos que empezar desde cero. No es un iniciar como recién que estábamos haciendo el ABC que empecé, creé un archivito, le puse acá, le creé la la conexión, sí, pero dije todo el tiempo se repite la conexión. Voy a hacer una librería. Bien, extraigo y hago esos patrones. De hecho, empecé más porque yo no diseñé, no pensé ni analicé el problema, pero en realidad lo que estábamos haciendo es eh simplemente aprender eso. Bien, entonces un framework es eso es un conjunto de herramientas que me ya desarrolladas que me dan solución a un montón de problemas comunes y me permiten no empezar desde cero todas las veces. Está y además de eso, esas herramientas generalmente me dan un contexto de desarrollo ordenado que ya me implementa ciertos patrones. Está en particular Codinator en su versión 4 es justamente eso. Bien, es un framework de desarrollo para PHP y con ciertos patrones y cierta estructura de funcionamiento que tengo que aprender para utilizarlo. Bien, ¿qué va a tener framework o cómo es su arquitectura? Sí, Codinator, eh, perdón, ¿qué es Coordinator y cuál es su arquitectura? Coordinator. Básicamente todo va a pasar por un index.php, ¿sí? El indexp. Todas las peticiones de recursos van a pasar justamente por el index PHP, que va a ser nuestro orquestador. ¿Qué significa? Que el index.php va a importar un montón de cosas. o va a ser un requeret, como recién lo hicimos, es un poquito más complejo que eso, pero va a ser eh utilización de todo este motor que ustedes ven de arquitectura de Coordinator 4\. En particular va a tener unos archivitos que son de ruteo. Estos roteos ya los vamos a ver, pero le van a decir a a partir del index.php va a saber decidir ese esa URL o ese recurso que estoy sol Necesitando a dónde enviarlo. Bien. Y a dónde enviarlo, primero va a pasar por una parte de seguridad y finalmente se a dónde el ruteo me va a decir a qué controller yo tengo que enviar esa petición http y el los controllers como core del negocio van a hacer uso de distintos drivers, de los modelos de distintas librerías, voy a tener helpers, voy a tener packages y voy a tener scripts. Los controllers van a ser los que utilicen este tipo de todos estos archivos para eh justamente construir, ejecutar las funciones del negocio y construir y enviar la información a las vistas para que la vista finalmente pase por una instancia de cacheo y se devuelva al eh cliente. Está, ese es el flujo completo de una petición HTTP que llega a un a una aplicación construida en Codinator 4\. Va a venir la petición a mi index.php. Me gustaría dibujar, aunque soy malísimo, pero va a venir la petición a index.php. index.php va a usar el roto. Según el ruteo, lo que va a ser index.php va a ser enviarlo a un controlador o a otro controlador. Esto es según la petición que venga acá. Si viene a en el ruteo va a buscar a y a le dice, "Che, andá el controlador a controller. Sí. Y a controller va a ser uso de todas estas cosas de acá, en particular models. Ya van a ver por qué es el que nosotros vamos a usar más porque models o o el que más vamos a ver usar, porque models van a ser nuestros accesos a la base de datos. Sí, nosotros vamos a usar un patrón que a partir de los modelos vamos a acceder a las bases de datos, pero implícitamente vamos a tener librerías como por ejemplo la librería de base de datos que va a ser la que gestione las conexiones a las bases de datos. Sí, como recién creamos una PD.php, bueno, codinator tiene algo similar donde tiene el usuario, el host, el password de la base de datos y los models, que son los encargados de hacer consultas a la base de datos, van a usar esa librería para conectarse a la base de datos. Y después tenemos los helpers que que son un montón de archivitos que nos van a permitir eh jugar con los arreglos, con listados, con un montón de cosas. Bueno, en fin, ahí ya tenemos para jugar y hacer un montón de cosas. Bien, Coordinator 4, requisitos para ejecutar y poder empezar a trabajar con un framework como coordinator 4 PHP. versión 7.4 o mayor. Sí. Extensiones de PHP. Esto tiene que estar instalado. ¿Sí? ¿Qué significa que esté instalado? ¿Se acuerdan cuando yo les dije que en mi servidor web que ya me instalaba PHP y yo a mi PHP, por ejemplo, viniendo acá a PHP, puedo ir a ver todo lo que tiene PPH. P. ¿Cómo está configurado? Bueno, en una
+
+no no se está mostrando. Se ve la diapositiva.
+
+Ah, y no se ve un archivito ahí.
+
+No,
+
+sí, yo lo veo.
+
+Ah, soy yo que no
+
+conexión, maestro.
+
+A ver, ahora un archivito fondo negro. Sí, sí.
+
+Ah, sí, lo ven.
+
+Ahí está. Bueno, esa configuración tanto en PHP como en Apache, tengo que tener estas extensiones configuradas. En particular esas que son de Apache, van Apache, si usan WAM es más fácil, ¿se acuerdan? Puedo ir acá a AP Moduls. Y tengo que buscar la Intel o por acá environment module. Bueno, inencontrable inencontrable m stram y J son. No las voy a poder encontrar en Apache, perdón. Igual están ordenadas alfabéticamente, me parece.
+
+Sí, pero algunas viste que eh aparecen como eh outo. Entonces ahí eh no sé cuánto. Bueno, es muy probable que sean configuraciones de que ya estén por defecto habilitadas estas extensiones. Acá están MB Stream Eh, inl y j son no está, no está. Es muy probable que ya estén por defectos en las versiones de PHP. Entonces, Muchas veces ni siquiera aparece, pero si vamos a coordinator 4 y vamos a la página oficial a learn. H, acá tenemos todos los detalles. Sí, sin ningún problema. De todas formas les va a correr por defecto ya esto viene activado. Sí, incluso las bases de datos eh se conecta fácilmente, ¿no? No. van a tener problema. Eso acuérdense que no va a pasar bien.
+
+Sí. Una consulta, profe.
+
+Sí.
+
+En la diapositiva anterior, segundo, o sea, esa misma,
+
+eh, esa es la que dice PHP, donde están todos cuadritos. Es así. ¿Ves la flecha? La flecha que conecta routing con catching.
+
+Ajá.
+
+Ese por qué era
+
+esto porque por lo general hacemos hace catching. tanto del response como de la petición.
+
+Ah,
+
+entonces asocia, si yo pedí tal, se cachea con tal otra con la respuesta.
+
+Ah, okay. Okay.
+
+Bien. En definitiva, cuando ustedes empiecen a trabajar con Codinator, lo que les va a pasar es que se van a descargar. Para hacerlo fácil, lo vamos a descargar en formato ZIP. Orrar. y lo vamos a descomprimir. Sí. Y básicamente eso que estamos descomprimiendo va a ser esto que ven acá. Y esa descompresión es el proyecto y el framework coordinator con todas sus eh librerías y todo lo que yo y todas sus herramientas. Aquí vamos a tener distintas carpetas a saber. App es donde va a vivir todo el código de nuestra aplicación. Sí, ahí es donde vamos a programar nosotros, donde vamos a meter todo nuestro código de la aplicación. Public, como lo dice la misma carpeta, lo dice, es todo lo público. Sí, ahí vamos a tener el index.php, este que va a entrar todo por ahí y los SS, los JavaScript o las imágenes que tienen acceso público, o sea, que no van a pasar por ese filtro de ruteo y a veces podemos tener el htacess, que ya vamos a ver para qué sirve y para qué lo vamos a utilizar. La carpetita system, en la carpetita systems está todo el core del framework, o sea, todo lo que hace funcionar a nuestro framework, codinator en particular. Test y writable. Primero test. Ahí deberíamos tener todos los testings que nosotros vamos a desarrollar. Y WR table es una carpetita que contiene directorios que se van guardando como caché, registros, logs, está eso se va usando, lo va usando solamente el sistema. Nosotros ni no tocamos nada de Bien, entonces esto es lo que nos vamos a encontrar cuando usemos Codinator. Eh, dentro de la carpetita appig, todas estas carpetas, bien, todas estas carpetas. Config, acá es donde vamos a trabajar todas las configuraciones, ¿a qué nos referimos? ¿Cómo se va a llamar nuestra aplicación? El tiempo que va a durar una sesión, eh la kiss para las key hash e la URL, la configuración de las bases de datos, las configuración del ruteo, todo eso va a estar acá en esta carpetita config, así que no le podemos cerrar, está todo ahí. Controlas controlers de la arquitectura, los controladores de toda la funcionalidad que nosotros vamos a meter. Database. Acá vamos a guardar las migraciones y los seats fields. Es muy probable que no usemos migraciones y se migraciones es básicamente programar la creación de las tablas que yo necesito y las modificaciones de esas tablas. las podemos programar, eh, no es complejo, es bastante sencillo. Y las seits en inglés que es semillas, básicamente es las configuraciones iniciales. Por ejemplo, si mi sistema va a tener una tabla que se llama roles, esa tabla va a tener su migration. La migración va a ser el create eh rols o roles o o el nombre de la tabla con sus campos. y los seats va a ser la precarga de los roles que va a tener mi sistema, ¿está? Entonces ahí va a ser los inserts de los datos por defectos que van a tener esas tablas que ya van a venir definidas. Sí, eso en database, ¿no? Acá no es la configuración, sino que tiene que ver con la creación y la precarga de los datos. Filters vamos a ver, pero filters eh codinator tiene un montón. Son acciones que yo puedo ejecutar antes de que se que llegue a una a un controller, después que llegue a un controller, etcétera, etcétera. Esto generalmente lo vamos a usar para seguridad. Entonces, yo puedo eh habilitar según si alguien está logueado o no está logueado o puedo no habilitarlo, puedo eh habilitar ciertos controllers para alguien que esté logue pero además tenga un rol. Sí, así que todo eso en filtres. Eh, help. Bueno, ahí podemos es una colección que podemos nosotros programar como una colección de funciones standalones, ¿sí? Funciones, no sé, quiero un helper que me ordene de cierta forma los respuestas de la base de datos. Bueno, lo configuro ahí, lo programo y lo guardo en helpers. Lenguaje para multilenguajes para la internacionalización. Librerías es parecido helpers, pero con funciones más complejas, ¿no? Una librería tiene más de una función y alguna clase eh más compleja. Models. Y acá es donde empieza eh también donde vamos a trabajar mucho models, eh controllers, models y view va a ser casi nuestro nuestra fuente de trabajo. Sí, los modelos en particular en Coordinator usan un patrón que son los encargados de acceder a las bases de datos y las views básicamente van a estar todas nuestras archivos de HTML que van a mostrar los resultados al cliente. Bien, esas son nuestras carpetitas. Eh, Coordinator mandatoriamente nos hace trabajar con un patrón modelo pista controlador donde separa estas responsabilidades, lo separa en estas carpetas, las vistas, los controllers y los modelos. Está entonces Nosotros vamos a tener una petición. Toda petición a través del router va a terminar llegando a un controlador. Ese controlador va a usar los models. Como les dije, los models son los encargados de acceder, en este caso, a la base de datos, pero además son clases que nosotros vamos a usar para recorrer los datos, para hacer lo que querramos que hacer eh con la información y esa información finalmente va a ser enviada a una vista. Esa vista va a tener la estructura, los CS y los JavaScript necesarios para construir el HTML de respuesta a nuestro cliente. Está modelo vista controlador. Modelo vista controlador. Y me encantó esto de dibujar. Vamos al siguiente. Bien. Ruteo. Eh, no pasa nada, pero eh Esto lo voy a pasar por alto. Después vamos a ver cómo rotea, cómo hacemos el roto. En Codinate. Eh, esto también es parte del ruteo. Vamos a cómo programamos. Si, y esto lo hacemos rápido. Quiero ver qué hora es. Son 8 men 10\. Sí, llegamos. Son 10 minutos que quiero ver esto y después nos metemos manos en la hora, descargamos coordinator y lo hacemos funcionar. Bien. Controllers. Para definir un controller, simplemente vamos a ir a la carpeta controllers. Coordinator usa hace uso de los name spaces. Name spaces hacen referencia a esto del de las paquetes en Java. Bueno, en PHP tenemos name spaces o espacios de nombre. Esos name spaces eh me van a permitir importar y hacer uso de distintos otros archivos librerías dentro de Coinator. Está entonces declarando un namespace de app controllers app es el sistema, el core de coordinator, yo voy a poder uso hacer uso de base controller. Base controller es el controlador de coordinator. Y entonces para definir mi propio controller, lo que yo hago uso es de una definición de clases y extender del base controller que es el controlador de codinator. Está para definir una clase. Ya lo vimos en PHP orientado objetos. La palabra reservada class, el nombre de mi controlador extiende de base controller y ahí todo lo que nosotros querramos eh programar. En definitiva, en los controllers también voy a definir una vista. Perdón, para definir una vista directamente van a ser archivos PHP que van a estar en la carpeta view y por ejemplo si yo defino esta se te se llamaría blog, perdonen la letra, ¿no? Qué difícil que es escribir con el mouse block view punto php. Ah, si entienden esto, ya están aprobados. Eh, por ejemplo, yo tengo ido una vista en la carpeta vistas para hacer llamado a esa vista desde un controlador para la comunicación. Lo que voy a hacer dentro de la función es devolver, hacer un eco con la función view del nombre de ese archivo. Está. Entonces, lo que yo voy a estar haciendo acá, alguien escribió acá, perdonen, el entregable de Sprint 2, tenemos que usar Coordinator, ¿no? El entregable del Sprint 2 no se usa Coordinator. Bien, lo que yo estoy haciendo acá es que si hay una petición que viene, pasa por el ruteo y llega a este controller y llega a este método de ese controller, me va a estar devolviendo esta vista. O sea, El controller va a decir, "Che, necesito renderizar esta vista que está acá." Entonces, la va a devolver y esta vista va a ser un archivo aparte que se va a llamar plogw.php y se va a devolver al cliente. Entonces, así las vistas que están en mi carpeta views, yo las voy a poder agrupar en distintas carpetas y voy a poder reutilizar esas vistas. Entonces, por ejemplo, quiero utilizar una vista que es Voy a tener footer, voy a tener un header que va a ser común, voy a tener una que es un menú que también va a ser común. Para devolver una vista bastante más compleja, lo que voy a hacer es eco de cada una de esas vistas separadas. Bien, entonces ahora lo vamos a ver en acción, ¿no? Pero pensemos lo siguiente. Cada eco de esto es como que voy escribiendo en un HTML en blanco que va a ser nuestro response, nuestra respuesta.
+
+Una consulta,
+
+¿sí?
+
+Eh, ¿en qué se se diferencia en algo en usar los include o eso también podríes,
+
+no? Los ecoview, o sea, todo eso con el controlador es un poco como usarl incluir esos pedacitos de código directamente.
+
+Sí, la diferencia es que acá lo estamos controlando. justamente desde el controller, ¿sí? Es una separación de responsabilidades, tiene que ver más con un patrón que con eh el resultado obtenido. Está acá el responsable de construir y de hacer uso de la vista es el controller. Bien, y no la vista por sí sola. Lo podemos hacer. Lo podemos hacer del lado de la vista, no va a pasar nada, va a andar igual. Ya, ahora después vamos a ver algunos detallecitos, pero tranquilamente lo podemos hacer y hacer un layout. Coordinator tiene una forma de hacer layout un poquito más ordenada que esta. Lo que yo quiero que entiendan es esto, es cómo en realidad funciona esto. Dentro de ese método, cada una de estas cosas va a ser como escribir en un papel en blanco. Entonces, el eco es va a agarrar este pedazo de menú, este HTML, este que está acá, y lo voy a escribir acá. Sí, después de escribir el header que lo escribió por acá y después así está. ¿Por qué tienen que tener en cuenta eso? Porque recuerden que lo que nosotros estamos construyendo es un HTML. Entonces, acá tengo que tener en el header la apertura del HTML y en el footer las cierre del HTML para que quede bien formado. ¿Está claro? Entonces, esto tienen que tenerlo bien claro. Después vamos a construir layouts más de una forma un poquito más simple, más compleja. Ahora me dicen ustedes, "Bueno, pero si yo quiero listar usuarios y los usuarios los consulté en el controlador a partir de otro objeto, ¿cómo se los paso a la vista? ¿Cómo le paso la data a la vista? Sí. Y la forma de pasárselo es como ustedes ven acá. Esperen que borro todo esto por cómo se borra borrar todo. La forma de pasarle información a la vista es construyendo un arreglo asociativo. Fíjense este arreglo asociativo. Empieza un arreglo, tiene un una ke que se llama page title y el valor de esa de ese arreglo en esa posición es your title. Ese arreglo asociativo se lo paso cuando llamo la función view, se lo paso como segundo parámetro. Y esto lo que va a producir es que yo en este contexto, en este content, en esta HTML, en esta vista que está acá, acá va a haber disponible una variable @ page title que va a tener este valor. Yo sé que por ahí se están mareando, pero van a ver que termina siendo algo así. En el controlador, como les dije, construyo un arreglo asociativo. En ese arreglo asociativo le pongo lo que yo quiera, cualquier índice. A ese índice le asigno valores, como pueden ser esto, pueden ser listados de usuario, pueden ser lo que yo quiera. Y esa arreglo asociativo se lo paso a Blockview View. Luego en Block View esto se va a convertir en una variable y así lo voy a lo voy a usar y heading se va a convertir en otra variable. Sí, no accedo como un arreglo asociativo, sino que arreglo ese arreglo asociativo se cambia, se convierte en variables. Los Lo mismo es esto que está acá. Estoy construyendo un arreglo asociativo con tod do list, title y heading. Fíjense que el to do list está acá tiene como valúe un arreglo. Entonces esto es un array. Entonces el to do list y llegó hasta esta variable que está acá, yo lo puedo recorrer con un for each. Y cada uno va a ser cada uno de estas variables, de estas contenidos, de ese arreglo. ¿Se entiende? Hagan deditos o me preguntan si no
+
+sí se entiende.
+
+Entonces, esa es la forma en que tiene codinator de que el controller envíe información a la vista. Bien, otra vez cliente. Petición H. T P de redes o mi red particular llega a un servidor. Esa petición que nosotros hicimos va a llegar a un petición a mi servidor web, a apache como en la aplicación mía va a estar alojada en Apache, en mí en particular mi www. La carpeta www. el servidor la va a encontrar si es que hice bien la petición y va a empezar el proceso de ruteo y lo va a tomar eso. Eh, mi codinator, mi framework. ¿Está claro? Pero esto ya lo tenemos que tener mega claro. Estamos esto vive, todo vive del lado del servidor. Y definitivamente, en definitiva, lo que vuelve es esta view construida pasada a a HTML. Tengo que desarrollar mi habilidad para escribir eh con esto. Claramente no soy muy bueno. HTML es lo que devuelve. Estamos bueno. las el ruteo, esto que yo les mencionaba, el ruteo en particular en Codinator lo vamos a establecer en un archivo de configuración routes y ahí le vamos a decir claramente, quiero que cuando pidan tal recurso vayas a tal controlador. Van a ver que es sers sencillo e intuitivo. Entonces, lo que tenemos que configurar en ese archivo de ruteo va a hacer esto. Cuando llegue un método get y en la URL sea users, anda al controlador users y ejecutar el método list. Entonces, esto lo que me va a hacer codinator es instanciarme un la clase users y ejecutar el método list de user. Está claro. Otro ruteo que puedo hacer cuando venga users 123, anda y llama a la clase users al método find, pásale 1 y 23/1/23 y eso va a llegar como parámetros. Después vamos a ver como esto no se pone uno, se pone, vamos a ver con algún eh comodines. Bien, para usar eso.
+
+¿Qué, profe, eh una dudita sobre los parámetros? Eh, ¿cómo? Eh, porque ahí pone que le envía users dos puntos dos puntos find eh bueno, 123 y acá e en la find dice como que recibe dos parámetros,
+
+el 1 y el 23\.
+
+Ah. Okay,
+
+tranquilos que esto lo vamos a ir viendo, no se preocupen. Esto inclusive cambia a veces acá para, por ejemplo, users y acá en lugar de ponerle números, yo le puedo poner eh comodines con pesos, pesos ID. Entonces, si me viene una petición barra algo, eso llega a una variable, un parámetro acá, pero eso lo vamos a ver más adelante, ¿ya? Okay.
+
+¿Cómo vamos a rotear? Eh, bien. Otra de los archivos de configuración importantes es la conexión a la base de datos. Sí, nosotros vamos a trabajar todos con base de datos, así que vamos a tener un archivo que está dentro de la carpeta config, que se llama database.php y ahí vamos a tener el host, el usuario, el password, el nombre de la base de datos, el driver que queremos usar, etcétera, etcétera, etcétera. un montón de parámetros que tienen que ver con las conexiones a base de datos. Una vez que nosotros establecemos eso, el resto se encarga la librería de base de datos de coordinator. Estamos, no tenemos que hacer más nada. Alivio, ¿no? Bien, yo les mencionaba que el acceso a la base de datos la vamos a hacer a través de los models. ¿Qué patrón de acceso a datos conoces? A ver, ¿quién me puede decir un patrón que hayan usado?
+
+No sea a qué se refiere como patrones de acceso. Piensa en en si es privilé, si es public, si es protector.
+
+No, estamos hablando de acá. Claro, te entiendo. No hablo de dentro de eh los patrones de desarrollo, patrones de desarrollo de software, ¿no? Cuando hablamos de distintas soluciones ya preestablecidas.
+
+Jdc
+
+JDBC no es un no es un patrón. JDBC es una librería.
+
+Porque nosotros hacíamos la clase del usuario JDBC y después hacíamos el Do.
+
+¿Qué es un? A ver, ¿qué es DAO?
+
+Nosotros el DA lo usábamos como una interfaz eh que tenía los métodos de insert o bueno, buscar como nosotros los defininábamos y después en el JDBC lo implementábamos y ese tenía y ahí se hacía el acceso a la base de datos.
+
+Perfecto. Ustedes usaban DAO. DAO es un patrón de acceso a los datos. Está ustedes y acá y ahí me dicen repository. Ese es un patrón dado también, pero parecido. ¿A qué me refiero con patrones? Esto ya nos vamos un escalón arriba del desarrollo, nos ponemos como diseñadores de software. Entonces establecemos, decimos, bueno, ¿quién va a ser el encargado de acceder a los datos? Y Y en Java, ustedes recién me decían, estaban las clases DAO. Entonces dijeron, por alguna magia del de la ingeniería del software, como los patrones, como todos estos problemas ya se les presentaron a un montón de personas y dijeron, "Lo resolvemos así, es la mejor forma, DAO es una de las mejores formas de acceder." ¿Qué significa esto? Delegar la responsabilidad de acceso a los datos a ciertas clases llamadas DAO. que la vamos a llamar que va a estar en esa capa y que va a ser así, data access object. ¿Qué significa? Son van a ser clases que se van a encargar de conectarse. Vaya a saber con qué librería ustedes usaron JDBC. Conectate a una base de datos relacional. Si usaban JDBC, tendrían que usar una base de datos, un servidor de base de datos compatible con JDBC. Hacer las consultas que tengas que hacer. Pero a mí devolveme objetos. Entonces, el encargado de hacer eso era esas clasecitas D. Bien, hacelo como quieras. Están hablando de mappers por ahí. A ver. Ah, lo que pasa que Evernight es un ORM completo, no es un DAO, no es un patrón de acceso a datos, sino que es un ORM. El está en el medio. Bien. Bien. Entonces, eso es un patrón DAO. Es el patrón que ustedes establecieron de acceso a los datos. ¿Qué decían? Bueno, yo para acceder a los datos tengo unas clasecitas, tengo que crear una clase. Esa clase va a ser la encargada de vaya a saber cómo, pero me va a devolver una lista de objetos. Va, imaginemos que sean usuarios, me va a devolver una lista de usuarios instanciados con los datos ahí adentro, ta y ustedes lo programan con JDBC. Está bien, listo. Bueno, Coordinator para eso usa algo que se llama Active Record, un patrón que es distinto, Active Record. ¿Qué significa? Que la responsabilidad de conocer cómo consultar la base de datos se la delegamos al propio modelo, al propio modelo. Entonces el model en este caso va a ser nuestro active record modelo. El modelo va a ser quien se va a saber qué tabla, perdonen, qué tabla tiene que consultar, qué atributos va a tener que consultar, cómo tiene que hacer para deletear ese esa los registros, cómo hace para actualizar esos registros, etcétera, etcétera, etcétera. El propio model va a ser el que tenga implementado todas esas funcionalidades. ¿Está claro? ¿Dudas con eso? Bien, obviamente que el model va a ser uso de una librería que va a ser la de acceso a base de datos. Esa librería nosotros la vamos a tener siempre disponible y se va a llamar, la vamos a usar como DB, se llama Query Builder. Después vamos a ver cómo mejorar todas las query builder, pero básicamente nuestro acceso a la base de datos va a ser así. A la librería de B le vamos a decir, "Ejecuta una query." ¿Qué query? La que nosotros querramos, la que ustedes quieran. Eso me va a devolver una y ese query es un objeto. Entonces, le vamos a pedir los resultados y esos resultados los vamos a poder recorrer y hacer lo que querramos. Bien, básicamente más o menos por ahí viene la mano. Entonces, el que va a tener acceso a la Query Builder, a la librería de base de datos, va a ser nuestro modelo y el controlador va a ser uso de esas funcionalidades para generar los datos. Bien, entonces Una característica es cómo creamos cómo creamos nuestros modelos. Al igual que los controllers, nuestro modelar o extender, perdón, sí, heredar de la clase model de codinator. Bien, entonces va a hacer uso de esa clase y va a extender y perdón y va a heredar todas las funcionalidades de eh codinator. Y ahí es donde va a tener Todo ya implementado. Tiene ya un montón de cosas implementadas. Todos los métodos CRUD están implementados, validaciones de modelo están implementados, paginación automática está implementada para las consultas y, por supuesto, la conexión automática a la base de datos. Para que todo eso funcione bien en mi model, lo único que tengo que hacer es definir algunas variables que están predefinidas en los modelos. Esas variables son la tabla de la base de datos, cuál es la primary key, si usa autoincremental o no, qué tipo de resultados quiero que me devuelva, bien, etcétera, etcétera, etcétera. Un montón de cosas que vamos a ir viendo. Ahora quiero acelerar así hacemos en 10 minutitos eh instalamos un ejemplo, pero por ejemplo, esto ya está definido, esto es el fine, ya la La funcionalidad find está definida, entonces eso me va a hacer el find es un listado. El find me va a buscar por estos atributos. El find si le paso un ID me va a hacer el buscar por ID, etcétera, etcétera. Bien, vamos. Eh, esta es la parte de layout que después se lo se los comento. Preguntas hasta acá, después lo vamos a volver a repasar esto. Eh, no se queden con que hice rápido ese último tramo. Quiero ir a la parte práctica ya y por lo menos dejar funcionando en 10 minutos eh un proyectito. Bien, avanzo. Deditos.
+
+Bien. Eh, vamos entonces. a Codinator. Bien, Codinator. Díganme si ven. Sí, perfecto. Vamos a la página de Codinator. En Codinator vamos a la página de descarga. Vamos a obviamente a descargar el codinator eh 4\. Yo directamente lo voy a descargar en mi WAM, en mi servidor Apache, en WW. Yo acá tengo un montón. Pero me voy a descargar la versión 474, ¿sí? Que es la última. Yo acá tenía la 463, etcétera, etcétera, en formato SIM. Vamos a guardarla. Eso me va a descargar un archivo ZIP, por supuesto. Esperemos que termine. No pesa mucho. Bueno, por alguna razón está tardando. Pesa un mega debe pesar. Bueno, vamos a ir acá. WW. Yo bajé coordinator framework versión 474\. Si yo lo abro es una carpetita que se llama codinator framework. Ta ta ta ta ta ta ta. Bien, esto directamente lo voy a descomprimir en mi carpeta www. Bien. A ver, ¿quién se anima a decirme qué pasó acá? ¿Qué hice yo? A ver, descomprimirí en mi WW. Eso ya lo sé que ya lo hice yo. Pero, ¿qué pasa cuando yo pongo algo en WW?
+
+Descargaste el framework.
+
+Es como un proyecto. Sí, en definitiva por ahora es un montón de carpetas y cosas que están ahí, ¿no? Estamos de acuerdo carpetas y archivos.
+
+Vos también podrías acceder ahí, ya que un proyecto
+
+como lo descargué. Exacto. Como yo lo descargué en mi apache, esto pasa a ser un recurso disponible para mi servidor web, ¿se acuerdan? Yo puedo acceder a los recursos disponibles porque están en mi servidor web. ¿Cómo puedo acceder a los recursos disponibles de mi servidor web?
+
+Peticiones.
+
+Desde ahí mandando la petición a local hostra, todo ese nombre de carpeta para agarrar el preload.php diría.
+
+Perfecto. Exactamente eso está. Ahora bien, va a ser có escribir este nombre de carpeta.
+
+No, le ponen CG, no sé, algo más fácil.
+
+Mi proyecto de software, mi PS. Ahí tenemos mi PS. Entonces, yo tengo acceso ya directamente a este recurso. Dijimos Para seguir los pasos van a learn welcome to codinator o installation o manual de instalación. Acá está ranger app. Está buenísimo el paso a paso. Sí. Eh, a ver acá si está your first application. Esto que está acá. Háganlo. va a ir rapidísimo. Está. Si yo hice las cosas bien, puedo ir a local host y le doy enter. Y fíjense, algo encontró Apache, pero no me hizo, no me renderizó nada. Yo les había dicho que Codinator tenía ese index.php que es el que orquesta todo el sistema y ese index.php está nada más y nada menos que en public. Ah, es este que está acá. Bien. Entonces yo para llegar a ese recurso tengo que ir a public y entonces ahí sí llegó a al index php hizo todo lo que vimos routeado y me devolvió esta página hermosa de codinator. Está. Y ahora lo vamos a abrir en nuestro ID de navegación. Archivo. Abrir carpeta mi PS. Lo abro acá. Confío. Confío en todo bien. Y acá vemos las carpetas que yo hoy les mencionaba, app, public, system, test y wrabel. Fíjense que en WR tabel está cach debook bar, log sessions, h un montón de cosas. Bien, en test todo lo que usemos para testear. System todo el core de codinator, todas sus librerías, todos sus módulos, todos de todo, de todo, de todo. Bien. No toquen o sí tóquenlo, pero si tocan algo ahí están tocando el core de coordinator, sepan lo que están tocando. Public HT Access, que ya vamos a ver qué cositas le vamos a hacer para mejorar el Fab icon. El Fabon es el iconito chiquitito index php, que es este el que hace todo. Sí, fíjate, usamos boot y pat y acá Con esto poquito que está acá hace la magia. Sí, este hace toda la magia. Esa magia me va a permitir llegar a mi aplicación. Como yo les decía, config, controller, database, filter, helper, language, library, models, third party, views. Y me va a permitir hacer llegar a los controladores al y a la configuración. Configuración. Fíjense que tenemos un montón de archivos de configuración. Tranquis con esto, mírenlo. En particular podemos ver app que básicamente, fíjense, me dice el base URL. Después vamos a ver qué de qué trata esto, cuál es la página de inicio. Eh, bueno, y un montón de cosas que tenemos para cambiar de configuración de la app. Eh, voy a ir a algunas en concreto. Database. Esta es la que vimos. Sí. Y fíjense, podemos configurarle eh muchas bases de datos, ¿sí? Y usar distintas bases de datos en el misma aplicación. En particular, yo voy a usar solo esta, la default. Fíjense, acá está comentado, pero podría tener otras bases de datos y otros tipos de base de datos. Acá hay configurada una de test que usa SQ Lite 3\. Entonces, cuando yo ejecute test, por defecto no me va a ir contra la base de datos mía y eso es positivo. Eh, tenemos usuario root, password root. Sí, esto básicamente lo que se va a conectar es a la misma al mismo servidor de base de datos que yo ya tengo instalado en mi OneP. Entonces, esto va a administrar esa conexión. Ya está, ya lo configuré, me olvido. Chao. Email encrypt. encryptations, eventos, las excepciones, filters, esto que yo les comentaba por ahora eh no los usamos, los vamos a usar eh pa generator image, logger migrations, minds, modules, pager path. Eh, ¿dónde está routers? Routes. Bien, este es el otro que más vamos a usar. Y recuerdan, lo que nosotros hacemos es decir que cuando hago una petición a través del método get y voy al barra, esto es lo que está diciendo esta ruta, anda al controlador que se llama home y ejecuta el método index. Estamos. Entonces, cuando voy al barra, o sea, cuando no viene nada, cuando yo pido el recurso barra. Fíjense acá pedí el recurso barra nada barra nada. Está esto. Entonces vino al router, vino a cordinator, se fijó en el router, che, está entrando al barra, mandalo al controlador home al método index. Entonces acá dentro controllers existe un homep.php. Este es el nombre del archivo, pero lo que yo estoy usando es el nombre de la clase, sean coherentes con lo que ponen, home y home. Sí, el nombre de la clase que sea coherente con el nombre del archivo. A mí me gusta ponerle controller, home controller, pero bueno, cada uno eh es libre de hacer lo que quiere. Home Controller extiende de base controller. Fíjense que base controller es este que está acá, base controller. Y base controller extiende de controller de codinator. Entonces ahí tenemos todo el power de coordinator. Pero a su vez el base controller tiene ya implementado algunas cositas, como por ejemplo en la inicialización, inicializar el parent con el request response y acá le puedo habilitar algunos helpers o algunos servicios de sesión, por ejemplo, para manejar las sesiones que después lo vamos a ver. Dejémoslo ahí. Lo que sí sabemos es que llegamos a a partir del ruteo del barrita ruta, llegamos a home al método index y el método index lo único que hace es retornar la vista welcome message. Entonces dijimos que esto que está acá es una vista y las vistas las va a buscar a mi carpetita. views. Y fíjense que en mi carpetita views hay un welcome messageph coincide con esto, nombre y ese welcome message.php tiene todo el HTML que me está devolviendo codinator. Todo eso que vimos es todo esto que está acá. Bien, no me voy a poner a hacerle mucho. Pero como ejemplo o exam pero sencillo, vamos a generar, por ejemplo, esto que está acá, ¿no? Esto no me gusta. Eh, usuarios, sí y usuarios va a ir a user controller index. Bien, entonces si yo pido el request usuarios, yo acá escribo usuarios, obviamente 404 no lo encontró. Fíjense que el 404 no es el 404 del navegador, el común. ¿Por qué? Porque esto es un 404 devuelto por Codinator. Porque la petición Sí, llegó al index porque llegó al public y llegó esta esta petición de recurso. Entonces, Apache, el servidor web, sí encontró el recurso aplicación codinator. El que no encontró este este ruteo, digamos, el controlador fue codinated y me devolvió ese 404\. Eso es importante porque ahí estamos nosotros bajo el control de lo que mostramos. y dejamos de mostrar. Fíjense que si vamos a las views, acá tenemos el error 404 y esta es la página que me está mostrando, ¿no? Esta es de 400\. La que me está mostrando es esta de 404\. Sí. Acá le podemos poner, ¿no? Y si lo guardo y refresco, Codinator está controlando que no encuentra algo. No encontró. ¿Y qué es lo que no encontró. Sí, nosotros dijimos que usuario vaya a un controlador que se llama user controller al método index. ¿Existe user controller? No existe claramente. Entonces lo vamos a crear. Vamos a cambiar el nombre. User controller. Ya. Además hay que cambiarle el nombre acá, ¿no? User controller. ya extiende y esto vamos a decirle que vaya a la carpeta users y haga uso del listado. Vamos de vuelta. Sí, acá estamos bien. Ya. Ahora tenemos user controller. Entonces el routeo usuarios vamos a ponerle users, vamos a ir en inglés. Users va a user controller, al método index. que acabamos de crear, user controllers. User controller va al método index y ese index me devuelve la vista de la carpeta users. Listo. Esto no existe. No existe la vista. Entonces, ¿qué tenemos que hacer? Crearla. Dentro de views. Vamos a crear la carpeta users. Dentro de users vamos a crear list.php. Y acá vamos a crear una lista de usuarios linda. Así no más. Eh, me maté en el prom. Díganme si no
+
+no se ve que la pensó durante años. Fue superdallado.
+
+Vamos a a ir a trabajar esta, como ya les dije, bueno, está editando el controller. Ya se metió en terreno que no quería yo. Ya analizó todo el proyecto, ya sabe que tengo un coordinator. Eh, me editó el controller, fíjense. Ah, pero bueno, no está perfecto. Esto lo que hizo. Me gusta, me gusta. Para el ejemplo viene bien. Vamos a ver que termine de hacer. Ahí está. Terminó de hacer la lista hermosa. 100 lías. Se tomó en serio lo de Lindo. Bueno, se emocionó. No sé qué está haciendo ahora, pero déjenlo. está ejecutando test seguro y cosas así. Eh, esto por supuesto no lo vamos a seguramente las líneas que tiene son todas de estilo y JavaScript.
+
+Profe, como pregunta rápida mientras trabaja la
+
+en COD, ¿cuál de los dos teníamos que descargar? Perdón. ¿Cuál?
+
+O sea, viste que usted descargó todos estos paquetes en por dónde era en Coordinator.
+
+Ajá.
+
+En el home abajo dice descargar.
+
+Sí. Eh, y que eran dos opciones, uno que dice cuatro y el otro que dice tres.
+
+La versión cuatro. Claro.
+
+Okay. La cuatro.
+
+Vamosando.
+
+Bueno, ahí le dije que me limpie. un poquito y me lo pase a assets. Sería muy sencillo. Tendría que hacerlo yo, cortar los CSS, ponerlos en public acá en assets CS JS. Copiar esos CSS y es JavaScript. Y acá simplemente en la vista borrar todo eso y linkear los archivitos. Está que es lo que está haciendo él. Bien. Vamos a aceptarle todos los cambios y esto no va a funcionar porque el base URL lo va a mandar a cualquier lado, pero no importa. Esperen que lo arreglo por acá porque ya me está haciendo macanas esto porque estaba en el puerto y Esto es IPS. Okay, ahí está. Eso después se lo explico, no se preocupen. Bueno, entonces para pasar el vamos a borrar esto, cerrar esto, cerramos acá. Empezamos por el ruteero, ¿sí? Porque básicamente es lo que estamos probando. Voy con users, con el roteo. Users va a ir a user controller al método index. Vamos al controlador users user controller. User controller va al método index. Y acá me estoy definiendo un arreglo asociativo de usuarios ficticio. Fíjense, un arreglo de datos que me definió y va a llamar o va a retornar la vista con la función. Esto es una una función view users list y le pasa un arreglo asociativo con la variable users y la variable users el contenido, es el arreglo de usuarios que declaró acá arriba. ¿Está claro? Todos arreglos asociativos de arreglos asociativos. ¿Se dieron cuenta? La lista de usuarios es un arreglo. Y cada usuario es un arreglo asociativo donde tiene el campo valor, campo valor, campo valor. Está así trabaja muchas veces PHP. Y a la vista le pasamos este arreglo asociativo. Recuerden que les dije, cuando esto yo se lo paso a la vista, este nombre que que está acá pasa a ser una variable dentro del archivo de la vista. Entonces, si yo voy al list de views users list, dentro de este listo voy a tener disponible la variable users. ¿Lo ven ahí? Lo voy a tener disponible como un listado de usuarios. Obviamente por las dudas que no esté, vamos a decir, "Che, si está vacío Si no está vacío, perdón, muestro el con de ese arreglo asociativo y si está vacío muestro un cero. Y más abajo vamos a Si no está vacío, lo mismo. Vamos a ver más abajo cuando empiece la lista. Pendientes, roles asignados. No sé que hizo de todo, ¿eh?
+
+Lo hizo como cartas, creo, ¿no? Como una tabla
+
+acá. No, no hizo eh
+
+pasa que hizo algo. Sí, hizo unos cards. Vamos a ver después ahora. Vamos a ver. Y dentro del table, que son los titulitos, cada uno de los cosos. Si no está vacío la variable esa, lo recorro. en el for y empiezo a construir cada uno de las filas con el nombre, el usuario, el mail, el rol, status. Sí, se la pido a cada usuario. Acá tiene las acciones. Bueno, hizo de todo. No sé que le hiz hizo de todo. Ahora vamos a ver qué hizo. Pero acá termina el l, el for. Lo que pasa que hizo con JavaScript, debe haber hecho edit, miren, editar usuario, hizo de todo. No se preocupe, no era el objetivo hacer tanto, pero sí entender esto que este esta variable yo le pasé los datos que están acá, que los podría haber obtenido de la base de datos desde mi controller. Bueno, vamos a ver qué resultó porque ya ahora me da intriga hasta a mí. Sí, no es usuario, sino que es users un desastre. ¿Por qué no se ve acá
+
+100 líneas para eso.
+
+Buenísimo. ¿Por qué se ve así de horrible? ¿Qué es lo que no está cargando?
+
+CS.
+
+Exactamente. Ni el CSS ni el JavaScript está cargando. Sí. ¿Por qué? Fíjense, acá está la petición al CSS. ¿Lo ven? Acá la petición para buscarlo. Dice que lo está yendo a buscar a local hosts. ¿Qué le falta ahí?
+
+Público
+
+le falta. Exactamente. Muy bien. Muy bien. Entonces, yo para por qué me está usando esto, ¿veis? URL y acá me falta ponerle public, creo que es con barra. Vamos a probar. Ahí lo salvé, volví a cargar y ahí sí lo tomó. Fíjense, si yo voy acá a users, me tomó public assets ccs, users ccs. Si vamos a la carpeta public, public assets ccs, users ccs, está Y acá está. Bueno, no estaba tan mal, ¿eh? Tenemos total de miembros, activos hoy, pendientes, roles asignados. El titulito tenemos vaginado que no funciona. Tenemos para verlos ver perfil de A, pero no lo muestra. Editar. Dice que lo editó. Fíjense, muestra un cartelito hermoso, pero no lo edita. Eliminar. También muestra un cartelito lindo. Ahí sí lo elimina.
+
+¿Y si reinicia cuando le da a editar?
+
+No, no. Sí, este está estático.
+
+Acordate, hace la petición, construyo ese arreglo asociativo genérico en el user están acá, no lo elimina de ningún lado, lo saca del HTML nada más la vista. Sí, lo borra, hace así, agarra esto, pero por JavaScript
+
+oculta, o sea, cambia la visual.
+
+Claro, le cambia a esa R. Yo acá voy a apretar delete. Listo, lo borré. No está más Alejandro. Está chao. No está más. Eh, lo borro o le pongo eh display. No, chao. No está mal como estilo. Sí. O visibility hiden. Ahora sí está, pero no se ve. ¿Se acuerdan de eso que lo vimos? Está ahí. Fíjense que ocupa el espacio. Ahí está, pero no lo veo. Estamos, mira, tengo el formulario para nuevo usuario y todo. Ah, y lo tiene exportar como CSB también.
+
+Eso sí, vale 15 líneas.
+
+Bueno, bien. No importa lo que hizo, dejó de hacer nuestra nuestra. Lo que yo Yo quiero es que entiendan eso. Sí, ya se nos está haciendo bastante tarde, ¿no? No llegamos a crear el modelo y a conectarnos a la base de datos. Sí. Para crear un modelo directamente deberíamos venir acá, crear nuestro model y trabajar con la base de datos. Bien, tomen como referencia build your first application. Acá van a a tener la instalación setting development mod porque está bueno esto. Si nosotros cambiamos estas variables nos va a aparecer eh en config, eh ¿dónde está? Esperen que o o en index también lo podemos cambiar. A ver, ¿dónde me lo cambia? en punto environment. Ah, bueno, porque trabaja con el punto environment. Esto si ustedes lo renombran a punto, si vamos a poder trabajar con estas variables de environment de entorno. Entonces, si acá en vez de producción le ponemos development Sí. Entonces, coordinator lo que va a hacer, esto que está acá nos va a mostrar una barra de desarrollo y lo cierro acá. Voy a refrescar esto. Y acá abajo, ustedes no la ven, está una barra, hay una barra de desarrollo, ¿sí? Que nos va a mostrar un montón de información. Los ruteos, las los archivos que se usaron, la historia, eh, un montón de cosas que nos sirven, ¿sí? Más que nada cuando hay un error nos lo va a mostrar, nos lo va a mostrar eh al error y cuál fue lo qué fue lo que falló. Está. Entonces, sigan además de la configuración del entorno como de buguear. Eso nosotros también lo vamos a ver, pero está bien explicado inclusive toda la creación, lo que recién vimos, el mapeo con parámetros que no lo llegamos a ver, pero sí, fíjense cuando escribimos así dos puntos segment, usamos segmento y algunos eh helpers, algunos perdón, comodines más como para mandar parámetros, la creación de vistas eh, pero encadenadas. Hm. Y ahí empieza a verse un poquito lo que es el ruteo. Eh, quiero llegar acá, les hace crear una base, una tabla en la base de datos y por acá crean los modelos. Bien, crean, compra, copian esos modelos y lo explica bastante bastante bien. Sí, en mi caso, yo para crear un un modelo, por ejemplo, de usuarios, tendría que venir acá crear un archivo que sea user model php. Este es mi archivo. Este va a ser mi user model y no va a ir contra acá en esta variable yo tengo que elegir la tabla y la tabla es la tabla de la base de datos. Sí, en particular, ¿no? Me acuerdo, nosotros estábamos usando usuarios en la base de datos. ¿Está o no era usuarios? ¿Quién se acuerda?
+
+Creo que sí.
+
+Bueno, vamos a suponer que sí. Y entonces
+
+users era
+
+para usuarios. Esto está me confundan, no me confunda. Eh, bueno, lo validamos, ¿les parece? PHP adminal host admin P barra PHP. Ahí ahí está entrando. Nunca nunca vi que tardara tanto en entrar a un servicio web local. Era PS26\. usuarios. Entonces, le vamos a pegar acá usuarios igual para users, ¿no? Users. Y acá vamos a usar el model para All, fíjense, find all y se lo pasamos a user, se lo pasamos acá. Y ahora créanme que esto va a explotar por todos los aires, pero le vamos a dar pack. Fíjense, este error me lo tira así porque yo estoy en modo development, environment. Development. Si estuviese en producción no me muestra cuál es el error. User model not found. Sí, no lo encontró. ¿Por qué? Y porque nunca lo importé, nunca le puse use. Arriba voy a tener que tener un use user model. Entonces voy y refresco. Bueno, por lo menos lo encontró. Pero, ¿qué pasa? Que en la vista list, en la línea 333, tengo un quilombo porque username no existe. Está. ¿Por qué no existe? Porque yo hago la consulta a mi base de datos y mi base de datos tiene mi tabla de base de datos tiene ID, email, name y password. ID, email, name y password. No tiene todo esto. Acá sí, id, name, email y password. Entonces, en la lista tenemos que ser un poco más discretos. Esto es un kiló. Bueno, no la puedo no lo puedo arreglar a todo esto, ¿no?
+
+Sí, es bastante porque creo que se entiende el punto de va a devolver la tabla y se tendría que devolver la tabla. El rol no existe. Bueno, etcétera, etcétera. Es demasiado. Se me fue del pasto este muchacho. Bien, pero básicamente lo que yo voy a tener acá es estos estos campos para verlo y una forma rápida, sencilla y es lo último y ya nos vamos acá con DD. users. Esto es para debugar. Sí. A ver si funciona. Por eso la palabra, ¿no? Esto DD D es una forma rápida de hacer de direct. Sí. ¿Qué significa? Que me va a mostrar de una forma agradable el contenido de esta variable users. Y esta variable, ¿qué contiene? El resultado del find all de este modelo. Bueno, fíjense, tiene una ray que tiene en la posición cero un arreglo de cuatro posiciones que tiene un ID con el valor 4, email con el valor Carlos, name Carlos y un password con 1 3 4 5 6\. Sí, es exactamente lo que tenemos acá. Sí, se dan cuenta Obviamente tendrían que hacer la vista, eso va a llegar a la vista y lo tenemos que usar bien en la vista. Bien.
+
+Sí.
+
+Y simplemente tuvimos que crear este usuario model y le dijimos a qué tabla conectarse. Solo Codinator se está conectando, está haciendo el celec asterisco from, está instanciando, está poniendo los campos, ta. Fíjense. que el la clase esta es débilmente tipada, le aparecen atributos según la tabla que a la cual se conecta. Bien. Bueno, fin por hoy. Bien, dudas. Hasta acá resumen rapidísimo. Hicimos un volvimos a repasar peticiones HTTP, clientes servidor, creación de response, buscar los recursos del servidor web. Eh, hablamos un poquito de lo que tiene que ver con el trabajo del alta, baja, modificación y consulta que tienen que hacer en puro HTML. Y la sesión dos fue introducirlos en el mundo codinator. Sí, vimos el framework coordinator, vimos de qué trataba, eh pude imos llegar a ver los patrones que rigen a Codinater, modelo vista controlador y active record. Eh, vimos su conformación, su estructura y finalmente un ejemplito rápido, sencillo, sin entrar en profundidad, recalcando qué cosas, conceptos, ruteo, controlador y vista. Hicimos un poquito de modelo, pero nada, no llegamos a hacer casi nada del modelo. Pero ruteo controlador vista. Consultas, dudas.
+
+No, no, nada.
+
+Aportes, lo que quieran. Pregunten, pregunten y pregunten. Practiquen PHP puro. Primero hagan lo que les dije que que que tenían que hacer. Generen las carpetitas, generen los PHP, avancen con eso. Háganlo antes de meterse en Codinater. Hagan ese ejercicio.
+
+Vale.
+
+Ah, y una cosa, antes de hacer tanto en Codinete como en coso, cualquiera de estas cuestiones Analicen y diseñen. Sí, siéntense, lo analizan, lo diseñan, lo escriben y eso se lo va a dar nuestro gran amigo. Bueno, chicos, eh nos vemos la clase que viene. Listo.
+
+Profe.
+
+Chao, profe.
+
+Chao.
+
+Nos vemos.
+
+Chao. Chao. M.

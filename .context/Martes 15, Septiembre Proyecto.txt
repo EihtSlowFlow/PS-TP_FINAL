@@ -1,0 +1,749 @@
+Me faltan dos entregas. ¿Qué pasó? de nosotros
+
+máximo. Entendos que se uno solo grupo, por eso el archivo se llamaba con
+
+no individual individual. Antes de la guía era con en grupo, ahora individual que actualizar
+
+y bueno, pasan cosas, ¿eh? Bueno, váyanse cosas.
+
+Ahí tiene la puerta.
+
+Ahí tiene la puerta. Perdieron la materia de chico. No puedo, no me puedo mover bien. Esta imagen tan moderna que tengo acá. Me encanta
+
+esa. No paso por
+
+no. Bien, vamos a concentrarnos en lo que nos toca. Sí, la última clase estuvimos hablando un poco de todo lo que tiene que ver con backend. Sí, empezamos a procesar todo lo que tiene todo el segundo sprint. Sí, charlamos sobre, nos pusimos en modo gestión y hablamos de el cierre de sprint deberíamos hacer la retrospectiva y ver por qué no entregaron, en qué fallamos, si en la comunicación hubo confusión ahí en el analista me puso mal los documentos y por más que se avisó que era individual, llegó el mensaje, bueno, hubo un problema en el equipo de comunicación, sí había ahí ruido, habría que mejorarlo. Sí, eso sería un buen tema de retrospectiva. Está tanto para el que no entregó como para mí que yo presenté la consigna. Sí, eso se evalúa porque todo lo que ustedes vayan a trabajar es en equipo. Sí. Si falla el equipo, fallan, fallan todos. Falla el equipo está. No es culpa de Bien, la retrospectiva trata de eso, no es echar culpas. Obviamente cada uno se tiene que hacer cargo de lo que le toca. Eh, y a veces, bueno, en empresas un poquito más estrictas y no con tantas eh buenos buenas intenciones. Patitas a la calle. Está hoy está bastante más fácil hacer ese patitas a la calle, así que eh tengan cuidado. Eh bien, está un buen ejemplo esto de para una reunión de retrospectiva sería qué qué pasó ahí que no hubo este está la entrega. Sí. Bien. Después estuvimos viendo que hay una etapa donde nosotros nos ponemos en project managers y no solo planificamos, vemos lo que pasó, retrospectiva, sino que establecemos las tareas y lo que vamos a hacer para adelante. Bien, eso quiero que quede claro, que en todos momentos ustedes tienen que fluctuar entre tareas de project manager, de analista y después desarrollador. Está todo el tiempo van a tener que hacer eso. Y ahora vamos a ver un poquito de infra. Poquito, sí, no mucho. Em, vimos PHP, así hicimos un recorrido gigante de PHP, sí, que les tiene que haber quedado, que es un lenguaje del mente tipado, que es un lenguaje interpretado, es orientado a objetos y es un lenguaje que se ejecuta del lado del servidor. Eso es lo fundamental. Sí. en este lado. Bien, es eh ese código el que nosotros vamos a programar básicamente va a ser el encargado el recurso ese que va a ir a buscar cualquier cliente. Sí, estamos repasando lo que les dije que les iba a repetir 100,000 veces y se los vuelvo a repetir. Un cliente solicita a través de nuestro protocolo HTTP
+
+un mate caliente y le llega el mate caliente. Sí. Solicita un un recurso a un servidor. Bien, ese solicitar recursos grábenselo porque es la clave de entender toda esta diálogo entre el cliente y el servidor. Esa solicitud de recursos va en nuestro a través de internet con nuestro protocolo http, sabe a dónde llegar y sabe cómo pedirlo. Y cuando llega a ese servidor que hoy vamos a ver qué servidor estamos hablando, ese servidor tiene que tener un algún software instalado para entender qué es lo que se le está pidiendo, ir a buscarlo a algún lugar a ese recurso. Sí, quien me están pidiendo, voy busco. Ese buscar puede va a llegar en nuestro caso a un archivo PHP, ¿sí? Que nosotros vamos a codificar. Ese archivo PHP va a ser el que genere o procese ese esa petición y dé la respuesta. PHP fue creado generalmente para generar y ser generar HTML. Sí, fue creado para eso, para poder eh intercalar eh lenguaje HTML y PHP y a partir de código interpretado ir creando esa respuesta que esa respuesta va a ser HTML, CSG. Entonces, del lado del servidor vamos a crear esa respuesta y cuando terminemos de crearla se va a devolver en el formato HTTP como un response a nuestro cliente. Está hoy en particular vamos a ver la parte práctica. Sí, si nos ponemos eh del lado de vamos a poner, vamos a hacer un rol, no es arquitecto, pero vamos a hacer de arquitecto pseudo arquitecto. Nosotros estamos al iniciar cualquier proyecto lo que tenemos que establecer, si se acuerdan, proyecto de software, tendríamos que definir eh los equipos, ¿sí?, a partir de o primero el el proyecto que vamos a desarrollar. Después de eso tendríamos que refinar qué solución vamos a dar, ¿sí? Si vamos a hacer una aplicación móvil, una web, de escritorio, lo lo que fuese y de ahí conseguir equipos, definir lenguajes y al partir de definir lenguajes y empezamos a desarrollar, vamos a tener que definir ambientes y la forma cómo vamos a llevar adelante nuestro proyecto ya a la hora de desarrollar. Y un poco yo les estuve hablando de mínimo tres ambientes, les había dicho, sí, un ambiente de desarrollo que el ambiente de desarrollo va a ser la máquina en la cual yo estoy desarrollando y puede involucrar algún otro servicios por ahí dando vuelta. Sí, puedo tener un servidor local para todos nosotros que somos un equipo de desarrollo, donde tenemos, por ejemplo, una base, un servidor de base de datos común o podemos llegar a tener eh una cola de mensaje, ¿sí?, un Rabit o un MQTT, un servidor MQTT, lo que fuese, ¿sí? Son mensajerías. livianas o podríamos llegar a tener otro tipo de cosas. Y eso es un ambiente que se llama ambiente de desarrollo donde está permitido reventar todo lo que se puede. Está. ¿Qué significa reventar? No me importa si la base de datos tiene porquería. No me importa si eh subo a ese servidor o a mi servidor, subo cosas y se rompen. No importa, no pasa nada. Es de desarrollo. Está Por supuesto que ese ambiente depende del proyecto, depende del de los equipos, va a estar más o menos cuidado. Sí. El segundo ambiente que le sigue a eso es un ambiente de testing. Ambiente de testing, básicamente son servidores en la nube, en un en un hosting o lo que fuese que exactamente lo que hay en el otro ambiente que es el ambiente de producción. Sí. Entonces, si mi desarrollo va a ser un software que va a correr en un servidor web, que va a estar con una URL público, va a entrar gente, se va a loguear, va a usar un servicio de base de datos, My Sequel, etcétera, etcétera, eso mismo que va a estar en producción lo replilo. Testing. Diferencias entre Testing y producción son obvias. Sí, en producción yo los datos no los puedo tocar. Se sonríen, están haciendo cagadas. Si se sonríe es porque están haciendo cagadas en producción. Bueno, en teoría, vamos a decirlo así, la diferencia es que yo de producción tengo que tener mucho más cuidado porque es lo que se está usando o se va a usar. Está Y en testing si lo uso para subir eh nuevos releases cuando termina el sprint, ahí se sube a testing y en testing se hacen las pruebas necesarias. Sí, va a entrar un montón de usuarios, van a empezar a meter a probar lo la nueva eh incremento en el software, ¿sí? Esos nuevos releases que se o futures que se han desarrollado y si lo aprueban está todo bien, che, no da error pasa producción. Sí, liberamos eso producción. Está tres ambientes. Entonces, lo primero que vamos a hacer nosotros en este caso es configurar nuestro entorno de desarrollo. Nosotros vamos a desarrollar en PHP, por lo cual vamos a configurar nuestro entorno de desarrollo. Bien, para configurar el entorno de desarrollo, para un proyecto en PHP vamos a necesitar un servidor web. está donde corre nuestro código y es el encargado, ese software es el encargado de escuchar en un puerto en específico de nuestra máquina y al escuchar significa que está va a estar pendiente y las peticiones de los clientes que entren a ese puerto las va a tomar ese servidor web y es el encargado de interpretar esa petición y de ir a buscar esos recursos. que se están pidiendo. Bien, cuando digo buscar recursos, entiéndanlo como ir a ese archivo PHP que nosotros vamos a programar y procesarlo. Está servidor web. Ejemplos de servidor web. ¿Quién levanta la mano y dice alguno?
+
+Apache,
+
+apache
+
+otro. Y AWC Sinfra no es un servidor web
+
+A demasiado. Es como servidor webcat
+
+Tomcat. Exactamente.
+
+¿Hay diferencia con el hosting?
+
+Sí, eso es un hosting que adentro tiene un servidor web. Está corriendo. Enginex, que es el más famoso ahora me parece que no sé si los han escuchado hablar, es como un un un servidor web muy liviano que ahí se está peleando con Apache. Hay confusiones, hosting y servidor web. Sí, hosting es alojamiento en la nube. ¿Qué significa una computadora que tiene un IP público a la cual yo puedo acceder? Una computadora que que está ahí en la nube a Bs es como mucho más que eso. Es como bueno, todo junto. Sí, Amazon tiene todo, pero hosting, que es lo más básico, es una computadora en la nube. En ese hosting, en esa computadora, yo puedo instalar un servidor web, un patch, puedo instalar un enginex, puedo instalar un un Tomcat o puedo instalar todos al mismo tiempo, ¿no? En el mismo puerto. está. Puedo instalar un servidor de base de datos. Sí, My Sequel. Todo en ese hosting. Bien, por lo general los hostings se ofrecen como máquinas virtuales. Sí van a escuchar o van a ver en los videos de de todos estos youtubers que difunden las VPN. Eh,
+
+BPS,
+
+BPS, perdón. Gracias. BPN es otra cosa, ¿no? Bien, bien. Corríjanme porque se me cruzan los cables y de PIF, las BPS, hm, que son servidores virtuales que uno contrata y ahí es un Linux que está en una computadora en en la web y lo configura como uno quiere, lo instala lo que uno quiere. ¿Está? ¿Estamos de acuerdo? Entonces, hosting, una computadora en la nube. Esto se lo tiene que decir Juan Cru, ¿no? Ahí en ese hosting nosotros instalamos un servidor web. Nosotros vamos a usar Apach. Está. Para que funcione PHP necesitamos PHP. Bien, el intérprete. Así como para usar Java ustedes instalan Java, si la virtual machine de Java. Para usar PHP tenemos que instalar. ¿Y qué otra cosa vamos a necesitar? servidor web Apache para interpretar esto y los datos dónde lo vamos a meter.
+
+Ojo con lo que digan, ¿no? Eh, un servidor de base de datos. ¿Y eso qué servidores de base de datos conoce?
+
+Postre, sequel
+
+Postgre, Mysequel. My admin.
+
+¿Quién dijo PHP My Admin? No, PHP My Admin es un cliente que se conecta a un servidor de base como un administrador.
+
+Exactamente. Básicamente lo que es PHP, My Admin es lo que vamos a hacer nosotros, desarrollar nosotros. Son un programa en PHP que corre en un servidor web que tiene la capacidad de conectarse a la base de datos y administrar esa base de datos, pero es un cliente de la base de datos, no es el servidor de base y con una pregunta, vemos algo de no relaciones, salutar objetos o algo acá alguna
+
+proyecto, ¿no?
+
+Ahí va iba a agregarles eso. Sí, tenemos las relacionales, hasta ahora dijimos todas relacionales y después tenemos las no SQL que son no relacionades, que tenemos Firebase, tenemos Mong DB como servidor, tenemos Elastic Search, tenemos un montón más, ¿bien? Y ahí las dividimos en documentales y bueno, hay un montón más. Y después aparecen base datos vectoriales, que ya ahí nos vamos a la inteligencia artificial. Sí, pero todo estos son servidores de base de datos o lo verán en base de datos como eh eh administradores de base de datos. Está porque en realidad la base de datos son tablas que están alojadas en nuestra computadora, tablas, índice, etcétera, etcétera, etcétera, que tiene un motor administrador de base de datos, My Sequal, SQL, Postgraph, quien sea, que gestiona todos esos archivos y nos facilita la administración de los datos. Está eso como para ir clarificando ustedes. tienen que empezar a separar todos estos términos para entender que no es una pelota de cosas, sí son todas cositas separadas y que las tenemos que ir configurando y administrando y conociendo separadamente. Estamos entonces nuestro entorno de desarrollo va a requerir un servidor web, ¿sí? En este caso vamos a necesitar Apache, un servidor de base de datos Vamos a usar My Sequal, ya lo conocen, ya han trabajado. Vamos a necesitar PHP, ¿sí? Instalado en en la máquina servidor de donde está el servidor de base de datos, perdón, servidor web. Y ni tan lejos vamos a necesitar algún servido, algún servicio o algún sistema para conectarnos y administrar nuestras bases de datos. Sí, para administrar bases de datos podemos hacerlo por un cliente web, PHP My Admi. Workbench es un cliente, pero es en realidad es una aplicación que se instala en una computadora, no es web y nos permite acceder a las bases de datos y administrarlas. También es un cliente, es algo que se conecta a un servidor de base datos, está o lo podemos hacer por consola directamente SQL y a tirar comanditos. Está Todas son válidas.
+
+Una pregunta, vamos a podemos contabilizar dijiste pasar entre ambiente y ambiente y lo más fácil sería un fondo.
+
+Exactamente. Sí. Yo no lo voy a No avanzo con la parte de contenerización. El que sabe y se quiere quiere hacerlo doquerizado, bienvenido. No respondo a quilombos de esos. Sí. No porque no sepa y no porque no quiera. Es que nos metemos en un No terminamos la materia, le empiezo a meter contenido y no llegamos. Hm. Eh, más adelante van a ver toda esa parte. Hm. Con Chicho, ese es el que sabe. Es bien. Entonces, para empezar a configurar todo esto, ¿bien? Paso a paso no lo vamos a hacer bien. Para configurar todo eso, lo más fácil que tienen para llevar adelante son algunos sistemitas o archivitos para instalar todo junto en nuestras máquinas. ¿Qué usaron para base de datos? ¿Cómo instalaron los servidores de base de datos cuando pulsaron base de datos? Los conq
+
+cómo
+
+que creo que en la página de en la página se puede My World Brench con My SQL Server.
+
+Bien, ¿uson eso?
+
+Sí. ¿Qué otra cosa?
+
+Yo sé instalé el Wordl y alguno más.
+
+Sé si todo
+
+bien. Bueno, entonces una forma de configurarlo es así. Vamos. Ya tien instalado My Sequel. Okay, listo.
+
+Eh,
+
+sé que ahora Windows tiene un repositorio que te trae compartas. Lo traer Sí, hay con Microsoft,
+
+hay 1000 formas. Sí, no sé si 1000, no sé si tanta, pero hay varias formas. Sí, la clásica. ¿Alguien usa Linux?
+
+Tiene Linux,
+
+los dos en la misma máquina.
+
+Ah, okay. toda la parte específicamente con Linux
+
+con Linux. Okay.
+
+Si primera
+
+yo la tengo Linux.
+
+Linux. Okay. Linux la tienen bastante más fácil. Sí. Aptg eh install y depende, bueno, depende del distro de Linux que tengan. Apache 2, aptget install 2, fin de la historia. Eh, y aptate install my sequel. Parece que sí.
+
+Tenes service y client y otro más. Pero cuando estás community te instalas.
+
+Sí, ya está.
+
+Instal server lo hac todo console.
+
+Eh,
+
+instalar el server y lo haces todo de consola.
+
+Después después el único tema de Myicul es que vas a tener que levantar el limon a mano que la prenda la comas.
+
+Sí.
+
+El de My Sequel.
+
+Sí.
+
+Sí. Bueno, y lo pueden lo podes dejar como un servicio. Lo instalas como un service y
+
+sí lo puedes poner o le pones una carita y lo levant lo levante.
+
+Bueno, eso la tienen fácil en Windows. También lo tenemos fácil. Yo uso WAMP. Sí, son unos paquetitos de En realidad yo les recomiendo WAM porque es muy muy sencillo administrarlo y usarlo, que es un paquetito que uno se descarga, se instala y tiene todo incluido. Tiene el servidor web, tiene el servidor de base de datos y tiene PHP. y uno le puede ir cambiando las versiones de PHP, etcétera, etcétera. No, no lo vamos a necesitar nosotros, pero si se bajan van a encontrar WAM o SAMP. Es lo mismo.
+
+¿Cómo
+
+uso?
+
+Es lo mismo.
+
+Por ahí cambia la la
+
+M es de No, la W es de Windows, la primero y la X significa que es general. Como
+
+la X es multiplataformas, Linux y Windows. Y después existe lamp con L de L.
+
+Exacto. Pero eh yo uso one porque da resultados. Sí. Eh, así que se los recomiendo. El que quiera instalar cada uno de los servicios, bienvenido. También lo mismo, vamos a tener que administrar cada uno de los servicios eh por su cuenta. Sí. Administrar, ¿qué significa? Y saber en qué puerto está publicado. Si no tocan nada, eso es mucho más fácil. Sí, my 3306, eh, Apache en el 80, etcétera, etcétera. Sí, tenemos que saber eso porque nosotros vamos a gestionar y vamos a conectarnos a esa base de datos a partir de esos puertos. Bien. Eh, bien. Entonces, si ustedes instalan eh para o SAM, que es lo mismo, que es WAMP Server, está medio en ruso alemán. La install One Server full viene con Apache 12\. No ven un c\*\*\*\*\*, ¿no? Esperen que lo hacemos así.
+
+P8 PHP8
+
+PHP 8030 8 81, 82, 83, 84, 85, todos esos FP tiene eh Myqual 8 y María DB 11, o sea, tiene dos servidores de base de datos distintos. Este paquete les instala absolutamente todo eso, ¿sí? Este One Server 3.464 bit, lo bajan, lo instalan y sale funcionando el cliente y todo
+
+exactamente. ¿Qué va a pasar cuando lo instalen? Yo ya lo tengo instalado, de hecho tengo varios Les va a aparecer una W hermosa. Así. Sí, la W rojita.
+
+Yo arranqué este One Server que ni me acuerdo qué versión es, pero cuando arranca va a empezar. Vamos a hacer así. Esperen que paro todos los servicios y perdón y cierro esto. Si yo arranco one server, ahí empieza one server 64 bit, iniciando servicios. Depende de su máquina, va a tardar más o menos. Sí. Una vez que arranca se tendría que poner todo en verde. Todo en verde, perdón. La W acá, el iconito acá abajo en verde. ¿Qué puede pasar? Y puede pasar que tengan esos puertos, los puertos ocupados. ¿Qué puerto? Sí, nosotros estamos hablando de servidores. Cuando hablamos de servidores son aplicaciones, servicios que se instalan en nuestra máquina. Nosotros estamos configurando nuestra máquina como un servidor y no es posible que dos aplicaciones escuchen en un mismo puerto. ¿Saben lo que es un puerto? Di. Me que sí, por favor.
+
+Si no lo tengo que llamar a Juan. Puerto de San Antonio. Muy bien. El este o del oeste dos distintos.
+
+El puerto es el del oeste,
+
+¿no? El del este.
+
+Los dos son cuartos, uno pesquero y el otro de agua profunda. Pero es un par de ramitas donde puedes camar.
+
+Bien, eso no es el puerto de la computadora. Sí entienden que es un puerto en una computadora.
+
+Me acuerdo del puerto 8080\. Me acuerdo
+
+que había en el 8080
+
+para No, no me acuerdo que era para conocías una página el host era, ¿no?
+
+Claro,
+
+por defecto.
+
+A ver, veo que no
+
+no todos conocen lo que es un puerto para
+
+comunicarse. Exactamente. Nuestras máquinas en la capa de red tienen numeritos. A esos numeritos se le llaman puertos.
+
+Que conte que empezamos carta de red la semana pasada.
+
+Pregúntenle a Juan que le explique que es un puerto o lo mato yo en este instante. No, en este instante porque no está. Pero díganle de parte mía que si no les explica eso va a morir. Bien. Son numeritos. Sí, en que en la red son numeritos, infinidad de números, un montón, una tonelada de números. Por lo general hay números de esos hay puertos que están reservados, que no se usan, que no están que no. Sí. Y entonces a partir de instalarle servicios o servidores a nuestras máquinas, esos puertos los voy a ir ocupando. Entonces, por ejemplo, instalo un servidor con como Apache Tomcat y Apache Tomcat por defecto escucha en el puerto 8080\. Está. Entonces lo que va a hacer esa instalación de Apache Tomcat o Apache, sí, cualquier servicio, me va a abrir ese puerto, lo abre y se va a quedar escuchando cualquier petición que entre a ese puerto de mi máquina. Estamos en Depende de lo que es ahora más o menos un puerto, es un número al cual entran cosas en nuestra por la red. Bien, entonces para yo tener una página en un servidor en la web donde hay un hosting. ¿Qué es un hosting?
+
+Una computadora.
+
+Perfecto. Única atenta.
+
+Exactamente. Es una computadora que está en la nube. Se lo lo dejamos así. Esa computadora para yo poder tener una página web ahí y poder acceder, ¿qué tiene que tener esa computadora?
+
+Antes o o al mismo tiempo, ¿qué tiene que tener instalado esa computadora?
+
+Ah, el mismo
+
+un servidor web. Un servidor web que escuche en un puerto. Yo lo configuro para que escucha en un puerto. Vamos a suponer que lo configuramos para escuchar en el puerto 80, ¿no? El 8080, solo el 80\. Si yo pongo el servidor web que escuche en el puerto 80, lo único que me queda hacer es apuntar a ese servidor, o sea, apuntar significa escribir la URL, que vaya a ese servidor a buscar el recurso que yo quiero, bien, y que vaya al puerto 80, ¿no? Que vaya al 8080\. ¿Está claro? ¿Se entiende? Sí, díganme si no porque es clave esto. Bien, vamos. Sí.
+
+Eh, no.
+
+Ah, pensé que no me habías dicho que no entendía. Bien, estamos. Entonces, computadora en la nube. Ahora lo que hacemos es computadora local, no está en la nube, en nuestra computadora, pero es lo mismo. Estamos replicando eso. Estamos configurando un servidor web. que va a abrir un puerto, un servidor de base de datos que va a abrir otro puerto, el 3306 y no más que esos dos. Está. Entonces, ¿qué puede pasar cuando nosotros levantamos los servicios en nuestra computadora? Puede ser que esos puertos estén ocupados. Si esos puertos están ocupados, el servicio no va a levantar, va a dar error. Y el iconito de WAM que está acá En lugar de estar verde se puede poner amarillo. Cuando está amarillo es porque alguno de los servicios no se levantó y ahí nos tenemos que poner a ver qué pasó. Bien, ahora si está verde, okay, todo okay. Pero sepamos qué es lo que está pasando. Todo okay significa que levantó un servicio. Un servidor web. Sí, levantó. Significa está corriendo. Ya está escuchando un servidor. web en mi máquina. Bien, que levantó un servidor de base datos My Sequel, que también está corriendo y escuchando en mi computadora, ¿no? Acá, acá. Sí. Y en este caso, WAM levanta un servidor María DB, que es lo mismo. My Sequal y María DB es exactamente igual, pero los pillines de creadores de My Sequel vendieron My Sequel a Oracle y crearon mayoría de B. Ya copiaron y pegaron y dijeron, "Bueno, miren, yo te vendo, pero tengo otro." Bien, es lo mismo. Entonces, tenemos que entender eso. Bien. Si yo hago click, se ve chiquitito, pero se ve. Van a ver que acá tengo apache versión 2459\. Y acá tengo el servicio, lo puedo parar, arrancar. Sí. y hacer lo que yo quiero. Ese es Apache, nuestro servidor web. Y una cosa interesante de lo que puedo hacer es http de comom. ¿Qué es esto? Un archivo plano hermosísimo de configuración del servidor web. Está. Y esto es Un dolor de cabeza. XML es o no.
+
+No, no es planísimo.
+
+No es XM, es archivo planísimo, no plano.
+
+Estos son módulos que yo cargo. Sí. Muchas aplicaciones que nosotros usamos se necesita módulos de apache y acá los habilitamos o los deshabilitamos sacándole el asterisco de adelante. Sí, por ejemplo, hay un módulo muy muy conocido, el mod rewrite. Sí, el mod rewrite es un módulo de apcheir para sobrescribir reglas de apach. Ya van a ver que lo vamos a utilizar para módulos.
+
+Sí, sí, es más fácil, pero primero quiero que vean acá. Entonces, a ver si puedo aumentar. Sí, acá. Si necesito ese módulo, por ejemplo, voy a buscar acá el rewrite, acá está el behost, acá está mont, sí, reescribir. Habilitando eso, lo que me va a hacer apache es permitirme reescribir reglas. Sí, reglas. ¿Qué significa? Que yo acá le puedo escribir qué por Por ejemplo, que todo, vamos a hacer esta primer regla, que todo los documentos están instalados y los voy a ir a buscar a la carpeta del directorio de instalación www. ¿Qué significa eso? Que todos los recursos que se le pidan a este servidor los va a ir a buscar esa carpeta. ¿Se entiende? ¿Se acuerdan? Yo le hago petición de recursos. Todos los recursos que se le pidan a este servidor, a mi servidor, los va a ir a buscar a la carpeta donde instalé el WAM, la carpeta www. Van a ver que el SAM usa HTDS como carpeta de instalación. El Apache en Linux usa la carpeta HTC también. Sí, son configuraciones de de apache. Lo puedo cambiar cuando yo quiera y como quiera. E si yo acá le pongo HTDS, lo voy a ir a buscar a la carpeta que yo le digo. Y así un montón de configuraciones tienen los servidores web, muchísimo para hacer dulce cos bien. Tema para trabajar con Juan Cruz, no con Bien. Y esto es una configuración de apache. archivo plano. Nuestro buen amigo Juan nos ofrece lo siguiente. Voy ache, voy acá a apache modules y me aparecen todos los módulos y los puedo habilitar y deshabilitar. Pero básicamente lo que estamos haciendo acá es descomentar una línea de ese archivo plano. Lo está haciendo en realidad nuestro amiguito está. Estamos Bien. Apache instalado, PHP instalado. ¿Qué versión? La 82 tengo yo acá. Con que sea ocho para arriba, instalen la que les guste. Bien, lo mismo acá puedo setear el PHP. Tiene un archivito que se llama php.ini ini, también un archivo plano. que no apareció un archivito plano que no sé dónde está y que no lo voy a abrir, que también se pueden configurar un montón de cosas. Eh, después vamos a ver configuraciones. My sequel 83\. Sí, mi servidor Mysequal, lo mismo. My.ini, que es un archivo plano, todas las configuraciones de My Sequel, está y todo se maneja así. Fíjense que acá le indico puerto quiero que use My Sequel 3306\. No se lo indico. Está por defecto. Yo nunca lo cambié. Ni lo voy a cambiar. No. Entonces, si esto está en verde, ¿qué significa? Que yo tengo acceso a mis servidores locales. Y acá quiero que hagan esa distinción. Como yo tengo un servicio web instalado en mi máquina y un servidor de base de datos instalado en mi máquina, voy a estar accediendo a través de un cliente que se va con conectar y va a hacer peticiones HTTP a ese servidor. Bien, entonces dijimos que Apache está escuchando en mi máquina en algún puerto. En este caso está por defecto y Apache por defecto escucha en el puerto 80\. Está. Y tenemos que entender una cosita, que si yo no especifico a qué puerto voy a hacer una petición a a un servidor por defecto es el puerto 80\. Sí, por defecto las peticiones HTTP se hacen el puerto 80\. Entonces, local host, ¿quién me puede decir qué significa local host cuando yo lo escribo? Ahí estáando
+
+servidor local. Vos también hablaste.
+
+No, atrás.
+
+Ah, yo no fui.
+
+Dije que estás en tu propia máquina.
+
+Bien, pero bien. Y y que yo escriba loca de cosa acá. ¿Qué va a pasar?
+
+Para de vuelta una máquinita virtual para
+
+No, no máquinas virtuales acá ni siquiera bien.
+
+No he dicho que ibas a ir a 107.0\.
+
+Okay.
+
+O sea, vas a ir el recurso a la al al pad relativo que le pongas después.
+
+Bien, bien. Eso está Todo bien, petición local. Eh, este me resolvió el DNS y voy a pedir un recurso al servidor al servidor local. ¿Se acuerdan cuando vimos en una presentación divina pasada por una hermosa, creo que era esta no gráfico, pero parecía traídos de la NASA? ¿Se acuerdan esto? Cuando yo escribo en el cliente Google. Ahí arribita, ¿qué pasa primero? Paso uno, resuelve en la petición y
+
+Google. ¿Cómo se maneja la red de redes? Internet. ¿Cuál es mi identificador en una red? IP. No, vamos, muchachos. Eh, conecten, conecten, porque se nos desconecta internet. Eh, yo cuando escribo acá una URL, lo primero que pasa es va y eso lo tiene que convertir en una dirección, en un para encontrar la casa, para encontrar esa máquina, ese servidor, ese host. Está el IP. ¿Quién lo identifica ese host? Un IP. Y para que ese IP se resuelva tiene que haber un servidor DNS de DNS. ¿Qué es un servidor de DNS? Le doy este nombre que está acá y me devuelve el IP. Eso es el servidor de DNS. Sí, eso después pregúntenselo a Juan Cruz. Tiene toda una ciencia, eso se propaga. Ta ta ta ta. Pregúntenlo. Está. Pero lo primero que hace es va y resuelve el IP. Una vez que tengo el IP termino de construir esa petición HTTP. En realidad la petición va resuelve el IP, pero y entonces el servidor, yo no voy a pedir a google. Sino que la petición va a ir a ese IP que está ahí que me devolvió el DNS. Entonces esa petición va a llegar a destino. Si no, un texto es un texto, no no tiene ningún sentido. Estamos entonces con esta secuencia de pasos. Esto es siempre así. No hay vuelta que darle. No hay otra forma de resolver hasta el momento redes y de comunicarse por las redes y por internet que no sea así. Sí, con esto. Entonces, díganme, ¿qué pasa cuando yo escribo local host ahí arriba,
+
+que no tiene que mandarlo al al DNS porque es tu propio IP? Está haciendo tu imagina.
+
+Bueno. Bueno, va por ahí. En realidad, cuando yo escribo local host no sé qué número de capa de red y dice, "Ah, no hace falta mandarlo a resolver a ningún servidor de DNS. Lo resuelvo inmediatamente con un IP local. Está, pero el flujo es el mismo, va y lo resuelve local. Bien. Y ese local host va a devolver un IP que que apunta a mi misma máquina, es como apuntarme a mí mismo y es el 127001\. ¿Sí? Entonces, escribir local hostina es lo mismo que escribir 127.0.1\. Sí, ahí le le evito un paso, o sea, directamente estoy apuntando a mi misma máquina y ustedes dirán, "¿Por qué le tengo que apuntar a mi misma máquina si estoy en mi misma máquina?" Bueno, porque en realidad yo estoy trabajando con un navegador que es un cliente que va a hacer una petición HTTP a un servidor y la única forma de comunicarnos con nuestro bendito protocolo de HTTP es a través del protocolo TCPIP. Ya eso lo estuvieron con Ya todos lo saben. Bien, un poquito de infra tenemos que conocer, tenemos que tenerlo claro, porque estamos en ese contexto, en ese ámbito, en ese ambiente. Y cuando empecemos a configurar servicios y los sistemas se empiecen a comunicar, tenemos que entender de qué estamos hablando y qué es lo que está pasando. Bien, estamos, se entendió esto. Entonces, si yo le doy enter, lo que está pasando acá que me está tirando un montón de errores. No importa, en realidad no son errores, son warnings y cosas deprecadas. Bueno, no importa. Está entrando a mi servidor apache y ese servidor apache de repente está tirando un montón de errores. Bien, me da como página o como resultado de ese recurso esta página. web HTML. Esto es HTML construido por mi servidor Apache. Está está claro. 127001 es lo mismo que escribir local h cost. Sí, fíjense que los errores son lo mismo. Bien, ahora vamos a Esto ya instaló PHP, como vimos. para saber qué versión de PHP tenemos. Fíjense, local host barra y le pidió ahí un recurso distinto. Sí, pasó unos parámetros raros, pero le está diciendo, "Bueno, devolveme este recurso." ¿Cuál es el recurso? PHP info. Bien. Y el PHP info en particular me imprime toda la configuración de mi PHP. en el servidor o de mi PHP, del PHP en el servidor que está ejecutándose bien. Y esto es bueno toda la configuración que vimos o que podemos ver en el archivo plano y un montón de cosas más. Bien, esto es toda la configuración de PHP de ese PHP en mi máquina. Es un montón. Bien,
+
+bien. Hasta ahí estamos. H servidor web My Sequel. ¿Cómo vamos a gestionar My Sequel? Esto ya lo hicieron en eh bases de datos. Pueden usar Wordbench, pueden usar PHP My Admin. One nos trae instalado ya un PHP My Admin. ¿Sí? ¿Y qué es PHP admin? Básicamente es un sistema desarrollado en PHP, PHP medio admin que corre en Apache, ¿sí? En un servidor web Apache que puedo por ende puedo acceder por la web, por un cliente navegador y que su finalidad va a ser administrar las bases de datos a través de un servidor de base, ¿está? Entonces, yo directamente, como eso lo tengo instalado porque WAM me lo instaló, puedo acceder a PHP PHP Ahí admin, eh, no está. Bueno, está este. Vamos a ponerlo así. Local host PHP Mi admin. Fíjense que al servidor web, a mi Apache, le estoy pidiendo el recurso PHP My admin. Entonces, llegó el apache, está configurado ya para que cuando yo le pida este recurso me devuelva, se fije si estoy logueado, si no estoy logueado, me diga, me devuelva la página de login. Bien, no les voy a decir el usuario de la contraseña porque si no me van a hackear. Formulario, inicio sesión. Hacer clic en eso ya es uno, es una petición web. Sí, estoy enviando un formulario. Ese formulario está yendo a a mi servidor Apache, resuelve por PHP My admin. Si metí bien usuario y contraseña, PHP My Admin lo que hace en realidad nos loguea con usuario y contraseña de la base de datos, del servidor de base de datos. Entonces lo que ponemos ahí es usuario y contraseña de la base de datos y me empieza a devolver recursos, fíjense, ¿sí? Empieza a devolver cosas. Esas cosas, esto que ven acá, HTML, CCS y HG. Son páginas programadas en PHP del lado del servidor. Está esto es PHP que por detrás está fue se conectó a la base de datos, le dijo, "Che, en el servidor de base de datos, tenés todas estas bases de datos" y vino y las listó. Le hizo listad. Bien. Bueno, a Hasta ahí estamos. ¿Se entendió todo bien? Bueno, como bien les dije, Apache se configura para que escuche y busque recursos por defecto en una carpetita. Esa carpetita, como yo instalé WAMP, ¿sí? Va a ser la carpeta WW. ¿De qué? ¿De dónde? W W W de dónde en particular, como yo lo instalé acá. Apache WAMP 64\. Esta es la carpeta de instalación. Sí. Ustedes cuando lo instalen usarán esa misma u otra. Ah, quise hacerle zoom, pero no funcionó. Adentro de esa carpeta van a tener varias carpetitas más. Y acá las aplicaciones. Las aplicaciones, miren que es adminer, PHP, My Admin, PHP, SIS info. Y después tenemos BIN BIN. Ahí adentro están los servicios que tiene One. En particular tiene Apache, María DB, My Sequel y PHP. Eh, ahí adentro está toda la configuración, todo lo que requiero. Y por otro lado tenemos la carpetita W W W. Bien, abro acá. Yo tengo un montón de carpetas, pero en En particular, voy a crear una nueva carpeta. Ya tenía una acá, no voy a crear una. Imagíense. Creamos una que se llame ps de proyecto de software y dentro de ella creamos un login HTML. Está. No sé qué tiene eso, que seguramente es del 2020 del 2023\. 3 años, pero básicamente yo para recuperar ese recurso, en particular HTML, lo que debería escribir, ¿qué es
+
+local?
+
+Local host,
+
+local host guardado.
+
+Yo creé una carpetita. que se llamaba PS y adentro le puse el index HTML y eso todo adentro de WW. Si mi servidor web apache va a buscar las cosas adentro de www, ¿qué le tendría que escribir acá?
+
+PH.
+
+Eh,
+
+PH era la carpeta
+
+PS
+
+PS
+
+PS exactamente.
+
+Login,
+
+login. login. HTML. Se entiende, fíjense, esta parte es mi servidor y si mi servidor busca las cosas dentro de www, esto es el recurso, el pan o el camino al recurso que le estoy pidiendo.
+
+No se paga el puerto.
+
+Por defecto es 80\. Si lo cambias ahí,
+
+si lo cambio, no lo encuentro.
+
+Espérate, hay que poner el puerto ahí.
+
+Si yo le cambiaría a mi servidor web. Te digo, "Che, escuchá en el 8080\. Acá se lo tengo que cambiar, se lo tengo que agregar. Si no, iría al 80 y no lo voy a encontrar. Esto es lo mismo que escribir así, dos puntos puerto 80\. Sí, no escribirlo o escribirlo es lo mismo en el 80\. Si yo ahora levanto otro servidor web y lo levanto en otro puerto, para hacer referencia a ese otro servidor web, tendría que escribir el puerto. Claro.
+
+A ver qué escribí. Log in html. Capaz que este no es la carpeta del de mi jue. Puede valir sal porque puede ser este. Va. Vamos a ver, arriesguemos PS. Dentro de PS vamos a crear un nuevo archivito. Login. HTML. Lo vamos a editar. Dije que lo vamos a editar. Se me rompió el Ah, no, nunca lo trajo. HTML. Oh, ¿por qué lo voy a editar acá? Esperen que vamos a hacerla fácil. Sí, sí. Carpeta. Acá está login. Créame un login. Un ahora un form. Vamoslo trabajar, ya que bueno, si es este, ¿se dieron cuenta lo que pasó? No, yo había tenía el recurso en una carpeta WW de otro servidor One y yo como levanté El de One era la carpeta de instalación, va a buscar recursos a su carpeta WW. Está y como yo levanté este y en ese en ese servicio no estaba ps.login/login, no lo encontraba. 404 no encuentro el recurso. ¿Qué pasó,
+
+loco, bu? Y encima se pone a molestar la pantalla.
+
+Tampoco te dije que sea lo tenado formulari
+
+encima
+
+se puso se puso a probar todo.
+
+Se pone
+
+volada de acá, amigo.
+
+Lo tenés reducado. Bueno, hizo el index y el login lo hizo duplicado. ¿Qué le pasa? Bueno, en fin. Entonces, en teoría, si eso está dentro del servidor web, que yo espero que sí en esta no falle, Lo voy a buscar acá y me debería demostrar el logín que hizo nuestro gran Géminis. Bien. Y por las dudas me hizo el otro, el index html, ¿o no? Index HTML, que es lo mismo, no sé por qué me lo copió y lo pegó. Otra cosa en particular que es configuración del servidor web, en este caso Apache, ¿sí? Presten atención. Si yo no Le pongo nada. Acá está. Por defecto me va a ir a buscar el index. HTML. Si no lo encuentra va a buscar index.php. Si no lo encuentra y creo que nos quedamos sin index más. Está. Si no encuentra nada de eso. 404\. No encontré el recurso que vos buscabas. Entonces si yo no le pongo nada barra nada Indirectamente le estoy diciendo el puerto, el 80, que no se lo estoy diciendo, pero es por defecto. Y como no le digo el recurso, indirectamente le estoy diciendo, devoluélveme el index.html o index.php que haya dentro de esa carpeta. ¿Está claro? Entonces, no se confundan con esto. No es que no le estoy diciendo ningún recurso, estoy pidiendo un recurso. Bien, entonces si yo voy ahí, fíjense, me renderizó el el índex. HTML está. Y si nos ponemos en exquisitos, volamos este login, lo vamos a volar y a este le cambiamos el nombre y le decimos index.php. Fíjense que va a funcionar igual. Lo mismo. Refresqué ¿Qué pasó en ese refresco? ¿Quién se pone ens y me dice qué es lo que pasó? Petición HTTP. Eh, HTTP. Se resolvió el DNS, el local host1\. Fue petición http al servidor, no sale a la web a internet porque es local. Le pegó al puerto 80\. En el puerto 80 Escuchaba nuestro amigo Apache. Apache tomó esa petición http y dijo, "Ah, me estás pidiendo el recurso PS barra nada." Okay. Me parece que vos querés algún índ carpeta PS. Voy a ver qué tengo. Fue a buscar dentro de su carpeta www. Encontró la carpeta PS, buscó ahí adentro index.html, no lo encontró, buscó index. php, lo encontró, procesó. ese HTML o SPHP, perdón, no había nada de PHP y me devolvió el HTML que construyó como respuesta.
+
+¿Se entiende? Eso fue todo lo que pasó. Fíjense, la petición es esta. Pido al request URL, esa es la petición, es un método get porque se escribe acá arribita. La respuesta fue, "Okay, todo esto lo que voló por los aires, incluso hay cookies, fíjense, se envían cookies. Todo esto viaja en la cabecera headers, todas cabeceras http. La respuesta, un HTML con todas sus cositas. Bien. Y como ese HTML hace referencia a fuente a fuentes de Google por allá y después también tiene linkeados un style CCS y por acá abajo tiene un script.js. También lo fue a buscar. Si ustedes ven acá hay otra petición HTML perdón, http donde voy a buscar y la respuesta es el csuncs. Hay otra para el JavaScript y este es el JavaScript que me trajo. Y también un Fabicon que es el Fabicon de la Wcita. Sí, el Fabicon es el iconito que aparece acá de Estamos. Se entiende eso. Eso tiene que quedar muy muy claro. Bien, porque es como vamos a empezar a trabajar.
+
+Profe, pero ¿por qué te lo procesó si vos no pusiste ninguna cláusula PHP en el HTML ni nada de eso, ¿por qué te lo procesa? Igual
+
+servidor web apache está preparado para devolvernos algo, ¿no?
+
+Sí.
+
+En básicamente para construir una respuesta y esa respuesta generalmente es HTML, ¿sí? Con con JavaScript C. Cuando yo hago la petición a ese recurso PHP, PHP está preparado para procesar y entender que las partes que son HTML puro las las devuelve como tal. HTML puro. Si yo le escribo PHP, ahí lo interpreta porque es un lenguaje interpretado y hace lo que tiene que hacer. ¿Sí? Por ejemplo, en este caso no hay nada de PHP. Va a dejar de volver ese o lo formatea HTML y lo lo trae.
+
+Sí, ya por defecto es un HTML. Entonces, ¿qué va a hacer? Llega acá, encuentra este index y empieza lo como es un PHP, se lo da al motor PHP que está instalado y le dice, "Bueno, fíjate, hacete cargo de esto que es tuyo." Eso lo hace el servidor web. Y entonces empieza el motor de PHP, empieza a leer HTML. Y eso lo, imagínate que esto lo empieza a escribir en la respuesta. Tiene una hoja en blanco y lo empieza a escribir, "Che, esto es HTML." HTML, lo empiezo a escribir y esto mismo lo va escribiendo. Lo va escribiendo. No encontré nada de PHP. Listo, devolvé eso. Está. Así es como funciona.
+
+Bien. Ahora, imagínense que yo quiero que procese PHP y devuelva algo. No sé dónde. No sé dónde, porque lo que hizo este muchacho se lo voy a arruinar. Vamos a suponer que yo acá lo quiero hacer esto con PHP. ¿Qué dijimos? PHP. Para escribir PHP, escribimos el tag PHP de apertura y de cierre. Bueno, lo hizo solo, no me hace, no me deja trabajar. Sí. Y para que PHP escriba usamos la palabra eco. En esa eh ese ese respond esa respuesta imaginaria en blanco que empezó a PHP a escribir. El eco sería escribí esto. Sí.
+
+Entonces, PHP va a empezar a escribir esto porque es HTML. Va a decir, "Bueno, pro proceso esto porque si esto me toca. ¿Y qué tengo que hacer?" Nada, escribí esto, este texto. Lo voy a escribir. Bien, tranquilamente, no lo terminé. Tranquilamente, ¿qué puedo hacer yo para hacerlo un poquito más? más un poquito, ¿no? Eh, ponerle saludo, no sé, igual. Y esto como es un texto, ¿cómo verde? Sí, instancio una variable, seteo un texto y acá saludo y acá muestro esa variable.
+
+Ahora si a ese eco le quieres dar estilo, lo ponés dentro de un P o cómo le das el
+
+Claro. Lo que yo puedo agarrar, fíjense que está dentro de un P. Car title. Esperen que le hago un zoomcito. No, con más. Fíjense que eso está adentro de un P. Bien. Y acá qué tiene classe. ¿Para qué era el class?
+
+Para el CSS. De ahí toma el estilo que yo quiero. Si lo buscamos acá, car title, vamos a ver qué le hizo a car subtil. Es que tiene una fuente tanto el color va a ser text secondary y la lhe head el separación de líneas el texto yo como estilo, ya saben, esa parte la pasamos podemos hacer lo que queremos o decirle a Gémini que haga lo que quiera y esto va a quedar igual. Fíjense que no hice nada, pero ya estamos procesando nuestro PHP. Lo guardo, lo refresco y fíjense que me imprimió lo mismo. Bien, ya vamos a meterle un poco de magia. Variables globales y peticiones antes de empezar con formularios. Bien, cómo nos comunicamos, cómo le mandamos cosas bien a nuestro PHP. Una de ellas es signo de pregunta. Y a partir del signo de pregunta, clave valor. Clave de valor. Estamos nombre igual Nicolás. Fíjense qué va a pasar. Nada, todo lo mismo. Sí. Yo acá lo que hice es hice una petición HTTP al mismo recurso. Pero le dije, "Bueno, te paso el parámetro nombre igual Nicolás. Hac vos lo que quieras con eso." Mi PHP estaba preparado para tratar esa información, ese parámetro.
+
+No,
+
+no, no hice nada. ¿Cómo hacíamos para trabajar parámetros y recuperar la información que viene o la las distintos tipos de información que vienen desde la web? Y estuvimos hablando que tenemos distintas variables que son arreglos asociativos que me van a ayudar a procesar todo esto. Sal. Entre ellas tenemos el arreglo asociativo llamado peso gu bajo guaj y en su índice Basta. Arreglo asociativo. Los índices son texto, son objetos. Entonces, yo estoy accediendo a un arreglo, al arreglo get, en la posición nombre. Y la realidad es lo que está pasando, es que cada una de estas variables se va a convertir en un en una posición dentro del arreglo asociativo, en un dice dentro del arreglo asociativo y el valor va a ser el valor del arreglo en ese índice. Entonces, el valor del arreglo get en el índice nombre va a ser el que viene por parámetro. Bien. Y acá yo voy a tener lo que recibí por parámetro. Y ahora lo que puedo decir es pesos nombre. ¿Se acuerdan que había hablado de Los literales comillas doble. Si yo pongo una variable, me va a escribir el valor de la variable y comilla simple me escribe el nombre de la variable así como está. Sí, podría ser otra forma. Sí, podría agarrar y hacer esto. Sé que va a ser un texto. Concatenar. Sí, es lo mismo. Esta es una forma más sencilla. Esperen que no me copió el pesos, pero vamos a ponerle hola con hola va con a hola coma ingresa tus credenciales. Ta ta ta ta ta. Entonces si yo acá le pongo otra vez le doy enter, me va a decir, "Hola, Nicolás, ingresa tus credenciales." Créanme que dice
+
+si no le pones nada es indefinido.
+
+Si no le pongo nada es vacío. Hola. Ingresa tus credenciales. Hasta parece que
+
+te lo tomo como stream vacío.
+
+Y si no lo mando, ¿qué va a pasar?
+
+Como estaba antes.
+
+Para, no escuches uno.
+
+A mí me va a quedar como estaba antes. Que ha va a cargar así vacío.
+
+Va a estar como estaba antes. Lo va a cargar vacío. ¿Qué otra opción?
+
+Claro, o sea,
+
+para mí revienta como un sapo. Lo que lo que te preguntaba, ¿cuál cuál le mandaste el el parámetro nombre y un stream vacío? Ahora, si no le mandas nada, ahí va a estar indefinido.
+
+No está el índice del arreglo asociativo. Revienta.
+
+No está inicializada esa variable.
+
+Revienta. Undefinite. Array key. No está el índice porque no está la variable.
+
+Eso es lo que te había preguntado. Si si te lo tomaba como indefinido. Por es
+
+exactamente. No lo toma como indefinido, sino que no viene, no existe esto. No existe el índice nombre en el arreglo get. ¿Por qué no existe? Porque nadie lo pasó por parámetro. Sí. Entonces, ¿qué hacemos? Is set. Sí,
+
+un operador ternario.
+
+¿Saben qué es lo que construyó ahí?
+
+Sí, un operador ternario. Es como un if.
+
+Es un if. Exactamente. Y me va a devolver true o false si esto está seteado. Signo de pregunta es el if. Che, esto es true. Si es verdadero, lo primero lo devuelvo lo primero y si no lo segundo. Estamos otra más fácil. Así. Doble signo de pregunta, ¿qué va a ser si está seteado esto? Y si no, eso ojo acá le tendría que sacar el iset porque si no me habar true. Particularidades de PHP débilmente tipado, igual que vimos en JavaScript. Cualquier cosa que no sea nul, undefinite o false es true. Ya está. Entonces yo ahí, ¿qué le hago? Si yo le hago esto, me va a devolver Si le paso el parámetro, por ahí me va a volver Nicolás o o lo que yo le pase por parámetro. Entonces, si me devuelve algo, es true. Y el operador signo de pregunta signo de pregunta me va me hace esto. Si eso es true, devuelvo eso y me lo asigna a la variable nombre. Y si no, me asigno lo que lo que sigue. Está es más o menos el mismo que el ternario, más cortito y más más rápido. Bien. Entonces ahí si yo no No le paso el parámetro, debería funcionar con usuario. Si yo le paso signo de pregunta, nombre Nicolás, me asigna Nicolás. Bien, si le paso otro nombre. Ah, otro nombre.
+
+Con usuario no hiciste nada.
+
+¿Cómo?
+
+Con el el creo que es la variable usuario. Comillas usuarios.
+
+Comillas usuarios. Me La doble pregunta es esa sería una variable,
+
+¿no? Esto es un literal.
+
+Ah, un literal.
+
+Un texto
+
+que se asigna un string que se asigna a la variable nombre. Está en realidad. ¿Qué estoy haciendo? En nombre, la variable nombre. Asígname lo que viene por parámetro o el texto nombre usuario. ¿Se entiende bien? ¿Entendimos? No se olviden de esto. Petición HTTP que llega acá. Ahora llega con parámetros. Bien, si nosotros vamos y vemos los parámetros de acá en network, fíjense los lo m esto va en pay load, en la network pay load. Sí, esa palabrita la van a escuchar por todos lados. Pay load es los parámetros. lo que yo estoy enviando. Saludos.
+
+Y fíjense, nombre, otro nombre.
+
+Bien,
+
+si yo vamos a ponerlo más
+
+más entendible, ¿no? Nombre, Nicolás. Voy a network, elijo la petición, voy a payad, nombre Nicolás. Entonces, la petición HTTP tiene ese headers, todo esto que está acá y un payload, o sea, parámetros. Está bien. Hasta ahí vamos. Vamos a usar este formulario, ¿no? No vamos a hacer el de Google hoy y el de GitHub tampoco. Capaz que en la próxima clase. Formularios. Sí, de eso también estuvimos charlando. Vimos cómo se hacía. Entonces, vamos a administrar este formulario y a generar algo y ver cómo envío esa información de los formularios y cómo me llega a mí recursos PHP. Entonces, form atributos importantes de forma dos lo más importante. A ver,
+
+me lo escribió Bueno, ahora ahora tenéis la oportunidad
+
+método y
+
+perfecto. Action,
+
+¿qué era? No, esto no. Action,
+
+¿qué era? Action.
+
+Es lo que va a ejecutar cuando
+
+cuando haga el submit.
+
+Ahí está. Sería el PHP, ¿no?
+
+El action. Exactamente. Sería el PHP.
+
+Acá te quedó tapado el método.
+
+Bueno, son cosas que bien. El action básicamente es a dónde yo voy a enviar esa información. ¿Qué información? La del formulario, ¿está claro? No, todos los inputs del formulario. Entonces, ¿y a dónde la vamos a dónde la queremos mandar nosotros? A ustedes, ¿a dónde la enviarían? Dat laval, ¿no?
+
+Sí. Paso previo de la base de datos antes de en la base de datos la administra nuestro sistema PHP. Hm. Entonces, nosotros vamos a programar PHP. El PHP se va a conectar a la base de datos y validará usuario y contraseña. Exacto. Pero básicamente lo que es el siempre o los get o las peticiones van a ir a mi servidor web. En el servidor web yo voy a tener los recursos que nosotros programemos en PHP. Entonces, cuando nosotros enviamos es a dónde les estoy diciendo a qué recurso PHP le voy a enviar esa información. Está por ahora lo único que lo que vamos a hacer es enviarlo a login.php, es el único que tenemos, index.php es el único que tenemos. Sí, lo Lo podríamos enviar a otro, después lo vamos a enviar a otro a otro PHP, pero vamos a empezar enviándolo a el único que tenemos, index.php. Sí, index. PHP es lo único que tenemos. Bien. Y el otro que me dijeron, get o post métod, perdón, métodos, ¿cuáles podían ser? P, post, get y patch.
+
+Eh, Parecido Pacha al fin. Dos veces.
+
+Sí, sí.
+
+Yo me lo olvido. Así que
+
+Y
+
+falta delite, eh, y no sé cuál otro, pero son ocho o nueve.
+
+De nuevo. Query
+
+Query Query también,
+
+¿no?
+
+Ah, Query me parece que también apareció. Bueno, no me no me hagan quilombo, ¿eh? Con cosas nuevas. Bien, vamos a dejarle el método get a ver qué pasa para que ustedes lo Experimenten. Fíjense, tengo un input con name email y tengo otro input con name password. Estamos. Y este es de tipo password. Bien. Y después tengo un botón eh laala que tienen unas cositas relindas y nada más. Entonces vamos a darle refresh solo para asegurarnos Voy a explorar esto, fíjense. A ver, vamos a explorarlo. Acá está el formulario. Mi formulario tiene un action que va a ir al index.php y método get. Y por acá dentro tengo esos input que qué sé yo que sé cuánto. Bueno, yo acá le voy a poner Nicolás. Ah, no, es un correo mi @ ar @mail.com y 1 2 3 4 de contraseña. Voy a darle a iniciar sesión. Me valida seis caracteres.
+
+Envío Bueno, acá tenemos unos problemitas bravos. Me hizo el inicio de sesión también por tenerlo tuneado. Déjenme hacer algo por la salud mental mía. Chao. Refrescamos. Ahora sí. Mi aí está mi @mail y 1 2 3\. Ahí tenés. Ahora no tenés validación. Espera. Le doy a iniciar y fíjense lo que pasó acá. ¿Alguien se da cuenta lo que pasó?
+
+La contraseña cruda por s seguro.
+
+Como yo al método le puse get, me mandó todo por get. ¿Qué significa todo por get? Todo por URL. Está. Entonces, la petición la hizo. Hizo el post, todo lo que venimos haciendo, el post, perdón, hizo la petición HTT. P la construyó ta ta y la envió al servidor. ¿Dónde? La URL. ¿Por qué? Porque yo le puse método get. Estamos un poco peligroso para un login, pero yo quería que ustedes lo experimenten por su cuenta. Si vamos acá, lo mismo. Acá está la petición y acá está el payload, el famoso payload. Email, tanto, password, tanto. Estamos. Vamos a cambiar un poquito eso. Vamos a ponerle método post, así somos más felices todos. No, tampoco es que nos van a venir a hackear a nosotros, pero por la duda le ponemos post. Si nosotros le ponemos post, yo acá voy a borrar esto. Voy a ir al index. Voy a poner mi mail.com. y 1 2 3 inicio sesión y fíjense que fue algún lado fue algo hizo. Está Vamos a ver qué pasó acá. Hizo una petición a ese recurso. Yo le puse en el action que se lo mande a este index.php, que le mande por método post. Y entonces esta petición la construyó el mismísimo Chrome. navegador y en payload ahora aparece algo distinto que es font data, ¿sí? Que va en el body de mi petición, que es lo mismo. En definitiva, el payload termina siendo lo mismo, pero este es formata. Bien, ¿cómo recupero esos datos? Bueno, ¿quién se anima a decirme? Ole, no toco más nada porque fíjense. No, acá no lo voy a hacer. Lo vamos a hacer arriba.
+
+Acá tenemos lo vamos a hacer. No, no escribo más nada. ¿De dónde recuper Eso, esos datos del formulario bajo post.
+
+Bien, pesos gu bajo post. Y los índices de ese arreglo asociativo, ¿cuáles van a ser?
+
+El email y la contraseña.
+
+Exacto. Pero particularmente, ¿qué? El name de los inputs está. Miren, user o mail. Vamos a ponerle email. igual a pesos y a un bajo post email y password. Sí, email y password, pero esto en realidad corresponde a los inputs a este valor. Si yo acá le no le pongo email, no es lo mismo. Va a ir como otro nombre, que en definitiva es esto que está acá. No, esto se construyó a partir del name de ese input y llega a mi PHP, a mi servidor de esa forma en mi arreglo asociativo post porque por método post y el índice va a ser ese valor. Estamos que tenerlo bien claro esto porque es las bases de la comunicación entre un cliente y un servidor, que es lo que vamos a trabajar nosotros. Bien. Entonces, hasta el momento tenemos esto por acá. ¿Qué podríamos hacer acá? Y tranquilamente es llamar a válido igual a validar validar y mandarle validar credenciales. Mandarle
+
+mandarle el email y el password y esa función que tendría que hacer. Está en la base de datos está
+
+validarlas. Exacto. Lo lo más lógico es ir a una base de datos, consultar la base de datos de usuarios y si el password es correcto, válido, acá hay formas de trabajarlo, que es un sen redirect, ¿sí? Que después lo vamos a ver como redireccionarlo que vaya a no sé, a la administración o a lo que fuese, pero ahora eso no lo vamos a a trabajar. Para conectarnos a una base de datos vamos a trabajar un CRUD, una ABN, una alta baja, modificación y consulta. Está entonces hasta acá vimos. Configuramos nuestro entorno rápido y sencillo con WAM, donde configuramos nuestro servidor web, en particular a H, donde instaló PHP para interpretar todos nuestros archivitos PHP y que esto esté funcionando y yo pueda codificar PHP y esos archivos los los interprete. Instalamos My Sequal, ¿sí? Que todavía no lo usamos, pero está ahí. Y además nos agregó este PHP My Admin para administrar las bases de datos, etcétera, etcétera. Bien, hasta ahora todo eso y empezamos a ver dónde vamos a buscar los recursos, dónde trabaja mi servidor web. Sí, en esa carpetita WW sabemos que ahí va a ir a buscar todos los recursos. Vimos cómo comunicarnos. Método get, método post. Sí. Parámetros casi. Parámetros en la URL, formularios por método post. Llegamos, tomamos esas parámetros, esos valores y ya ahí codificamos lo que queremos. Está. Ya ahí somos programadores. Así que sabemos qué tenemos que hacer y qué no tenemos que hacer. ¿Estamos de acuerdo? Bien. Bueno, hasta ahora eso. Preguntas hasta ahí, ¿das? Ninguna. Bien, si no hay dudas, seguimos. A. Bien, vamos a crear un ABM. punto php HTML HTML 5\. Está. Eh, ¿qué necesitamos? Un formulario para dar de alta. ¿Qué vamos a dar de alta? Vamos a planificar project managers. Ahora nos ponemos elorro de Project Managers. Tenemos que hacer el alta de usuarios en nuestro portal, no sé, mágico. Sí, vamos a hacer la administración de usuarios. Sí, los usuarios tienen email, nombre, apellido, password y eh edad. Sí. ¿Qué hacemos? ¿Qué tenemos que hacer? ¿Son analistas? ¿Son ahora no están no son programadores, la BM es donde va a incorporar el negocio para para si va a tener una base de datos, va a tener que conectarse la base de datos
+
+bien?
+
+Y eventualmente hacer el intercambio. Eh, y si no, si lo vas a tener una variable o o lo o vas a usar, no sé, el local storage por lo menos para para esta sesión.
+
+Vamos a usarnos.
+
+Eh, bueno, entonces va a conectar con la base de datos, va a tener que intentar para para primero conectarte con la base de datos y después hacer el el pedido después la base y administrar la respuesta.
+
+Perfecto. Okay. ¿Y qué vamos a tener que tener en la base de datos principal? En el servidor de base de datos, ¿qué vamos a tener?
+
+La base de datos.
+
+Entendamos esto. Un servidor de base de datos puede tener un montón de base de datos. Sí. Y dependiendo del motor, si nos vamos a un postgre, está dividido distinto. Sí, está dividido en esquemas y los esquemas tienen base de datos adentro. My sequel es más sencillo. Sí, my sequel hablamos de esquema es lo mismo que una base de datos. Estamos. Entonces, un servidor de base de datos tiene muchas bases de datos y esas bases de datos están constituidas por tablas
+
+tablas. Algo más
+
+coneto. datos.
+
+Bien, él la probó. Me parece que ustedes ustedes todavía están ahí o no. Bien, todo eso. Bien. Entonces nosotros vamos a desarrollar una alta baja modificación y consulta de usuarios que tienen esa estructura, esos datos. ¿Qué vamos a tener que tener? Nuestra tabla, nuestra base de datos y adentro nuestra tabla. Bien, con esa estructura. Entonces, diseñar Amos, hacemos el modelo entidad relación, decimos, esto es un cuadradito, se va a llamar usuarios, va a tener un ID, un autoincremental, ¿no? Eso que hicieron alguna vez. Y después, ¿qué vamos a ya estamos diseñando, no? Después, ¿qué vamos a tener que tener para dar de alta un usuario al lado del cliente? Un formulario que cargue los datos, se envíe un controlador o un archivo en el servidor que procese esos datos y los dé alta en el en la tabla en la base de datos. Se conecte a la base de datos y los dé los inserte en la base de datos. ¿Está es así o no? Entonces vamos a empezar por el principio y vamos a ir medio rapidón. Yo ya estoy conectado acá a mi base de datos. Vamos a crear una nueva base de datos. Yo Acá tengo una que se llama proyecto. Me parece que esto ya lo hice varias veces, ¿no? Vamos a crear una nueva base de datos. Vamos a llamarla PS2 2026\. Estamos. Proyecto de software 2026\. Esa es mi base de datos. Está acá. Vamos a crear una tabla usuarios. Sí. Cuatro columnas. Cuatro columnas. ID entero. Índice primario. Auto incremental. Name o email. Email. Barchar, no text, no. Barchar y vamos a ponerle dos 200\. ¿Dónde está
+
+conejamiento? No. Atributo no predeterminado. No empecemos restricciones.
+
+Ino de B. No me no me creen. Mam está. No Mam no saben por qué no. Ya se lo dijo Soya. Y si no se lo preguntan ellos.
+
+No, mentira.
+
+Porque maneja transacciones o las transacciones son únicas, ¿no?
+
+No tiene transacciones, no maneja referencias, o sea, son tablas muy muy eh flaquitas, están hechas para consultas rápidas, pero no tenés eh relaciones, ¿sí? No tenés frame key todas esas cosas no son soportadas por ese motor. Name, todo en inglés, por favor, les pido estudien inglés. Name 150\. Eh,
+
+password con doble usar la
+
+eh No, no pasa nada. Anda, anda.
+
+A veces se tira no es as cambiar
+
+bien.
+
+¿Qué pasa?
+
+Listo. Guardar pregunta acá, ¿qué? Acabo de hacer cuando yo llené ese formulario
+
+antes. ¿Qué es PHP?
+
+Es un loco que se puso a programar como estamos haciendo nosotros en PHP y programó estas tablitas y esos formularios para que nosotros seamos felices y llenemos los campitos y esos campitos van a PH al servidor web apache, se procesa esos campitos, se conecta a la base de datos y hace un create table. con los datos que yo le pasé. Está nada más y nada menos que eso. Bien. Eh, petición no me lo muestra. Hay algunos que lo muestren, pero bueno, ahí está mi tabla. Bien, que si yo voy y pongo examinar acá, ¿no? Hace un selectec disco from usuarios y no hay ninguno. Bien, entonces Empecemos eh con nuestro formulario y acá le vamos a poner este suelo.
+
+¿Cómo sabes?
+
+Escucha,
+
+te escucha.
+
+No tenés
+
+formulario. de alta de usuarios en ABM. PH
+
+tenés que estás usando librería para conectarte base de datos
+
+por ahora no todavía no no conecté nada.
+
+No, no, pero digo, o sea, vas a tener que usar algo. Nosotros ja usamos eh JBC para rentar más datos.
+
+Sí. PHP us Usas nada.
+
+Hay un método tipo my sequel I conect tiene sus propias librerías
+
+y para es pedo
+
+no tienes que instalarla ya viene con PHP.
+
+Si cerrás ese que está sin guardar y lo volves a abrir Bueno, se emocionó. Creo que se puede extensiones.
+
+Sí, sí, sí, está de acuerdo. ¿Qué le pasó? Bueno, no importa. Ahora vamos a ver qué es lo que creo.
+
+Ya tienen registrarse todo. Bueno, vamos a buscar nuestro curso ab.php, ¿sí? Porque hasta ahora estamos en index.php. Yo en realidad lo que necesito es abm.php. Está. Le doy enter y efectivamente me hizo el formulario de alta de ABM de un usuario. Alta de usuario, me hizo nombre, apellido, email, usuario. Esto lo vamos a sacar. Roll. Buenísimo. Contraseña, repetir, contraseña, volver y registrar usuario.
+
+Claro que te deje ser administrador.
+
+Normalmente PHP eh dej juntas la lógica de negocio con la con la renderización del componente o
+
+no no no hasta ahora no vamos a trabajar exactamente igual que que Java, digamos. Básicamente lo que nosotros después la arquitectura, vamos a tener clases de arquitectura. Acá vamos a hablar, no sé si clase, pero vamos a hablar la arquitectura del proyecto web, que es lo que nosotros estamos haciendo ahora. Ahora estoy armando todo en la vista y y todo el proceso en la vista. Eh, fíjense que estoy metiendo PHP dentro de la página del HTML. Cuando nosotros separamos en un protocolo MBC modelo vista controlador o separamos la vista de los controladores, una lógica de separación eh funcional, ¿no? Entonces, ponemos la lógica de negocio separado de lo que es la vista. Es normal controlador, digamos, y queda la vista.
+
+Eso después lo trabajamos con algún framework, lo podemos separar nosotros, pero nosotros vamos a usar framewor que ya lo separo. Sí. Eh, así que no, ahora sí estoy trabajando todos juntos, pero esto no es así, simplemente para lo que tenemos que lograr entender. Y ustedes tienen que prestar atención en esto de la comunicación, la ID vuelta y la conexión con la base, sí, es ida y vuelta. Después, dentro de lo que es PHP, vamos a complejizar esa arquitectura de software. Bien, que vamos, ya vamos a charlar sobre esta arquitectura. Esto no me sirve. Yo voy a poner email, nombre, apellido, eh usuario, no lo quiero, rol, no lo quiero y contraseña, lo vamos a poner cualquier cotación. Eh, entonces lo vamos a simplificar. Esperen que vamos a Esto necesito verlo un poquito más chico. Acciones de registrar. Eh, password. Confirm password. Este no. Este no lo queremos. Decime que no me hizo validaciones. No, no las hizo. Bien, ese no está. Favor. Sí, estos usuarios no los queremos del rol, perdón, no los quiero. Y después teníamos acá Usuario. Usuario tampoco lo queremos. Sí. Eh, esto está. Entonces, si guardamos esto y refrescamos, quedó espantoso, pero es lo que nosotros necesitamos. Correo electrónico, contraseña, el registrar, nombre y apellido. Bien. Entonces, esto que ustedes ven que completa con root y un password es del navegador. Sí, los navegadores cuando vas recordando eh por defecto nos va completando porque tiene ganas de completar, autocompletarnos, ¿no? E y acá ya me hizo todo bien. Formulario. ¿A dónde vería enviar la información este formulario?
+
+Eh,
+
+pero desde la vista, ¿a dónde lo vamos a enviar? ¿A qué recurso?
+
+PHP,
+
+a ab. PHP, no hay index. Index teníamos, ya lo vamos, lo dejamos, lo liberamos ahí. Bien, entonces lo vamos a mandar a ab.php. ¿Dónde está este formulario? Fíjense. Action ab. PHP. Método post. Sí, listo. Ya está. Estamos contentos. Toda esa información va a ir a este archivo del lado del servidor. Se va a renderizar la página. Lo que complete el cliente va a ser un post que va a ir al servidor con, como vimos recién, la petición HTTP y todas las variables. de los inputs en el arreglo asociativo post. Estamos. Entonces, fíjense lo que me hizo este muchacho. Me declaró una variable mensaje, un tipo de mensaje, nombre, apellido, usuario, rol. Yo roll no lo voy a usar y usuario tampoco lo voy a usar. Y entonces me dijo isif, sí, el método request es igual a post. Sí, empiezo a recuperar los datos de el post. Recupero el nombre, el apellido, el email, usuario, roll. No los quiero, los vuelo. Basta.
+
+En la base de datos habías creado apellido. Me parece que no.
+
+Creo que no. No. Bueno, no importa. Ahora lo vemos.
+
+Hasta est en inglés,
+
+¿eh? usuario no existe, así que lo volamos de acá. Acá hizo toda una validación. Usuario, facilitar todas las valones, eh,
+
+no facilitar todas las validaciones que ir buscando cada campo usuario,
+
+¿cómo? ¿Cómo? Para
+
+nada, nada, nada.
+
+Vamos de vuelta,
+
+¿no? Porque a lo mejor verificamos muchas veces el usuario. Iba a tener que ir buscando cada vez que usuario.
+
+Ah, para borrarlo, ¿no? Pero yo quiero seguir la lógica y lo voy a ir borrando mientras no pasa nada. Entonces, ¿qué me hizo? Porque esto me lo hizo Go. Sí. ¿Qué me validó? Bueno, si no está que todos tengan algo, que no estén vacíos. Me validó. Okay. ¿Por qué se le cantó? Que todo tenía que estar ahí. Si alguno de estos está vacío, ponen la variable tipo error. Tipo mensaje, error. Y el mensaje es, por favor, complete todos los campos obligatorios. El SIF, si no filter bar, bueno, estos son funciones propias de PHP. Filtrar una variable email por validate email. También son constantes propias que ya tiene PHP, ni las vamos a usar, está nosotros lo vamos a hacer más simple. Sí, esto lo volamos, esto lo volamos, lo volamos. y lo volamos. Yao, no queremos todo eso. Simplemente que valide que no estén vacíos. Usuario y roll acá vuelan. Entonces, ¿qué va a hacer? If si alguno está vacío da error. Y si no, el mensaje éxito y crea un mensaje usuario con el nombre de usuario que no existe con ese rol.
+
+Esa es una
+
+justo eso. Eh,
+
+eso es como un alerta, o sea,
+
+no, no mensaje, una variable.
+
+Ah,
+
+ahora vamos a ver qué hace con eso. Si esto no existe, así que vamos a hacer una cosa. Si está acá, acá le ponemos nombre completo. Completo. Y acá ponemos peso, nombre y apellido. Concatenamos el nombre y el apellido. Y acá vamos a decirle que que el usuario tal registrado con éxito. Sí, fíjense acá, simplemente me completa estas variables mensaje, me limpia estas variables que están acá y más abajo, fíjense, si mensaje, si la variable mensaje no está vacía, me hace, me escribe todo este HTML. Esta es la forma de mostrar HTML con condiciones en PHP. Sí, fíjense. If abre un tag PHP, if si mensaje no está vacío, dos puntos es una es la forma de es la llavecita, la puedo usar igual el lif, ¿sí? Con el tag PHP. Entonces Si esto no está vacío, escribí este HML. Está. Eso es lo que estoy haciendo. Si mensaje está vacío, este banner con lo que está ahí adentro no lo va a renderizar, no lo va a escribir. Sí. Entonces, si no está vacío, se fija, si el tipo de error es sucess, o sea, éxito, me pone esto que debe ser algo en verde. Imaginémoslo. Y si no, si no es sucessor. Entonces pondrá esto que seguramente es en rojo. Y acá dice el mensaje, lo escribe. Esto que ven acá es lo mismo que hacer PHP e
+
+estáis buscando un I para ahí, ¿no? El CCO. Sí, sí. Un SBG que seguramente es un círculo verde con el Sí, estos son SBG, son y escribe las
+
+Sí. Los las coordenadas.
+
+Sí. Y muestra el mensaje. Que el mensaje era la variable. Vamos a volver a lo mismo. El mensaje lo completaba acá, ¿no? En el proceso. Mensaje. Usuario. Ta ta ta. Hm. ¿Está claro?
+
+Entonces, al momento es completo el formulario, se envía al servidor, el servidor encuentra el recurso, el recurso es el mismo, ab.php y ab.php empieza a procesar. Como es un método post el que recibo, me fijo todas las variables, las valido y si eso está válido, empiezo a escribir de nuevo el formulario, de nuevo, todo el mismo PHP, el mismo HTML que dio origen a la petición. Está. Entonces, si yo lo envío vacío, me va a dar un mensaje de error. No me va a permitir porque está validado. Revivo. Me lo validó. Doble validación. Se las voy a sacar. Este requiere de un input. Lo que hace es que me lo valide HTML, que no esté vacío. Sí, por eso me ponía el delito. Se los voy a sacar para mostrarles más fácil. Mínimo seis caracteres. No quiero. Bien, refrescamos esto. Fíjense, ahí hice una petición HG get. Bien, por eso no procesó toda la parte de las variables. Ahora hago una petición post, pero la que te parió. me valida que sea un mail. Ahora sí fue la petición post. Procesó, perdón, procesó todo esto lo de acá arriba. Empezó, encontró el recurso, llegó el recurso, le dije, "Te enviaron todo esto por post." Bien. En Empiezo. Proceso, creo las variables. El método es post. Sí, era post. Tomo los valores, valido. Están vacíos. Sí, estaba todo vacío. Solo el mail estaba completo. Como estaba vacío el tipo en la variable tipo mensaje le pongo este texto error. Pero eso es todo idea del programador Gémino. Estamos. Y en el mensaje de error, por favor complete todos los datos obligatorios. Si vamos acá, acá está el error. Sí, ese texto. Puse una comilla simple ahí que no sé, la debo haber escrito yo. Lo borramos. Bien, lo volvemos a enviar y ya se borró la comillación. Ahora si yo lo completo el mail y la contraseña. 1 2 3 mando. Este era el SBG, el iconito. Bien. Y me el mensaje lo mismo. Petición post, llega el servidor, encuentra el recurso, empieza a procesar. El método es post. Sí. Tomo los valores. Esto es válido. Eh, hay alguno vacío, ¿no? Entonces va por el else. Tipo de mensaje, sucess. Nombre completo, ese que está ahí. Mensaje, este que está acá. Limpio los las variables y empiezo a sigo renderizando. HTML, ta. Ta ta ta ta. Veo cada vez que encuentro h PHP, el motor de PHP va a decir, "El mensaje no está vacío." No, no está vacío. Es suces y el mensaje no sé qué te. Entonces entro acá. El tipo de mensaje succes. Sí, escribo esto. Si no, no entro ahí y escribo el mensaje. Sigo escribiendo el div. Salgo del if, escribo otra vez el formulario. Termina la petición post request, el el response vuelve al cliente, vuelve al cliente que eso que escribió, todo ese HTML que se fue escribiendo a partir del código PHP. ¿Está claro? ¿Alguna duda? Hasta acá lo tenemos que guardar en la base de datos. Bien, vamos a guardarlo. Ya me debe haber escuchado, ya lo debe haber hecho. Bien, entonces acá en lugar de mensaje suces me dejó escrito, ¿eh? Y me quierear la la password, pero salí de acá.
+
+Acá no respetamos las buenas prácticas.
+
+Vamos a hacer, lo vimos en el rápidamente en la presentación mientras dormían. Yo se los conté. con my sequel. Gracias. Gracias, amigo. My sequel connect la cual me va a conectar y me pará un poco. Qué ansioso que está local hostigual, ¿no? Esa es la dirección de la base de datos. Tiene que tener un IP en la base de datos, ¿no? O un un
+
+un IP, ¿sí?
+
+O un eh ¿Dónde está nuestro? de base
+
+en el puerto8 levant
+
+qué puerto
+
+33
+
+pero no no sé dónde lo levantaste porque vos no lo tenías eh en algún servidor en la nube a la base de datos
+
+el tema que ese sería sería el 127.0
+
+porque está usando PHP
+
+estoy usando
+
+one nos crea o nos instala un servidor de base de datos en mi máquina.
+
+Okay. Igual ahí debería ir la URL en ese caso, pero
+
+la URL de donde esté el recurso. Eh,
+
+tal cual. Acá va la URL del servidor de base de datos. Está el que querramos. Yo en este caso voy a desarrollar con el servidor que me instaló WAMP. ¿Y cuál es la URL del servidor que me instaló One en mi máquina? Lo host. Entonces, me estoy Ando a mi servidor local. Quiero conectarme a un servidor en la nube. Bueno, averigo en el IP y nos conectamos. Ponemos el IP. Sí, cualquiera sea usuario power, por supuesto. Bien, yo en este caso me voy a conectar root. Le voy a desvelar mi password.
+
+1 2 3 4
+
+root como y acá va el nombre de la base de datos, ¿se acuerdan? Va. programar.
+
+¿Se acuerdan cómo le puse a la
+
+PS26?
+
+Nico, consulta, ¿podrías hacer eh tirar las variables de entorno algún archivo aparte para no tener que cuando pase eso a texto, a producción? Ten que andar cambiando lo que punto
+
+environment.
+
+Sí, se hace así.
+
+¿Se sigue usando el punto M o ya cambió eso?
+
+No, no. Sí.
+
+Okay.
+
+Sí. viendo una discusión de no quién usa moo dependenci
+
+cómo
+
+no que puedes usar los ids no sé si pero te permite configurar la var entorno en el mismo ID o si no Windows también te permite configurarno en la consola
+
+sí pero quedas dependiente de esas variables entorno, cambias de proyecto y tenés que cambiar las variables de entorno de Windows, ¿no?
+
+Si lo pon Windows Sí, si lo ponés de por proyecto tiene también.
+
+Sí, depende del líder, olvídense. Punto environ. No, c\*\*\*\*\*
+
+porque eso sería más cómodo que un archivo.
+
+Sí. No, no, no se complique la vida. Y ahora no es cuestión de del proceso. Bueno, conexión. Lo que va a hacer la conexión es conectarse a la base de datos y devolverle un objeto conexión. Sí, posterior a conexión tenemos que obviamente podríamos preguntar si la conexión existe directamente construir el SQL. Se lo dejo que programe porque ya me está volviendo loco. Podríamos decir que si no se conectó, tipo de mensaje error, error el conectarse a la base de datos. Finalmente ese SQL lo vamos a ejecutar el query. Esto lo vamos a hacer. Esto lo deberíamos hacer. ¿Qué hizo acá? Esto hizo una un gran Esperen que rompió todo. Esto no va acá.
+
+Empezamos conal épico. Eh, lo ejecutamos. Ah, no, no hacía falta el if. Bueno. Sí.
+
+¿Y qué vamos a hacer acá? Este tipo de mensaje y todo esto lo vamos a poner acá adentro del if si la ejecución es válida. Está bueno. Basta. Entendimos la lógica, la repasamos. Si el método es post, tomo los datos que me envió el formulario, valido que esos datos no estén vacíos. Simple validación. Podríamos hacer, como me hizo Géminis, un montón de validaciones, que el email sea email, que todo lo que queramos. Si todos están completos, creo una conexión a la base de datos. Si la conexión se creó exitosamente, entonces construyo el insert. Fíjense, insert into, esto me, esto lo saben así. Fíjense una cosa en la construcción de este inserto. Es un texto plano, es un insert into, entre comillas, o sea, es texto dentro de HTML. No es otra cosa que texto con Bien, entonces insert in tu usuario, nombre, apellido, email y password. Valúes, le paso la variable nombre, el contenido de la variable nombre, el contenido de la variable apellido, el contenido del email, el contenido del password. Apellido no tenemos nosotros, así que va nombre. Esto no va. Nombre completo teníamos, ¿se acuerdan? Ah. No, no lo tenemos. Nombre y apellido. Vamos a hacer. ¿Y qué pasó acá? Punto apellido. O sea, que estamos lo usamos y en vez de nombre acá, nombre completo. Está en nombre. Vamos a poner el nombre completo en email, el email y en password. Password. ¿Qué nos tenemos que asegurar? para que este insert into funcione correctamente. Pasé a
+
+eh tendrías que hacer un trch, ¿no? Para para
+
+no no no por ahora no se existe trch en PHP
+
+para errores de ese de ese
+
+Sí, sí, para el manejo de excepciones lo deberíamos hacer, no lo vamos a hacer ahora, no hoy. Asegurarnos que que la tabla se llama de usuarios y que los campos sean nombre, email y password también la variable
+
+y que lo que le mandemos tengan la validación de tipo. Exactamente. No le voy a mandar un entero en o un stream barchart a un entero, etcétera, etcétera. Entonces, email, name y password, ya estamos mal. Nombre, no es nombre, name. Sí. Email, email. Password. Password. Ahí estamos bien. Sí, siempre asegurémonos esto. Si no es pelear contra un edificio. Bien,
+
+bien.
+
+No tiene que ser la función asíncrona porque no andes o automáticamente asíncrona cuando asincrónica porque te conectas y te que esperar la respuesta.
+
+No hay acá no hay asincronía que v no. Es síncrono. Esto, el my sequel query pasándole la conexión y el SQL va a ejecutar y espero a que me devuelva el control.
+
+Esperando a que vuelva.
+
+Exacto. Sí, sí, sí, sí. Bien. Y si esto devuelve, en realidad esto va a devolver un objeto. My query me devuelve un objeto porque query puedo poner lo que yo quiera acá. Acá es un insert, pero le puedo poner un select, le puedo un query, un update, un delete, puedo poner lo que yo quiero ahí en querer un create table, puedo crear tablas, lo que yo quiera, está lo que me devuelve es un objeto. Como me va a devolver un objeto y no es un nul o un cero o un false, puedo usar el if porque si me devuelve algo es true. Funcionó. Si no, my i. A ver si me parao y me me dice algo. Esto no tiene menos info. My sequel query me va a devolver false, o sea, cero o nul si da error y me va a do bien. Bien. Entonces, vamos a probarlo a ver qué pasa. Entonces, alta. Voy a hacer primero el request, el get. Pido el formulario, o no era un post, no entró, no hizo nada. Nicolás García, mi mail.com y 1 2 3\. Vamos a hacer el post usuario creado correctamente. ¿Me creen? Va a ser un ID autoincremental, email, nombre completo y password. Los tres ni lo haáamos nada, no nos vamos a meter con cosas de seguridad. Estamos
+
+tenemos que listarlo de alguna forma. Sí. Entonces vamos, esto va a quedar muy apretado, pero vamos a hacerle acá abajo. antes del footer, después del formulario. Ya tenés una cuenta. Vamos a ponerle así. Esto se lo vamos a volar y acá le vamos a hacer un y acá le vamos a decir así, mira, no le vamos a decir nada. Ya sabe lo que queremos hacer. una tabla. ¿Sí? ¿Qué vamos a hacer en esa tabla? Vamos a listar todos los usuarios que hay en la base de datos. Para listar, para listarlos, ¿qué hacemos? Primero, ¿qué tengo que hacer?
+
+Hay que mandar a la base de datos un get de
+
+un get a la base de datos.
+
+O sea,
+
+estamos de vuelta.
+
+En serio.
+
+Claro.
+
+Te mezclaron los dos. Sí, sí. que ser controlador con el imaginaba que tenía que ser eh Está bien acá lo está
+
+acá lo vamos contra la base porque esto es todo. Controlador, vista, controlador, eh repositorio, todo.
+
+Nos tenemos que conectar a la base de datos, tenemos que hacer un cterisco from de la tabla usuarios, traernos los usuarios, esa respuesta, recorrerla y por cada usuario, mostrar una fila de la tabla. ¿Estamos de acuerdo? Dibujar una fila en la tabla. Bien, esperemos a ver qué hizo. Entonces, primero con HTML hizo la cabecera de la tabla donde va a mostrar el ID, el nombre, el correo electrónico. Por suerte no me muestra el password, lo vamos a mostrar total. Y me hizo una columna que se llama acción. Acciones para eliminar y para editar. Muy bien. Y después en el cuerpo de la tabla empezó, dijo, asumiendo que usuarios es un arreglo asociativo de los usuarios, ta ta ta. Bueno, esta función HTML eh especial es básicamente se usa para evitar quilombos de caracteres especiales. Sí, tranquilamente. Esto lo vamos a volar para que no confunda y para que no me haga kilomos. Bien. Entonces, acá dice que asumiendo que usuarios es un arreglo asociativo de usuarios, pero no me hizo la conexión, ahí me crea usuarios get usuarios, una función. Yo lo voy a hacer a mano. Bien, vamos a hacer la conexión. Conectar se me hizo una función, ¿no? Perdonen. Vamos a hacer así. Vamos a hacer my sequ. My sequel connecto acá era
+
+PS
+
+PS 2026\. Lo mismo acá. Vamos a ponerle usuarios. Quelquer la conexión se le casterisco from usuarios. Usuarios o users.
+
+Usuarios.
+
+Usuarios. Todo en inglés y el nombre de de la tabla en español. Sí. Esto no está bien porque acá usuarios no es un arreglo asociativo. Para recorrer un objeto conexión vamos a usar el fetch az de usuarios. Entonces acá en realidad lo que vamos a hacer es response para no confundirlos. Y acá vamos a hacer un wh. Fíjense el my sequel fetch asoc. Yo le devuelvo el objeto. response y lo que me va a hacer es me va a asignar una fila, si es que existe, a esa variable row. Bien, acá voy construyendo este arreglo asociativo usuario, pero yo no lo quiero hacer así. Yo directamente todo esto que está acá, esperen. Créanme que va a funcionar. Salí esto por cada row. Yo voy a completar esto que está acá. Y acá lo cerramos. Este lo vamos a volar porque no hay ningún ifá. Bien. Entonces, ¿qué hicimos en la tabla? Creamos esto de acá. Hicimos la consulta, creamos una conexión, o sea, nos volvimos a conectar, le mandamos el query, se le casterisco from, el objeto response lo fuimos asignando a cada una de la fila y por cada fila creamos un TR. TR es una fila en la tabla HTML.
+
+¿No te mantiene la conexión abierta o se cierra sola cuando
+
+No la puedo usar de vuelta la va a mantener? Lo que pasa que la conexión la abro si es un post, si no es un post no la abro. ¿Se acuerdan? Fíjense, antes todo en el mismo archivo, eh, todo esto lo voy a procesar siempre, cada vez que llega este recurso. Yo la conexión esta la hago si llega un post y si los datos son válidos.
+
+Y el hecho de tener la variable con el mismo nombre, no te va a hacer uno. No
+
+me parece que va a reventar, pero vamos. No, no voy a reventar porque yo la es débilmente tipado. Puedo asignar lo que quiero cuando quiero. Vamos a probar.
+
+Si ya queda abierta, hace falta abrir.
+
+Va a abrir otra,
+
+pero hace falta o podemos.
+
+No, todo esto después lo tendremos que separar a una lógica donde no tengamos que escribir todos los tiros las mismas cosas. Fíjense que escribimos usuario, contraseña, las conexiones, todo esto. Después hay que separar porque después viene la la formalidad, todo lo que ustedes estudiaron acá tiene que ser bajo acoplamiento, eh, y todo eso. Patrones hermosos que estudiaron. Sí. Eh, bueno, vamos a probar. Ya voy a sacar esto por acá. Ya vamos a darle refrescar. No le vamos a dar refrescar, le vamos a dar enter. Esta es la tabla, créanme. Y estos son las acciones. Hermosas las acciones.
+
+Funcionar o funciona.
+
+Funcionar funciona. Eso es lo importante, ¿o no?
+
+Qué asco esto. Delete edit. Bien, vamos de vuelta. Funcionar, funciona. Está listado. Ahora vamos a dar de alta otro. No, qué m\*\*\*\*\*. Qué difícil que es poner un arroa, ¿no? 1 2 3\.
+
+Voy a hacer un post. Va a abrir la conexión porque va a ser post porque como están todos los campos completos, va a abrir una conexión, va a insertarse a la va a ejecutar el insert, va a escribir HTML, va a crear otra conexión a la base de datos, va a hacer un celecisco from de la de los usuarios y va a escribir esa tabla espantosa que me hizo. Tanto esfuerzo para hacer un login lindo y hace esa cosa. Va un login, una alta, fíjense, hizo todo eso, me dio el cartelito y me hizo el select. Perfecto. Sí, abrí dos conexiones en la base de datos, no tendría que haberlo hecho. Tengo hardcodeado del usuario del power. No tendría que estar Hay cosas que no están bien. Todos lo detectamos a eso bien, pero funciona. Bien, entonces todo esto se está ejecutando dentro de mi ABM. Tengo un formulario que envía post a un recurso en mi servidor web, que es lo que configuramos hoy de mi entorno local. Ese servidor web encuentra ese recurso. Ese recurso tiene código PHP que se va a conectar a un servidor Mysequel que está en mi entorno local, ¿sí? Con su usuario y contraseña root root para el que me quiera hackear. se va a conectar a ese servidor web y voy a ejecutar sentencias SQL contra ese servidor web. Me las voy a devolver, las voy a procesar con PHP y voy a ir dibujando ese response cuando termino de ejecutar acá abajo todo ese archivo, completé mi response y lo devuelvo al cliente. Vuelve por la web al ador está está claro cosas que tienen que tener muy en claro y prestar mucha mucha atención. Viene la petición, todo esto se ejecuta del lado del servidor y se va escribiendo ese HTML response y eso el HTML es el que está
+
+como lado del servidor local si Sí, es local, pero es del servidor. Si estuviese en la nube, es lo mismo. Voy, se ejecutaría ya en la nube y lo que vuelve es un HTML. Es lo mismo. O sea, piénsenlo que es lo mismo. Yo acá estoy yendo a este servidor, está cerca, pero es lo mismo. Estoy yendo por internet a ese servidor y eso me está devolviendo algo. Si entiendan que son cosas separadas, cliente, navegador, servidor, por más que sea local. La comunicación es la misma, es un HTTP, sea local, sea en la nube. ¿Está claro? ¿Se entiende eso? Eso tiene que estar clarísimo. Es las bases de todo lo que vayan a hacer en la web, en proyectos web. Bien, está. Dudas, la más mínima duda que tengan. Consulta.
+
+Las excepciones.
+
+Ahí trae catch. Ya ahí nos metemos más en lenguaje PHP. Está van a ver que lo que viene, yo lo que quiero que quede claro ahora es la comunicación entre estos dos mundos y empezamos con un poquito de código, no hace falta meternos de lleno en código PHP. Ahora sí vamos a ver después que existe try catch, existe toda la lo mismo que en Java y se puede usar. Tampoco vamos a usar estas conexiones con como tal, falecal i connect y es hay objetos para para trabajar con eso. Sí. Y vamos a usar posteriormente un framework, un framework que esto lo lo tiene todo resuelto, ni siquiera lo vamos a ver. Sí, como como Sprintot, si usaron o como Java. Sí, pero ahora es esto. Es un poquito de PHP embido en nuestra vista, en nuestro HTML, no es lo indicado, no se hace así, pero entendamos Esto petición HTTP desde un formulario o puede ir por la URL, por GET. Trabajo esa response, la voy a trabajando con mi código y ese response que termina siendo un HTML vuelve a través de internet a mi cliente que es el navegador. El navegador renderiza, somos todos felices. Y parece que no pasó nada. Sí, parece en este caso, como es el mismo formulario, lo mismo, fíjense que que da la impresión de que el control siempre lo tiene el navegador, pero no es así. Hizo la petición, fue construyó de vuelta todo el HTML y volvió y se rentizó. Está. Vamos a crear alguien más. Alguien más. MailJuan. No sé por qué le puso Juan. Fíjense que va a parpadear. Se pone en blanco y vuelve. No llegó a ponerse ni en blanco la velocidad. La realidad es que ponerle el trotin,
+
+eh,
+
+poner el limitador de red sin
+
+Bueno, eso sería así. Si yo lo limito y va lento, te quedas esperando. Sí,
+
+el formulario refresca la página con el
+
+formulario
+
+te refresca la página con el Por eso de hecho ves la tabla renderizada. No, todo refresca. Esto está yendo. Construye todo de vuelta, el el HTML completo con la tabla, con todo
+
+y vuelve. Sí, sí, sí. Todo, todo completo. Son las 9 - C. Hacemos el delete. El delete es más fácil. Delete lo vamos a hacer por método get. Nuestro amigo A HRF. Sí, un link. ¿Se acuerdan? Hacer clic en un link es lo mismo que escribir en la URL. Es lo mismo. Acá me dijo que vaya a un eliminar usuario. Yo le vamos a poner así, mira. A BM PHP. A lo mismo. Sí. ¿Y qué lo vamos a hacer? ¿Se acuerdan lo primero que hicimos? Que nosotros en la URL le escribimos signo de pregunta clave, valor para pasarle una variable. Sí. ¿Y qué le voy a pasar para eliminar? ¿Qué tenemos que saber para eliminar a alguien de una base de datos?
+
+El ID, eh, el identificador en realidad que nosotros le pusimos ID auto incremental, lo más fácil de todo. Entonces, le pasamos el ID con qué valor esto. Yo voy construyendo la tabla y por cada row voy a tener el ID de ese R, de ese de ese usuario, ¿está bien? Entonces, el valor va a ser el de ese ID. Entonces, cuando llega, vamos a preguntarle lo primero, vamos a hacerla rápida acá que ya nos queremos ir todos. Pesos. ID, si el ID existe, sí, pesos, tomo el ID. ID, lo mismo que hicimos hoy con el nombre. Si el ID viene como parámetro en get y existe en la variable ID me asigna ese valor y si no vacío. Si existe, o sea, que vino el parámetro y tenía un valor, entonces crea una conexión, aprendió, construye el select. El select va a ser un delete from usuario where id el ID que me vino por parámetro. ¿Estamos de acuerdo? Ejecuto eso. Tipo de mensaje sucesse usuario eliminado correctamente. Va va a hacer esto y va a seguir para abajo, va a seguir trabajando. Sí, si es post ta. Va a hacer todo lo mismo. Va a volver a consultar a la base de datos, va a traerse los datos y va a construir la tabla. Entonces vamos a refrescar esto. Y vamos a eliminarlo a alguien más. Fíjense que yo me paro en eliminar y acá se ven local h cost psabm.php 2 punid = 3\. Sí, desde el lado de PHP ya lo construyó con ese ID y me vino el response un HTML que ya tenía eso, ¿no? Ese ah esa ese link ya construido. Se entiende de eso o le digo que canten más fuerte. Entonces, cuando yo aquí va a enviar el post y lo eliminó. Chao. Murió.
+
+Te rendé el mensaje
+
+de No,
+
+porque lo vació después porque como el Bueno, no sé,
+
+distancia después lo delit lo pusiste
+
+arriba del todo.
+
+Arriba del todo.
+
+Pero fíjense, la petición es un una petición get que está ahí arriba. Si yo acá le meto un dos y le doy enter, ¿qué se imaginan que pasa?
+
+A la m\*\*\*\*\*. Chao, Messi.
+
+Y no me hizo el mensaje. ¿Por qué el mensaje no está? Porque acá seteo esto, pero acá lo borro. Acá vuelvo a instanciar las variables con vacío. Entonces, tendría que hacer así. Entonces, ahora sí, si elimino esto, usuario eliminado correctamente. Y me quedó hermoso esto. Vamos a hacer así. Dale estilo a la tabla. Tablet. Bueno, mientras trabaja, ¿se entiende lo de hoy? Hablamos de un poquito de pensar en peticiones eh cliente servidor http. Los volví loco con http. Entender que nosotros trabajamos en un entorno para trabajar en en proyectos de software, proyectos de software web, por lo general Son tres entornos. Configuramos un entorno rápido. No, no profundicé en el tema. Yo usé WAM, pero sí charlamos sobre qué va instalado en ese entorno. Está dijimos un servidor web, dijimos un servidor de base de datos y dijimos eh, ¿qué más? Ah, PHP, porque vamos a usar PHP. Sí, esas tres cosas fundamentales. Bien. Y después algún clientito para manejar las bases de datos como PHP My Admin, puede ser Wordwch, puede ser cualquier cliente. Hm. Configuramos nuestro entorno. Una vez configurado y cuando hablo de configurado es es entender esto en que arranca, que los puertos están libres, que todo anda, todo se puede comunicar. Tener los usuarios y contraseñas de acceso tanto a la base de datos como a cualquier recurso que necesitemos. Eh, es saber qué carpeta es donde mi servidor web va a va a ir a buscar los recursos, la W W. En mi caso, hm, en Wam, en SAM es la carpeta HT Docs, es una carpeta que crea Sam y funciona así. Creamos una carpeta dentro de esa carpetita One, ¿sí? Para poner nuestro proyecto y empezamos a codear un poco de PHP y entender esto, cómo nos comunicamos por estos dos métodos, get y post. Bien, post para enviarlo un poco más oculto nuestra nuestra información. nuestros datos y get va a ir todo en la URL. ¿Cómo recuperamos del lado del servidor toda esa información que enviamos y cómo trabajamos con esa información o un poquito de código PHP entre medio de nuestro HTML y vamos construyendo ese response, ¿no? Ese response una vez construido vuela de vuelta para nuestro cliente que hizo el esa petición. Bien, ese es el resumen del día de hoy. Sí, hace todo lo que vos quieras. No, no detectó sintax error. Vamos a ver. Se puso a probar. Se puso a ver qué tal le quedó. No, pa. ¿Qué pasó? Claro. Te pedir ¿Qué hizo, señor?
+
+Sí, todo, todo. Sé lo que vos quier No me deja terminar de verlo. Yo.
+
+¿Qué hizo, señor? Ahí está. No me había tenía cachado el CSS, entonces tenía que refrescar el Ahí está la tablita. No, no sé qué está haciendo este. Está Ah, está probando
+
+ponel. Bueno, insertó alguien. A ver si yo lo puedo ver antes que lo elimine. Sí. Carlos Gómez. Gómez.
+
+A ver si lo elimina.
+
+Bueno, estas cosas la hace solo, ¿no? Gemini se pone a probar, cosa que nadie le dijo que prueba. Escróo para abajo. Lo va a eliminar. Eh,
+
+dale. Tanto misterio.
+
+Te quedaste sin son. Y bueno, lo dejó bastante bonito. Yo lo que haría es en realidad ponerlo en lado. Estaba mejor en un lado del otro, ¿no? Bueno, gente, listo. Cortala, cortala, amigo. Cerramos esto. Qué bonito que lo dejó, ¿no? Hasta lo con todo acá. Bueno, duda. consultas hasta acá nos faltó el editar, no llegamos al editar, pero se imaginarán el editar, mando el ID, hago un select asterisco from usuario where id a s y relleno el formulario con esos valores y al guardar, en lugar de crear uno nuevo, hago un update de ese ID. ¿Está bien? Después lo veremos en la próxima. ¿Dudas, consultas hasta acá?
+
+Bien.
+
+Bueno, vayan puñendo su la clase que viene, lo que vamos a hacer es pensar un poquito más en arnesiar un proyectito de este tipo, separar un poco la lógica, el entregable de este sprint y ahora el Últimos un minutito. El entregable de este spring es básicamente esto que hicimos hoy, alta, baja, modificación y consulta de una tabla. Sí, no mucho más que eso, pero lo vamos a tuñar un poquito, le vamos a poner controlador, vamos a a pensar en algo más a menos y al mismo tiempo vamos a usar por ahí usamos algún template porque vamos a hablar después de UX, vamos a hablar un poco de eso. Bien. Listo. ¿Es grupal o individual?
+
+Individual. Voy a fijar que el mensaje llegue correctamente.
