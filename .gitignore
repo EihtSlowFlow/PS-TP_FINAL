@@ -17,6 +17,9 @@
 !/writable/uploads/index.html
 !/writable/uploads/.gitkeep
 
+# Environment
+.env
+
 # OS / IDE
 .DS_Store
 Thumbs.db
