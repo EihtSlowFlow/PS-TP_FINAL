@@ -1,0 +1,688 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "heading": "#111827",
+          "success-soft": "#ECFDF5",
+          "on-primary-container": "#dad7ff",
+          "outline-variant": "#c7c4d8",
+          "surface-variant": "#d9e3f6",
+          "background-start": "#F0F4F8",
+          "on-tertiary-container": "#ffd2be",
+          "on-secondary-container": "#606366",
+          "secondary-fixed": "#e0e2e6",
+          "primary-soft": "#E0E7FF",
+          "error-container": "#ffdad6",
+          "surface-container-low": "#eff4ff",
+          "secondary-container": "#dee0e4",
+          "surface-muted": "#F9FAFB",
+          "primary-fixed": "#e2dfff",
+          "danger-soft": "#FEF2F2",
+          "primary-fixed-dim": "#c3c0ff",
+          "background-end": "#D9E2EC",
+          "danger-hover": "#DC2626",
+          "on-primary-fixed-variant": "#3323cc",
+          "border": "#E5E7EB",
+          "on-tertiary-fixed": "#351000",
+          "warning-soft": "#FFFBEB",
+          "success": "#10B981",
+          "on-primary": "#ffffff",
+          "outline": "#777587",
+          "info-soft": "#DBEAFE",
+          "on-secondary-fixed": "#191c1f",
+          "tertiary-fixed-dim": "#ffb695",
+          "surface-container-highest": "#d9e3f6",
+          "surface-container-lowest": "#ffffff",
+          "error": "#ba1a1a",
+          "warning-text": "#92400E",
+          "text-muted": "#6B7280",
+          "danger": "#EF4444",
+          "info-text": "#1E40AF",
+          "danger-text": "#B91C1C",
+          "primary-container": "#4f46e5",
+          "tertiary": "#7e3000",
+          "surface-tint": "#4d44e3",
+          "inverse-surface": "#27313f",
+          "background": "#f8f9ff",
+          "on-secondary": "#ffffff",
+          "on-surface-variant": "#464555",
+          "on-background": "#121c2a",
+          "primary-hover": "#4338CA",
+          "secondary-fixed-dim": "#c4c7ca",
+          "tertiary-fixed": "#ffdbcc",
+          "surface": "#FFFFFF",
+          "inverse-on-surface": "#eaf1ff",
+          "surface-container-high": "#dee9fc",
+          "tertiary-container": "#a44100",
+          "on-error-container": "#93000a",
+          "on-secondary-fixed-variant": "#44474a",
+          "warning": "#F59E0B",
+          "surface-bright": "#f8f9ff",
+          "on-primary-fixed": "#0f0069",
+          "surface-dim": "#d0dbed",
+          "success-text": "#065F46",
+          "surface-container": "#e6eeff",
+          "info": "#2563EB",
+          "inverse-primary": "#c3c0ff",
+          "on-surface": "#121c2a",
+          "on-tertiary": "#ffffff",
+          "on-tertiary-fixed-variant": "#7b2f00",
+          "on-error": "#ffffff",
+          "secondary": "#5c5f62",
+          "row-hover": "#F3F4F6",
+          "primary": "#3525cd",
+          "border-input": "#D1D5DB"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "margin-mobile": "1rem",
+          "space-xs": "0.25rem",
+          "space-xl": "2rem",
+          "margin": "2rem",
+          "space-lg": "1.5rem",
+          "gutter-mobile": "1rem",
+          "space-sm": "0.5rem",
+          "space-md": "1rem",
+          "gutter": "1.5rem"
+        },
+        "fontFamily": {
+          "headline-md": [
+            "Inter"
+          ],
+          "headline-sm": [
+            "Inter"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "body-md": [
+            "Inter"
+          ],
+          "headline-lg-mobile": [
+            "Inter"
+          ],
+          "headline-lg": [
+            "Inter"
+          ],
+          "table-header": [
+            "Inter"
+          ],
+          "label-md": [
+            "Inter"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "metric-display": [
+            "Inter"
+          ]
+        },
+        "fontSize": {
+          "headline-md": [
+            "20px",
+            {
+              "lineHeight": "26px",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-sm": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "500"
+            }
+          ],
+          "label-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-md": [
+            "15px",
+            {
+              "lineHeight": "22px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg-mobile": [
+            "22px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-lg": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "fontWeight": "600"
+            }
+          ],
+          "table-header": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "letterSpacing": "0.05em",
+              "fontWeight": "500"
+            }
+          ],
+          "label-md": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "body-sm": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "metric-display": [
+            "32px",
+            {
+              "lineHeight": "38px",
+              "fontWeight": "600"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-gradient-to-b from-background-start to-background-end min-h-screen text-on-surface font-body-md text-body-md antialiased" style="font-family: Inter, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif;"><aside class="fixed left-0 top-0 h-full w-[260px] bg-surface z-50 flex flex-col justify-between shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]"><div class="flex flex-col flex-1 overflow-y-auto"><div class="h-16 px-space-md flex items-center gap-space-sm border-b border-border"><div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0"><span class="material-symbols-outlined text-on-primary text-[22px]">apartment</span></div><div class="flex flex-col min-w-0 leading-tight"><span class="font-headline-sm text-headline-sm text-heading font-semibold tracking-tight truncate">InmoGestión</span><span class="font-label-sm text-label-sm text-text-muted truncate">Plataforma Inmobiliaria 2026</span></div></div><nav class="flex-1 px-space-sm py-space-md space-y-1" data-active-classes="bg-primary-soft text-primary-hover font-semibold rounded-lg shadow-sm border-l-4 border-primary-hover pl-3"><a class="flex items-center gap-space-sm px-3.5 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-muted hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-label-md text-label-md font-medium">Dashboard</span></a><a class="flex items-center gap-space-sm px-3.5 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-muted hover:text-on-surface transition-all" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="font-label-md text-label-md font-medium">Usuarios</span></a><a class="flex items-center gap-space-sm px-3.5 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-muted hover:text-on-surface transition-all" data-path="inmuebles" href="#"><span class="material-symbols-outlined text-[20px]">home_work</span><span class="font-label-md text-label-md font-medium">Inmuebles</span></a><a class="flex items-center gap-space-sm px-3.5 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-muted hover:text-on-surface transition-all" data-path="contratos" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span class="font-label-md text-label-md font-medium">Contratos</span></a><div class="pt-1"><div class="flex items-center justify-between px-3.5 py-2 text-on-surface-variant font-label-md text-label-md font-medium"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="">Cuotas</span></div><span class="material-symbols-outlined text-[16px]">expand_more</span></div><div class="pl-8 pr-1 space-y-1"><a class="flex items-center py-1.5 px-2 rounded-lg text-on-surface-variant hover:bg-surface-muted hover:text-on-surface font-label-sm text-label-sm transition-all" data-path="emitir-cuotas" href="#">Emitir cuotas</a><a class="flex items-center py-1.5 px-2 rounded-lg text-on-surface-variant hover:bg-surface-muted hover:text-on-surface font-label-sm text-label-sm transition-all" data-path="cobranzas" href="#">Cobranzas</a></div></div><a aria-current="page" class="flex items-center justify-between px-3.5 py-2.5 transition-all bg-primary-soft text-primary-hover font-semibold rounded-lg shadow-sm border-l-4 border-primary-hover pl-3" data-path="pagos" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">payments</span><span class="font-label-md text-label-md font-medium">Pagos</span></div><span class="px-2 py-0.5 rounded-full bg-primary-soft text-primary-hover font-label-sm text-label-sm font-semibold">Activo</span></a><a class="flex items-center gap-space-sm px-3.5 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-muted hover:text-on-surface transition-all" data-path="liquidaciones" href="#"><span class="material-symbols-outlined text-[20px]">account_balance_wallet</span><span class="font-label-md text-label-md font-medium">Liquidaciones</span></a><a class="flex items-center gap-space-sm px-3.5 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-muted hover:text-on-surface transition-all" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span class="font-label-md text-label-md font-medium">Reportes</span></a></nav></div><div class="p-space-sm border-t border-border bg-surface-muted/60"><div class="p-space-sm rounded-xl bg-surface border border-border flex items-center justify-between gap-space-xs shadow-sm"><div class="flex items-center gap-space-sm min-w-0"><div class="w-9 h-9 rounded-full bg-primary-soft text-primary-hover font-label-md text-label-md font-semibold flex items-center justify-center shrink-0 border border-primary/20">LB</div><div class="flex flex-col min-w-0 leading-tight"><span class="font-label-md text-label-md text-heading font-medium truncate">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted truncate">Administradora</span></div></div><a class="p-1.5 rounded-lg text-on-surface-variant hover:bg-danger-soft hover:text-danger-text transition-colors" data-path="cerrar-sesion" href="#" title="Cerrar Sesión"><span class="material-symbols-outlined text-[20px]">logout</span></a></div></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/90 backdrop-blur-md border-b border-border z-40 flex items-center justify-between px-space-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-xs font-label-md text-label-md text-text-muted"><span class="text-on-surface-variant font-medium">InmoGestión</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-on-surface-variant font-medium">Pagos</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-heading font-semibold">Bandeja de pagos</span></div><div class="flex items-center gap-space-lg"><div class="hidden md:flex items-center gap-1.5 text-text-muted font-label-sm text-label-sm px-2.5 py-1 rounded-md bg-surface-muted border border-border"><span class="material-symbols-outlined text-[16px] text-primary">calendar_today</span><span class="">06/11/2026</span></div><div class="relative flex items-center"><button aria-label="Notificaciones" class="relative p-2 rounded-full text-on-surface-variant hover:bg-surface-muted transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-4 h-4 bg-danger text-on-error rounded-full font-label-sm text-[10px] leading-4 flex items-center justify-center font-bold">2</span></button></div><div class="flex items-center gap-space-sm pl-2 border-l border-border"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden sm:flex flex-col text-left leading-none"><span class="font-label-md text-label-md text-heading font-medium">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted">Online</span></div></div></div></header><main class="relative pt-16 min-h-screen"><div class="max-w-[1200px] mx-auto px-space-xl py-space-lg"><div class="flex flex-col w-full space-y-space-lg">
+<!-- 1. Encabezado Principal y Acciones -->
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-space-md">
+<div class="space-y-1">
+<div class="flex items-center gap-space-xs">
+<h1 class="font-headline-lg text-headline-lg text-heading tracking-tight">Pagos informados</h1>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-soft text-primary-hover font-label-sm text-label-sm font-semibold">
+          Ciclo Nov 2026
+        </span>
+</div>
+<p class="font-body-md text-body-md text-text-muted max-w-2xl">
+        Bandeja de verificación y conciliación de transferencias reportadas por inquilinos con comprobante adjunto.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap sm:flex-nowrap">
+<button class="h-[42px] px-4 rounded-lg bg-surface hover:bg-surface-muted text-on-surface-variant font-label-md text-label-md font-medium shadow-sm transition-all flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">download</span>
+<span class="">Exportar planilla (CSV)</span>
+</button>
+<button class="h-[42px] px-4 rounded-lg bg-surface hover:bg-surface-muted text-on-surface-variant font-label-md text-label-md font-medium shadow-sm transition-all flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-muted">history</span>
+<span class="">Historial de conciliación</span>
+</button>
+</div>
+</div>
+<!-- 2. Tarjetas de Métricas Rápidas (KPIs) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- KPI 1: Pendientes -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between relative overflow-hidden group hover:translate-y-[-2px] transition-transform">
+<div class="flex items-center justify-between">
+<span class="font-table-header text-table-header uppercase text-text-muted">Pendientes de revisión</span>
+<div class="w-10 h-10 rounded-full bg-warning-soft text-warning flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">pending_actions</span>
+</div>
+</div>
+<div class="mt-4">
+<span class="font-metric-display text-metric-display text-heading tracking-tight block">1 pago</span>
+<div class="flex items-center gap-1.5 mt-1 font-label-sm text-label-sm text-warning-text font-medium">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span class="">$ 420.000 por conciliar hoy</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-warning/80"></div>
+</div>
+<!-- KPI 2: Aprobados -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between relative overflow-hidden group hover:translate-y-[-2px] transition-transform">
+<div class="flex items-center justify-between">
+<span class="font-table-header text-table-header uppercase text-text-muted">Aprobados en Noviembre</span>
+<div class="w-10 h-10 rounded-full bg-success-soft text-success flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</div>
+</div>
+<div class="mt-4">
+<span class="font-metric-display text-metric-display text-heading tracking-tight block">1 pago</span>
+<div class="flex items-center gap-1.5 mt-1 font-label-sm text-label-sm text-success-text font-medium">
+<span class="material-symbols-outlined text-[15px]">verified</span>
+<span class="">$ 780.000 acreditados</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-success/80"></div>
+</div>
+<!-- KPI 3: Rechazados -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between relative overflow-hidden group hover:translate-y-[-2px] transition-transform">
+<div class="flex items-center justify-between">
+<span class="font-table-header text-table-header uppercase text-text-muted">Rechazados históricos</span>
+<div class="w-10 h-10 rounded-full bg-danger-soft text-danger flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+</div>
+</div>
+<div class="mt-4">
+<span class="font-metric-display text-metric-display text-heading tracking-tight block">1 pago</span>
+<div class="flex items-center gap-1.5 mt-1 font-label-sm text-label-sm text-danger-text font-medium">
+<span class="material-symbols-outlined text-[15px]">error_outline</span>
+<span class="">$ 650.000 con observación</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-danger/80"></div>
+</div>
+<!-- KPI 4: Total Procesado -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between relative overflow-hidden group hover:translate-y-[-2px] transition-transform">
+<div class="flex items-center justify-between">
+<span class="font-table-header text-table-header uppercase text-text-muted">Total procesado</span>
+<div class="w-10 h-10 rounded-full bg-info-soft text-info flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</div>
+</div>
+<div class="mt-4">
+<span class="font-metric-display text-metric-display text-heading tracking-tight font-semibold block">$ 2.270.000</span>
+<div class="flex items-center gap-1.5 mt-1 font-label-sm text-label-sm text-text-muted">
+<span class="material-symbols-outlined text-[15px] text-primary">data_usage</span>
+<span class="">4 registros en bandeja</span>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-primary"></div>
+</div>
+</div>
+<!-- 3. Contenedor Principal: Pestañas + Filtros + Tabla -->
+<div class="bg-surface rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] overflow-hidden">
+<!-- Pestañas Superiores (Tabs) -->
+<div class="px-space-lg pt-2 bg-surface-muted/40 flex items-center gap-space-md overflow-x-auto">
+<button class="py-3 px-2 text-on-surface-variant font-label-md text-label-md font-medium hover:text-heading flex items-center gap-2 whitespace-nowrap transition-colors" type="button">
+<span class="">Pendientes de validación</span>
+<span class="px-2 py-0.5 rounded-full bg-warning-soft text-warning-text font-label-sm text-label-sm font-semibold">1</span>
+</button>
+<button class="py-3 px-2 text-on-surface-variant font-label-md text-label-md font-medium hover:text-heading flex items-center gap-2 whitespace-nowrap transition-colors" type="button">
+<span class="">Aprobados</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-container font-label-sm text-label-sm font-semibold">2</span>
+</button>
+<button class="py-3 px-2 text-on-surface-variant font-label-md text-label-md font-medium hover:text-heading flex items-center gap-2 whitespace-nowrap transition-colors" type="button">
+<span class="">Rechazados</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-container font-label-sm text-label-sm font-semibold">1</span>
+</button>
+<!-- Tab ACTIVA: Todos -->
+<button class="py-3 px-2 text-primary-container font-label-md text-label-md font-semibold flex items-center gap-2 whitespace-nowrap relative" type="button">
+<span class="">Todos</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-soft text-primary-hover font-label-sm text-label-sm font-semibold">4</span>
+<span class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-container rounded-t-full"></span>
+</button>
+</div>
+<!-- Barra de Filtros y Búsqueda -->
+<div class="p-space-lg bg-surface flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<!-- Búsqueda -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-[20px] text-text-muted">search</span>
+<input class="w-full h-11 pl-10 pr-4 bg-surface rounded-lg text-heading font-body-sm text-body-sm placeholder:text-text-muted focus:outline-none focus:bg-surface-container-low transition-all" placeholder="Buscar por inquilino, DNI, dirección o N° op..." type="text" value="">
+</div>
+<!-- Rango de Fechas -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-[18px] text-text-muted">calendar_month</span>
+<select class="w-full h-11 pl-10 pr-8 bg-surface rounded-lg text-heading font-body-sm text-body-sm appearance-none focus:outline-none focus:bg-surface-container-low transition-all cursor-pointer">
+<option>Desde: 01/10/2026 Hasta: 06/11/2026</option>
+<option>Últimos 30 días</option>
+<option>Mes en curso (Noviembre 2026)</option>
+<option>Mes anterior (Octubre 2026)</option>
+<option>Personalizado...</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-[18px] text-text-muted pointer-events-none">arrow_drop_down</span>
+</div>
+<!-- Selector Medio de Pago -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-3 text-[18px] text-text-muted">credit_card</span>
+<select class="w-full h-11 pl-10 pr-8 bg-surface rounded-lg text-heading font-body-sm text-body-sm appearance-none focus:outline-none focus:bg-surface-container-low transition-all cursor-pointer">
+<option selected="">Transferencia bancaria</option>
+<option>Todos los medios</option>
+<option>Depósito en cuenta</option>
+<option>Efectivo (en caja)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 text-[18px] text-text-muted pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<!-- Métricas del filtro y reset -->
+<div class="flex items-center justify-between lg:justify-end gap-space-md shrink-0">
+<div class="flex items-center gap-1.5 font-label-md text-label-md text-text-muted">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<span class="font-medium text-heading">4</span> pagos encontrados
+        </div>
+<button class="text-primary-hover hover:text-primary font-label-md text-label-md font-medium flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">filter_alt_off</span>
+<span class="">Limpiar filtros</span>
+</button>
+</div>
+</div>
+<!-- Tabla de Pagos Informados -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm text-on-surface">
+<thead class="bg-surface-muted text-text-muted font-table-header text-table-header uppercase">
+<tr>
+<th class="py-3.5 px-space-md font-medium" scope="col">FECHA DE ENVÍO</th>
+<th class="py-3.5 px-space-md font-medium" scope="col">INQUILINO</th>
+<th class="py-3.5 px-space-md font-medium" scope="col">INMUEBLE</th>
+<th class="py-3.5 px-space-md font-medium" scope="col">PERÍODO</th>
+<th class="py-3.5 px-space-md font-medium text-right" scope="col">MONTO</th>
+<th class="py-3.5 px-space-md font-medium" scope="col">MEDIO</th>
+<th class="py-3.5 px-space-md font-medium" scope="col">N° DE OPERACIÓN</th>
+<th class="py-3.5 px-space-md font-medium" scope="col">ESTADO</th>
+<th class="py-3.5 px-space-md font-medium text-center" scope="col">COMPROBANTE</th>
+<th class="py-3.5 px-space-md font-medium text-right" scope="col">ACCIÓN</th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<!-- FILA 1: Camila Rojas (Pendiente) -->
+<tr class="hover:bg-row-hover transition-colors">
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="font-label-md text-label-md font-medium text-heading">06/11/2026</span>
+<span class="block text-text-muted font-label-sm text-label-sm">11:42 hs</span>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-heading truncate">Camila Rojas</span>
+<span class="font-label-sm text-label-sm text-text-muted">DNI 38.412.901</span>
+</div>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-medium text-heading">Belgrano 1250</span>
+<span class="font-label-sm text-label-sm text-text-muted">Depto · 3 amb. (Piso 4 B)</span>
+</div>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-soft text-primary-hover font-label-sm text-label-sm font-semibold">
+                Nov 2026
+              </span>
+</td>
+<td class="py-4 px-space-md text-right whitespace-nowrap font-medium text-heading tabular-nums text-[15px]">
+              $ 420.000
+            </td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-text-muted">account_balance</span>
+<span class="">Transferencia</span>
+</div>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="font-mono text-[13px] text-on-surface font-medium px-2 py-1 rounded bg-surface-muted">
+                0098123
+              </span>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-warning-soft text-warning-text font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">hourglass_top</span>
+<span class="">Pendiente de Validación</span>
+</span>
+</td>
+<td class="py-4 px-space-md text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-primary-container bg-primary-soft hover:bg-primary/20 font-label-sm text-label-sm font-medium transition-colors" title="Ver comprobante adjunto" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="">Ver (PDF)</span>
+</button>
+</td>
+<td class="py-4 px-space-md text-right whitespace-nowrap">
+<button class="h-9 px-4 rounded-lg bg-primary-container hover:bg-primary-hover text-on-primary font-label-md text-label-md font-semibold shadow-sm transition-all inline-flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="">Revisar</span>
+</button>
+</td>
+</tr>
+<!-- FILA 2: Valentina Funes (Aprobado) -->
+<tr class="hover:bg-row-hover transition-colors">
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="font-label-md text-label-md font-medium text-heading">05/11/2026</span>
+<span class="block text-text-muted font-label-sm text-label-sm">16:15 hs</span>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-heading truncate">Valentina Funes</span>
+<span class="font-label-sm text-label-sm text-text-muted">CUIT 27-40192844-3</span>
+</div>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-medium text-heading">San Martín 322</span>
+<span class="font-label-sm text-label-sm text-text-muted">Local comercial (Salón PB)</span>
+</div>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-soft text-primary-hover font-label-sm text-label-sm font-semibold">
+                Nov 2026
+              </span>
+</td>
+<td class="py-4 px-space-md text-right whitespace-nowrap font-medium text-heading tabular-nums text-[15px]">
+              $ 780.000
+            </td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-text-muted">account_balance</span>
+<span class="">Transferencia</span>
+</div>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="font-mono text-[13px] text-on-surface font-medium px-2 py-1 rounded bg-surface-muted">
+                0087456
+              </span>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+<span class="">Aprobado</span>
+</span>
+</td>
+<td class="py-4 px-space-md text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-on-surface-variant hover:bg-surface-muted font-label-sm text-label-sm font-medium transition-colors" title="Ver comprobante adjunto" type="button">
+<span class="material-symbols-outlined text-[16px] text-text-muted">attachment</span>
+<span class="">Ver JPG</span>
+</button>
+</td>
+<td class="py-4 px-space-md text-right whitespace-nowrap">
+<button class="h-9 px-3 rounded-lg bg-surface-muted hover:bg-surface-variant text-heading font-label-md text-label-md font-medium transition-all inline-flex items-center gap-1" type="button">
+<span class="">Ver detalle</span>
+<span class="material-symbols-outlined text-[16px] text-text-muted">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- FILA 3: Joaquín Medina (Rechazado) -->
+<tr class="hover:bg-row-hover transition-colors">
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="font-label-md text-label-md font-medium text-heading">12/10/2026</span>
+<span class="block text-text-muted font-label-sm text-label-sm">09:05 hs</span>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-heading truncate">Joaquín Medina</span>
+<span class="font-label-sm text-label-sm text-text-muted">DNI 35.882.110</span>
+</div>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-medium text-heading">Mitre 845</span>
+<span class="font-label-sm text-label-sm text-text-muted">Casa · 4 amb.</span>
+</div>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-container font-label-sm text-label-sm font-medium">
+                Oct 2026
+              </span>
+</td>
+<td class="py-4 px-space-md text-right whitespace-nowrap font-medium text-heading tabular-nums text-[15px]">
+              $ 650.000
+            </td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-text-muted">account_balance</span>
+<span class="">Transferencia</span>
+</div>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="text-text-muted italic text-[13px]">—</span>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<div class="flex flex-col gap-1 items-start">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-danger-soft text-danger-text font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">cancel</span>
+<span class="">Rechazado</span>
+</span>
+<div class="flex items-center gap-1 text-[11px] text-danger font-medium pl-1">
+<span class="material-symbols-outlined text-[13px]">report</span>
+<span class="">Comprobante ilegible</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-on-surface-variant hover:bg-surface-muted font-label-sm text-label-sm font-medium transition-colors" title="Ver comprobante adjunto" type="button">
+<span class="material-symbols-outlined text-[16px] text-text-muted">attachment</span>
+<span class="">Ver adjunto</span>
+</button>
+</td>
+<td class="py-4 px-space-md text-right whitespace-nowrap">
+<button class="h-9 px-3 rounded-lg bg-danger-soft hover:bg-danger/10 text-danger-text font-label-md text-label-md font-medium transition-all inline-flex items-center gap-1" type="button">
+<span class="">Ver motivo</span>
+</button>
+</td>
+</tr>
+<!-- FILA 4: Camila Rojas (Aprobado Octubre) -->
+<tr class="hover:bg-row-hover transition-colors">
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="font-label-md text-label-md font-medium text-heading">08/10/2026</span>
+<span class="block text-text-muted font-label-sm text-label-sm">18:30 hs</span>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-semibold text-heading truncate">Camila Rojas</span>
+<span class="font-label-sm text-label-sm text-text-muted">DNI 38.412.901</span>
+</div>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md font-medium text-heading">Belgrano 1250</span>
+<span class="font-label-sm text-label-sm text-text-muted">Depto · 3 amb. (Piso 4 B)</span>
+</div>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-container font-label-sm text-label-sm font-medium">
+                Oct 2026
+              </span>
+</td>
+<td class="py-4 px-space-md text-right whitespace-nowrap font-medium text-heading tabular-nums text-[15px]">
+              $ 420.000
+            </td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px] text-text-muted">account_balance</span>
+<span class="">Transferencia</span>
+</div>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="font-mono text-[13px] text-on-surface font-medium px-2 py-1 rounded bg-surface-muted">
+                0076219
+              </span>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+<span class="">Aprobado</span>
+</span>
+</td>
+<td class="py-4 px-space-md text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-on-surface-variant hover:bg-surface-muted font-label-sm text-label-sm font-medium transition-colors" title="Ver comprobante adjunto" type="button">
+<span class="material-symbols-outlined text-[16px] text-text-muted">attachment</span>
+<span class="">Ver PDF</span>
+</button>
+</td>
+<td class="py-4 px-space-md text-right whitespace-nowrap">
+<button class="h-9 px-3 rounded-lg bg-surface-muted hover:bg-surface-variant text-heading font-label-md text-label-md font-medium transition-all inline-flex items-center gap-1" type="button">
+<span class="">Ver detalle</span>
+<span class="material-symbols-outlined text-[16px] text-text-muted">chevron_right</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Fila Totalizadora y Resumen Contable -->
+<div class="px-space-lg py-3.5 bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-space-sm font-label-md text-label-md">
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-on-surface-variant">
+<span class=""><strong class="text-heading">Total bandeja:</strong> 4 pagos</span>
+<span class="text-outline-variant">•</span>
+<span class=""><strong class="text-success-text">Conciliado:</strong> $ 1.200.000</span>
+<span class="text-outline-variant">•</span>
+<span class=""><strong class="text-warning-text">En revisión:</strong> $ 420.000</span>
+<span class="text-outline-variant">•</span>
+<span class=""><strong class="text-danger-text">Rechazado:</strong> $ 650.000</span>
+</div>
+<div class="text-right">
+<span class="text-text-muted">Total declarado en lote:</span>
+<span class="font-bold text-heading text-[16px] tabular-nums pl-1.5">$ 2.270.000</span>
+</div>
+</div>
+<!-- Paginación Inferior -->
+<div class="p-space-lg bg-surface flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<span class="font-label-sm text-label-sm text-text-muted">
+        Mostrando <strong class="text-heading font-semibold">1–4</strong> de <strong class="text-heading font-semibold">4</strong> registros
+      </span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted opacity-40 cursor-not-allowed" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">first_page</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted opacity-40 cursor-not-allowed" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold flex items-center justify-center shadow-sm" type="button">
+          1
+        </button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted opacity-40 cursor-not-allowed" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted opacity-40 cursor-not-allowed" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">last_page</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 4. Banner Informativo: Circuito y Procedimiento de Conciliación Bancaria -->
+<div class="p-space-lg rounded-xl bg-surface shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] relative overflow-hidden flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-container"></div>
+<div class="flex items-start sm:items-center gap-space-md min-w-0 pl-2">
+<div class="w-10 h-10 rounded-full bg-primary-soft text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">account_balance_wallet</span>
+</div>
+<div class="space-y-0.5">
+<h3 class="font-headline-sm text-headline-sm text-heading font-semibold">
+          Procedimiento de conciliación bancaria
+        </h3>
+<p class="font-body-sm text-body-sm text-text-muted">
+          Al aprobar un pago se emite automáticamente el recibo oficial X, se cancela la exigibilidad de la cuota en Cobranzas y se habilita el crédito para la liquidación mensual al propietario.
+        </p>
+</div>
+</div>
+<div class="shrink-0 pl-2 sm:pl-0">
+<button class="h-[40px] px-4 rounded-lg bg-surface-muted hover:bg-surface-variant text-heading font-label-md text-label-md font-semibold transition-all inline-flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">schema</span>
+<span class="">Ver circuito contable</span>
+</button>
+</div>
+</div>
+</div></div></main></div>
+
+</body></html>

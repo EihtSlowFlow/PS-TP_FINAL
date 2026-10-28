@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comprobante de liquidación LQ-002 - InmoGestión 2026</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              DEFAULT: '#4F46E5',
+              hover: '#4338CA',
+              soft: '#E0E7FF'
+            },
+            heading: '#111827',
+            text: '#1F2937',
+            muted: '#6B7280',
+            border: '#E5E7EB',
+            surface: '#FFFFFF',
+            success: {
+              DEFAULT: '#10B981',
+              soft: '#ECFDF5',
+              text: '#065F46'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #F3F4F6;
+      color: #1F2937;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Simulación de hoja A4 en pantalla */
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 24px auto;
+      background: #FFFFFF;
+      padding: 20mm;
+      box-sizing: border-box;
+      border: 1px solid #D1D5DB;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Reglas para impresión estricta */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm 15mm;
+      }
+      body {
+        background: #FFFFFF !important;
+        color: #000000 !important;
+        padding: 0 !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .a4-page {
+        width: 100% !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .print-border-black {
+        border-color: #000000 !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen text-text text-sm">
+
+  <!-- BARRA DE ACCIONES SUPERIOR (FUERA DEL ÁREA IMPRIMIBLE) -->
+  <div class="no-print bg-white border-b border-border sticky top-0 z-50 px-6 py-3 shadow-sm">
+    <div class="max-w-[210mm] mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <a href="javascript:history.back()" class="inline-flex items-center gap-1.5 text-xs font-medium text-muted hover:text-text transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
+          </svg>
+          Volver al listado
+        </a>
+        <span class="text-gray-300">|</span>
+        <div class="flex items-center gap-2">
+          <span class="inline-block w-2 h-2 rounded-full bg-success"></span>
+          <span class="text-xs text-muted">Vista previa de impresión &bull; Comprobante oficial LQ-002</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <!-- Botón Descargar PDF -->
+        <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 border border-border bg-white hover:bg-gray-50 text-text font-medium text-xs rounded-lg transition shadow-sm">
+          <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/>
+          </svg>
+          Descargar PDF
+        </button>
+
+        <!-- Botón Imprimir -->
+        <button onclick="window.print()" class="inline-flex items-center gap-2 px-5 py-2 bg-primary hover:bg-primary-hover text-white font-medium text-xs rounded-lg transition shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.75A2.25 2.25 0 0015 1.5H9a2.25 2.25 0 00-2.25 2.25v4.209"/>
+          </svg>
+          Imprimir
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENEDOR DEL DOCUMENTO A4 IMPRIMIBLE -->
+  <main class="a4-page text-[#111827]">
+
+    <!-- CABECERA INSTITUCIONAL Y TÍTULO DEL COMPROBANTE -->
+    <header class="border-b-2 border-gray-900 pb-5 mb-6">
+      <div class="flex items-start justify-between">
+        
+        <!-- Bloque izquierdo: Identidad institucional -->
+        <div class="flex items-start gap-3">
+          <!-- Logo cuadrado con casa blanca e índigo corporativo -->
+          <div class="w-11 h-11 bg-primary rounded-lg flex items-center justify-center flex-shrink-0 print:border print:border-black">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold tracking-tight text-gray-900 leading-tight">InmoGestión</h1>
+            <p class="text-xs text-muted font-medium">Administración Inmobiliaria y Fiduciaria &bull; Nico Tech</p>
+            <p class="text-[11px] text-gray-500 mt-0.5">CUIT: 30-71489215-9 &bull; Matrícula CUCICBA N° 6821 &bull; info@inmogestion.com.ar</p>
+          </div>
+        </div>
+
+        <!-- Bloque derecho: Número de liquidación y Badge -->
+        <div class="text-right">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-success-soft text-success-text border border-success/30 rounded-full text-xs font-semibold uppercase tracking-wider mb-1.5 print:border-black print:text-black print:bg-transparent">
+            <svg class="w-3.5 h-3.5 text-success print:text-black" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+            </svg>
+            Transferido
+          </div>
+          <div class="text-lg font-bold text-gray-900 tracking-tight">Comprobante LQ-002</div>
+          <p class="text-[11px] text-muted">Fecha de emisión: 12/10/2026 &bull; Hoja 1 de 1</p>
+        </div>
+
+      </div>
+
+      <!-- Título formal centrado / destacado -->
+      <div class="mt-4 pt-3 border-t border-gray-200 flex items-center justify-between">
+        <div>
+          <span class="text-xs uppercase font-semibold tracking-wider text-muted">Documento oficial</span>
+          <h2 class="text-base font-bold text-gray-900">Comprobante de liquidación LQ-002</h2>
+        </div>
+        <div class="text-right text-xs">
+          <span class="text-muted">Período liquidado:</span>
+          <span class="font-bold text-gray-900 ml-1">Septiembre 2026</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- METADATOS Y PARTES INTERVINIENTES (2 COLUMNAS) -->
+    <section class="grid grid-cols-2 gap-4 mb-6">
+      
+      <!-- Columna 1: Propietario e Inmueble -->
+      <div class="border border-gray-300 rounded-lg p-3.5 bg-gray-50/50 print:bg-transparent print:border-gray-400">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-muted border-b border-gray-200 pb-1.5 mb-2.5">
+          Datos del Propietario e Inmueble
+        </h3>
+        <dl class="space-y-1.5 text-xs">
+          <div class="flex justify-between">
+            <dt class="text-muted font-medium">Propietario / Beneficiario:</dt>
+            <dd class="font-semibold text-gray-900 text-right">Ricardo Sosa</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-muted font-medium">CUIT / CUIL:</dt>
+            <dd class="font-mono text-gray-800 text-right">20-28491023-7</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-muted font-medium">Inmueble administrado:</dt>
+            <dd class="font-semibold text-gray-900 text-right">Belgrano 1250, 4°B</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-muted font-medium">Destino / Tipo:</dt>
+            <dd class="text-gray-800 text-right">Departamento residencial (3 amb.)</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-muted font-medium">Contrato asociado:</dt>
+            <dd class="font-semibold text-primary text-right font-mono print:text-black">C-001 (Vigente)</dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- Columna 2: Locatario y Datos de Transferencia Bancaria -->
+      <div class="border border-gray-300 rounded-lg p-3.5 bg-gray-50/50 print:bg-transparent print:border-gray-400">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-muted border-b border-gray-200 pb-1.5 mb-2.5">
+          Inquilino y Transferencia Bancaria
+        </h3>
+        <dl class="space-y-1.5 text-xs">
+          <div class="flex justify-between">
+            <dt class="text-muted font-medium">Inquilino (Locatario):</dt>
+            <dd class="font-semibold text-gray-900 text-right">Camila Rojas</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-muted font-medium">DNI Inquilino:</dt>
+            <dd class="font-mono text-gray-800 text-right">35.120.448</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-muted font-medium">Fecha de acreditación:</dt>
+            <dd class="font-semibold text-gray-900 text-right">12/10/2026</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-muted font-medium">Referencia bancaria:</dt>
+            <dd class="font-mono font-bold text-gray-900 text-right">0051878</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-muted font-medium">Cuenta receptora:</dt>
+            <dd class="text-gray-800 text-right">Banco Galicia C/A &bull; CBU ...1822</dd>
+          </div>
+        </dl>
+      </div>
+
+    </section>
+
+    <!-- DETALLE ECONÓMICO Y CUADRO DE LIQUIDACIÓN -->
+    <section class="mb-6">
+      <div class="border border-gray-300 rounded-lg overflow-hidden print:border-gray-400">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-gray-100 border-b border-gray-300 text-gray-700 font-semibold uppercase tracking-wider text-[11px] print:bg-gray-100 print:text-black">
+              <th class="py-2.5 px-4">Concepto</th>
+              <th class="py-2.5 px-4 text-center">Período / Base</th>
+              <th class="py-2.5 px-4 text-right">Alícuota / Detalle</th>
+              <th class="py-2.5 px-4 text-right">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <!-- Canon Bruto Percibido -->
+            <tr>
+              <td class="py-3 px-4">
+                <div class="font-semibold text-gray-900">Cobro mensual de alquiler de locación</div>
+                <div class="text-[11px] text-muted">Período Septiembre 2026 &bull; Inmueble Belgrano 1250, Piso 4° "B"</div>
+              </td>
+              <td class="py-3 px-4 text-center font-mono">09/2026</td>
+              <td class="py-3 px-4 text-right text-muted">Canon pactado</td>
+              <td class="py-3 px-4 text-right font-mono font-semibold text-gray-900">$ 420.000</td>
+            </tr>
+
+            <!-- Descuento de Comisión de Administración -->
+            <tr class="bg-gray-50/30 print:bg-transparent">
+              <td class="py-3 px-4">
+                <div class="font-semibold text-red-700 print:text-black">Comisión de administración inmobiliaria</div>
+                <div class="text-[11px] text-muted">Honorarios por gestión de cobro, conciliación y seguimiento patrimonial</div>
+              </td>
+              <td class="py-3 px-4 text-center font-mono">Sobre $ 420.000</td>
+              <td class="py-3 px-4 text-right text-red-700 font-medium print:text-black">10,00% (IVA inc.)</td>
+              <td class="py-3 px-4 text-right font-mono font-semibold text-red-700 print:text-black">− $ 42.000</td>
+            </tr>
+
+            <!-- Fila informativa de retenciones adicionales -->
+            <tr>
+              <td class="py-2.5 px-4 text-muted text-[11px]">
+                Retenciones impositivas y gastos bancarios extraordinarios
+              </td>
+              <td class="py-2.5 px-4 text-center text-muted font-mono text-[11px]">-</td>
+              <td class="py-2.5 px-4 text-right text-muted text-[11px]">Sin retenciones adicionales</td>
+              <td class="py-2.5 px-4 text-right font-mono text-muted text-[11px]">$ 0</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- RECUADRO DE DESGLOSE FORMULARIO EXACTO Y NETO DESTACADO -->
+        <div class="bg-gray-100 border-t-2 border-gray-900 p-4 print:bg-gray-50 print:border-black">
+          
+          <!-- Ecuación contable textual requerida -->
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-2 pb-3 mb-3 border-b border-gray-300">
+            <div class="text-xs text-muted font-medium">
+              Fórmula de liquidación:
+            </div>
+            <div class="font-mono text-xs font-semibold text-gray-800 tracking-tight bg-white px-3 py-1 rounded border border-gray-300 print:border-black">
+              Monto bruto $ 420.000 − Comisión (10%) $ 42.000 = Neto transferido $ 378.000
+            </div>
+          </div>
+
+          <!-- Total Neto Destacado -->
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-gray-700 block">Total Neto Transferido</span>
+              <span class="text-[11px] text-muted">Acreditado en cuenta bancaria el 12/10/2026 &bull; Ref. 0051878</span>
+            </div>
+            <div class="text-right">
+              <span class="text-2xl font-bold font-mono text-primary print:text-black tracking-tight block">
+                $ 378.000
+              </span>
+              <span class="text-[11px] text-gray-600 italic">
+                Son: Trescientos setenta y ocho mil pesos con 00/100 M.N.
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUMEN DE CONCILIACIÓN BANCARIA Y SEGURIDAD -->
+    <section class="border border-gray-300 rounded-lg p-3.5 mb-8 text-xs bg-white print:border-gray-400">
+      <div class="flex items-start gap-3">
+        <div class="mt-0.5 text-primary print:text-black flex-shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+          </svg>
+        </div>
+        <div class="flex-1 text-[11px] text-gray-600 leading-relaxed">
+          <p class="font-semibold text-gray-900 mb-0.5">Constancia de Transferencia Bancaria Directa</p>
+          <p>
+            El importe neto de <strong>$ 378.000</strong> ha sido acreditado exitosamente en la cuenta bancaria de destino (Banco Galicia Caja de Ahorro en Pesos) bajo el número de transferencia y comprobante de clearing <strong>0051878</strong> con fecha de valor <strong>12/10/2026</strong>. Este comprobante constituye constancia formal de rendición de cuentas conforme a la normativa vigente del Código Civil y Comercial de la Nación Argentina.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN DE FIRMAS Y VALIDADOR DE AUDITORÍA -->
+    <footer class="mt-12 pt-6 border-t border-gray-300 print:mt-16">
+      <div class="grid grid-cols-2 gap-10">
+        
+        <!-- Firma Administración -->
+        <div class="text-center">
+          <div class="h-14 border-b border-gray-400 flex items-end justify-center pb-1">
+            <span class="font-serif italic text-gray-500 text-xs">Laura Benítez - Firma Digital Autorizada</span>
+          </div>
+          <p class="text-xs font-bold text-gray-900 mt-2">Laura Benítez</p>
+          <p class="text-[11px] text-muted">Dpto. de Administración y Finanzas &bull; InmoGestión</p>
+          <p class="text-[10px] text-gray-400 font-mono mt-0.5">Certificado de firma digital N° IG-2026-94812</p>
+        </div>
+
+        <!-- Firma / Recepción del Propietario -->
+        <div class="text-center">
+          <div class="h-14 border-b border-gray-400 flex items-end justify-center pb-1">
+            <span class="text-[11px] text-gray-400 font-mono">Transferencia electrónica verificada en cuenta</span>
+          </div>
+          <p class="text-xs font-bold text-gray-900 mt-2">Ricardo Sosa</p>
+          <p class="text-[11px] text-muted">Propietario / Beneficiario &bull; DNI 28.491.023</p>
+          <p class="text-[10px] text-gray-400 font-mono mt-0.5">Acreditación automática validada el 12/10/2026</p>
+        </div>
+
+      </div>
+
+      <!-- Pie de página legal -->
+      <div class="mt-8 pt-3 border-t border-gray-200 flex items-center justify-between text-[10px] text-gray-400">
+        <div>InmoGestión 2026 &bull; Sistema de Gestión Inmobiliaria y Fiduciaria Nico Tech</div>
+        <div class="font-mono">Fecha de consulta: 06/11/2026 &bull; Hash de auditoría: 4f8b91c2...0051878</div>
+      </div>
+    </footer>
+
+  </main>
+
+</body>
+</html>

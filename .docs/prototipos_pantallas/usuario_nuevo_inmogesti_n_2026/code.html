@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-primary": "#c3c0ff",
+          "error-container": "#ffdad6",
+          "warning-text": "#92400E",
+          "danger-text": "#B91C1C",
+          "info-text": "#1E40AF",
+          "on-surface-variant": "#464555",
+          "on-tertiary": "#ffffff",
+          "on-primary-fixed": "#0f0069",
+          "success": "#10B981",
+          "tertiary-fixed": "#ffdbcc",
+          "warning-soft": "#FFFBEB",
+          "background-end": "#D9E2EC",
+          "border-input": "#D1D5DB",
+          "tertiary": "#7e3000",
+          "danger": "#EF4444",
+          "inverse-surface": "#27313f",
+          "on-primary-container": "#dad7ff",
+          "tertiary-container": "#a44100",
+          "row-hover": "#F3F4F6",
+          "on-surface": "#121c2a",
+          "surface-variant": "#d9e3f6",
+          "surface": "#FFFFFF",
+          "primary-container": "#4f46e5",
+          "surface-container-lowest": "#ffffff",
+          "danger-hover": "#DC2626",
+          "surface-container-highest": "#d9e3f6",
+          "on-secondary-container": "#606366",
+          "background": "#f8f9ff",
+          "success-text": "#065F46",
+          "heading": "#111827",
+          "background-start": "#F0F4F8",
+          "primary-fixed-dim": "#c3c0ff",
+          "secondary-fixed": "#e0e2e6",
+          "border": "#E5E7EB",
+          "primary-hover": "#4338CA",
+          "on-secondary-fixed": "#191c1f",
+          "info-soft": "#DBEAFE",
+          "on-secondary": "#ffffff",
+          "surface-container-high": "#dee9fc",
+          "danger-soft": "#FEF2F2",
+          "text-muted": "#6B7280",
+          "on-primary": "#ffffff",
+          "tertiary-fixed-dim": "#ffb695",
+          "on-primary-fixed-variant": "#3323cc",
+          "surface-muted": "#F9FAFB",
+          "surface-dim": "#d0dbed",
+          "outline-variant": "#c7c4d8",
+          "primary-fixed": "#e2dfff",
+          "secondary": "#5c5f62",
+          "inverse-on-surface": "#eaf1ff",
+          "info": "#2563EB",
+          "secondary-fixed-dim": "#c4c7ca",
+          "surface-container": "#e6eeff",
+          "on-tertiary-fixed": "#351000",
+          "success-soft": "#ECFDF5",
+          "on-error": "#ffffff",
+          "secondary-container": "#dee0e4",
+          "on-secondary-fixed-variant": "#44474a",
+          "error": "#ba1a1a",
+          "on-background": "#121c2a",
+          "surface-container-low": "#eff4ff",
+          "on-tertiary-fixed-variant": "#7b2f00",
+          "on-tertiary-container": "#ffd2be",
+          "surface-bright": "#f8f9ff",
+          "outline": "#777587",
+          "primary-soft": "#E0E7FF",
+          "on-error-container": "#93000a",
+          "warning": "#F59E0B",
+          "primary": "#3525cd",
+          "surface-tint": "#4d44e3"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-lg": "1.5rem",
+          "space-xs": "0.25rem",
+          "gutter-mobile": "1rem",
+          "margin-mobile": "1rem",
+          "margin": "2rem",
+          "space-sm": "0.5rem",
+          "space-md": "1rem",
+          "space-xl": "2rem",
+          "gutter": "1.5rem"
+        },
+        "fontFamily": {
+          "headline-md": ["Inter"],
+          "metric-display": ["Inter"],
+          "label-sm": ["Inter"],
+          "body-lg": ["Inter"],
+          "body-md": ["Inter"],
+          "table-header": ["Inter"],
+          "headline-lg-mobile": ["Inter"],
+          "label-md": ["Inter"],
+          "headline-lg": ["Inter"],
+          "body-sm": ["Inter"],
+          "headline-sm": ["Inter"]
+        },
+        "fontSize": {
+          "headline-md": ["20px", {"lineHeight": "26px", "fontWeight": "500"}],
+          "metric-display": ["32px", {"lineHeight": "38px", "fontWeight": "600"}],
+          "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+          "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+          "body-md": ["15px", {"lineHeight": "22px", "fontWeight": "400"}],
+          "table-header": ["13px", {"lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+          "headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+          "label-md": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+          "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+          "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+          "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "500"}]
+        }
+      },
+    },
+  }</script></head><body class="bg-gradient-to-b from-background-start to-background-end min-h-screen text-on-surface font-body-md text-body-md antialiased"><aside class="fixed left-0 top-0 h-screen w-[260px] bg-surface z-50 flex flex-col justify-between shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center gap-space-sm"><div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0"><span class="material-symbols-outlined text-on-primary text-[22px]">home</span></div><div class="flex flex-col overflow-hidden"><span class="font-headline-sm text-headline-sm text-heading font-semibold leading-tight truncate">InmoGestión</span><span class="font-label-sm text-label-sm text-text-muted leading-tight truncate">Plataforma Inmobiliaria 2026</span></div></div><nav class="px-space-sm mt-space-sm space-y-1 flex flex-col overflow-y-auto max-h-[calc(100vh-230px)]" data-active-classes="bg-primary-soft text-primary-hover font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="inmuebles" href="#"><span class="material-symbols-outlined text-[20px]">apartment</span><span>Inmuebles</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="contratos" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span>Contratos</span></a><div class="pt-1"><div class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant font-body-sm text-body-sm"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="flex-1">Cuotas</span><span class="material-symbols-outlined text-[16px] text-text-muted">expand_more</span></div><div class="pl-8 pr-space-xs space-y-1 mt-0.5"><a class="flex items-center px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-label-md text-label-md" data-path="emitir-cuotas" href="#"><span>Emitir cuotas</span></a><a class="flex items-center px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-label-md text-label-md" data-path="cobranzas" href="#"><span>Cobranzas</span></a></div></div><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="pagos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Pagos</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="liquidaciones" href="#"><span class="material-symbols-outlined text-[20px]">account_balance_wallet</span><span>Liquidaciones</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a></nav></div><div class="p-space-md bg-surface"><div class="bg-surface-muted rounded-xl p-space-sm flex items-center justify-between mb-space-xs"><div class="flex items-center gap-space-sm overflow-hidden"><div class="w-9 h-9 rounded-full bg-primary-container text-on-primary font-semibold flex items-center justify-center text-label-md shrink-0">LB</div><div class="flex flex-col overflow-hidden"><span class="font-label-md text-label-md font-semibold text-heading truncate">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted truncate">Administradora</span></div></div><a class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:bg-danger-soft hover:text-danger-text transition-colors" data-path="login" href="#" title="Cerrar Sesión"><span class="material-symbols-outlined text-[18px]">logout</span></a></div></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 flex items-center justify-between px-space-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-xs text-body-sm font-body-sm text-text-muted"><span class="hover:text-heading cursor-pointer transition-colors">InmoGestión</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="text-heading font-medium">Dashboard</span></div><div class="flex items-center gap-space-md"><div class="inline-flex items-center gap-1.5 px-space-md py-1 bg-surface-muted rounded-full text-text-muted font-label-md text-label-md"><span class="material-symbols-outlined text-[16px]">calendar_today</span><span>06/11/2026</span></div><button class="relative w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-row-hover transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-4 h-4 bg-danger text-on-primary font-label-sm text-[10px] leading-none flex items-center justify-center rounded-full font-bold">2</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-9 h-9 rounded-full bg-primary-container text-on-primary font-semibold flex items-center justify-center font-label-md text-label-md shadow-sm">LB</div><div class="hidden md:flex flex-col"><span class="font-label-md text-label-md font-semibold text-heading leading-tight">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted leading-tight">Administradora</span></div></div></div></header><main class="relative pt-16 min-h-screen px-space-xl py-space-xl"><div class="flex flex-col w-full">
+<div class="w-full max-w-[1200px] mx-auto pb-space-xl">
+<!-- Breadcrumb contextual -->
+<nav aria-label="Ruta de navegación" class="flex items-center gap-space-xs text-body-sm font-body-sm text-text-muted mb-space-sm">
+<a class="hover:text-heading transition-colors" href="#">InmoGestión</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-heading transition-colors font-medium" href="#">Usuarios</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span aria-current="page" class="text-heading font-medium">Nuevo usuario</span>
+</nav>
+<!-- Cabecera de Página -->
+<header class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col">
+<h1 class="font-headline-lg text-headline-lg text-heading tracking-tight">Nuevo usuario</h1>
+<p class="font-body-md text-body-md text-text-muted mt-0.5">
+          Completá los datos personales y asigná el rol para dar de alta a un cliente o miembro del equipo.
+        </p>
+</div>
+<div class="flex items-center shrink-0">
+<a class="inline-flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-surface text-on-surface-variant font-label-md text-label-md shadow-sm hover:bg-row-hover hover:text-heading transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Volver al listado</span>
+</a>
+</div>
+</header>
+<form class="space-y-space-lg" id="newUserForm" onsubmit="event.preventDefault(); handleUserSubmit();">
+<!-- Tarjeta 1: Datos personales -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm">
+<div class="flex items-start gap-space-md mb-space-lg pb-space-md">
+<div class="w-10 h-10 rounded-full bg-primary-soft text-primary-hover flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">badge</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-heading">Datos personales</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Información de contacto y datos identificatorios del usuario.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<!-- Nombre -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="firstName">
+              Nombre <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 bg-surface text-on-surface font-body-md text-body-md rounded-lg shadow-sm placeholder:text-text-muted/60 focus:outline-none focus:bg-surface-container-low transition-all" id="firstName" placeholder="Ej: Martín" required="" type="text"/>
+</div>
+</div>
+<!-- Apellido -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="lastName">
+              Apellido <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 bg-surface text-on-surface font-body-md text-body-md rounded-lg shadow-sm placeholder:text-text-muted/60 focus:outline-none focus:bg-surface-container-low transition-all" id="lastName" placeholder="Ej: Gómez" required="" type="text"/>
+</div>
+</div>
+<!-- DNI -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="dni">
+              DNI <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 bg-surface text-on-surface font-body-md text-body-md rounded-lg shadow-sm placeholder:text-text-muted/60 focus:outline-none focus:bg-surface-container-low transition-all" id="dni" placeholder="Ej: 32.456.789" required="" type="text"/>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Sin puntos o con formato estándar argentino.</span>
+</div>
+<!-- Correo electrónico -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="email">
+              Correo electrónico <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 bg-surface text-on-surface font-body-md text-body-md rounded-lg shadow-sm placeholder:text-text-muted/60 focus:outline-none focus:bg-surface-container-low transition-all" id="email" placeholder="Ej: m.gomez@gmail.com" required="" type="email"/>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Se utilizará como nombre de usuario para iniciar sesión.</span>
+</div>
+<!-- Teléfono -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="phone">
+              Teléfono <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 bg-surface text-on-surface font-body-md text-body-md rounded-lg shadow-sm placeholder:text-text-muted/60 focus:outline-none focus:bg-surface-container-low transition-all" id="phone" placeholder="Ej: (011) 4567-8901" required="" type="tel"/>
+</div>
+</div>
+<!-- Dirección -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-heading font-medium" for="address">Dirección</label>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-surface-muted text-text-muted">Opcional</span>
+</div>
+<div class="relative">
+<input class="w-full h-11 px-3.5 bg-surface text-on-surface font-body-md text-body-md rounded-lg shadow-sm placeholder:text-text-muted/60 focus:outline-none focus:bg-surface-container-low transition-all" id="address" placeholder="Ej: Av. Santa Fe 1820, Piso 3, CABA" type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Tarjeta 2: Acceso y permisos -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm">
+<div class="flex items-start gap-space-md mb-space-lg pb-space-md">
+<div class="w-10 h-10 rounded-full bg-primary-soft text-primary-hover flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[22px]">lock_person</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-heading">Acceso y permisos</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Configuración de privilegios de acceso y contraseña inicial.</p>
+</div>
+</div>
+<!-- Selección de Rol -->
+<fieldset class="mb-space-xl">
+<legend class="font-label-md text-label-md text-heading font-medium mb-space-sm flex items-center gap-1">
+            Rol en la plataforma <span class="text-danger">*</span>
+</legend>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md" role="radiogroup">
+<!-- Rol: Administrador -->
+<label class="group relative flex flex-col p-space-md rounded-xl bg-surface hover:bg-surface-muted transition-all cursor-pointer shadow-sm role-card" data-role="admin">
+<input class="sr-only" name="role" onchange="updateRoleSelection(this)" type="radio" value="admin"/>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="w-10 h-10 rounded-lg bg-primary-soft text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">shield_person</span>
+</div>
+<div class="w-5 h-5 rounded-full bg-surface-muted radio-indicator flex items-center justify-center">
+<span class="w-2.5 h-2.5 rounded-full bg-transparent dot-marker"></span>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm text-heading font-semibold mb-1">Administrador</span>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Gestión total de la plataforma: contratos, cobranzas, liquidaciones y configuración del sistema.
+              </p>
+</label>
+<!-- Rol: Propietario -->
+<label class="group relative flex flex-col p-space-md rounded-xl bg-surface hover:bg-surface-muted transition-all cursor-pointer shadow-sm role-card" data-role="propietario">
+<input class="sr-only" name="role" onchange="updateRoleSelection(this)" type="radio" value="propietario"/>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="w-10 h-10 rounded-lg bg-info-soft text-info flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">apartment</span>
+</div>
+<div class="w-5 h-5 rounded-full bg-surface-muted radio-indicator flex items-center justify-center">
+<span class="w-2.5 h-2.5 rounded-full bg-transparent dot-marker"></span>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm text-heading font-semibold mb-1">Propietario</span>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Acceso a su cartera de inmuebles, estado de sus contratos vigentes y liquidaciones mensuales acreditadas.
+              </p>
+</label>
+<!-- Rol: Inquilino (Marcado por defecto) -->
+<label class="group relative flex flex-col p-space-md rounded-xl bg-surface-container-low transition-all cursor-pointer shadow-md role-card active-role" data-role="inquilino">
+<input checked="" class="sr-only" name="role" onchange="updateRoleSelection(this)" type="radio" value="inquilino"/>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="w-10 h-10 rounded-lg bg-success-soft text-success-text flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">key</span>
+</div>
+<div class="w-5 h-5 rounded-full bg-primary-container radio-indicator flex items-center justify-center shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-on-primary dot-marker"></span>
+</div>
+</div>
+<span class="font-headline-sm text-headline-sm text-heading font-semibold mb-1">Inquilino</span>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Consulta de estado de cuenta, descarga de cuotas emitidas e informe de comprobantes de pago.
+              </p>
+</label>
+</div>
+</fieldset>
+<!-- Contraseña inicial -->
+<div class="max-w-xl flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="password">
+            Contraseña temporal <span class="text-danger">*</span>
+</label>
+<div class="relative flex items-center">
+<input class="w-full h-11 pl-3.5 pr-28 bg-surface text-on-surface font-body-md text-body-md rounded-lg shadow-sm placeholder:text-text-muted/60 focus:outline-none focus:bg-surface-container-low transition-all" id="password" placeholder="••••••••" required="" type="password"/>
+<div class="absolute right-1.5 flex items-center gap-1">
+<button aria-label="Alternar visibilidad de contraseña" class="h-8 px-2 rounded flex items-center justify-center text-text-muted hover:text-heading hover:bg-surface-muted transition-colors" id="togglePassBtn" onclick="togglePasswordVisibility()" title="Mostrar / ocultar contraseña" type="button">
+<span class="material-symbols-outlined text-[18px]" id="eyeIcon">visibility</span>
+</button>
+<button class="h-8 px-2.5 rounded bg-surface-muted text-primary-hover hover:bg-primary-soft font-label-sm text-label-sm font-semibold transition-colors flex items-center gap-1" onclick="generateSuggestedPassword()" title="Generar contraseña segura" type="button">
+<span class="material-symbols-outlined text-[14px]">auto_fix_high</span>
+<span>Sugerir</span>
+</button>
+</div>
+</div>
+<div class="flex items-start gap-1.5 mt-1 text-text-muted">
+<span class="material-symbols-outlined text-[16px] text-text-muted mt-0.5 shrink-0">info</span>
+<p class="font-label-sm text-label-sm">
+              Mínimo 8 caracteres (recomendado: incluir mayúsculas y números). El usuario podrá modificarla desde su perfil al ingresar.
+            </p>
+</div>
+</div>
+</section>
+<!-- Banner informativo sutil -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-start gap-space-md shadow-sm">
+<div class="w-8 h-8 rounded-full bg-info-soft text-info flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">mark_email_read</span>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<p class="font-body-sm text-body-sm text-heading leading-relaxed">
+            Al guardar, se enviará automáticamente un correo electrónico de bienvenida al usuario con sus credenciales de acceso temporal e instrucciones de ingreso a la plataforma InmoGestión.
+          </p>
+</div>
+</div>
+<!-- Barra de acciones al pie -->
+<footer class="flex flex-col-reverse sm:flex-row items-center justify-end gap-space-md pt-space-xs">
+<a class="w-full sm:w-auto h-11 px-space-lg rounded-lg bg-surface text-on-surface-variant hover:bg-row-hover hover:text-heading font-label-md text-label-md flex items-center justify-center transition-colors shadow-sm" href="#">
+          Cancelar
+        </a>
+<button class="w-full sm:w-auto h-11 px-space-lg rounded-lg bg-primary-container text-on-primary hover:bg-primary-hover font-label-md text-label-md font-semibold flex items-center justify-center gap-space-xs shadow-md transition-all active:scale-[0.99]" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Guardar usuario</span>
+</button>
+</footer>
+</form>
+</div>
+</div>
+<script>
+  function updateRoleSelection(input) {
+    const cards = document.querySelectorAll('.role-card');
+    cards.forEach(card => {
+      card.classList.remove('active-role', 'bg-surface-container-low', 'shadow-md');
+      card.classList.add('bg-surface', 'shadow-sm');
+      const indicator = card.querySelector('.radio-indicator');
+      const dot = card.querySelector('.dot-marker');
+      indicator.className = 'w-5 h-5 rounded-full bg-surface-muted radio-indicator flex items-center justify-center';
+      dot.className = 'w-2.5 h-2.5 rounded-full bg-transparent dot-marker';
+    });
+
+    const activeCard = input.closest('.role-card');
+    if (activeCard) {
+      activeCard.classList.remove('bg-surface', 'shadow-sm');
+      activeCard.classList.add('active-role', 'bg-surface-container-low', 'shadow-md');
+      const indicator = activeCard.querySelector('.radio-indicator');
+      const dot = activeCard.querySelector('.dot-marker');
+      indicator.className = 'w-5 h-5 rounded-full bg-primary-container radio-indicator flex items-center justify-center shadow-sm';
+      dot.className = 'w-2.5 h-2.5 rounded-full bg-on-primary dot-marker';
+    }
+  }
+
+  function togglePasswordVisibility() {
+    const passInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+    if (passInput.type === 'password') {
+      passInput.type = 'text';
+      eyeIcon.textContent = 'visibility_off';
+    } else {
+      passInput.type = 'password';
+      eyeIcon.textContent = 'visibility';
+    }
+  }
+
+  function generateSuggestedPassword() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!#%*';
+    let res = '';
+    for (let i = 0; i < 10; i++) {
+      res += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    const passInput = document.getElementById('password');
+    passInput.value = res;
+    passInput.type = 'text';
+    document.getElementById('eyeIcon').textContent = 'visibility_off';
+  }
+
+  function handleUserSubmit() {
+    const btn = document.querySelector('button[type="submit"]');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">progress_activity</span><span>Guardando...</span>';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check_circle</span><span>¡Usuario creado!</span>';
+      btn.classList.remove('bg-primary-container');
+      btn.classList.add('bg-success');
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.remove('bg-success');
+        btn.classList.add('bg-primary-container');
+        btn.disabled = false;
+      }, 2500);
+    }, 900);
+  }
+</script></main></div></body></html>

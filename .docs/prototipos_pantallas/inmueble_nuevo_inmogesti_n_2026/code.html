@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary-container":"#dad7ff","on-tertiary-fixed":"#351000","surface-container-lowest":"#ffffff","outline-variant":"#c7c4d8","background-end":"#D9E2EC","tertiary-container":"#a44100","inverse-surface":"#27313f","inverse-primary":"#c3c0ff","danger-text":"#B91C1C","error-container":"#ffdad6","on-secondary-fixed":"#191c1f","error":"#ba1a1a","primary-fixed":"#e2dfff","primary-container":"#4f46e5","border":"#E5E7EB","tertiary-fixed":"#ffdbcc","on-primary-fixed-variant":"#3323cc","row-hover":"#F3F4F6","on-error":"#ffffff","primary":"#3525cd","success-soft":"#ECFDF5","danger-hover":"#DC2626","on-secondary":"#ffffff","on-surface":"#121c2a","secondary":"#5c5f62","info-soft":"#DBEAFE","on-secondary-fixed-variant":"#44474a","primary-hover":"#4338CA","tertiary":"#7e3000","background-start":"#F0F4F8","tertiary-fixed-dim":"#ffb695","surface-bright":"#f8f9ff","on-tertiary-container":"#ffd2be","warning-soft":"#FFFBEB","info":"#2563EB","on-primary-fixed":"#0f0069","surface-container-low":"#eff4ff","secondary-container":"#dee0e4","surface-container-high":"#dee9fc","border-input":"#D1D5DB","surface-tint":"#4d44e3","warning-text":"#92400E","surface":"#FFFFFF","warning":"#F59E0B","primary-soft":"#E0E7FF","on-primary":"#ffffff","heading":"#111827","primary-fixed-dim":"#c3c0ff","surface-dim":"#d0dbed","on-surface-variant":"#464555","on-background":"#121c2a","success":"#10B981","on-error-container":"#93000a","on-tertiary-fixed-variant":"#7b2f00","success-text":"#065F46","background":"#f8f9ff","text-muted":"#6B7280","on-tertiary":"#ffffff","outline":"#777587","surface-muted":"#F9FAFB","surface-variant":"#d9e3f6","surface-container-highest":"#d9e3f6","inverse-on-surface":"#eaf1ff","secondary-fixed":"#e0e2e6","danger":"#EF4444","surface-container":"#e6eeff","danger-soft":"#FEF2F2","info-text":"#1E40AF","on-secondary-container":"#606366","secondary-fixed-dim":"#c4c7ca"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter":"1.5rem","space-sm":"0.5rem","margin-mobile":"1rem","space-xs":"0.25rem","gutter-mobile":"1rem","space-md":"1rem","space-lg":"1.5rem","space-xl":"2rem","margin":"2rem"},"fontFamily":{"body-lg":["Inter"],"headline-lg-mobile":["Inter"],"headline-md":["Inter"],"body-md":["Inter"],"headline-lg":["Inter"],"metric-display":["Inter"],"label-md":["Inter"],"table-header":["Inter"],"label-sm":["Inter"],"headline-sm":["Inter"],"body-sm":["Inter"]},"fontSize":{"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg-mobile":["22px",{"lineHeight":"28px","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"26px","fontWeight":"500"}],"body-md":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-lg":["28px",{"lineHeight":"36px","fontWeight":"600"}],"metric-display":["32px",{"lineHeight":"38px","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"500"}],"table-header":["13px",{"lineHeight":"18px","letterSpacing":"0.05em","fontWeight":"500"}],"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"500"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}};</script></head><body class="min-h-screen bg-gradient-to-b from-background-start to-background-end font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[260px] bg-surface border-r border-border z-40 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center gap-space-sm border-b border-border"><div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary shrink-0 shadow-sm"><svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg></div><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-heading font-semibold tracking-tight truncate leading-tight">InmoGestión</span><span class="font-label-sm text-label-sm text-text-muted truncate">Plataforma Inmobiliaria 2026</span></div></div><nav class="flex flex-col gap-1 p-space-sm overflow-y-auto" data-active-classes="bg-primary-soft text-primary-hover font-semibold border-r-4 border-primary-container"><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-body-sm text-body-sm">Dashboard</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="inmuebles" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Inmuebles</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratos" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span class="font-body-sm text-body-sm">Contratos</span></a><div class="flex flex-col"><button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Cuotas</span></div><span class="material-symbols-outlined text-[16px]">expand_more</span></button><div class="flex flex-col pl-9 pr-1 gap-1 py-1"><a class="px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-body-sm text-body-sm transition-colors" data-path="emitir-cuotas" href="#">Emitir cuotas</a><a class="px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-body-sm text-body-sm transition-colors" data-path="cobranzas" href="#">Cobranzas</a></div></div><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="pagos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span class="font-body-sm text-body-sm">Pagos</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="liquidaciones" href="#"><span class="material-symbols-outlined text-[20px]">calculate</span><span class="font-body-sm text-body-sm">Liquidaciones</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span class="font-body-sm text-body-sm">Reportes</span></a></nav></div><div class="p-space-sm border-t border-border bg-surface-muted"><div class="flex items-center gap-3 p-2 bg-surface rounded-lg border border-border shadow-sm mb-2"><div class="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-md text-label-md font-semibold shrink-0">LB</div><div class="flex flex-col min-w-0 flex-1"><span class="font-label-md text-label-md font-medium text-heading truncate">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted truncate">Administradora</span></div></div><a class="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg text-danger-text hover:bg-danger-soft transition-colors font-label-md text-label-md font-medium" data-path="login" href="#"><span class="material-symbols-outlined text-[18px]">logout</span><span>Cerrar Sesión</span></a></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/90 backdrop-blur-md border-b border-border z-30 px-space-lg flex items-center justify-between shadow-[0_1px_4px_rgba(0,0,0,0.02)]"><div class="flex items-center gap-2 font-body-sm text-body-sm text-text-muted"><span class="hover:text-heading cursor-pointer transition-colors">InmoGestión</span><span class="material-symbols-outlined text-[16px] text-outline-variant">chevron_right</span><span class="text-heading font-medium">Inmuebles</span></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-1.5 text-on-surface-variant px-3 py-1.5 rounded-lg bg-surface-container-low border border-border font-label-md text-label-md"><span class="material-symbols-outlined text-[18px] text-text-muted">calendar_today</span><span>06/11/2026</span></div><button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-danger text-on-error font-label-sm text-[10px] font-bold flex items-center justify-center ring-2 ring-surface">2</span></button><div class="flex items-center gap-2.5 pl-2 border-l border-border"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md font-medium text-heading leading-tight">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted leading-tight">Administradora</span></div></div></div></header><main class="relative pt-16 min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full max-w-[1200px] mx-auto px-margin-mobile md:px-margin py-space-lg flex flex-col gap-space-lg">
+<!-- Sub-header context bar -->
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-text-muted">
+<span>InmoGestión</span>
+<span class="material-symbols-outlined text-[14px] text-outline-variant">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Inmuebles</a>
+<span class="material-symbols-outlined text-[14px] text-outline-variant">chevron_right</span>
+<span class="text-heading font-medium">Nuevo inmueble</span>
+</div>
+<div class="flex items-baseline gap-3 mt-1">
+<h1 class="font-headline-lg text-headline-lg text-heading font-semibold tracking-tight">Nuevo inmueble</h1>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-primary-soft text-primary-hover font-medium">
+            Alta en cartera 2026
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">
+          Registrá una nueva unidad locativa en la cartera y asignale un propietario titular.
+        </p>
+</div>
+<div class="flex items-center gap-3 shrink-0 self-start sm:self-auto">
+<a class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface text-on-surface-variant hover:text-heading hover:bg-surface-container-high transition-colors font-label-md text-label-md shadow-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Volver al listado</span>
+</a>
+</div>
+</div>
+<!-- Main Workspace: 2 Columns (70% Form / 30% Context Aside) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Left Column: Form Workflow (8 cols ~ 67%) -->
+<form class="lg:col-span-8 flex flex-col gap-space-lg" id="form-nuevo-inmueble" onsubmit="event.preventDefault();">
+<!-- Card 1: Datos Catastrales y Básicos -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col gap-space-lg relative overflow-hidden">
+<div class="flex items-start gap-4">
+<div class="w-11 h-11 rounded-xl bg-primary-soft text-primary-container flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]">apartment</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-heading font-semibold">Datos del inmueble</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Información catastral, titularidad y características básicas de la unidad.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Propietario Titular (Col span full) -->
+<div class="md:col-span-2 flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-heading font-medium" for="propietario-select">
+                  Propietario titular <span class="text-danger">*</span>
+</label>
+<span class="font-label-sm text-label-sm text-text-muted">Requerido para liquidación</span>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-text-muted pointer-events-none">person_search</span>
+<select class="w-full h-11 pl-11 pr-10 bg-surface rounded-lg font-body-md text-body-md text-heading appearance-none shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-container/20 focus:bg-surface-bright transition-all cursor-pointer" id="propietario-select" required="">
+<option disabled="" selected="" value="">Seleccionar propietario...</option>
+<option value="1">Ricardo Sosa — DNI 24.118.905 (3 inmuebles)</option>
+<option value="2">Marta Quiroga — DNI 21.650.312 (1 inmueble)</option>
+<option value="3">Hernán Paz — DNI 28.349.880 (2 inmuebles)</option>
+<option value="4">Florencia Varela — DNI 32.901.442 (Nuevo titular)</option>
+<option value="5">Esteban Cambiasso — DNI 18.774.209 (5 inmuebles)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-[20px] text-text-muted pointer-events-none">expand_more</span>
+</div>
+<p class="font-label-sm text-label-sm text-text-muted flex items-center gap-1.5 mt-0.5">
+<span class="material-symbols-outlined text-[15px] text-info">info</span>
+                Solo se muestran usuarios registrados con rol Propietario activo.
+              </p>
+</div>
+<!-- Dirección Exacta (Col span full) -->
+<div class="md:col-span-2 flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium" for="direccion-input">
+                Dirección exacta <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-text-muted pointer-events-none">location_on</span>
+<input class="w-full h-11 pl-11 pr-4 bg-surface rounded-lg font-body-md text-body-md text-heading shadow-sm placeholder:text-text-muted/60 focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all" id="direccion-input" placeholder="Ej: Av. Santa Fe 3420, Piso 5 Depto B, Palermo, CABA" required="" type="text"/>
+</div>
+<p class="font-label-sm text-label-sm text-text-muted mt-0.5">
+                Incluir piso, departamento, torre o número de local comercial si corresponde.
+              </p>
+</div>
+<!-- Tipo de Inmueble -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium" for="tipo-inmueble">
+                Tipo de inmueble <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-text-muted pointer-none">domain</span>
+<select class="w-full h-11 pl-11 pr-10 bg-surface rounded-lg font-body-md text-body-md text-heading appearance-none shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all cursor-pointer" id="tipo-inmueble" required="">
+<option selected="" value="departamento">Departamento</option>
+<option value="casa">Casa</option>
+<option value="local">Local comercial</option>
+<option value="oficina">Oficina</option>
+<option value="terreno">Terreno / Lote</option>
+<option value="cochera">Cochera individual</option>
+</select>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-[20px] text-text-muted pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Cantidad de Ambientes -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium" for="ambientes-input">
+                Cantidad de ambientes <span class="text-danger">*</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-[20px] text-text-muted pointer-events-none">meeting_room</span>
+<input class="w-full h-11 pl-11 pr-16 bg-surface rounded-lg font-body-md text-body-md text-heading shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all" id="ambientes-input" max="25" min="1" placeholder="Ej: 2" required="" step="1" type="number"/>
+<div class="absolute right-1.5 flex items-center gap-0.5">
+<button class="w-7 h-7 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container transition-colors" onclick="const el=document.getElementById('ambientes-input'); el.value = Math.max(1, (parseInt(el.value)||1)-1);" type="button">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container transition-colors" onclick="const el=document.getElementById('ambientes-input'); el.value = (parseInt(el.value)||0)+1;" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+<p class="font-label-sm text-label-sm text-text-muted mt-0.5">
+                Ambientes principales habitables (monoambiente = 1).
+              </p>
+</div>
+<!-- Precio base de alquiler sugerido -->
+<div class="md:col-span-2 flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium" for="precio-input">
+                Precio base de alquiler sugerido <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 font-headline-sm text-headline-sm font-semibold text-text-muted select-none">$</span>
+<input class="w-full h-11 pl-9 pr-16 bg-surface rounded-lg font-body-md text-body-md font-medium text-heading tracking-wide shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all font-mono" id="precio-input" inputmode="numeric" placeholder="450.000" required="" type="text"/>
+<span class="absolute right-3.5 top-1/2 -translate-y-1/2 font-label-sm text-label-sm text-text-muted uppercase font-semibold">ARS / mes</span>
+</div>
+<p class="font-label-sm text-label-sm text-text-muted mt-0.5">
+                Monto mensual de referencia en pesos argentinos (mayor a cero). Se tomará de base al confeccionar el contrato de locación.
+              </p>
+</div>
+</div>
+</section>
+<!-- Card 2: Descripción, comodidades y notas -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-start gap-4">
+<div class="w-11 h-11 rounded-xl bg-surface-container-high text-on-surface-variant flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]">notes</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-heading font-semibold">Descripción del inmueble</h2>
+<p class="font-body-sm text-body-sm text-text-muted">Detalles constructivos, estado de conservación y equipamiento disponible.</p>
+</div>
+</div>
+<!-- Tags rápidas de comodidades -->
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-heading font-medium">Comodidades y características frecuentes</span>
+<div class="flex flex-wrap gap-2" id="amenities-container">
+<label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-md text-label-md cursor-pointer transition-colors select-none">
+<input class="rounded text-primary-container focus:ring-0 w-3.5 h-3.5" name="amenity" type="checkbox" value="Balcón al frente"/>
+<span>Balcón al frente</span>
+</label>
+<label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-md text-label-md cursor-pointer transition-colors select-none">
+<input class="rounded text-primary-container focus:ring-0 w-3.5 h-3.5" name="amenity" type="checkbox" value="Cochera cubierta"/>
+<span>Cochera fija cubierta</span>
+</label>
+<label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-md text-label-md cursor-pointer transition-colors select-none">
+<input class="rounded text-primary-container focus:ring-0 w-3.5 h-3.5" name="amenity" type="checkbox" value="Apto profesional"/>
+<span>Apto profesional</span>
+</label>
+<label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-md text-label-md cursor-pointer transition-colors select-none">
+<input class="rounded text-primary-container focus:ring-0 w-3.5 h-3.5" name="amenity" type="checkbox" value="Calefacción central"/>
+<span>Calefacción central</span>
+</label>
+<label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-md text-label-md cursor-pointer transition-colors select-none">
+<input class="rounded text-primary-container focus:ring-0 w-3.5 h-3.5" name="amenity" type="checkbox" value="Seguridad 24hs"/>
+<span>Seguridad 24hs</span>
+</label>
+<label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-md text-label-md cursor-pointer transition-colors select-none">
+<input class="rounded text-primary-container focus:ring-0 w-3.5 h-3.5" name="amenity" type="checkbox" value="SUM / Parrilla"/>
+<span>SUM con parrilla</span>
+</label>
+<label class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface-variant font-label-md text-label-md cursor-pointer transition-colors select-none">
+<input class="rounded text-primary-container focus:ring-0 w-3.5 h-3.5" name="amenity" type="checkbox" value="Aire acondicionado"/>
+<span>Aire acondicionado split</span>
+</label>
+</div>
+</div>
+<!-- Textarea con contador -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-heading font-medium" for="descripcion-textarea">
+                Estado y comodidades detalladas <span class="text-danger">*</span>
+</label>
+<span class="font-label-sm text-label-sm text-text-muted" id="char-counter">142 / 1.000 caracteres</span>
+</div>
+<textarea class="w-full p-3.5 bg-surface rounded-lg font-body-md text-body-md text-heading shadow-sm placeholder:text-text-muted/60 focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all resize-y leading-relaxed" id="descripcion-textarea" maxlength="1000" placeholder="Describí las características de la unidad: metros cuadrados cubiertos/totales, orientación luminosa, expensas estimadas ordinarias, cochera, amenities (SUM, piscina, parrilla, seguridad 24hs), estado de pintura e instalaciones..." required="" rows="5">Excelente semipiso al contrafrente, super luminoso. Cuenta con living-comedor con salida a balcón aterrazado, cocina independiente con bajo mesada y alacenas completas, lavadero separado. Dormitorio principal con placard de piso a techo y baño completo con ventilación natural. Expensas estimadas $48.000 (ordinarias).</textarea>
+<p class="font-label-sm text-label-sm text-text-muted mt-0.5">
+              Esta descripción se adjuntará como ficha técnica de inventario en el anexo del contrato.
+            </p>
+</div>
+</section>
+<!-- Card 3: Galería fotográfica preliminar -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-label-md text-label-md font-semibold text-heading">Material fotográfico de referencia</h3>
+<p class="font-label-sm text-label-sm text-text-muted">Imágenes de fachada e interiores para auditoría previa</p>
+</div>
+</div>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low text-primary-hover hover:bg-primary-soft text-label-sm font-medium transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">cloud_upload</span>
+<span>Subir fotos</span>
+</button>
+</div>
+<div class="grid grid-cols-3 gap-3 pt-2">
+<div class="relative rounded-lg overflow-hidden h-28 group bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Modern spacious sunny living room interior in Buenos Aires apartment, high ceilings, large windows with balcony view, minimalist clean aesthetic, warm ambient afternoon light, contemporary real estate photography with cool slate tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgHWR6-pBGtiK6t0V8f-rfbYwDRH_LefMp_4379iU3Yp8dYXCFvH5GFwVddp_Q9SJQi721qHoYJPVN4PqdxXLPt3S5WNG10jFHmifcWvwbHx0wcxwW6VvqfT5h5mu6x0kLd9c5viJt8-S1u5iw8x1rmrtcWOiBXJVlOCahw4VR7pzy9CUWu2pRuZA0eSAwHJI9Ago4Z2WMSh7H19za9QvR2fFn2ygHvU8w8_u2KOg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2">
+<span class="text-[11px] font-medium text-white truncate">Estar / Comedor</span>
+</div>
+</div>
+<div class="relative rounded-lg overflow-hidden h-28 group bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Contemporary apartment kitchen in Palermo, polished stone countertops, stainless steel appliances, natural morning light, clean architectural angles, pristine administrative catalog style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnMmHQsQ3qtfUprdmdyo8xRwHPKIAJdZkSO5j1pL3FvSqL3-ANT0AHNFDOi-_rKWPzJYn6L4VLdujwSkJ1p6VuMLDuqipPOYnNqxFyy-igMD9_uP3royUThLSVSF1UYqH6GlyfIELRbGK_lyO6WQiD5COoLeonHfVNpigYa4R6QkL9aBY0mxcEig-UrZlUFBYde-ny-xiyBM1vLXQVLGdsEbGcqezoyL2N8Gg2pEg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-2">
+<span class="text-[11px] font-medium text-white truncate">Cocina integrada</span>
+</div>
+</div>
+<div class="relative rounded-lg overflow-hidden h-28 flex flex-col items-center justify-center bg-surface-container-low text-text-muted hover:text-primary hover:bg-primary-soft/50 cursor-pointer transition-colors p-2 text-center">
+<span class="material-symbols-outlined text-[26px]">add_a_photo</span>
+<span class="font-label-sm text-[11px] font-medium mt-1">Agregar más fotos</span>
+<span class="text-[10px] text-text-muted/70">Máx 15 imágenes</span>
+</div>
+</div>
+</section>
+<!-- Barra de Acciones al pie -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-2 text-text-muted font-label-sm text-label-sm order-2 sm:order-1">
+<span class="material-symbols-outlined text-[18px] text-success">verified_user</span>
+<span>Los datos cargados contarán con respaldo catastral registrado.</span>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto order-1 sm:order-2">
+<a class="w-full sm:w-auto text-center px-5 py-2.5 rounded-lg bg-surface-container-high hover:bg-secondary-container text-on-surface-variant hover:text-heading font-label-md text-label-md font-medium transition-colors" href="#">
+              Cancelar
+            </a>
+<button class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg bg-primary-container hover:bg-primary-hover text-on-primary font-label-md text-label-md font-medium shadow-sm transition-all active:scale-[0.98]" id="btn-submit" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Guardar Inmueble</span>
+</button>
+</div>
+</div>
+</form>
+<!-- Right Column: Context & Guidelines Aside (4 cols ~ 33%) -->
+<aside class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Card A: Estado del Registro -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col gap-3 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-muted font-semibold">Parámetro de alta</span>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+              Disponible
+            </span>
+</div>
+<div class="flex items-start gap-3 mt-1">
+<div class="w-9 h-9 rounded-lg bg-success-soft text-success flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">key</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-label-md text-label-md font-semibold text-heading">Estado inicial: Disponible</h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-1 leading-relaxed">
+                Se asigna automáticamente al guardar. El inmueble figurará de inmediato en el catálogo de unidades disponibles para iniciar un nuevo contrato de locación.
+              </p>
+</div>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg mt-2 flex items-center justify-between text-text-muted font-label-sm text-label-sm">
+<span>Fecha de incorporación:</span>
+<span class="font-semibold text-heading font-mono">06/11/2026</span>
+</div>
+</div>
+<!-- Card B: Guía de alta de cartera -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-primary-container">rule</span>
+<h3 class="font-headline-sm text-body-lg font-semibold text-heading">Guía de alta de cartera</h3>
+</div>
+<div class="flex flex-col gap-3.5 pt-1">
+<div class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-primary-soft text-primary-hover flex items-center justify-center shrink-0 font-label-sm text-label-sm font-bold mt-0.5">
+                1
+              </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-heading">Titular validado</span>
+<span class="font-body-sm text-body-sm text-text-muted">El propietario debe tener CUIT/DNI cargado en el sistema para posibilitar futuras liquidaciones de alquileres.</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-primary-soft text-primary-hover flex items-center justify-center shrink-0 font-label-sm text-label-sm font-bold mt-0.5">
+                2
+              </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-heading">Publicación inmediata</span>
+<span class="font-body-sm text-body-sm text-text-muted">La propiedad quedará habilitada para confeccionar contratos, agendar visitas y asociar inquilinos solicitantes.</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-6 h-6 rounded-full bg-primary-soft text-primary-hover flex items-center justify-center shrink-0 font-label-sm text-label-sm font-bold mt-0.5">
+                3
+              </div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-heading">Comisión administrativa</span>
+<span class="font-body-sm text-body-sm text-text-muted">Se aplicará la tasa habitual de gestión de cobranzas de la inmobiliaria (alícuota estándar 5% mensual).</span>
+</div>
+</div>
+</div>
+<!-- Mini Callout Informativo -->
+<div class="p-3.5 rounded-lg bg-warning-soft text-warning-text flex items-start gap-2.5 mt-1">
+<span class="material-symbols-outlined text-[18px] shrink-0 text-warning">shield_lock</span>
+<p class="font-label-sm text-label-sm leading-snug">
+              Una vez vinculado a un contrato vigente, el precio base no podrá ser modificado sin adenda contractual.
+            </p>
+</div>
+</div>
+<!-- Card C: Accesos Rápidos -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col gap-3">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-muted font-semibold">Atajos operacionales</span>
+<div class="flex flex-col gap-2">
+<a class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-primary-hover group-hover:scale-110 transition-transform">person_add</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-heading">¿No encontrás al propietario?</span>
+<span class="font-label-sm text-label-sm text-text-muted">Dar de alta nuevo usuario titular</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-text-muted group-hover:text-heading group-hover:translate-x-0.5 transition-all">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant group-hover:scale-110 transition-transform">receipt_long</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-medium text-heading">Borradores de contrato</span>
+<span class="font-label-sm text-label-sm text-text-muted">Ver plantillas locativas 2026</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-text-muted group-hover:text-heading group-hover:translate-x-0.5 transition-all">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Resumen de cartera inmobiliaria (Widget visual complementario) -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary font-bold">
+<svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted">Unidades activas</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-heading">148 propiedades</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm font-medium text-success-text bg-success-soft px-2 py-1 rounded">
+            94% Ocupación
+          </span>
+</div>
+</aside>
+</div>
+</div>
+<script>
+    // Contador dinámico de caracteres para el textarea
+    const textarea = document.getElementById('descripcion-textarea');
+    const counter = document.getElementById('char-counter');
+    if (textarea && counter) {
+      const updateCounter = () => {
+        const length = textarea.value.length;
+        counter.textContent = `${length} / 1.000 caracteres`;
+      };
+      textarea.addEventListener('input', updateCounter);
+      updateCounter();
+    }
+
+    // Formateador amigable para campo de precio en ARS
+    const precioInput = document.getElementById('precio-input');
+    if (precioInput) {
+      precioInput.addEventListener('blur', (e) => {
+        let val = e.target.value.replace(/\D/g, '');
+        if (val) {
+          e.target.value = new Intl.NumberFormat('es-AR').format(val);
+        }
+      });
+      precioInput.addEventListener('focus', (e) => {
+        let val = e.target.value.replace(/\./g, '');
+        e.target.value = val;
+      });
+    }
+
+    // Comportamiento visual de amenities al clickear tags
+    const amenityCheckboxes = document.querySelectorAll('input[name="amenity"]');
+    amenityCheckboxes.forEach(chk => {
+      chk.addEventListener('change', function() {
+        const parentLabel = this.closest('label');
+        if (this.checked) {
+          parentLabel.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+          parentLabel.classList.add('bg-primary-soft', 'text-primary-hover', 'font-semibold');
+        } else {
+          parentLabel.classList.remove('bg-primary-soft', 'text-primary-hover', 'font-semibold');
+          parentLabel.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+        }
+      });
+    });
+  </script>
+</div></main></div></body></html>

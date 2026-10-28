@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Iniciar sesión - InmoGestión 2026</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              DEFAULT: '#4F46E5',
+              hover: '#4338CA',
+              soft: '#E0E7FF',
+            },
+            heading: '#111827',
+            textColor: '#1F2937',
+            textMuted: '#6B7280',
+            borderDefault: '#E5E7EB',
+            borderInput: '#D1D5DB',
+            surface: '#FFFFFF',
+            surfaceMuted: '#F9FAFB',
+            success: '#10B981',
+            successSoft: '#ECFDF5',
+            successText: '#065F46',
+            danger: '#EF4444',
+            warning: '#F59E0B',
+            info: '#2563EB',
+          },
+          boxShadow: {
+            card: '0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.05)',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #F0F4F8 0%, #D9E2EC 100%);
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-screen text-textColor antialiased flex flex-col justify-between gradient-bg selection:bg-indigo-100 selection:text-indigo-800">
+<!-- Main Container -->
+<main class="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-12 w-full"><div class="flex flex-col w-full items-center justify-center">
+<!-- Tarjeta Central de Recuperación -->
+<div class="w-full max-w-[480px] bg-surface rounded-xl shadow-xl shadow-indigo-950/5 p-6 sm:p-8 flex flex-col gap-6 relative overflow-hidden">
+<!-- Acento decorativo sutil en el borde superior -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-soft via-primary-container to-primary"></div>
+<!-- Encabezado de la Tarjeta -->
+<div class="flex flex-col items-center text-center gap-3">
+<!-- Pill superior de contexto y seguridad -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-soft text-primary font-label-sm text-label-sm tracking-wide uppercase">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span>Seguridad de la cuenta</span>
+</div>
+<!-- Isotipo oficial InmoGestión -->
+<div class="flex items-center gap-3 mt-1">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shadow-md shadow-primary-container/20">
+<span class="material-symbols-outlined text-[24px]">real_estate_agent</span>
+</div>
+<div class="text-left">
+<div class="font-headline-sm text-headline-sm text-heading tracking-tight leading-none">InmoGestión</div>
+<div class="font-label-sm text-label-sm text-text-muted">Plataforma Inmobiliaria 2026</div>
+</div>
+</div>
+<!-- Título y subtítulo rioplatense -->
+<div class="flex flex-col gap-1 mt-2">
+<h1 class="font-headline-lg text-headline-lg text-heading">Recuperar contraseña</h1>
+<p class="font-body-md text-body-md text-text-muted">Definí tu nueva contraseña para volver a operar</p>
+</div>
+<!-- Cuenta de destino identificada -->
+<div class="w-full mt-1 bg-surface-muted py-2 px-3 rounded-lg flex items-center justify-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[16px] text-primary-container">alternate_email</span>
+<span class="font-body-sm text-body-sm truncate">martin.gomez@email.com.ar</span>
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+</div>
+</div>
+<!-- Formulario interactivo -->
+<form class="flex flex-col gap-5" id="recoverForm" onsubmit="event.preventDefault(); handleSubmit();">
+<!-- Campo 1: Nueva contraseña -->
+<div class="flex flex-col gap-1.5 text-left">
+<label class="font-label-md text-label-md text-heading flex items-center justify-between" for="passwordField">
+<span>Nueva contraseña <span class="text-danger">*</span></span>
+<span class="font-label-sm text-label-sm text-success font-medium" id="strengthText">Segura</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-text-muted text-[19px] pointer-events-none">lock</span>
+<input class="w-full h-11 pl-10 pr-11 bg-surface rounded-lg font-body-md text-body-md text-textColor shadow-sm focus:outline-none transition-all placeholder:text-text-muted/60" id="passwordField" name="password" oninput="checkPasswordMatch()" placeholder="Ingresá al menos 8 caracteres" required="" type="password" value="GestorInmo2026!"/>
+<button aria-label="Alternar visibilidad" class="absolute right-2 p-1.5 text-text-muted hover:text-heading transition-colors rounded" onclick="togglePasswordVisibility('passwordField', 'toggleIcon1')" title="Alternar visibilidad" type="button">
+<span class="material-symbols-outlined text-[19px]" id="toggleIcon1">visibility</span>
+</button>
+</div>
+<!-- Barra de progreso de fortaleza (coherente con registro de plataforma) -->
+<div class="w-full bg-surface-muted h-1.5 rounded-full overflow-hidden mt-1">
+<div class="h-full bg-success rounded-full transition-all duration-300 w-full" id="strengthBar"></div>
+</div>
+</div>
+<!-- Campo 2: Repetir contraseña -->
+<div class="flex flex-col gap-1.5 text-left">
+<label class="font-label-md text-label-md text-heading" for="repeatPasswordField">
+          Repetir nueva contraseña <span class="text-danger">*</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-text-muted text-[19px] pointer-events-none">lock_reset</span>
+<input class="w-full h-11 pl-10 pr-11 bg-surface rounded-lg font-body-md text-body-md text-textColor shadow-sm focus:outline-none transition-all placeholder:text-text-muted/60" id="repeatPasswordField" name="repeatPassword" oninput="checkPasswordMatch()" placeholder="Reescribí tu contraseña elegida" required="" type="password" value="GestorInmo2026!"/>
+<button aria-label="Alternar visibilidad" class="absolute right-2 p-1.5 text-text-muted hover:text-heading transition-colors rounded" onclick="togglePasswordVisibility('repeatPasswordField', 'toggleIcon2')" title="Alternar visibilidad" type="button">
+<span class="material-symbols-outlined text-[19px]" id="toggleIcon2">visibility</span>
+</button>
+</div>
+</div>
+<!-- Checklist de Requisitos de Seguridad -->
+<div class="bg-surface-muted p-3.5 rounded-lg flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-heading uppercase tracking-wider font-semibold">Requisitos de seguridad:</span>
+<div class="flex flex-col gap-1.5">
+<!-- Requisito 1 -->
+<div class="flex items-center gap-2 text-success-text font-body-sm text-body-sm transition-colors" id="reqLength">
+<span class="material-symbols-outlined text-[17px] text-success" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Mínimo 8 caracteres</span>
+</div>
+<!-- Requisito 2 -->
+<div class="flex items-center gap-2 text-success-text font-body-sm text-body-sm transition-colors" id="reqMatch">
+<span class="material-symbols-outlined text-[17px] text-success" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Las contraseñas coinciden</span>
+</div>
+</div>
+</div>
+<!-- Notificación de confirmación oculta por defecto -->
+<div class="hidden p-3 bg-success-soft rounded-lg items-center gap-2 text-success-text text-left" id="successNotice">
+<span class="material-symbols-outlined text-success text-[20px]" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+<span class="font-body-sm text-body-sm">¡Listo! Contraseña actualizada con éxito. Redirigiendo...</span>
+</div>
+<!-- Botón de Acción Principal -->
+<button class="w-full h-11 px-6 bg-primary-container hover:bg-primary-hover text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm transition-all focus:outline-none" id="submitBtn" type="submit">
+<span>Cambiar contraseña</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<!-- Navegación Secundaria de Retorno -->
+<div class="pt-2 text-center">
+<a class="inline-flex items-center justify-center gap-1.5 font-label-md text-label-md text-text-muted hover:text-primary transition-colors py-1 px-2 rounded group" href="#login">
+<span class="material-symbols-outlined text-[17px] transition-transform group-hover:-translate-x-0.5">arrow_back</span>
+<span>¿Te acordaste? Volver a ingresar</span>
+</a>
+</div>
+</form>
+<!-- Indicador de Telemetría Institucional -->
+<div class="border-t border-borderDefault/40 pt-4 flex items-center justify-between text-left text-text-muted">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-success" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-label-sm text-label-sm">Conexión cifrada SSL</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+<span class="font-label-sm text-label-sm tabular-nums">AR-BUE 100% en línea</span>
+</div>
+</div>
+</div>
+<!-- Micro-aviso de estado del sistema -->
+<div class="mt-4 text-center">
+<p class="font-label-sm text-label-sm text-text-muted tabular-nums">
+      Sistema activo: 06/11/2026 • Terminal autorizada de recuperación de credenciales
+    </p>
+</div>
+</div>
+<script>
+  function togglePasswordVisibility(fieldId, iconId) {
+    const input = document.getElementById(fieldId);
+    const icon = document.getElementById(iconId);
+    if (!input || !icon) return;
+
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.textContent = 'visibility_off';
+    } else {
+      input.type = 'password';
+      icon.textContent = 'visibility';
+    }
+  }
+
+  function checkPasswordMatch() {
+    const p1 = document.getElementById('passwordField').value;
+    const p2 = document.getElementById('repeatPasswordField').value;
+    
+    const reqLen = document.getElementById('reqLength');
+    const reqMatch = document.getElementById('reqMatch');
+    const strengthBar = document.getElementById('strengthBar');
+    const strengthText = document.getElementById('strengthText');
+    const submitBtn = document.getElementById('submitBtn');
+
+    const isLengthValid = p1.length >= 8;
+    const isMatching = p1.length > 0 && p1 === p2;
+
+    // Validación de longitud
+    if (isLengthValid) {
+      reqLen.innerHTML = '<span class="material-symbols-outlined text-[17px] text-success" style="font-variation-settings: \'FILL\' 1;">check_circle</span><span>Mínimo 8 caracteres</span>';
+      reqLen.className = 'flex items-center gap-2 text-success-text font-body-sm text-body-sm transition-colors';
+    } else {
+      reqLen.innerHTML = '<span class="material-symbols-outlined text-[17px] text-text-muted">radio_button_unchecked</span><span>Mínimo 8 caracteres</span>';
+      reqLen.className = 'flex items-center gap-2 text-text-muted font-body-sm text-body-sm transition-colors';
+    }
+
+    // Validación de concordancia
+    if (isMatching) {
+      reqMatch.innerHTML = '<span class="material-symbols-outlined text-[17px] text-success" style="font-variation-settings: \'FILL\' 1;">check_circle</span><span>Las contraseñas coinciden</span>';
+      reqMatch.className = 'flex items-center gap-2 text-success-text font-body-sm text-body-sm transition-colors';
+    } else {
+      reqMatch.innerHTML = '<span class="material-symbols-outlined text-[17px] text-text-muted">radio_button_unchecked</span><span>Las contraseñas coinciden</span>';
+      reqMatch.className = 'flex items-center gap-2 text-text-muted font-body-sm text-body-sm transition-colors';
+    }
+
+    // Fortaleza gráfica simplificada
+    if (p1.length >= 10 && /[A-Z]/.test(p1) && /[0-9!@#$%^&*]/.test(p1)) {
+      strengthBar.style.width = '100%';
+      strengthBar.className = 'h-full bg-success rounded-full transition-all duration-300';
+      strengthText.textContent = 'Segura';
+      strengthText.className = 'font-label-sm text-label-sm text-success font-medium';
+    } else if (p1.length >= 8) {
+      strengthBar.style.width = '65%';
+      strengthBar.className = 'h-full bg-warning rounded-full transition-all duration-300';
+      strengthText.textContent = 'Aceptable';
+      strengthText.className = 'font-label-sm text-label-sm text-warning font-medium';
+    } else {
+      strengthBar.style.width = '25%';
+      strengthBar.className = 'h-full bg-danger rounded-full transition-all duration-300';
+      strengthText.textContent = 'Débil';
+      strengthText.className = 'font-label-sm text-label-sm text-danger font-medium';
+    }
+
+    if (isLengthValid && isMatching) {
+      submitBtn.removeAttribute('disabled');
+      submitBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+    } else {
+      submitBtn.setAttribute('disabled', 'true');
+      submitBtn.classList.add('opacity-60', 'cursor-not-allowed');
+    }
+  }
+
+  function handleSubmit() {
+    const notice = document.getElementById('successNotice');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    notice.classList.remove('hidden');
+    notice.classList.add('flex');
+    submitBtn.setAttribute('disabled', 'true');
+    submitBtn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span> Guardando...';
+
+    setTimeout(() => {
+      window.location.hash = 'login';
+    }, 1200);
+  }
+
+  // Inicializar estado al cargar
+  document.addEventListener('DOMContentLoaded', () => {
+    checkPasswordMatch();
+  });
+</script></main>
+<!-- Footer Público Minimalista -->
+<footer class="w-full py-4 px-6 text-center text-xs text-textMuted border-t border-borderDefault/60 bg-white/60 backdrop-blur-sm">
+<div class="max-w-[1240px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+<p>© 2026 InmoGestión por Nico Tech. Todos los derechos reservados.</p>
+<div class="flex items-center gap-4 text-xs">
+<a class="hover:text-textColor transition-colors" href="#terminos">Términos del servicio</a>
+<span>•</span>
+<a class="hover:text-textColor transition-colors" href="#privacidad">Política de privacidad</a>
+<span>•</span>
+<a class="hover:text-textColor transition-colors" href="#soporte">Soporte técnico</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión - InmoGestión 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              DEFAULT: '#4F46E5',
+              hover: '#4338CA',
+              soft: '#E0E7FF',
+            },
+            heading: '#111827',
+            textColor: '#1F2937',
+            textMuted: '#6B7280',
+            borderDefault: '#E5E7EB',
+            borderInput: '#D1D5DB',
+            surface: '#FFFFFF',
+            surfaceMuted: '#F9FAFB',
+            success: '#10B981',
+            successSoft: '#ECFDF5',
+            successText: '#065F46',
+            danger: '#EF4444',
+            warning: '#F59E0B',
+            info: '#2563EB',
+          },
+          boxShadow: {
+            card: '0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.05)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #F0F4F8 0%, #D9E2EC 100%);
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-textColor antialiased flex flex-col justify-between gradient-bg selection:bg-indigo-100 selection:text-indigo-800">
+
+  <!-- Main Container -->
+  <main class="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-12 w-full">
+    <div class="w-full max-w-[1240px] bg-white rounded-2xl shadow-card border border-borderDefault overflow-hidden grid grid-cols-1 lg:grid-cols-12 min-h-[680px]">
+      
+      <!-- Columna Izquierda: Panel Índigo de Branding y Características -->
+      <section class="lg:col-span-5 bg-[#4F46E5] text-white p-8 sm:p-12 flex flex-col justify-between relative overflow-hidden">
+        <!-- Decoración geométrica sutil -->
+        <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-white/5 pointer-events-none blur-2xl"></div>
+        <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-indigo-900/30 pointer-events-none blur-3xl"></div>
+
+        <div class="relative z-10">
+          <!-- Logo Brand -->
+          <div class="flex items-center gap-3 mb-12">
+            <div class="w-11 h-11 bg-white rounded-xl shadow-md flex items-center justify-center text-primary flex-shrink-0">
+              <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+            </div>
+            <div>
+              <span class="text-2xl font-bold tracking-tight text-white block leading-tight">InmoGestión</span>
+              <span class="text-[11px] font-medium tracking-wider uppercase text-indigo-200">Plataforma Inmobiliaria 2026</span>
+            </div>
+          </div>
+
+          <!-- Título y Bajada de la Columna -->
+          <div class="space-y-4 mb-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-indigo-100 text-xs font-medium backdrop-blur-sm">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Operaciones en tiempo real
+            </div>
+            <h1 class="text-2xl sm:text-3xl font-semibold leading-tight tracking-tight text-white">
+              Gestión de alquileres, simple y transparente
+            </h1>
+            <p class="text-indigo-100 text-sm sm:text-base leading-relaxed font-normal">
+              Centralizá contratos, cobranzas y liquidaciones con precisión contable y seguimiento paso a paso.
+            </p>
+          </div>
+
+          <!-- 3 Puntos Clave con Íconos de Línea -->
+          <ul class="space-y-6 pt-2">
+            <li class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 mt-0.5 text-white">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                  <path d="m9 16 2 2 4-4"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-medium text-base text-white">Cuotas y mora automáticas</h3>
+                <p class="text-xs sm:text-sm text-indigo-200 mt-0.5 leading-snug">
+                  Cálculo exacto por índice contractual y recargos puntuales sin errores manuales.
+                </p>
+              </div>
+            </li>
+
+            <li class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 mt-0.5 text-white">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-medium text-base text-white">Pagos con comprobante</h3>
+                <p class="text-xs sm:text-sm text-indigo-200 mt-0.5 leading-snug">
+                  Carga directa del inquilino y validación en un clic por el administrador.
+                </p>
+              </div>
+            </li>
+
+            <li class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 mt-0.5 text-white">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                  <path d="M16 8h-4a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-medium text-base text-white">Liquidaciones claras</h3>
+                <p class="text-xs sm:text-sm text-indigo-200 mt-0.5 leading-snug">
+                  Rendición inmediata a propietarios discriminando comisión y gastos netos.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Footer Columna Izquierda con Metadata del Sistema -->
+        <div class="relative z-10 pt-8 mt-8 border-t border-indigo-400/30 flex items-center justify-between text-xs text-indigo-200">
+          <div class="flex items-center gap-2">
+            <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>Sistema activo al <strong>06/11/2026</strong></span>
+          </div>
+          <span>Versión 2.6.4</span>
+        </div>
+      </section>
+
+      <!-- Columna Derecha: Tarjeta Blanca y Formulario de Acceso -->
+      <section class="lg:col-span-7 bg-white p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
+        <div class="max-w-[440px] w-full mx-auto">
+          
+          <!-- Encabezado del Formulario -->
+          <div class="mb-8">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-primary bg-primary-soft px-2.5 py-1 rounded-full">
+                Acceso al Portal
+              </span>
+              <span class="text-xs text-textMuted flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                Conexión segura SSL
+              </span>
+            </div>
+            <h2 class="text-2xl sm:text-[28px] font-semibold text-heading tracking-tight">
+              Ingresar a InmoGestión
+            </h2>
+            <p class="text-textMuted text-sm mt-1.5">
+              Ingresá tus credenciales para acceder a tu panel de administración, propietario o inquilino.
+            </p>
+          </div>
+
+          <!-- Formulario -->
+          <form class="space-y-5" onsubmit="event.preventDefault();">
+            
+            <!-- Campo: Correo Electrónico -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="email" class="block text-[13px] font-medium text-heading">
+                  Correo electrónico <span class="text-danger">*</span>
+                </label>
+              </div>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-textMuted">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                  </svg>
+                </div>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email"
+                  required
+                  placeholder="ejemplo@inmogestion.com.ar"
+                  value="administracion@nicotech.com.ar"
+                  class="w-full pl-10 pr-4 py-2.5 bg-surface text-textColor placeholder:text-gray-400 text-sm border border-borderInput rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/15 transition-all"
+                >
+              </div>
+            </div>
+
+            <!-- Campo: Contraseña con Toggle de Visibilidad -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="password" class="block text-[13px] font-medium text-heading">
+                  Contraseña <span class="text-danger">*</span>
+                </label>
+                <a href="#recuperar" class="text-xs font-medium text-primary hover:text-primary-hover hover:underline transition-colors">
+                  ¿Olvidaste tu contraseña?
+                </a>
+              </div>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-textMuted">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                </div>
+                <input 
+                  type="password" 
+                  id="password" 
+                  name="password"
+                  required
+                  placeholder="••••••••••••"
+                  value="••••••••••••"
+                  class="w-full pl-10 pr-11 py-2.5 bg-surface text-textColor placeholder:text-gray-400 text-sm border border-borderInput rounded-lg focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/15 transition-all font-mono tracking-wide"
+                >
+                <!-- Botón de ojo para alternar contraseña -->
+                <button 
+                  type="button" 
+                  aria-label="Mostrar u ocultar contraseña"
+                  onclick="const input = document.getElementById('password'); const isPass = input.type === 'password'; input.type = isPass ? 'text' : 'password';"
+                  class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-textMuted hover:text-textColor focus:outline-none transition-colors"
+                >
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Recordar dispositivo -->
+            <div class="flex items-center justify-between pt-1">
+              <label class="flex items-center gap-2 cursor-pointer select-none">
+                <input type="checkbox" checked class="w-4 h-4 rounded text-primary focus:ring-primary/20 border-borderInput">
+                <span class="text-xs text-textMuted font-normal">Recordar sesión en este equipo</span>
+              </label>
+            </div>
+
+            <!-- Botón Primario de Ancho Completo -->
+            <div class="pt-2">
+              <button 
+                type="submit"
+                class="w-full py-2.5 px-4 bg-primary hover:bg-primary-hover active:bg-indigo-800 text-white font-medium text-sm rounded-lg shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-primary/25 cursor-pointer"
+              >
+                <span>Ingresar</span>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"/>
+                  <path d="m12 5 7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+
+          </form>
+
+          <!-- Enlace inferior de Registro -->
+          <div class="mt-8 pt-6 border-t border-borderDefault text-center">
+            <p class="text-sm text-textMuted">
+              ¿No tenés cuenta? 
+              <a href="#registro" class="font-semibold text-primary hover:text-primary-hover hover:underline transition-colors ml-1">
+                Registrate
+              </a>
+            </p>
+          </div>
+
+          <!-- Selector / Información de Roles para Guía del Usuario -->
+          <div class="mt-8 bg-surfaceMuted border border-borderDefault rounded-xl p-3.5">
+            <p class="text-[11px] font-semibold text-textMuted uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+              Acceso unificado por rol
+            </p>
+            <div class="grid grid-cols-3 gap-2 text-center text-xs">
+              <div class="bg-white border border-borderDefault py-1.5 px-2 rounded-lg text-textColor">
+                <span class="font-medium block text-[12px]">Admin</span>
+                <span class="text-[10px] text-textMuted">Control total</span>
+              </div>
+              <div class="bg-white border border-borderDefault py-1.5 px-2 rounded-lg text-textColor">
+                <span class="font-medium block text-[12px]">Propietario</span>
+                <span class="text-[10px] text-textMuted">Rendiciones</span>
+              </div>
+              <div class="bg-white border border-borderDefault py-1.5 px-2 rounded-lg text-textColor">
+                <span class="font-medium block text-[12px]">Inquilino</span>
+                <span class="text-[10px] text-textMuted">Cuotas y pagos</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer Público Minimalista -->
+  <footer class="w-full py-4 px-6 text-center text-xs text-textMuted border-t border-borderDefault/60 bg-white/60 backdrop-blur-sm">
+    <div class="max-w-[1240px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>© 2026 InmoGestión por Nico Tech. Todos los derechos reservados.</p>
+      <div class="flex items-center gap-4 text-xs">
+        <a href="#terminos" class="hover:text-textColor transition-colors">Términos del servicio</a>
+        <span>•</span>
+        <a href="#privacidad" class="hover:text-textColor transition-colors">Política de privacidad</a>
+        <span>•</span>
+        <a href="#soporte" class="hover:text-textColor transition-colors">Soporte técnico</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

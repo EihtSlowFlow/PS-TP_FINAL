@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InmoGestión - Contratos</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#4F46E5',
+            'primary-hover': '#4338CA',
+            'primary-soft': '#E0E7FF',
+            heading: '#111827',
+            'text-muted': '#6B7280',
+            border: '#E5E7EB',
+            'row-hover': '#F3F4F6',
+            'surface-muted': '#F9FAFB',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/></head>
+<body class="min-h-screen bg-gradient-to-br from-[#F0F4F8] to-[#D9E2EC] text-[#1E293B] antialiased flex">
+<!-- Sidebar fijo 260px -->
+<aside class="fixed left-0 top-0 bottom-0 w-[260px] bg-white border-r border-border z-50 flex flex-col justify-between shadow-sm">
+<div class="flex flex-col">
+<!-- Logo InmoGestión -->
+<div class="h-16 px-5 flex items-center gap-3 border-b border-border">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-sm flex-shrink-0">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+</svg>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-bold text-[17px] text-heading leading-tight tracking-tight">InmoGestión</span>
+<span class="text-[11px] text-text-muted font-medium">Plataforma Inmobiliaria 2026</span>
+</div>
+</div>
+<!-- Navigation links -->
+<nav class="p-3 flex flex-col gap-1 text-[14px]">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Dashboard</span>
+</a>
+<!-- Usuarios -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Usuarios</span>
+</a>
+<!-- Inmuebles -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Inmuebles</span>
+</a>
+<!-- Contratos (ACTIVO) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary-soft text-primary-hover font-semibold transition-colors shadow-xs" href="#">
+<svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Contratos</span>
+</a>
+<!-- Cuotas + Submenú -->
+<div class="flex flex-col">
+<button class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" type="button">
+<div class="flex items-center gap-3">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Cuotas</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-gray-400">expand_more</span>
+</button>
+<div class="pl-9 pr-2 py-1 flex flex-col gap-0.5">
+<a class="px-2.5 py-1.5 rounded-md text-[13px] text-gray-600 hover:bg-gray-100 hover:text-primary font-medium transition-colors" href="#">Emitir cuotas</a>
+<a class="px-2.5 py-1.5 rounded-md text-[13px] text-gray-600 hover:bg-gray-100 hover:text-primary font-medium transition-colors" href="#">Cobranzas</a>
+</div>
+</div>
+<!-- Pagos -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Pagos</span>
+</a>
+<!-- Liquidaciones -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Liquidaciones</span>
+</a>
+<!-- Reportes -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Reportes</span>
+</a>
+</nav>
+</div>
+<!-- Usuario Activo inferior -->
+<div class="p-3 border-t border-border bg-white">
+<div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl border border-gray-200">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-sm">
+            LB
+          </div>
+<div class="flex flex-col min-w-0">
+<span class="text-xs font-semibold text-heading truncate">Laura Benítez</span>
+<span class="text-[11px] text-text-muted truncate">Administradora</span>
+</div>
+</div>
+<button class="text-gray-400 hover:text-red-600 p-1.5 rounded-lg hover:bg-white transition-colors" title="Cerrar Sesión" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</div>
+</aside>
+<!-- Layout Principal -->
+<div class="flex-1 pl-[260px] flex flex-col min-h-screen">
+<!-- Header Superior (64px) -->
+<header class="h-16 bg-white border-b border-border sticky top-0 z-40 px-8 flex items-center justify-between shadow-xs">
+<!-- Breadcrumb -->
+<div class="flex items-center gap-2 text-[14px]">
+<span class="text-text-muted font-medium">InmoGestión</span>
+<span class="text-gray-400">/</span>
+<span class="text-heading font-semibold">Contratos</span>
+</div>
+<!-- Header derecho -->
+<div class="flex items-center gap-6">
+<!-- Fecha -->
+<div class="flex items-center gap-2 text-text-muted text-[13px] font-medium bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200">
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>06/11/2026</span>
+</div>
+<!-- Notificaciones -->
+<div class="relative">
+<button class="p-2 text-gray-500 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<span class="absolute top-1.5 right-1.5 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white">2</span>
+</div>
+<div class="h-6 w-px bg-gray-200"></div>
+<!-- Avatar Admin -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shadow-xs">
+            LB
+          </div>
+<span class="text-[14px] font-medium text-heading">Laura Benítez</span>
+</div>
+</div>
+</header>
+<!-- Contenedor Principal (1440px optimizado) -->
+<main class="flex-1 p-8 max-w-[1400px] w-full mx-auto"><div class="flex flex-col w-full">
+<!-- Navegación y encabezado contextual -->
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-2">
+<a class="inline-flex items-center gap-1.5 text-primary hover:text-primary-hover font-label-md text-label-md transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Volver al listado de contratos</span>
+</a>
+<span class="text-text-muted text-label-sm">·</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary-soft text-primary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+          Paso a paso contractual 2026
+        </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-heading tracking-tight">Nuevo contrato de locación</h1>
+<p class="font-body-md text-body-md text-text-muted max-w-2xl">
+        Completá los datos del acuerdo locativo, calculá automáticamente las liquidaciones y generá el contrato con respaldo legal y cronograma financiero integrado.
+      </p>
+</div>
+<!-- Acciones directas superiores -->
+<div class="flex items-center gap-3 self-start sm:self-center">
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface text-secondary hover:bg-surface-muted shadow-sm font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span>Cancelar</span>
+</button>
+<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-on-primary hover:bg-primary-hover shadow-md font-label-md text-label-md transition-all" form="contractForm" type="submit">
+<span class="material-symbols-outlined text-[18px]">history_edu</span>
+<span>Generar Contrato</span>
+</button>
+</div>
+</div>
+<!-- Alerta informativa de estado catastral -->
+<div class="mb-6 p-4 rounded-xl bg-info-soft flex items-start gap-3 shadow-xs">
+<span class="material-symbols-outlined text-info-text text-[22px] mt-0.5 flex-shrink-0">info</span>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full gap-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-info-text font-semibold">Integración de firma digital y emisión automatizada activada</span>
+<span class="font-body-sm text-body-sm text-info-text opacity-90">
+          La fecha vigente del sistema es <strong class="font-semibold">06/11/2026</strong>. Al generar este acuerdo, el inmueble se bloqueará de forma simultánea para nuevas visitas.
+        </span>
+</div>
+<span class="font-label-sm text-label-sm text-info-text bg-white/60 px-2.5 py-1 rounded-md whitespace-nowrap self-start">
+        Ley de Alquileres · Art. 1204 CCyC
+      </span>
+</div>
+</div>
+<!-- Formulario principal en 2 columnas -->
+<form class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start" id="contractForm">
+<!-- Columna Izquierda (8 cols): Tarjetas numeradas -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- TARJETA 1: Partes intervinientes -->
+<section class="bg-surface rounded-xl p-6 shadow-md relative overflow-hidden">
+<div class="flex items-start gap-4 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-soft text-primary flex items-center justify-center font-headline-sm text-headline-sm flex-shrink-0 shadow-xs">
+            1
+          </div>
+<div class="flex flex-col min-w-0">
+<h2 class="font-headline-sm text-headline-sm text-heading leading-tight">Partes intervinientes</h2>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">
+              Seleccioná el inmueble disponible en cartera y el inquilino titular verificado.
+            </p>
+</div>
+</div>
+<div class="flex flex-col gap-5">
+<!-- Inmueble -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="propertySelect">
+                Inmueble en locación <span class="text-danger">*</span>
+</label>
+<span class="font-label-sm text-label-sm text-text-muted">Solo unidades en estado Disponible</span>
+</div>
+<div class="relative">
+<select class="w-full h-11 pl-11 pr-10 rounded-lg bg-surface-muted text-heading font-body-sm text-body-sm focus:bg-surface focus:outline-none shadow-xs appearance-none transition-all cursor-pointer" id="propertySelect">
+<option selected="" value="roca-1020">Roca 1020, Piso 2 · Oficina (2 amb.) · $ 510.000 / mes · Propietario: Hernán Paz (DNI 30.114.992)</option>
+<option value="belgrano-450">Av. Belgrano 450, 4° B · Departamento (3 amb.) · $ 680.000 / mes · Propietaria: Silvia Méndez</option>
+<option value="mitre-890">Mitre 890 · Local comercial · $ 920.000 / mes · Propietario: Grupo Fiduciario Sur</option>
+</select>
+<span class="material-symbols-outlined absolute left-3.5 top-2.5 text-text-muted text-[20px] pointer-events-none">domain</span>
+<span class="material-symbols-outlined absolute right-3.5 top-2.5 text-text-muted text-[20px] pointer-events-none">unfold_more</span>
+</div>
+<div class="flex items-center justify-between text-label-sm font-label-sm mt-0.5">
+<span class="text-text-muted flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">link</span>
+                El propietario titular se vincula de manera automática según la ficha catastral.
+              </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-success-soft text-success-text font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                Disponible
+              </span>
+</div>
+</div>
+<!-- Inquilino -->
+<div class="flex flex-col gap-1.5 pt-1">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="tenantSelect">
+                Inquilino titular <span class="text-danger">*</span>
+</label>
+<button class="inline-flex items-center gap-1 text-primary hover:text-primary-hover font-label-sm text-label-sm font-medium transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">person_add</span>
+                Registrar nuevo inquilino
+              </button>
+</div>
+<div class="relative">
+<select class="w-full h-11 pl-11 pr-10 rounded-lg bg-surface-muted text-heading font-body-sm text-body-sm focus:bg-surface focus:outline-none shadow-xs appearance-none transition-all cursor-pointer" id="tenantSelect">
+<option selected="" value="camila-rojas">Camila Rojas (DNI 38.412.901) · camila.rojas@gmail.com · Tel: +54 9 11 5821-4402</option>
+<option value="esteban-duarte">Esteban Duarte (DNI 32.784.112) · esteban.d@outlook.com</option>
+<option value="marina-vazquez">Marina Vázquez (DNI 35.619.004) · m.vazquez@estudiojuridico.com.ar</option>
+</select>
+<span class="material-symbols-outlined absolute left-3.5 top-2.5 text-text-muted text-[20px] pointer-events-none">person</span>
+<span class="material-symbols-outlined absolute right-3.5 top-2.5 text-text-muted text-[20px] pointer-events-none">unfold_more</span>
+</div>
+</div>
+<!-- Ficha de validación rápida de partes -->
+<div class="p-4 rounded-xl bg-surface-muted flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mt-2">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-soft text-primary flex items-center justify-center font-bold text-label-sm flex-shrink-0">
+                HP
+              </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-muted">Propietario titular vinculado</span>
+<span class="font-label-md text-label-md text-heading font-semibold truncate">Hernán Paz (DNI 30.114.992)</span>
+</div>
+</div>
+<div class="h-px md:h-8 md:w-px bg-border-input/40"></div>
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-info-soft text-info font-bold text-label-sm flex items-center justify-center flex-shrink-0">
+                CR
+              </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-muted">Inquilina verificada</span>
+<span class="font-label-md text-label-md text-heading font-semibold truncate">Camila Rojas</span>
+</div>
+</div>
+<div class="h-px md:h-8 md:w-px bg-border-input/40"></div>
+<div class="flex items-center gap-2 bg-success-soft px-3 py-2 rounded-lg text-success-text">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold">Garantía aprobada</span>
+<span class="text-[11px] leading-tight opacity-90">Seguro de caución Finaer</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TARJETA 2: Plazo de vigencia -->
+<section class="bg-surface rounded-xl p-6 shadow-md relative overflow-hidden">
+<div class="flex items-start gap-4 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-soft text-primary flex items-center justify-center font-headline-sm text-headline-sm flex-shrink-0 shadow-xs">
+            2
+          </div>
+<div class="flex flex-col min-w-0">
+<h2 class="font-headline-sm text-headline-sm text-heading leading-tight">Plazo de vigencia</h2>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">
+              Definí la fecha de entrega de llaves y el vencimiento del período de locación.
+            </p>
+</div>
+</div>
+<div class="flex flex-col gap-5">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Fecha de inicio -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="startDate">
+                Fecha de inicio del contrato <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 pl-11 pr-4 rounded-lg bg-surface-muted text-heading font-body-sm text-body-sm focus:bg-surface focus:outline-none shadow-xs transition-all" id="startDate" type="text" value="01/12/2026"/>
+<span class="material-symbols-outlined absolute left-3.5 top-2.5 text-text-muted text-[20px] pointer-events-none">calendar_today</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Fecha formal de entrega del inmueble.</span>
+</div>
+<!-- Fecha de fin -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="endDate">
+                Fecha de finalización <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 pl-11 pr-4 rounded-lg bg-surface-muted text-heading font-body-sm text-body-sm focus:bg-surface focus:outline-none shadow-xs transition-all" id="endDate" type="text" value="30/11/2028"/>
+<span class="material-symbols-outlined absolute left-3.5 top-2.5 text-text-muted text-[20px] pointer-events-none">event_available</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Extinción automática del plazo sin prórroga.</span>
+</div>
+</div>
+<!-- Bloque de cálculo de plazo automático -->
+<div class="p-4 rounded-xl bg-surface-container-low flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-info-soft text-info flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">date_range</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-heading font-semibold">Duración pactada: 24 meses</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-soft text-primary font-label-sm text-label-sm font-semibold">2 años completos</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">Primer cobro: Diciembre 2026 · Último período: Noviembre 2028</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 text-info-text font-label-sm text-label-sm bg-white/70 px-3 py-1.5 rounded-lg self-stretch md:self-auto justify-center">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+<span>Cálculo dinámico 100% legal</span>
+</div>
+</div>
+</div>
+</section>
+<!-- TARJETA 3: Condiciones económicas y administrativas -->
+<section class="bg-surface rounded-xl p-6 shadow-md relative overflow-hidden">
+<div class="flex items-start gap-4 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-soft text-primary flex items-center justify-center font-headline-sm text-headline-sm flex-shrink-0 shadow-xs">
+            3
+          </div>
+<div class="flex flex-col min-w-0">
+<h2 class="font-headline-sm text-headline-sm text-heading leading-tight">Condiciones económicas y administrativas</h2>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">
+              Parámetros mensuales de canon locativo, aranceles de administración e intereses por mora.
+            </p>
+</div>
+</div>
+<div class="flex flex-col gap-5">
+<!-- Grilla 2x2 de campos -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- Canon mensual -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="monthlyRentInput">
+                Monto mensual pactado <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<span class="absolute left-3.5 top-2.5 font-label-md text-label-md text-text-muted select-none">$</span>
+<input class="w-full h-11 pl-9 pr-4 rounded-lg bg-surface-muted text-heading font-body-md text-body-md font-semibold tracking-wide focus:bg-surface focus:outline-none shadow-xs transition-all" id="monthlyRentInput" type="text" value="510.000"/>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Canon mensual inicial a liquidar al propietario.</span>
+</div>
+<!-- % Comisión -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="commissionRateInput">
+                % Comisión inmobiliaria <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 pl-4 pr-10 rounded-lg bg-surface-muted text-heading font-body-md text-body-md font-semibold focus:bg-surface focus:outline-none shadow-xs transition-all" id="commissionRateInput" step="0.5" type="number" value="10"/>
+<span class="absolute right-3.5 top-2.5 font-label-md text-label-md text-text-muted select-none">%</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Alícuota estándar por administración de cobranza mensual.</span>
+</div>
+<!-- Día de vencimiento -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="dueDaySelect">
+                Día límite de vencimiento mensual <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-11 pl-4 pr-10 rounded-lg bg-surface-muted text-heading font-body-sm text-body-sm focus:bg-surface focus:outline-none shadow-xs appearance-none transition-all cursor-pointer" id="dueDaySelect">
+<option value="5">Día 5 de cada mes</option>
+<option selected="" value="10">Día 10 de cada mes</option>
+<option value="15">Día 15 de cada mes</option>
+<option value="20">Día 20 de cada mes</option>
+</select>
+<span class="material-symbols-outlined absolute right-3.5 top-2.5 text-text-muted text-[20px] pointer-events-none">unfold_more</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Día del 1 al 28 en que vence la cuota sin recargo.</span>
+</div>
+<!-- Recargo diario por mora -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-heading font-medium flex items-center gap-1" for="lateFeeRateInput">
+                % Recargo diario por mora <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<input class="w-full h-11 pl-4 pr-10 rounded-lg bg-surface-muted text-heading font-body-md text-body-md font-semibold focus:bg-surface focus:outline-none shadow-xs transition-all" id="lateFeeRateInput" type="text" value="0,5"/>
+<span class="absolute right-3.5 top-2.5 font-label-md text-label-md text-text-muted select-none">%</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Aplicable a partir del día siguiente al vencimiento.</span>
+</div>
+</div>
+<!-- Conmutador legal de automatización -->
+<div class="p-4 rounded-xl bg-surface-muted flex items-center justify-between gap-4 mt-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[24px]">receipt_long</span>
+<div class="flex flex-col">
+<label class="font-label-md text-label-md text-heading font-medium cursor-pointer" for="autoBillingToggle">
+                  Habilitar emisión automática de cuotas mensuales
+                </label>
+<span class="font-body-sm text-body-sm text-text-muted">
+                  Se generarán los cupones con código de cobro los días 1° de cada mes con vencimiento al día indicado.
+                </span>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
+<input checked="" class="sr-only peer" id="autoBillingToggle" type="checkbox"/>
+<div class="w-11 h-6 bg-secondary-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Botonera inferior para mobile / pantallas chicas -->
+<div class="flex items-center justify-end gap-3 pt-2">
+<button class="px-5 py-3 rounded-lg bg-surface text-secondary hover:bg-surface-muted font-label-md text-label-md shadow-xs transition-colors" type="button">
+          Cancelar y regresar
+        </button>
+<button class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-on-primary hover:bg-primary-hover shadow-md font-label-md text-label-md font-semibold transition-all" type="submit">
+<span class="material-symbols-outlined text-[20px]">history_edu</span>
+<span>Generar Contrato y Emitir Cronograma</span>
+</button>
+</div>
+</div>
+<!-- Columna Derecha (4 cols): Panel Sticky «Resumen del contrato» -->
+<div class="lg:col-span-4 sticky top-24 flex flex-col gap-5">
+<div class="bg-surface rounded-xl p-6 shadow-xl flex flex-col gap-5">
+<!-- Header del resumen -->
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">analytics</span>
+<h3 class="font-headline-sm text-headline-sm text-heading font-semibold">Resumen en vivo</h3>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-info-soft text-info-text font-label-sm text-label-sm font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-info"></span>
+            Tiempo real
+          </span>
+</div>
+<!-- Ficha compacta de la unidad asignada -->
+<div class="p-3.5 rounded-xl bg-surface-muted flex items-center justify-between gap-3">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-primary text-white flex items-center justify-center flex-shrink-0 shadow-xs">
+<span class="material-symbols-outlined text-[22px]">business</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-heading font-semibold truncate">Roca 1020, Piso 2</span>
+<span class="font-label-sm text-label-sm text-text-muted">Oficina comercial · 2 amb.</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-medium whitespace-nowrap">
+            Disponible
+          </span>
+</div>
+<!-- Visualización financiera detallada -->
+<div class="p-4 rounded-xl bg-surface-container-low flex flex-col gap-3">
+<span class="font-label-sm text-label-sm text-text-muted tracking-wider uppercase font-semibold">Desglose de canon mensual</span>
+<div class="flex items-baseline justify-between">
+<span class="font-body-sm text-body-sm text-heading">Canon locativo bruto</span>
+<span class="font-headline-sm text-headline-sm font-semibold text-heading tabular-nums" id="summaryGross">$ 510.000</span>
+</div>
+<div class="flex items-baseline justify-between text-primary">
+<div class="flex items-center gap-1 font-body-sm text-body-sm">
+<span>Honorarios inmobiliaria (10%)</span>
+</div>
+<span class="font-label-md text-label-md font-semibold tabular-nums" id="summaryFee">- $ 51.000</span>
+</div>
+<!-- Divisor suave con cambio tonal -->
+<div class="h-px bg-border/60 my-1"></div>
+<!-- Neto al propietario -->
+<div class="p-3 rounded-lg bg-success-soft flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-success-text font-medium">Neto a transferir</span>
+<span class="text-[11px] text-success-text opacity-80">Al propietario Hernán Paz</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-headline-sm text-headline-sm font-bold text-success-text tabular-nums" id="summaryNet">$ 459.000</span>
+<span class="font-label-sm text-label-sm text-success-text font-semibold uppercase tracking-wider">A liquidar</span>
+</div>
+</div>
+</div>
+<!-- Parámetros de cobro y penalidades -->
+<div class="flex flex-col gap-2.5">
+<span class="font-label-sm text-label-sm text-text-muted tracking-wider uppercase font-semibold">Términos operativos</span>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-muted font-body-sm text-body-sm">
+<div class="flex items-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[18px]">event</span>
+<span>Vencimiento mensual</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-heading" id="summaryDue">Día 10 de cada mes</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-muted font-body-sm text-body-sm">
+<div class="flex items-center gap-2 text-text-muted">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span>Mora diaria (0,5%)</span>
+</div>
+<span class="font-label-md text-label-md font-semibold text-danger tabular-nums" id="summaryLateFee">$ 2.550 / día</span>
+</div>
+</div>
+<!-- Cláusulas y garantías pactadas -->
+<div class="flex flex-col gap-2 pt-1">
+<span class="font-label-sm text-label-sm text-text-muted tracking-wider uppercase font-semibold">Cláusulas del acuerdo</span>
+<div class="flex flex-col gap-1.5 text-body-sm font-body-sm">
+<div class="flex items-center gap-2 text-heading">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Ajuste ICL cuatrimestral (normativa vigente)</span>
+</div>
+<div class="flex items-center gap-2 text-heading">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Comprobante de pago obligatorio</span>
+</div>
+<div class="flex items-center gap-2 text-heading">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+<span>Depósito en garantía: 1 mes integrado ($ 510.000)</span>
+</div>
+</div>
+</div>
+<!-- Aviso de seguridad y automatización posterior -->
+<div class="p-3 rounded-lg bg-surface-container-high flex items-start gap-2.5">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5 flex-shrink-0">shield</span>
+<p class="font-label-sm text-label-sm text-heading opacity-90 leading-relaxed">
+            Al confirmar, el inmueble <strong>Roca 1020</strong> pasará automáticamente a estado <strong>Alquilado</strong> y se programará el cronograma de 24 cuotas en el módulo de Cuotas &amp; Cobranzas.
+          </p>
+</div>
+</div>
+<!-- Mini resumen del operador activo -->
+<div class="p-3.5 rounded-xl bg-surface/80 shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary text-white font-bold text-label-sm flex items-center justify-center shadow-xs">
+            LB
+          </div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm font-semibold text-heading">Laura Benítez</span>
+<span class="text-[11px] text-text-muted">Operadora certificada</span>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-muted text-text-muted font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+          Sesión segura
+        </span>
+</div>
+</div>
+</form>
+<!-- Script interactivo para cálculo reactivo en vivo -->
+<script>
+    (function() {
+      const rentInput = document.getElementById('monthlyRentInput');
+      const commissionInput = document.getElementById('commissionRateInput');
+      const dueSelect = document.getElementById('dueDaySelect');
+      const lateFeeInput = document.getElementById('lateFeeRateInput');
+
+      const summaryGross = document.getElementById('summaryGross');
+      const summaryFee = document.getElementById('summaryFee');
+      const summaryNet = document.getElementById('summaryNet');
+      const summaryDue = document.getElementById('summaryDue');
+      const summaryLateFee = document.getElementById('summaryLateFee');
+
+      function parseMoney(val) {
+        if (!val) return 0;
+        const cleaned = val.toString().replace(/\./g, '').replace(/,/g, '.');
+        return parseFloat(cleaned) || 0;
+      }
+
+      function formatMoney(amount) {
+        return '$ ' + Math.round(amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      }
+
+      function updateCalculations() {
+        const gross = parseMoney(rentInput.value);
+        const commPct = parseFloat(commissionInput.value) || 0;
+        const latePct = parseFloat((lateFeeInput.value || '').replace(',', '.')) || 0;
+
+        const fee = gross * (commPct / 100);
+        const net = gross - fee;
+        const latePerDay = gross * (latePct / 100);
+
+        if (summaryGross) summaryGross.textContent = formatMoney(gross);
+        if (summaryFee) summaryFee.textContent = '- ' + formatMoney(fee);
+        if (summaryNet) summaryNet.textContent = formatMoney(net);
+        if (summaryDue && dueSelect) summaryDue.textContent = `Día ${dueSelect.value} de cada mes`;
+        if (summaryLateFee) summaryLateFee.textContent = `${formatMoney(latePerDay)} / día`;
+      }
+
+      if (rentInput) rentInput.addEventListener('input', updateCalculations);
+      if (commissionInput) commissionInput.addEventListener('input', updateCalculations);
+      if (dueSelect) dueSelect.addEventListener('change', updateCalculations);
+      if (lateFeeInput) lateFeeInput.addEventListener('input', updateCalculations);
+
+      const form = document.getElementById('contractForm');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const btn = form.querySelector('button[type="submit"]');
+          if (btn) {
+            btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span> Generando acuerdo...';
+            btn.disabled = true;
+            setTimeout(() => {
+              alert('¡Contrato de locación generado con éxito!\n\nInmueble: Roca 1020, Piso 2\nInquilina: Camila Rojas\n24 cuotas programadas en el sistema.');
+              btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">verified</span> Contrato Generado';
+            }, 800);
+          }
+        });
+      }
+    })();
+  </script>
+</div></main>
+</div>
+<!-- Script interactivo de filtrado -->
+<script>
+    (function() {
+      const searchInput = document.getElementById('searchInput');
+      const statusSelect = document.getElementById('statusSelect');
+      const filterBtn = document.getElementById('filterBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const tableBody = document.getElementById('contractsBody');
+      const rangeCount = document.getElementById('rangeCount');
+
+      function filterTable() {
+        if (!tableBody) return;
+        const q = (searchInput?.value || '').toLowerCase().trim();
+        const status = statusSelect?.value || 'todos';
+        const rows = tableBody.querySelectorAll('tr');
+        let count = 0;
+
+        rows.forEach(row => {
+          const rowStatus = row.getAttribute('data-status') || '';
+          const rowSearch = row.getAttribute('data-search') || '';
+          
+          const matchStatus = (status === 'todos') || (rowStatus === status);
+          const matchQuery = !q || rowSearch.includes(q);
+
+          if (matchStatus && matchQuery) {
+            row.style.display = '';
+            count++;
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        if (rangeCount) {
+          rangeCount.textContent = count > 0 ? `1–${count}` : '0';
+        }
+      }
+
+      if (filterBtn) filterBtn.addEventListener('click', filterTable);
+      if (searchInput) searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') filterTable(); });
+      if (statusSelect) statusSelect.addEventListener('change', filterTable);
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (searchInput) searchInput.value = '';
+          if (statusSelect) statusSelect.value = 'todos';
+          filterTable();
+        });
+      }
+    })();
+  </script>
+</body></html>
