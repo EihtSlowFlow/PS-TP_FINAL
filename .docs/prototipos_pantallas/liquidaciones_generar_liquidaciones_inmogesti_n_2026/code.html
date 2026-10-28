@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "tertiary": "#7e3000", "inverse-primary": "#c3c0ff", "info-text": "#1E40AF", "surface-container": "#e6eeff", "inverse-surface": "#27313f", "outline-variant": "#c7c4d8", "secondary-fixed-dim": "#c4c7ca", "danger-hover": "#DC2626", "surface-container-high": "#dee9fc", "surface-container-highest": "#d9e3f6", "surface": "#FFFFFF", "on-secondary": "#ffffff", "surface-bright": "#f8f9ff", "on-tertiary-container": "#ffd2be", "on-background": "#121c2a", "surface-tint": "#4d44e3", "error-container": "#ffdad6", "on-primary-container": "#dad7ff", "heading": "#111827", "border": "#E5E7EB", "on-tertiary-fixed": "#351000", "on-tertiary-fixed-variant": "#7b2f00", "outline": "#777587", "success-text": "#065F46", "surface-container-lowest": "#ffffff", "surface-variant": "#d9e3f6", "on-tertiary": "#ffffff", "surface-muted": "#F9FAFB", "primary-container": "#4f46e5", "primary": "#3525cd", "on-secondary-fixed-variant": "#44474a", "on-primary-fixed": "#0f0069", "on-error-container": "#93000a", "danger-soft": "#FEF2F2", "primary-fixed": "#e2dfff", "tertiary-fixed-dim": "#ffb695", "on-surface-variant": "#464555", "surface-dim": "#d0dbed", "primary-soft": "#E0E7FF", "danger": "#EF4444", "tertiary-container": "#a44100", "on-primary-fixed-variant": "#3323cc", "on-primary": "#ffffff", "secondary-fixed": "#e0e2e6", "background-start": "#F0F4F8", "success-soft": "#ECFDF5", "warning-soft": "#FFFBEB", "success": "#10B981", "warning-text": "#92400E", "on-surface": "#121c2a", "warning": "#F59E0B", "primary-hover": "#4338CA", "tertiary-fixed": "#ffdbcc", "inverse-on-surface": "#eaf1ff", "error": "#ba1a1a", "surface-container-low": "#eff4ff", "primary-fixed-dim": "#c3c0ff", "on-secondary-fixed": "#191c1f", "border-input": "#D1D5DB", "info": "#2563EB", "info-soft": "#DBEAFE", "background": "#f8f9ff", "secondary-container": "#dee0e4", "background-end": "#D9E2EC", "secondary": "#5c5f62", "on-error": "#ffffff", "danger-text": "#B91C1C", "text-muted": "#6B7280", "row-hover": "#F3F4F6", "on-secondary-container": "#606366" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter": "1.5rem", "space-sm": "0.5rem", "space-md": "1rem", "space-xs": "0.25rem", "margin": "2rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "gutter-mobile": "1rem", "space-xl": "2rem" }, "fontFamily": { "body-sm": [ "Inter" ], "label-sm": [ "Inter" ], "headline-lg": [ "Inter" ], "headline-lg-mobile": [ "Inter" ], "metric-display": [ "Inter" ], "body-md": [ "Inter" ], "table-header": [ "Inter" ], "headline-md": [ "Inter" ], "body-lg": [ "Inter" ], "headline-sm": [ "Inter" ], "label-md": [ "Inter" ] }, "fontSize": { "body-sm": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "label-sm": [ "12px", { "lineHeight": "16px", "fontWeight": "500" } ], "headline-lg": [ "28px", { "lineHeight": "36px", "fontWeight": "600" } ], "headline-lg-mobile": [ "22px", { "lineHeight": "28px", "fontWeight": "600" } ], "metric-display": [ "32px", { "lineHeight": "38px", "fontWeight": "600" } ], "body-md": [ "15px", { "lineHeight": "22px", "fontWeight": "400" } ], "table-header": [ "13px", { "lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "500" } ], "headline-md": [ "20px", { "lineHeight": "26px", "fontWeight": "500" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "fontWeight": "500" } ], "label-md": [ "13px", { "lineHeight": "18px", "fontWeight": "500" } ] } } } };</script></head><body class="min-h-screen bg-gradient-to-br from-background-start to-background-end font-body-md text-on-surface antialiased" style='font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;'><aside class="fixed left-0 top-0 h-screen w-[260px] bg-surface shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0"><span class="material-symbols-outlined text-on-primary text-[22px]">home_work</span></div><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm font-semibold text-heading leading-tight truncate">InmoGestión</span><span class="font-label-sm text-label-sm text-text-muted truncate">Plataforma Inmobiliaria 2026</span></div></div><div class="px-space-md py-space-sm"><nav class="flex flex-col gap-1" data-active-classes="bg-primary-soft text-primary-hover font-semibold"><a class="flex items-center px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-body-sm text-body-sm transition-colors" data-path="dashboard" href="#">Dashboard</a><a class="flex items-center px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-body-sm text-body-sm transition-colors" data-path="usuarios" href="#">Usuarios</a><a class="flex items-center px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-body-sm text-body-sm transition-colors" data-path="inmuebles" href="#">Inmuebles</a><a class="flex items-center px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-body-sm text-body-sm transition-colors" data-path="contratos" href="#">Contratos</a><div class="flex flex-col"><button class="flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors text-left" type="button"><span class="font-body-sm text-body-sm">Cuotas</span><span class="material-symbols-outlined text-[16px] text-text-muted">expand_more</span></button><div class="flex flex-col pl-4 pr-2 py-1 gap-1"><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" data-path="emitir-cuotas" href="#">Emitir cuotas</a><a class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors" data-path="cobranzas" href="#">Cobranzas</a></div></div><a class="flex items-center px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-body-sm text-body-sm transition-colors" data-path="pagos" href="#">Pagos</a><a class="flex items-center px-3 py-2.5 rounded-lg bg-primary-soft text-primary-hover font-semibold font-body-sm text-body-sm transition-colors" data-path="liquidaciones" href="#">Liquidaciones</a><a class="flex items-center px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface font-body-sm text-body-sm transition-colors" data-path="reportes" href="#">Reportes</a></nav></div></div><div class="p-space-md m-space-md rounded-xl bg-surface-muted shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-3 mb-3"><div class="w-9 h-9 rounded-full bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center font-bold tracking-tight shrink-0">LB</div><div class="flex flex-col min-w-0"><span class="font-body-sm text-body-sm font-semibold text-heading truncate">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted truncate">Administradora</span></div></div><a class="flex items-center justify-center gap-2 w-full py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-label-sm text-label-sm transition-colors" data-path="login" href="#">Cerrar Sesión</a></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-xl"><div class="flex items-center gap-2 text-text-muted font-body-sm text-body-sm"><span class="text-on-surface-variant font-medium">InmoGestión</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-on-surface-variant font-medium">Liquidaciones</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-heading font-semibold">Generar liquidaciones</span></div><div class="flex items-center gap-space-lg"><div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-muted text-secondary font-label-md text-label-md"><span class="material-symbols-outlined text-[16px]">calendar_today</span><span class="">06/11/2026</span></div><button aria-label="Notificaciones" class="relative w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-muted hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-danger text-on-error font-label-sm text-[10px] leading-tight font-bold flex items-center justify-center">2</span></button><div class="flex items-center gap-3 pl-2"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="flex flex-col"><span class="font-label-md text-label-md font-semibold text-heading leading-tight">Laura Benítez</span><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-success inline-block"></span><span class="font-label-sm text-[11px] text-text-muted leading-tight">Online</span></div></div></div></div></div></header><main class="w-full pt-16"><div class="flex flex-col w-full">
+<div class="max-w-[1200px] w-full mx-auto px-space-md lg:px-space-xl py-space-lg flex flex-col gap-6">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div class="flex flex-col">
+<h1 class="font-headline-lg text-headline-lg text-heading">Generar liquidaciones</h1>
+<p class="font-body-md text-body-md text-text-muted mt-0.5">Cuotas cobradas pendientes de liquidar a propietarios</p>
+</div>
+<div class="flex items-center gap-3 self-start md:self-auto">
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface text-secondary hover:bg-surface-container-high transition-colors font-label-md text-label-md shadow-sm" style="box-shadow: 0 1px 3px rgba(0,0,0,0.06);" type="button">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>Historial de liquidaciones</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface text-secondary hover:bg-surface-container-high transition-colors font-label-md text-label-md shadow-sm" style="box-shadow: 0 1px 3px rgba(0,0,0,0.06);" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Exportar vista previa (CSV)</span>
+</button>
+</div>
+</div>
+<!-- Informative Alert Banner with 4px left accent -->
+<div class="relative overflow-hidden rounded-xl bg-info-soft/30 p-4 shadow-sm" style="box-shadow: 0 2px 8px -2px rgba(37,99,235,0.08);">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-info"></div>
+<div class="flex items-start gap-3.5 pl-2">
+<div class="w-8 h-8 rounded-full bg-info/10 text-info flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</div>
+<div class="flex flex-col flex-1 min-w-0 text-on-surface">
+<p class="font-label-md text-label-md font-semibold text-info-text">
+            Las cuotas vencidas, en revisión o con pago rechazado no se pueden liquidar hasta que el pago sea aprobado.
+          </p>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">
+            Solo se exhiben cuotas con cobro efectivamente acreditado e imputado en el sistema al <span class="font-semibold text-heading">06/11/2026</span>. Cada liquidación emitida deducirá automáticamente la comisión pactada por contrato.
+          </p>
+</div>
+</div>
+</div>
+<!-- Calculation Rule & KPI Cards Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+<!-- Formula & Calculation Card -->
+<div class="lg:col-span-4 bg-surface rounded-xl p-5 shadow-sm flex flex-col justify-between" style="box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.06);">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-muted">Cálculo Reglamentario</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-text-muted">calculate</span>
+</div>
+<div class="bg-surface-muted rounded-lg p-3.5 my-2">
+<span class="font-label-sm text-[11px] uppercase tracking-wider text-text-muted block mb-1">Fórmula Legal Vigente</span>
+<div class="font-label-md text-label-md font-semibold text-heading flex items-center gap-1.5 flex-wrap">
+<span class="text-success-text bg-success-soft px-1.5 py-0.5 rounded">Neto</span>
+<span class="text-text-muted">=</span>
+<span class="text-primary-hover bg-primary-soft px-1.5 py-0.5 rounded">Bruto</span>
+<span class="text-text-muted">−</span>
+<span class="text-warning-text bg-warning-soft px-1.5 py-0.5 rounded">(Bruto × % Comisión)</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 text-text-muted font-body-sm text-body-sm">
+<span>Tasa retención promedio:</span>
+<span class="font-semibold text-heading">8.42%</span>
+</div>
+</div>
+<!-- Quick KPI Strip -->
+<div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+<!-- KPI 1 -->
+<div class="bg-surface rounded-xl p-5 shadow-sm flex flex-col justify-between" style="box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.06);">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Cuotas Aptas</span>
+<div class="w-9 h-9 rounded-full bg-primary-soft text-primary-hover flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+</div>
+</div>
+<div class="mt-1">
+<div class="font-metric-display text-metric-display text-heading">3</div>
+<div class="flex items-center gap-1.5 mt-1 font-label-sm text-label-sm text-success-text">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+<span>100% seleccionadas</span>
+</div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface rounded-xl p-5 shadow-sm flex flex-col justify-between" style="box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.06);">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Bruto Cobrado</span>
+<div class="w-9 h-9 rounded-full bg-info-soft text-info-text flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+</div>
+</div>
+<div class="mt-1">
+<div class="font-headline-lg text-headline-lg font-bold text-heading tracking-tight">$ 1.980.000</div>
+<div class="font-label-sm text-label-sm text-text-muted mt-1 truncate">
+              1 propietario receptor (Sosa)
+            </div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface rounded-xl p-5 shadow-sm flex flex-col justify-between" style="box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.06);">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Comisión a Retener</span>
+<div class="w-9 h-9 rounded-full bg-warning-soft text-warning-text flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">price_check</span>
+</div>
+</div>
+<div class="mt-1">
+<div class="font-headline-lg text-headline-lg font-bold text-warning-text tracking-tight">$ 166.800</div>
+<div class="font-label-sm text-label-sm text-text-muted mt-1">
+              Ingreso neto agencia
+            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Filters & Selection Toolbar -->
+<div class="bg-surface rounded-xl p-4 shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4" style="box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.06);">
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 flex-1 max-w-2xl">
+<!-- Search bar -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
+<input class="w-full h-11 pl-10 pr-4 rounded-lg bg-surface-muted text-on-surface font-body-sm text-body-sm focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all placeholder:text-text-muted" placeholder="Buscar por propietario, DNI o inmueble..." type="text" value="Ricardo Sosa"/>
+</div>
+<!-- Owner Select Dropdown -->
+<div class="relative min-w-[240px]">
+<select class="w-full h-11 pl-3 pr-9 rounded-lg bg-surface-muted text-heading font-label-md text-label-md appearance-none focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary-container/20 cursor-pointer">
+<option selected="" value="sosa">Ricardo Sosa (3 cuotas)</option>
+<option value="all">Todos los propietarios (1)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">unfold_more</span>
+</div>
+</div>
+<!-- Multi-select trigger & Quick Actions -->
+<div class="flex items-center justify-between sm:justify-end gap-3 pt-2 md:pt-0">
+<label class="inline-flex items-center gap-2 cursor-pointer select-none px-3 py-2 rounded-lg hover:bg-surface-muted transition-colors">
+<input checked="" class="w-4 h-4 rounded text-primary-container accent-primary-container cursor-pointer" id="selectAllMaster" type="checkbox"/>
+<span class="font-label-md text-label-md font-semibold text-heading">Seleccionar todas (3 de 3)</span>
+</label>
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-hover font-semibold transition-colors px-2 py-1" id="btnToggleAll" type="button">
+          Deseleccionar todo
+        </button>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="bg-surface rounded-xl shadow-sm overflow-hidden" style="box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-muted text-text-muted font-table-header text-table-header uppercase tracking-wider">
+<th class="py-3.5 pl-6 pr-3 w-12 text-center" scope="col">
+<span class="sr-only">Selección</span>
+</th>
+<th class="py-3.5 px-4" scope="col">Propietario / Datos de Pago</th>
+<th class="py-3.5 px-4" scope="col">Inmueble</th>
+<th class="py-3.5 px-4" scope="col">Período</th>
+<th class="py-3.5 px-4 text-right" scope="col">Bruto Cobrado</th>
+<th class="py-3.5 px-3 text-center" scope="col">% Com.</th>
+<th class="py-3.5 px-4 text-right" scope="col">Comisión ($)</th>
+<th class="py-3.5 px-4 text-right" scope="col">Neto a Liquidar</th>
+<th class="py-3.5 px-4 text-center" scope="col">Estado Cobro</th>
+<th class="py-3.5 pl-4 pr-6 text-center" scope="col">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface font-body-sm text-body-sm" id="quotaTableBody">
+<!-- Row 1 -->
+<tr class="hover:bg-row-hover/80 transition-colors bg-primary-soft/10">
+<td class="py-4 pl-6 pr-3 text-center align-middle">
+<input checked="" class="quota-checkbox w-4 h-4 rounded text-primary-container accent-primary-container cursor-pointer" data-bruto="420000" data-comision="42000" data-neto="378000" type="checkbox"/>
+</td>
+<td class="py-4 px-4 align-middle">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-semibold text-heading">Ricardo Sosa</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-muted text-[11px] font-medium text-text-muted">Titular</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5">DNI 14.892.310 · Banco Galicia CBU ...4918</span>
+</div>
+</td>
+<td class="py-4 px-4 align-middle">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-heading">Belgrano 1250</span>
+<span class="font-label-sm text-label-sm text-text-muted">Depto · 3 amb. Piso 4 B</span>
+</div>
+</td>
+<td class="py-4 px-4 align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-muted text-on-surface-variant font-label-md text-label-md font-medium">
+<span class="material-symbols-outlined text-[14px] text-text-muted">event</span>
+                  Octubre 2026
+                </span>
+</td>
+<td class="py-4 px-4 align-middle text-right font-medium text-heading tabular-nums whitespace-nowrap">
+                $ 420.000
+              </td>
+<td class="py-4 px-3 align-middle text-center">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-muted font-label-md text-label-md text-on-surface-variant font-semibold">10%</span>
+</td>
+<td class="py-4 px-4 align-middle text-right text-warning-text font-medium tabular-nums whitespace-nowrap">
+                $ 42.000
+              </td>
+<td class="py-4 px-4 align-middle text-right font-semibold text-heading tabular-nums whitespace-nowrap">
+                $ 378.000
+              </td>
+<td class="py-4 px-4 align-middle text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                  Pago Aprobado (08/10)
+                </span>
+</td>
+<td class="py-4 pl-4 pr-6 align-middle text-center whitespace-nowrap">
+<button class="inline-flex items-center justify-center p-2 rounded-lg text-secondary hover:text-primary-hover hover:bg-surface-container-high transition-colors" title="Ver recibo de cobro" type="button">
+<span class="material-symbols-outlined text-[19px]">receipt_long</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-row-hover/80 transition-colors bg-primary-soft/10">
+<td class="py-4 pl-6 pr-3 text-center align-middle">
+<input checked="" class="quota-checkbox w-4 h-4 rounded text-primary-container accent-primary-container cursor-pointer" data-bruto="780000" data-comision="62400" data-neto="717600" type="checkbox"/>
+</td>
+<td class="py-4 px-4 align-middle">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-semibold text-heading">Ricardo Sosa</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-muted text-[11px] font-medium text-text-muted">Titular</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5">DNI 14.892.310 · Banco Galicia CBU ...4918</span>
+</div>
+</td>
+<td class="py-4 px-4 align-middle">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-heading">San Martín 322</span>
+<span class="font-label-sm text-label-sm text-text-muted">Local comercial · Salón PB</span>
+</div>
+</td>
+<td class="py-4 px-4 align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-muted text-on-surface-variant font-label-md text-label-md font-medium">
+<span class="material-symbols-outlined text-[14px] text-text-muted">event</span>
+                  Octubre 2026
+                </span>
+</td>
+<td class="py-4 px-4 align-middle text-right font-medium text-heading tabular-nums whitespace-nowrap">
+                $ 780.000
+              </td>
+<td class="py-4 px-3 align-middle text-center">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-muted font-label-md text-label-md text-on-surface-variant font-semibold">8%</span>
+</td>
+<td class="py-4 px-4 align-middle text-right text-warning-text font-medium tabular-nums whitespace-nowrap">
+                $ 62.400
+              </td>
+<td class="py-4 px-4 align-middle text-right font-semibold text-heading tabular-nums whitespace-nowrap">
+                $ 717.600
+              </td>
+<td class="py-4 px-4 align-middle text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                  Pago Aprobado (15/10)
+                </span>
+</td>
+<td class="py-4 pl-4 pr-6 align-middle text-center whitespace-nowrap">
+<button class="inline-flex items-center justify-center p-2 rounded-lg text-secondary hover:text-primary-hover hover:bg-surface-container-high transition-colors" title="Ver recibo de cobro" type="button">
+<span class="material-symbols-outlined text-[19px]">receipt_long</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-row-hover/80 transition-colors bg-primary-soft/10">
+<td class="py-4 pl-6 pr-3 text-center align-middle">
+<input checked="" class="quota-checkbox w-4 h-4 rounded text-primary-container accent-primary-container cursor-pointer" data-bruto="780000" data-comision="62400" data-neto="717600" type="checkbox"/>
+</td>
+<td class="py-4 px-4 align-middle">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md font-semibold text-heading">Ricardo Sosa</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-muted text-[11px] font-medium text-text-muted">Titular</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5">DNI 14.892.310 · Banco Galicia CBU ...4918</span>
+</div>
+</td>
+<td class="py-4 px-4 align-middle">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-medium text-heading">San Martín 322</span>
+<span class="font-label-sm text-label-sm text-text-muted">Local comercial · Salón PB</span>
+</div>
+</td>
+<td class="py-4 px-4 align-middle">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-primary-soft text-primary-hover font-label-md text-label-md font-medium">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                  Noviembre 2026
+                </span>
+</td>
+<td class="py-4 px-4 align-middle text-right font-medium text-heading tabular-nums whitespace-nowrap">
+                $ 780.000
+              </td>
+<td class="py-4 px-3 align-middle text-center">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-muted font-label-md text-label-md text-on-surface-variant font-semibold">8%</span>
+</td>
+<td class="py-4 px-4 align-middle text-right text-warning-text font-medium tabular-nums whitespace-nowrap">
+                $ 62.400
+              </td>
+<td class="py-4 px-4 align-middle text-right font-semibold text-heading tabular-nums whitespace-nowrap">
+                $ 717.600
+              </td>
+<td class="py-4 px-4 align-middle text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                  Pago Aprobado (05/11)
+                </span>
+</td>
+<td class="py-4 pl-4 pr-6 align-middle text-center whitespace-nowrap">
+<button class="inline-flex items-center justify-center p-2 rounded-lg text-secondary hover:text-primary-hover hover:bg-surface-container-high transition-colors" title="Ver recibo de cobro" type="button">
+<span class="material-symbols-outlined text-[19px]">receipt_long</span>
+</button>
+</td>
+</tr>
+</tbody>
+<!-- Pinned Subtotal Table Row -->
+<tfoot>
+<tr class="bg-surface-muted/90 font-semibold text-heading">
+<td class="py-4 pl-6 pr-3 text-center align-middle">
+<span class="material-symbols-outlined text-[18px] text-text-muted">functions</span>
+</td>
+<td class="py-4 px-4 align-middle" colspan="3">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md uppercase tracking-wider text-text-muted">Totales de la selección</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-soft text-primary-hover font-label-sm text-[11px] font-bold" id="footerBadgeCount">3 cuotas</span>
+</div>
+</td>
+<td class="py-4 px-4 align-middle text-right tabular-nums whitespace-nowrap">
+<span class="text-text-muted text-[11px] uppercase block tracking-wider font-normal">Bruto acumulado</span>
+<span class="text-[15px] font-bold text-heading" id="footerBruto">$ 1.980.000</span>
+</td>
+<td class="py-4 px-3 align-middle text-center text-text-muted font-normal text-label-sm">
+                —
+              </td>
+<td class="py-4 px-4 align-middle text-right tabular-nums whitespace-nowrap">
+<span class="text-text-muted text-[11px] uppercase block tracking-wider font-normal">Retención total</span>
+<span class="text-[15px] font-bold text-warning-text" id="footerComision">$ 166.800</span>
+</td>
+<td class="py-4 px-4 align-middle text-right tabular-nums whitespace-nowrap">
+<span class="text-text-muted text-[11px] uppercase block tracking-wider font-normal">Neto a transferir</span>
+<span class="text-[16px] font-bold text-heading" id="footerNeto">$ 1.813.200</span>
+</td>
+<td class="py-4 pr-6 pl-4 text-right" colspan="2">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-text-muted">
+<span class="material-symbols-outlined text-[16px] text-success">verified</span>
+                  Verificadas p/ emisión
+                </span>
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+<!-- Settlement Flow Details & Verification Note -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 pb-24">
+<div class="p-4 rounded-xl bg-surface shadow-sm flex items-start gap-3" style="box-shadow: 0 4px 20px -5px rgba(0,0,0,0.04);">
+<div class="w-8 h-8 rounded-lg bg-primary-soft text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-heading">Acreditación Bancaria</span>
+<span class="font-body-sm text-body-sm text-text-muted mt-0.5">Se emitirá comprobante oficial de liquidación y orden de transferencia inmediata al CBU registrado.</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface shadow-sm flex items-start gap-3" style="box-shadow: 0 4px 20px -5px rgba(0,0,0,0.04);">
+<div class="w-8 h-8 rounded-lg bg-success-soft text-success-text flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-heading">Notificación Automática</span>
+<span class="font-body-sm text-body-sm text-text-muted mt-0.5">El propietario recibirá el detalle discriminado con desglose de honorarios en su casilla de correo.</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface shadow-sm flex items-start gap-3" style="box-shadow: 0 4px 20px -5px rgba(0,0,0,0.04);">
+<div class="w-8 h-8 rounded-lg bg-warning-soft text-warning-text flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-heading">Cierre de Período</span>
+<span class="font-body-sm text-body-sm text-text-muted mt-0.5">Las cuotas seleccionadas pasarán a estado 'Liquidada', bloqueando modificaciones posteriores.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom Summary Bar -->
+<aside aria-label="Resumen de liquidación" class="sticky bottom-0 z-30 w-full bg-surface shadow-[0_-4px_25px_-2px_rgba(0,0,0,0.1)]">
+<div class="max-w-[1200px] mx-auto px-space-md lg:px-space-xl py-3.5 flex flex-col md:flex-row items-center justify-between gap-4">
+<!-- Metrics Left / Center -->
+<div class="flex flex-wrap items-center gap-4 lg:gap-8 w-full md:w-auto justify-between md:justify-start">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-soft text-primary-hover font-label-md text-label-md font-bold" id="stickyBadge">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span id="stickyCount">3 seleccionadas</span>
+</span>
+</div>
+<div class="hidden sm:flex flex-col">
+<span class="font-label-sm text-[11px] uppercase tracking-wider text-text-muted">Bruto</span>
+<span class="font-label-md text-label-md font-semibold text-heading tabular-nums" id="stickyBruto">$ 1.980.000</span>
+</div>
+<div class="hidden sm:flex flex-col">
+<span class="font-label-sm text-[11px] uppercase tracking-wider text-text-muted">Comisión</span>
+<span class="font-label-md text-label-md font-semibold text-warning-text tabular-nums" id="stickyComision">$ 166.800</span>
+</div>
+<div class="flex flex-col pl-1 md:pl-4">
+<span class="font-label-sm text-[11px] uppercase tracking-wider text-text-muted font-medium">Neto a Liquidar</span>
+<span class="font-headline-md text-headline-md font-bold text-success-text tabular-nums tracking-tight" id="stickyNeto">
+            $ 1.813.200
+          </span>
+</div>
+</div>
+<!-- Actions Right -->
+<div class="flex items-center gap-3 w-full md:w-auto justify-end">
+<button class="px-4 py-2.5 rounded-lg bg-surface text-secondary hover:bg-surface-container-high transition-colors font-label-md text-label-md" id="btnCancelSelection" type="button">
+          Cancelar selección
+        </button>
+<button class="inline-flex items-center justify-center gap-2.5 px-6 py-2.5 rounded-lg bg-primary-container hover:bg-primary-hover text-on-primary font-label-md text-label-md font-semibold transition-all shadow-md hover:shadow-lg active:scale-[0.99]" id="btnGenerateSettlement" style="box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.35);" type="button">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span>Generar liquidaciones</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Interactive JavaScript for Calculations & State -->
+<script>
+    (function() {
+      const selectAllMaster = document.getElementById('selectAllMaster');
+      const toggleAllBtn = document.getElementById('btnToggleAll');
+      const cancelBtn = document.getElementById('btnCancelSelection');
+      const checkboxes = document.querySelectorAll('.quota-checkbox');
+      const generateBtn = document.getElementById('btnGenerateSettlement');
+
+      const footerBadgeCount = document.getElementById('footerBadgeCount');
+      const footerBruto = document.getElementById('footerBruto');
+      const footerComision = document.getElementById('footerComision');
+      const footerNeto = document.getElementById('footerNeto');
+
+      const stickyCount = document.getElementById('stickyCount');
+      const stickyBruto = document.getElementById('stickyBruto');
+      const stickyComision = document.getElementById('stickyComision');
+      const stickyNeto = document.getElementById('stickyNeto');
+
+      function formatARS(num) {
+        return '$ ' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      }
+
+      function updateTotals() {
+        let totalBruto = 0;
+        let totalComision = 0;
+        let totalNeto = 0;
+        let count = 0;
+
+        checkboxes.forEach(cb => {
+          const row = cb.closest('tr');
+          if (cb.checked) {
+            count++;
+            totalBruto += parseFloat(cb.dataset.bruto || 0);
+            totalComision += parseFloat(cb.dataset.comision || 0);
+            totalNeto += parseFloat(cb.dataset.neto || 0);
+            row.classList.add('bg-primary-soft/10');
+          } else {
+            row.classList.remove('bg-primary-soft/10');
+          }
+        });
+
+        // Update footer totals
+        footerBadgeCount.textContent = count + (count === 1 ? ' cuota' : ' cuotas');
+        footerBruto.textContent = formatARS(totalBruto);
+        footerComision.textContent = formatARS(totalComision);
+        footerNeto.textContent = formatARS(totalNeto);
+
+        // Update sticky bar
+        stickyCount.textContent = count + ' seleccionada' + (count === 1 ? '' : 's');
+        stickyBruto.textContent = formatARS(totalBruto);
+        stickyComision.textContent = formatARS(totalComision);
+        stickyNeto.textContent = formatARS(totalNeto);
+
+        // Update master checkbox state
+        if (selectAllMaster) {
+          selectAllMaster.checked = count === checkboxes.length;
+          selectAllMaster.indeterminate = count > 0 && count < checkboxes.length;
+        }
+
+        if (toggleAllBtn) {
+          toggleAllBtn.textContent = count === checkboxes.length ? 'Deseleccionar todo' : 'Seleccionar todo';
+        }
+
+        // Enable or disable generate action
+        if (generateBtn) {
+          if (count === 0) {
+            generateBtn.disabled = true;
+            generateBtn.classList.add('opacity-50', 'pointer-events-none');
+          } else {
+            generateBtn.disabled = false;
+            generateBtn.classList.remove('opacity-50', 'pointer-events-none');
+          }
+        }
+      }
+
+      // Checkbox click handlers
+      checkboxes.forEach(cb => {
+        cb.addEventListener('change', updateTotals);
+      });
+
+      // Master checkbox change
+      if (selectAllMaster) {
+        selectAllMaster.addEventListener('change', function() {
+          const targetState = this.checked;
+          checkboxes.forEach(cb => { cb.checked = targetState; });
+          updateTotals();
+        });
+      }
+
+      // Toggle button
+      if (toggleAllBtn) {
+        toggleAllBtn.addEventListener('click', function() {
+          const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+          checkboxes.forEach(cb => { cb.checked = !allChecked; });
+          updateTotals();
+        });
+      }
+
+      // Cancel button
+      if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+          checkboxes.forEach(cb => { cb.checked = false; });
+          updateTotals();
+        });
+      }
+
+      // Generate action feedback
+      if (generateBtn) {
+        generateBtn.addEventListener('click', function() {
+          const selectedRows = Array.from(checkboxes).filter(cb => cb.checked).length;
+          if (selectedRows > 0) {
+            this.innerHTML = '<span class="material-symbols-outlined text-[20px] animate-spin">progress_activity</span><span>Procesando...</span>';
+            setTimeout(() => {
+              this.innerHTML = '<span class="material-symbols-outlined text-[20px]">check</span><span>¡Liquidaciones emitidas!</span>';
+              this.classList.remove('bg-primary-container', 'hover:bg-primary-hover');
+              this.classList.add('bg-success');
+            }, 1200);
+          }
+        });
+      }
+
+      // Initial calculation
+      updateTotals();
+    })();
+  </script>
+</div></main></div>
+</body></html>

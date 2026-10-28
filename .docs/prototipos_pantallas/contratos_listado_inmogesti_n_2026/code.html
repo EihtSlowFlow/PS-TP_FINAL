@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InmoGestión - Contratos</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: '#4F46E5',
+            'primary-hover': '#4338CA',
+            'primary-soft': '#E0E7FF',
+            heading: '#111827',
+            'text-muted': '#6B7280',
+            border: '#E5E7EB',
+            'row-hover': '#F3F4F6',
+            'surface-muted': '#F9FAFB',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-[#F0F4F8] to-[#D9E2EC] text-[#1E293B] antialiased flex">
+<!-- Sidebar fijo 260px -->
+<aside class="fixed left-0 top-0 bottom-0 w-[260px] bg-white border-r border-border z-50 flex flex-col justify-between shadow-sm">
+<div class="flex flex-col">
+<!-- Logo InmoGestión -->
+<div class="h-16 px-5 flex items-center gap-3 border-b border-border">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-sm flex-shrink-0">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+</svg>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-bold text-[17px] text-heading leading-tight tracking-tight">InmoGestión</span>
+<span class="text-[11px] text-text-muted font-medium">Plataforma Inmobiliaria 2026</span>
+</div>
+</div>
+<!-- Navigation links -->
+<nav class="p-3 flex flex-col gap-1 text-[14px]">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Dashboard</span>
+</a>
+<!-- Usuarios -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Usuarios</span>
+</a>
+<!-- Inmuebles -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Inmuebles</span>
+</a>
+<!-- Contratos (ACTIVO) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary-soft text-primary-hover font-semibold transition-colors shadow-xs" href="#">
+<svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Contratos</span>
+</a>
+<!-- Cuotas + Submenú -->
+<div class="flex flex-col">
+<button class="flex items-center justify-between w-full px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" type="button">
+<div class="flex items-center gap-3">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Cuotas</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-gray-400">expand_more</span>
+</button>
+<div class="pl-9 pr-2 py-1 flex flex-col gap-0.5">
+<a class="px-2.5 py-1.5 rounded-md text-[13px] text-gray-600 hover:bg-gray-100 hover:text-primary font-medium transition-colors" href="#">Emitir cuotas</a>
+<a class="px-2.5 py-1.5 rounded-md text-[13px] text-gray-600 hover:bg-gray-100 hover:text-primary font-medium transition-colors" href="#">Cobranzas</a>
+</div>
+</div>
+<!-- Pagos -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Pagos</span>
+</a>
+<!-- Liquidaciones -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Liquidaciones</span>
+</a>
+<!-- Reportes -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-gray-900 transition-colors font-medium" href="#">
+<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Reportes</span>
+</a>
+</nav>
+</div>
+<!-- Usuario Activo inferior -->
+<div class="p-3 border-t border-border bg-white">
+<div class="flex items-center justify-between p-2.5 bg-gray-50 rounded-xl border border-gray-200">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-sm">
+            LB
+          </div>
+<div class="flex flex-col min-w-0">
+<span class="text-xs font-semibold text-heading truncate">Laura Benítez</span>
+<span class="text-[11px] text-text-muted truncate">Administradora</span>
+</div>
+</div>
+<button class="text-gray-400 hover:text-red-600 p-1.5 rounded-lg hover:bg-white transition-colors" title="Cerrar Sesión" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</div>
+</aside>
+<!-- Layout Principal -->
+<div class="flex-1 pl-[260px] flex flex-col min-h-screen">
+<!-- Header Superior (64px) -->
+<header class="h-16 bg-white border-b border-border sticky top-0 z-40 px-8 flex items-center justify-between shadow-xs">
+<!-- Breadcrumb -->
+<div class="flex items-center gap-2 text-[14px]">
+<span class="text-text-muted font-medium">InmoGestión</span>
+<span class="text-gray-400">/</span>
+<span class="text-heading font-semibold">Contratos</span>
+</div>
+<!-- Header derecho -->
+<div class="flex items-center gap-6">
+<!-- Fecha -->
+<div class="flex items-center gap-2 text-text-muted text-[13px] font-medium bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200">
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>06/11/2026</span>
+</div>
+<!-- Notificaciones -->
+<div class="relative">
+<button class="p-2 text-gray-500 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<span class="absolute top-1.5 right-1.5 w-4 h-4 bg-red-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white">2</span>
+</div>
+<div class="h-6 w-px bg-gray-200"></div>
+<!-- Avatar Admin -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs shadow-xs">
+            LB
+          </div>
+<span class="text-[14px] font-medium text-heading">Laura Benítez</span>
+</div>
+</div>
+</header>
+<!-- Contenedor Principal (1440px optimizado) -->
+<main class="flex-1 p-8 max-w-[1400px] w-full mx-auto">
+<!-- Encabezado de Página -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+<div>
+<div class="flex items-center gap-3">
+<h1 class="text-2xl font-bold text-heading tracking-tight">Contratos</h1>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary-soft text-primary-hover">
+              6 contratos registrados · 4 vigentes
+            </span>
+</div>
+<p class="text-sm text-text-muted mt-1">
+            Gestión de contratos de locación, seguimiento de vigencias y alícuotas de comisión administrativa.
+          </p>
+</div>
+<!-- Botón + Nuevo Contrato -->
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-semibold shadow-sm transition-all focus:ring-2 focus:ring-primary focus:ring-offset-2" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Nuevo contrato</span>
+</button>
+</div>
+<!-- Tarjetas KPI (3 Tarjetas) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+<!-- KPI 1: Vigentes -->
+<div class="bg-white rounded-xl border border-border p-5 shadow-sm flex items-start justify-between">
+<div>
+<span class="text-xs font-semibold uppercase tracking-wider text-text-muted">Vigentes</span>
+<div class="flex items-baseline gap-2.5 mt-2">
+<span class="text-3xl font-bold text-heading">4</span>
+<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                66.7% activo
+              </span>
+</div>
+<p class="text-xs text-text-muted mt-2">Locaciones en curso</p>
+</div>
+<div class="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 flex-shrink-0">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- KPI 2: Próximos a vencer -->
+<div class="bg-white rounded-xl border border-border p-5 shadow-sm flex items-start justify-between">
+<div>
+<span class="text-xs font-semibold uppercase tracking-wider text-text-muted">Próximos a vencer</span>
+<div class="flex items-baseline gap-2.5 mt-2">
+<span class="text-3xl font-bold text-heading">2</span>
+<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
+                Atención
+              </span>
+</div>
+<p class="text-xs text-text-muted mt-2">Vencen en menos de 60 días</p>
+</div>
+<div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100 flex-shrink-0">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+<!-- KPI 3: Finalizados / Rescindidos -->
+<div class="bg-white rounded-xl border border-border p-5 shadow-sm flex items-start justify-between">
+<div>
+<span class="text-xs font-semibold uppercase tracking-wider text-text-muted">Finalizados / Rescindidos</span>
+<div class="flex items-baseline gap-2.5 mt-2">
+<span class="text-3xl font-bold text-heading">2</span>
+<span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200">
+                Histórico
+              </span>
+</div>
+<p class="text-xs text-text-muted mt-2">1 finalizado · 1 rescindido</p>
+</div>
+<div class="w-11 h-11 rounded-xl bg-gray-100 text-gray-600 flex items-center justify-center border border-gray-200 flex-shrink-0">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Barra de Filtros -->
+<div class="bg-white rounded-xl border border-border p-4 shadow-sm mb-6 flex flex-col md:flex-row items-center gap-3 justify-between">
+<!-- Input de Búsqueda -->
+<div class="relative w-full md:flex-1">
+<svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<input class="w-full h-10 pl-10 pr-4 rounded-lg bg-white border border-gray-300 text-sm text-heading placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all" id="searchInput" placeholder="Buscar por N° contrato, inmueble o interviniente..." type="text"/>
+</div>
+<!-- Select de Estado -->
+<div class="relative w-full md:w-56">
+<select class="w-full h-10 pl-3.5 pr-10 rounded-lg bg-white border border-gray-300 text-sm text-heading focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary appearance-none transition-all cursor-pointer" id="statusSelect">
+<option value="todos">Todos los estados</option>
+<option value="vigente">Vigente</option>
+<option value="finalizado">Finalizado</option>
+<option value="rescindido">Rescindido</option>
+</select>
+<svg class="w-4 h-4 text-gray-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<!-- Botones de Acción -->
+<div class="flex items-center gap-2 w-full md:w-auto">
+<button class="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 h-10 px-4 rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 text-sm font-medium transition-colors" id="resetBtn" type="button">
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Limpiar</span>
+</button>
+<button class="flex-1 md:flex-none inline-flex items-center justify-center gap-1.5 h-10 px-5 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-medium shadow-xs transition-colors" id="filterBtn" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Filtrar</span>
+</button>
+</div>
+</div>
+<!-- Tabla de Contratos -->
+<div class="bg-white rounded-xl border border-border shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[1050px]">
+<thead>
+<tr class="bg-surface-muted border-b border-border text-[12px] font-semibold text-text-muted uppercase tracking-wider">
+<th class="py-3.5 px-4">N° CONTRATO</th>
+<th class="py-3.5 px-4">INMUEBLE</th>
+<th class="py-3.5 px-4">INQUILINO</th>
+<th class="py-3.5 px-4">PROPIETARIO</th>
+<th class="py-3.5 px-4">VIGENCIA</th>
+<th class="py-3.5 px-4 text-right">MONTO</th>
+<th class="py-3.5 px-4 text-center">COMISIÓN</th>
+<th class="py-3.5 px-4">ESTADO</th>
+<th class="py-3.5 px-4 text-right">ACCIONES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-200 text-sm" id="contractsBody">
+<!-- Fila 1: C-001 -->
+<tr class="hover:bg-row-hover transition-colors" data-search="c-001 belgrano 1250 camila rojas ricardo sosa" data-status="vigente">
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-mono font-bold text-xs bg-primary-soft text-primary-hover">
+                    C-001
+                  </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-semibold text-heading">Belgrano 1250</div>
+<div class="text-xs text-text-muted">Depto · 3 amb.</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs flex-shrink-0">
+                      CR
+                    </div>
+<div>
+<div class="font-medium text-heading">Camila Rojas</div>
+<div class="text-xs text-text-muted">DNI 38.412.901</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-heading">R. Sosa</div>
+<div class="text-xs text-text-muted">Ricardo Sosa</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-heading">01/01/2025 – 31/12/2026</div>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-24 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 92%;"></div>
+</div>
+<span class="text-[11px] text-text-muted">22/24 meses</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<div class="font-semibold text-heading">$ 420.000</div>
+<div class="text-xs text-text-muted">mensual</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<span class="inline-block px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 font-semibold text-xs border border-gray-200">
+                    10%
+                  </span>
+<div class="text-[11px] text-text-muted mt-0.5">$ 42.000/mes</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col gap-1 items-start">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path></svg>
+                      Vigente
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+<svg class="w-3 h-3 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+                      Vence en 55 días
+                    </span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-indigo-200 bg-white text-primary hover:bg-primary-soft text-xs font-semibold transition-colors" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Ver</span>
+</button>
+</td>
+</tr>
+<!-- Fila 2: C-002 -->
+<tr class="hover:bg-row-hover transition-colors" data-search="c-002 mitre 845 joaquin medina marta quiroga" data-status="vigente">
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-mono font-bold text-xs bg-primary-soft text-primary-hover">
+                    C-002
+                  </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-semibold text-heading">Mitre 845</div>
+<div class="text-xs text-text-muted">Casa · 4 amb.</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs flex-shrink-0">
+                      JM
+                    </div>
+<div>
+<div class="font-medium text-heading">Joaquín Medina</div>
+<div class="text-xs text-text-muted">DNI 35.882.110</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-heading">M. Quiroga</div>
+<div class="text-xs text-text-muted">Marta Quiroga</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-heading">16/12/2024 – 15/12/2026</div>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-24 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full rounded-full" style="width: 95%;"></div>
+</div>
+<span class="text-[11px] text-amber-700 font-semibold">Casi completo</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<div class="font-semibold text-heading">$ 650.000</div>
+<div class="text-xs text-text-muted">mensual</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<span class="inline-block px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 font-semibold text-xs border border-gray-200">
+                    10%
+                  </span>
+<div class="text-[11px] text-text-muted mt-0.5">$ 65.000/mes</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex flex-col gap-1 items-start">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path></svg>
+                      Vigente
+                    </span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+<svg class="w-3 h-3 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+                      Vence en 39 días
+                    </span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-indigo-200 bg-white text-primary hover:bg-primary-soft text-xs font-semibold transition-colors" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Ver</span>
+</button>
+</td>
+</tr>
+<!-- Fila 3: C-003 -->
+<tr class="hover:bg-row-hover transition-colors" data-search="c-003 san martin 322 valentina funes ricardo sosa" data-status="vigente">
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-mono font-bold text-xs bg-primary-soft text-primary-hover">
+                    C-003
+                  </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-semibold text-heading">San Martín 322</div>
+<div class="text-xs text-text-muted">Local comercial</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs flex-shrink-0">
+                      VF
+                    </div>
+<div>
+<div class="font-medium text-heading">Valentina Funes</div>
+<div class="text-xs text-text-muted">CUIT 27-40192844-3</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-heading">R. Sosa</div>
+<div class="text-xs text-text-muted">Ricardo Sosa</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-heading">01/06/2026 – 31/05/2028</div>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-24 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full rounded-full" style="width: 22%;"></div>
+</div>
+<span class="text-[11px] text-text-muted">5/24 meses</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<div class="font-semibold text-heading">$ 780.000</div>
+<div class="text-xs text-text-muted">mensual</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<span class="inline-block px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 font-semibold text-xs border border-gray-200">
+                    8%
+                  </span>
+<div class="text-[11px] text-text-muted mt-0.5">$ 62.400/mes</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path></svg>
+                    Vigente
+                  </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-indigo-200 bg-white text-primary hover:bg-primary-soft text-xs font-semibold transition-colors" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Ver</span>
+</button>
+</td>
+</tr>
+<!-- Fila 4: C-004 -->
+<tr class="hover:bg-row-hover transition-colors" data-search="c-004 moreno 560 tomas aguirre hernan paz" data-status="vigente">
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-mono font-bold text-xs bg-primary-soft text-primary-hover">
+                    C-004
+                  </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-semibold text-heading">Moreno 560</div>
+<div class="text-xs text-text-muted">Depto · 2 amb.</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs flex-shrink-0">
+                      TA
+                    </div>
+<div>
+<div class="font-medium text-heading">Tomás Aguirre</div>
+<div class="text-xs text-text-muted">DNI 42.109.845</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-heading">H. Paz</div>
+<div class="text-xs text-text-muted">Hernán Paz</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-heading">01/08/2026 – 31/07/2028</div>
+<div class="flex items-center gap-2 mt-1">
+<div class="w-24 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full rounded-full" style="width: 14%;"></div>
+</div>
+<span class="text-[11px] text-text-muted">3/24 meses</span>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<div class="font-semibold text-heading">$ 390.000</div>
+<div class="text-xs text-text-muted">mensual</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<span class="inline-block px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 font-semibold text-xs border border-gray-200">
+                    10%
+                  </span>
+<div class="text-[11px] text-text-muted mt-0.5">$ 39.000/mes</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+<svg class="w-3 h-3 text-emerald-600" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path></svg>
+                    Vigente
+                  </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-indigo-200 bg-white text-primary hover:bg-primary-soft text-xs font-semibold transition-colors" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Ver</span>
+</button>
+</td>
+</tr>
+<!-- Fila 5: C-005 -->
+<tr class="hover:bg-row-hover transition-colors" data-search="c-005 roca 1020 lucia paredes hernan paz" data-status="rescindido">
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-mono font-bold text-xs bg-red-100 text-red-700">
+                    C-005
+                  </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-semibold text-heading">Roca 1020</div>
+<div class="text-xs text-text-muted">Oficina · 2 amb.</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-xs flex-shrink-0">
+                      LP
+                    </div>
+<div>
+<div class="font-medium text-heading">Lucía Paredes</div>
+<div class="text-xs text-text-muted">DNI 37.520.103</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-heading">H. Paz</div>
+<div class="text-xs text-text-muted">Hernán Paz</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-gray-400 line-through">01/03/2025 – 28/02/2027</div>
+<div class="text-[11px] text-red-600 font-semibold mt-0.5">Rescisión: 15/09/2026</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<div class="font-semibold text-heading">$ 510.000</div>
+<div class="text-xs text-text-muted">convenido</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<span class="inline-block px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 font-semibold text-xs border border-gray-200">
+                    10%
+                  </span>
+<div class="text-[11px] text-text-muted mt-0.5">$ 51.000/mes</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-50 text-red-700 border border-red-200">
+<svg class="w-3 h-3 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Rescindido
+                  </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-indigo-200 bg-white text-primary hover:bg-primary-soft text-xs font-semibold transition-colors" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Ver</span>
+</button>
+</td>
+</tr>
+<!-- Fila 6: C-006 -->
+<tr class="hover:bg-row-hover transition-colors" data-search="c-006 sarmiento 77 elena arias marta quiroga" data-status="finalizado">
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-mono font-bold text-xs bg-gray-100 text-gray-700">
+                    C-006
+                  </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-semibold text-heading">Sarmiento 77</div>
+<div class="text-xs text-text-muted">Depto · 2 amb.</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-xs flex-shrink-0">
+                      EA
+                    </div>
+<div>
+<div class="font-medium text-heading">Elena Arias</div>
+<div class="text-xs text-text-muted">DNI 32.990.411</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-heading">M. Quiroga</div>
+<div class="text-xs text-text-muted">Marta Quiroga</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<div class="font-medium text-gray-600">01/02/2024 – 31/01/2026</div>
+<div class="text-[11px] text-text-muted mt-0.5">Plazo completado 24m</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<div class="font-semibold text-heading">$ 350.000</div>
+<div class="text-xs text-text-muted">histórico</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-center">
+<span class="inline-block px-2 py-0.5 rounded-full bg-gray-100 text-gray-700 font-semibold text-xs border border-gray-200">
+                    10%
+                  </span>
+<div class="text-[11px] text-text-muted mt-0.5">$ 35.000/mes</div>
+</td>
+<td class="py-4 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-700 border border-gray-200">
+<svg class="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Finalizado
+                  </span>
+</td>
+<td class="py-4 px-4 whitespace-nowrap text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-indigo-200 bg-white text-primary hover:bg-primary-soft text-xs font-semibold transition-colors" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Ver</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Paginación -->
+<div class="px-5 py-3.5 bg-white border-t border-border flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
+<div class="text-text-muted">
+            Mostrando <span class="font-semibold text-heading" id="rangeCount">1–6</span> de <span class="font-semibold text-heading">6</span> contratos registrados
+          </div>
+<div class="flex items-center gap-1.5">
+<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-gray-200 text-gray-400 bg-gray-50 text-xs font-medium cursor-not-allowed" disabled="" type="button">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Anterior</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-primary text-white font-semibold text-xs flex items-center justify-center shadow-xs" type="button">
+              1
+            </button>
+<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-gray-200 text-gray-400 bg-gray-50 text-xs font-medium cursor-not-allowed" disabled="" type="button">
+<span>Siguiente</span>
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Script interactivo de filtrado -->
+<script>
+    (function() {
+      const searchInput = document.getElementById('searchInput');
+      const statusSelect = document.getElementById('statusSelect');
+      const filterBtn = document.getElementById('filterBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const tableBody = document.getElementById('contractsBody');
+      const rangeCount = document.getElementById('rangeCount');
+
+      function filterTable() {
+        if (!tableBody) return;
+        const q = (searchInput?.value || '').toLowerCase().trim();
+        const status = statusSelect?.value || 'todos';
+        const rows = tableBody.querySelectorAll('tr');
+        let count = 0;
+
+        rows.forEach(row => {
+          const rowStatus = row.getAttribute('data-status') || '';
+          const rowSearch = row.getAttribute('data-search') || '';
+          
+          const matchStatus = (status === 'todos') || (rowStatus === status);
+          const matchQuery = !q || rowSearch.includes(q);
+
+          if (matchStatus && matchQuery) {
+            row.style.display = '';
+            count++;
+          } else {
+            row.style.display = 'none';
+          }
+        });
+
+        if (rangeCount) {
+          rangeCount.textContent = count > 0 ? `1–${count}` : '0';
+        }
+      }
+
+      if (filterBtn) filterBtn.addEventListener('click', filterTable);
+      if (searchInput) searchInput.addEventListener('keyup', (e) => { if (e.key === 'Enter') filterTable(); });
+      if (statusSelect) statusSelect.addEventListener('change', filterTable);
+
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (searchInput) searchInput.value = '';
+          if (statusSelect) statusSelect.value = 'todos';
+          filterTable();
+        });
+      }
+    })();
+  </script>
+</body></html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-primary-container":"#dad7ff","on-tertiary-fixed":"#351000","surface-container-lowest":"#ffffff","outline-variant":"#c7c4d8","background-end":"#D9E2EC","tertiary-container":"#a44100","inverse-surface":"#27313f","inverse-primary":"#c3c0ff","danger-text":"#B91C1C","error-container":"#ffdad6","on-secondary-fixed":"#191c1f","error":"#ba1a1a","primary-fixed":"#e2dfff","primary-container":"#4f46e5","border":"#E5E7EB","tertiary-fixed":"#ffdbcc","on-primary-fixed-variant":"#3323cc","row-hover":"#F3F4F6","on-error":"#ffffff","primary":"#3525cd","success-soft":"#ECFDF5","danger-hover":"#DC2626","on-secondary":"#ffffff","on-surface":"#121c2a","secondary":"#5c5f62","info-soft":"#DBEAFE","on-secondary-fixed-variant":"#44474a","primary-hover":"#4338CA","tertiary":"#7e3000","background-start":"#F0F4F8","tertiary-fixed-dim":"#ffb695","surface-bright":"#f8f9ff","on-tertiary-container":"#ffd2be","warning-soft":"#FFFBEB","info":"#2563EB","on-primary-fixed":"#0f0069","surface-container-low":"#eff4ff","secondary-container":"#dee0e4","surface-container-high":"#dee9fc","border-input":"#D1D5DB","surface-tint":"#4d44e3","warning-text":"#92400E","surface":"#FFFFFF","warning":"#F59E0B","primary-soft":"#E0E7FF","on-primary":"#ffffff","heading":"#111827","primary-fixed-dim":"#c3c0ff","surface-dim":"#d0dbed","on-surface-variant":"#464555","on-background":"#121c2a","success":"#10B981","on-error-container":"#93000a","on-tertiary-fixed-variant":"#7b2f00","success-text":"#065F46","background":"#f8f9ff","text-muted":"#6B7280","on-tertiary":"#ffffff","outline":"#777587","surface-muted":"#F9FAFB","surface-variant":"#d9e3f6","surface-container-highest":"#d9e3f6","inverse-on-surface":"#eaf1ff","secondary-fixed":"#e0e2e6","danger":"#EF4444","surface-container":"#e6eeff","danger-soft":"#FEF2F2","info-text":"#1E40AF","on-secondary-container":"#606366","secondary-fixed-dim":"#c4c7ca"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"gutter":"1.5rem","space-sm":"0.5rem","margin-mobile":"1rem","space-xs":"0.25rem","gutter-mobile":"1rem","space-md":"1rem","space-lg":"1.5rem","space-xl":"2rem","margin":"2rem"},"fontFamily":{"body-lg":["Inter"],"headline-lg-mobile":["Inter"],"headline-md":["Inter"],"body-md":["Inter"],"headline-lg":["Inter"],"metric-display":["Inter"],"label-md":["Inter"],"table-header":["Inter"],"label-sm":["Inter"],"headline-sm":["Inter"],"body-sm":["Inter"]},"fontSize":{"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg-mobile":["22px",{"lineHeight":"28px","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"26px","fontWeight":"500"}],"body-md":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-lg":["28px",{"lineHeight":"36px","fontWeight":"600"}],"metric-display":["32px",{"lineHeight":"38px","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"500"}],"table-header":["13px",{"lineHeight":"18px","letterSpacing":"0.05em","fontWeight":"500"}],"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"500"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}};</script></head><body class="min-h-screen bg-gradient-to-b from-background-start to-background-end font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[260px] bg-surface border-r border-border z-40 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center gap-space-sm border-b border-border"><div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary shrink-0 shadow-sm"><svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg></div><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-heading font-semibold tracking-tight truncate leading-tight">InmoGestión</span><span class="font-label-sm text-label-sm text-text-muted truncate">Plataforma Inmobiliaria 2026</span></div></div><nav class="flex flex-col gap-1 p-space-sm overflow-y-auto" data-active-classes="bg-primary-soft text-primary-hover font-semibold border-r-4 border-primary-container"><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span class="font-body-sm text-body-sm">Dashboard</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="font-body-sm text-body-sm">Usuarios</span></a><a aria-current="page" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors bg-primary-soft text-primary-hover font-semibold border-r-4 border-primary-container" data-path="inmuebles" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-sm text-body-sm">Inmuebles</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="contratos" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span class="font-body-sm text-body-sm">Contratos</span></a><div class="flex flex-col"><button class="w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-body-sm text-body-sm">Cuotas</span></div><span class="material-symbols-outlined text-[16px]">expand_more</span></button><div class="flex flex-col pl-9 pr-1 gap-1 py-1"><a class="px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-body-sm text-body-sm transition-colors" data-path="emitir-cuotas" href="#">Emitir cuotas</a><a class="px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-body-sm text-body-sm transition-colors" data-path="cobranzas" href="#">Cobranzas</a></div></div><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="pagos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span class="font-body-sm text-body-sm">Pagos</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="liquidaciones" href="#"><span class="material-symbols-outlined text-[20px]">calculate</span><span class="font-body-sm text-body-sm">Liquidaciones</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span class="font-body-sm text-body-sm">Reportes</span></a></nav></div><div class="p-space-sm border-t border-border bg-surface-muted"><div class="flex items-center gap-3 p-2 bg-surface rounded-lg border border-border shadow-sm mb-2"><div class="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-label-md text-label-md font-semibold shrink-0">LB</div><div class="flex flex-col min-w-0 flex-1"><span class="font-label-md text-label-md font-medium text-heading truncate">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted truncate">Administradora</span></div></div><a class="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg text-danger-text hover:bg-danger-soft transition-colors font-label-md text-label-md font-medium" data-path="login" href="#"><span class="material-symbols-outlined text-[18px]">logout</span><span>Cerrar Sesión</span></a></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/90 backdrop-blur-md border-b border-border z-30 px-space-lg flex items-center justify-between shadow-[0_1px_4px_rgba(0,0,0,0.02)]"><div class="flex items-center gap-2 font-body-sm text-body-sm text-text-muted"><span class="hover:text-heading cursor-pointer transition-colors">InmoGestión</span><span class="material-symbols-outlined text-[16px] text-outline-variant">chevron_right</span><span class="text-heading font-medium">Inmuebles</span></div><div class="flex items-center gap-space-md"><div class="hidden sm:flex items-center gap-1.5 text-on-surface-variant px-3 py-1.5 rounded-lg bg-surface-container-low border border-border font-label-md text-label-md"><span class="material-symbols-outlined text-[18px] text-text-muted">calendar_today</span><span>06/11/2026</span></div><button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-danger text-on-error font-label-sm text-[10px] font-bold flex items-center justify-center ring-2 ring-surface">2</span></button><div class="flex items-center gap-2.5 pl-2 border-l border-border"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><div class="hidden md:flex flex-col text-left"><span class="font-label-md text-label-md font-medium text-heading leading-tight">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted leading-tight">Administradora</span></div></div></div></header><main class="relative pt-16 min-h-screen"><div class="max-w-[1200px] mx-auto px-space-lg py-space-xl"><div class="flex flex-col w-full">
+<!-- ENCABEZADO Y ACCIONES PRINCIPALES -->
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col">
+<div class="flex items-center gap-3">
+<h1 class="font-headline-lg text-headline-lg text-heading font-semibold tracking-tight">Inmuebles</h1>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary-soft text-primary font-label-sm text-label-sm font-semibold">
+          6 propiedades registradas
+        </span>
+</div>
+<p class="font-body-md text-body-md text-text-muted mt-1">
+        Gestión de cartera, unidades locativas y estados de disponibilidad.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="inline-flex items-center justify-center gap-2 px-6 h-[42px] rounded-lg bg-primary-container hover:bg-primary-hover text-on-primary font-label-md text-label-md font-medium shadow-sm transition-all focus:outline-none focus:ring-4 focus:ring-primary-container/20" type="button">
+<span class="material-symbols-outlined text-[20px]">add_home</span>
+<span>+ Nuevo inmueble</span>
+</button>
+</div>
+</div>
+<!-- TARJETAS MÉTRICAS (KPIs DE CARTERA) -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-lg mb-space-lg">
+<!-- Card Disponibles -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-table-header text-table-header uppercase text-text-muted tracking-wider">Disponibles</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-metric-display text-metric-display text-heading font-semibold">1</span>
+<span class="font-label-md text-label-md text-text-muted">unidad</span>
+</div>
+<span class="font-label-sm text-label-sm text-success-text mt-1 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+          Lista para alquilar
+        </span>
+</div>
+<div class="w-12 h-12 rounded-full bg-success-soft text-success flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">key</span>
+</div>
+</div>
+<!-- Card Alquilados -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-table-header text-table-header uppercase text-text-muted tracking-wider">Alquilados</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-metric-display text-metric-display text-heading font-semibold">4</span>
+<span class="font-label-md text-label-md text-text-muted">unidades</span>
+</div>
+<span class="font-label-sm text-label-sm text-info-text mt-1 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+          Contratos en curso
+        </span>
+</div>
+<div class="w-12 h-12 rounded-full bg-info-soft text-info flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">lock</span>
+</div>
+</div>
+<!-- Card En Mantenimiento -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-table-header text-table-header uppercase text-text-muted tracking-wider">En Mantenimiento</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-metric-display text-metric-display text-heading font-semibold">1</span>
+<span class="font-label-md text-label-md text-text-muted">unidad</span>
+</div>
+<span class="font-label-sm text-label-sm text-warning-text mt-1 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[15px]">build</span>
+          Reparaciones activas
+        </span>
+</div>
+<div class="w-12 h-12 rounded-full bg-warning-soft text-warning flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">home_repair_service</span>
+</div>
+</div>
+</div>
+<!-- PANEL DE FILTROS -->
+<div class="bg-surface rounded-xl p-5 mb-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col gap-4">
+<!-- Fila 1 de Filtros -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+<!-- Input Dirección -->
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-[18px] text-text-muted pointer-events-none">search</span>
+<input class="w-full h-11 pl-10 pr-4 bg-surface rounded-lg font-body-sm text-body-sm text-heading placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary-container bg-surface-container-lowest shadow-sm" id="filter-address" placeholder="Buscar por dirección (ej. Belgrano 1250)..." type="text"/>
+</div>
+<!-- Select Propietario -->
+<div>
+<select class="w-full h-11 px-3 bg-surface-container-lowest rounded-lg font-body-sm text-body-sm text-heading focus:outline-none focus:ring-2 focus:ring-primary-container shadow-sm" id="filter-owner">
+<option value="">Todos los propietarios</option>
+<option value="Ricardo Sosa">Ricardo Sosa</option>
+<option value="Marta Quiroga">Marta Quiroga</option>
+<option value="Hernán Paz">Hernán Paz</option>
+</select>
+</div>
+<!-- Select Tipo -->
+<div>
+<select class="w-full h-11 px-3 bg-surface-container-lowest rounded-lg font-body-sm text-body-sm text-heading focus:outline-none focus:ring-2 focus:ring-primary-container shadow-sm" id="filter-type">
+<option value="">Todos los tipos</option>
+<option value="Departamento">Departamento</option>
+<option value="Casa">Casa</option>
+<option value="Local comercial">Local comercial</option>
+<option value="Oficina">Oficina</option>
+</select>
+</div>
+<!-- Select Estado -->
+<div>
+<select class="w-full h-11 px-3 bg-surface-container-lowest rounded-lg font-body-sm text-body-sm text-heading focus:outline-none focus:ring-2 focus:ring-primary-container shadow-sm" id="filter-status">
+<option value="">Todos los estados</option>
+<option value="Disponible">Disponible</option>
+<option value="Alquilado">Alquilado</option>
+<option value="En Mantenimiento">En Mantenimiento</option>
+</select>
+</div>
+</div>
+<!-- Fila 2 de Filtros: Rango Precios + Acciones -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-4 pt-2 bg-surface-container-low/50 p-3 rounded-lg">
+<div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+<span class="font-label-md text-label-md text-text-muted font-medium">Rango de precio base:</span>
+<div class="flex items-center gap-2">
+<input class="h-10 w-36 px-3 bg-surface rounded-lg font-body-sm text-body-sm text-heading placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary-container shadow-sm" id="filter-min-price" placeholder="Mínimo ($)" type="text"/>
+<span class="text-text-muted font-label-md">—</span>
+<input class="h-10 w-36 px-3 bg-surface rounded-lg font-body-sm text-body-sm text-heading placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-primary-container shadow-sm" id="filter-max-price" placeholder="Máximo ($)" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2 self-end md:self-auto">
+<button class="inline-flex items-center gap-1.5 px-4 h-10 rounded-lg bg-surface hover:bg-row-hover text-on-surface-variant font-label-md text-label-md font-medium transition-colors shadow-sm" id="btn-clear" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span>Limpiar</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-5 h-10 rounded-lg bg-primary-container hover:bg-primary-hover text-on-primary font-label-md text-label-md font-medium transition-colors shadow-sm" id="btn-filter" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+<span>Filtrar</span>
+</button>
+</div>
+</div>
+</div>
+<!-- TABLA DE INMUEBLES -->
+<div class="bg-surface rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="properties-table">
+<thead>
+<tr class="bg-surface-muted">
+<th class="py-3.5 px-5 font-table-header text-table-header uppercase text-text-muted">Dirección</th>
+<th class="py-3.5 px-4 font-table-header text-table-header uppercase text-text-muted">Tipo</th>
+<th class="py-3.5 px-4 font-table-header text-table-header uppercase text-text-muted">Ambientes</th>
+<th class="py-3.5 px-4 font-table-header text-table-header uppercase text-text-muted text-right">Precio Base Mensual</th>
+<th class="py-3.5 px-5 font-table-header text-table-header uppercase text-text-muted">Propietario</th>
+<th class="py-3.5 px-4 font-table-header text-table-header uppercase text-text-muted">Estado</th>
+<th class="py-3.5 px-5 font-table-header text-table-header uppercase text-text-muted text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-on-surface">
+<!-- Inmueble 1 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-5">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading group-hover:text-primary transition-colors">Belgrano 1250, 4°B</span>
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                  Belgrano, CABA
+                </span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary">apartment</span>
+<span>Departamento</span>
+</div>
+</td>
+<td class="py-4 px-4 font-body-sm text-body-sm text-on-surface-variant">3 amb.</td>
+<td class="py-4 px-4 font-body-md text-body-md font-semibold text-heading text-right tabular-nums">$ 420.000</td>
+<td class="py-4 px-5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary-soft text-primary font-label-sm text-label-sm font-semibold flex items-center justify-center shrink-0">
+                  RS
+                </div>
+<span class="font-body-sm text-body-sm text-heading font-medium">Ricardo Sosa</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-info-soft text-info-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                Alquilado
+              </span>
+</td>
+<td class="py-4 px-5 text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-container transition-colors" title="Ver inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-heading hover:bg-surface-container transition-colors" title="Editar inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-danger hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Inmueble 2 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-5">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading group-hover:text-primary transition-colors">Mitre 845</span>
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                  Vicente López, Zona Norte
+                </span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary">cottage</span>
+<span>Casa</span>
+</div>
+</td>
+<td class="py-4 px-4 font-body-sm text-body-sm text-on-surface-variant">4 amb.</td>
+<td class="py-4 px-4 font-body-md text-body-md font-semibold text-heading text-right tabular-nums">$ 650.000</td>
+<td class="py-4 px-5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm font-semibold flex items-center justify-center shrink-0">
+                  MQ
+                </div>
+<span class="font-body-sm text-body-sm text-heading font-medium">Marta Quiroga</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-info-soft text-info-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                Alquilado
+              </span>
+</td>
+<td class="py-4 px-5 text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-container transition-colors" title="Ver inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-heading hover:bg-surface-container transition-colors" title="Editar inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-danger hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Inmueble 3 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-5">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading group-hover:text-primary transition-colors">San Martín 322, Local 3</span>
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                  Microcentro, CABA
+                </span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary">storefront</span>
+<span>Local comercial</span>
+</div>
+</td>
+<td class="py-4 px-4 font-body-sm text-body-sm text-on-surface-variant">1 amb.</td>
+<td class="py-4 px-4 font-body-md text-body-md font-semibold text-heading text-right tabular-nums">$ 780.000</td>
+<td class="py-4 px-5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary-soft text-primary font-label-sm text-label-sm font-semibold flex items-center justify-center shrink-0">
+                  RS
+                </div>
+<span class="font-body-sm text-body-sm text-heading font-medium">Ricardo Sosa</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-info-soft text-info-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                Alquilado
+              </span>
+</td>
+<td class="py-4 px-5 text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-container transition-colors" title="Ver inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-heading hover:bg-surface-container transition-colors" title="Editar inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-danger hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Inmueble 4 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-5">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading group-hover:text-primary transition-colors">Moreno 560, PB</span>
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                  San Telmo, CABA
+                </span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary">apartment</span>
+<span>Departamento</span>
+</div>
+</td>
+<td class="py-4 px-4 font-body-sm text-body-sm text-on-surface-variant">2 amb.</td>
+<td class="py-4 px-4 font-body-md text-body-md font-semibold text-heading text-right tabular-nums">$ 390.000</td>
+<td class="py-4 px-5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary-fixed-dim text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold flex items-center justify-center shrink-0">
+                  HP
+                </div>
+<span class="font-body-sm text-body-sm text-heading font-medium">Hernán Paz</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-info-soft text-info-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                Alquilado
+              </span>
+</td>
+<td class="py-4 px-5 text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-container transition-colors" title="Ver inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-heading hover:bg-surface-container transition-colors" title="Editar inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-danger hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Inmueble 5 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-5">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading group-hover:text-primary transition-colors">Roca 1020, Piso 2</span>
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                  Núñez, Corporativo
+                </span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary">corporate_fare</span>
+<span>Oficina</span>
+</div>
+</td>
+<td class="py-4 px-4 font-body-sm text-body-sm text-on-surface-variant">2 amb.</td>
+<td class="py-4 px-4 font-body-md text-body-md font-semibold text-heading text-right tabular-nums">$ 510.000</td>
+<td class="py-4 px-5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary-fixed-dim text-on-primary-fixed-variant font-label-sm text-label-sm font-semibold flex items-center justify-center shrink-0">
+                  HP
+                </div>
+<span class="font-body-sm text-body-sm text-heading font-medium">Hernán Paz</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Disponible
+              </span>
+</td>
+<td class="py-4 px-5 text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-container transition-colors" title="Ver inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-heading hover:bg-surface-container transition-colors" title="Editar inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-danger hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Inmueble 6 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-5">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading group-hover:text-primary transition-colors">Sarmiento 77, 1°A</span>
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+                  Almagro, CABA
+                </span>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary">apartment</span>
+<span>Departamento</span>
+</div>
+</td>
+<td class="py-4 px-4 font-body-sm text-body-sm text-on-surface-variant">2 amb.</td>
+<td class="py-4 px-4 font-body-md text-body-md font-semibold text-heading text-right tabular-nums">$ 350.000</td>
+<td class="py-4 px-5">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary-container text-on-secondary-fixed font-label-sm text-label-sm font-semibold flex items-center justify-center shrink-0">
+                  MQ
+                </div>
+<span class="font-body-sm text-body-sm text-heading font-medium">Marta Quiroga</span>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-warning-soft text-warning-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">build</span>
+                En Mantenimiento
+              </span>
+</td>
+<td class="py-4 px-5 text-right">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-text-muted hover:text-primary hover:bg-surface-container transition-colors" title="Ver inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-heading hover:bg-surface-container transition-colors" title="Editar inmueble" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-text-muted hover:text-danger hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- PIE DE TABLA / PAGINACIÓN -->
+<div class="px-6 py-4 bg-surface flex flex-col sm:flex-row items-center justify-between gap-3 bg-surface-muted/40">
+<div class="font-body-sm text-body-sm text-text-muted text-center sm:text-left">
+        Mostrando <span class="font-medium text-heading">1–6</span> de <span class="font-medium text-heading">6</span> inmuebles registrados
+      </div>
+<div class="inline-flex items-center gap-1">
+<button class="inline-flex items-center justify-center px-3 py-1.5 rounded-lg font-label-sm text-label-sm text-text-muted opacity-40 cursor-not-allowed bg-surface-container-low" disabled="" type="button">
+<span class="material-symbols-outlined text-[16px] mr-1">chevron_left</span>
+          Anterior
+        </button>
+<button class="w-8 h-8 rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold flex items-center justify-center shadow-sm" type="button">
+          1
+        </button>
+<button class="inline-flex items-center justify-center px-3 py-1.5 rounded-lg font-label-sm text-label-sm text-text-muted opacity-40 cursor-not-allowed bg-surface-container-low" disabled="" type="button">
+          Siguiente
+          <span class="material-symbols-outlined text-[16px] ml-1">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+    // Microinteracción para limpiar y aplicar filtros
+    const btnClear = document.getElementById('btn-clear');
+    const inputAddress = document.getElementById('filter-address');
+    const selectOwner = document.getElementById('filter-owner');
+    const selectType = document.getElementById('filter-type');
+    const selectStatus = document.getElementById('filter-status');
+    const inputMin = document.getElementById('filter-min-price');
+    const inputMax = document.getElementById('filter-max-price');
+
+    if (btnClear) {
+      btnClear.addEventListener('click', () => {
+        inputAddress.value = '';
+        selectOwner.value = '';
+        selectType.value = '';
+        selectStatus.value = '';
+        inputMin.value = '';
+        inputMax.value = '';
+      });
+    }
+  </script>
+</div></div></main></div></body></html>

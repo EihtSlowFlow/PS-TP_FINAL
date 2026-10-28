@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "row-hover": "#F3F4F6", "primary": "#3525cd", "success-text": "#065F46", "surface-container": "#e6eeff", "border-input": "#D1D5DB", "secondary-fixed": "#e0e2e6", "on-secondary-fixed": "#191c1f", "on-primary-fixed": "#0f0069", "on-tertiary": "#ffffff", "surface": "#FFFFFF", "secondary-container": "#dee0e4", "on-primary-fixed-variant": "#3323cc", "text-muted": "#6B7280", "on-primary-container": "#dad7ff", "on-surface": "#121c2a", "primary-container": "#4f46e5", "on-secondary": "#ffffff", "surface-container-highest": "#d9e3f6", "primary-soft": "#E0E7FF", "on-surface-variant": "#464555", "danger": "#EF4444", "danger-soft": "#FEF2F2", "tertiary-container": "#a44100", "success-soft": "#ECFDF5", "background": "#f8f9ff", "danger-hover": "#DC2626", "heading": "#111827", "info-soft": "#DBEAFE", "surface-container-lowest": "#ffffff", "primary-fixed-dim": "#c3c0ff", "info": "#2563EB", "warning-text": "#92400E", "on-secondary-container": "#606366", "primary-fixed": "#e2dfff", "surface-bright": "#f8f9ff", "surface-container-high": "#dee9fc", "border": "#E5E7EB", "background-start": "#F0F4F8", "on-tertiary-container": "#ffd2be", "secondary-fixed-dim": "#c4c7ca", "success": "#10B981", "tertiary": "#7e3000", "warning-soft": "#FFFBEB", "on-error": "#ffffff", "surface-container-low": "#eff4ff", "tertiary-fixed-dim": "#ffb695", "on-tertiary-fixed": "#351000", "tertiary-fixed": "#ffdbcc", "on-secondary-fixed-variant": "#44474a", "inverse-primary": "#c3c0ff", "danger-text": "#B91C1C", "on-background": "#121c2a", "inverse-surface": "#27313f", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#7b2f00", "outline": "#777587", "error-container": "#ffdad6", "secondary": "#5c5f62", "inverse-on-surface": "#eaf1ff", "on-primary": "#ffffff", "error": "#ba1a1a", "surface-muted": "#F9FAFB", "background-end": "#D9E2EC", "outline-variant": "#c7c4d8", "surface-variant": "#d9e3f6", "surface-dim": "#d0dbed", "surface-tint": "#4d44e3", "warning": "#F59E0B", "info-text": "#1E40AF", "primary-hover": "#4338CA" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "margin-mobile": "1rem", "margin": "2rem", "space-lg": "1.5rem", "space-md": "1rem", "gutter": "1.5rem", "space-xl": "2rem", "gutter-mobile": "1rem", "space-xs": "0.25rem", "space-sm": "0.5rem" }, "fontFamily": { "body-lg": ["Inter"], "headline-lg-mobile": ["Inter"], "body-sm": ["Inter"], "headline-md": ["Inter"], "metric-display": ["Inter"], "label-sm": ["Inter"], "body-md": ["Inter"], "label-md": ["Inter"], "headline-lg": ["Inter"], "headline-sm": ["Inter"], "table-header": ["Inter"] }, "fontSize": { "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }], "headline-lg-mobile": ["22px", { "lineHeight": "28px", "fontWeight": "600" }], "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "headline-md": ["20px", { "lineHeight": "26px", "fontWeight": "500" }], "metric-display": ["32px", { "lineHeight": "38px", "fontWeight": "600" }], "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }], "body-md": ["15px", { "lineHeight": "22px", "fontWeight": "400" }], "label-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }], "headline-lg": ["28px", { "lineHeight": "36px", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "500" }], "table-header": ["13px", { "lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "500" }] } } } };</script></head><body class="min-h-screen bg-gradient-to-b from-background-start to-background-end font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-[260px] bg-surface z-50 flex flex-col justify-between shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center shrink-0 shadow-sm"><span class="material-symbols-outlined text-on-primary text-[20px]">home</span></div><div class="flex flex-col leading-none"><span class="font-headline-sm text-headline-sm text-heading font-bold tracking-tight">InmoGestión</span><span class="font-label-sm text-label-sm text-text-muted mt-0.5">Plataforma 2026</span></div></div><div class="px-space-md py-space-sm"><div class="h-px w-full bg-border"></div></div><nav class="px-space-sm space-y-1 overflow-y-auto max-h-[calc(100vh-220px)]" data-active-classes="bg-primary-soft text-primary-hover font-semibold"><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="inmuebles" href="#"><span class="material-symbols-outlined text-[20px]">apartment</span><span>Inmuebles</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="contratos" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span>Contratos</span></a><div class="pt-1"><div class="flex items-center justify-between px-3 py-2 text-text-muted font-label-sm text-label-sm uppercase tracking-wider"><span class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">receipt_long</span>Cuotas</span><span class="material-symbols-outlined text-[16px]">expand_more</span></div><div class="pl-4 pr-1 space-y-1 mt-0.5"><a aria-current="page" class="flex items-center gap-2.5 px-3 py-2 rounded-lg transition-colors bg-primary-soft text-primary-hover font-semibold" data-path="emitir-cuotas" href="#"><span class="w-1.5 h-1.5 rounded-full bg-primary-container shrink-0"></span><span>Emitir cuotas</span></a><a class="flex items-center gap-2.5 px-3 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="cobranzas" href="#"><span class="w-1.5 h-1.5 rounded-full bg-outline-variant shrink-0"></span><span>Cobranzas</span></a></div></div><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="pagos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Pagos</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="liquidaciones" href="#"><span class="material-symbols-outlined text-[20px]">account_balance_wallet</span><span>Liquidaciones</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a></nav></div><div class="p-space-md bg-surface-muted m-space-sm rounded-xl border border-border flex flex-col gap-space-sm"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-label-md text-label-md font-bold shrink-0">LB</div><div class="flex flex-col min-w-0 flex-1"><span class="font-label-md text-label-md font-semibold text-heading truncate">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted truncate">Administradora</span></div></div><a class="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg text-danger-text hover:bg-danger-soft transition-colors font-label-md text-label-md" data-path="login" href="#"><span class="material-symbols-outlined text-[18px]">logout</span><span>Cerrar Sesión</span></a></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-xl flex items-center justify-between"><div class="flex items-center gap-2 font-label-md text-label-md text-text-muted"><span class="hover:text-heading transition-colors">InmoGestión</span><span class="material-symbols-outlined text-[14px] text-outline-variant">chevron_right</span><span class="hover:text-heading transition-colors">Cuotas</span><span class="material-symbols-outlined text-[14px] text-outline-variant">chevron_right</span><span class="font-semibold text-primary">Emitir cuotas</span></div><div class="flex items-center gap-space-lg"><div class="hidden md:flex items-center gap-1.5 font-label-md text-label-md text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded-lg"><span class="material-symbols-outlined text-[18px] text-text-muted">calendar_today</span><span>06/11/2026</span></div><div class="relative flex items-center justify-center w-9 h-9 rounded-lg hover:bg-surface-container-low cursor-pointer transition-colors text-on-surface-variant"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-danger text-on-error font-label-sm text-[10px] font-bold flex items-center justify-center leading-none">2</span></div><div class="flex items-center gap-2 pl-2"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 min-h-screen"><div class="max-w-[1200px] mx-auto px-space-xl py-space-xl"><div class="flex flex-col w-full space-y-6">
+<!-- CABECERA DE LA PÁGINA -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+<div class="space-y-1.5">
+<div class="flex items-center gap-3 flex-wrap">
+<h1 class="font-headline-lg text-headline-lg text-heading font-semibold tracking-tight">Emitir cuotas</h1>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-label-sm text-label-sm bg-primary-soft text-primary font-medium">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+          Operación de Cierre Mensual
+        </span>
+</div>
+<p class="font-body-md text-body-md text-text-muted max-w-2xl">
+        Generación masiva y control previo de cupones locativos correspondientes al período seleccionado. Revise la proyección antes de asentar los saldos.
+      </p>
+</div>
+<!-- Badge contextual de auditoría temporal -->
+<div class="flex items-center gap-3 bg-surface p-3 px-4 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] self-start lg:self-auto">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[22px]">calendar_clock</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted">Fecha del sistema: <strong class="text-heading font-semibold">06/11/2026</strong></span>
+<span class="font-label-md text-label-md text-primary font-semibold flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+          Próximo período: Diciembre 2026
+        </span>
+</div>
+</div>
+</div>
+<!-- BENTO SUMMARY METRICS: Visual richness with sparklines and clear financial totals -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-surface rounded-xl p-space-md shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider font-semibold">Período Destino</span>
+<div class="w-8 h-8 rounded-full bg-primary-soft flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">event_upcoming</span>
+</div>
+</div>
+<div class="mt-2">
+<div class="font-headline-md text-headline-md text-heading font-semibold">Dic 2026</div>
+<span class="font-label-sm text-label-sm text-success-text font-medium flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Sin cuotas emitidas
+        </span>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-space-md shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider font-semibold">Contratos Activos</span>
+<div class="w-8 h-8 rounded-full bg-info-soft flex items-center justify-center text-info-text">
+<span class="material-symbols-outlined text-[18px]">assignment_turned_in</span>
+</div>
+</div>
+<div class="mt-2">
+<div class="font-headline-md text-headline-md text-heading font-semibold">4 / 4</div>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5 block">100% elegibles para emisión</span>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-space-md shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider font-semibold">Total a Facturar</span>
+<div class="w-8 h-8 rounded-full bg-success-soft flex items-center justify-center text-success-text">
+<span class="material-symbols-outlined text-[18px]">account_balance</span>
+</div>
+</div>
+<div class="mt-2">
+<div class="font-headline-md text-headline-md text-heading font-semibold tabular-nums">$ 2.240.000</div>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5 block">Monto neto consolidado</span>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-space-md shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider font-semibold">Rango Vencimientos</span>
+<div class="w-8 h-8 rounded-full bg-warning-soft flex items-center justify-center text-warning-text">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+</div>
+</div>
+<div class="mt-2">
+<div class="font-headline-md text-headline-md text-heading font-semibold">05 - 15 Dic</div>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5 block">Primer vencimiento en 29 días</span>
+</div>
+</div>
+</div>
+<!-- BLOQUE «PERÍODO» -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]">
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">date_range</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-heading font-semibold">Selección de período a emitir</h2>
+<p class="font-label-sm text-label-sm text-text-muted">Parámetros del ejercicio mensual para liquidación de alquileres.</p>
+</div>
+</div>
+<span class="hidden md:inline-flex items-center gap-1 text-label-sm font-label-sm text-text-muted bg-surface-muted px-2.5 py-1 rounded">
+<span class="material-symbols-outlined text-[15px]">verified_user</span> Entorno contable cerrado
+      </span>
+</div>
+<form class="space-y-4" id="periodForm" onsubmit="event.preventDefault();">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
+<!-- Mes -->
+<div class="md:col-span-4 space-y-1.5">
+<label class="block font-label-md text-label-md font-medium text-heading" for="mesSelector">
+            Mes de liquidación <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-11 px-3.5 pr-10 rounded-lg bg-surface text-on-surface font-body-md text-body-md shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary cursor-pointer" id="mesSelector">
+<option value="1">Enero</option>
+<option value="2">Febrero</option>
+<option value="3">Marzo</option>
+<option value="4">Abril</option>
+<option value="5">Mayo</option>
+<option value="6">Junio</option>
+<option value="7">Julio</option>
+<option value="8">Agosto</option>
+<option value="9">Septiembre</option>
+<option value="10">Octubre</option>
+<option value="11">Noviembre</option>
+<option selected="" value="12">Diciembre</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted text-[20px]">expand_more</span>
+</div>
+</div>
+<!-- Año -->
+<div class="md:col-span-3 space-y-1.5">
+<label class="block font-label-md text-label-md font-medium text-heading" for="anioSelector">
+            Año fiscal <span class="text-danger">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-11 px-3.5 pr-10 rounded-lg bg-surface text-on-surface font-body-md text-body-md shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary cursor-pointer" id="anioSelector">
+<option value="2025">2025</option>
+<option selected="" value="2026">2026</option>
+<option value="2027">2027</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted text-[20px]">expand_more</span>
+</div>
+</div>
+<!-- Botón Ver vista previa -->
+<div class="md:col-span-5 flex md:justify-end">
+<button class="w-full md:w-auto h-11 px-6 rounded-lg bg-surface-container-high hover:bg-surface-container font-label-md text-label-md text-primary font-semibold flex items-center justify-center gap-2 transition-colors shadow-sm active:scale-[0.99]" id="btnPreview" type="button">
+<span class="material-symbols-outlined text-[18px]">preview</span>
+<span>Ver vista previa</span>
+</button>
+</div>
+</div>
+<!-- Nota de control legal/temporal -->
+<div class="flex items-start gap-2.5 p-3 rounded-lg bg-surface-muted text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">info</span>
+<span>
+          Se verificarán contratos con vigencia activa durante el <strong>01/12/2026</strong> al <strong>31/12/2026</strong> y sin cuotas previamente generadas para este período. Los montos reflejan cláusulas de ajuste vigentes.
+        </span>
+</div>
+</form>
+</div>
+<!-- BLOQUE INFORMATIVO DE SEGURIDAD / CHECKLIST PREVIO (Flash Alert corporativa de confianza) -->
+<div class="relative bg-surface rounded-xl p-4 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-success"></div>
+<div class="flex items-start md:items-center justify-between gap-3 pl-2">
+<div class="flex items-start md:items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-success-soft text-success-text flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<div class="space-y-0.5">
+<div class="font-label-md text-label-md text-heading font-semibold flex items-center gap-2 flex-wrap">
+<span>Validación de consistencia completada sin observaciones</span>
+<span class="px-2 py-0.5 rounded text-[11px] bg-success-soft text-success-text font-medium uppercase tracking-wider">Auditado OK</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+<strong>4 contratos vigentes encontrados</strong> para Diciembre 2026. Ninguno registra cuota previa generada. Se calcularán automáticamente los vencimientos y cupones de pago.
+          </p>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-2 text-text-muted text-label-sm font-label-sm shrink-0">
+<span class="material-symbols-outlined text-[16px] text-success">lock</span>
+<span>Datos inmutables</span>
+</div>
+</div>
+</div>
+<!-- BLOQUE «VISTA PREVIA» (Tarjeta principal blanca grande con Data Table) -->
+<div class="bg-surface rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] overflow-hidden">
+<!-- Header del Bloque -->
+<div class="p-space-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-surface">
+<div class="flex items-center gap-3">
+<div class="w-2.5 h-6 rounded-full bg-primary"></div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-heading font-semibold">
+            Vista previa de emisión — Período Diciembre 2026
+          </h2>
+<p class="font-label-sm text-label-sm text-text-muted">Revise la nómina de cupones antes de asentar en cuenta corriente.</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-label-sm text-label-sm bg-success-soft text-success-text font-semibold">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+          4 contratos listos
+        </span>
+</div>
+</div>
+<!-- Tabla prolija estilo InmoGestión -->
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-muted text-text-muted font-table-header text-table-header uppercase">
+<th class="py-3.5 px-6">N° Contrato</th>
+<th class="py-3.5 px-6">Inquilino</th>
+<th class="py-3.5 px-6">Inmueble</th>
+<th class="py-3.5 px-6">Fecha Vencimiento</th>
+<th class="py-3.5 px-6 text-right">Monto Base</th>
+<th class="py-3.5 px-6 text-center">Estado Emisión</th>
+<th class="py-3.5 px-6 text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-low font-body-sm text-body-sm text-on-surface">
+<!-- Fila 1 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-6 font-semibold text-primary">
+<span class="px-2.5 py-1 rounded bg-primary-soft text-primary font-label-md text-label-md">C-001</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-heading">Camila Rojas</span>
+<span class="font-label-sm text-label-sm text-text-muted">DNI 38.412.901</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-medium text-heading">Belgrano 1250</span>
+<span class="font-label-sm text-label-sm text-text-muted">Depto · 3 amb. (Piso 4 - B)</span>
+</div>
+</td>
+<td class="py-4 px-6 font-medium text-heading">
+<div class="inline-flex items-center gap-1.5 font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-text-muted">calendar_today</span>
+                10/12/2026
+              </div>
+</td>
+<td class="py-4 px-6 text-right">
+<span class="font-semibold text-heading font-label-md text-label-md tabular-nums">$ 420.000</span>
+</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-label-sm text-label-sm bg-success-soft text-success-text font-medium">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                Se emitirá
+              </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="inline-flex items-center gap-1 text-primary hover:text-primary-hover font-label-md text-label-md font-medium px-2 py-1 rounded hover:bg-surface-container-low transition-colors" onclick="alert('Detalle de C-001: Camila Rojas · Belgrano 1250 · Monto $420.000')" type="button">
+<span>Ver detalle</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Fila 2 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-6 font-semibold text-primary">
+<span class="px-2.5 py-1 rounded bg-primary-soft text-primary font-label-md text-label-md">C-002</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-heading">Joaquín Medina</span>
+<span class="font-label-sm text-label-sm text-text-muted">DNI 35.882.110</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-medium text-heading">Mitre 845</span>
+<span class="font-label-sm text-label-sm text-text-muted">Casa · 4 amb. (C/Cochera)</span>
+</div>
+</td>
+<td class="py-4 px-6 font-medium text-heading">
+<div class="inline-flex items-center gap-1.5 font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-text-muted">calendar_today</span>
+                10/12/2026
+              </div>
+</td>
+<td class="py-4 px-6 text-right">
+<span class="font-semibold text-heading font-label-md text-label-md tabular-nums">$ 650.000</span>
+</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-label-sm text-label-sm bg-success-soft text-success-text font-medium">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                Se emitirá
+              </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="inline-flex items-center gap-1 text-primary hover:text-primary-hover font-label-md text-label-md font-medium px-2 py-1 rounded hover:bg-surface-container-low transition-colors" onclick="alert('Detalle de C-002: Joaquín Medina · Mitre 845 · Monto $650.000')" type="button">
+<span>Ver detalle</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Fila 3 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-6 font-semibold text-primary">
+<span class="px-2.5 py-1 rounded bg-primary-soft text-primary font-label-md text-label-md">C-003</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-heading">Valentina Funes</span>
+<span class="font-label-sm text-label-sm text-text-muted">CUIT 27-40192844-3</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-medium text-heading">San Martín 322</span>
+<span class="font-label-sm text-label-sm text-text-muted">Local comercial (PB Frente)</span>
+</div>
+</td>
+<td class="py-4 px-6 font-medium text-heading">
+<div class="inline-flex items-center gap-1.5 font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-text-muted">calendar_today</span>
+                15/12/2026
+              </div>
+</td>
+<td class="py-4 px-6 text-right">
+<span class="font-semibold text-heading font-label-md text-label-md tabular-nums">$ 780.000</span>
+</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-label-sm text-label-sm bg-success-soft text-success-text font-medium">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                Se emitirá
+              </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="inline-flex items-center gap-1 text-primary hover:text-primary-hover font-label-md text-label-md font-medium px-2 py-1 rounded hover:bg-surface-container-low transition-colors" onclick="alert('Detalle de C-003: Valentina Funes · San Martín 322 · Monto $780.000')" type="button">
+<span>Ver detalle</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Fila 4 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-6 font-semibold text-primary">
+<span class="px-2.5 py-1 rounded bg-primary-soft text-primary font-label-md text-label-md">C-004</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-semibold text-heading">Tomás Aguirre</span>
+<span class="font-label-sm text-label-sm text-text-muted">DNI 42.109.845</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-medium text-heading">Moreno 560</span>
+<span class="font-label-sm text-label-sm text-text-muted">Depto · 2 amb. (Piso 2 - A)</span>
+</div>
+</td>
+<td class="py-4 px-6 font-medium text-heading">
+<div class="inline-flex items-center gap-1.5 font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-text-muted">calendar_today</span>
+                05/12/2026
+              </div>
+</td>
+<td class="py-4 px-6 text-right">
+<span class="font-semibold text-heading font-label-md text-label-md tabular-nums">$ 390.000</span>
+</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-label-sm text-label-sm bg-success-soft text-success-text font-medium">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                Se emitirá
+              </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="inline-flex items-center gap-1 text-primary hover:text-primary-hover font-label-md text-label-md font-medium px-2 py-1 rounded hover:bg-surface-container-low transition-colors" onclick="alert('Detalle de C-004: Tomás Aguirre · Moreno 560 · Monto $390.000')" type="button">
+<span>Ver detalle</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</td>
+</tr>
+</tbody>
+<!-- Fila / Pie de tabla totalizadora -->
+<tfoot>
+<tr class="bg-surface-muted font-label-md text-label-md">
+<td class="py-4 px-6" colspan="4">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-heading font-headline-sm text-headline-sm">4 cuotas a emitir</span>
+<span class="text-text-muted">· Contratos validados y sin superposición</span>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider font-semibold">Total a emitir</span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold tabular-nums tracking-tight">$ 2.240.000</span>
+</div>
+</td>
+<td class="py-4 px-6 text-center text-text-muted font-label-sm text-label-sm" colspan="2">
+              Moneda: ARS ($)
+            </td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+<!-- ZONA DE CONFIRMACIÓN Y ACCIONES SEGURAS -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col gap-6">
+<!-- Panel con mensaje de confirmación y advertencia legal -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-xl bg-surface-container-low">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-soft text-primary flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
+<span class="material-symbols-outlined text-[20px]">shield</span>
+</div>
+<div class="space-y-0.5">
+<div class="font-label-md text-label-md text-heading font-semibold">Garantía de integridad de saldos</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Al confirmar, se generarán los <strong>4 registros de cobro</strong> con sus códigos de pago y se habilitará la notificación a los inquilinos. Esta acción asienta los importes en el libro contable de liquidaciones.
+          </p>
+</div>
+</div>
+</div>
+<!-- Opciones y Acciones finales -->
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-2">
+<!-- Checkbox de seguridad con interacción -->
+<label class="flex items-center gap-3 cursor-pointer select-none group">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary focus:ring-offset-0 cursor-pointer" id="checkNotificar" type="checkbox"/>
+<span class="font-body-md text-body-md text-heading group-hover:text-primary transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-text-muted group-hover:text-primary transition-colors">mark_email_read</span>
+          Notificar automáticamente por email a los inquilinos con el cupón adjunto
+        </span>
+</label>
+<!-- Botones de Acción -->
+<div class="flex items-center gap-3 self-stretch md:self-auto justify-end">
+<button class="w-full md:w-auto px-6 h-[42px] rounded-lg bg-surface-muted hover:bg-surface-container-low text-on-surface-variant font-label-md text-label-md font-semibold transition-colors flex items-center justify-center gap-2" onclick="history.back()" type="button">
+<span>Cancelar / Volver</span>
+</button>
+<button class="w-full md:w-auto px-7 h-[42px] rounded-lg bg-primary hover:bg-primary-hover text-on-primary font-label-md text-label-md font-semibold transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 active:scale-[0.98]" id="btnEmitir" onclick="handleEmitir()" type="button">
+<span class="material-symbols-outlined text-[20px]" id="emitirIcon">bolt</span>
+<span id="emitirText">Emitir 4 cuotas</span>
+</button>
+</div>
+</div>
+</div>
+<!-- MODAL / FEEDBACK TOAST DE RESULTADO (Oculto inicialmente, manejado con Vanilla JS) -->
+<div class="hidden relative bg-surface rounded-xl p-5 shadow-[0_20px_25px_-5px_rgba(0,0,0,0.1)] overflow-hidden transition-all duration-300" id="successBanner">
+<div class="absolute left-0 top-0 bottom-0 w-2 bg-success"></div>
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pl-3">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-full bg-success text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-heading font-semibold">¡Emisión de cuotas completada con éxito!</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            Se registraron correctamente los 4 cupones para el período <strong>Diciembre 2026</strong> por un total de <strong>$ 2.240.000</strong>. Las notificaciones por correo fueron encoladas.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<a class="w-full sm:w-auto px-4 py-2 rounded-lg bg-success-soft text-success-text hover:bg-success hover:text-on-primary font-label-md text-label-md font-semibold transition-colors text-center" href="#">
+          Ir a Cobranzas
+        </a>
+<button class="p-2 rounded-lg hover:bg-surface-container-low text-text-muted transition-colors" onclick="document.getElementById('successBanner').classList.add('hidden')" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function handleEmitir() {
+    const btn = document.getElementById('btnEmitir');
+    const icon = document.getElementById('emitirIcon');
+    const text = document.getElementById('emitirText');
+    const notifChecked = document.getElementById('checkNotificar').checked;
+
+    // Estado cargando
+    btn.disabled = true;
+    btn.classList.add('opacity-80', 'cursor-not-allowed');
+    icon.textContent = 'progress_activity';
+    icon.classList.add('animate-spin');
+    text.textContent = 'Procesando cupones...';
+
+    setTimeout(() => {
+      // Estado final
+      btn.classList.remove('opacity-80', 'cursor-not-allowed');
+      icon.classList.remove('animate-spin');
+      icon.textContent = 'check';
+      text.textContent = 'Cuotas Emitidas';
+      btn.classList.remove('bg-primary', 'hover:bg-primary-hover');
+      btn.classList.add('bg-success', 'hover:bg-success');
+
+      // Revelar banner con animación
+      const banner = document.getElementById('successBanner');
+      banner.classList.remove('hidden');
+      banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 900);
+  }
+
+  // Interacción en selector de período
+  document.getElementById('btnPreview')?.addEventListener('click', () => {
+    const mes = document.getElementById('mesSelector').value;
+    const anio = document.getElementById('anioSelector').value;
+    if (mes !== '12' || anio !== '2026') {
+      alert(`Buscando vigencias para el período ${mes}/${anio}. Período sin cuotas emitidas.`);
+    } else {
+      alert('Vista previa actualizada: 4 contratos listos para Diciembre 2026.');
+    }
+  });
+</script></div></main></div></body></html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-primary": "#c3c0ff",
+          "error-container": "#ffdad6",
+          "warning-text": "#92400E",
+          "danger-text": "#B91C1C",
+          "info-text": "#1E40AF",
+          "on-surface-variant": "#464555",
+          "on-tertiary": "#ffffff",
+          "on-primary-fixed": "#0f0069",
+          "success": "#10B981",
+          "tertiary-fixed": "#ffdbcc",
+          "warning-soft": "#FFFBEB",
+          "background-end": "#D9E2EC",
+          "border-input": "#D1D5DB",
+          "tertiary": "#7e3000",
+          "danger": "#EF4444",
+          "inverse-surface": "#27313f",
+          "on-primary-container": "#dad7ff",
+          "tertiary-container": "#a44100",
+          "row-hover": "#F3F4F6",
+          "on-surface": "#121c2a",
+          "surface-variant": "#d9e3f6",
+          "surface": "#FFFFFF",
+          "primary-container": "#4f46e5",
+          "surface-container-lowest": "#ffffff",
+          "danger-hover": "#DC2626",
+          "surface-container-highest": "#d9e3f6",
+          "on-secondary-container": "#606366",
+          "background": "#f8f9ff",
+          "success-text": "#065F46",
+          "heading": "#111827",
+          "background-start": "#F0F4F8",
+          "primary-fixed-dim": "#c3c0ff",
+          "secondary-fixed": "#e0e2e6",
+          "border": "#E5E7EB",
+          "primary-hover": "#4338CA",
+          "on-secondary-fixed": "#191c1f",
+          "info-soft": "#DBEAFE",
+          "on-secondary": "#ffffff",
+          "surface-container-high": "#dee9fc",
+          "danger-soft": "#FEF2F2",
+          "text-muted": "#6B7280",
+          "on-primary": "#ffffff",
+          "tertiary-fixed-dim": "#ffb695",
+          "on-primary-fixed-variant": "#3323cc",
+          "surface-muted": "#F9FAFB",
+          "surface-dim": "#d0dbed",
+          "outline-variant": "#c7c4d8",
+          "primary-fixed": "#e2dfff",
+          "secondary": "#5c5f62",
+          "inverse-on-surface": "#eaf1ff",
+          "info": "#2563EB",
+          "secondary-fixed-dim": "#c4c7ca",
+          "surface-container": "#e6eeff",
+          "on-tertiary-fixed": "#351000",
+          "success-soft": "#ECFDF5",
+          "on-error": "#ffffff",
+          "secondary-container": "#dee0e4",
+          "on-secondary-fixed-variant": "#44474a",
+          "error": "#ba1a1a",
+          "on-background": "#121c2a",
+          "surface-container-low": "#eff4ff",
+          "on-tertiary-fixed-variant": "#7b2f00",
+          "on-tertiary-container": "#ffd2be",
+          "surface-bright": "#f8f9ff",
+          "outline": "#777587",
+          "primary-soft": "#E0E7FF",
+          "on-error-container": "#93000a",
+          "warning": "#F59E0B",
+          "primary": "#3525cd",
+          "surface-tint": "#4d44e3"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-lg": "1.5rem",
+          "space-xs": "0.25rem",
+          "gutter-mobile": "1rem",
+          "margin-mobile": "1rem",
+          "margin": "2rem",
+          "space-sm": "0.5rem",
+          "space-md": "1rem",
+          "space-xl": "2rem",
+          "gutter": "1.5rem"
+        },
+        "fontFamily": {
+          "headline-md": ["Inter"],
+          "metric-display": ["Inter"],
+          "label-sm": ["Inter"],
+          "body-lg": ["Inter"],
+          "body-md": ["Inter"],
+          "table-header": ["Inter"],
+          "headline-lg-mobile": ["Inter"],
+          "label-md": ["Inter"],
+          "headline-lg": ["Inter"],
+          "body-sm": ["Inter"],
+          "headline-sm": ["Inter"]
+        },
+        "fontSize": {
+          "headline-md": ["20px", {"lineHeight": "26px", "fontWeight": "500"}],
+          "metric-display": ["32px", {"lineHeight": "38px", "fontWeight": "600"}],
+          "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+          "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+          "body-md": ["15px", {"lineHeight": "22px", "fontWeight": "400"}],
+          "table-header": ["13px", {"lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+          "headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+          "label-md": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+          "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+          "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+          "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "500"}]
+        }
+      },
+    },
+  }</script></head><body class="bg-gradient-to-b from-background-start to-background-end min-h-screen text-on-surface font-body-md text-body-md antialiased"><aside class="fixed left-0 top-0 h-screen w-[260px] bg-surface z-50 flex flex-col justify-between shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center gap-space-sm"><div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shadow-sm shrink-0"><span class="material-symbols-outlined text-on-primary text-[22px]">home</span></div><div class="flex flex-col overflow-hidden"><span class="font-headline-sm text-headline-sm text-heading font-semibold leading-tight truncate">InmoGestión</span><span class="font-label-sm text-label-sm text-text-muted leading-tight truncate">Plataforma Inmobiliaria 2026</span></div></div><nav class="px-space-sm mt-space-sm space-y-1 flex flex-col overflow-y-auto max-h-[calc(100vh-230px)]" data-active-classes="bg-primary-soft text-primary-hover font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="inmuebles" href="#"><span class="material-symbols-outlined text-[20px]">apartment</span><span>Inmuebles</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="contratos" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span>Contratos</span></a><div class="pt-1"><div class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant font-body-sm text-body-sm"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="flex-1">Cuotas</span><span class="material-symbols-outlined text-[16px] text-text-muted">expand_more</span></div><div class="pl-8 pr-space-xs space-y-1 mt-0.5"><a class="flex items-center px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-label-md text-label-md" data-path="emitir-cuotas" href="#"><span>Emitir cuotas</span></a><a class="flex items-center px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-label-md text-label-md" data-path="cobranzas" href="#"><span>Cobranzas</span></a></div></div><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="pagos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Pagos</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="liquidaciones" href="#"><span class="material-symbols-outlined text-[20px]">account_balance_wallet</span><span>Liquidaciones</span></a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a></nav></div><div class="p-space-md bg-surface"><div class="bg-surface-muted rounded-xl p-space-sm flex items-center justify-between mb-space-xs"><div class="flex items-center gap-space-sm overflow-hidden"><div class="w-9 h-9 rounded-full bg-primary-container text-on-primary font-semibold flex items-center justify-center text-label-md shrink-0">LB</div><div class="flex flex-col overflow-hidden"><span class="font-label-md text-label-md font-semibold text-heading truncate">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted truncate">Administradora</span></div></div><a class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:bg-danger-soft hover:text-danger-text transition-colors" data-path="login" href="#" title="Cerrar Sesión"><span class="material-symbols-outlined text-[18px]">logout</span></a></div></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 flex items-center justify-between px-space-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-space-xs text-body-sm font-body-sm text-text-muted"><span class="hover:text-heading cursor-pointer transition-colors">InmoGestión</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="text-heading font-medium">Dashboard</span></div><div class="flex items-center gap-space-md"><div class="inline-flex items-center gap-1.5 px-space-md py-1 bg-surface-muted rounded-full text-text-muted font-label-md text-label-md"><span class="material-symbols-outlined text-[16px]">calendar_today</span><span>06/11/2026</span></div><button class="relative w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-row-hover transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1 right-1 w-4 h-4 bg-danger text-on-primary font-label-sm text-[10px] leading-none flex items-center justify-center rounded-full font-bold">2</span></button><div class="flex items-center gap-space-sm pl-space-xs"><div class="w-9 h-9 rounded-full bg-primary-container text-on-primary font-semibold flex items-center justify-center font-label-md text-label-md shadow-sm">LB</div><div class="hidden md:flex flex-col"><span class="font-label-md text-label-md font-semibold text-heading leading-tight">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted leading-tight">Administradora</span></div></div></div></header><main class="relative pt-16 min-h-screen px-space-xl py-space-xl"><div class="flex flex-col w-full">
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentBreadcrumb = document.querySelector('header .text-heading.font-medium');
+      if (currentBreadcrumb) {
+        currentBreadcrumb.textContent = 'Usuarios';
+      }
+      const navLinks = document.querySelectorAll('aside nav a');
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-path') === 'usuarios') {
+          link.className = 'flex items-center gap-space-sm px-space-md py-2.5 rounded-lg bg-primary-soft text-primary-hover font-semibold transition-colors font-body-sm text-body-sm border-l-4 border-primary-container pl-3';
+        } else if (link.getAttribute('data-path') === 'dashboard') {
+          link.className = 'flex items-center gap-space-sm px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors font-body-sm text-body-sm';
+        }
+      });
+    });
+  </script>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs mb-0.5">
+<h1 class="font-headline-lg text-headline-lg text-heading font-bold tracking-tight">Usuarios</h1>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-surface-muted text-text-muted">10 activos</span>
+</div>
+<p class="font-body-md text-body-md text-text-muted">Padrón de clientes y personal</p>
+</div>
+<div class="flex items-center gap-space-sm self-start sm:self-auto">
+<button class="inline-flex items-center gap-2 h-[42px] px-space-lg bg-primary-container hover:bg-primary-hover text-on-primary rounded-lg font-label-md text-label-md font-semibold transition-all shadow-sm focus:outline-none focus:ring-4 focus:ring-primary-container/20 active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-[19px]">person_add</span>
+<span>+ Nuevo usuario</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md mb-space-lg">
+<div class="bg-surface rounded-xl p-space-md shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider font-semibold">Inquilinos</span>
+<span class="font-metric-display text-metric-display text-heading mt-0.5">6</span>
+<span class="font-label-sm text-label-sm text-success-text flex items-center gap-1 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> 60% del padrón total
+        </span>
+</div>
+<div class="w-11 h-11 rounded-full bg-success-soft text-success-text flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">key</span>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-space-md shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider font-semibold">Propietarios</span>
+<span class="font-metric-display text-metric-display text-heading mt-0.5">3</span>
+<span class="font-label-sm text-label-sm text-info-text flex items-center gap-1 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-info"></span> 30% del padrón total
+        </span>
+</div>
+<div class="w-11 h-11 rounded-full bg-info-soft text-info-text flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">real_estate_agent</span>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-space-md shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider font-semibold">Administradores</span>
+<span class="font-metric-display text-metric-display text-heading mt-0.5">1</span>
+<span class="font-label-sm text-label-sm text-primary-hover flex items-center gap-1 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Gestión del sistema
+        </span>
+</div>
+<div class="w-11 h-11 rounded-full bg-primary-soft text-primary-hover flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">shield_person</span>
+</div>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] mb-space-lg">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+<div class="flex-1 min-w-[280px]">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[20px] text-text-muted pointer-events-none">search</span>
+<input class="w-full h-11 pl-11 pr-4 bg-surface text-on-surface font-body-sm text-body-sm rounded-lg border border-border-input focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 focus:outline-none placeholder:text-text-muted transition-colors" placeholder="Buscar por nombre, DNI o email..." type="text"/>
+</div>
+</div>
+<div class="flex flex-wrap sm:flex-nowrap items-center gap-3">
+<div class="w-full sm:w-48 relative">
+<select class="w-full h-11 pl-3.5 pr-9 bg-surface text-on-surface font-body-sm text-body-sm rounded-lg border border-border-input focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 focus:outline-none appearance-none cursor-pointer transition-colors">
+<option selected="" value="todos">Todos los roles</option>
+<option value="admin">Administrador</option>
+<option value="propietario">Propietario</option>
+<option value="inquilino">Inquilino</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[20px] text-text-muted pointer-events-none">expand_more</span>
+</div>
+<label class="flex items-center gap-2.5 px-2 py-2 cursor-pointer select-none text-text-muted hover:text-on-surface transition-colors whitespace-nowrap">
+<input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container/30 border-border-input cursor-pointer" type="checkbox"/>
+<span class="font-body-sm text-body-sm">Incluir dados de baja</span>
+</label>
+<div class="flex items-center gap-2 ml-auto sm:ml-0">
+<button class="h-11 px-4 bg-primary-container hover:bg-primary-hover text-on-primary rounded-lg font-label-md text-label-md font-semibold inline-flex items-center gap-1.5 transition-colors shadow-sm focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_alt</span>
+<span>Filtrar</span>
+</button>
+<button class="h-11 px-3.5 bg-surface text-text-muted hover:text-on-surface hover:bg-row-hover rounded-lg font-label-md text-label-md font-medium border border-border-input inline-flex items-center gap-1.5 transition-colors" title="Restablecer filtros" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span class="hidden sm:inline">Limpiar</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-muted border-b border-border">
+<th class="py-3.5 px-space-md font-table-header text-table-header text-text-muted uppercase tracking-wider font-semibold">Usuario</th>
+<th class="py-3.5 px-space-md font-table-header text-table-header text-text-muted uppercase tracking-wider font-semibold">DNI</th>
+<th class="py-3.5 px-space-md font-table-header text-table-header text-text-muted uppercase tracking-wider font-semibold">Correo Electrónico</th>
+<th class="py-3.5 px-space-md font-table-header text-table-header text-text-muted uppercase tracking-wider font-semibold">Teléfono</th>
+<th class="py-3.5 px-space-md font-table-header text-table-header text-text-muted uppercase tracking-wider font-semibold">Rol</th>
+<th class="py-3.5 px-space-md font-table-header text-table-header text-text-muted uppercase tracking-wider font-semibold">Fecha de Alta</th>
+<th class="py-3.5 px-space-md font-table-header text-table-header text-text-muted uppercase tracking-wider font-semibold text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border">
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-soft text-primary-hover font-semibold flex items-center justify-center font-label-md text-label-md shrink-0">
+                  LB
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading leading-tight">Laura Benítez</span>
+<span class="font-label-sm text-label-sm text-text-muted leading-tight">Administración Central</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface-variant font-mono tabular-nums">34.892.104</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface">l.benitez@inmogestion.com.ar</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">(011) 4892-3310</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-label-sm bg-primary-soft text-primary-hover font-medium">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+<span>Administrador</span>
+</span>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">12/03/2023</td>
+<td class="py-3.5 px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-primary-container hover:bg-primary-soft transition-colors" title="Editar usuario" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-border-input opacity-40 cursor-not-allowed" disabled="" title="No se puede dar de baja (Usuario propio)" type="button">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-info-soft text-info-text font-semibold flex items-center justify-center font-label-md text-label-md shrink-0">
+                  RS
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading leading-tight">Ricardo Sosa</span>
+<span class="font-label-sm text-label-sm text-text-muted leading-tight">Cartera Belgrano / Colegiales</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface-variant font-mono tabular-nums">24.118.905</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface">r.sosa@inmogestion.com.ar</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">(011) 5120-8842</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-label-sm bg-info-soft text-info-text font-medium">
+<span class="material-symbols-outlined text-[15px]">apartment</span>
+<span>Propietario</span>
+</span>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">15/01/2024</td>
+<td class="py-3.5 px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-primary-container hover:bg-primary-soft transition-colors" title="Editar usuario" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-danger-text hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-info-soft text-info-text font-semibold flex items-center justify-center font-label-md text-label-md shrink-0">
+                  MQ
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading leading-tight">Marta Quiroga</span>
+<span class="font-label-sm text-label-sm text-text-muted leading-tight">Cartera Palermo Soho</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface-variant font-mono tabular-nums">21.650.312</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface">marta.quiroga@yahoo.com.ar</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">(011) 4780-9921</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-label-sm bg-info-soft text-info-text font-medium">
+<span class="material-symbols-outlined text-[15px]">apartment</span>
+<span>Propietario</span>
+</span>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">04/05/2024</td>
+<td class="py-3.5 px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-primary-container hover:bg-primary-soft transition-colors" title="Editar usuario" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-danger-text hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-info-soft text-info-text font-semibold flex items-center justify-center font-label-md text-label-md shrink-0">
+                  HP
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading leading-tight">Hernán Paz</span>
+<span class="font-label-sm text-label-sm text-text-muted leading-tight">Inversor Residencial</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface-variant font-mono tabular-nums">28.349.880</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface">hernan.paz@inversiones.com.ar</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">(011) 6204-1189</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-label-sm bg-info-soft text-info-text font-medium">
+<span class="material-symbols-outlined text-[15px]">apartment</span>
+<span>Propietario</span>
+</span>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">18/08/2024</td>
+<td class="py-3.5 px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-primary-container hover:bg-primary-soft transition-colors" title="Editar usuario" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-danger-text hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-success-soft text-success-text font-semibold flex items-center justify-center font-label-md text-label-md shrink-0">
+                  CR
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading leading-tight">Camila Rojas</span>
+<span class="font-label-sm text-label-sm text-text-muted leading-tight">Contrato CON-2025-081</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface-variant font-mono tabular-nums">39.421.084</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface">camila.rojas@gmail.com</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">(011) 3920-4412</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-label-sm bg-success-soft text-success-text font-medium">
+<span class="material-symbols-outlined text-[15px]">home_pin</span>
+<span>Inquilino</span>
+</span>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">01/02/2025</td>
+<td class="py-3.5 px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-primary-container hover:bg-primary-soft transition-colors" title="Editar usuario" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-danger-text hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-success-soft text-success-text font-semibold flex items-center justify-center font-label-md text-label-md shrink-0">
+                  JM
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading leading-tight">Joaquín Medina</span>
+<span class="font-label-sm text-label-sm text-text-muted leading-tight">Contrato CON-2025-094</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface-variant font-mono tabular-nums">32.148.902</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface">joaquin.medina@outlook.com</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">(011) 5503-7721</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-label-sm bg-success-soft text-success-text font-medium">
+<span class="material-symbols-outlined text-[15px]">home_pin</span>
+<span>Inquilino</span>
+</span>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">10/03/2025</td>
+<td class="py-3.5 px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-primary-container hover:bg-primary-soft transition-colors" title="Editar usuario" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-danger-text hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-success-soft text-success-text font-semibold flex items-center justify-center font-label-md text-label-md shrink-0">
+                  VF
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading leading-tight">Valentina Funes</span>
+<span class="font-label-sm text-label-sm text-text-muted leading-tight">Contrato CON-2025-112</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface-variant font-mono tabular-nums">41.205.673</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface">valentina.funes@gmail.com</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">(011) 4410-6678</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-label-sm bg-success-soft text-success-text font-medium">
+<span class="material-symbols-outlined text-[15px]">home_pin</span>
+<span>Inquilino</span>
+</span>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">19/06/2025</td>
+<td class="py-3.5 px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-primary-container hover:bg-primary-soft transition-colors" title="Editar usuario" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-danger-text hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-success-soft text-success-text font-semibold flex items-center justify-center font-label-md text-label-md shrink-0">
+                  TA
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading leading-tight">Tomás Aguirre</span>
+<span class="font-label-sm text-label-sm text-text-muted leading-tight">Contrato CON-2025-130</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface-variant font-mono tabular-nums">29.834.110</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface">tomas.aguirre@live.com.ar</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">(011) 5119-3304</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-label-sm bg-success-soft text-success-text font-medium">
+<span class="material-symbols-outlined text-[15px]">home_pin</span>
+<span>Inquilino</span>
+</span>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">28/07/2025</td>
+<td class="py-3.5 px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-primary-container hover:bg-primary-soft transition-colors" title="Editar usuario" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-danger-text hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-success-soft text-success-text font-semibold flex items-center justify-center font-label-md text-label-md shrink-0">
+                  LP
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading leading-tight">Lucía Paredes</span>
+<span class="font-label-sm text-label-sm text-text-muted leading-tight">Contrato CON-2025-155</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface-variant font-mono tabular-nums">38.712.945</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface">lucia.paredes@gmail.com</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">(011) 4802-9951</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-label-sm bg-success-soft text-success-text font-medium">
+<span class="material-symbols-outlined text-[15px]">home_pin</span>
+<span>Inquilino</span>
+</span>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">14/09/2025</td>
+<td class="py-3.5 px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-primary-container hover:bg-primary-soft transition-colors" title="Editar usuario" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-danger-text hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-success-soft text-success-text font-semibold flex items-center justify-center font-label-md text-label-md shrink-0">
+                  EA
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-heading leading-tight">Elena Arias</span>
+<span class="font-label-sm text-label-sm text-text-muted leading-tight">Contrato CON-2026-004</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface-variant font-mono tabular-nums">36.550.819</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-on-surface">elena.arias@hotmail.com</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">(011) 6041-8833</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-label-sm font-label-sm bg-success-soft text-success-text font-medium">
+<span class="material-symbols-outlined text-[15px]">home_pin</span>
+<span>Inquilino</span>
+</span>
+</td>
+<td class="py-3.5 px-space-md font-body-sm text-body-sm text-text-muted font-mono tabular-nums">02/10/2026</td>
+<td class="py-3.5 px-space-md whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-primary-container hover:bg-primary-soft transition-colors" title="Editar usuario" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-danger-text hover:bg-danger-soft transition-colors" title="Dar de baja" type="button">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-space-md py-4 bg-surface flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-border">
+<div class="text-text-muted font-body-sm text-body-sm">
+        Mostrando <span class="font-semibold text-heading">1–10</span> de <span class="font-semibold text-heading">10</span> usuarios registrados
+      </div>
+<div class="inline-flex items-center gap-1.5">
+<button class="px-3 h-8.5 rounded-lg border border-border-input text-border-input font-label-md text-label-md inline-flex items-center gap-1 cursor-not-allowed opacity-50" disabled="" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+<span>Anterior</span>
+</button>
+<button class="w-8.5 h-8.5 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md font-semibold flex items-center justify-center shadow-sm" type="button">
+          1
+        </button>
+<button class="px-3 h-8.5 rounded-lg border border-border-input text-border-input font-label-md text-label-md inline-flex items-center gap-1 cursor-not-allowed opacity-50" disabled="" type="button">
+<span>Siguiente</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

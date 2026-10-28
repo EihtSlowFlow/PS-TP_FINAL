@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>InmoGestión 2026</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "warning-soft": "#FFFBEB",
+        "inverse-on-surface": "#eaf1ff",
+        "error": "#ba1a1a",
+        "secondary-fixed": "#e0e2e6",
+        "on-tertiary-container": "#ffd2be",
+        "surface-container-low": "#eff4ff",
+        "secondary": "#5c5f62",
+        "info": "#2563EB",
+        "on-background": "#121c2a",
+        "surface-container-high": "#dee9fc",
+        "background-start": "#F0F4F8",
+        "primary-fixed": "#e2dfff",
+        "surface-muted": "#F9FAFB",
+        "tertiary-fixed": "#ffdbcc",
+        "warning-text": "#92400E",
+        "on-error-container": "#93000a",
+        "danger": "#EF4444",
+        "heading": "#111827",
+        "success-text": "#065F46",
+        "danger-hover": "#DC2626",
+        "on-error": "#ffffff",
+        "background-end": "#D9E2EC",
+        "warning": "#F59E0B",
+        "primary": "#3525cd",
+        "outline": "#777587",
+        "primary-container": "#4f46e5",
+        "outline-variant": "#c7c4d8",
+        "on-tertiary": "#ffffff",
+        "on-primary-fixed-variant": "#3323cc",
+        "background": "#f8f9ff",
+        "on-secondary-fixed": "#191c1f",
+        "on-tertiary-fixed-variant": "#7b2f00",
+        "danger-text": "#B91C1C",
+        "tertiary-fixed-dim": "#ffb695",
+        "primary-hover": "#4338CA",
+        "border-input": "#D1D5DB",
+        "on-surface": "#121c2a",
+        "info-soft": "#DBEAFE",
+        "success": "#10B981",
+        "on-primary-fixed": "#0f0069",
+        "error-container": "#ffdad6",
+        "on-secondary": "#ffffff",
+        "inverse-primary": "#c3c0ff",
+        "on-secondary-fixed-variant": "#44474a",
+        "surface-container-lowest": "#ffffff",
+        "on-primary-container": "#dad7ff",
+        "on-primary": "#ffffff",
+        "text-muted": "#6B7280",
+        "primary-fixed-dim": "#c3c0ff",
+        "tertiary-container": "#a44100",
+        "row-hover": "#F3F4F6",
+        "surface-dim": "#d0dbed",
+        "surface-tint": "#4d44e3",
+        "on-tertiary-fixed": "#351000",
+        "surface-container": "#e6eeff",
+        "primary-soft": "#E0E7FF",
+        "surface": "#FFFFFF",
+        "inverse-surface": "#27313f",
+        "danger-soft": "#FEF2F2",
+        "success-soft": "#ECFDF5",
+        "on-surface-variant": "#464555",
+        "info-text": "#1E40AF",
+        "secondary-container": "#dee0e4",
+        "surface-container-highest": "#d9e3f6",
+        "tertiary": "#7e3000",
+        "secondary-fixed-dim": "#c4c7ca",
+        "border": "#E5E7EB",
+        "on-secondary-container": "#606366",
+        "surface-bright": "#f8f9ff",
+        "surface-variant": "#d9e3f6"
+      },
+      "borderRadius": {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      "spacing": {
+        "space-lg": "1.5rem",
+        "space-xs": "0.25rem",
+        "margin": "2rem",
+        "margin-mobile": "1rem",
+        "gutter-mobile": "1rem",
+        "gutter": "1.5rem",
+        "space-sm": "0.5rem",
+        "space-md": "1rem",
+        "space-xl": "2rem"
+      },
+      "fontFamily": {
+        "headline-lg": ["Inter"],
+        "body-sm": ["Inter"],
+        "label-md": ["Inter"],
+        "label-sm": ["Inter"],
+        "headline-sm": ["Inter"],
+        "headline-md": ["Inter"],
+        "metric-display": ["Inter"],
+        "body-md": ["Inter"],
+        "body-lg": ["Inter"],
+        "headline-lg-mobile": ["Inter"],
+        "table-header": ["Inter"]
+      },
+      "fontSize": {
+        "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+        "label-md": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+        "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "500"}],
+        "headline-md": ["20px", {"lineHeight": "26px", "fontWeight": "500"}],
+        "metric-display": ["32px", {"lineHeight": "38px", "fontWeight": "600"}],
+        "body-md": ["15px", {"lineHeight": "22px", "fontWeight": "400"}],
+        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+        "table-header": ["13px", {"lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+      }
+    }
+  }
+}</script></head><body class="min-h-screen flex flex-col bg-gradient-to-b from-background-start to-background-end text-on-surface font-body-md text-body-md"><header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-margin-mobile lg:px-margin flex items-center justify-between"><a class="flex items-center gap-space-sm" data-path="landing-publica" href="#"><div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-on-primary text-[22px]">home</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-heading leading-tight">InmoGestión</span><span class="font-label-sm text-label-sm text-text-muted leading-tight">Plataforma Inmobiliaria 2026</span></div></a><nav class="hidden md:flex items-center gap-space-md" data-active-classes="bg-surface-container text-on-surface font-bold rounded-lg"><a class="text-on-surface-variant hover:text-on-surface px-space-sm py-space-xs transition-colors font-label-md text-label-md" data-path="landing-publica" href="#">Inicio</a><a class="text-on-surface-variant hover:text-on-surface px-space-sm py-space-xs transition-colors font-label-md text-label-md" data-path="catalogo-inmuebles" href="#">Propiedades</a><a class="text-on-surface-variant hover:text-on-surface px-space-sm py-space-xs transition-colors font-label-md text-label-md" data-path="planes-servicios" href="#">Servicios</a><a class="text-on-surface-variant hover:text-on-surface px-space-sm py-space-xs transition-colors font-label-md text-label-md" data-path="soporte-tecnico" href="#">Contacto</a></nav><div class="flex items-center gap-space-sm"><a class="h-[42px] px-space-lg rounded-lg bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-colors font-label-md text-label-md flex items-center justify-center" data-path="login" href="#">Ingresar</a><a class="h-[42px] px-space-lg rounded-lg bg-primary-container text-on-primary hover:bg-primary-hover transition-colors font-label-md text-label-md flex items-center justify-center shadow-sm" data-path="registro" href="#">Registrarse</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 flex-1 max-w-7xl mx-auto px-margin-mobile lg:px-margin"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto py-space-xl flex flex-col gap-space-xl">
+<!-- Hero Header / Intro Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-space-lg bg-surface p-space-xl rounded-xl shadow-sm">
+<div class="flex flex-col gap-space-sm max-w-3xl">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-space-xs px-space-sm py-0.5 rounded-full bg-primary-soft text-primary font-label-sm text-label-sm tracking-wide">
+<span class="material-symbols-outlined text-[14px]">apartment</span>
+            EXPLORADOR DE PROPIEDADES
+          </span>
+<span class="inline-flex items-center gap-1 px-space-sm py-0.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+            24 propiedades disponibles
+          </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-heading tracking-tight">
+          Encontrá tu próximo alquiler
+        </h1>
+<p class="font-body-md text-body-md text-secondary leading-relaxed">
+          Catálogo oficial de propiedades residenciales y comerciales disponibles para alquiler inmediato. Valores contractuales actualizados al 06/11/2026.
+        </p>
+</div>
+<div class="flex items-center gap-space-md self-start md:self-end">
+<div class="flex items-center gap-space-xs text-text-muted font-label-sm text-label-sm bg-surface-muted px-space-md py-space-sm rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-info">verified</span>
+<span>Garantías revisadas por InmoGestión</span>
+</div>
+</div>
+</section>
+<!-- Filters Bar Card -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<form class="flex flex-col gap-space-md" id="filter-form" onsubmit="event.preventDefault();">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-space-md">
+<!-- Search input -->
+<div class="lg:col-span-4 flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-heading" for="search-input">Ubicación o dirección</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-space-md text-secondary text-[20px] pointer-events-none">search</span>
+<input class="w-full h-11 pl-11 pr-space-md bg-surface-muted hover:bg-surface text-on-surface placeholder:text-text-muted rounded-lg font-body-sm text-body-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container" id="search-input" placeholder="Ej: Av. Roca, Belgrano, Centro..." type="text"/>
+</div>
+</div>
+<!-- Type dropdown -->
+<div class="lg:col-span-2 flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-heading" for="property-type">Tipo de inmueble</label>
+<div class="relative flex items-center">
+<select class="w-full h-11 px-space-md pr-10 appearance-none bg-surface-muted hover:bg-surface text-on-surface rounded-lg font-body-sm text-body-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container cursor-pointer" id="property-type">
+<option value="">Todos los tipos</option>
+<option value="departamento">Departamento</option>
+<option value="casa">Casa</option>
+<option value="local">Local comercial</option>
+<option value="oficina">Oficina</option>
+<option value="terreno">Terreno</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-md text-secondary text-[20px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Rooms dropdown -->
+<div class="lg:col-span-2 flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-heading" for="rooms-count">Ambientes</label>
+<div class="relative flex items-center">
+<select class="w-full h-11 px-space-md pr-10 appearance-none bg-surface-muted hover:bg-surface text-on-surface rounded-lg font-body-sm text-body-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container cursor-pointer" id="rooms-count">
+<option value="">Cualquiera</option>
+<option value="1">1 amb.</option>
+<option value="2">2 amb.</option>
+<option value="3">3 amb.</option>
+<option value="4">4+ amb.</option>
+</select>
+<span class="material-symbols-outlined absolute right-space-md text-secondary text-[20px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Price Min -->
+<div class="lg:col-span-2 flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-heading" for="price-min">Precio mín.</label>
+<div class="relative flex items-center">
+<span class="absolute left-space-md text-secondary font-label-md text-label-md pointer-events-none">$</span>
+<input class="w-full h-11 pl-8 pr-space-md bg-surface-muted hover:bg-surface text-on-surface placeholder:text-text-muted rounded-lg font-body-sm text-body-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container" id="price-min" placeholder="200.000" type="text"/>
+</div>
+</div>
+<!-- Price Max -->
+<div class="lg:col-span-2 flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-heading" for="price-max">Precio máx.</label>
+<div class="relative flex items-center">
+<span class="absolute left-space-md text-secondary font-label-md text-label-md pointer-events-none">$</span>
+<input class="w-full h-11 pl-8 pr-space-md bg-surface-muted hover:bg-surface text-on-surface placeholder:text-text-muted rounded-lg font-body-sm text-body-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-container" id="price-max" placeholder="800.000" type="text"/>
+</div>
+</div>
+</div>
+<!-- Filter Actions -->
+<div class="flex items-center justify-between pt-space-xs flex-wrap gap-space-md">
+<div class="flex items-center gap-space-xs text-text-muted font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span>Precios expresados en Pesos Argentinos (ARS) mensuales</span>
+</div>
+<div class="flex items-center gap-space-sm ml-auto">
+<button class="h-[42px] px-space-md rounded-lg bg-surface-muted hover:bg-secondary-container text-on-surface-variant transition-colors font-label-md text-label-md flex items-center gap-space-xs" type="reset">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span>Limpiar</span>
+</button>
+<button class="h-[42px] px-space-lg rounded-lg bg-primary-container hover:bg-primary-hover text-on-primary transition-colors font-label-md text-label-md flex items-center gap-space-xs shadow-sm" type="submit">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+<span>Filtrar</span>
+</button>
+</div>
+</div>
+</form>
+</section>
+<!-- Properties Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+<!-- Card 1: Roca 1020, Piso 2 (OBLIGATORIA) -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col group">
+<div class="relative w-full aspect-[16/10] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Interior de oficina moderna y luminosa en Buenos Aires con escritorios de trabajo de madera clara, sillas ergonómicas oscuras, ventanales con vista a la ciudad y piso flotante. Estilo arquitectónico corporativo, iluminación natural diurna nítida, tonos neutros y toques índigo sutiles." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc6IOfsPTfWdUuDivI8my4EDiPpLPrleUiGAHrE2HWheNpQ3PLf9O8yE6sLD0AUHERWAoL3-QCgxLwAW3f_2hPfbuniX_R1YjnOkUzM9G8MI_uVlWtYvC6hyR6Owff53Xy0O1Y_-n_R7LFn7KYLO87DRF6jYaCjVXd_Kpz0E9JpNnJkcj1-bH5T-EsLKnNpmtUoIxZRND2g6zeu74B3tKtSisAf7KQXOTrVhMXAuk"/>
+<div class="absolute top-space-md left-space-md flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm shadow-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              Disponible
+            </span>
+</div>
+<span class="absolute top-space-md right-space-md bg-inverse-surface/80 text-inverse-on-surface px-space-sm py-0.5 rounded font-label-sm text-label-sm backdrop-blur-sm">
+            REF-1020
+          </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-heading font-semibold line-clamp-1">
+              Roca 1020, Piso 2
+            </h3>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-text-muted">domain</span>
+<span>Oficina · 2 amb. · 54 m²</span>
+</p>
+</div>
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-primary-container">$ 510.000</span>
+<span class="font-body-sm text-body-sm text-text-muted">/ mes</span>
+</div>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+<span>+ $ 45.000 expensas</span>
+</p>
+</div>
+<div class="pt-space-md bg-surface-muted -mx-space-lg -mb-space-lg p-space-md flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-success">verified</span>
+              Contrato a 24 meses
+            </span>
+<a class="h-[36px] px-space-md rounded-lg bg-surface hover:bg-primary-soft text-primary-container font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm" data-path="detalle-inmueble" href="#">
+<span>Ver detalle</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<!-- Card 2: Av. Cabildo 2450, Piso 7 -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col group">
+<div class="relative w-full aspect-[16/10] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Living comedor de departamento espacioso en Belgrano Buenos Aires, piso de parquet plastificado, ventanal amplio con balcón corrido hacia arboleda urbana, paredes blancas, sofá contemporáneo gris y luminarias de diseño moderno. Fotografía inmobiliaria profesional con luz de media tarde." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN6TnZcmH0HCJKB_CxeKqYYm2OP6pRczk-BkspRmW1dDemDhUZTZdHtEAc-F-JvC38qEBXQzrbc4G9VxxiUtgWy_zyZLTv5-pz0ynUjxoSpWbM646s50r0ubCfwBL5SMxyPnP1KVq7gm7hCeUR-95vtCdcOsHrI_LvG224w8_7PvmhWf3OejnYfjtJeiIeu-D_qYIdvn-XuGYaC-tTJgfQpg_mUNWLK3veuzUZXLk"/>
+<div class="absolute top-space-md left-space-md flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm shadow-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              Disponible
+            </span>
+</div>
+<span class="absolute top-space-md right-space-md bg-inverse-surface/80 text-inverse-on-surface px-space-sm py-0.5 rounded font-label-sm text-label-sm backdrop-blur-sm">
+            REF-2450
+          </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-heading font-semibold line-clamp-1">
+              Av. Cabildo 2450, Piso 7
+            </h3>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-text-muted">home_work</span>
+<span>Departamento · 3 amb. · 78 m²</span>
+</p>
+</div>
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-primary-container">$ 680.000</span>
+<span class="font-body-sm text-body-sm text-text-muted">/ mes</span>
+</div>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+<span>+ $ 58.000 expensas</span>
+</p>
+</div>
+<div class="pt-space-md bg-surface-muted -mx-space-lg -mb-space-lg p-space-md flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-success">verified</span>
+              Apto mascotas
+            </span>
+<a class="h-[36px] px-space-md rounded-lg bg-surface hover:bg-primary-soft text-primary-container font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm" data-path="detalle-inmueble" href="#">
+<span>Ver detalle</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<!-- Card 3: Gorriti 4810 -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col group">
+<div class="relative w-full aspect-[16/10] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Fachada moderna de local comercial a la calle en Palermo Soho Buenos Aires con vidriera panorámica de doble altura, marco de hierro negro mate, vereda amplia con adoquines limpios, iluminación interior cálida con rieles de focos direccionales y techos altos industriales." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAimv3HVmCbRe9Lh77K9R2WPRtHZ6dpahvwDzFj90YkoRk8yfdpkIBasLbfUcAuD4m0tODNYGuGlczAj8YD5t3BaXTnw8UATGRpNQJHNBgMX8qyi3Y1q4dvX1eS42Q0AJRPzKdRHLHJH9-KIVnEtN4WJ5gH0Jx1JuVBmj3sVbDsjpki4h_YimWof--yQE8zlrcHAvsYubtkOfTDsGZwYqQFmjneBV1OQ0dIShn_H0w"/>
+<div class="absolute top-space-md left-space-md flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm shadow-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              Disponible
+            </span>
+</div>
+<span class="absolute top-space-md right-space-md bg-inverse-surface/80 text-inverse-on-surface px-space-sm py-0.5 rounded font-label-sm text-label-sm backdrop-blur-sm">
+            REF-4810
+          </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-heading font-semibold line-clamp-1">
+              Gorriti 4810
+            </h3>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-text-muted">storefront</span>
+<span>Local comercial · 1 amb. · 95 m²</span>
+</p>
+</div>
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-primary-container">$ 920.000</span>
+<span class="font-body-sm text-body-sm text-text-muted">/ mes</span>
+</div>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+<span>Sin expensas directas</span>
+</p>
+</div>
+<div class="pt-space-md bg-surface-muted -mx-space-lg -mb-space-lg p-space-md flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-info">store</span>
+              Apto gastronómico
+            </span>
+<a class="h-[36px] px-space-md rounded-lg bg-surface hover:bg-primary-soft text-primary-container font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm" data-path="detalle-inmueble" href="#">
+<span>Ver detalle</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<!-- Card 4: Juramento 1580, Piso 4 -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col group">
+<div class="relative w-full aspect-[16/10] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Dormitorio principal luminoso y acogedor de departamento en Belgrano, con pisos de madera clara, placard empotrado de piso a techo, cortinas roller claras, luz natural de mañana entrando por ventana amplia, diseño minimalista moderno y ropa de cama en tonos neutros." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa2QCl0UlQhwjFOGxBoWsPZ_QB0X1iyAvY5GI6TwM8hbBVyUQbZCLpin4h1NFWahqH9IKEn8qCHeZO497nLW8ZmoD15leW2ei-MiuUjn6DLHiKlRdpYyvs3JFGLkuLS02zinQ83Ba9m6He0DgZRY6iEDSifqquvwvKkKXOUfBQu0cXfycD2q7jwm7F1m2dIHRSH_0VA2va4vOxr_NPJKeSh-yuxhP2VQyWWAyLFvo"/>
+<div class="absolute top-space-md left-space-md flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm shadow-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              Disponible
+            </span>
+</div>
+<span class="absolute top-space-md right-space-md bg-inverse-surface/80 text-inverse-on-surface px-space-sm py-0.5 rounded font-label-sm text-label-sm backdrop-blur-sm">
+            REF-1580
+          </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-heading font-semibold line-clamp-1">
+              Juramento 1580, Piso 4
+            </h3>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-text-muted">bedroom_parent</span>
+<span>Departamento · 2 amb. · 48 m²</span>
+</p>
+</div>
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-primary-container">$ 450.000</span>
+<span class="font-body-sm text-body-sm text-text-muted">/ mes</span>
+</div>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+<span>+ $ 38.000 expensas</span>
+</p>
+</div>
+<div class="pt-space-md bg-surface-muted -mx-space-lg -mb-space-lg p-space-md flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-success">balcony</span>
+              Con balcón al frente
+            </span>
+<a class="h-[36px] px-space-md rounded-lg bg-surface hover:bg-primary-soft text-primary-container font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm" data-path="detalle-inmueble" href="#">
+<span>Ver detalle</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<!-- Card 5: Bouchard 710, Piso 11 -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col group">
+<div class="relative w-full aspect-[16/10] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Piso corporativo de oficinas en torre moderna de Catalinas Norte en Buenos Aires con vistas despejadas al Río de la Plata y Puerto Madero a través de muro cortina vidriado. Espacio diáfano con alfombra técnica modular gris, luminarias LED lineales suspendidas y sala de reuniones de vidrio templado." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCokalEzAGrPlKuE3rTYDnwDW2fBX-sw1dh9y-xtaeIGJIvjC2JRdeaU-qPdqVK3BYaundWNKjy0V4G8c24BcrRxXXFfJ7rZZp6xdPfycNSZKxGLY1dGFgI2HQyJ0IFiyk1FrNJY0ZAP0S8o10UXs_3Jaxl6enTnAL9TE6fxmCJCpME1J2fvFtW2HjyxZmg62za_VtPcGofxL6UGurgYEazn4hm-Z77XMl-QxBnPAc"/>
+<div class="absolute top-space-md left-space-md flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm shadow-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              Disponible
+            </span>
+</div>
+<span class="absolute top-space-md right-space-md bg-inverse-surface/80 text-inverse-on-surface px-space-sm py-0.5 rounded font-label-sm text-label-sm backdrop-blur-sm">
+            REF-710
+          </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-heading font-semibold line-clamp-1">
+              Bouchard 710, Piso 11
+            </h3>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-text-muted">business_center</span>
+<span>Oficina · 3 amb. · 110 m²</span>
+</p>
+</div>
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-primary-container">$ 840.000</span>
+<span class="font-body-sm text-body-sm text-text-muted">/ mes</span>
+</div>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+<span>+ $ 72.000 expensas</span>
+</p>
+</div>
+<div class="pt-space-md bg-surface-muted -mx-space-lg -mb-space-lg p-space-md flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-info">local_parking</span>
+              Incluye 1 cochera
+            </span>
+<a class="h-[36px] px-space-md rounded-lg bg-surface hover:bg-primary-soft text-primary-container font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm" data-path="detalle-inmueble" href="#">
+<span>Ver detalle</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+<!-- Card 6: Del Libertador 6320 -->
+<article class="bg-surface rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col group">
+<div class="relative w-full aspect-[16/10] overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Casa residencial moderna en Nuñez con jardín parquizado frontal, galería semicubierta con parrilla, portón corredizo automático, ventanales de piso a techo, revestimiento de hormigón visto y detalles de listones de madera natural. Fotografía con iluminación cálida de atardecer." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBulhdfZILPS0GqJM9Gtc2D9Q4vqjv9ez-SVBKPYzeGtpfjCw57dJUAKQgGi8uAgbS0ZKc2lQmQjPKK4Bxi5SUMMd5klRle1LHPObngicND7hnWIxDjo1S4yXLsShcSCiVn1-g3I_Fg-ji5Exe0sL98flmOOsbhRXpOGYKkkVJ-thK7FumetrOVmhMsklJZI9I-5M-ZYATHre2JLj5Mn8Ae1gAk_BDYSdYREVgdQo"/>
+<div class="absolute top-space-md left-space-md flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm shadow-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              Disponible
+            </span>
+</div>
+<span class="absolute top-space-md right-space-md bg-inverse-surface/80 text-inverse-on-surface px-space-sm py-0.5 rounded font-label-sm text-label-sm backdrop-blur-sm">
+            REF-6320
+          </span>
+</div>
+<div class="p-space-lg flex flex-col flex-1 justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-heading font-semibold line-clamp-1">
+              Del Libertador 6320
+            </h3>
+<p class="font-body-sm text-body-sm text-secondary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-text-muted">cottage</span>
+<span>Casa · 4 amb. · 180 m²</span>
+</p>
+</div>
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-primary-container">$ 1.350.000</span>
+<span class="font-body-sm text-body-sm text-text-muted">/ mes</span>
+</div>
+<p class="font-label-sm text-label-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+<span>Bajas expensas barriales</span>
+</p>
+</div>
+<div class="pt-space-md bg-surface-muted -mx-space-lg -mb-space-lg p-space-md flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-success">yard</span>
+              Jardín y parrilla
+            </span>
+<a class="h-[36px] px-space-md rounded-lg bg-surface hover:bg-primary-soft text-primary-container font-label-md text-label-md flex items-center gap-space-xs transition-colors shadow-sm" data-path="detalle-inmueble" href="#">
+<span>Ver detalle</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</article>
+</section>
+<!-- Pagination Footer -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="font-body-sm text-body-sm text-secondary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-text-muted">dataset</span>
+<span>Mostrando <strong class="text-heading font-medium">1 a 6</strong> de <strong class="text-heading font-medium">24</strong> propiedades registradas</span>
+</div>
+<nav aria-label="Paginación del catálogo" class="flex items-center gap-space-xs">
+<button class="h-9 px-space-md rounded-lg bg-surface-muted text-text-muted cursor-not-allowed font-label-md text-label-md flex items-center gap-1 opacity-60" disabled="" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+<span>Anterior</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center font-semibold shadow-sm" type="button">
+          1
+        </button>
+<button class="w-9 h-9 rounded-lg bg-surface-muted hover:bg-secondary-container text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors" type="button">
+          2
+        </button>
+<button class="w-9 h-9 rounded-lg bg-surface-muted hover:bg-secondary-container text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors" type="button">
+          3
+        </button>
+<button class="w-9 h-9 rounded-lg bg-surface-muted hover:bg-secondary-container text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors" type="button">
+          4
+        </button>
+<button class="h-9 px-space-md rounded-lg bg-surface-muted hover:bg-secondary-container text-on-surface font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span>Siguiente</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</nav>
+</section>
+<!-- Institutional trust banner -->
+<section class="bg-surface-container-low rounded-xl p-space-lg flex flex-col md:flex-row items-center justify-between gap-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined text-[28px]">shield</span>
+</div>
+<div class="flex flex-col">
+<h4 class="font-headline-sm text-headline-sm text-heading font-semibold">Proceso 100% digital y transparente</h4>
+<p class="font-body-sm text-body-sm text-secondary">Contratos electrónicos certificados bajo ley argentina, liquidaciones bancarizadas automáticas y soporte técnico continuo.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<a class="h-[42px] px-space-lg rounded-lg bg-primary-container text-on-primary hover:bg-primary-hover font-label-md text-label-md flex items-center justify-center shadow-sm transition-colors" data-path="planes-servicios" href="#">
+          Publicar mi inmueble
+        </a>
+</div>
+</section>
+</div>
+<script>
+    // Micro-interacción: formatear inputs numéricos con punto de miles
+    const formatNumber = (val) => val.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    ['price-min', 'price-max'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', (e) => {
+          e.target.value = formatNumber(e.target.value);
+        });
+      }
+    });
+  </script>
+</div></main><footer class="w-full bg-surface shadow-[0_-1px_8px_rgba(0,0,0,0.04)] mt-auto"><div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md"><p class="font-body-sm text-body-sm text-text-muted text-center md:text-left">© 2026 InmoGestión por Nico Tech. Todos los derechos reservados.</p><div class="flex flex-wrap items-center justify-center gap-space-md"><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" data-path="terminos-del-servicio" href="#">Términos del servicio</a><span class="text-outline-variant">•</span><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" data-path="politica-de-privacidad" href="#">Política de privacidad</a><span class="text-outline-variant">•</span><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" data-path="soporte-tecnico" href="#">Soporte técnico</a></div></div></footer></body></html>

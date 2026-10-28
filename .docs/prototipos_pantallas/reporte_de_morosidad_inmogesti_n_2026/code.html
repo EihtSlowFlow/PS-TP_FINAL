@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-dim":"#d0dbed","tertiary-fixed":"#ffdbcc","surface-container":"#e6eeff","primary-soft":"#E0E7FF","on-primary-fixed-variant":"#3323cc","warning-soft":"#FFFBEB","surface":"#FFFFFF","secondary-container":"#dee0e4","on-tertiary":"#ffffff","text-muted":"#6B7280","border-input":"#D1D5DB","on-error-container":"#93000a","primary-hover":"#4338CA","danger":"#EF4444","outline-variant":"#c7c4d8","on-tertiary-fixed-variant":"#7b2f00","surface-container-low":"#eff4ff","on-secondary-fixed":"#191c1f","inverse-primary":"#c3c0ff","on-error":"#ffffff","heading":"#111827","outline":"#777587","primary":"#3525cd","background-end":"#D9E2EC","primary-fixed-dim":"#c3c0ff","danger-text":"#B91C1C","secondary":"#5c5f62","on-secondary":"#ffffff","on-secondary-fixed-variant":"#44474a","on-surface-variant":"#464555","surface-tint":"#4d44e3","surface-muted":"#F9FAFB","inverse-surface":"#27313f","warning":"#F59E0B","tertiary-fixed-dim":"#ffb695","surface-container-lowest":"#ffffff","info-text":"#1E40AF","surface-container-high":"#dee9fc","info":"#2563EB","surface-container-highest":"#d9e3f6","on-tertiary-fixed":"#351000","danger-soft":"#FEF2F2","primary-container":"#4f46e5","on-primary-fixed":"#0f0069","error":"#ba1a1a","border":"#E5E7EB","tertiary":"#7e3000","error-container":"#ffdad6","tertiary-container":"#a44100","secondary-fixed-dim":"#c4c7ca","on-secondary-container":"#606366","success-soft":"#ECFDF5","inverse-on-surface":"#eaf1ff","surface-variant":"#d9e3f6","on-surface":"#121c2a","warning-text":"#92400E","danger-hover":"#DC2626","primary-fixed":"#e2dfff","success":"#10B981","secondary-fixed":"#e0e2e6","on-background":"#121c2a","background-start":"#F0F4F8","surface-bright":"#f8f9ff","background":"#f8f9ff","row-hover":"#F3F4F6","info-soft":"#DBEAFE","success-text":"#065F46","on-tertiary-container":"#ffd2be","on-primary":"#ffffff","on-primary-container":"#dad7ff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-xs":"0.25rem","space-md":"1rem","margin":"2rem","space-sm":"0.5rem","gutter-mobile":"1rem","space-xl":"2rem","gutter":"1.5rem","margin-mobile":"1rem","space-lg":"1.5rem"},fontFamily:{"body-lg":["Inter"],"headline-lg-mobile":["Inter"],"metric-display":["Inter"],"body-md":["Inter"],"headline-sm":["Inter"],"headline-lg":["Inter"],"label-sm":["Inter"],"body-sm":["Inter"],"label-md":["Inter"],"headline-md":["Inter"],"table-header":["Inter"]},fontSize:{"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}],"headline-lg-mobile":["22px",{lineHeight:"28px",fontWeight:"600"}],"metric-display":["32px",{lineHeight:"38px",fontWeight:"600"}],"body-md":["15px",{lineHeight:"22px",fontWeight:"400"}],"headline-sm":["18px",{lineHeight:"24px",fontWeight:"500"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"600"}],"label-sm":["12px",{lineHeight:"16px",fontWeight:"500"}],"body-sm":["14px",{lineHeight:"20px",fontWeight:"400"}],"label-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-md":["20px",{lineHeight:"26px",fontWeight:"500"}],"table-header":["13px",{lineHeight:"18px",letterSpacing:"0.05em",fontWeight:"500"}]}}}};</script></head><body class="min-h-screen bg-gradient-to-b from-background-start to-background-end font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-[260px] bg-surface z-50 flex flex-col justify-between shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center gap-space-sm"><div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[24px]">home</span></div><div class="flex flex-col"><span class="font-headline-sm text-heading leading-tight tracking-tight font-semibold">InmoGestión</span><span class="font-label-sm text-text-muted text-[11px] leading-none">Plataforma Inmobiliaria 2026</span></div></div><nav class="flex flex-col gap-1 px-space-sm pt-space-sm" data-active-classes="bg-primary-soft text-primary-hover font-semibold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="font-label-md">Usuarios</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="inmuebles" href="#"><span class="material-symbols-outlined text-[20px]">apartment</span><span class="font-label-md">Inmuebles</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="contratos" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span class="font-label-md">Contratos</span></a><div class="flex flex-col"><div class="flex items-center justify-between px-space-sm py-2 rounded-lg text-on-surface-variant"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-label-md">Cuotas</span></div><span class="material-symbols-outlined text-[16px] text-text-muted">expand_more</span></div><div class="pl-8 pr-space-xs flex flex-col gap-1"><a class="flex items-center px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="emitir-cuotas" href="#"><span class="font-label-sm">Emitir cuotas</span></a><a class="flex items-center px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="cobranzas" href="#"><span class="font-label-sm">Cobranzas</span></a></div></div><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="pagos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span class="font-label-md">Pagos</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="liquidaciones" href="#"><span class="material-symbols-outlined text-[20px]">account_balance_wallet</span><span class="font-label-md">Liquidaciones</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-2 rounded-lg transition-all bg-primary-soft text-primary-hover font-semibold" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span class="font-label-md">Reportes</span></a></nav></div><div class="p-space-sm mb-space-sm mx-space-sm rounded-xl bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] flex flex-col gap-2"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary font-semibold text-xs tracking-wider">LB</div><div class="flex flex-col flex-1 min-w-0"><span class="font-label-md text-heading font-medium truncate">Laura Benítez</span><span class="font-label-sm text-text-muted truncate">Administradora</span></div></div><a class="flex items-center gap-1.5 text-danger font-label-sm hover:text-danger-hover transition-colors pt-1" data-path="login" href="#"><span class="material-symbols-outlined text-[16px]">logout</span><span>Cerrar Sesión</span></a></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-xl"><div class="flex items-center gap-2 font-label-md text-text-muted"><span class="hover:text-heading cursor-pointer">InmoGestión</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="hover:text-heading cursor-pointer">Reportes</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="text-heading font-medium">Reporte de morosidad</span></div><div class="flex items-center gap-space-lg"><div class="flex items-center gap-1.5 font-label-md text-text-muted"><span class="material-symbols-outlined text-[18px]">calendar_today</span><span>06/11/2026</span></div><div class="relative flex items-center justify-center cursor-pointer p-1.5 rounded-full hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-on-surface-variant text-[22px]">notifications</span><span class="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-danger text-on-error font-label-sm text-[10px] flex items-center justify-center font-bold">2</span></div><div class="flex items-center gap-2 pl-2"><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-success ring-2 ring-surface"></span></div><span class="font-label-md text-heading font-medium hidden md:inline">Laura Benítez</span></div></div></header><main class="w-full pt-16 px-space-xl pb-space-xl max-w-[1440px] mx-auto"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-lg w-full">
+<!-- Encabezado de página -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md w-full">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-heading tracking-tight font-semibold">Reporte de morosidad</h1>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-danger-soft text-danger-text font-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-danger"></span>
+            Actualizado hoy
+          </span>
+</div>
+<p class="font-body-md text-text-muted">
+          Seguimiento exhaustivo de cuotas impagas, recargos punitorios acumulados y gestión prejudicial de cobro
+        </p>
+</div>
+<div class="flex items-center gap-space-sm self-start lg:self-auto">
+<button class="inline-flex items-center gap-2 px-4 h-[42px] rounded-lg bg-surface text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md font-medium shadow-sm" onclick="window.print()" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Imprimir / Exportar</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 h-[42px] rounded-lg bg-primary-container text-on-primary hover:bg-primary-hover transition-colors font-label-md font-medium shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Descargar Excel</span>
+</button>
+</div>
+</div>
+<!-- Barra de Filtros -->
+<section class="w-full bg-surface rounded-xl p-5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)]">
+<form class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md" id="filter-form" onsubmit="event.preventDefault();">
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-space-md flex-1">
+<!-- Desde -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-text-muted font-medium flex items-center gap-1" for="fecha-desde">
+<span class="material-symbols-outlined text-[15px]">event</span>
+              Vencimiento desde
+            </label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-muted text-on-surface font-body-sm focus:outline-none focus:bg-surface transition-all font-sans" id="fecha-desde" type="date" value="2026-09-01"/>
+</div>
+</div>
+<!-- Hasta -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-text-muted font-medium flex items-center gap-1" for="fecha-hasta">
+<span class="material-symbols-outlined text-[15px]">event_available</span>
+              Vencimiento hasta (Hoy)
+            </label>
+<div class="relative">
+<input class="w-full h-11 px-3.5 rounded-lg bg-surface-muted text-on-surface font-body-sm focus:outline-none focus:bg-surface transition-all font-sans" id="fecha-hasta" type="date" value="2026-11-06"/>
+</div>
+</div>
+<!-- Días de atraso pills -->
+<div class="flex flex-col gap-1.5 sm:col-span-2 xl:col-span-1">
+<span class="font-label-sm text-text-muted font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">timer</span>
+              Tolerancia de atraso
+            </span>
+<div class="inline-flex h-11 items-center p-1 rounded-lg bg-surface-container-high w-full">
+<button class="filter-pill flex-1 h-full rounded font-label-sm text-on-surface-variant hover:text-on-surface transition-all font-medium" data-filter-pill="" type="button">Cualquiera</button>
+<button class="filter-pill flex-1 h-full rounded font-label-sm bg-surface text-primary-hover shadow-sm font-semibold" data-filter-pill="" type="button">15+ d</button>
+<button class="filter-pill flex-1 h-full rounded font-label-sm text-on-surface-variant hover:text-on-surface transition-all font-medium" data-filter-pill="" type="button">30+ d</button>
+<button class="filter-pill flex-1 h-full rounded font-label-sm text-on-surface-variant hover:text-on-surface transition-all font-medium" data-filter-pill="" type="button">60+ d</button>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-sm self-end w-full lg:w-auto">
+<button class="flex-1 lg:flex-initial h-[42px] px-4 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md font-medium transition-colors" type="reset">
+            Limpiar
+          </button>
+<button class="flex-1 lg:flex-initial h-[42px] px-6 rounded-lg bg-primary-container text-on-primary hover:bg-primary-hover font-label-md font-medium transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_alt</span>
+<span>Aplicar filtros</span>
+</button>
+</div>
+</form>
+</section>
+<!-- Grid de 3 Tarjetas KPI -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-space-lg w-full">
+<!-- KPI 1: Total adeudado -->
+<div class="relative overflow-hidden bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-text-muted tracking-wider uppercase font-semibold">Total Adeudado</span>
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-danger-text font-bold tracking-tight font-sans tabular-nums">$ 1.569.230</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-full bg-danger-soft flex items-center justify-center text-danger shrink-0">
+<span class="material-symbols-outlined text-[24px]">trending_down</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 pt-2 bg-surface-muted -mx-space-lg -mb-space-lg px-space-lg py-2.5">
+<span class="material-symbols-outlined text-danger text-[16px]">priority_high</span>
+<span class="font-body-sm text-text-muted font-medium tabular-nums">
+            $ 1.430.000 capital base + $ 139.230 recargos
+          </span>
+</div>
+</div>
+<!-- KPI 2: Inquilinos en mora -->
+<div class="relative overflow-hidden bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-text-muted tracking-wider uppercase font-semibold">Inquilinos en Mora</span>
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-heading font-bold tracking-tight tabular-nums">2</span>
+<span class="font-label-sm text-warning-text font-medium bg-warning-soft px-2 py-0.5 rounded-full">Activos</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-full bg-warning-soft flex items-center justify-center text-warning shrink-0">
+<span class="material-symbols-outlined text-[24px]">group_off</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 pt-2 bg-surface-muted -mx-space-lg -mb-space-lg px-space-lg py-2.5">
+<span class="material-symbols-outlined text-warning text-[16px]">info</span>
+<span class="font-body-sm text-text-muted font-medium">
+            Contratos con atraso superior a la tolerancia (10 días)
+          </span>
+</div>
+</div>
+<!-- KPI 3: Cuotas impagas -->
+<div class="relative overflow-hidden bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between gap-space-md">
+<div class="flex items-start justify-between">
+<div class="flex flex-col gap-1">
+<span class="font-label-sm text-text-muted tracking-wider uppercase font-semibold">Cuotas Impagas</span>
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-heading font-bold tracking-tight tabular-nums">3</span>
+<span class="font-label-sm text-info-text font-medium bg-info-soft px-2 py-0.5 rounded-full">En gestión</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-full bg-info-soft flex items-center justify-center text-info shrink-0">
+<span class="material-symbols-outlined text-[24px]">pending_actions</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 pt-2 bg-surface-muted -mx-space-lg -mb-space-lg px-space-lg py-2.5">
+<span class="material-symbols-outlined text-info text-[16px]">schedule</span>
+<span class="font-body-sm text-text-muted font-medium">
+            2 con &gt;30 días y 1 con &gt;15 días de atraso
+          </span>
+</div>
+</div>
+</section>
+<!-- Tabla Principal de Morosidad -->
+<section class="w-full bg-surface rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] overflow-hidden">
+<!-- Barra superior de la tabla -->
+<div class="px-space-lg py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm bg-surface">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-heading font-semibold">Detalle de Inquilinos y Contratos</span>
+<span class="font-label-sm text-text-muted font-medium px-2 py-0.5 bg-surface-container rounded-md">2 registros</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-sm text-text-muted">Cálculo de punitorio: <strong>0,5% diario</strong></span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-muted text-text-muted font-table-header uppercase text-left">
+<th class="py-3.5 px-space-lg" scope="col">Inquilino</th>
+<th class="py-3.5 px-space-md" scope="col">Teléfono</th>
+<th class="py-3.5 px-space-md" scope="col">Inmueble</th>
+<th class="py-3.5 px-space-md text-center" scope="col">Cuotas</th>
+<th class="py-3.5 px-space-md text-right" scope="col">Base</th>
+<th class="py-3.5 px-space-md text-right" scope="col">Recargos</th>
+<th class="py-3.5 px-space-md text-right" scope="col">Total Adeudado</th>
+<th class="py-3.5 px-space-md text-center" scope="col">Atraso Máx.</th>
+<th class="py-3.5 px-space-lg text-right" scope="col">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<!-- Fila 1: Joaquín Medina -->
+<tr class="hover:bg-row-hover transition-colors font-body-sm group">
+<td class="py-4 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container-high text-primary font-semibold flex items-center justify-center text-xs shrink-0">
+                    JM
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-heading font-semibold group-hover:text-primary transition-colors">Joaquín Medina</span>
+<span class="font-label-sm text-text-muted">DNI 32.840.119</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<a class="font-label-md text-primary hover:text-primary-hover flex items-center gap-1.5 transition-colors" href="tel:2920456789">
+<span class="material-symbols-outlined text-[16px]">call</span>
+<span class="tabular-nums">2920 45-6789</span>
+</a>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-heading font-medium">Mitre 845</span>
+<span class="font-label-sm text-text-muted">Casa · 4 amb.</span>
+</div>
+</td>
+<td class="py-4 px-space-md text-center">
+<span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full bg-warning-soft text-warning-text font-label-sm font-semibold tabular-nums">
+                  1 cuota
+                </span>
+</td>
+<td class="py-4 px-space-md text-right font-body-md text-on-surface tabular-nums">
+                $ 650.000
+              </td>
+<td class="py-4 px-space-md text-right">
+<div class="flex flex-col items-end">
+<span class="font-body-md text-danger-text font-medium tabular-nums">$ 87.750</span>
+<span class="font-label-sm text-text-muted">+13,5% punitorio</span>
+</div>
+</td>
+<td class="py-4 px-space-md text-right whitespace-nowrap">
+<span class="font-headline-sm text-heading font-semibold tabular-nums">$ 737.750</span>
+</td>
+<td class="py-4 px-space-md text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-warning-soft text-warning-text font-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+                  27 días
+                </span>
+</td>
+<td class="py-4 px-space-lg text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5">
+<button class="px-3 h-8 rounded-lg bg-surface-container text-primary-hover hover:bg-primary-soft font-label-sm font-medium transition-colors" type="button">
+                    Ver ficha
+                  </button>
+<button class="w-8 h-8 rounded-lg bg-success-soft text-success-text hover:bg-success hover:text-on-primary flex items-center justify-center transition-colors" title="Contactar vía WhatsApp" type="button">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 2: Tomás Aguirre -->
+<tr class="hover:bg-row-hover transition-colors font-body-sm group bg-surface-muted/50">
+<td class="py-4 px-space-lg">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-soft text-primary-hover font-semibold flex items-center justify-center text-xs shrink-0">
+                    TA
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-heading font-semibold group-hover:text-primary transition-colors">Tomás Aguirre</span>
+<span class="font-label-sm text-text-muted">DNI 29.412.054</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md whitespace-nowrap">
+<a class="font-label-md text-primary hover:text-primary-hover flex items-center gap-1.5 transition-colors" href="tel:2920512233">
+<span class="material-symbols-outlined text-[16px]">call</span>
+<span class="tabular-nums">2920 51-2233</span>
+</a>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex flex-col">
+<span class="font-label-md text-heading font-medium">Moreno 560, PB</span>
+<span class="font-label-sm text-text-muted">Depto · 2 amb.</span>
+</div>
+</td>
+<td class="py-4 px-space-md text-center">
+<span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full bg-danger-soft text-danger-text font-label-sm font-semibold tabular-nums">
+                  2 cuotas
+                </span>
+</td>
+<td class="py-4 px-space-md text-right font-body-md text-on-surface tabular-nums">
+                $ 780.000
+              </td>
+<td class="py-4 px-space-md text-right">
+<div class="flex flex-col items-end">
+<span class="font-body-md text-danger-text font-medium tabular-nums">$ 51.480</span>
+<span class="font-label-sm text-text-muted">+6,6% punitorio</span>
+</div>
+</td>
+<td class="py-4 px-space-md text-right whitespace-nowrap">
+<span class="font-headline-sm text-heading font-semibold tabular-nums">$ 831.480</span>
+</td>
+<td class="py-4 px-space-md text-center whitespace-nowrap">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-danger-soft text-danger-text font-label-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                  32 días
+                </span>
+</td>
+<td class="py-4 px-space-lg text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1.5">
+<button class="px-3 h-8 rounded-lg bg-surface-container text-primary-hover hover:bg-primary-soft font-label-sm font-medium transition-colors" type="button">
+                    Ver ficha
+                  </button>
+<button class="w-8 h-8 rounded-lg bg-success-soft text-success-text hover:bg-success hover:text-on-primary flex items-center justify-center transition-colors" title="Contactar vía WhatsApp" type="button">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+<!-- Fila de Totales Destacada -->
+<tfoot>
+<tr class="bg-primary-soft/50 font-label-md">
+<td class="py-4 px-space-lg text-heading font-semibold" colspan="4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">account_balance</span>
+<span>TOTALES ACUMULADOS (2 inquilinos · 3 cuotas)</span>
+</div>
+</td>
+<td class="py-4 px-space-md text-right text-heading font-semibold font-body-md tabular-nums">
+                $ 1.430.000
+              </td>
+<td class="py-4 px-space-md text-right text-danger-text font-semibold font-body-md tabular-nums">
+                $ 139.230
+              </td>
+<td class="py-4 px-space-md text-right whitespace-nowrap">
+<span class="font-headline-sm text-primary font-bold tabular-nums">$ 1.569.230</span>
+</td>
+<td class="py-4 px-space-md text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface text-on-surface font-label-sm font-semibold shadow-sm">
+                  Prom. 29,5 días
+                </span>
+</td>
+<td class="py-4 px-space-lg text-right">
+<span class="font-label-sm text-text-muted">Liquidación al día</span>
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</section>
+<!-- Bloque complementario de Gestión y Políticas de Mora -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg w-full">
+<!-- Tarjeta 1: Política de cobro y punitorios vigentes -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">gavel</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-heading font-semibold">Política de cobro y punitorios vigentes</h2>
+<span class="font-label-sm text-text-muted">Parámetros automáticos del sistema InmoGestión</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md pt-2">
+<div class="flex items-start gap-3 p-3.5 rounded-lg bg-surface-muted">
+<span class="material-symbols-outlined text-warning text-[20px] shrink-0 mt-0.5">percent</span>
+<div class="flex flex-col">
+<span class="font-label-md text-heading font-semibold">Tasa punitoria diaria: 0,5%</span>
+<span class="font-body-sm text-text-muted">Se computa a partir del día 11 corrido del mes de vencimiento.</span>
+</div>
+</div>
+<div class="flex items-start gap-3 p-3.5 rounded-lg bg-surface-muted">
+<span class="material-symbols-outlined text-info text-[20px] shrink-0 mt-0.5">mark_chat_unread</span>
+<div class="flex flex-col">
+<span class="font-label-md text-heading font-semibold">Recordatorios periódicos</span>
+<span class="font-body-sm text-text-muted">Disparo automático vía WhatsApp y mail a los 5 y 15 días de vencido.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-sm text-text-muted">Tolerancia sin recargo: <strong>1 al 10 de cada mes</strong></span>
+<a class="font-label-sm text-primary hover:text-primary-hover font-semibold inline-flex items-center gap-1" href="#">
+            Configurar tasas
+            <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Tarjeta 2: Acciones rápidas de cobranza -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between gap-space-md">
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-danger-soft flex items-center justify-center text-danger">
+<span class="material-symbols-outlined text-[22px]">campaign</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-heading font-semibold">Acciones rápidas de cobranza</h2>
+<span class="font-label-sm text-text-muted">Comunicaciones inmediatas e instancia prejudicial</span>
+</div>
+</div>
+<p class="font-body-sm text-text-muted pt-1">
+            Ejecutá recordatorios directos con plantilla formal o derivá las carpetas en mora superior a 30 días a estudio jurídico externo.
+          </p>
+</div>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm">
+<button class="flex-1 h-[42px] px-4 rounded-lg bg-primary-container text-on-primary hover:bg-primary-hover font-label-md font-medium transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">forward_to_inbox</span>
+<span>Intimación masiva por mail</span>
+</button>
+<button class="flex-1 h-[42px] px-4 rounded-lg bg-surface text-danger-text hover:bg-danger-soft font-label-md font-medium transition-colors flex items-center justify-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+<span>Exportar para asesoría legal</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+<script>
+  // Manejo de interacción de los botones toggle (Pills de días de atraso)
+  document.querySelectorAll('[data-filter-pill]').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('[data-filter-pill]').forEach(btn => {
+        btn.classList.remove('bg-surface', 'text-primary-hover', 'shadow-sm', 'font-semibold');
+        btn.classList.add('text-on-surface-variant', 'font-medium');
+      });
+      pill.classList.remove('text-on-surface-variant', 'font-medium');
+      pill.classList.add('bg-surface', 'text-primary-hover', 'shadow-sm', 'font-semibold');
+    });
+  });
+</script></main></div></body></html>
