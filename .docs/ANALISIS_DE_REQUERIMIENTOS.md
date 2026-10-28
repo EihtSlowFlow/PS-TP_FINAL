@@ -288,3 +288,36 @@ Para asegurar la viabilidad técnica, la adopción fluida de los usuarios y la e
 2. **Segundo Pago contra entrega de Cursada Regularizada (Fase 1 completada):** 40% = **$ 600.000 ARS**.
 3. **Tercer Pago contra entrega y defensa del Examen Final (Fase 2 completada):** 20% = **$ 300.000 ARS**.
 4. **Pago de Cierre e inicio de Servicios Post-Entrega (Fase 3 activada):** 20% = **$ 300.000 ARS**.
+
+
+
+___
+REVISAR - REFACTORIZAR
+### Detalle de Fases y Sprints:
+* **Sprint 1 (Semanas 1 y 2 - 11 SP | 16,5 HH):**
+  * Seguridad, login con BCRYPT, filtros de sesión y rol (`AuthFilter`, `RoleFilter`).
+  * Mecanismo de restablecimiento de contraseña.
+  * ABMC de usuarios / personas con *Soft Delete* y perfil del propietario/inquilino.
+  * *Entregable:* Padrón de usuarios activo y portal de acceso protegido.
+
+* **Sprint 2 (Semanas 3 y 4 - 10 SP | 15,0 HH):**
+  * ABMC de inmuebles con catálogo, filtros por disponibilidad y asignación de propietario.
+  * ABMC de contratos de alquiler: vinculación formal Inmueble + Inquilino + Propietario, canon locativo y comisiones.
+  * *Entregable:* Asignación de propiedades y contratos vigentes.
+
+* **Sprint 3 (Semanas 5 y 6 - 12 SP | 18,5 HH) — [HITO CURSADA]:**
+  * Emisión masiva o individual de cuotas mensuales y cálculo automático de recargos por mora.
+  * Portal del inquilino: estado de cuenta y formulario de carga de comprobantes de pago (PDF/JPG).
+  * Panel administrativo de verificación, conciliación y aprobación/rechazo de pagos.
+  * *Entregable:* **Demo funcional completa para la aprobación de la cursada (33 SP | 50,0 HH | $ 900.000 ARS).**
+
+* **Sprints 4 y 5 (Semanas 7 a 10 - 9 SP | 11,0 HH) — [HITO EXAMEN FINAL]:**
+  * Módulo de liquidaciones automáticas a propietarios con deducción de comisión.
+  * Dashboard directivo con KPIs de ocupación y morosidad; balances patrimoniales del propietario.
+  * *Entregable:* **Defensa y aprobación del Examen Final.**
+
+* **Fase Post-Entrega (60 días post-lanzamiento - 22,33 HH):**
+  * Mesa de ayuda, resolución de incidencias en garantía (10,0 HH).
+  * Jornadas de capacitación y entrega de manual operativo de usuario (5,0 HH).
+  * Mantenimiento preventivo, optimización LAMP y verificación de logs (4,0 HH).
+  * Puesta en marcha de políticas de resguardo y backup diario de MySQL (3,33 HH).
