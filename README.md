@@ -17,11 +17,10 @@
 - Soporte y garantía post‑entrega (60 días).
 
 ## Cronograma resumido
-- **Sprint 1 – 2:** Seguridad, usuarios y login. 
-- **Sprint 2 – 4:** Gestión de inmuebles y contratos. 
-- **Sprint 3 – 6:** Emisión de cuotas, portal de inquilinos y panel de pagos. 
-- **Sprints 4 y 5:** Liquidaciones, dashboard y examen final. 
-- **Fase post‑entrega:** Mesa de ayuda, capacitación y mantenimiento.
+- **Sprint 1 (Semana 1):** Seguridad, usuarios, inmuebles y contratos. 
+- **Sprint 2 (Semana 2):** Cuotas, moras, portal de inquilinos, validación de pagos y demo cursada. 
+- **Fase 2 (Examen final):** Liquidaciones, notificaciones y dashboard directivo. 
+- **Fase 3 (Post‑entrega):** Mesa de ayuda, capacitación y mantenimiento.
 
 ## Presupuesto y tarifa
 - **Carga horaria total estimada:** **83,33 HH** (Horas-Hombre / 42 SP):

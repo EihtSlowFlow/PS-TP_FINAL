@@ -55,13 +55,13 @@ Siguiendo lo analizado en clase:
 
 ---
 
-### 📑 Documentos de Detalle por Módulo
-* [01_seguridad_y_autenticacion.md](01_seguridad_y_autenticacion.md)
-* [02_gestion_usuarios.md](02_gestion_usuarios.md)
-* [03_gestion_inmuebles.md](03_gestion_inmuebles.md)
-* [04_contratos_alquiler.md](04_contratos_alquiler.md)
-* [05_cuotas_y_mora.md](05_cuotas_y_mora.md)
-* [06_pagos_y_comprobantes.md](06_pagos_y_comprobantes.md)
-* [07_liquidaciones_propietarios.md](07_liquidaciones_propietarios.md)
-* [08_notificaciones.md](08_notificaciones.md)
-* [09_dashboard_y_reportes.md](09_dashboard_y_reportes.md)
+### 📑 Documentos de Detalle por Historia
+* **Seguridad y autenticación:** [HU-01](HU-01_iniciar_sesion_control_acceso.md) · [HU-02](HU-02_registro_clientes_externos.md) · [HU-03](HU-03_cierre_sesion.md) · [HU-03b](HU-03b_restablecer_contrasena.md)
+* **Usuarios:** [HU-04](HU-04_gestion_usuarios.md) · [HU-05](HU-05_baja_logica_usuario.md) · [HU-06](HU-06_gestion_perfil_propio.md)
+* **Inmuebles:** [HU-07](HU-07_alta_edicion_inmueble.md) · [HU-08](HU-08_catalogo_filtros_inmuebles.md) · [HU-09](HU-09_baja_logica_inmueble.md)
+* **Contratos:** [HU-10](HU-10_alta_contrato_alquiler.md) · [HU-11](HU-11_consulta_contratos.md) · [HU-12](HU-12_rescision_finalizacion_contrato.md)
+* **Cuotas y mora:** [HU-13](HU-13_emision_masiva_cuotas.md) · [HU-14](HU-14_calculo_recargo_mora.md) · [HU-15](HU-15_estado_cuenta_inquilino.md)
+* **Pagos:** [HU-16](HU-16_registro_pago_comprobante.md) · [HU-17](HU-17_verificacion_aprobacion_pagos.md) · [HU-18](HU-18_historial_pagos_comprobantes.md)
+* **Liquidaciones:** [HU-19](HU-19_calculo_liquidacion_propietarios.md) · [HU-20](HU-20_registro_transferencia_propietario.md) · [HU-21](HU-21_consulta_liquidaciones_propietario.md)
+* **Notificaciones:** [HU-22](HU-22_notificaciones_pagos.md) · [HU-23](HU-23_alertas_vencimiento_cuotas.md) · [HU-24](HU-24_alertas_vencimiento_contratos.md)
+* **Dashboard y reportes:** [HU-25](HU-25_dashboard_ejecutivo.md) · [HU-26](HU-26_panel_resumen_propietario.md) · [HU-27](HU-27_reportes_recaudacion_morosidad.md)

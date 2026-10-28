@@ -291,32 +291,32 @@ Para asegurar la viabilidad técnica, la adopción fluida de los usuarios y la e
 
 
 
-___
-REVISAR - REFACTORIZAR
-### Detalle de Fases y Sprints:
-* **Sprint 1 (Semanas 1 y 2 - 11 SP | 16,5 HH):**
+---
+
+### Detalle de Fases y Sprints (Cronograma Intensivo de 2 Semanas de Cursada):
+* **Sprint 1 (Semana 1 - 16 SP | 24,0 HH):**
   * Seguridad, login con BCRYPT, filtros de sesión y rol (`AuthFilter`, `RoleFilter`).
   * Mecanismo de restablecimiento de contraseña.
   * ABMC de usuarios / personas con *Soft Delete* y perfil del propietario/inquilino.
-  * *Entregable:* Padrón de usuarios activo y portal de acceso protegido.
-
-* **Sprint 2 (Semanas 3 y 4 - 10 SP | 15,0 HH):**
   * ABMC de inmuebles con catálogo, filtros por disponibilidad y asignación de propietario.
   * ABMC de contratos de alquiler: vinculación formal Inmueble + Inquilino + Propietario, canon locativo y comisiones.
-  * *Entregable:* Asignación de propiedades y contratos vigentes.
+  * *Entregable:* Padrón de usuarios, catálogo de inmuebles y contratos activos en portal seguro.
 
-* **Sprint 3 (Semanas 5 y 6 - 12 SP | 18,5 HH) — [HITO CURSADA]:**
-  * Emisión masiva o individual de cuotas mensuales y cálculo automático de recargos por mora.
+* **Sprint 2 (Semana 2 - 17 SP | 26,0 HH) — [HITO REGULARIZACIÓN DE CURSADA]:**
+  * Emisión masiva o individual de cuotas mensuales de alquiler.
+  * Motor de cálculo automático de recargos por mora e intereses por días de atraso.
   * Portal del inquilino: estado de cuenta y formulario de carga de comprobantes de pago (PDF/JPG).
-  * Panel administrativo de verificación, conciliación y aprobación/rechazo de pagos.
+  * Panel administrativo de verificación, conciliación y aprobación/rechazo de pagos presentados.
+  * Integración end-to-end, testing final y demo funcional completa para la cátedra.
   * *Entregable:* **Demo funcional completa para la aprobación de la cursada (33 SP | 50,0 HH | $ 900.000 ARS).**
 
-* **Sprints 4 y 5 (Semanas 7 a 10 - 9 SP | 11,0 HH) — [HITO EXAMEN FINAL]:**
+* **Fase 2: Módulos de Cierre (Turno Examen Final - 9 SP | 11,0 HH):**
   * Módulo de liquidaciones automáticas a propietarios con deducción de comisión.
   * Dashboard directivo con KPIs de ocupación y morosidad; balances patrimoniales del propietario.
+  * Sistema de notificaciones automáticas (alertas de pagos, vencimientos de cuotas y contratos).
   * *Entregable:* **Defensa y aprobación del Examen Final.**
 
-* **Fase Post-Entrega (60 días post-lanzamiento - 22,33 HH):**
+* **Fase 3: Servicios Post-Entrega (60 días post-lanzamiento - 22,33 HH):**
   * Mesa de ayuda, resolución de incidencias en garantía (10,0 HH).
   * Jornadas de capacitación y entrega de manual operativo de usuario (5,0 HH).
   * Mantenimiento preventivo, optimización LAMP y verificación de logs (4,0 HH).
