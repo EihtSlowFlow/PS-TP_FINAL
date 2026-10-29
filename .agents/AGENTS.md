@@ -12,6 +12,8 @@ Assist with a maintainable web application using **PHP 8.2+, CodeIgniter 4.x, My
 - Never use production databases for tests or run destructive commands without explicit authorization.
 - Preserve existing work; do not discard local changes or silently expand scope.
 - Keep detailed rules in skills and persistent architecture information in `.docs/`; do not duplicate them here.
+- Before ending a session, update the active handoff document in `.docs/exec-plans/` using the project template (`HANDOFF_TEMPLATE.md`). Record only verified facts: status, scope, changes, tests, risks, and next steps.
+- When resuming work in a new session or on another machine, read the current handoff and the related user story/issue before editing code.
 
 ## Progressive skill disclosure
 1. Identify the task type.
@@ -40,6 +42,7 @@ Assist with a maintainable web application using **PHP 8.2+, CodeIgniter 4.x, My
 - Before broad architectural changes, adding dependencies, destructive operations, modifying real data, or potentially incompatible migrations: explain the impact and wait for approval.
 - Run checks already configured in the project (for example, `composer.json` scripts); do not invent lint commands or install tools solely to satisfy a skill.
 - At the end, report what changed, which tests ran, and what remains unverified.
-
+- Keep the handoff updated at the end of each work session to maintain continuity across agents and machines.
+    
 ## Definition of done
 The change satisfies the request, follows CI4 conventions and security boundaries, avoids unrelated modifications, and reports relevant tests and limitations.
