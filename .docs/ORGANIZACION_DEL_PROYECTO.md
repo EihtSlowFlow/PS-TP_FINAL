@@ -1,6 +1,6 @@
 # Organización del proyecto — InmoGestión 2026
 
-> Última actualización: 28/10/2026. Este documento resume cómo está organizado el trabajo del equipo: quién hace qué, en qué orden, con qué convenciones y qué falta decidir. La fuente de cada dato se indica entre paréntesis. Si algo cambia en GitHub, hay que actualizarlo acá.
+> Última actualización: 06/11/2026. Este documento resume cómo está organizado el trabajo del equipo: quién hace qué, en qué orden, con qué convenciones y qué falta decidir. La fuente de cada dato se indica entre paréntesis. Si algo cambia en GitHub, hay que actualizarlo acá.
 
 ## Índice
 
@@ -43,7 +43,9 @@ Según el [análisis de requerimientos](ANALISIS_DE_REQUERIMIENTOS.md) y el [REA
 | **Fase 2 (examen final)** | Liquidaciones, notificaciones, dashboard y reportes | HU-19 a HU-27 (todavía sin issues) |
 | **Fase 3 (post-entrega)** | Garantía de 60 días, capacitación, mantenimiento y backups | — |
 
-Presupuesto del documento de requerimientos: 83,33 horas-hombre a $18.000 ARS por hora, con un tope de $1.500.000 ARS.
+Presupuesto del documento de requerimientos: 83,33 horas-hombre a $18.000 ARS por hora, con un tope de $1.500.000 ARS (de los cuales 50 horas y $900.000 corresponden a la cursada). Los criterios, las restricciones y las inconsistencias de la estimación están en [`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md).
+
+**Entrega:** segunda semana de noviembre de 2026 (del 17 al 24), según el enunciado.
 
 ---
 
@@ -108,6 +110,8 @@ Salen de [`.agents/AGENTS.md`](../.agents/AGENTS.md):
 |---|---|
 | [`README.md`](../README.md) | Descripción general, tecnologías, cronograma y presupuesto |
 | [`.docs/ANALISIS_DE_REQUERIMIENTOS.md`](ANALISIS_DE_REQUERIMIENTOS.md) | Alcance, roles, requerimientos RF/RNF, riesgos, sprints y presupuesto |
+| [`.docs/PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md) | Cómo se llegó a la estimación: método, restricciones de tiempo y capacidad, tarifa, alcance, inconsistencias detectadas y decisiones pendientes |
+| [`.docs/documentacion/`](documentacion/) | Transcripciones de reuniones del equipo. Hoy: la charla de Discord del 29/10 sobre estimación y presupuesto (dictado automático, con mucho ruido) |
 | [`.docs/2026 - inmogestion.md`](2026%20-%20inmogestion.md) | Enunciado del trabajo y tabla de alcances por etapa |
 | [`.docs/GUIA TP-FINAL.md`](GUIA%20TP-FINAL.md) | Índice que pide la cátedra para el informe (incluye DER y modelo relacional en la sección 3.3) |
 | [`.docs/TarjetasCRC.md`](TarjetasCRC.md) | Tarjetas CRC por módulo: usuarios, propiedades y contratos, cuotas y mora, pagos, liquidaciones, notificaciones |
@@ -277,16 +281,32 @@ Desde HU-13 la cadena es estricta: 13, 14, 15, 16, 17, 18 (28 puntos en fila). P
 | HU-14 | Redondeo, tope del recargo y si se guarda o se recalcula |
 | HU-16 | Medios de pago disponibles y qué pasa si el monto no coincide con la cuota |
 
+### Presupuesto y alcance
+
+Detalle en [`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md) (secciones 5 y 6). Fuente: la charla del equipo del 29/10.
+
+1. **Qué se exige el 17 al 24 de noviembre:** el enunciado dice que se deben cumplir "todas las funcionalidades para aprobar la cursada", pero su matriz separa cursada y final. Conviene confirmarlo con la cátedra.
+2. **Cifra de referencia:** 50 horas y $900.000 son el subtotal de la cursada en el análisis, pero en la charla se trataron como el total del desarrollo (el total del análisis es 83,33 horas y $1.500.000).
+3. **Fase 2 incompleta:** la tabla de estimación no incluye las notificaciones ni la gestión completa e historial de usuarios, que el enunciado pide para el final.
+4. **Equivalencia de puntos a horas:** no es uniforme (por ejemplo, 5 SP van de 6,0 a 8,0 horas) y los puntos de las historias no se pueden convertir a horas con la escala del análisis.
+
+### Proceso de trabajo
+
+1. **Scrum y GitHub Projects:** la cátedra plantea Scrum como método (clase del 20/10) y el informe pide describir la metodología (sección 1.4 de la [guía](GUIA%20TP-FINAL.md)). El equipo trabaja con issues y un tablero de GitHub Projects, y en la charla se dudó de si eso alcanza para llamarlo Scrum. Falta decidir cómo se describe y qué ceremonias se usan.
+2. **Sprint en el tablero:** el tablero no tiene un campo de iteración (Sprint 1 y Sprint 2). Agregarlo permitiría ver el backlog a la izquierda y el sprint actual a continuación, como se propuso en la charla.
+3. **Reunión breve periódica:** se habló de la reunión diaria de 15 minutos de Scrum y uno de los integrantes dudó de su utilidad. No se decidió nada.
+
 ---
 
 ## 12. Observaciones sobre el repositorio
 
 Cosas detectadas al revisar el proyecto, para corregir cuando convenga:
 
-- **Enlaces rotos en el `README`:** apunta a `.docs/PRESUPUESTO_Y_PLANIFICACION.md`, que no existe, y a `.docs/[BORRADOR]ANALISIS_DE_REQUERIMIENTOS.md`, que hoy se llama `ANALISIS_DE_REQUERIMIENTOS.md`.
+- **Enlace roto en el `README`:** apunta a `.docs/[BORRADOR]ANALISIS_DE_REQUERIMIENTOS.md`, que hoy se llama `ANALISIS_DE_REQUERIMIENTOS.md`. El enlace a `.docs/PRESUPUESTO_Y_PLANIFICACION.md` ya funciona desde que existe ese documento.
 - **Versión de PHP:** el `README` dice "PHP ≥ 7.4", pero `composer.json` exige `^8.2`.
 - **Ruta de las skills:** `AGENTS.md` cita `.agents/skills/...`, pero los archivos están en `.agents/.agents/skills/...`.
-- **Puntos del backlog:** el resumen del backlog dice 66 puntos para la cursada, pero la suma de su tabla da 70 (73 contando HU-03b).
+- **Puntos del backlog:** el resumen del backlog dice 66 puntos para la cursada, pero la suma de su tabla da 70 (73 contando HU-03b). Con el final pasa lo mismo: el resumen dice 38 y la tabla suma 41.
+- **Estimación en dos escalas:** el análisis de requerimientos estima por módulo (42 SP en total) y el backlog por historia (más del doble). Las 50 horas de la cursada salen de la primera escala. Ver [`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md).
 - **Referencias a la rama de prototipos:** los issues dicen que los prototipos están "en la rama `prototipos-pantalla` hasta su merge". Ya se mergeó, así que ese texto quedó viejo.
 - **Estados del tablero:** hay 12 issues en *In progress* a la vez, lo que no encaja con el orden de la sección 10. Convendría dejar así solo los de la etapa actual.
 - **Fechas del issue de base de datos:** inicio 29/10 y objetivo 30/10 para 8 puntos; es un plazo muy justo.
@@ -308,3 +328,4 @@ Cosas detectadas al revisar el proyecto, para corregir cuando convenga:
 | 28/10/2026 | Estimación del issue de base de datos corregida de 999 a 8 puntos, con desglose |
 | 28/10/2026 | Reparto en partes iguales entre los tres integrantes y orden cronológico de trabajo |
 | 28/10/2026 | Este documento |
+| 06/11/2026 | Analizada la transcripción de la charla del 29/10 (`.docs/documentacion/`). Se creó `PRESUPUESTO_Y_PLANIFICACION.md` y se agregaron a este documento la entrega, las decisiones pendientes de presupuesto y de proceso, y las observaciones sobre los puntos |
