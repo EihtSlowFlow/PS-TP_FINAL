@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"error":"#ba1a1a","secondary-fixed-dim":"#c4c7ca","secondary":"#5c5f62","secondary-fixed":"#e0e2e6","warning-soft":"#FFFBEB","info-soft":"#DBEAFE","info-text":"#1E40AF","row-hover":"#F3F4F6","tertiary-fixed-dim":"#ffb695","on-background":"#121c2a","danger-hover":"#DC2626","surface-tint":"#4d44e3","on-error-container":"#93000a","secondary-container":"#dee0e4","surface-muted":"#F9FAFB","on-primary-container":"#dad7ff","primary":"#3525cd","success-soft":"#ECFDF5","surface-bright":"#f8f9ff","error-container":"#ffdad6","on-tertiary":"#ffffff","background":"#f8f9ff","surface-variant":"#d9e3f6","danger":"#EF4444","on-tertiary-fixed-variant":"#7b2f00","success-text":"#065F46","on-primary":"#ffffff","on-secondary-container":"#606366","surface-container":"#e6eeff","surface-container-highest":"#d9e3f6","outline-variant":"#c7c4d8","inverse-primary":"#c3c0ff","border":"#E5E7EB","primary-container":"#4f46e5","on-surface":"#121c2a","on-secondary-fixed":"#191c1f","warning-text":"#92400E","danger-text":"#B91C1C","primary-fixed":"#e2dfff","surface-dim":"#d0dbed","on-secondary-fixed-variant":"#44474a","primary-hover":"#4338CA","tertiary-fixed":"#ffdbcc","on-tertiary-container":"#ffd2be","primary-soft":"#E0E7FF","on-tertiary-fixed":"#351000","background-start":"#F0F4F8","text-muted":"#6B7280","on-surface-variant":"#464555","warning":"#F59E0B","info":"#2563EB","on-primary-fixed-variant":"#3323cc","heading":"#111827","surface-container-high":"#dee9fc","outline":"#777587","border-input":"#D1D5DB","primary-fixed-dim":"#c3c0ff","on-error":"#ffffff","tertiary-container":"#a44100","on-primary-fixed":"#0f0069","success":"#10B981","background-end":"#D9E2EC","inverse-surface":"#27313f","inverse-on-surface":"#eaf1ff","danger-soft":"#FEF2F2","surface-container-low":"#eff4ff","surface-container-lowest":"#ffffff","on-secondary":"#ffffff","surface":"#FFFFFF","tertiary":"#7e3000"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-sm":"0.5rem","gutter":"1.5rem","space-md":"1rem","margin-mobile":"1rem","margin":"2rem","gutter-mobile":"1rem","space-xs":"0.25rem","space-xl":"2rem","space-lg":"1.5rem"},"fontFamily":{"label-sm":["Inter"],"label-md":["Inter"],"table-header":["Inter"],"body-lg":["Inter"],"body-md":["Inter"],"headline-lg-mobile":["Inter"],"metric-display":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"],"headline-lg":["Inter"],"body-sm":["Inter"]},"fontSize":{"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"500"}],"table-header":["13px",{"lineHeight":"18px","letterSpacing":"0.05em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"body-md":["15px",{"lineHeight":"22px","fontWeight":"400"}],"headline-lg-mobile":["22px",{"lineHeight":"28px","fontWeight":"600"}],"metric-display":["32px",{"lineHeight":"38px","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"26px","fontWeight":"500"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"500"}],"headline-lg":["28px",{"lineHeight":"36px","fontWeight":"600"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}};</script></head><body class="min-h-screen bg-gradient-to-br from-background-start to-background-end font-body-md text-on-surface antialiased"><aside class="fixed top-0 left-0 h-full w-[260px] bg-surface border-r border-border z-40 flex flex-col justify-between select-none"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center gap-space-sm border-b border-border"><div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center flex-shrink-0 shadow-sm"><span class="material-symbols-outlined text-on-primary text-[22px]">apartment</span></div><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-heading leading-tight truncate">InmoGestión</span><span class="font-label-sm text-label-sm text-text-muted leading-none">Gestión Inmobiliaria</span></div></div><nav class="px-space-sm py-space-md flex flex-col gap-space-xs" data-active-classes="bg-primary-soft text-primary-hover font-semibold rounded-lg"><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors" data-path="inmuebles" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span>Inmuebles</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors" data-path="contratos" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span>Contratos</span></a><div class="flex flex-col"><a class="flex items-center justify-between px-space-sm py-2 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors" data-path="cuotas" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span>Cuotas</span></div><span class="material-symbols-outlined text-[16px] text-text-muted">expand_more</span></a><div class="ml-7 pl-3 border-l border-border flex flex-col gap-1 py-1"><a class="px-2 py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors" data-path="emitir-cuotas" href="#">Emitir cuotas</a><a class="px-2 py-1.5 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors" data-path="cobranzas" href="#">Cobranzas</a></div></div><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors" data-path="pagos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Pagos</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors" data-path="liquidaciones" href="#"><span class="material-symbols-outlined text-[20px]">account_balance_wallet</span><span>Liquidaciones</span></a><a aria-current="page" class="flex items-center gap-3 px-space-sm py-2 transition-colors bg-primary-soft text-primary-hover font-semibold rounded-lg" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a></nav></div><div class="p-space-sm border-t border-border"><div class="p-3 rounded-xl bg-surface-muted border border-border flex flex-col gap-space-sm"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-primary-soft text-primary-hover font-headline-sm text-label-md font-semibold flex items-center justify-center flex-shrink-0">LB</div><div class="flex flex-col min-w-0 leading-tight"><span class="font-label-md text-label-md font-semibold text-heading truncate">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted truncate">Administradora</span></div></div><a class="w-full flex items-center justify-center gap-2 py-1.5 px-3 rounded-lg text-danger hover:bg-danger-soft hover:text-danger-hover transition-colors font-label-md text-label-md font-medium" data-path="login" href="#"><span class="material-symbols-outlined text-[18px]">logout</span><span>Cerrar Sesión</span></a></div></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface border-b border-border z-30 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-2 font-body-sm text-body-sm text-text-muted"><span class="hover:text-heading transition-colors">InmoGestión</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="hover:text-heading transition-colors">Reportes</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="font-label-md text-heading font-medium">Recaudación</span></div><div class="flex items-center gap-space-lg"><div class="flex items-center gap-2 font-label-md text-label-md text-text-muted bg-surface-muted px-3 py-1.5 rounded-lg border border-border"><span class="material-symbols-outlined text-[18px] text-text-muted">calendar_today</span><span>Hoy: 06/11/2026</span></div><div class="relative flex items-center justify-center"><button class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-row-hover hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 w-4 h-4 bg-danger text-on-error rounded-full font-label-sm text-[10px] leading-4 text-center font-bold">3</span></button></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 min-h-screen"><div class="max-w-[1440px] mx-auto p-space-xl"><div class="flex flex-col w-full gap-space-lg">
+<!-- 1. ENCABEZADO DE SECCIÓN -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex flex-col gap-1 min-w-0">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-soft text-primary font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+          Ejercicio Fiscal 2026
+        </span>
+<span class="font-label-sm text-label-sm text-text-muted">Corte al 06/11/2026</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-heading tracking-tight">Reporte de recaudación</h1>
+<p class="font-body-md text-body-md text-text-muted max-w-2xl">
+        Seguimiento y consolidación contable de pagos ingresados y acreditados por locación de inmuebles.
+      </p>
+</div>
+<!-- Barra de acciones rápidas -->
+<div class="flex items-center gap-3 shrink-0">
+<button class="h-[42px] px-4 rounded-lg bg-surface text-secondary border border-border hover:bg-surface-muted hover:text-heading transition-colors flex items-center gap-2 font-label-md text-label-md shadow-sm" onclick="window.print()" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Imprimir</span>
+</button>
+<div class="relative inline-block text-left" id="exportDropdown">
+<button class="h-[42px] px-4 rounded-lg bg-surface text-secondary border border-border hover:bg-surface-muted hover:text-heading transition-colors flex items-center gap-2 font-label-md text-label-md shadow-sm" onclick="const m = document.getElementById('exportMenu'); m.classList.toggle('hidden');" type="button">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span>Exportar</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<div class="hidden absolute right-0 mt-2 w-48 rounded-xl bg-surface shadow-xl p-1 z-20 border border-border" id="exportMenu">
+<a class="flex items-center gap-2.5 px-3 py-2 text-body-sm font-body-sm text-on-surface hover:bg-surface-muted rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-danger text-[18px]">picture_as_pdf</span>
+<span>Documento PDF (.pdf)</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 text-body-sm font-body-sm text-on-surface hover:bg-surface-muted rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-success text-[18px]">table_view</span>
+<span>Planilla Excel (.xlsx)</span>
+</a>
+<a class="flex items-center gap-2.5 px-3 py-2 text-body-sm font-body-sm text-on-surface hover:bg-surface-muted rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-info text-[18px]">data_object</span>
+<span>Asientos CSV (.csv)</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- 2. BARRA DE FILTROS -->
+<div class="bg-surface rounded-xl p-5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] border border-border flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">filter_alt</span>
+<span class="font-label-md text-label-md text-heading font-semibold">Parámetros del balance</span>
+</div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-surface-muted text-text-muted font-label-sm text-label-sm border border-border">
+<span class="material-symbols-outlined text-[15px] text-primary">event_available</span>
+<span>Período filtrado: <strong>01/10/2026</strong> al <strong>06/11/2026</strong> (vigente)</span>
+</div>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-end" id="filterForm" onsubmit="event.preventDefault();">
+<!-- Desde período -->
+<div class="md:col-span-3 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-muted font-medium flex items-center justify-between">
+<span>Desde período</span>
+<span class="text-primary text-[11px]">Inicio</span>
+</label>
+<div class="relative">
+<select class="w-full h-11 bg-surface border border-border-input rounded-lg px-3.5 pr-9 font-body-sm text-body-sm text-heading appearance-none focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all cursor-pointer">
+<option value="ago-2026">Agosto 2026</option>
+<option value="sep-2026">Septiembre 2026</option>
+<option selected="" value="oct-2026">Octubre 2026</option>
+<option value="nov-2026">Noviembre 2026</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">calendar_month</span>
+</div>
+</div>
+<!-- Hasta período -->
+<div class="md:col-span-3 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-muted font-medium flex items-center justify-between">
+<span>Hasta período</span>
+<span class="text-primary text-[11px]">Cierre</span>
+</label>
+<div class="relative">
+<select class="w-full h-11 bg-surface border border-border-input rounded-lg px-3.5 pr-9 font-body-sm text-body-sm text-heading appearance-none focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all cursor-pointer">
+<option value="oct-2026">Octubre 2026</option>
+<option selected="" value="nov-2026">Noviembre 2026</option>
+<option value="dic-2026">Diciembre 2026</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">calendar_month</span>
+</div>
+</div>
+<!-- Medio de pago -->
+<div class="md:col-span-3 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-muted font-medium">Medio de pago</label>
+<div class="relative">
+<select class="w-full h-11 bg-surface border border-border-input rounded-lg px-3.5 pr-9 font-body-sm text-body-sm text-heading appearance-none focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all cursor-pointer">
+<option value="todos">Todos los canales</option>
+<option selected="" value="transferencia">Transferencia bancaria</option>
+<option value="deposito">Depósito bancario</option>
+<option value="pasarela">Pasarela digital / Débito</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">account_balance</span>
+</div>
+</div>
+<!-- Botón aplicar -->
+<div class="md:col-span-3 flex items-center gap-2">
+<button class="w-full h-11 px-5 rounded-lg bg-primary-container text-on-primary hover:bg-primary-hover font-label-md text-label-md font-semibold transition-all flex items-center justify-center gap-2 shadow-sm shadow-primary-container/30 active:scale-[0.99]" onclick="const toast = document.getElementById('refreshToast'); toast.classList.remove('opacity-0','pointer-events-none'); setTimeout(() => toast.classList.add('opacity-0','pointer-events-none'), 2200);" type="button">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+<span>Aplicar filtros</span>
+</button>
+</div>
+</form>
+<!-- Micro toast feedback -->
+<div class="opacity-0 pointer-events-none transition-opacity duration-300 -mt-1 px-3 py-1.5 rounded-lg bg-success-soft text-success-text font-label-sm text-label-sm flex items-center gap-2 w-fit" id="refreshToast">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Filtros actualizados: 3 registros consolidados en el visor contable.</span>
+</div>
+</div>
+<!-- 3. TARJETAS DE RESUMEN (KPI CARDS) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<!-- KPI 1: Total recaudado -->
+<div class="bg-surface rounded-xl p-6 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] border border-border relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between mb-4">
+<div class="flex flex-col">
+<span class="font-table-header text-table-header text-text-muted uppercase tracking-wider font-semibold">Total recaudado</span>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5">Bimestre Oct - Nov 2026</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-success-soft text-success flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">payments</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-heading font-semibold tracking-tight font-mono">$ 1.980.000</span>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-border">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+            3 cobros liquidados
+          </span>
+<span class="font-label-sm text-label-sm text-text-muted">en el período</span>
+</div>
+</div>
+</div>
+<!-- KPI 2: Pagos aprobados -->
+<div class="bg-surface rounded-xl p-6 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] border border-border relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between mb-4">
+<div class="flex flex-col">
+<span class="font-table-header text-table-header text-text-muted uppercase tracking-wider font-semibold">Pagos aprobados</span>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5">Validación de acreditaciones</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-soft text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">verified</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-primary-container font-semibold tracking-tight">3</span>
+<span class="font-body-sm text-body-sm text-text-muted">operaciones con recibo</span>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-border">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-info-soft text-info-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">sync_saved_locally</span>
+            100% bancarizado
+          </span>
+<span class="font-label-sm text-label-sm text-text-muted">conciliación completada</span>
+</div>
+</div>
+</div>
+<!-- KPI 3: Promedio y efectividad -->
+<div class="bg-surface rounded-xl p-6 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.06)] border border-border relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-start justify-between mb-4">
+<div class="flex flex-col">
+<span class="font-table-header text-table-header text-text-muted uppercase tracking-wider font-semibold">Tasa de cobro efectivo</span>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5">Cumplimiento en término</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-muted text-heading flex items-center justify-center shrink-0 border border-border">
+<span class="material-symbols-outlined text-[22px]">trending_up</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-heading font-semibold tracking-tight">100%</span>
+<span class="font-label-md text-label-md text-text-muted">| Ticket prom. $ 660.000</span>
+</div>
+<div class="flex items-center gap-2 pt-2 border-t border-border">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[14px]">format_image_left</span>
+            Riesgo mora 0%
+          </span>
+<span class="font-label-sm text-label-sm text-text-muted">sin rechazos ni reclamos</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. TABLA DE PAGOS APROBADOS -->
+<div class="bg-surface rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] border border-border overflow-hidden">
+<!-- Barra superior de la tabla con métricas en línea -->
+<div class="px-6 py-4 border-b border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-surface">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-soft text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-heading font-semibold">Detalle de operaciones registradas</h2>
+<p class="font-label-sm text-label-sm text-text-muted">3 registros verificados bajo libro mayor</p>
+</div>
+</div>
+<div class="flex items-center gap-2 text-label-sm font-label-sm">
+<span class="px-2.5 py-1 rounded-md bg-surface-muted text-text-muted border border-border">Moneda: ARS ($)</span>
+<span class="px-2.5 py-1 rounded-md bg-success-soft text-success-text font-medium flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+          Canal Red Link / Banelco
+        </span>
+</div>
+</div>
+<!-- Contenedor responsive con scroll horizontal si es necesario -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-muted border-b border-border">
+<th class="py-3.5 px-6 font-table-header text-table-header text-text-muted uppercase tracking-wider" scope="col">Fecha de pago</th>
+<th class="py-3.5 px-6 font-table-header text-table-header text-text-muted uppercase tracking-wider" scope="col">Inquilino</th>
+<th class="py-3.5 px-6 font-table-header text-table-header text-text-muted uppercase tracking-wider" scope="col">Inmueble</th>
+<th class="py-3.5 px-6 font-table-header text-table-header text-text-muted uppercase tracking-wider" scope="col">Período abonado</th>
+<th class="py-3.5 px-6 font-table-header text-table-header text-text-muted uppercase tracking-wider" scope="col">Medio de pago</th>
+<th class="py-3.5 px-6 font-table-header text-table-header text-text-muted uppercase tracking-wider" scope="col">N° Operación</th>
+<th class="py-3.5 px-6 font-table-header text-table-header text-text-muted uppercase tracking-wider text-right" scope="col">Monto</th>
+<th class="py-3.5 px-6 font-table-header text-table-header text-text-muted uppercase tracking-wider text-center" scope="col">Estado / Auditoría</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border">
+<!-- FILA 1 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-heading font-medium">05/11/2026</span>
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span> hace 1 día
+                </span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary-soft text-primary-hover font-label-md text-label-md font-semibold flex items-center justify-center shrink-0">
+                  VF
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-heading font-medium">Valentina Funes</span>
+<span class="font-label-sm text-label-sm text-text-muted">DNI 38.412.903</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col min-w-[210px]">
+<span class="font-body-md text-body-md text-heading font-medium">San Martín 322, Local 3</span>
+<span class="font-label-sm text-label-sm text-text-muted">Destino Comercial</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-muted text-heading font-label-md text-label-md border border-border">
+<span class="material-symbols-outlined text-[15px] text-primary">calendar_today</span>
+                Noviembre 2026
+              </span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-text-muted">account_balance</span>
+<span>Transferencia</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="font-mono text-body-sm font-body-sm text-text-muted bg-surface-muted px-2 py-0.5 rounded border border-border">#0087456</span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<span class="font-mono font-semibold text-body-lg text-body-lg text-heading">$ 780.000</span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                Aprobado
+              </span>
+</td>
+</tr>
+<!-- FILA 2 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-heading font-medium">14/10/2026</span>
+<span class="font-label-sm text-label-sm text-text-muted">Conciliado</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary-soft text-primary-hover font-label-md text-label-md font-semibold flex items-center justify-center shrink-0">
+                  VF
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-heading font-medium">Valentina Funes</span>
+<span class="font-label-sm text-label-sm text-text-muted">DNI 38.412.903</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col min-w-[210px]">
+<span class="font-body-md text-body-md text-heading font-medium">San Martín 322, Local 3</span>
+<span class="font-label-sm text-label-sm text-text-muted">Destino Comercial</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-muted text-heading font-label-md text-label-md border border-border">
+<span class="material-symbols-outlined text-[15px] text-primary">calendar_today</span>
+                Octubre 2026
+              </span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-text-muted">account_balance</span>
+<span>Transferencia</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="font-mono text-body-sm font-body-sm text-text-muted bg-surface-muted px-2 py-0.5 rounded border border-border">#0079321</span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<span class="font-mono font-semibold text-body-lg text-body-lg text-heading">$ 780.000</span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                Aprobado
+              </span>
+</td>
+</tr>
+<!-- FILA 3 -->
+<tr class="hover:bg-row-hover transition-colors group">
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-heading font-medium">08/10/2026</span>
+<span class="font-label-sm text-label-sm text-text-muted">Conciliado</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md font-semibold flex items-center justify-center shrink-0">
+                  CR
+                </div>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-heading font-medium">Camila Rojas</span>
+<span class="font-label-sm text-label-sm text-text-muted">DNI 35.184.210</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col min-w-[210px]">
+<span class="font-body-md text-body-md text-heading font-medium">Belgrano 1250, 4°B</span>
+<span class="font-label-sm text-label-sm text-text-muted">Depto. 3 amb</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-muted text-heading font-label-md text-label-md border border-border">
+<span class="material-symbols-outlined text-[15px] text-primary">calendar_today</span>
+                Octubre 2026
+              </span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-text-muted">account_balance</span>
+<span>Transferencia</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="font-mono text-body-sm font-body-sm text-text-muted bg-surface-muted px-2 py-0.5 rounded border border-border">#0071650</span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<span class="font-mono font-semibold text-body-lg text-body-lg text-heading">$ 420.000</span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-center">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[15px]">check_circle</span>
+                Aprobado
+              </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- 5. PIE CON SUBTOTALES Y CONSOLIDACIÓN -->
+<div class="border-t border-border bg-surface-muted p-6 flex flex-col gap-6">
+<!-- Desglose analítico por período -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-border">
+<div class="flex flex-col">
+<span class="font-table-header text-table-header text-text-muted uppercase tracking-wider font-semibold">Desglose mensual del período filtrado</span>
+<span class="font-label-sm text-label-sm text-text-muted">Liquidaciones imputadas por mes de devengamiento</span>
+</div>
+<div class="flex flex-wrap items-center gap-4">
+<!-- Octubre -->
+<div class="flex items-center gap-3 bg-surface px-4 py-2.5 rounded-lg border border-border shadow-sm">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+<div class="flex flex-col leading-tight">
+<span class="font-label-sm text-label-sm text-text-muted">Subtotal Octubre 2026 (2 pagos)</span>
+<span class="font-mono font-semibold text-body-md text-heading">$ 1.200.000</span>
+</div>
+</div>
+<!-- Noviembre -->
+<div class="flex items-center gap-3 bg-surface px-4 py-2.5 rounded-lg border border-border shadow-sm">
+<div class="w-2.5 h-2.5 rounded-full bg-info"></div>
+<div class="flex flex-col leading-tight">
+<span class="font-label-sm text-label-sm text-text-muted">Subtotal Noviembre 2026 (1 pago)</span>
+<span class="font-mono font-semibold text-body-md text-heading">$ 780.000</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Fila de Total Consolidado -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 rounded-xl bg-surface border border-border shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">account_balance_wallet</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-heading font-semibold">Total general recaudado</span>
+<span class="font-label-sm text-label-sm text-text-muted">Suma total de cuotas acreditadas e imputadas</span>
+</div>
+</div>
+<div class="flex items-baseline gap-3">
+<span class="font-label-md text-label-md text-text-muted font-medium uppercase tracking-wider">Monto final:</span>
+<span class="font-mono text-headline-lg text-headline-lg font-bold text-primary-container tracking-tight">$ 1.980.000</span>
+</div>
+</div>
+<!-- Leyenda informativa de auditoría contable -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 font-label-sm text-label-sm text-text-muted">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span>
+<span>Reporte generado al <strong>06/11/2026</strong> conforme a movimientos bancarios conciliados. Sistema <strong>InmoGestión 2026</strong>.</span>
+</div>
+<div class="flex items-center gap-4">
+<span>Auditoría: ID-REC-8921-X</span>
+<span class="text-success-text flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+            Cierre certificado
+          </span>
+</div>
+</div>
+</div>
+</div>
+</div></div></main></div></body></html>

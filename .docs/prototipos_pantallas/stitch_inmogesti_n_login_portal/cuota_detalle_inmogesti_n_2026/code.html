@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-high":"#dee9fc","inverse-primary":"#c3c0ff","on-primary-fixed":"#0f0069","on-surface":"#121c2a","success-text":"#065F46","on-error":"#ffffff","tertiary-fixed":"#ffdbcc","outline":"#777587","secondary-fixed":"#e0e2e6","on-primary-container":"#dad7ff","on-primary-fixed-variant":"#3323cc","secondary":"#5c5f62","warning":"#F59E0B","on-tertiary":"#ffffff","on-secondary":"#ffffff","on-primary":"#ffffff","danger-soft":"#FEF2F2","surface-container":"#e6eeff","primary-soft":"#E0E7FF","on-secondary-fixed":"#191c1f","primary-hover":"#4338CA","background-start":"#F0F4F8","background-end":"#D9E2EC","surface-bright":"#f8f9ff","primary-fixed-dim":"#c3c0ff","secondary-container":"#dee0e4","surface":"#FFFFFF","border-input":"#D1D5DB","success-soft":"#ECFDF5","error":"#ba1a1a","surface-container-highest":"#d9e3f6","inverse-on-surface":"#eaf1ff","surface-muted":"#F9FAFB","border":"#E5E7EB","info-text":"#1E40AF","surface-dim":"#d0dbed","surface-variant":"#d9e3f6","danger-text":"#B91C1C","info-soft":"#DBEAFE","primary-container":"#4f46e5","inverse-surface":"#27313f","surface-container-low":"#eff4ff","success":"#10B981","on-surface-variant":"#464555","danger-hover":"#DC2626","tertiary-container":"#a44100","on-secondary-fixed-variant":"#44474a","row-hover":"#F3F4F6","surface-container-lowest":"#ffffff","on-background":"#121c2a","secondary-fixed-dim":"#c4c7ca","on-tertiary-container":"#ffd2be","error-container":"#ffdad6","tertiary":"#7e3000","tertiary-fixed-dim":"#ffb695","primary":"#3525cd","surface-tint":"#4d44e3","on-error-container":"#93000a","primary-fixed":"#e2dfff","warning-soft":"#FFFBEB","outline-variant":"#c7c4d8","warning-text":"#92400E","on-tertiary-fixed-variant":"#7b2f00","heading":"#111827","on-tertiary-fixed":"#351000","background":"#f8f9ff","danger":"#EF4444","info":"#2563EB","on-secondary-container":"#606366","text-muted":"#6B7280"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"1rem","space-xl":"2rem","space-sm":"0.5rem","space-xs":"0.25rem","space-lg":"1.5rem","gutter":"1.5rem","space-md":"1rem","gutter-mobile":"1rem","margin":"2rem"},"fontFamily":{"headline-lg-mobile":["Inter"],"body-md":["Inter"],"body-sm":["Inter"],"metric-display":["Inter"],"label-md":["Inter"],"table-header":["Inter"],"headline-md":["Inter"],"headline-lg":["Inter"],"headline-sm":["Inter"],"body-lg":["Inter"],"label-sm":["Inter"]},"fontSize":{"headline-lg-mobile":["22px",{"lineHeight":"28px","fontWeight":"600"}],"body-md":["15px",{"lineHeight":"22px","fontWeight":"400"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"metric-display":["32px",{"lineHeight":"38px","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"500"}],"table-header":["13px",{"lineHeight":"18px","letterSpacing":"0.05em","fontWeight":"500"}],"headline-md":["20px",{"lineHeight":"26px","fontWeight":"500"}],"headline-lg":["28px",{"lineHeight":"36px","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}]}}}};</script></head><body class="bg-gradient-to-b from-background-start to-background-end min-h-screen text-on-surface font-body-md text-body-md"><aside class="fixed left-0 top-0 h-screen w-[260px] bg-surface z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-lg flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary shrink-0"><span class="material-symbols-outlined text-[22px]">home</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-heading leading-tight">InmoGestión</span><span class="font-label-sm text-label-sm text-text-muted leading-none mt-0.5">Gestión Inmobiliaria</span></div></div><nav class="flex flex-col px-space-sm mt-space-sm gap-0.5" data-active-classes="bg-primary-soft text-primary-hover font-label-md rounded-lg"><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">grid_view</span><span>Dashboard</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="inmuebles" href="#"><span class="material-symbols-outlined text-[20px]">apartment</span><span>Inmuebles</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="contratos" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span>Contratos</span></a><div class="flex flex-col mt-0.5"><div class="flex items-center justify-between px-space-sm py-2 text-on-surface-variant font-label-md text-label-md"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span>Cuotas</span></div><span class="material-symbols-outlined text-[16px]">expand_more</span></div><div class="pl-8 pr-space-xs flex flex-col gap-0.5"><a class="flex items-center px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="emitir-cuotas" href="#">Emitir cuotas</a><a aria-current="page" class="flex items-center px-space-sm py-1.5 transition-colors bg-primary-soft text-primary-hover font-label-md rounded-lg" data-path="cobranzas" href="#">Cobranzas</a></div></div><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="pagos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Pagos</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="liquidaciones" href="#"><span class="material-symbols-outlined text-[20px]">account_balance_wallet</span><span>Liquidaciones</span></a><a class="flex items-center gap-3 px-space-sm py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-label-md text-label-md" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span>Reportes</span></a></nav></div><div class="p-space-sm m-space-sm bg-surface-muted rounded-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-primary-soft text-primary font-headline-sm text-headline-sm flex items-center justify-center shrink-0 font-semibold">LB</div><div class="flex flex-col overflow-hidden"><span class="font-label-md text-label-md text-heading font-medium truncate">Laura Benítez</span><span class="font-label-sm text-label-sm text-text-muted truncate">Administradora</span></div></div><a class="mt-space-sm w-full py-1.5 px-space-sm flex items-center justify-center gap-2 rounded-lg bg-surface text-secondary hover:bg-danger-soft hover:text-danger-text transition-colors font-label-sm text-label-sm" data-path="login" href="#"><span class="material-symbols-outlined text-[16px]">logout</span><span>Cerrar Sesión</span></a></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/90 backdrop-blur-xl z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-2 font-body-sm text-body-sm text-text-muted"><span class="text-on-surface-variant">InmoGestión</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="text-on-surface-variant">Cuotas</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="text-on-surface-variant">Cobranzas</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="text-heading font-label-md text-label-md font-medium">Detalle de cuota</span></div><div class="flex items-center gap-space-lg"><div class="hidden md:flex items-center gap-2 font-label-md text-label-md text-secondary"><span class="material-symbols-outlined text-[18px]">calendar_today</span><span>Hoy: 06/11/2026</span></div><div class="relative flex items-center"><button aria-label="Notificaciones" class="w-9 h-9 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span></button><span class="absolute top-1 right-1 w-4 h-4 rounded-full bg-danger text-on-error font-label-sm text-[10px] flex items-center justify-center leading-none font-semibold">3</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 max-w-[1200px] mx-auto px-space-xl py-space-xl"><div class="flex flex-col w-full gap-space-lg">
+<!-- CABECERA SUPERIOR DE NAVEGACIÓN Y ACCIONES RÁPIDAS -->
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-space-md">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-2">
+<a class="inline-flex items-center gap-1.5 text-secondary hover:text-primary transition-colors font-label-md text-label-md" data-path="cobranzas" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Volver a cobranzas</span>
+</a>
+<span class="text-secondary font-label-sm text-label-sm">/</span>
+<span class="font-label-sm text-label-sm text-text-muted">ID Cuota #OCT-2026-002</span>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<h1 class="font-headline-lg text-headline-lg text-heading font-semibold tracking-tight">
+          Cuota Octubre 2026 · Mitre 845
+        </h1>
+<span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-danger-soft text-danger-text font-label-md text-label-md font-medium">
+<span class="material-symbols-outlined text-[15px]">error</span>
+<span>Vencida</span>
+</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<a class="inline-flex items-center gap-1.5 text-primary hover:text-primary-hover font-label-md text-label-md underline decoration-primary/40 underline-offset-4" data-path="contratos" href="#">
+<span class="material-symbols-outlined text-[16px]">description</span>
+<span>Contrato C-002 (Joaquín Medina · Marta Quiroga)</span>
+</a>
+<span class="text-text-muted text-label-sm font-label-sm">•</span>
+<span class="text-text-muted font-label-sm text-label-sm">Inmueble: Departamento 2B · Mitre 845, Viedma</span>
+</div>
+</div>
+<!-- BOTONERA DE ACCIÓN SUPERIOR -->
+<div class="flex flex-wrap items-center gap-2.5">
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface text-secondary hover:bg-surface-container-low hover:text-on-surface shadow-sm font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>Aviso WhatsApp</span>
+</button>
+<button class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-surface text-secondary hover:bg-surface-container-low hover:text-on-surface shadow-sm font-label-md text-label-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span>Intimación formal</span>
+</button>
+<button class="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-primary-container text-on-primary hover:bg-primary-hover shadow-sm font-label-md text-label-md transition-colors font-medium" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Registrar pago manual</span>
+</button>
+</div>
+</div>
+<!-- BANNER DE ALERTA DE MORA PROLONGADA -->
+<div class="flex items-start justify-between gap-3 p-space-md rounded-xl bg-danger-soft text-danger-text shadow-sm">
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-error-container text-danger-text flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-semibold text-danger-text">Cuota con 27 días de atraso acumulados</span>
+<p class="font-body-sm text-body-sm mt-0.5 text-danger-text/90">
+          La fecha límite original fue el 10/10/2026. Se rechazó un pago no verificado el 13/10/2026, por lo que el cómputo de punitorios diarios continúa activo al día de la fecha (06/11/2026).
+        </p>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded bg-surface/80 text-danger-text font-medium whitespace-nowrap self-center">
+      Tasa contractual: 0,5% / día
+    </span>
+</div>
+<!-- GRILLA PRINCIPAL DE CONTENIDO: 2 COLUMNAS (DESGLOSE Y PARTES) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- COLUMNA IZQUIERDA: TARJETA 1 DESGLOSE FINANCIERO (8 COLS) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<!-- ENCABEZADO DE TARJETA -->
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-soft text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">calculate</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-heading font-semibold">
+                Desglose de la cuota y liquidación de mora
+              </h2>
+<span class="font-label-sm text-label-sm text-text-muted">Cálculo paramétrico automatizado según Cláusula 4.ª del Contrato C-002</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm px-2.5 py-1 rounded-full bg-surface-muted text-secondary font-medium">
+            Octubre 2026
+          </span>
+</div>
+<!-- KPI GRID DE PARÁMETROS -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 p-space-md bg-surface-muted rounded-xl">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted">Vencimiento base</span>
+<span class="font-headline-sm text-headline-sm text-heading font-semibold mt-0.5">10/10/2026</span>
+<span class="font-label-sm text-label-sm text-danger-text mt-0.5">Hace 27 días</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted">Días en mora</span>
+<span class="font-headline-sm text-headline-sm text-heading font-semibold mt-0.5">27 días</span>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5">Hoy: 06/11/2026</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted">Canon locativo</span>
+<span class="font-headline-sm text-headline-sm text-heading font-semibold tabular-nums mt-0.5">$ 650.000</span>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5">Monto original</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted">Mora diaria (0,5%)</span>
+<span class="font-headline-sm text-headline-sm text-danger-text font-semibold tabular-nums mt-0.5">$ 3.250</span>
+<span class="font-label-sm text-label-sm text-text-muted mt-0.5">Por cada día corrido</span>
+</div>
+</div>
+<!-- TABLA COMPOSICIÓN DETALLADA -->
+<div class="overflow-x-auto rounded-lg bg-surface-bright p-1">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-muted font-table-header text-table-header text-on-surface-variant uppercase">
+<th class="py-2.5 px-4 font-medium">Concepto exigible</th>
+<th class="py-2.5 px-4 font-medium text-center">Base de cálculo</th>
+<th class="py-2.5 px-4 font-medium text-center">Alicuota / Días</th>
+<th class="py-2.5 px-4 font-medium text-right">Subtotal</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<tr class="hover:bg-row-hover transition-colors">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-medium text-heading">Canon locativo mensual</span>
+<span class="font-label-sm text-label-sm text-text-muted">Período Octubre 2026 (Mitre 845)</span>
+</div>
+</td>
+<td class="py-3 px-4 text-center tabular-nums text-secondary font-label-md text-label-md">$ 650.000</td>
+<td class="py-3 px-4 text-center text-secondary font-label-md text-label-md">1 período</td>
+<td class="py-3 px-4 text-right tabular-nums font-semibold text-heading">$ 650.000</td>
+</tr>
+<tr class="hover:bg-row-hover transition-colors">
+<td class="py-3 px-4">
+<div class="flex flex-col">
+<span class="font-medium text-danger-text">Punitorios por mora acumulada</span>
+<span class="font-label-sm text-label-sm text-text-muted">Desde 11/10/2026 hasta 06/11/2026 inclusive</span>
+</div>
+</td>
+<td class="py-3 px-4 text-center tabular-nums text-secondary font-label-md text-label-md">$ 3.250 / día</td>
+<td class="py-3 px-4 text-center text-secondary font-label-md text-label-md">27 días (0,5%)</td>
+<td class="py-3 px-4 text-right tabular-nums font-semibold text-danger-text">$ 87.750</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- CAJA DESTACADA DE TOTAL EXIGIBLE -->
+<div class="p-space-lg rounded-xl bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<span class="font-table-header text-table-header uppercase text-secondary tracking-wider font-semibold">Total Exigible al 06/11/2026</span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="font-metric-display text-metric-display text-primary font-bold tabular-nums tracking-tight">
+                $ 737.750
+              </span>
+<span class="font-label-md text-label-md text-text-muted font-normal">(Pesos Argentinos)</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary mt-1">Equivalente a: Base ($ 650.000) + Recargo ($ 87.750)</span>
+</div>
+<div class="flex flex-col gap-2 w-full md:w-auto">
+<div class="flex items-center gap-2 p-2.5 rounded-lg bg-surface text-secondary font-label-sm text-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[18px] text-info">info</span>
+<span>El recargo queda fijo mientras un pago está en revisión.</span>
+</div>
+<div class="flex items-center justify-end gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface text-secondary hover:bg-surface-container-low font-label-sm text-label-sm font-medium transition-colors" type="button">
+                Descargar liquidación PDF
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- TARJETA 3: HISTORIAL DE PAGOS INFORMADOS (DENTRO DE COL IZQUIERDA PARA ANCHO AMPLIO) -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container text-on-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">history</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<h3 class="font-headline-md text-headline-md text-heading font-semibold">Historial de pagos informados</h3>
+<span class="px-2 py-0.5 rounded-full bg-surface-muted text-text-muted font-label-sm text-label-sm font-semibold">1 intento</span>
+</div>
+<span class="font-label-sm text-label-sm text-text-muted">Registro de comprobantes presentados y auditorías realizadas</span>
+</div>
+</div>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-muted text-secondary hover:text-on-surface font-label-sm text-label-sm font-medium transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">upload_file</span>
+<span>Subir comprobante</span>
+</button>
+</div>
+<!-- TABLA ADMINISTRATIVA DE INTENTOS DE PAGO -->
+<div class="overflow-x-auto rounded-lg">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-muted font-table-header text-table-header text-on-surface-variant uppercase">
+<th class="py-3 px-4 font-medium">Fecha y hora</th>
+<th class="py-3 px-4 font-medium">Medio / Canal</th>
+<th class="py-3 px-4 font-medium text-right">Monto</th>
+<th class="py-3 px-4 font-medium text-center">Estado</th>
+<th class="py-3 px-4 font-medium">Motivo / Auditoría</th>
+<th class="py-3 px-4 font-medium text-right">Acción</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<tr class="hover:bg-row-hover transition-colors">
+<td class="py-3.5 px-4 font-label-md text-label-md">
+<div class="flex flex-col">
+<span class="font-medium text-heading">12/10/2026</span>
+<span class="text-text-muted font-label-sm text-label-sm">15:42 hs</span>
+</div>
+</td>
+<td class="py-3.5 px-4 font-label-md text-label-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">account_balance</span>
+<div class="flex flex-col">
+<span class="font-medium text-heading">Transferencia</span>
+<span class="text-text-muted font-label-sm text-label-sm">Banco Galicia</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right font-headline-sm text-headline-sm font-semibold text-heading tabular-nums">
+                  $ 650.000
+                </td>
+<td class="py-3.5 px-4 text-center">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-danger-soft text-danger-text font-label-sm text-label-sm font-medium">
+<span class="material-symbols-outlined text-[13px]">cancel</span>
+<span>Rechazado</span>
+</span>
+</td>
+<td class="py-3.5 px-4 font-label-sm text-label-sm">
+<div class="flex flex-col">
+<span class="font-medium text-danger-text">Comprobante ilegible</span>
+<span class="text-text-muted">Auditado por Laura Benítez (13/10/2026 · 10:15 hs)</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-right">
+<button class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-surface text-secondary hover:bg-surface-container-low hover:text-on-surface shadow-sm font-label-sm text-label-sm transition-colors" type="button">
+<span class="material-symbols-outlined text-[15px]">visibility</span>
+<span>Ver pago</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- NOTA EXPLICATIVA SOBRE EL RECHAZO Y EL CÓMPUTO DE MORA -->
+<div class="p-3.5 rounded-lg bg-surface-muted flex items-start gap-2.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary mt-0.5 shrink-0">info</span>
+<p>
+<strong class="text-heading">Efecto legal y contable:</strong> Dado que el pago fue rechazado formalmente el 13/10/2026 debido a captura de pantalla borrosa sin código de transacción rastreable, el valor no acreditado mantiene la cuota en estado moroso acumulando $ 3.250 diarios hasta la regularización fehaciente.
+          </p>
+</div>
+</div>
+</div>
+<!-- COLUMNA DERECHA: TARJETA 2 PARTES INTERVINIENTES & RESUMEN INMUEBLE (4 COLS) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- TARJETA PARTES -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-low text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">contacts</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline-md text-headline-md text-heading font-semibold">Partes intervinientes</h3>
+<span class="font-label-sm text-label-sm text-text-muted">Titulares del Contrato C-002</span>
+</div>
+</div>
+</div>
+<!-- BLOQUE INQUILINO (LOCATARIO) -->
+<div class="p-space-md rounded-xl bg-surface-bright flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-semibold uppercase tracking-wider">Locatario (Inquilino)</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-danger-soft text-danger-text">
+<span class="material-symbols-outlined text-[12px]">priority_high</span>
+              En mora
+            </span>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-11 h-11 rounded-full bg-primary-soft text-primary font-headline-sm text-headline-sm font-semibold flex items-center justify-center shrink-0">
+              JM
+            </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-heading font-medium truncate">Joaquín Medina</span>
+<span class="font-label-sm text-label-sm text-text-muted">DNI 38.291.044</span>
+<span class="font-label-sm text-label-sm text-text-muted truncate">j.medina@email.com</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 pt-2">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-text-muted">Teléfono:</span>
+<span class="font-medium text-heading tabular-nums">2920 45-6789</span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-1">
+<a class="inline-flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-surface text-secondary hover:bg-surface-container-low hover:text-on-surface font-label-sm text-label-sm transition-colors shadow-sm" href="tel:2920456789">
+<span class="material-symbols-outlined text-[16px]">call</span>
+<span>Llamar</span>
+</a>
+<a class="inline-flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-success-soft text-success-text hover:bg-success hover:text-on-primary font-label-sm text-label-sm transition-colors font-medium" href="https://wa.me/5492920456789" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+<span>WhatsApp</span>
+</a>
+</div>
+</div>
+</div>
+<!-- BLOQUE PROPIETARIA (LOCADORA) -->
+<div class="p-space-md rounded-xl bg-surface-muted flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase tracking-wider">Locadora (Propietaria)</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-success-soft text-success-text">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+              Titular al día
+            </span>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-11 h-11 rounded-full bg-surface-container text-on-surface-variant font-headline-sm text-headline-sm font-semibold flex items-center justify-center shrink-0">
+              MQ
+            </div>
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-heading font-medium truncate">Marta Quiroga</span>
+<span class="font-label-sm text-label-sm text-text-muted">CUIT 27-24891032-4</span>
+<span class="font-label-sm text-label-sm text-text-muted truncate">m.quiroga.prop@inmo.com</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 pt-2 font-label-sm text-label-sm">
+<div class="flex items-center justify-between">
+<span class="text-text-muted">Cuenta liquidación:</span>
+<span class="font-medium text-heading">Banco Patagonia</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-muted">CBU verificado:</span>
+<span class="font-mono text-[11px] text-heading">034025...9811</span>
+</div>
+</div>
+</div>
+<!-- LINK CONTRACTUAL DE ACCESO COMPLETO -->
+<a class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-3 rounded-lg bg-surface-container-low text-primary hover:bg-primary-soft hover:text-primary-hover font-label-md text-label-md font-medium transition-colors" data-path="contratos" href="#">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+<span>Ver contrato completo C-002</span>
+</a>
+</div>
+<!-- TARJETA INMUEBLE CON IMAGEN VISUAL RICA -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="relative h-36 w-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Modern renovated apartment interior at Calle Mitre 845 in Viedma Argentina, sunlit living room with parquet floors, contemporary minimalist furniture, large window with sheer white curtains, subtle architectural elegance in cool corporate tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxj9_cMax7iNwtNULhSPs225PAGWo3cGLDh9nPfr8n8iJ23SpuxusEJDReG6h1EX0QJBHyAYVNw0wYT1aRn0gi7QcK77Ko0e-3vjQAylKhRBcSiD37tgrBrCKPUBEyAKv0qbNuk7whyPGrs1I6P6Wbdu2zikdOlUYu3M6FLQMw7XRnpBrqb5_QK8nv4CQm2RVmFbY9A7HD4pGiWA_tcVAw0BpDXWEX3U-b0EvySe4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-heading/80 via-transparent to-transparent flex items-end p-3.5">
+<div class="flex flex-col text-on-primary">
+<span class="font-label-sm text-label-sm text-on-primary/80 uppercase tracking-wider">Inmueble Vinculado</span>
+<span class="font-headline-sm text-headline-sm font-semibold">Calle Mitre 845, Dpto 2B</span>
+</div>
+</div>
+</div>
+<div class="p-space-md flex flex-col gap-2 font-body-sm text-body-sm">
+<div class="flex items-center justify-between">
+<span class="text-text-muted">Tipo:</span>
+<span class="font-medium text-heading">Residencial 2 ambientes</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-muted">Localidad:</span>
+<span class="font-medium text-heading">Viedma, Río Negro</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-muted">Comisión administración:</span>
+<span class="font-medium text-heading">8% ($ 52.000)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ACCIONES INFERIORES GLOBALES -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md p-space-md bg-surface rounded-xl shadow-sm">
+<a class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface text-secondary hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors w-full sm:w-auto justify-center" data-path="cobranzas" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Volver a cobranzas</span>
+</a>
+<div class="flex flex-wrap items-center gap-3 w-full sm:w-auto justify-end">
+<button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface text-secondary hover:bg-surface-container-low hover:text-on-surface font-label-md text-label-md transition-colors w-full sm:w-auto justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+<span>Enviar recordatorio de cobro</span>
+</button>
+<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary-container text-on-primary hover:bg-primary-hover shadow-sm font-label-md text-label-md font-medium transition-colors w-full sm:w-auto justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+<span>Informar nuevo pago por inquilino</span>
+</button>
+</div>
+</div>
+</div></main></div></body></html>
