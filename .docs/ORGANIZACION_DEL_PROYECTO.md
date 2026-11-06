@@ -43,7 +43,9 @@ Según el [análisis de requerimientos](ANALISIS_DE_REQUERIMIENTOS.md) y el [REA
 | **Fase 2 (examen final)** | Liquidaciones, notificaciones, dashboard y reportes | HU-19 a HU-27 (todavía sin issues) |
 | **Fase 3 (post-entrega)** | Garantía de 60 días, capacitación, mantenimiento y backups | — |
 
-Presupuesto del documento de requerimientos: 83,33 horas-hombre (42 puntos) a $18.000 ARS por hora, con un tope de $1.500.000 ARS. Es la estimación vigente. Los puntos del backlog de la sección 7 (73 de la cursada y 41 del final) son otra escala, más fina, para repartir el trabajo; la correspondencia entre ambas está en el [README de historias](historias_de_usuario/README.md).
+Presupuesto del documento de requerimientos: 83,33 horas-hombre (42 puntos) a $18.000 ARS por hora, con un tope de $1.500.000 ARS (de los cuales 50 horas y $900.000 corresponden a la cursada). Es la estimación vigente. Los criterios, las restricciones y las inconsistencias de la estimación están en [`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md). Los puntos del backlog de la sección 7 (73 de la cursada y 41 del final) son otra escala, más fina, para repartir el trabajo; la correspondencia entre ambas está en el [README de historias](historias_de_usuario/README.md).
+
+**Entrega:** segunda semana de noviembre de 2026 (del 17 al 24), según el enunciado.
 
 ---
 
@@ -108,6 +110,9 @@ Salen de [`.agents/AGENTS.md`](../.agents/AGENTS.md):
 |---|---|
 | [`README.md`](../README.md) | Descripción general, tecnologías, cronograma y presupuesto |
 | [`.docs/ANALISIS_DE_REQUERIMIENTOS.md`](ANALISIS_DE_REQUERIMIENTOS.md) | **Fuente de verdad del alcance.** Alcance, roles, requerimientos RF/RNF, riesgos, sprints y presupuesto; la sección 9 fija el glosario de estados y los valores que el análisis deja abiertos |
+| [`.docs/PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md) | Cómo se llegó a la estimación: método, restricciones de tiempo y capacidad, tarifa, alcance, inconsistencias detectadas y decisiones pendientes |
+| [`.docs/documentacion/`](documentacion/) | Transcripciones de reuniones del equipo. Hoy: la charla de Discord del 29/10 sobre estimación y presupuesto (dictado automático, con mucho ruido) |
+| [`.docs/base_de_datos/`](base_de_datos/MODELO_DE_DATOS.md) | Base de datos: DER, modelo relacional, decisiones resueltas, esquema en SQL para MySQL Workbench y cómo usarlos. La fuente de verdad son las migraciones de `app/Database/Migrations/` |
 | [`.docs/2026 - inmogestion.md`](2026%20-%20inmogestion.md) | Enunciado del trabajo y tabla de alcances por etapa |
 | [`.docs/GUIA TP-FINAL.md`](GUIA%20TP-FINAL.md) | Índice que pide la cátedra para el informe (incluye DER y modelo relacional en la sección 3.3) |
 | [`.docs/TarjetasCRC.md`](TarjetasCRC.md) | Tarjetas CRC por módulo: usuarios, propiedades y contratos, cuotas y mora, pagos, liquidaciones, notificaciones |
@@ -253,7 +258,7 @@ Desde HU-13 la cadena es estricta: 13, 14, 15, 16, 17, 18 (28 puntos en fila). P
 
 ### Base de datos (issue #22): resueltas el 06/11/2026
 
-Las nueve decisiones están resueltas y explicadas en la [sección 5 del modelo de datos](base_de_datos/MODELO_DE_DATOS.md#5-decisiones-del-issue-22). Falta anotarlas en el issue #22.
+Las nueve decisiones están resueltas y explicadas en la [sección 5 del modelo de datos](base_de_datos/MODELO_DE_DATOS.md#5-decisiones-del-issue-22). Están anotadas en el issue #22; falta que EihtSlowFlow y joaquincorbalan las confirmen.
 
 | # | Tema | Resolución |
 |---|---|---|
@@ -283,6 +288,21 @@ Las nueve decisiones están resueltas y explicadas en la [sección 5 del modelo 
 | HU-14 | Redondeo, tope del recargo y si se guarda o se recalcula |
 | HU-16 | Resuelto: medios de pago transferencia, depósito y pasarela digital (etiqueta de carga manual); si el monto no coincide, el pago se registra y se marca la diferencia |
 
+### Presupuesto y alcance
+
+Detalle en [`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md) (secciones 5 y 6). Fuente: la charla del equipo del 29/10.
+
+1. **Qué se exige el 17 al 24 de noviembre:** el enunciado dice que se deben cumplir "todas las funcionalidades para aprobar la cursada", pero su matriz separa cursada y final. Conviene confirmarlo con la cátedra.
+2. **Cifra de referencia:** resuelto. La estimación vigente es la del análisis (83,33 horas y $1.500.000, sección 9.1); las 50 horas y $900.000 son el subtotal de la cursada, aunque en la charla se las trató como el total del desarrollo.
+3. **Fase 2 incompleta:** resuelto. Las notificaciones forman parte del esfuerzo de la Fase 2 aunque no tengan fila propia en la tabla (análisis, sección 9.2), y la consulta de usuarios dados de baja, pedida para el final, es el escenario 5 de HU-04.
+4. **Equivalencia de puntos a horas:** no es uniforme (por ejemplo, 5 SP van de 6,0 a 8,0 horas) y los puntos de las historias no se pueden convertir a horas con la escala del análisis.
+
+### Proceso de trabajo
+
+1. **Scrum y GitHub Projects:** la cátedra plantea Scrum como método (clase del 20/10) y el informe pide describir la metodología (sección 1.4 de la [guía](GUIA%20TP-FINAL.md)). El equipo trabaja con issues y un tablero de GitHub Projects, y en la charla se dudó de si eso alcanza para llamarlo Scrum. Falta decidir cómo se describe y qué ceremonias se usan.
+2. **Sprint en el tablero:** el tablero no tiene un campo de iteración (Sprint 1 y Sprint 2). Agregarlo permitiría ver el backlog a la izquierda y el sprint actual a continuación, como se propuso en la charla.
+3. **Reunión breve periódica:** se habló de la reunión diaria de 15 minutos de Scrum y uno de los integrantes dudó de su utilidad. No se decidió nada.
+
 ---
 
 ## 12. Observaciones sobre el repositorio
@@ -296,7 +316,7 @@ Cosas detectadas al revisar el proyecto, para corregir cuando convenga:
 - **Issues reasignados que ya estaban en curso:** HU-02, HU-03, HU-04, HU-06, HU-08 y HU-09 cambiaron de responsable estando en *In progress*. Si alguien ya había empezado alguno, hay que coordinarlo.
 - **`.env` en el historial:** ver la sección 3.
 
-Resueltas el 06/11/2026 (ya no hace falta corregirlas): los enlaces rotos y la versión de PHP del `README`, y los totales del resumen del backlog (cursada 73, final 41, total 114 puntos).
+Resueltas el 06/11/2026 (ya no hace falta corregirlas): los enlaces rotos y la versión de PHP del `README`, los totales del resumen del backlog (cursada 73, final 41, total 114 puntos) y la relación entre las dos escalas de puntos (README de historias y sección 9.1 del análisis).
 
 ---
 
@@ -313,4 +333,6 @@ Resueltas el 06/11/2026 (ya no hace falta corregirlas): los enlaces rotos y la v
 | 28/10/2026 | Estimación del issue de base de datos corregida de 999 a 8 puntos, con desglose |
 | 28/10/2026 | Reparto en partes iguales entre los tres integrantes y orden cronológico de trabajo |
 | 28/10/2026 | Este documento |
+| 06/11/2026 | Analizada la transcripción de la charla del 29/10 (`.docs/documentacion/`). Se creó `PRESUPUESTO_Y_PLANIFICACION.md` y se agregaron a este documento la entrega, las decisiones pendientes de presupuesto y de proceso, y las observaciones sobre los puntos |
 | 06/11/2026 | Documentación alineada con el análisis de requerimientos: sección 9 del análisis, totales y correspondencia de puntos en el README de historias, campos de inmueble y contrato, estados, alertas y prototipos |
+| 06/11/2026 | Base de datos (#22) en la rama `feature/base-de-datos`: 11 migraciones, seeders, datos de prueba, esquema para Workbench y pruebas de integridad con PHPUnit. Se agregó el rol Empleado (cuatro roles), se actualizaron 19 issues de GitHub y se agregaron los prompts y los prototipos de las pantallas que faltaban |
