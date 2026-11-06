@@ -1,9 +1,9 @@
 # InmoGestión 2026
 
-**Proyecto final** del ramo de Desarrollo de Software – gestión integral de inmuebles, usuarios y contratos de alquiler.
+**Proyecto final** de Proyecto de Software (UNRN) – gestión integral de inmuebles, usuarios y contratos de alquiler.
 
 ## Tecnologías
-- **Backend:** PHP ≥ 7.4 con **CodeIgniter 4** (MVC). 
+- **Backend:** PHP ^8.2 con **CodeIgniter 4** (MVC). 
 - **Base de datos:** MySQL (driver MySQLi). 
 - **Frontend:** HTML5, CSS3 (responsive) y JavaScript ES6 vanilla.
 - **Infraestructura:** LAMP/WAMP (Apache, PHP, MySQL) en entorno local.
@@ -26,13 +26,13 @@ Otros comandos útiles:
 
 En Windows con WAMP, `php` suele no estar en el PATH. Se puede usar la ruta completa del PHP de WAMP, por ejemplo `C:\wamp64\bin\php\php8.2.29\php.exe spark migrate`, o agregarla al PATH.
 
-Las pruebas de integridad (`composer test`) usan una base vacía y descartable distinta de la de desarrollo, definida en `database.tests.*`. Requieren `composer install` para instalar PHPUnit.
+Las pruebas de integridad (`composer test`) usan una base vacía y descartable distinta de la de desarrollo, definida en `database.tests.*`. Requieren `composer install` para instalar PHPUnit. Sin Composer sirve el PHPUnit 11 suelto (`phpunit-11.phar`, de https://phar.phpunit.de/phpunit-11.phar): `php phpunit-11.phar --no-coverage`. La base de pruebas se crea con `php spark db:create inmogestion2026_test`.
 
 El diagrama, el modelo relacional, las decisiones, el esquema en SQL y los datos de prueba para MySQL Workbench están en [`.docs/base_de_datos/`](.docs/base_de_datos/MODELO_DE_DATOS.md).
 
 ## Alcance y módulos principales
 - Seguridad y autenticación (BCRYPT, filtros de sesión/rol). 
-- ABM de usuarios, inmobiliarias, contratos y pagos. 
+- ABMC de usuarios, inmuebles, contratos y pagos. 
 - Generación automática de cuotas y recargos por mora. 
 - Portal de inquilinos con carga de comprobantes. 
 - Dashboard administrativo y reportes KPI. 
@@ -49,9 +49,9 @@ El diagrama, el modelo relacional, las decisiones, el esquema en SQL y los datos
   - **Fase 1 (Cursada regularizada):** 50,0 HH
   - **Fase 2 (Examen final):** 11,0 HH
   - **Fase 3 (Servicios post-entrega):** 22,33 HH
-- **Tarifa profesional:** **$ 18.000 ARS / hora** (según *PRESUPUESTO_Y_PLANIFICACION.md*). 
+- **Tarifa profesional:** **$ 18.000 ARS / hora** (según el [análisis de requerimientos](.docs/ANALISIS_DE_REQUERIMIENTOS.md)). 
 - **Presupuesto total límite:** **$ 1.500.000 ARS**.
-- El desglose de horas y conceptos está detallado en el documento de planificación (Sujeto a cambios por el cliente).
+- El desglose de horas y conceptos está detallado en el análisis de requerimientos (sujeto a cambios por el cliente). Los puntos del backlog de historias de usuario son otra escala; ver [`.docs/historias_de_usuario/README.md`](.docs/historias_de_usuario/README.md).
 
 ## Servicios post‑entrega
 - Mesa de ayuda y resolución de incidencias (10 HH). 
@@ -60,7 +60,7 @@ El diagrama, el modelo relacional, las decisiones, el esquema en SQL y los datos
 - Back‑up diario de MySQL y políticas de resguardo (3,33 HH).
 
 ## Documentación
-- [Planificación y presupuesto](.docs/PRESUPUESTO_Y_PLANIFICACION.md) 
-- [Análisis de requerimientos](.docs/[BORRADOR]ANALISIS_DE_REQUERIMIENTOS.md) 
+- [Análisis de requerimientos, estimación y presupuesto](.docs/ANALISIS_DE_REQUERIMIENTOS.md) 
+- [Organización del proyecto](.docs/ORGANIZACION_DEL_PROYECTO.md) 
 - [Historias de usuario](.docs/historias_de_usuario/)
 - [Modelo de datos y base de datos](.docs/base_de_datos/MODELO_DE_DATOS.md)

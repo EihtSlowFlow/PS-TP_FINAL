@@ -356,13 +356,13 @@ final class SchemaIntegrityTest extends CIUnitTestCase
     // Seeders
     // ------------------------------------------------------------------
 
-    public function testRoleSeederCreatesTheThreeRolesOnlyOnce(): void
+    public function testRoleSeederCreatesTheFourRolesOnlyOnce(): void
     {
         $this->seed(RoleSeeder::class);
 
         $names = array_column($this->db->table('roles')->orderBy('name')->get()->getResultArray(), 'name');
 
-        $this->assertSame(['admin', 'owner', 'tenant'], $names);
+        $this->assertSame(['admin', 'employee', 'owner', 'tenant'], $names);
     }
 
     public function testAdminSeederCreatesAnActiveAdministratorWithAHashedPassword(): void

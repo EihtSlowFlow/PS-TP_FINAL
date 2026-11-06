@@ -5,7 +5,7 @@ namespace App\Database\Migrations;
 use CodeIgniter\Database\Migration;
 
 /**
- * Roles of the system (admin, owner, tenant). Rows are created by RoleSeeder.
+ * Roles of the system (admin, employee, owner, tenant). Rows are created by RoleSeeder.
  */
 class CreateRolesTable extends Migration
 {

@@ -1,6 +1,6 @@
 # Modelo de datos — InmoGestión 2026
 
-> Última actualización: 06/11/2026. Cubre el issue #22 (base de datos): DER, modelo relacional, decisiones resueltas y cómo usar los archivos de esquema y de datos de prueba. **La fuente de verdad son las migraciones** de [`app/Database/Migrations/`](../../app/Database/Migrations/); este documento y los `.sql` se derivan de ellas.
+> Última actualización: 06/11/2026. Cubre el issue #22 (base de datos): DER, modelo relacional, decisiones resueltas y cómo usar los archivos de esquema y de datos de prueba. **La fuente de verdad son las migraciones** de [`app/Database/Migrations/`](../../app/Database/Migrations/); este documento y los `.sql` se derivan de ellas. El alcance funcional y el glosario de estados salen del [análisis de requerimientos](../ANALISIS_DE_REQUERIMIENTOS.md) (secciones 4 y 9).
 
 ## Índice
 
@@ -22,7 +22,7 @@
 | Archivo | Para qué sirve |
 |---|---|
 | [`app/Database/Migrations/`](../../app/Database/Migrations/) | Crean las 11 tablas, en orden de dependencias. Es lo que usa `php spark migrate` |
-| [`app/Database/Seeds/DatabaseSeeder.php`](../../app/Database/Seeds/DatabaseSeeder.php) | Datos base: los tres roles y el administrador inicial (clave desde `.env`) |
+| [`app/Database/Seeds/DatabaseSeeder.php`](../../app/Database/Seeds/DatabaseSeeder.php) | Datos base: los cuatro roles y el administrador inicial (clave desde `.env`) |
 | [`app/Database/Seeds/DemoSeeder.php`](../../app/Database/Seeds/DemoSeeder.php) y [`demo_data.sql`](../../app/Database/Seeds/demo_data.sql) | Datos de prueba. El seeder ejecuta el mismo SQL que se puede correr a mano en Workbench |
 | [`inmogestion_schema.sql`](inmogestion_schema.sql) | Esquema completo en SQL, para Workbench (diagrama EER y comparación con la base real) |
 | [`tests/database/SchemaIntegrityTest.php`](../../tests/database/SchemaIntegrityTest.php) | Pruebas de integridad: unicidad, claves foráneas y datos inválidos |
@@ -53,7 +53,7 @@ erDiagram
 
     roles {
         int id PK
-        string name UK "admin, owner, tenant"
+        string name UK "admin, employee, owner, tenant"
     }
     users {
         int id PK
@@ -225,7 +225,9 @@ Los valores se guardan en inglés; las etiquetas en español las pone la aplicac
 
 - Que `contracts.owner_id` coincida con el propietario del inmueble al crear el contrato.
 - Que el inmueble y los usuarios de un contrato estén activos y que el inmueble esté disponible.
-- Que la fecha de un pago o de una transferencia no sea futura, y que el monto del pago coincida con la cuota.
+- Que la fecha de un pago o de una transferencia no sea futura, y que se marque la diferencia cuando el monto del pago no coincide con el exigible de la cuota (HU-16); el administrador la evalúa al verificar.
+- Que la ciudad del inmueble sea obligatoria y los ambientes también, salvo en terrenos (HU-07).
+- Que el motivo de cierre de un contrato, que la base admite vacío, se pida al cerrarlo (HU-12).
 - Que una cuota solo se liquide si está pagada con un pago aprobado.
 - Que la baja de un inmueble no ocurra con un contrato vigente.
 - Que el tipo real del archivo de un comprobante sea el declarado (se verifica el contenido, no el nombre).
@@ -253,9 +255,10 @@ Otras decisiones tomadas al diseñar:
 - `settlements.period` es el mes de alquiler que se liquida, el mismo `period` de la cuota. Con la regla de una cuota por contrato y período, hoy cada liquidación incluye una cuota; la tabla intermedia deja abierta la posibilidad de agrupar más.
 - `properties.rooms` admite NULL, porque un terreno no tiene ambientes. La aplicación lo exige para los demás tipos.
 - `users.phone` y `users.address` admiten NULL; la aplicación decide si son obligatorios.
+- Hay **cuatro roles**: `admin`, `employee`, `owner` y `tenant`. El enunciado habla de cuatro roles aunque solo describe tres, con "Administrador / Empleado" juntos; se separó el empleado del administrador. Como `roles` es una tabla, sumarlo no cambió el esquema. En qué se diferencian los permisos de uno y otro es una regla de la aplicación (filtros por rol) y todavía no está definida en los documentos de requisitos.
 - `payment_receipts` admite varios comprobantes por pago; el issue no pide limitarlo.
 - `notifications` guarda en `reference_type` y `reference_id` a qué registro se refiere, sin clave foránea porque apunta a tres tablas distintas.
-- Las alertas de vencimiento (HU-23, HU-24) no tienen tabla propia: se resuelven con consultas. Hay índices pensados para eso: `(status, due_date)` en cuotas y `(status, end_date)` en contratos.
+- Las alertas de vencimiento (HU-23, HU-24) no tienen tabla propia: la aplicación las detecta con consultas, para las que hay índices `(status, due_date)` en cuotas y `(status, end_date)` en contratos. Para que tengan estado leída / no leída, cada alerta detectada se registra una sola vez en `notifications` con el tipo `installment_due_soon` o `contract_expiring`. La aplicación evita duplicarla; la base no lo garantiza con un índice único.
 - La carpeta `writable/uploads/comprobantes/` viaja con el repositorio (vacía, con `.gitkeep`) y su contenido sigue ignorado por git.
 - `php spark migrate:refresh` no tiene opción `--seed` en CodeIgniter 4.7: se hace `migrate:refresh` y después `db:seed`.
 
@@ -275,7 +278,7 @@ Otras decisiones tomadas al diseñar:
 | HU-16, HU-17, HU-18 | `payments`, `payment_receipts`, `installments` |
 | HU-19, HU-20, HU-21 | `settlements`, `settlement_installments` |
 | HU-22 | `notifications` |
-| HU-23, HU-24 | Consultas sobre `installments` y `contracts` |
+| HU-23, HU-24 | Consultas sobre `installments` y `contracts`; cada alerta se registra en `notifications` |
 | HU-25, HU-26, HU-27 | Consultas sobre todas las tablas anteriores |
 
 ---
@@ -364,7 +367,7 @@ Después, reemplazar en el archivo generado `CREATE TABLE ` por `CREATE TABLE IF
 
 ## 10. Verificación y límites
 
-Verificado el 06/11/2026 en instancias descartables de **MySQL 8.4.7** y **MariaDB 11.4.9**:
+Verificado el 06/11/2026 en instancias descartables de **MySQL 8.4.7** y **MariaDB 11.4.9**, y la creación en el **MySQL 8.0.45** real del equipo (`db:create`, `migrate` y `db:seed DatabaseSeeder`, con 16 claves foráneas, 24 `CHECK`, 3 columnas generadas, roles y administrador comprobados en solo lectura), donde además pasa `SchemaIntegrityTest` con PHPUnit 11.5.57 (34 pruebas, 56 aserciones; la suite completa del proyecto, 39 pruebas):
 
 - `php spark migrate`, `migrate:rollback`, `migrate` de nuevo y `migrate:refresh` sobre una base vacía, sin errores.
 - 64 comprobaciones de integridad (duplicados, claves foráneas, `CHECK`, casos límite), todas con el código de error esperado.
@@ -373,6 +376,6 @@ Verificado el 06/11/2026 en instancias descartables de **MySQL 8.4.7** y **Maria
 
 **No verificado:**
 
-- **La suite PHPUnit** (`SchemaIntegrityTest`) no se ejecutó, porque en esta máquina no hay Composer ni PHPUnit instalados. Las mismas reglas se comprobaron con un script equivalente. Para correrla: `composer install`, crear una base vacía para `database.tests.database` en `.env` y `composer test`.
-- **El servidor MySQL 8.0 local** (servicio `MySQL80`) no se probó: la clave del `.env` fue rechazada. Los `CHECK` solo se hacen cumplir desde **MySQL 8.0.16**; en una versión anterior se ignoran sin avisar. Conviene confirmar la versión con `SELECT VERSION();`.
+- **`composer test`.** La suite se corrió con PHPUnit 11.5.57 suelto (`phpunit-11.phar`, de phar.phpunit.de), no con Composer ni con el `vendor/` del proyecto, que no tiene `composer.lock`. Con las versiones que instale Composer (^10.5.16 o ^11.2) podrían aparecer diferencias.
+- **Otras versiones de MySQL.** Los `CHECK` se hacen cumplir desde **MySQL 8.0.16**; en una versión anterior se ignoran sin avisar, así que cada integrante debería confirmar la suya con `SELECT VERSION();` antes de correr las pruebas.
 - Versiones intermedias de MySQL y MariaDB entre las probadas.

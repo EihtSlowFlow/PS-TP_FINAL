@@ -57,6 +57,7 @@ SET @m6 = DATE_SUB(@m0, INTERVAL 6 MONTH);
 -- Roles (the CodeIgniter RoleSeeder creates the same ones; IGNORE keeps this safe to repeat).
 INSERT IGNORE INTO roles (name, created_at, updated_at) VALUES
 ('admin', NOW(), NOW()),
+('employee', NOW(), NOW()),
 ('owner', NOW(), NOW()),
 ('tenant', NOW(), NOW());
 

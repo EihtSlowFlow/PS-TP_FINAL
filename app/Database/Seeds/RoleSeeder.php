@@ -5,14 +5,15 @@ namespace App\Database\Seeds;
 use CodeIgniter\Database\Seeder;
 
 /**
- * Creates the three roles of the system. Safe to run more than once.
+ * Creates the four roles of the system. Safe to run more than once.
  */
 class RoleSeeder extends Seeder
 {
     /**
-     * Values of roles.name. The application shows their Spanish labels.
+     * Values of roles.name. The application shows their Spanish labels:
+     * Administrador, Empleado, Propietario and Inquilino.
      */
-    public const ROLES = ['admin', 'owner', 'tenant'];
+    public const ROLES = ['admin', 'employee', 'owner', 'tenant'];
 
     public function run(): void
     {

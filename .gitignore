@@ -1,6 +1,8 @@
 # CodeIgniter 4 gitignore
 /vendor/
 /.phpunit.cache
+# PHPUnit results and logs (phpunit.dist.xml writes them to build/)
+/build/
 /writable/cache/*
 !/writable/cache/index.html
 !/writable/cache/.gitkeep
