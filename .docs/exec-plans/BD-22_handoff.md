@@ -8,11 +8,11 @@
 | **Historia de usuario / Issue** | Elaboración de la base de datos · [#22](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/22) |
 | **Sprint / Hito** | Etapa 0 (base de datos, bloquea a todas las historias) |
 | **Rama** | `feature/base-de-datos` (desde `origin/main` en `270912e`) |
-| **Último commit** | `e949323` — feat: add database schema, seeders and demo data (issue #22). Es el último commit de código; este documento se actualizó en un commit posterior |
-| **Pull Request** | Sin PR: la rama está pusheada a `origin/feature/base-de-datos` y el PR queda pendiente |
+| **Último commit** | `0cbe08d` — feat: add the employee role and document the PHPUnit verification. Es el último commit de código; después hay commits de documentación y el merge de `main` |
+| **Pull Request** | [#26](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/26), abierto el 06/11/2026 hacia `main`: mergeable, cierra #22 al mergear, `main` exige 1 aprobación de EihtSlowFlow |
 | **Fecha de cierre** | 2026-11-06 |
 | **Autor / Agente** | Claude, con `LauPerisse` |
-| **Estado global** | 🟡 En curso: todo escrito, verificado en instancias descartables y en la base real del equipo (MySQL 8.0.45), y pusheado; la suite PHPUnit pasa; falta el PR y la confirmación del equipo |
+| **Estado global** | 🟡 En curso: todo escrito, verificado en instancias descartables y en la base real del equipo (MySQL 8.0.45), y pusheado; la suite PHPUnit pasa; PR #26 abierto: falta la revisión y la confirmación del equipo |
 | **Avance estimado** | 98 % |
 
 **Resumen:** quedaron escritas las 11 migraciones (Fases 1 y 2 del issue), los seeders, `.env.example`, la configuración del grupo de pruebas, las pruebas de integridad, el esquema en SQL y los datos de prueba para Workbench, y la documentación (DER, modelo relacional, decisiones). Se verificó en MySQL 8.4.7 y MariaDB 11.4.9. Además se creó y verificó la base real del equipo (MySQL 8.0.45), donde también pasa la suite PHPUnit (`SchemaIntegrityTest`, 34 pruebas).
@@ -115,7 +115,7 @@ El resto de las decisiones del issue está en la sección 5 del documento del mo
 | 1 | ✅ Hecho el 06/11/2026 en la máquina de `LauPerisse`: `.env` corregido, base creada, migrada y sembrada. Cada integrante debe repetirlo en la suya (README, sección de la base de datos) | `.env` | `ci4-data-layer` |
 | 2 | ✅ Hecho el 06/11/2026 en la máquina de `LauPerisse`: base `inmogestion2026_test` creada y suite corrida con PHPUnit suelto. Cada integrante debe correrla en la suya (README) | `.env`, `tests/database/` | `ci4-testing` |
 | 3 | Revisar el diagrama en Workbench (ver el documento del modelo de datos, sección 7) | `.docs/base_de_datos/inmogestion_schema.sql` | — |
-| 4 | Abrir el PR de `feature/base-de-datos` hacia `main` (la rama ya está pusheada; `main` exige 1 aprobación de `EihtSlowFlow`) | — | — |
+| 4 | ✅ PR [#26](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/26) abierto el 06/11/2026. Falta la aprobación de `EihtSlowFlow` | — | — |
 | 5 | ✅ Decisiones anotadas en el issue #22 el 06/11/2026. Falta que los otros dos integrantes las confirmen | — | — |
 
 **Siguiente HU sugerida:** HU-01 — Iniciar sesión y control de acceso (#21), que ya puede usar `users`, `roles` y el administrador sembrado.
@@ -128,7 +128,8 @@ El resto de las decisiones del issue está en la sección 5 del documento del mo
 | Fecha | Autor | Resumen | Commit / PR |
 |---|---|---|---|
 | 2026-11-06 | Claude con `LauPerisse` | Diseño del esquema, 11 migraciones, seeders, esquema y datos para Workbench, pruebas de integridad y documentación | `e949323` |
-| 2026-11-06 | Claude con `LauPerisse` | Revisión de coherencia de `.docs/` tomando el análisis de requerimientos como fuente de verdad: sección 9 del análisis, README de historias, historias HU-04/07/08/10/12/13/16/17/20 a 24/26, CRC, DESIGN, prompts, modelo de datos (alertas en `notifications`) y `ORGANIZACION_DEL_PROYECTO.md`. Sin cambios de esquema ni de código; sin commit | Sin commit |
-| 2026-11-06 | Claude con `LauPerisse` | Se actualizó el `.env` local (credenciales, base de pruebas y seeders) y se creó, migró y sembró la base real `inmogestion2026` en el MySQL 8.0.45 del equipo, con verificación de solo lectura. Después se cargó `DemoSeeder` en esa base y se comprobaron en solo lectura los conteos y la coherencia de los datos (28 comprobaciones). Sin cambios de código | Sin commit |
-| 2026-11-06 | Claude con `LauPerisse` | Se agregó el rol `employee`, para tener cuatro roles: administrador, empleado, propietario e inquilino. Cambios en `RoleSeeder`, `demo_data.sql`, `SchemaIntegrityTest`, el glosario de agentes y la documentación de la base y de requisitos (enunciado, análisis, historias, CRC, prototipos y organización). Se insertó en la base real con `RoleSeeder`. Sin cambios de esquema. Los permisos del empleado quedaron por definir | Sin commit |
-| 2026-11-06 | Claude con `LauPerisse` | Se actualizaron 19 issues de GitHub (#3 a #18, #20, #21 y #22) para que coincidan con los documentos y la base. Se descargó PHPUnit 11.5.57 suelto (`phpunit-11.phar`) a la carpeta temporal de la sesión, fuera del proyecto, se creó `inmogestion2026_test` y pasó la suite: `SchemaIntegrityTest` 34 pruebas y suite completa 39. Sin cambios de código | Sin commit |
+| 2026-11-06 | Claude con `LauPerisse` | Revisión de coherencia de `.docs/` tomando el análisis de requerimientos como fuente de verdad: sección 9 del análisis, README de historias, historias HU-04/07/08/10/12/13/16/17/20 a 24/26, CRC, DESIGN, prompts, modelo de datos (alertas en `notifications`) y `ORGANIZACION_DEL_PROYECTO.md`. Sin cambios de esquema ni de código | `dad590e` |
+| 2026-11-06 | Claude con `LauPerisse` | Se actualizó el `.env` local (credenciales, base de pruebas y seeders) y se creó, migró y sembró la base real `inmogestion2026` en el MySQL 8.0.45 del equipo, con verificación de solo lectura. Después se cargó `DemoSeeder` en esa base y se comprobaron en solo lectura los conteos y la coherencia de los datos (28 comprobaciones). Sin cambios de código; el `.env` no se versiona | — |
+| 2026-11-06 | Claude con `LauPerisse` | Se agregó el rol `employee`, para tener cuatro roles: administrador, empleado, propietario e inquilino. Cambios en `RoleSeeder`, `demo_data.sql`, `SchemaIntegrityTest`, el glosario de agentes y la documentación de la base y de requisitos (enunciado, análisis, historias, CRC, prototipos y organización). Se insertó en la base real con `RoleSeeder`. Sin cambios de esquema. Los permisos del empleado quedaron por definir | `0cbe08d`, `dad590e` |
+| 2026-11-06 | Claude con `LauPerisse` | Se actualizaron 19 issues de GitHub (#3 a #18, #20, #21 y #22) para que coincidan con los documentos y la base. Se descargó PHPUnit 11.5.57 suelto (`phpunit-11.phar`) a la carpeta temporal de la sesión, fuera del proyecto, se creó `inmogestion2026_test` y pasó la suite: `SchemaIntegrityTest` 34 pruebas y suite completa 39. Sin cambios de código | `0cbe08d` |
+| 2026-11-06 | Claude con `LauPerisse` | Se incorporó `main` (PR #25) a la rama y se resolvió el conflicto de `ORGANIZACION_DEL_PROYECTO.md`. Se commiteó todo en commits por tema (base de datos, documentos, prototipos), se pusheó la rama y se abrió el pull request #26: mergeable, con EihtSlowFlow como revisor y que cierra #22 al mergear | #26 |
