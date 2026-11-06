@@ -16,6 +16,10 @@
 /writable/uploads/*
 !/writable/uploads/index.html
 !/writable/uploads/.gitkeep
+# Payment receipts: keep the (empty) folder in the repository, never its contents
+!/writable/uploads/comprobantes/
+/writable/uploads/comprobantes/*
+!/writable/uploads/comprobantes/.gitkeep
 
 # Environment
 .env

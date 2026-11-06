@@ -8,6 +8,28 @@
 - **Frontend:** HTML5, CSS3 (responsive) y JavaScript ES6 vanilla.
 - **Infraestructura:** LAMP/WAMP (Apache, PHP, MySQL) en entorno local.
 
+## Puesta en marcha de la base de datos
+
+Requiere MySQL 8.0.16 o superior, o MariaDB (probado en MySQL 8.4 y MariaDB 11.4), con una cuenta que pueda crear bases de datos. Los comandos se ejecutan en la raíz del proyecto.
+
+1. Copiar `.env.example` a `.env` y completar el usuario y la clave de la base (`database.default.*`) y los datos de los seeders (`seed.adminEmail`, `seed.adminPassword`, `seed.demoPassword`). El `.env` no se versiona.
+2. Crear la base: `php spark db:create inmogestion2026`
+3. Crear las tablas: `php spark migrate`
+4. Cargar los roles y el administrador inicial: `php spark db:seed DatabaseSeeder`
+5. Opcional, datos de prueba para desarrollo: `php spark db:seed DemoSeeder`
+
+Otros comandos útiles:
+
+- Revertir todo: `php spark migrate:rollback`
+- Rehacer todo desde cero: `php spark migrate:refresh` y después los seeders de los pasos 4 y 5
+- Ver el estado: `php spark migrate:status`
+
+En Windows con WAMP, `php` suele no estar en el PATH. Se puede usar la ruta completa del PHP de WAMP, por ejemplo `C:\wamp64\bin\php\php8.2.29\php.exe spark migrate`, o agregarla al PATH.
+
+Las pruebas de integridad (`composer test`) usan una base vacía y descartable distinta de la de desarrollo, definida en `database.tests.*`. Requieren `composer install` para instalar PHPUnit.
+
+El diagrama, el modelo relacional, las decisiones, el esquema en SQL y los datos de prueba para MySQL Workbench están en [`.docs/base_de_datos/`](.docs/base_de_datos/MODELO_DE_DATOS.md).
+
 ## Alcance y módulos principales
 - Seguridad y autenticación (BCRYPT, filtros de sesión/rol). 
 - ABM de usuarios, inmobiliarias, contratos y pagos. 
@@ -41,3 +63,4 @@
 - [Planificación y presupuesto](.docs/PRESUPUESTO_Y_PLANIFICACION.md) 
 - [Análisis de requerimientos](.docs/[BORRADOR]ANALISIS_DE_REQUERIMIENTOS.md) 
 - [Historias de usuario](.docs/historias_de_usuario/)
+- [Modelo de datos y base de datos](.docs/base_de_datos/MODELO_DE_DATOS.md)
