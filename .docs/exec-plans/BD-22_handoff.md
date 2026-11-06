@@ -8,11 +8,11 @@
 | **Historia de usuario / Issue** | Elaboración de la base de datos · [#22](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/22) |
 | **Sprint / Hito** | Etapa 0 (base de datos, bloquea a todas las historias) |
 | **Rama** | `feature/base-de-datos` (desde `origin/main` en `270912e`) |
-| **Último commit** | Sin commit: los cambios están en el árbol de trabajo |
-| **Pull Request** | Sin PR |
+| **Último commit** | `e949323` — feat: add database schema, seeders and demo data (issue #22). Es el último commit de código; este documento se actualizó en un commit posterior |
+| **Pull Request** | Sin PR: la rama está pusheada a `origin/feature/base-de-datos` y el PR queda pendiente |
 | **Fecha de cierre** | 2026-11-06 |
 | **Autor / Agente** | Claude, con `LauPerisse` |
-| **Estado global** | 🟡 En curso: todo escrito y verificado en instancias descartables; falta la prueba contra la base local del equipo y la suite PHPUnit |
+| **Estado global** | 🟡 En curso: todo escrito, verificado en instancias descartables y pusheado; falta la prueba contra la base local del equipo, la suite PHPUnit y el PR |
 | **Avance estimado** | 90 % |
 
 **Resumen:** quedaron escritas las 11 migraciones (Fases 1 y 2 del issue), los seeders, `.env.example`, la configuración del grupo de pruebas, las pruebas de integridad, el esquema en SQL y los datos de prueba para Workbench, y la documentación (DER, modelo relacional, decisiones). Se verificó en MySQL 8.4.7 y MariaDB 11.4.9. No se pudo probar contra el MySQL local del equipo ni ejecutar PHPUnit.
@@ -113,7 +113,7 @@ El resto de las decisiones del issue está en la sección 5 del documento del mo
 | 1 | Corregir el `.env`, correr `migrate` y `db:seed DatabaseSeeder` en la base real del equipo | `.env` | `ci4-data-layer` |
 | 2 | Instalar dependencias (`composer install`), crear la base de pruebas y correr `composer test` | `.env`, `tests/database/` | `ci4-testing` |
 | 3 | Revisar el diagrama en Workbench (ver el documento del modelo de datos, sección 7) | `.docs/base_de_datos/inmogestion_schema.sql` | — |
-| 4 | Commit, push y PR de la rama `feature/base-de-datos` | — | — |
+| 4 | Abrir el PR de `feature/base-de-datos` hacia `main` (la rama ya está pusheada; `main` exige 1 aprobación de `EihtSlowFlow`) | — | — |
 | 5 | Anotar las decisiones en el issue #22 | — | — |
 
 **Siguiente HU sugerida:** HU-01 — Iniciar sesión y control de acceso (#21), que ya puede usar `users`, `roles` y el administrador sembrado.
@@ -125,4 +125,4 @@ El resto de las decisiones del issue está en la sección 5 del documento del mo
 
 | Fecha | Autor | Resumen | Commit / PR |
 |---|---|---|---|
-| 2026-11-06 | Claude con `LauPerisse` | Diseño del esquema, 11 migraciones, seeders, esquema y datos para Workbench, pruebas de integridad y documentación | Sin commit |
+| 2026-11-06 | Claude con `LauPerisse` | Diseño del esquema, 11 migraciones, seeders, esquema y datos para Workbench, pruebas de integridad y documentación | `e949323` |
