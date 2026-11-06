@@ -127,6 +127,8 @@ el registro formal de sus pagos adjuntando comprobantes de transferencia o
 
 depósito.
 
+> **Nota del equipo:** el enunciado habla de cuatro roles pero solo describe tres, con "Administrador / Empleado Inmobiliario" juntos. El [análisis de requerimientos](ANALISIS_DE_REQUERIMIENTOS.md) (sección 3) los separa y adopta cuatro: Administrador, Empleado, Propietario e Inquilino.
+
 ### Régimen de Aprobación
 
 El trabajo práctico está estructurado en dos hitos de entrega evaluativos con requisitos
@@ -188,3 +190,5 @@ La entrega consiste en:
 ● Una Presentación grupal del desarrollo del proyecto, deben contar y mostrar todo el proceso de desarrollo del Proyecto de Software. ● Una demo del proyecto funcionando, con las funcionalidades especificadas para la etapa correspondiente. ● La entrega del código fuente con scripts de bd en un archivo comprimido.
 
 La entrega final del trabajo será la segunda semana (17 al 24) de Noviembre de 2026, en esta etapa se debe cumplir con todas las funcionalidades para aprobar la cursada . En caso de no cumplir con la entrega en la fecha estipulada, el grupo deberá rendir un coloquio sobre un tema a asignar por la cátedra.
+
+> **Nota del equipo:** se interpreta la matriz de requisitos como guía de alcance: las funcionalidades de la cursada corresponden a la Fase 1 y las del examen final a la Fase 2 del [análisis de requerimientos](ANALISIS_DE_REQUERIMIENTOS.md) (sección 8).

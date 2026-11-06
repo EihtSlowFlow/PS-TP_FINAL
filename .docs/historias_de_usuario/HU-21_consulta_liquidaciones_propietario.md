@@ -39,7 +39,7 @@ para auditar los montos cobrados, la comisión deducida y los fondos netos acred
 ## Reglas de negocio
 
 - Cada propietario solo accede a sus propias liquidaciones.
-- Los estados posibles son "Pendiente" y "Transferido".
+- Los estados posibles son "Pendiente de transferencia" y "Transferido".
 - El recibo solo se emite para liquidaciones transferidas.
 
 ## Definition of Done

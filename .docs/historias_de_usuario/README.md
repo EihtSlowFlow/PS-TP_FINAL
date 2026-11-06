@@ -18,14 +18,15 @@ Siguiendo lo analizado en clase:
 
 | ID | Historia de Usuario | Rol Principal | Valor PO (1-5) | Riesgo | Story Points | Prioridad | Dependencias | Hito |
 | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :--- | :--- |
-| **HU-01** | Inicio de Sesión y Control de Acceso | Todos los roles | 5 | **Alto (Flujo)** | 5 | **P1 (Alta)** | Ninguna | **Cursada** |
-| **HU-02** | Registro de Clientes Externos | Inquilino / Prop. | 4 | Medio | 3 | **P1 (Alta)** | HU-01 | **Cursada** |
-| **HU-03** | Cierre de Sesión Seguro | Todos los roles | 3 | Bajo | 1 | **P1 (Alta)** | HU-01 | **Cursada** |
-| **HU-04** | ABMC de Personas / Usuarios | Administrador | 5 | Medio | 5 | **P1 (Alta)** | HU-01 | **Cursada** |
+| **HU-01** | Inicio de Sesión y Control de Acceso | Usuario registrado | 5 | **Alto (Flujo)** | 5 | **P1 (Alta)** | Ninguna | **Cursada** |
+| **HU-02** | Registro de Clientes Externos | Visitante (Inquilino / Prop.) | 4 | Medio | 3 | **P1 (Alta)** | HU-01 | **Cursada** |
+| **HU-03** | Cierre de Sesión Seguro | Usuario autenticado | 3 | Bajo | 1 | **P1 (Alta)** | HU-01 | **Cursada** |
+| **HU-03b** | Restablecer la Contraseña | Usuario registrado | 5 | **Alto (Seguridad)** | 3 | **P1 (Alta)** | HU-01 | **Cursada** |
+| **HU-04** | ABMC de Personas / Usuarios | Administrador | 5 | Medio | 5 | **P1 (Alta)** | HU-01 | **Cursada / Final** |
 | **HU-05** | Baja Lógica (*Soft Delete*) de Usuarios | Administrador | 4 | Medio | 2 | **P1 (Alta)** | HU-04 | **Cursada** |
 | **HU-06** | Gestión y Edición de Perfil de Usuario | Inquilino / Prop. | 3 | Bajo | 2 | **P2 (Media)**| HU-02 | **Cursada** |
 | **HU-07** | Alta y Edición de Inmuebles | Administrador | 5 | Medio | 5 | **P1 (Alta)** | HU-04 | **Cursada** |
-| **HU-08** | Catálogo y Filtrado de Inmuebles | Admin / Público | 4 | Bajo | 3 | **P1 (Alta)** | HU-07 | **Cursada** |
+| **HU-08** | Catálogo y Filtrado de Inmuebles | Admin / Propietario / Público | 4 | Bajo | 3 | **P1 (Alta)** | HU-07 | **Cursada** |
 | **HU-09** | Baja Lógica de Inmuebles | Administrador | 4 | Medio | 2 | **P1 (Alta)** | HU-07 | **Cursada** |
 | **HU-10** | Alta y Vinculación de Contratos | Administrador | 5 | **Alto (Core)** | 8 | **P1 (Alta)** | HU-04, HU-07 | **Cursada** |
 | **HU-11** | Consulta de Contratos y Estados | Admin / Propietario | 5 | Medio | 3 | **P1 (Alta)** | HU-10 | **Cursada** |
@@ -49,9 +50,31 @@ Siguiendo lo analizado en clase:
 ---
 
 ### 📦 Resumen de Esfuerzo (Story Points)
-* **Alcance Cursada (Regularización):** 66 Story Points (18 Historias de Usuario - Core transaccional y seguridad).
-* **Alcance Examen Final:** 38 Story Points (9 Historias de Usuario - Liquidaciones, Notificaciones, Dashboards y Reportes).
-* **Esfuerzo Total del Proyecto:** 104 Story Points.
+* **Alcance Cursada (Regularización):** 73 Story Points (19 Historias de Usuario: HU-01 a HU-18 y HU-03b - Core transaccional y seguridad).
+* **Alcance Examen Final:** 41 Story Points (9 Historias de Usuario: HU-19 a HU-27 - Liquidaciones, Notificaciones, Dashboards y Reportes).
+* **Esfuerzo Total del Backlog:** 114 Story Points (28 Historias de Usuario).
+
+### 🔗 Relación con la estimación del Análisis de Requerimientos
+
+La estimación vigente para presupuesto, facturación y cronograma es la del [Análisis de Requerimientos](../ANALISIS_DE_REQUERIMIENTOS.md) (sección 8): **42 SP, 83,33 HH y $ 1.500.000 ARS** (Fase 1: 33 SP; Fase 2: 9 SP). Los puntos de este backlog son una estimación de equipo más fina, por historia: sirven para ordenar el trabajo y repartirlo (tablero de GitHub), y **no se suman ni se convierten a horas** con los del análisis. La tabla muestra qué historias componen cada módulo del presupuesto:
+
+| Módulo del análisis (sección 8) | SP análisis | Historias | SP backlog |
+| :--- | :---: | :--- | :---: |
+| Seguridad y login (objetivos 1 y 3; esfuerzo agrupado en Sprint 1) | — | HU-01, HU-03, HU-03b | 9 |
+| Gestión de Personas / Usuarios (Admin) | 3 | HU-04, HU-05 | 7 |
+| Registro y Perfil (Propietario 3 SP + Inquilino 2 SP) | 5 | HU-02, HU-06 | 5 |
+| Gestión de Inmuebles y Catálogo (Admin) | 5 | HU-07, HU-08, HU-09 | 10 |
+| Consulta de Inmuebles y Contratos (Propietario) | 2 | Incluida en HU-08 y HU-11 | — |
+| Gestión de Contratos de Alquiler (Admin) | 5 | HU-10, HU-11, HU-12 | 14 |
+| Cobro y Emisión de Cuotas / Moras (Admin) | 3 | HU-13, HU-14 | 10 |
+| Estado de Cuenta y Detalle de Cuotas (Inquilino) | 5 | HU-15 | 3 |
+| Registro de Pagos y Carga de Comprobante (Inquilino) | 5 | HU-16, HU-17, HU-18 | 15 |
+| **Fase 1 - Cursada** | **33** | HU-01 a HU-18 y HU-03b | **73** |
+| Liquidación Financiera a Propietarios | 2 | HU-19, HU-20 | 11 |
+| Dashboard y Panel de Control Directivo | 5 | HU-25, HU-26, HU-27 | 16 |
+| Consulta y Recibos de Liquidación (Propietario) | 2 | HU-21 | 3 |
+| Notificaciones automáticas (detalle de la Fase 2; esfuerzo agrupado en sus 9 SP) | — | HU-22, HU-23, HU-24 | 11 |
+| **Fase 2 - Examen Final** | **9** | HU-19 a HU-27 | **41** |
 
 ---
 

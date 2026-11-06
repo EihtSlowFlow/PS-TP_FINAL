@@ -1,8 +1,8 @@
 # Prompts de Google Stitch para prototipar InmoGestión 2026
 
-**Un prompt por pantalla.** Son 36 prompts, uno por cada pantalla del sistema. Cada bloque es **autocontenido** (incluye el estilo, el menú del rol y los datos de ejemplo que necesita), así que se puede pegar solo, sin ningún prompt de base. **Ninguno supera los 2.000 caracteres** (el más largo tiene 1.937; se midió uno por uno).
+**Un prompt por pantalla.** Son 37 prompts, uno por cada pantalla del sistema: los 37 ya tienen su prototipo en esta carpeta; `AUT-03a` (solicitud de recuperación de contraseña) y `PRO-04a` (liquidaciones del propietario) están en `stitch_inmogesti_n_login_portal/`. Las pantallas que las historias piden y no tenían prompt están en [`PROMPTS_STITCH_PANTALLAS_FALTANTES.md`](PROMPTS_STITCH_PANTALLAS_FALTANTES.md). Cada bloque es **autocontenido** (incluye el estilo, el menú del rol y los datos de ejemplo que necesita), así que se puede pegar solo, sin ningún prompt de base. **Ninguno supera los 2.000 caracteres** (el más largo tiene 1.937; se midió uno por uno).
 
-Cubren las 27 historias de usuario de `historias_de_usuario/`, usan los tokens que ya existen en `public/css/styles.css` (Inter, índigo `#4F46E5`, radios 8/12/16 px) y siguen el formato "admin template" que pidió la cátedra: menú lateral + barra superior + contenido central.
+Cubren las 28 historias de usuario de `historias_de_usuario/` (HU-01 a HU-27 y HU-03b), usan los tokens que ya existen en `public/css/styles.css` (Inter, índigo `#4F46E5`, radios 8/12/16 px) y siguen el formato "admin template" que pidió la cátedra: menú lateral + barra superior + contenido central.
 
 ---
 
@@ -36,9 +36,10 @@ Cubren las 27 historias de usuario de `historias_de_usuario/`, usan los tokens q
 | :--- | :--- | :--- | :--- | :--- |
 | AUT-01 | Iniciar sesión | Público | HU-01, HU-03 | `/auth/login` |
 | AUT-02 | Crear cuenta | Público | HU-02 | `/auth/register` |
-| AUT-03 | Recuperar contraseña | Público | HU-03b | `/auth/recuperar-password` |
+| AUT-03a | Recuperar contraseña: solicitud | Público | HU-03b | `/auth/recuperar-password` (prototipo en `stitch_inmogesti_n_login_portal/`) |
+| AUT-03b | Recuperar contraseña: nueva contraseña | Público | HU-03b | a definir (/auth/restablecer-password/:token) |
 | AUT-04 | Catálogo público de inmuebles | Público | HU-08 | a definir (/inmuebles) |
-| COM-01 | Mi perfil | Inquilino | HU-06 | a definir (/perfil) |
+| COM-01 | Mi perfil | Propietario / Inquilino (se muestra el Inquilino) | HU-06 | a definir (/perfil) |
 | COM-02a | Panel de notificaciones (campana) | Administrador | HU-22, HU-23, HU-24 | componente de la barra superior |
 | COM-02b | Notificaciones: Administradora | Administrador | HU-22, HU-24 | a definir (/notificaciones) |
 | COM-02c | Notificaciones: Inquilino | Inquilino | HU-22, HU-23 | a definir (/notificaciones) |
@@ -68,7 +69,7 @@ Cubren las 27 historias de usuario de `historias_de_usuario/`, usan los tokens q
 | PRO-01 | Dashboard del propietario | Propietario | HU-26, HU-24 | `/propietario/dashboard` |
 | PRO-02 | Mis inmuebles | Propietario | HU-08 | `/propietario/mis-inmuebles` |
 | PRO-03 | Mis contratos | Propietario | HU-11 | `/propietario/mis-contratos` |
-| PRO-04a | Liquidaciones: listado | Propietario | HU-21 | `/propietario/liquidaciones` |
+| PRO-04a | Liquidaciones: listado | Propietario | HU-21 | `/propietario/liquidaciones` (prototipo en `stitch_inmogesti_n_login_portal/`) |
 | PRO-04b | Recibo de liquidación (imprimible) | Impresión | HU-21 | a definir |
 
 ---
@@ -95,12 +96,22 @@ Pantalla pública, sin sidebar. Tarjeta centrada de 640px, título "Crear cuenta
 ESTILO: web desktop 1440px, admin template limpio y sobrio, todo en español rioplatense. Fuente Inter. Primario índigo #4F46E5 (botones, ítem activo, foco); fondo degradado #F0F4F8 a #D9E2EC; tarjetas blancas con radio 12px, sombra suave y borde #E5E7EB; texto #1F2937 y secundario #6B7280. Éxito #10B981, peligro #EF4444, advertencia #F59E0B, info #2563EB. Badges con ícono + texto. Íconos de línea. Hoy es 06/11/2026; fechas dd/mm/aaaa; montos como $ 420.000. Logo: casa blanca en cuadrado índigo + "InmoGestión".
 ```
 
-### AUT-03 Recuperar contraseña (HU-03b)
+### AUT-03a Recuperar contraseña: solicitud (HU-03b)
 
 ```text
-Diseñá la pantalla «Recuperar contraseña» de InmoGestión 2026, una plataforma de gestión inmobiliaria y de alquileres.
+Diseñá la pantalla «Recuperar contraseña: solicitud» de InmoGestión 2026, una plataforma de gestión inmobiliaria y de alquileres.
 
-Pantalla pública, sin sidebar, a la que se llega desde "¿Olvidaste tu contraseña?" del login. Una sola tarjeta centrada de 480px con el logo arriba, título "Recuperar contraseña" y texto "Definí tu nueva contraseña". Campos "Nueva contraseña*" y "Repetir nueva contraseña*" (ambos con ojo para mostrar u ocultar). Lista de requisitos con tildes: "Mínimo 8 caracteres" y "Las contraseñas coinciden". Botón primario de ancho completo "Cambiar contraseña" y enlace "Volver a ingresar".
+Pantalla pública, sin sidebar, a la que se llega desde "¿Olvidaste tu contraseña?" del login. Una sola tarjeta centrada de 480px con el logo arriba, título "Recuperar contraseña" y texto "Ingresá el correo electrónico de tu cuenta y te brindamos las instrucciones para definir una nueva contraseña". Campo "Correo electrónico*". Botón primario de ancho completo "Enviar instrucciones" y enlace "Volver a ingresar". Debajo del botón, un aviso informativo neutro: "Si el correo pertenece a una cuenta activa, te brindamos las instrucciones" (no revela si el correo existe).
+
+ESTILO: web desktop 1440px, admin template limpio y sobrio, todo en español rioplatense. Fuente Inter. Primario índigo #4F46E5 (botones, ítem activo, foco); fondo degradado #F0F4F8 a #D9E2EC; tarjetas blancas con radio 12px, sombra suave y borde #E5E7EB; texto #1F2937 y secundario #6B7280. Éxito #10B981, peligro #EF4444, advertencia #F59E0B, info #2563EB. Badges con ícono + texto. Íconos de línea. Hoy es 06/11/2026; fechas dd/mm/aaaa; montos como $ 420.000. Logo: casa blanca en cuadrado índigo + "InmoGestión".
+```
+
+### AUT-03b Recuperar contraseña: nueva contraseña (HU-03b)
+
+```text
+Diseñá la pantalla «Recuperar contraseña: nueva contraseña» de InmoGestión 2026, una plataforma de gestión inmobiliaria y de alquileres.
+
+Pantalla pública, sin sidebar, a la que se llega desde las instrucciones de la pantalla de solicitud (con un token válido). Una sola tarjeta centrada de 480px con el logo arriba, título "Recuperar contraseña" y texto "Definí tu nueva contraseña". Campos "Nueva contraseña*" y "Repetir nueva contraseña*" (ambos con ojo para mostrar u ocultar). Lista de requisitos con tildes: "Mínimo 8 caracteres" y "Las contraseñas coinciden". Botón primario de ancho completo "Cambiar contraseña" y enlace "Volver a ingresar".
 
 ESTILO: web desktop 1440px, admin template limpio y sobrio, todo en español rioplatense. Fuente Inter. Primario índigo #4F46E5 (botones, ítem activo, foco); fondo degradado #F0F4F8 a #D9E2EC; tarjetas blancas con radio 12px, sombra suave y borde #E5E7EB; texto #1F2937 y secundario #6B7280. Éxito #10B981, peligro #EF4444, advertencia #F59E0B, info #2563EB. Badges con ícono + texto. Íconos de línea. Hoy es 06/11/2026; fechas dd/mm/aaaa; montos como $ 420.000. Logo: casa blanca en cuadrado índigo + "InmoGestión".
 ```
@@ -172,14 +183,16 @@ ESTILO: web desktop 1440px, admin template limpio y sobrio, todo en español rio
 LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "InmoGestión"), ítems con ícono (activo: fondo #E0E7FF, texto #4338CA) y abajo el usuario (Ricardo Sosa, Propietario) con "Cerrar Sesión". Barra superior con breadcrumb, campana con contador rojo y avatar. Menú: Dashboard, Mis inmuebles, Mis contratos, Liquidaciones, Mi perfil. Activo: Dashboard.
 ```
 
-## Administrador / Empleado inmobiliario
+## Administrador y Empleado inmobiliario
+
+Los roles Administrador y Empleado comparten estas pantallas hasta que se definan sus diferencias de permisos. Los prototipos ya generados de usuarios (`usuarios_listado`, `usuario_nuevo` y `usuario_editar`) se hicieron con tres roles: estos prompts ya incluyen el rol Empleado, pero esas pantallas no se regeneraron.
 
 ### ADM-01 Dashboard ejecutivo (HU-25)
 
 ```text
 Diseñá la pantalla «Dashboard ejecutivo» de InmoGestión 2026, una plataforma de gestión inmobiliaria y de alquileres.
 
-Encabezado «Panel de control» con selector de período (Noviembre 2026) y accesos rápidos "Emitir cuotas", "Nuevo contrato" y "Generar liquidaciones". Cuatro tarjetas de KPI: Ocupación 67% (4 de 6 inmuebles alquilados, barra de progreso); Recaudado en Noviembre $ 780.000; Morosidad 50% (2 de 4 inquilinos) con "$ 1.569.230 vencido" en rojo; Saldo pendiente de liquidar a propietarios $ 2.530.800. Gráfico de barras simple «Recaudación de los últimos 6 meses»: Jun $ 1.850.000, Jul $ 1.850.000, Ago $ 2.240.000, Sep $ 2.240.000, Oct $ 1.200.000, Nov $ 780.000 (en curso). Tarjeta «Alertas»: "1 pago pendiente de verificación"; "Contrato Mitre 845 vence el 15/12/2026 (39 días)"; "Contrato Belgrano 1250, 4°B vence el 31/12/2026 (55 días)". Tabla corta «Inquilinos en mora»: Joaquín Medina $ 737.750 y Tomás Aguirre $ 831.480.
+Encabezado «Panel de control» con selector de período (Noviembre 2026) y accesos rápidos "Emitir cuotas", "Nuevo contrato" y "Generar liquidaciones". Cuatro tarjetas de KPI: Ocupación 67% (4 de 6 inmuebles alquilados, barra de progreso); Recaudado en Noviembre $ 780.000; Morosidad 50% (2 de 4 inquilinos) con "$ 1.569.230 vencido" en rojo; Saldo pendiente de liquidar a propietarios $ 717.600. Gráfico de barras simple «Recaudación de los últimos 6 meses»: Jun $ 1.850.000, Jul $ 1.850.000, Ago $ 2.240.000, Sep $ 2.240.000, Oct $ 1.200.000, Nov $ 780.000 (en curso). Tarjeta «Alertas»: "1 pago pendiente de verificación"; "Contrato Mitre 845 vence el 15/12/2026 (39 días)"; "Contrato Belgrano 1250, 4°B vence el 31/12/2026 (55 días)". Tabla corta «Inquilinos en mora»: Joaquín Medina $ 737.750 y Tomás Aguirre $ 831.480.
 
 ESTILO: web desktop 1440px, admin template limpio y sobrio, todo en español rioplatense. Fuente Inter. Primario índigo #4F46E5 (botones, ítem activo, foco); fondo degradado #F0F4F8 a #D9E2EC; tarjetas blancas con radio 12px, sombra suave y borde #E5E7EB; texto #1F2937 y secundario #6B7280. Éxito #10B981, peligro #EF4444, advertencia #F59E0B, info #2563EB. Badges con ícono + texto. Íconos de línea. Hoy es 06/11/2026; fechas dd/mm/aaaa; montos como $ 420.000.
 LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "InmoGestión"), ítems con ícono (activo: fondo #E0E7FF, texto #4338CA) y abajo el usuario (Laura Benítez, Administradora) con "Cerrar Sesión". Barra superior con breadcrumb, campana con contador rojo y avatar. Menú: Dashboard, Usuarios, Inmuebles, Contratos, Cuotas (Emitir cuotas y Cobranzas), Pagos, Liquidaciones, Reportes. Activo: Dashboard.
@@ -190,7 +203,7 @@ LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "Inm
 ```text
 Diseñá la pantalla «Usuarios: listado» de InmoGestión 2026, una plataforma de gestión inmobiliaria y de alquileres.
 
-Encabezado «Usuarios», subtítulo "Padrón de clientes y personal" y botón primario "Nuevo usuario". Filtros: búsqueda por nombre, DNI o email; select de rol (Todos, Administrador, Propietario, Inquilino); casilla "Incluir usuarios dados de baja"; botones "Filtrar" y "Limpiar". Tabla paginada: avatar con iniciales + nombre, DNI (inventados, 12.345.678), correo, teléfono, badge de rol, fecha de alta y acciones (editar, dar de baja). 10 filas: Laura Benítez; Ricardo Sosa, Marta Quiroga, Hernán Paz (propietarios); Camila Rojas, Joaquín Medina, Valentina Funes, Tomás Aguirre, Lucía Paredes, Elena Arias (inquilinos). Pie con "Mostrando 1–10 de 10" y paginación.
+Encabezado «Usuarios», subtítulo "Padrón de clientes y personal" y botón primario "Nuevo usuario". Filtros: búsqueda por nombre, DNI o email; select de rol (Todos, Administrador, Empleado, Propietario, Inquilino); casilla "Incluir usuarios dados de baja"; botones "Filtrar" y "Limpiar". Tabla paginada: avatar con iniciales + nombre, DNI (inventados, 12.345.678), correo, teléfono, badge de rol, fecha de alta y acciones (editar, dar de baja). 10 filas: Laura Benítez; Ricardo Sosa, Marta Quiroga, Hernán Paz (propietarios); Camila Rojas, Joaquín Medina, Valentina Funes, Tomás Aguirre, Lucía Paredes, Elena Arias (inquilinos). Pie con "Mostrando 1–10 de 10" y paginación.
 
 ESTILO: web desktop 1440px, admin template limpio y sobrio, todo en español rioplatense. Fuente Inter. Primario índigo #4F46E5 (botones, ítem activo, foco); fondo degradado #F0F4F8 a #D9E2EC; tarjetas blancas con radio 12px, sombra suave y borde #E5E7EB; texto #1F2937 y secundario #6B7280. Éxito #10B981, peligro #EF4444, advertencia #F59E0B, info #2563EB. Badges con ícono + texto. Íconos de línea. Hoy es 06/11/2026; fechas dd/mm/aaaa; montos como $ 420.000.
 LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "InmoGestión"), ítems con ícono (activo: fondo #E0E7FF, texto #4338CA) y abajo el usuario (Laura Benítez, Administradora) con "Cerrar Sesión". Barra superior con breadcrumb, campana con contador rojo y avatar. Menú: Dashboard, Usuarios, Inmuebles, Contratos, Cuotas (Emitir cuotas y Cobranzas), Pagos, Liquidaciones, Reportes. Activo: Usuarios.
@@ -201,7 +214,7 @@ LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "Inm
 ```text
 Diseñá la pantalla «Usuario: nuevo» de InmoGestión 2026, una plataforma de gestión inmobiliaria y de alquileres.
 
-Formulario en página propia (no modal). Breadcrumb «Usuarios / Nuevo usuario». Tarjeta «Datos personales» en dos columnas: Nombre*, Apellido*, DNI*, Correo electrónico*, Teléfono*, Dirección. Tarjeta «Acceso y permisos»: Rol* con tres tarjetas de selección (Administrador, Propietario, Inquilino, cada una con una línea de descripción) y Contraseña* (mínimo 8 caracteres, con ojo). Acciones al pie: "Guardar usuario" (primario) y "Cancelar" (secundario).
+Formulario en página propia (no modal). Breadcrumb «Usuarios / Nuevo usuario». Tarjeta «Datos personales» en dos columnas: Nombre*, Apellido*, DNI*, Correo electrónico*, Teléfono*, Dirección. Tarjeta «Acceso y permisos»: Rol* con cuatro tarjetas de selección (Administrador, Empleado, Propietario, Inquilino, cada una con una línea de descripción) y Contraseña* (mínimo 8 caracteres, con ojo). Acciones al pie: "Guardar usuario" (primario) y "Cancelar" (secundario).
 
 ESTILO: web desktop 1440px, admin template limpio y sobrio, todo en español rioplatense. Fuente Inter. Primario índigo #4F46E5 (botones, ítem activo, foco); fondo degradado #F0F4F8 a #D9E2EC; tarjetas blancas con radio 12px, sombra suave y borde #E5E7EB; texto #1F2937 y secundario #6B7280. Éxito #10B981, peligro #EF4444, advertencia #F59E0B, info #2563EB. Badges con ícono + texto. Íconos de línea. Hoy es 06/11/2026; fechas dd/mm/aaaa; montos como $ 420.000.
 LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "InmoGestión"), ítems con ícono (activo: fondo #E0E7FF, texto #4338CA) y abajo el usuario (Laura Benítez, Administradora) con "Cerrar Sesión". Barra superior con breadcrumb, campana con contador rojo y avatar. Menú: Dashboard, Usuarios, Inmuebles, Contratos, Cuotas (Emitir cuotas y Cobranzas), Pagos, Liquidaciones, Reportes. Activo: Usuarios.
@@ -212,7 +225,7 @@ LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "Inm
 ```text
 Diseñá la pantalla «Usuario: editar» de InmoGestión 2026, una plataforma de gestión inmobiliaria y de alquileres.
 
-Formulario en página propia con los datos de Joaquín Medina cargados. Breadcrumb «Usuarios / Editar usuario». Tarjeta «Datos personales» en dos columnas (Nombre*, Apellido*, DNI*, Correo*, Teléfono*, Dirección) y tarjeta «Acceso y permisos» con Rol* (tres tarjetas de selección, Inquilino elegida) y Contraseña en blanco con la ayuda "Dejá en blanco para no modificar la contraseña actual". A la derecha, un bloque lateral con "Creado el 12/03/2025" y "Última modificación 20/10/2026". Acciones: "Guardar cambios" (primario) y "Cancelar".
+Formulario en página propia con los datos de Joaquín Medina cargados. Breadcrumb «Usuarios / Editar usuario». Tarjeta «Datos personales» en dos columnas (Nombre*, Apellido*, DNI*, Correo*, Teléfono*, Dirección) y tarjeta «Acceso y permisos» con Rol* (cuatro tarjetas de selección: Administrador, Empleado, Propietario e Inquilino, con Inquilino elegida) y Contraseña en blanco con la ayuda "Dejá en blanco para no modificar la contraseña actual". A la derecha, un bloque lateral con "Creado el 12/03/2025" y "Última modificación 20/10/2026". Acciones: "Guardar cambios" (primario) y "Cancelar".
 
 ESTILO: web desktop 1440px, admin template limpio y sobrio, todo en español rioplatense. Fuente Inter. Primario índigo #4F46E5 (botones, ítem activo, foco); fondo degradado #F0F4F8 a #D9E2EC; tarjetas blancas con radio 12px, sombra suave y borde #E5E7EB; texto #1F2937 y secundario #6B7280. Éxito #10B981, peligro #EF4444, advertencia #F59E0B, info #2563EB. Badges con ícono + texto. Íconos de línea. Hoy es 06/11/2026; fechas dd/mm/aaaa; montos como $ 420.000.
 LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "InmoGestión"), ítems con ícono (activo: fondo #E0E7FF, texto #4338CA) y abajo el usuario (Laura Benítez, Administradora) con "Cerrar Sesión". Barra superior con breadcrumb, campana con contador rojo y avatar. Menú: Dashboard, Usuarios, Inmuebles, Contratos, Cuotas (Emitir cuotas y Cobranzas), Pagos, Liquidaciones, Reportes. Activo: Usuarios.
@@ -234,7 +247,7 @@ LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "Inm
 ```text
 Diseñá la pantalla «Inmueble: nuevo» de InmoGestión 2026, una plataforma de gestión inmobiliaria y de alquileres.
 
-Formulario en página propia (no modal). Breadcrumb «Inmuebles / Nuevo inmueble». Sección «Datos del inmueble»: Propietario* (select con búsqueda, solo propietarios), Dirección exacta*, Tipo* (Departamento, Casa, Local comercial, Terreno, Oficina), Cantidad de ambientes* (entero positivo) y Precio base de alquiler sugerido* (prefijo "$", mayor a cero). Sección «Descripción»: textarea grande "Estado y comodidades" con contador de caracteres. A la derecha, un bloque informativo "Estado inicial: Disponible" (badge verde) con la ayuda "Se asigna automáticamente al guardar". Acciones: "Guardar Inmueble" (primario) y "Cancelar".
+Formulario en página propia (no modal). Breadcrumb «Inmuebles / Nuevo inmueble». Sección «Datos del inmueble»: Propietario* (select con búsqueda, solo propietarios), Dirección exacta*, Ciudad*, Tipo* (Departamento, Casa, Local comercial, Terreno, Oficina), Cantidad de ambientes* (entero positivo; no se exige en Terreno), Superficie en m² (opcional), Servicios incluidos (opcional) y Precio base de alquiler sugerido* (prefijo "$", mayor a cero). Sección «Descripción»: textarea grande "Estado y comodidades" con contador de caracteres. A la derecha, un bloque informativo "Estado inicial: Disponible" (badge verde) con la ayuda "Se asigna automáticamente al guardar". Acciones: "Guardar Inmueble" (primario) y "Cancelar".
 
 ESTILO: web desktop 1440px, admin template limpio y sobrio, todo en español rioplatense. Fuente Inter. Primario índigo #4F46E5 (botones, ítem activo, foco); fondo degradado #F0F4F8 a #D9E2EC; tarjetas blancas con radio 12px, sombra suave y borde #E5E7EB; texto #1F2937 y secundario #6B7280. Éxito #10B981, peligro #EF4444, advertencia #F59E0B, info #2563EB. Badges con ícono + texto. Íconos de línea. Hoy es 06/11/2026; fechas dd/mm/aaaa; montos como $ 420.000.
 LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "InmoGestión"), ítems con ícono (activo: fondo #E0E7FF, texto #4338CA) y abajo el usuario (Laura Benítez, Administradora) con "Cerrar Sesión". Barra superior con breadcrumb, campana con contador rojo y avatar. Menú: Dashboard, Usuarios, Inmuebles, Contratos, Cuotas (Emitir cuotas y Cobranzas), Pagos, Liquidaciones, Reportes. Activo: Inmuebles.
@@ -256,7 +269,7 @@ LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "Inm
 ```text
 Diseñá la pantalla «Contrato: nuevo» de InmoGestión 2026, una plataforma de gestión inmobiliaria y de alquileres.
 
-Pantalla clave del negocio: clara y confiable. Dos columnas: formulario (2/3) en tres tarjetas numeradas y panel fijo «Resumen del contrato» (1/3). 1 «Partes»: Inmueble* (select solo con inmuebles Disponibles, ej. Roca 1020, Piso 2 · $ 510.000) e Inquilino* (select con búsqueda). 2 «Plazo»: Fecha de inicio* y Fecha de finalización*, con la duración calculada ("24 meses"). 3 «Condiciones económicas»: Monto mensual pactado*, % de comisión inmobiliaria*, Día límite de vencimiento mensual* (1 a 28) y % de recargo diario por mora*. Resumen en vivo: cuota mensual $ 510.000, comisión 10% = $ 51.000, neto mensual al propietario $ 459.000, vencimiento día 10, mora 0,5% = $ 2.550 por día. Acciones: "Generar Contrato" (primario) y "Cancelar".
+Pantalla clave del negocio: clara y confiable. Dos columnas: formulario (2/3) en tres tarjetas numeradas y panel fijo «Resumen del contrato» (1/3). 1 «Partes»: Inmueble* (select solo con inmuebles Disponibles, ej. Roca 1020, Piso 2 · $ 510.000) e Inquilino* (select con búsqueda), más Propietario (se completa solo al elegir el inmueble, solo lectura). 2 «Plazo»: Fecha de inicio* y Fecha de finalización*, con la duración calculada ("24 meses"). 3 «Condiciones económicas»: Monto mensual pactado*, % de incremento por actualización*, % de comisión inmobiliaria*, Día límite de vencimiento mensual* (1 a 28) y % de recargo diario por mora*. Resumen en vivo: cuota mensual $ 510.000, comisión 10% = $ 51.000, neto mensual al propietario $ 459.000, vencimiento día 10, mora 0,5% = $ 2.550 por día. Acciones: "Generar Contrato" (primario) y "Cancelar".
 
 ESTILO: web desktop 1440px, admin template limpio y sobrio, todo en español rioplatense. Fuente Inter. Primario índigo #4F46E5 (botones, ítem activo, foco); fondo degradado #F0F4F8 a #D9E2EC; tarjetas blancas con radio 12px, sombra suave y borde #E5E7EB; texto #1F2937 y secundario #6B7280. Éxito #10B981, peligro #EF4444, advertencia #F59E0B, info #2563EB. Badges con ícono + texto. Íconos de línea. Hoy es 06/11/2026; fechas dd/mm/aaaa; montos como $ 420.000.
 LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "InmoGestión"), ítems con ícono (activo: fondo #E0E7FF, texto #4338CA) y abajo el usuario (Laura Benítez, Administradora) con "Cerrar Sesión". Barra superior con breadcrumb, campana con contador rojo y avatar. Menú: Dashboard, Usuarios, Inmuebles, Contratos, Cuotas (Emitir cuotas y Cobranzas), Pagos, Liquidaciones, Reportes. Activo: Contratos.
@@ -278,7 +291,7 @@ LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "Inm
 ```text
 Diseñá la pantalla «Emitir cuotas: período y vista previa» de InmoGestión 2026, una plataforma de gestión inmobiliaria y de alquileres.
 
-Operación mensual crítica: debe dar seguridad. Bloque «Período»: selector de mes y año (Diciembre 2026) y botón "Ver vista previa". Bloque «Vista previa»: tabla de contratos vigentes que cubren ese mes, con N°, inquilino, inmueble, vencimiento, monto base y estado "Se emitirá" (verde): C-001 Camila Rojas · Belgrano 1250 · 10/12/2026 · $ 420.000; C-002 Joaquín Medina · Mitre 845 · 10/12/2026 · $ 650.000; C-003 Valentina Funes · San Martín 322 · 15/12/2026 · $ 780.000; C-004 Tomás Aguirre · Moreno 560 · 05/12/2026 · $ 390.000. Pie de tabla: "4 cuotas a emitir · $ 2.240.000". Botón primario "Emitir cuotas".
+Operación mensual crítica: debe dar seguridad. Bloque «Período»: selector de mes y año (Diciembre 2026) y botón "Ver vista previa". Bloque «Vista previa»: tabla de contratos vigentes que cubren ese mes, con casilla por fila (todas marcadas; desmarcando se emite solo a los elegidos, incluso a uno), N°, inquilino, inmueble, vencimiento, monto base y estado "Se emitirá" (verde): C-001 Camila Rojas · Belgrano 1250 · 10/12/2026 · $ 420.000; C-002 Joaquín Medina · Mitre 845 · 10/12/2026 · $ 650.000; C-003 Valentina Funes · San Martín 322 · 15/12/2026 · $ 780.000; C-004 Tomás Aguirre · Moreno 560 · 05/12/2026 · $ 390.000. Pie de tabla: "4 cuotas a emitir · $ 2.240.000". Botón primario "Emitir cuotas".
 
 ESTILO: web desktop 1440px, admin template limpio y sobrio, todo en español rioplatense. Fuente Inter. Primario índigo #4F46E5 (botones, ítem activo, foco); fondo degradado #F0F4F8 a #D9E2EC; tarjetas blancas con radio 12px, sombra suave y borde #E5E7EB; texto #1F2937 y secundario #6B7280. Éxito #10B981, peligro #EF4444, advertencia #F59E0B, info #2563EB. Badges con ícono + texto. Íconos de línea. Hoy es 06/11/2026; fechas dd/mm/aaaa; montos como $ 420.000.
 LAYOUT: sidebar blanco de 260px con logo (casa blanca en cuadrado índigo + "InmoGestión"), ítems con ícono (activo: fondo #E0E7FF, texto #4338CA) y abajo el usuario (Laura Benítez, Administradora) con "Cerrar Sesión". Barra superior con breadcrumb, campana con contador rojo y avatar. Menú: Dashboard, Usuarios, Inmuebles, Contratos, Cuotas (Emitir cuotas y Cobranzas), Pagos, Liquidaciones, Reportes. Activo: Cuotas > Emitir cuotas.

@@ -6,7 +6,7 @@
 
 Como administrador,
 
-quiero emitir masivamente las cuotas mensuales de los contratos vigentes para un período determinado,
+quiero emitir las cuotas mensuales de los contratos vigentes para un período determinado, de forma masiva o individual,
 
 para habilitar las obligaciones de cobro a los inquilinos.
 
@@ -46,16 +46,25 @@ Además, presenta un informe con la cantidad de cuotas emitidas y el monto total
 
 **entonces** el sistema rechaza la operación e informa el error.
 
+### Escenario 5: Emisión individual
+
+**Dado** que existe un contrato vigente que cubre el período seleccionado,
+
+**cuando** el administrador limita la emisión a ese contrato en la vista previa y confirma,
+
+**entonces** el sistema genera solo la cuota de ese contrato, con las mismas reglas que la emisión masiva.
+
 ## Reglas de negocio
 
 - Solo se emiten cuotas para contratos vigentes que cubran el período.
+- La emisión puede ser masiva (todos los contratos vigentes del período) o individual (un solo contrato).
 - Existe como máximo una cuota por contrato y período.
 - La numeración de cuotas es correlativa por contrato.
 - Toda cuota nueva inicia con recargo por mora en cero y estado "Pendiente".
 
 ## Definition of Done
 
-- [ ] El administrador puede emitir cuotas masivamente para un período.
+- [ ] El administrador puede emitir cuotas para un período, de forma masiva o para un solo contrato.
 - [ ] No se generan cuotas duplicadas.
 - [ ] Se informa la cantidad de cuotas emitidas y el monto total.
 - [ ] Se verifican los permisos de acceso.

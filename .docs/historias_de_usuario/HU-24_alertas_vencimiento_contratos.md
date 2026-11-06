@@ -43,6 +43,7 @@ Además, permite acceder directamente al contrato.
 - La ventana de anticipación es de 60 días corridos antes de la fecha de finalización.
 - Solo se alerta sobre contratos vigentes.
 - El propietario solo recibe alertas de sus propios inmuebles.
+- La alerta se detecta consultando los contratos y se registra una sola vez como notificación de cada destinatario, para poder marcarla como leída (HU-22).
 
 ## Definition of Done
 

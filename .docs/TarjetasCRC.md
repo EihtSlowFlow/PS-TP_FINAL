@@ -5,7 +5,7 @@
 | **Usuario**                                                                                             |                   |
 | ------------------------------------------------------------------------------------------------------- | ----------------- |
 | **Responsabilidades**                                                                                   | **Colaboradores** |
-| • Representar la entidad genérica de persona en el sistema (Nombre, DNI, Email, Teléfono, Rol, Estado). | • `AuthService`   |
+| • Representar la entidad genérica de persona en el sistema (Nombre, DNI, Email, Teléfono, Rol, Estado). Los roles son Administrador, Empleado, Propietario e Inquilino. | • `AuthService`   |
 | • Autenticarse mediante verificación de clave BCRYPT.                                                   |                   |
 | • Actualizar sus datos de perfil y contraseña.                                                          |                   |
 | • Aplicar baja lógica (_Soft Delete_).                                                                  |                   |
@@ -89,7 +89,7 @@
 | ---------------------------------------------------------------------------------------- | ----------------- |
 | **Responsabilidades**                                                                    | **Colaboradores** |
 | • Validar extensión (PDF, JPG, PNG) y peso (máx. 5MB) del archivo digital.               | • `Pago`          |
-| • Almacenar el archivo físico de forma segura en `writable/uploads/` con hash aleatorio. |                   |
+| • Almacenar el archivo físico de forma segura en `writable/uploads/comprobantes/` con hash aleatorio.|                   |
 | • Servir la descarga del archivo mediante controladores protegidos.                      |                   |
 
 ---
@@ -114,9 +114,10 @@
 | **ServicioNotificaciones**                                                             |                   |
 | -------------------------------------------------------------------------------------- | ----------------- |
 | **Responsabilidades**                                                                  | **Colaboradores** |
-| • Generar y enviar alertas de recepción y resolución de pagos.                         | • `Pago`          |
+| • Generar y mostrar alertas de recepción y resolución de pagos.                        | • `Pago`          |
 | • Emitir avisos preventivos de vencimiento de cuotas a inquilinos.                     | • `Cuota`         |
 | • Alertar a administradores y propietarios sobre vencimientos inminentes de contratos. | • `Contrato`      |
+| • Registrar cada alerta una sola vez como notificación, con estado leída / no leída.   |                   |
 
 #### Tarjeta CRC: `DashboardReportes`
 

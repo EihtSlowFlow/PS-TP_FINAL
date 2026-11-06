@@ -32,7 +32,7 @@ Además, el monto deja de contarse en el saldo pendiente de liquidación.
 
 ### Escenario 3: Liquidación ya transferida
 
-**Dado** que una liquidación ya está "Transferida",
+**Dado** que una liquidación ya está "Transferido",
 
 **cuando** el administrador intenta registrar otra transferencia,
 

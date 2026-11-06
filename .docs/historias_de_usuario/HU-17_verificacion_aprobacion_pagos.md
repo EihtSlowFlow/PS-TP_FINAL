@@ -20,7 +20,7 @@ para mantener la contabilidad al día y confirmar las cuotas efectivamente cobra
 
 **entonces** el pago pasa a "Aprobado" y la cuota asociada pasa a "Pagada".
 
-Además, se registran la fecha y hora de aprobación y el empleado que la realizó.
+Además, se registran la fecha y hora de aprobación y el administrador o empleado que la realizó.
 
 ### Escenario 2: Rechazar un pago
 

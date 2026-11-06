@@ -15,6 +15,7 @@
 * [6. Matriz de Análisis de Riesgos y Contingencias](#6-matriz-de-análisis-de-riesgos-y-contingencias)
 * [7. Servicios Post-Entrega y Garantía Operativa](#7-servicios-post-entrega-y-garantía-operativa)
 * [8. Tabla Consolidada de Estimaciones y Presupuesto ($ 1.500.000 ARS)](#8-tabla-consolidada-de-estimaciones-y-presupuesto)
+* [9. Precisiones Adoptadas Durante el Desarrollo](#9-precisiones-adoptadas-durante-el-desarrollo)
 
 ---
 
@@ -36,10 +37,10 @@ En esta sección se especifica el estándar utilizado para la asignación de Sto
 
 * **Objetivo General:** Desarrollar una plataforma web integral bajo patrón MVC (CodeIgniter 4) para la gestión de contratos de alquiler, cobro de cuotas, liquidaciones financieras y catalogación de inmuebles.
 * **Límites e Inclusiones (*In-Scope*):**
-  * Autenticación segura con hash BCRYPT (`password_hash()`), gestión de sesiones y control de acceso por roles (`Administrador`, `Propietario`, `Inquilino`).
+  * Autenticación segura con hash BCRYPT (`password_hash()`), gestión de sesiones y control de acceso por roles (`Administrador`, `Empleado`, `Propietario`, `Inquilino`).
   * Mecanismo de restablecimiento y recuperación de contraseña.
   * ABMC de Personas/Usuarios con regla estricta de unicidad en correo y borrado lógico (*Soft Delete* mediante `deleted_at`).
-  * Catalogación de inmuebles vinculados a sus propietarios y estados (`Disponible`, `Alquilado`, `Mantenimiento`).
+  * Catalogación de inmuebles vinculados a sus propietarios y estados (`Disponible`, `Alquilado`, `En Mantenimiento`).
   * Administración de contratos de alquiler, canon locativo, día de vencimiento mensual y porcentaje de comisión inmobiliaria.
   * Emisión masiva o individual de cuotas con recargos automáticos por mora diaria.
   * Módulo de autogestión para inquilinos con carga digital de comprobantes de transferencia (PDF/JPG) y flujo de verificación/aprobación por administración.
@@ -56,7 +57,8 @@ En esta sección se especifica el estándar utilizado para la asignación de Sto
 
 | Rol de Usuario | Descripción y Responsabilidades | Permisos Principales en el Sistema |
 | :--- | :--- | :--- |
-| **Administrador / Empleado** | Personal operativo de la inmobiliaria encargado del control financiero y gestión del catálogo. | **Acceso total:** ABMC de usuarios, inmuebles, contratos, emisión de cuotas, verificación de comprobantes, liquidaciones a propietarios y Dashboard directivo. |
+| **Administrador** | Personal de la inmobiliaria encargado del control financiero y gestión del catálogo. | **Acceso total:** ABMC de usuarios, inmuebles, contratos, emisión de cuotas, verificación de comprobantes, liquidaciones a propietarios y Dashboard directivo. |
+| **Empleado** | Personal operativo de la inmobiliaria. | **Por definir:** falta establecer cuáles de las funciones del administrador puede usar. |
 | **Propietario** | Dueño titular de los inmuebles administrados por la inmobiliaria. | **Acceso de consulta y auditoría:** Estado de sus propiedades, contratos vigentes, histórico de liquidaciones recibidas y recibos de transferencias. |
 | **Inquilino** | Arrendatario que ocupa un inmueble en alquiler. | **Acceso de autogestión:** Consulta de estado de cuenta mensual, detalle de cuotas emitidas/vencidas y carga de comprobantes de pago. |
 
@@ -91,7 +93,7 @@ En esta sección se especifica el estándar utilizado para la asignación de Sto
   4. El administrador puede consultar los usuarios registrados y sus datos con filtros por rol y buscador.
   5. El administrador puede modificar los datos de un usuario existente sin exigir cambio de clave.
   6. El administrador puede dar de baja usuarios respetando las restricciones de integridad mediante borrado lógico.
-  7. El sistema permite asignar los roles de Administrador, Propietario e Inquilino.
+  7. El sistema permite asignar los roles de Administrador, Empleado, Propietario e Inquilino.
   8. El sistema informa si una operación se realizó correctamente o si ocurrió un error.
 
 ## 3. RESTABLECIMIENTO DE CONTRASEÑA
@@ -289,6 +291,8 @@ Para asegurar la viabilidad técnica, la adopción fluida de los usuarios y la e
 3. **Tercer Pago contra entrega y defensa del Examen Final (Fase 2 completada):** 20% = **$ 300.000 ARS**.
 4. **Pago de Cierre e inicio de Servicios Post-Entrega (Fase 3 activada):** 20% = **$ 300.000 ARS**.
 
+> Este esquema es un cronograma de cobro por hitos: no replica los subtotales de cada fase (Fase 2: $ 198.000; Fase 3: $ 402.000), pero suma el mismo total de $ 1.500.000 ARS.
+
 
 
 ---
@@ -321,3 +325,43 @@ Para asegurar la viabilidad técnica, la adopción fluida de los usuarios y la e
   * Jornadas de capacitación y entrega de manual operativo de usuario (5,0 HH).
   * Mantenimiento preventivo, optimización LAMP y verificación de logs (4,0 HH).
   * Puesta en marcha de políticas de resguardo y backup diario de MySQL (3,33 HH).
+
+---
+
+# 9. Precisiones Adoptadas Durante el Desarrollo
+
+Esta sección **no modifica** las secciones 1 a 8. Fija valores que el análisis deja abiertos y el vocabulario que usan el resto de los documentos (`historias_de_usuario/`, `TarjetasCRC.md`, `base_de_datos/MODELO_DE_DATOS.md` y `prototipos_pantallas/`). Si alguna precisión contradijera al análisis, prevalece el análisis.
+
+## 9.1 Relación con el backlog de historias de usuario
+
+La estimación vigente para presupuesto, facturación y cronograma es la de la sección 8: **42 SP, 83,33 HH y $ 1.500.000 ARS**. Los puntos del backlog de historias de usuario (Planning Poker y tablero de GitHub) son una estimación de equipo más fina, por historia: sirven para ordenar y repartir el trabajo, y no se suman ni se convierten a horas con los de este documento. La correspondencia entre los módulos de la sección 8 y las historias está en [`historias_de_usuario/README.md`](historias_de_usuario/README.md).
+
+## 9.2 Esfuerzo agrupado
+
+La sección 4 detalla la funcionalidad por objetivo y la sección 8 agrupa el esfuerzo por módulo y por sprint. Por eso Seguridad y login (objetivo 1) y Restablecimiento de contraseña (objetivo 3) forman parte del esfuerzo de Sprint 1 (16 SP | 24,0 HH), y las notificaciones automáticas (pagos, vencimientos de cuotas y de contratos) del de la Fase 2 (9 SP | 11,0 HH), aunque no tengan una fila propia en la tabla de la sección 8.
+
+## 9.3 Glosario de estados
+
+| Entidad | Estados | Observaciones |
+| :--- | :--- | :--- |
+| Inmueble | `Disponible`, `Alquilado`, `En Mantenimiento` | |
+| Contrato | `Vigente`, `Finalizado`, `Rescindido` | |
+| Cuota | `Pendiente`, `Vencida`, `En Revisión`, `Pagada` | `En Revisión` es la cuota (pendiente o vencida) que tiene un pago informado esperando verificación. No altera el cálculo de mora. |
+| Pago | `Pendiente de Validación`, `Aprobado`, `Rechazado` | Equivale al `Pendiente`, `Aprobada` y `Rechazada` del resultado de la verificación (objetivo 7, condición 9). |
+| Liquidación | `Pendiente de Transferencia`, `Transferido` | |
+
+La baja lógica (`deleted_at`) es independiente de estos estados.
+
+## 9.4 Valores definidos
+
+* **Día de vencimiento mensual:** de 1 a 28 (es el "rango fijado para el proyecto" del objetivo 5), para evitar los meses cortos.
+* **Propietario del contrato:** es el del inmueble elegido. Se completa a partir de él y se guarda también en el contrato y en la liquidación, para conservar el historial si el inmueble cambia de dueño.
+* **Porcentajes** (comisión, mora diaria y actualización): entre 0 y 100.
+* **Medios de pago:** Transferencia bancaria, Depósito y Pasarela digital. "Pasarela digital" es una etiqueta de carga manual: no hay integración con pasarelas (sección 2, exclusiones).
+* **Comprobantes:** PDF, JPG o PNG (RF-06 se entiende en ese sentido), hasta 5 MB, guardados en `writable/uploads/comprobantes/`.
+* **Emisión de cuotas (RF-05):** masiva, para todos los contratos vigentes del período, o individual, para un solo contrato.
+* **Cierre de contratos:** al finalizar o rescindir se guardan la fecha y el motivo.
+* **Liquidaciones:** una por contrato y período. Las cuotas incluidas se registran en una tabla intermedia y el período es el primer día del mes.
+* **Alertas:** una cuota se avisa desde 5 días antes de su vencimiento y un contrato desde 60 días antes de su finalización.
+* **Roles:** son cuatro: Administrador, Empleado, Propietario e Inquilino (`admin`, `employee`, `owner`, `tenant`). El enunciado habla de cuatro roles pero describe tres, con "Administrador / Empleado" juntos; aquí se separan. Qué funciones del administrador puede usar el empleado está por definir (sección 3).
+* **Nombres técnicos:** tablas y columnas en inglés (`contract_id`, `tenant_id` y `owner_id` en lugar de los `contrato_id`, `inquilino_id` y `propietario_id` del riesgo R-04). Las etiquetas se muestran en español.

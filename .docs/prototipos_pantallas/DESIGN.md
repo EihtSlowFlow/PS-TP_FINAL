@@ -155,7 +155,7 @@ components:
 
 InmoGestión 2026 es una plataforma web de gestión inmobiliaria y de alquileres. Digitaliza el ciclo completo: catálogo de inmuebles, contrato, emisión mensual de cuotas, pago informado por el inquilino con comprobante, verificación del administrador y liquidación al propietario con descuento de la comisión.
 
-Hay tres roles con menús distintos (Administrador/Empleado, Propietario e Inquilino) y pantallas públicas (login, registro, catálogo). Es un **admin template** limpio, moderno y sobrio, no una landing de marketing. Todo el texto de la interfaz va en español rioplatense.
+Hay cuatro roles (Administrador, Empleado, Propietario e Inquilino) con menús distintos y pantallas públicas (login, registro, catálogo). Los prototipos del Administrador sirven también para el Empleado hasta que se definan sus diferencias de permisos. Es un **admin template** limpio, moderno y sobrio, no una landing de marketing. Todo el texto de la interfaz va en español rioplatense.
 
 ## Colors
 
