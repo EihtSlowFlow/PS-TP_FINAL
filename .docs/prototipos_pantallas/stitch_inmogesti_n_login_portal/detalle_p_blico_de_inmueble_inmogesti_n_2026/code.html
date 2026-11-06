@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-surface-variant":"#464555","primary":"#3525cd","background-end":"#D9E2EC","danger-hover":"#DC2626","on-secondary-fixed":"#191c1f","on-tertiary-fixed":"#351000","tertiary":"#7e3000","row-hover":"#F3F4F6","danger-text":"#B91C1C","outline-variant":"#c7c4d8","success-soft":"#ECFDF5","surface-container-lowest":"#ffffff","warning-soft":"#FFFBEB","surface-tint":"#4d44e3","outline":"#777587","error":"#ba1a1a","inverse-primary":"#c3c0ff","primary-container":"#4f46e5","on-tertiary":"#ffffff","info-soft":"#DBEAFE","text-muted":"#6B7280","background-start":"#F0F4F8","tertiary-fixed-dim":"#ffb695","info-text":"#1E40AF","surface":"#FFFFFF","on-error-container":"#93000a","warning":"#F59E0B","primary-fixed":"#e2dfff","surface-container-low":"#eff4ff","border":"#E5E7EB","on-secondary":"#ffffff","primary-hover":"#4338CA","on-primary-fixed":"#0f0069","secondary":"#5c5f62","secondary-fixed":"#e0e2e6","success":"#10B981","background":"#f8f9ff","warning-text":"#92400E","on-tertiary-fixed-variant":"#7b2f00","inverse-on-surface":"#eaf1ff","surface-container":"#e6eeff","inverse-surface":"#27313f","on-tertiary-container":"#ffd2be","tertiary-container":"#a44100","danger":"#EF4444","on-secondary-container":"#606366","primary-fixed-dim":"#c3c0ff","secondary-fixed-dim":"#c4c7ca","success-text":"#065F46","error-container":"#ffdad6","surface-muted":"#F9FAFB","on-primary-fixed-variant":"#3323cc","surface-bright":"#f8f9ff","border-input":"#D1D5DB","surface-variant":"#d9e3f6","danger-soft":"#FEF2F2","on-background":"#121c2a","info":"#2563EB","on-primary":"#ffffff","on-secondary-fixed-variant":"#44474a","surface-container-highest":"#d9e3f6","on-primary-container":"#dad7ff","on-error":"#ffffff","tertiary-fixed":"#ffdbcc","secondary-container":"#dee0e4","heading":"#111827","surface-dim":"#d0dbed","primary-soft":"#E0E7FF","on-surface":"#121c2a","surface-container-high":"#dee9fc"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-sm":"0.5rem","gutter":"1.5rem","space-xl":"2rem","margin":"2rem","gutter-mobile":"1rem","margin-mobile":"1rem","space-lg":"1.5rem","space-md":"1rem","space-xs":"0.25rem"},"fontFamily":{"metric-display":["Inter"],"headline-lg":["Inter"],"headline-md":["Inter"],"label-sm":["Inter"],"body-sm":["Inter"],"table-header":["Inter"],"body-lg":["Inter"],"headline-lg-mobile":["Inter"],"headline-sm":["Inter"],"body-md":["Inter"],"label-md":["Inter"]},"fontSize":{"metric-display":["32px",{"lineHeight":"38px","fontWeight":"600"}],"headline-lg":["28px",{"lineHeight":"36px","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"26px","fontWeight":"500"}],"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"body-sm":["14px",{"lineHeight":"20px","fontWeight":"400"}],"table-header":["13px",{"lineHeight":"18px","letterSpacing":"0.05em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg-mobile":["22px",{"lineHeight":"28px","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"500"}],"body-md":["15px",{"lineHeight":"22px","fontWeight":"400"}],"label-md":["13px",{"lineHeight":"18px","fontWeight":"500"}]}}}};</script></head><body class="min-h-screen bg-gradient-to-b from-background-start to-background-end font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-[1200px] mx-auto px-space-xl flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-md"><div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center shadow-sm flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[22px]">home</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-heading tracking-tight leading-none">InmoGestión</span><span class="font-label-sm text-label-sm text-text-muted mt-0.5 leading-none">Gestión Inmobiliaria &amp; Alquileres</span></div></div><nav class="hidden md:flex items-center gap-space-lg" data-active-classes="bg-surface-container text-primary font-label-md"><a aria-current="page" class="transition-colors py-space-xs px-space-sm rounded-lg bg-surface-container text-primary font-label-md" data-path="propiedades-disponibles" href="#">Propiedades</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-sm rounded-lg" data-path="como-funciona" href="#">Cómo funciona</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-sm rounded-lg" data-path="propietarios" href="#">Propietarios</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-sm rounded-lg" data-path="inquilinos" href="#">Inquilinos</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors py-space-xs px-space-sm rounded-lg" data-path="contacto-comercial" href="#">Contacto</a></nav><div class="flex items-center gap-space-sm"><a class="inline-flex items-center justify-center h-[42px] px-space-lg rounded-lg bg-border text-on-surface font-label-md text-label-md hover:bg-border-input transition-colors" data-path="login" href="#">Ingresar</a><a class="inline-flex items-center justify-center h-[42px] px-space-lg rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary-hover shadow-sm transition-colors" data-path="registro" href="#">Registrarse</a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-space-xs"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16"><div class="max-w-[1200px] mx-auto px-space-xl py-space-xl"><div class="flex flex-col w-full">
+<!-- Dynamic Breadcrumb Navigation -->
+<nav class="flex items-center gap-space-sm mb-space-lg text-on-surface-variant text-label-md font-label-md">
+<a class="hover:text-primary transition-colors flex items-center gap-1" data-path="propiedades-disponibles" href="#">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Catálogo</span>
+</a>
+<span class="text-text-muted">/</span>
+<span class="text-heading font-medium">Roca 1020, Piso 2</span>
+</nav>
+<!-- Header Section with Key Facts & Actions -->
+<header class="bg-surface rounded-xl p-space-lg shadow-sm mb-space-xl flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-label-sm font-label-sm bg-success-soft text-success-text">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+          Disponible
+        </span>
+<span class="text-text-muted text-label-sm font-label-sm">Código REF: #IG-8842</span>
+<span class="text-text-muted text-label-sm font-label-sm">• Actualizado: 06/11/2026</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-heading tracking-tight mt-1">
+        Roca 1020, Piso 2
+      </h1>
+<div class="flex items-center gap-1.5 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-primary">location_on</span>
+<span>Viedma, Río Negro</span>
+<span class="text-text-muted mx-1">•</span>
+<span class="text-text-muted">Centro Comercial e Institucional</span>
+</div>
+</div>
+<!-- Pricing and Quick Actions -->
+<div class="flex items-start sm:items-center lg:items-end flex-col sm:flex-row lg:flex-col gap-space-md justify-between lg:justify-center">
+<div class="text-left lg:text-right">
+<div class="font-metric-display text-metric-display text-heading tracking-tight text-primary-container">
+          $ 510.000 <span class="font-body-md text-body-md text-text-muted font-normal">/ mes</span>
+</div>
+<p class="font-label-sm text-label-sm text-text-muted mt-0.5">Canon mensual pactado</p>
+</div>
+<div class="flex items-center gap-space-xs w-full sm:w-auto">
+<button class="inline-flex items-center justify-center gap-1.5 h-[42px] px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all" id="favorite-btn" type="button">
+<span class="material-symbols-outlined text-[18px] text-danger" id="fav-icon">favorite_border</span>
+<span id="fav-text">Guardar</span>
+</button>
+<button class="inline-flex items-center justify-center gap-1.5 h-[42px] px-space-md rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-all" id="share-btn" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary">share</span>
+<span>Compartir</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Interactive Photographic Gallery -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm mb-space-xl flex flex-col gap-space-md">
+<!-- Main Large Stage Viewport -->
+<div class="relative w-full h-[380px] md:h-[500px] rounded-lg overflow-hidden bg-surface-container-high group">
+<img alt="Vista principal de la oficina en Roca 1020" class="w-full h-full object-cover transition-opacity duration-300" data-alt="Spacious modern architectural office interior with expansive panoramic floor-to-ceiling windows, polished light wood flooring, pristine neutral white walls, bright morning natural daylight, minimalist contemporary executive desk, potted green plant, corporate atmosphere in Viedma" id="main-gallery-img" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsYy7-t149LO7dH5Md-AHhiZBlYOvDVtbwHP-x87UFwE7_10uuBO-HY9vjXrBRqldsA0N6VpTndcBFUGBNdl7rlqkbRnPqTfwm7zn9JT_2y2WLsy6S91otDw2qXDoKQNvUtkyoZXnIbq7TUJ58r1-Bc-GLZ9er5quQHbpCmHHJ2B9TjBW_pMzBduzCeESzmA2fHkkfXY4YjLc9_f4uzMLemuPC5lahKhi5LURNLpQ"/>
+<!-- Overlay Tag -->
+<div class="absolute bottom-4 left-4 bg-surface/90 backdrop-blur-md px-3 py-1.5 rounded-lg text-heading font-label-sm text-label-sm shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">photo_camera</span>
+<span id="current-caption">Vista general del ambiente principal</span>
+<span class="text-text-muted">|</span>
+<span class="text-text-muted">5 fotos disponibles</span>
+</div>
+<!-- Navigation Arrows -->
+<button aria-label="Foto anterior" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-surface/90 hover:bg-surface text-heading flex items-center justify-center shadow-md transition-transform hover:scale-105 opacity-90 group-hover:opacity-100" id="gallery-prev">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button aria-label="Foto siguiente" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-surface/90 hover:bg-surface text-heading flex items-center justify-center shadow-md transition-transform hover:scale-105 opacity-90 group-hover:opacity-100" id="gallery-next">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+<!-- 4 High-fidelity Thumbnails Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm" id="thumb-grid">
+<button class="gallery-thumb active-thumb relative h-24 rounded-lg overflow-hidden shadow-sm ring-2 ring-primary ring-offset-2 transition-all" data-caption="Vista general del ambiente principal" data-img-index="0" type="button">
+<img alt="Ambiente principal" class="w-full h-full object-cover" data-alt="Spacious modern architectural office interior with expansive panoramic windows, wooden flooring, bright natural sunlight in high resolution" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn7p8l9kigMdOp2ekTc6ra850L1-gmc2V3_DxN6V3RwKLbVh_K_3ENkjPk2tVSOi-SM10h3X424l91_1uld7nHkyzN-cCF-LWnD4vIFQKMOOManQWJSW0BZLJhpjm6T2oPk_zIq-WZFTjFWiNDdsrjIsqu6jAb162Bt_UIxch5zTEQ_-hLFP15f_tX0e4NLPqDQqZyZV_FosC76_IRj_WQVuSgceeimo_0m2aIfy0"/>
+<span class="absolute inset-0 bg-primary/10"></span>
+</button>
+<button class="gallery-thumb relative h-24 rounded-lg overflow-hidden shadow-sm hover:opacity-90 transition-all" data-caption="Despacho privado y puesto de trabajo ejecutivo" data-img-index="1" type="button">
+<img alt="Despacho privado" class="w-full h-full object-cover" data-alt="Private professional executive office suite with clean minimalist oak desk, ergonomic mesh chair, bookshelves, clean warm ambient office lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDL_oF7r6RFKPiIaDZ80J9ssZb9uHuQCLyReFbFMGpNz4mxejiMoUuRqA1lm4uV2d5baEEuzEdtgXi_CvyFHKSO_pzubFiqInhDjZutCnbeqXCoy6I8G3mD_EOhn9z5yl1-ydfwX08X_B-5eL7znzrO7HHHfobhhQ65aA1DHTwlIMIw2sb560FFg4cdD9BlEWYhsrx0YGRpGakH5VNZEewesZeBmxrg6OdNG1joqLc"/>
+</button>
+<button class="gallery-thumb relative h-24 rounded-lg overflow-hidden shadow-sm hover:opacity-90 transition-all" data-caption="Sector de reuniones y recepción luminosa" data-img-index="2" type="button">
+<img alt="Sector reuniones" class="w-full h-full object-cover" data-alt="Compact commercial meeting room with glass table, four ergonomic chairs, smart screen on wall, polished white floor tiles, architectural daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTKeqPu2cWIuFrkdNRDYOhn4FxGDx9qMjAv_RxEbMc7L-1gHgETXxszcy65nSMNiu5H7atRGbKAcy9JOQsMwyvU-RDJ3r2Vc3cW113OOPGzXvfV6Ba6H9WTYznDpty5aFNjOFNfCgAbY7pTXyr5Tm5-HZyYHz9lCWMoJk7JsJj-ub9gLlaKzaOYcpzAzHEfIa632xRA6zdd6MevNJ38-5oKd2ACMYQQrbMtpUQI-s"/>
+</button>
+<button class="gallery-thumb relative h-24 rounded-lg overflow-hidden shadow-sm hover:opacity-90 transition-all" data-caption="Kitchenette integrada y office con mueble bajo mesada" data-img-index="3" type="button">
+<img alt="Kitchenette / Office" class="w-full h-full object-cover" data-alt="Modern clean office kitchenette station with stainless steel sink, granite countertop, built-in espresso machine, clean cabinet joinery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-pYFCixB946BjXXIVKI4BcTzw4cUy40794yTknRJyh0twSNoUahmtANNFguT5ELZlB7hozJ1QJlTTbWvv3YEQ0uffvBxRnd3yAHc3brFm0BlpQSvG8NoZaFx47_UXuqN-L48M0xo8L2T9232Ab_temkEVsw5giUbyW-B9BLPwK9zJT-QibZFkDuvyFOghhLG_gkz7AoHYiv1zcVEa1-yBSGH7BjqTyDHV_ZKSeZ0"/>
+</button>
+</div>
+</section>
+<!-- Two-Column Administrative Layout: 8 cols Primary + 4 cols Lateral Sidebar -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- Left / Center Column (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-xl">
+<!-- Technical Specifications Sheet -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm">
+<h2 class="font-headline-md text-headline-md text-heading mb-space-lg flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">tune</span>
+          Ficha técnica del inmueble
+        </h2>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-space-md">
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center gap-2 text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]">domain</span>
+<span>Tipo de inmueble</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-heading mt-0.5">Oficina</span>
+<span class="font-label-sm text-label-sm text-text-muted">Apto uso profesional</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center gap-2 text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]">meeting_room</span>
+<span>Ambientes</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-heading mt-0.5">2 ambientes</span>
+<span class="font-label-sm text-label-sm text-text-muted">Recepción + Privado</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center gap-2 text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]">square_foot</span>
+<span>Superficie</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-heading mt-0.5">48 m²</span>
+<span class="font-label-sm text-label-sm text-text-muted">Superficie cubierta</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center gap-2 text-success font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span>Servicios</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-heading mt-0.5">Agua y expensas</span>
+<span class="font-label-sm text-label-sm text-text-muted">Incluidos en canon</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center gap-2 text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]">wb_sunny</span>
+<span>Disposición</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-heading mt-0.5">Frente</span>
+<span class="font-label-sm text-label-sm text-text-muted">Orientación norte, muy luminosa</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center gap-2 text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]">sentiment_satisfied</span>
+<span>Estado</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-heading mt-0.5">Impecable</span>
+<span class="font-label-sm text-label-sm text-text-muted">Listo para habitar</span>
+</div>
+</div>
+</section>
+<!-- Description Section -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm">
+<h2 class="font-headline-md text-headline-md text-heading mb-space-md flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">description</span>
+          Descripción
+        </h2>
+<div class="text-on-surface-variant font-body-lg text-body-lg leading-relaxed">
+<p class="mb-space-md">
+            Oficina luminosa en pleno centro, ideal para estudio profesional. Ubicada en segundo piso al frente, cuenta con recepción, despacho privado principal, kitchenette integrada y baño completo.
+          </p>
+<p>
+            Excelente conectividad, iluminación natural durante toda la jornada laboral y accesos rápidos en el centro comercial de Viedma. Edificio corporativo de categoría, con mantenimiento permanente y ambiente de trabajo calmo y silencioso.
+          </p>
+</div>
+</section>
+<!-- Characteristics & Amenities -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm">
+<h2 class="font-headline-md text-headline-md text-heading mb-space-md flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">checklist</span>
+          Características y comodidades adicionales
+        </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-sm">
+<div class="flex items-center gap-space-sm p-3 rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="w-8 h-8 rounded-full bg-primary-soft flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">ac_unit</span>
+</div>
+<span class="font-body-md text-body-md text-heading font-medium">Climatización frío/calor instalada</span>
+</div>
+<div class="flex items-center gap-space-sm p-3 rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="w-8 h-8 rounded-full bg-primary-soft flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">router</span>
+</div>
+<span class="font-body-md text-body-md text-heading font-medium">Conexión para fibra óptica y cableado</span>
+</div>
+<div class="flex items-center gap-space-sm p-3 rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="w-8 h-8 rounded-full bg-primary-soft flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">blinds</span>
+</div>
+<span class="font-body-md text-body-md text-heading font-medium">Cortinas roller black-out colocadas</span>
+</div>
+<div class="flex items-center gap-space-sm p-3 rounded-lg bg-surface-container-lowest shadow-sm">
+<div class="w-8 h-8 rounded-full bg-primary-soft flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">elevator</span>
+</div>
+<span class="font-body-md text-body-md text-heading font-medium">Edificio con ascensor y acceso digital</span>
+</div>
+</div>
+</section>
+<!-- Terms & Contractual Conditions -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm">
+<h2 class="font-headline-md text-headline-md text-heading mb-space-md flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">gavel</span>
+          Condiciones de contratación y alquiler
+        </h2>
+<div class="space-y-space-sm">
+<div class="flex items-start gap-space-md p-space-sm rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">attach_money</span>
+<div>
+<p class="font-label-md text-label-md text-heading font-semibold">Canon locativo mensual</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">$ 510.000 mensual con pago bancario del 1 al 10 de cada mes.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-md p-space-sm rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">trending_up</span>
+<div>
+<p class="font-label-md text-label-md text-heading font-semibold">Esquema de actualización</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ajuste cuatrimestral por ICL (Índice de Contratos de Locación) según normativa vigente.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-md p-space-sm rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">shield</span>
+<div>
+<p class="font-label-md text-label-md text-heading font-semibold">Requisitos de ingreso</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Garantía propietaria tradicional o seguro de caución aceptado por InmoGestión.</p>
+</div>
+</div>
+<div class="flex items-start gap-space-md p-space-sm rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">receipt_long</span>
+<div>
+<p class="font-label-md text-label-md text-heading font-semibold">Expensas comunes ordinarias</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Incluidas íntegramente en el canon mensual publicado.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Neighborhood Location Map Preview -->
+<section class="bg-surface rounded-xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between mb-space-md">
+<h2 class="font-headline-md text-headline-md text-heading flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[22px]">map</span>
+            Ubicación en el mapa
+          </h2>
+<span class="font-label-sm text-label-sm text-text-muted">Calle Roca 1020, Viedma</span>
+</div>
+<div class="w-full h-64 rounded-lg bg-surface-container-high bg-cover bg-center shadow-inner relative flex items-center justify-center" data-location="Roca 1020, Viedma, Rio Negro, Argentina" style="">
+<div class="bg-surface/95 backdrop-blur-md px-4 py-2 rounded-lg shadow-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">pin_drop</span>
+<span class="font-label-md text-label-md text-heading">Roca 1020, Piso 2 - Viedma</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Administrative Sidebar Interaction Card (4 cols) -->
+<aside class="lg:col-span-4 sticky top-20 flex flex-col gap-space-lg">
+<div class="bg-surface rounded-xl p-space-lg shadow-lg flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-xs text-primary font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[24px]">contact_support</span>
+<span class="font-semibold text-heading">¿Te interesa?</span>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-success-soft text-success-text">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+            Disponible
+          </span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-muted font-medium">Valor mensual de referencia</span>
+<div class="font-metric-display text-metric-display text-primary-container tracking-tight">
+            $ 510.000 <span class="font-body-md text-body-md text-text-muted font-normal">/ mes</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed bg-surface-container-low p-space-sm rounded-lg">
+          Registrate para seguir tus alquileres o contactá a la inmobiliaria
+        </p>
+<!-- Main Conversion Action Buttons -->
+<div class="flex flex-col gap-space-xs pt-1">
+<a class="w-full h-[44px] rounded-lg bg-primary-container hover:bg-primary-hover text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm transition-colors text-center" data-path="registro" href="#">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>Registrarme</span>
+</a>
+<a class="w-full h-[44px] rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 transition-colors text-center" data-path="propiedades-disponibles" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Volver al catálogo</span>
+</a>
+</div>
+<!-- Subtle Structural Divider -->
+<div class="h-px bg-border my-space-xs"></div>
+<!-- Direct Contact Operations -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-text-muted font-medium mb-1">
+            Canales de atención directa
+          </span>
+<a class="w-full h-[42px] px-space-md rounded-lg bg-success-soft hover:bg-emerald-100 text-success-text font-label-md text-label-md flex items-center justify-between transition-colors" href="https://wa.me/5492920400000?text=Hola,%20quisiera%20consultar%20por%20la%20oficina%20en%20Roca%201020%20Piso%202" rel="noopener noreferrer" target="_blank">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-success">chat</span>
+<span>Contactar por WhatsApp</span>
+</div>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+<button class="w-full h-[42px] px-space-md rounded-lg bg-primary-soft hover:bg-indigo-100 text-primary font-label-md text-label-md flex items-center justify-between transition-colors" id="schedule-visit-btn" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+<span>Solicitar visita presencial</span>
+</div>
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+<!-- Operating Hours & Institutional Guarantee -->
+<div class="bg-surface-muted p-space-sm rounded-lg flex flex-col gap-2 mt-1">
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-text-muted">schedule</span>
+<span>Atención: Lunes a Viernes de 9:00 a 18:00 hs</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-text-muted">phone_in_talk</span>
+<span>Línea fija: +54 (02920) 42-8819</span>
+</div>
+</div>
+<div class="flex items-start gap-2 pt-2 text-text-muted font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">verified_user</span>
+<p class="leading-normal">
+            Gestión respaldada por InmoGestión 2026 y matriculado CUCICBA / Colegio Departamental.
+          </p>
+</div>
+</div>
+<!-- Quick Trust Indicators -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary-soft flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">assured_workload</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-heading font-medium">Contrato transparente</p>
+<p class="font-body-sm text-body-sm text-text-muted leading-tight">Proceso formal con homologación y factura electrónica.</p>
+</div>
+</div>
+</aside>
+</div>
+<!-- Interactive Modal: Solicitar Visita Presencial -->
+<div class="fixed inset-0 z-50 bg-heading/50 backdrop-blur-sm hidden items-center justify-center p-4" id="visit-modal">
+<div class="bg-surface rounded-xl max-w-md w-full p-space-lg shadow-2xl flex flex-col gap-space-md relative">
+<button aria-label="Cerrar modal" class="absolute top-4 right-4 text-text-muted hover:text-heading" id="close-modal-btn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-heading">Coordinar visita</h3>
+<p class="font-label-sm text-label-sm text-text-muted">Inmueble: Roca 1020, Piso 2</p>
+</div>
+</div>
+<form class="flex flex-col gap-space-sm mt-1" id="visit-form" onsubmit="event.preventDefault(); alert('¡Gracias! Un asesor de InmoGestión se comunicará a la brevedad para confirmar día y horario.'); document.getElementById('visit-modal').classList.add('hidden'); document.getElementById('visit-modal').classList.remove('flex');">
+<div>
+<label class="font-label-md text-label-md text-heading block mb-1">Nombre completo</label>
+<input class="w-full h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-primary text-body-sm" placeholder="Ej: Dr. Martín Gómez" required="" type="text"/>
+</div>
+<div>
+<label class="font-label-md text-label-md text-heading block mb-1">Teléfono celular / WhatsApp</label>
+<input class="w-full h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-primary text-body-sm" placeholder="+54 9 2920 ..." required="" type="tel"/>
+</div>
+<div>
+<label class="font-label-md text-label-md text-heading block mb-1">Día de preferencia</label>
+<select class="w-full h-11 px-3 rounded-lg bg-surface-container-lowest text-on-surface shadow-sm focus:outline-none focus:ring-2 focus:ring-primary text-body-sm">
+<option>Lunes a Viernes mañana (10:00 - 12:30)</option>
+<option>Lunes a Viernes tarde (15:00 - 18:00)</option>
+<option>Sábados por la mañana (con turno previo)</option>
+</select>
+</div>
+<button class="w-full h-[42px] rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:bg-primary-hover shadow-sm transition-colors mt-2" type="submit">
+          Enviar solicitud de visita
+        </button>
+</form>
+</div>
+</div>
+<script>
+    (function() {
+      // Thumbnail Interactive Switching
+      const thumbs = document.querySelectorAll('.gallery-thumb');
+      const mainImg = document.getElementById('main-gallery-img');
+      const captionTag = document.getElementById('current-caption');
+      let currentIndex = 0;
+
+      const galleryData = [
+        {
+          src: 'placeholder',
+          alt: 'Spacious modern architectural office interior with expansive panoramic floor-to-ceiling windows, polished light wood flooring, pristine neutral white walls, bright morning natural daylight, minimalist contemporary executive desk, potted green plant, corporate atmosphere in Viedma',
+          caption: 'Vista general del ambiente principal'
+        },
+        {
+          src: 'placeholder',
+          alt: 'Private professional executive office suite with clean minimalist oak desk, ergonomic mesh chair, bookshelves, clean warm ambient office lighting',
+          caption: 'Despacho privado y puesto de trabajo ejecutivo'
+        },
+        {
+          src: 'placeholder',
+          alt: 'Compact commercial meeting room with glass table, four ergonomic chairs, smart screen on wall, polished white floor tiles, architectural daylight',
+          caption: 'Sector de reuniones y recepción luminosa'
+        },
+        {
+          src: 'placeholder',
+          alt: 'Modern clean office kitchenette station with stainless steel sink, granite countertop, built-in espresso machine, clean cabinet joinery',
+          caption: 'Kitchenette integrada y office con mueble bajo mesada'
+        }
+      ];
+
+      function updateActiveSlide(idx) {
+        currentIndex = idx;
+        const item = galleryData[idx];
+        if (!item) return;
+
+        mainImg.style.opacity = '0.3';
+        setTimeout(() => {
+          mainImg.setAttribute('src', item.src);
+          mainImg.setAttribute('data-alt', item.alt);
+          captionTag.textContent = item.caption;
+          mainImg.style.opacity = '1';
+        }, 150);
+
+        thumbs.forEach((th, i) => {
+          if (i === idx) {
+            th.classList.add('ring-2', 'ring-primary', 'ring-offset-2');
+          } else {
+            th.classList.remove('ring-2', 'ring-primary', 'ring-offset-2');
+          }
+        });
+      }
+
+      thumbs.forEach((t, i) => {
+        t.addEventListener('click', () => updateActiveSlide(i));
+      });
+
+      const nextBtn = document.getElementById('gallery-next');
+      const prevBtn = document.getElementById('gallery-prev');
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          const next = (currentIndex + 1) % galleryData.length;
+          updateActiveSlide(next);
+        });
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          const prev = (currentIndex - 1 + galleryData.length) % galleryData.length;
+          updateActiveSlide(prev);
+        });
+      }
+
+      // Quick Favorite Micro-interaction
+      const favBtn = document.getElementById('favorite-btn');
+      const favIcon = document.getElementById('fav-icon');
+      const favText = document.getElementById('fav-text');
+      let isFav = false;
+
+      if (favBtn) {
+        favBtn.addEventListener('click', () => {
+          isFav = !isFav;
+          if (isFav) {
+            favIcon.textContent = 'favorite';
+            favIcon.style.fontVariationSettings = "'FILL' 1";
+            favText.textContent = 'Guardado';
+          } else {
+            favIcon.textContent = 'favorite_border';
+            favIcon.style.fontVariationSettings = "'FILL' 0";
+            favText.textContent = 'Guardar';
+          }
+        });
+      }
+
+      // Share Link Micro-interaction
+      const shareBtn = document.getElementById('share-btn');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', () => {
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(window.location.href);
+            alert('¡Enlace de la propiedad copiado al portapapeles!');
+          } else {
+            alert('Enlace: Roca 1020, Piso 2 - InmoGestión Viedma');
+          }
+        });
+      }
+
+      // Visit Modal Toggle
+      const scheduleBtn = document.getElementById('schedule-visit-btn');
+      const modal = document.getElementById('visit-modal');
+      const closeModalBtn = document.getElementById('close-modal-btn');
+
+      if (scheduleBtn && modal) {
+        scheduleBtn.addEventListener('click', () => {
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        });
+      }
+
+      if (closeModalBtn && modal) {
+        closeModalBtn.addEventListener('click', () => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+        });
+      }
+
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+        }
+      });
+    })();
+  </script>
+</div></div></main><footer class="w-full bg-surface-container-lowest/80 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] mt-auto"><div class="max-w-[1200px] mx-auto px-space-xl py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex flex-col md:flex-row items-center gap-space-sm md:gap-space-md text-center md:text-left"><p class="font-body-sm text-body-sm text-text-muted">© 2026 InmoGestión. Desarrollado por Nico Tech. Todos los derechos reservados.</p></div><div class="flex items-center gap-space-lg flex-wrap justify-center"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="terminos-y-condiciones" href="#">Términos</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="politica-de-privacidad" href="#">Privacidad</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="seguridad" href="#">Seguridad</a></div></div></footer></body></html>

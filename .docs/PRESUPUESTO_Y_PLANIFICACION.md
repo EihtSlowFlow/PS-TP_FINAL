@@ -126,6 +126,8 @@ Para corregir en [`ANALISIS_DE_REQUERIMIENTOS.md`](ANALISIS_DE_REQUERIMIENTOS.md
 | 5 | **Enlaces rotos en el `README.md`** | Apunta a `PRESUPUESTO_Y_PLANIFICACION.md` (este documento, que no existía) y a `[BORRADOR]ANALISIS_DE_REQUERIMIENTOS.md` (hoy es `ANALISIS_DE_REQUERIMIENTOS.md`). El primero queda resuelto con este documento |
 | 6 | **"Todas las funcionalidades" en el enunciado** | La sección de entrega dice que en la fecha de la entrega final "se debe cumplir con todas las funcionalidades para aprobar la cursada", mientras que la matriz de requisitos separa cursada y final. En la charla también quedó la duda de qué implica terminar todo antes de tiempo para la promoción |
 
+**Actualización del 06/11/2026:** los puntos 1, 2, 4 y 5 quedaron resueltos al alinear la documentación con el análisis. La sección 9.1 del análisis fija 83,33 h y $1.500.000 como estimación vigente (punto 1) y explica la relación entre las dos escalas de puntos, que también está en el README de historias (punto 4). La sección 9.2 explica que las notificaciones forman parte del esfuerzo de la Fase 2, y HU-04 incluye para el final la consulta de usuarios dados de baja (punto 2). El `README.md` ya no tiene enlaces rotos (punto 5). **Siguen abiertos** el punto 3 (equivalencia de puntos a horas) y el 6 (qué se exige en la entrega).
+
 ---
 
 ## 6. Decisiones pendientes
@@ -136,3 +138,5 @@ Para corregir en [`ANALISIS_DE_REQUERIMIENTOS.md`](ANALISIS_DE_REQUERIMIENTOS.md
 4. **Completar la Fase 2** con notificaciones y gestión completa e historial de usuarios, o declararlas expresamente fuera del presupuesto.
 5. **Definir si se agrega un margen de contingencia explícito** sobre las horas. Un borrador agregaba 20 % de riesgo y contingencia (27 h base → 32,5 h, redondeadas a 33 h), pero el análisis actual no lo tiene. No quedó claro a qué alcance correspondía ese borrador.
 6. **Guardar el enlace de la fuente de honorarios** si se la va a citar.
+
+**Actualización del 06/11/2026:** las decisiones 2 y 4 quedaron resueltas por lo explicado en la sección anterior. Siguen abiertas la 1, la 3, la 5 y la 6.

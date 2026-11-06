@@ -11,6 +11,6 @@ This glossary is retained from the original skills document. Load it only when t
 | Payment / Receipt | `Payment` / `Receipt` | `payments` / `PaymentModel` |
 | Owner settlement | `Settlement` | `settlements` / `SettlementModel` |
 | Notification / Alert | `Notification` | `notifications` / `NotificationModel` |
-| Roles | `admin`, `owner`, `tenant` | `roles.name` |
+| Roles | `admin`, `employee`, `owner`, `tenant` | `roles.name` |
 
 This table is illustrative. Verify the real schema and the project's actual ubiquitous language before creating or renaming identifiers.

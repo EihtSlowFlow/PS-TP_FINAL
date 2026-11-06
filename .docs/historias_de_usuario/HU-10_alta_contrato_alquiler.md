@@ -16,11 +16,11 @@ para establecer los plazos, el monto mensual, la comisión y las condiciones de 
 
 **Dado** que existe un inmueble activo y disponible y un inquilino activo,
 
-**cuando** el administrador informa fecha de inicio, fecha de finalización, monto mensual, porcentaje de comisión, día de vencimiento mensual y porcentaje de recargo diario por mora,
+**cuando** el administrador elige el inmueble y el inquilino, e informa fecha de inicio, fecha de finalización, monto mensual, porcentaje de incremento por actualización, porcentaje de comisión, día de vencimiento mensual y porcentaje de recargo diario por mora,
 
 **entonces** el sistema registra el contrato con estado "Vigente" y cambia el estado del inmueble a "Alquilado".
 
-Además, muestra la ficha del contrato con un mensaje de confirmación.
+Además, el contrato queda vinculado al propietario del inmueble, que el formulario completa y muestra al elegirlo, y el sistema muestra la ficha del contrato con un mensaje de confirmación.
 
 ### Escenario 2: Inmueble no disponible
 
@@ -49,9 +49,10 @@ Además, muestra la ficha del contrato con un mensaje de confirmación.
 ## Reglas de negocio
 
 - Un inmueble solo puede tener un contrato vigente a la vez.
-- Solo pueden asociarse inmuebles activos y disponibles, e inquilinos activos.
-- El monto mensual debe ser mayor a cero y los porcentajes deben estar en un rango válido.
-- El día de vencimiento mensual debe ser un día válido del mes.
+- Solo pueden asociarse inmuebles activos y disponibles, e inquilinos y propietarios activos.
+- El propietario del contrato es el propietario del inmueble elegido.
+- El monto mensual debe ser mayor a cero y los porcentajes (incremento por actualización, comisión y recargo diario) deben estar entre 0 y 100.
+- El día de vencimiento mensual debe estar entre 1 y 28.
 - La creación del contrato y el cambio de estado del inmueble se realizan de forma atómica.
 
 ## Definition of Done

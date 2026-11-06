@@ -30,7 +30,7 @@
 | Base de datos | MySQL/MariaDB (driver MySQLi), `utf8mb4` |
 | Frontend | HTML5, CSS3 responsive y JavaScript ES6 sin frameworks |
 | Servidor | Apache (LAMP/WAMP local) |
-| Roles del sistema | Administrador, Propietario, Inquilino |
+| Roles del sistema | Administrador, Empleado, Propietario, Inquilino |
 
 ### Fases y sprints
 
@@ -43,7 +43,7 @@ Según el [análisis de requerimientos](ANALISIS_DE_REQUERIMIENTOS.md) y el [REA
 | **Fase 2 (examen final)** | Liquidaciones, notificaciones, dashboard y reportes | HU-19 a HU-27 (todavía sin issues) |
 | **Fase 3 (post-entrega)** | Garantía de 60 días, capacitación, mantenimiento y backups | — |
 
-Presupuesto del documento de requerimientos: 83,33 horas-hombre a $18.000 ARS por hora, con un tope de $1.500.000 ARS (de los cuales 50 horas y $900.000 corresponden a la cursada). Los criterios, las restricciones y las inconsistencias de la estimación están en [`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md).
+Presupuesto del documento de requerimientos: 83,33 horas-hombre (42 puntos) a $18.000 ARS por hora, con un tope de $1.500.000 ARS (de los cuales 50 horas y $900.000 corresponden a la cursada). Es la estimación vigente. Los criterios, las restricciones y las inconsistencias de la estimación están en [`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md). Los puntos del backlog de la sección 7 (73 de la cursada y 41 del final) son otra escala, más fina, para repartir el trabajo; la correspondencia entre ambas está en el [README de historias](historias_de_usuario/README.md).
 
 **Entrega:** segunda semana de noviembre de 2026 (del 17 al 24), según el enunciado.
 
@@ -71,7 +71,7 @@ Repositorio: <https://github.com/EihtSlowFlow/PS-TP_FINAL>
 - **`CODEOWNERS`** asigna a `EihtSlowFlow` como revisor de todo el repositorio.
 - **`.env` ya no se versiona.** Se quitó del índice de git y se agregó al `.gitignore`. Entró en `main` con el pull request #2.
 - El `.env` anterior **sigue en el historial** de commits previos. Si tenía contraseñas o claves reales, conviene rotarlas.
-- Todavía **no hay `.env.example`**, así que cada integrante arma su `.env` a mano. Está como tarea en el issue de base de datos.
+- El `.env.example` entra con el pull request de la base de datos (rama `feature/base-de-datos`, issue #22). Hasta que se mergee, cada integrante arma su `.env` a mano; después alcanza con copiarlo y completarlo.
 
 ### Flujo sugerido
 
@@ -109,13 +109,16 @@ Salen de [`.agents/AGENTS.md`](../.agents/AGENTS.md):
 | Ruta | Contenido |
 |---|---|
 | [`README.md`](../README.md) | Descripción general, tecnologías, cronograma y presupuesto |
-| [`.docs/ANALISIS_DE_REQUERIMIENTOS.md`](ANALISIS_DE_REQUERIMIENTOS.md) | Alcance, roles, requerimientos RF/RNF, riesgos, sprints y presupuesto |
+| [`.docs/ANALISIS_DE_REQUERIMIENTOS.md`](ANALISIS_DE_REQUERIMIENTOS.md) | **Fuente de verdad del alcance.** Alcance, roles, requerimientos RF/RNF, riesgos, sprints y presupuesto; la sección 9 fija el glosario de estados y los valores que el análisis deja abiertos |
 | [`.docs/PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md) | Cómo se llegó a la estimación: método, restricciones de tiempo y capacidad, tarifa, alcance, inconsistencias detectadas y decisiones pendientes |
 | [`.docs/documentacion/`](documentacion/) | Transcripciones de reuniones del equipo. Hoy: la charla de Discord del 29/10 sobre estimación y presupuesto (dictado automático, con mucho ruido) |
+| [`.docs/base_de_datos/`](base_de_datos/MODELO_DE_DATOS.md) | Base de datos: DER, modelo relacional, decisiones resueltas, esquema en SQL para MySQL Workbench y cómo usarlos. La fuente de verdad son las migraciones de `app/Database/Migrations/` |
 | [`.docs/2026 - inmogestion.md`](2026%20-%20inmogestion.md) | Enunciado del trabajo y tabla de alcances por etapa |
 | [`.docs/GUIA TP-FINAL.md`](GUIA%20TP-FINAL.md) | Índice que pide la cátedra para el informe (incluye DER y modelo relacional en la sección 3.3) |
 | [`.docs/TarjetasCRC.md`](TarjetasCRC.md) | Tarjetas CRC por módulo: usuarios, propiedades y contratos, cuotas y mora, pagos, liquidaciones, notificaciones |
-| [`.docs/historias_de_usuario/`](historias_de_usuario/) | Una HU por archivo con escenarios, reglas y Definition of Done. El [`README`](historias_de_usuario/README.md) trae el backlog priorizado |
+| [`.docs/historias_de_usuario/`](historias_de_usuario/) | Una HU por archivo con escenarios, reglas y Definition of Done. El [`README`](historias_de_usuario/README.md) trae el backlog priorizado y su correspondencia con el presupuesto del análisis |
+| [`.docs/base_de_datos/`](base_de_datos/MODELO_DE_DATOS.md) | Modelo de datos (DER, modelo relacional, decisiones del issue #22) y el esquema en SQL para MySQL Workbench |
+| [`.docs/exec-plans/`](exec-plans/) | Plantilla de traspaso (`HANDOFF_TEMPLATE.md`) y un handoff por tarea (por ejemplo `BD-22_handoff.md`) |
 | [`.docs/prototipos_pantallas/`](prototipos_pantallas/) | Prototipos de pantallas (`code.html` y `screen.png` por pantalla), `DESIGN.md` y los prompts usados para generarlos (`PROMPTS_STITCH_PROTOTIPOS.md`, que mapea cada pantalla a su HU y su ruta) |
 | [`.agents/`](../.agents/) | Reglas para asistentes de IA: `AGENTS.md`, glosario del dominio y skills por tecnología |
 | `.context/` | Transcripciones de las clases (un `.txt` por clase) |
@@ -201,7 +204,7 @@ Issue: <https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/22>
 
 - **Se hace entre los tres**, en conjunto. Cada integrante aporta 8/3 ≈ 2,7 puntos al total.
 - **Estimación:** 8 puntos (tamaño XL, prioridad P0). El desglose está en el issue: DER y decisiones 2, migraciones de la Fase 1 3, migraciones de la Fase 2 1, seeders, `.env.example` y README 1, pruebas de integridad 1.
-- **Contenido del issue:** 11 tablas propuestas (`roles`, `usuarios`, `password_resets`, `inmuebles`, `contratos`, `cuotas`, `pagos`, `comprobantes`, `liquidaciones`, `liquidacion_cuotas`, `notificaciones`), una tabla que relaciona cada HU con las tablas que usa, reglas de integridad, tareas y criterios de aceptación.
+- **Contenido del issue:** 11 tablas propuestas, que quedaron con nombres en inglés (`roles`, `users`, `password_resets`, `properties`, `contracts`, `installments`, `payments`, `payment_receipts`, `settlements`, `settlement_installments`, `notifications`), una tabla que relaciona cada HU con las tablas que usa, reglas de integridad, tareas y criterios de aceptación.
 - **Orden sugerido de migraciones:** primero el esquema de la Fase 1 (HU-01 a HU-18) y después `liquidaciones`, `liquidacion_cuotas` y `notificaciones`, pero con el DER completo desde el inicio.
 - **Bloquea** a todas las historias que guardan datos.
 
@@ -245,25 +248,29 @@ Dentro de cada etapa las historias se hacen en paralelo. Una historia arranca cu
 | **9** | | | HU-17 |
 | **10** | | | HU-18 |
 
-Las etapas 1 a 5 corresponden a la **semana 1** y las etapas 5 a 10 a la **semana 2**.
+La **semana 1** abarca las etapas 1 a 4 y las HU-11 y HU-12 de la etapa 5; la **semana 2**, desde la HU-13 (etapa 5) hasta la etapa 10.
 
 Desde HU-13 la cadena es estricta: 13, 14, 15, 16, 17, 18 (28 puntos en fila). Por eso conviene que quien espera adelante pantallas, formularios y validaciones.
 
 ---
 
-## 11. Decisiones pendientes
+## 11. Decisiones
 
-### Base de datos (issue #22)
+### Base de datos (issue #22): resueltas el 06/11/2026
 
-1. **Idioma de los nombres:** el glosario y `AGENTS.md` piden inglés (`users`, `properties`), pero el análisis de requerimientos usa español (`contrato_id`, `inquilino_id`).
-2. **Unicidad con baja lógica:** email y DNI únicos solo entre usuarios activos; un `UNIQUE` simple impide volver a registrar a alguien dado de baja.
-3. **Estados:** `ENUM` o tabla de catálogo.
-4. **Liquidaciones:** una por contrato y período, o una por propietario con detalle por contrato.
-5. **Día de vencimiento:** los documentos dicen "día válido del mes"; se propone 1 a 28.
-6. **Base de pruebas:** el grupo `tests` usa SQLite3 en memoria con prefijo `db_`; `ENUM` y columnas generadas son propios de MySQL.
-7. **Cierre de contratos:** si se guardan fecha y motivo de la finalización o rescisión.
-8. **Período de las cuotas:** texto `AAAA-MM` o fecha del primer día del mes.
-9. **Propietario en `contratos` y `liquidaciones`:** guardarlo evita perder historial si el inmueble cambia de dueño, pero duplica el dato.
+Las nueve decisiones están resueltas y explicadas en la [sección 5 del modelo de datos](base_de_datos/MODELO_DE_DATOS.md#5-decisiones-del-issue-22). Están anotadas en el issue #22; falta que EihtSlowFlow y joaquincorbalan las confirmen.
+
+| # | Tema | Resolución |
+|---|---|---|
+| 1 | Idioma de los nombres | Inglés (`users`, `properties`, `contract_id`) |
+| 2 | Unicidad con baja lógica | Columnas generadas con índice único: email y DNI únicos solo entre usuarios activos |
+| 3 | Estados | `ENUM` |
+| 4 | Liquidaciones | Una por contrato y período, con las cuotas en una tabla intermedia |
+| 5 | Día de vencimiento | 1 a 28 |
+| 6 | Base de pruebas | Grupo `tests` en MySQL/MariaDB, no SQLite |
+| 7 | Cierre de contratos | Se guardan fecha y motivo |
+| 8 | Período de las cuotas | Fecha del primer día del mes |
+| 9 | Propietario en `contracts` y `settlements` | Se guarda también ahí |
 
 ### Historias de usuario (secciones "Por definir" de cada issue)
 
@@ -272,22 +279,22 @@ Desde HU-13 la cadena es estricta: 13, 14, 15, 16, 17, 18 (28 puntos en fila). P
 | HU-03b | Vigencia del token y cómo se entrega (correo o enlace en pantalla) |
 | HU-04 | Contraseña inicial de un usuario creado por el administrador; qué "auditorías básicas" se guardan |
 | HU-05 | Si hay reactivación de usuarios; si se puede dar de baja a quien tiene contratos vigentes; si se protege al último administrador |
-| HU-07 | Si ciudad, superficie y servicios incluidos se cargan en esta historia |
+| HU-07 | Resuelto: ciudad obligatoria; superficie y servicios incluidos opcionales |
 | HU-08 | Filtro por ubicación, ordenamiento y qué datos son públicos |
 | HU-09 | Si hay reactivación de inmuebles |
-| HU-10 | Rango de los porcentajes, tope del día de vencimiento, porcentaje de actualización del canon y de dónde sale el propietario |
-| HU-12 | Fecha y motivo del cierre; qué pasa con las cuotas pendientes |
-| HU-13 | Formato del período y si hay emisión individual |
+| HU-10 | Resuelto: porcentajes de 0 a 100, día de vencimiento de 1 a 28, el propietario es el del inmueble. Abierto: cómo y cuándo se aplica el porcentaje de actualización al canon |
+| HU-12 | Resuelto: se guardan fecha y motivo del cierre. Abierto: qué pasa con las cuotas pendientes |
+| HU-13 | Resuelto: el período es el primer día del mes y hay emisión individual además de la masiva |
 | HU-14 | Redondeo, tope del recargo y si se guarda o se recalcula |
-| HU-16 | Medios de pago disponibles y qué pasa si el monto no coincide con la cuota |
+| HU-16 | Resuelto: medios de pago transferencia, depósito y pasarela digital (etiqueta de carga manual); si el monto no coincide, el pago se registra y se marca la diferencia |
 
 ### Presupuesto y alcance
 
 Detalle en [`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md) (secciones 5 y 6). Fuente: la charla del equipo del 29/10.
 
 1. **Qué se exige el 17 al 24 de noviembre:** el enunciado dice que se deben cumplir "todas las funcionalidades para aprobar la cursada", pero su matriz separa cursada y final. Conviene confirmarlo con la cátedra.
-2. **Cifra de referencia:** 50 horas y $900.000 son el subtotal de la cursada en el análisis, pero en la charla se trataron como el total del desarrollo (el total del análisis es 83,33 horas y $1.500.000).
-3. **Fase 2 incompleta:** la tabla de estimación no incluye las notificaciones ni la gestión completa e historial de usuarios, que el enunciado pide para el final.
+2. **Cifra de referencia:** resuelto. La estimación vigente es la del análisis (83,33 horas y $1.500.000, sección 9.1); las 50 horas y $900.000 son el subtotal de la cursada, aunque en la charla se las trató como el total del desarrollo.
+3. **Fase 2 incompleta:** resuelto. Las notificaciones forman parte del esfuerzo de la Fase 2 aunque no tengan fila propia en la tabla (análisis, sección 9.2), y la consulta de usuarios dados de baja, pedida para el final, es el escenario 5 de HU-04.
 4. **Equivalencia de puntos a horas:** no es uniforme (por ejemplo, 5 SP van de 6,0 a 8,0 horas) y los puntos de las historias no se pueden convertir a horas con la escala del análisis.
 
 ### Proceso de trabajo
@@ -302,16 +309,14 @@ Detalle en [`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md) (s
 
 Cosas detectadas al revisar el proyecto, para corregir cuando convenga:
 
-- **Enlace roto en el `README`:** apunta a `.docs/[BORRADOR]ANALISIS_DE_REQUERIMIENTOS.md`, que hoy se llama `ANALISIS_DE_REQUERIMIENTOS.md`. El enlace a `.docs/PRESUPUESTO_Y_PLANIFICACION.md` ya funciona desde que existe ese documento.
-- **Versión de PHP:** el `README` dice "PHP ≥ 7.4", pero `composer.json` exige `^8.2`.
 - **Ruta de las skills:** `AGENTS.md` cita `.agents/skills/...`, pero los archivos están en `.agents/.agents/skills/...`.
-- **Puntos del backlog:** el resumen del backlog dice 66 puntos para la cursada, pero la suma de su tabla da 70 (73 contando HU-03b). Con el final pasa lo mismo: el resumen dice 38 y la tabla suma 41.
-- **Estimación en dos escalas:** el análisis de requerimientos estima por módulo (42 SP en total) y el backlog por historia (más del doble). Las 50 horas de la cursada salen de la primera escala. Ver [`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md).
 - **Referencias a la rama de prototipos:** los issues dicen que los prototipos están "en la rama `prototipos-pantalla` hasta su merge". Ya se mergeó, así que ese texto quedó viejo.
 - **Estados del tablero:** hay 12 issues en *In progress* a la vez, lo que no encaja con el orden de la sección 10. Convendría dejar así solo los de la etapa actual.
 - **Fechas del issue de base de datos:** inicio 29/10 y objetivo 30/10 para 8 puntos; es un plazo muy justo.
 - **Issues reasignados que ya estaban en curso:** HU-02, HU-03, HU-04, HU-06, HU-08 y HU-09 cambiaron de responsable estando en *In progress*. Si alguien ya había empezado alguno, hay que coordinarlo.
 - **`.env` en el historial:** ver la sección 3.
+
+Resueltas el 06/11/2026 (ya no hace falta corregirlas): los enlaces rotos y la versión de PHP del `README`, los totales del resumen del backlog (cursada 73, final 41, total 114 puntos) y la relación entre las dos escalas de puntos (README de historias y sección 9.1 del análisis).
 
 ---
 
@@ -329,3 +334,5 @@ Cosas detectadas al revisar el proyecto, para corregir cuando convenga:
 | 28/10/2026 | Reparto en partes iguales entre los tres integrantes y orden cronológico de trabajo |
 | 28/10/2026 | Este documento |
 | 06/11/2026 | Analizada la transcripción de la charla del 29/10 (`.docs/documentacion/`). Se creó `PRESUPUESTO_Y_PLANIFICACION.md` y se agregaron a este documento la entrega, las decisiones pendientes de presupuesto y de proceso, y las observaciones sobre los puntos |
+| 06/11/2026 | Documentación alineada con el análisis de requerimientos: sección 9 del análisis, totales y correspondencia de puntos en el README de historias, campos de inmueble y contrato, estados, alertas y prototipos |
+| 06/11/2026 | Base de datos (#22) en la rama `feature/base-de-datos`: 11 migraciones, seeders, datos de prueba, esquema para Workbench y pruebas de integridad con PHPUnit. Se agregó el rol Empleado (cuatro roles), se actualizaron 19 issues de GitHub y se agregaron los prompts y los prototipos de las pantallas que faltaban |

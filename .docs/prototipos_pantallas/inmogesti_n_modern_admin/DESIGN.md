@@ -16,7 +16,7 @@ colors:
   outline: '#777587'
   outline-variant: '#c7c4d8'
   surface-tint: '#4d44e3'
-  primary: '#3525cd'
+  primary: '#4F46E5'
   on-primary: '#ffffff'
   primary-container: '#4f46e5'
   on-primary-container: '#dad7ff'
@@ -167,7 +167,7 @@ The palette establishes an authoritative visual hierarchy designed for heavy tra
   - **Success (`#10B981`, soft `#ECFDF5`, text `#065F46`):** Active contracts, validated payments, available units, completed payouts.
   - **Warning (`#F59E0B`, soft `#FFFBEB`, text `#92400E`):** Pending reviews, payment verifications awaiting admin action, scheduled maintenance.
   - **Danger (`#EF4444`, soft `#FEF2F2`, text `#B91C1C`):** Overdue installments, terminated leases, rejected payment slips, destructive prompts.
-  - **Info (`#2563EB`, soft `#DBEAFE`, text `#1E40AF`):** Leased units, active audit logs, in-review balances.
+  - **Info (`#2563EB`, soft `#DBEAFE`, text `#1E40AF`):** Leased units, active audit logs, installments under review (En Revisión).
 
 ## Typography
 
@@ -191,7 +191,7 @@ The layout is structured around an administrative fixed-fluid hybrid grid:
 Visual hierarchy uses a refined blend of subtle surface separation and low-opacity ambient shadows:
 
 - **Baseline Surfaces:** Canvas background carries the slate gradient (`#F0F4F8` to `#D9E2EC`). Workspaces, table wrappers, and sidebar panels sit on pristine `#FFFFFF` surfaces bounded by a crisp 1px hairline border (`#E5E7EB`).
-- **Cards & Data Tables:** Elevated with a wide, soft ambient shadow: `box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08)`. This establishes clear separation without harsh lines or stark drops.
+- **Cards & Data Tables:** Elevated with a wide, soft ambient shadow: `box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1)`. This establishes clear separation without harsh lines or stark drops.
 - **Modals & Drawers:** Elevated using an intentional layering shadow: `0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)`, underpinned by a semi-opaque neutral backdrop (`rgba(17, 24, 39, 0.5)`).
 - **Print Optimization:** In print media stylesheets (`@media print`), all box shadows, background gradients, and decorative borders are stripped to preserve ink density and ensure clean hard copies of settlement receipts and lease contracts.
 
@@ -224,8 +224,9 @@ The interface embraces a balanced roundedness model to soften administrative den
 - **Pairing Rule:** Never rely on color alone. Always display an accompanying icon (or status dot) alongside explicit text in Argentine Spanish.
 - **Values:**
   - *Disponible / Vigente / Pagada / Aprobado / Transferido:* `#ECFDF5` background, `#065F46` label.
-  - *En Mantenimiento / Pendiente / En Revisión / Por Transferir:* `#FFFBEB` background, `#92400E` label.
-  - *Alquilado:* `#DBEAFE` background, `#1E40AF` label.
+  - *En Mantenimiento / Pendiente / Pendiente de Validación / Pendiente de Transferencia:* `#FFFBEB` background, `#92400E` label.
+  - *Alquilado / En Revisión:* `#DBEAFE` background, `#1E40AF` label.
+  - *Finalizado:* neutral gray background (`#F3F4F6`), `#374151` label.
   - *Vencida / Rescindido / Rechazado:* `#FEF2F2` background, `#B91C1C` label.
 
 ### Data Tables

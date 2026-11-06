@@ -6,7 +6,7 @@
 
 Como administrador,
 
-quiero dar de alta, consultar, buscar y modificar los datos de los usuarios (inquilinos, propietarios y empleados),
+quiero dar de alta, consultar, buscar y modificar los datos de los usuarios (administradores, empleados, propietarios e inquilinos),
 
 para mantener actualizado el padrón de clientes y operadores del sistema.
 
@@ -44,9 +44,20 @@ para mantener actualizado el padrón de clientes y operadores del sistema.
 
 **entonces** el sistema actualiza los datos sin alterar la contraseña vigente.
 
+### Escenario 5: Consultar usuarios dados de baja (alcance Final)
+
+**Dado** que existen usuarios dados de baja lógicamente,
+
+**cuando** el administrador activa la opción "Incluir usuarios dados de baja" del listado,
+
+**entonces** el sistema los muestra identificados como dados de baja, junto con el resto de los usuarios, y conserva consultables sus datos y los registros asociados (contratos, cuotas y pagos).
+
+Además, sin esa opción el listado muestra solo los usuarios activos.
+
 ## Reglas de negocio
 
 - El correo electrónico y el DNI deben ser únicos entre los usuarios activos.
+- Los roles posibles son cuatro: Administrador, Empleado, Propietario e Inquilino.
 - Solo el administrador puede crear usuarios con cualquier rol.
 - Dejar la contraseña en blanco al editar no la modifica.
 - Las validaciones se realizan en el servidor.
@@ -56,5 +67,6 @@ para mantener actualizado el padrón de clientes y operadores del sistema.
 - [ ] El administrador puede crear, listar, buscar y editar usuarios.
 - [ ] Se valida la unicidad de correo y DNI.
 - [ ] La contraseña se almacena cifrada y no se altera al editar sin cambiarla.
+- [ ] (Final) El listado permite incluir los usuarios dados de baja y los identifica como tales.
 - [ ] Se verifican los permisos de acceso.
 - [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.

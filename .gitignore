@@ -1,6 +1,8 @@
 # CodeIgniter 4 gitignore
 /vendor/
 /.phpunit.cache
+# PHPUnit results and logs (phpunit.dist.xml writes them to build/)
+/build/
 /writable/cache/*
 !/writable/cache/index.html
 !/writable/cache/.gitkeep
@@ -16,6 +18,10 @@
 /writable/uploads/*
 !/writable/uploads/index.html
 !/writable/uploads/.gitkeep
+# Payment receipts: keep the (empty) folder in the repository, never its contents
+!/writable/uploads/comprobantes/
+/writable/uploads/comprobantes/*
+!/writable/uploads/comprobantes/.gitkeep
 
 # Environment
 .env

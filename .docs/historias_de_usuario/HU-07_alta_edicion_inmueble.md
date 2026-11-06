@@ -16,13 +16,13 @@ para ampliar el catálogo y gestionar el inventario de bienes en alquiler.
 
 **Dado** que el administrador tiene permiso para gestionar inmuebles,
 
-**cuando** completa propietario, dirección, tipo de inmueble, cantidad de ambientes, precio base de alquiler y descripción,
+**cuando** completa propietario, dirección, ciudad, tipo de inmueble, cantidad de ambientes, superficie, servicios incluidos, precio base de alquiler y descripción,
 
 **entonces** el sistema registra el inmueble con estado inicial "Disponible" y lo muestra en el listado con un mensaje de éxito.
 
 ### Escenario 2: Datos inválidos
 
-**Dado** que el administrador completa el formulario con datos inválidos (por ejemplo, precio menor o igual a cero o ambientes no positivos),
+**Dado** que el administrador completa el formulario con datos inválidos (por ejemplo, precio menor o igual a cero, ambientes no positivos, superficie menor o igual a cero o ciudad vacía),
 
 **cuando** intenta guardar,
 
@@ -40,7 +40,8 @@ para ampliar el catálogo y gestionar el inventario de bienes en alquiler.
 
 - Todo inmueble debe estar vinculado a un usuario con rol propietario activo.
 - El tipo de inmueble pertenece a un conjunto definido (departamento, casa, local comercial, terreno u oficina).
-- El precio base debe ser un valor mayor a cero y los ambientes un entero positivo.
+- La dirección y la ciudad son obligatorias. La superficie y los servicios incluidos son opcionales; si se informa la superficie, debe ser mayor a cero.
+- El precio base debe ser un valor mayor a cero y los ambientes un entero positivo, obligatorio salvo para terrenos.
 - Las validaciones se realizan en el servidor.
 
 ## Definition of Done

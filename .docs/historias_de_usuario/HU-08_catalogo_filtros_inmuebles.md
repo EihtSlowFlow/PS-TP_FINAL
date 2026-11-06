@@ -55,6 +55,6 @@ Además, puede filtrar por propietario, rango de precio o estado.
 ## Definition of Done
 
 - [ ] El catálogo se puede consultar según el rol del usuario.
-- [ ] Los filtros por estado, tipo, propietario y precio funcionan correctamente.
+- [ ] Los filtros por estado, tipo y precio funcionan correctamente, y el administrador puede filtrar además por propietario.
 - [ ] Se respetan las restricciones de visibilidad por rol.
 - [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.

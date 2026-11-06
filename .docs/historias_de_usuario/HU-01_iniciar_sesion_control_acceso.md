@@ -18,7 +18,7 @@ para acceder al panel privado correspondiente a mis permisos y operar de forma s
 
 **cuando** ingreso mi correo electrónico y mi contraseña correctos,
 
-**entonces** el sistema inicia mi sesión y me redirige al panel correspondiente a mi rol (administrador, propietario o inquilino).
+**entonces** el sistema inicia mi sesión y me redirige al panel correspondiente a mi rol (administrador, empleado, propietario o inquilino).
 
 ### Escenario 2: Credenciales incorrectas
 

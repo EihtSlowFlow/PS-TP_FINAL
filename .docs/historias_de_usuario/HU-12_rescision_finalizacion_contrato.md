@@ -16,9 +16,11 @@ para cerrar el período de cobros y devolver el inmueble a disponibilidad.
 
 **Dado** que un contrato se encuentra "Vigente" y el administrador tiene permiso para gestionarlo,
 
-**cuando** solicita finalizarlo o rescindirlo y confirma la operación,
+**cuando** solicita finalizarlo o rescindirlo, puede indicar el motivo y confirma la operación,
 
 **entonces** el contrato pasa a "Finalizado" o "Rescindido" y el inmueble asociado vuelve a "Disponible".
+
+Además, el sistema registra la fecha del cierre y, si se informó, el motivo.
 
 ### Escenario 2: Conservar el historial
 
@@ -40,6 +42,7 @@ para cerrar el período de cobros y devolver el inmueble a disponibilidad.
 
 - Solo los contratos vigentes pueden finalizarse o rescindirse.
 - El cierre del contrato no elimina cuotas, pagos ni comprobantes.
+- Un contrato vigente no tiene fecha ni motivo de cierre; al cerrarse se guarda la fecha.
 - El cambio de estado del contrato y del inmueble se realiza de forma atómica.
 
 ## Definition of Done

@@ -41,6 +41,7 @@ para pagar a término y evitar recargos por mora.
 - Se alerta únicamente sobre cuotas pendientes dentro de la ventana de anticipación definida (5 días).
 - Cada inquilino solo recibe alertas sobre sus propias cuotas.
 - Una alerta deja de mostrarse cuando la cuota se informa como pagada.
+- La alerta se detecta consultando las cuotas y se registra una sola vez como notificación del inquilino, para poder marcarla como leída (HU-22).
 
 ## Definition of Done
 

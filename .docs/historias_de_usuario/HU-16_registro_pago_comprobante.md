@@ -16,7 +16,7 @@ para que la administración pueda conciliarlo y registrar la cuota como pagada.
 
 **Dado** que tengo una cuota pendiente o vencida,
 
-**cuando** informo el monto transferido, la fecha de la operación, el medio de pago, el número de transacción y adjunto un comprobante válido,
+**cuando** informo el monto transferido, la fecha de la operación, el medio de pago (transferencia bancaria, depósito o pasarela digital), el número de transacción y adjunto un comprobante válido,
 
 **entonces** el sistema registra el pago como "Pendiente de validación" y la cuota pasa a "En revisión".
 
@@ -58,6 +58,8 @@ para que la administración pueda conciliarlo y registrar la cuota como pagada.
 - El tipo de archivo se verifica en el servidor y no se confía en el nombre ni el tipo declarado por el cliente.
 - Los comprobantes se almacenan con nombre generado y fuera del acceso público directo.
 - Solo se puede informar pago sobre cuotas propias pendientes o vencidas.
+- "Pasarela digital" es solo una etiqueta de carga manual: el sistema no se integra con pasarelas de pago.
+- Si el monto informado no coincide con el monto exigible de la cuota, el pago se registra igual y se marca la diferencia para que el administrador la evalúe al verificarlo.
 
 ## Definition of Done
 

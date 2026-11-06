@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>InmoGestión - Portal Propietario | Liquidaciones</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              DEFAULT: '#4F46E5',
+              hover: '#4338CA',
+              soft: '#E0E7FF',
+            },
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+<meta content="web_dashboard" name="shell-type"/></head>
+<body class="min-h-screen bg-gradient-to-br from-[#F0F4F8] to-[#D9E2EC] text-slate-800 antialiased">
+<!-- Sidebar Fijo (260px) -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-white border-r border-[#E5E7EB] z-50 flex flex-col justify-between select-none">
+<div class="flex flex-col">
+<!-- Logo y Branding -->
+<div class="h-16 px-6 flex items-center gap-3 border-b border-[#E5E7EB]">
+<div class="w-10 h-10 rounded-lg bg-indigo-600 flex items-center justify-center shadow-sm text-white">
+<i class="fa-solid fa-house text-lg"></i>
+</div>
+<div class="flex flex-col min-w-0 leading-tight">
+<span class="text-[18px] font-bold text-gray-900 tracking-tight">InmoGestión</span>
+<span class="text-xs text-gray-500 font-medium">Portal Propietario</span>
+</div>
+</div>
+<!-- Menú Principal -->
+<div class="p-4">
+<span class="px-3 text-xs uppercase tracking-wider text-gray-400 font-semibold block mb-2">Menú Principal</span>
+<nav class="flex flex-col gap-1.5">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium" href="#">
+<i class="fa-solid fa-chart-pie w-5 text-gray-400 text-center text-base"></i>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium" href="#">
+<i class="fa-solid fa-building w-5 text-gray-400 text-center text-base"></i>
+<span>Mis inmuebles</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium" href="#">
+<i class="fa-solid fa-file-contract w-5 text-gray-400 text-center text-base"></i>
+<span>Mis contratos</span>
+</a>
+<!-- Ítem Activo: Liquidaciones -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-[#E0E7FF] text-[#4338CA] font-semibold border-l-4 border-indigo-600 shadow-sm transition-all text-sm" href="#">
+<i class="fa-solid fa-wallet w-5 text-indigo-600 text-center text-base"></i>
+<span>Liquidaciones</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium" href="#">
+<i class="fa-solid fa-circle-user w-5 text-gray-400 text-center text-base"></i>
+<span>Mi perfil</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- Perfil y Logout Inferior -->
+<div class="p-4 border-t border-[#E5E7EB]">
+<div class="p-3 rounded-xl bg-gray-50 border border-gray-200/80 flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<div class="relative flex-shrink-0">
+<div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-sm">
+              RS
+            </div>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+</div>
+<div class="flex flex-col min-w-0 flex-1 leading-tight">
+<span class="text-sm font-semibold text-gray-900 truncate">Ricardo Sosa</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="text-xs text-gray-500">Propietario</span>
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+</div>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-rose-600 hover:bg-rose-50 hover:text-rose-700 transition-colors text-xs font-semibold" type="button">
+<i class="fa-solid fa-arrow-right-from-bracket text-sm"></i>
+<span>Cerrar Sesión</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Contenedor Principal (con margen izquierdo para el sidebar) -->
+<div class="pl-[260px]">
+<!-- Topbar (64px) -->
+<header class="fixed top-0 left-[260px] right-0 h-16 bg-white border-b border-[#E5E7EB] z-40 px-8 flex items-center justify-between shadow-sm">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-sm text-gray-500">
+<span class="hover:text-gray-800 transition-colors cursor-pointer">InmoGestión</span>
+<i class="fa-solid fa-chevron-right text-[11px] text-gray-400"></i>
+<span class="hover:text-gray-800 transition-colors cursor-pointer">Propietario</span>
+<i class="fa-solid fa-chevron-right text-[11px] text-gray-400"></i>
+<span class="font-semibold text-gray-900">Liquidaciones</span>
+</div>
+<!-- Acciones de Cabecera -->
+<div class="flex items-center gap-4">
+<!-- Indicador de Fecha Actual -->
+<div class="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-gray-50 border border-gray-200 text-gray-600 text-xs font-medium">
+<i class="fa-regular fa-calendar text-gray-500"></i>
+<span>Hoy: 06/11/2026</span>
+</div>
+<!-- Notificaciones -->
+<button class="relative p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-gray-800 transition-colors focus:outline-none" type="button">
+<i class="fa-regular fa-bell text-lg"></i>
+<span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-rose-500 text-white text-[10px] font-bold flex items-center justify-center">1</span>
+</button>
+<div class="h-6 w-px bg-gray-200"></div>
+<!-- Perfil Usuario Topbar -->
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center font-medium text-xs shadow-sm">
+<i class="fa-solid fa-user text-xs"></i>
+</div>
+<div class="flex flex-col leading-tight">
+<span class="text-xs font-semibold text-gray-900">Ricardo Sosa</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-[11px] font-medium text-emerald-600">En línea</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Contenido Central -->
+<main class="relative pt-16 min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full max-w-[1200px] mx-auto px-8 py-8 flex flex-col gap-8">
+<!-- Encabezado de página -->
+<section class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="flex flex-col gap-2 max-w-2xl">
+<h1 class="font-headline-lg text-headline-lg text-heading tracking-tight">Liquidaciones</h1>
+<p class="font-body-md text-body-md text-text-muted leading-relaxed">
+          Consulta y rendición mensual de alquileres transferidos a tu cuenta bancaria. Desglose detallado de canon cobrado, honorarios de administración retenidos y neto percibido.
+        </p>
+</div>
+<div class="flex items-center gap-3 self-start lg:self-auto flex-shrink-0">
+<button class="h-[42px] px-5 bg-surface-muted hover:bg-row-hover text-on-surface-variant font-label-md text-label-md rounded-lg shadow-sm transition-all flex items-center gap-2.5" type="button">
+<span class="material-symbols-outlined text-[19px] text-danger">picture_as_pdf</span>
+<span>Descargar resumen fiscal (PDF)</span>
+</button>
+<button class="h-[42px] px-5 bg-primary-container hover:bg-primary-hover text-on-primary font-label-md text-label-md rounded-lg shadow-sm hover:shadow-md transition-all flex items-center gap-2.5" type="button">
+<span class="material-symbols-outlined text-[19px]">table_view</span>
+<span>Exportar Excel (XLSX)</span>
+</button>
+</div>
+</section>
+<!-- Tarjetas KPI Métricas Superiores + Bloque de Cuenta Bancaria -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-6">
+<!-- Tarjeta KPI 1: Acreditado 12M -->
+<div class="xl:col-span-4 bg-surface rounded-xl p-6 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Acreditado en los últimos 12 meses</span>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-heading tracking-tight tabular-nums">$ 6.310.800</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-success-soft text-success flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="mt-5 pt-4 bg-surface-muted -mx-6 -mb-6 px-6 py-3 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<span class="font-label-sm text-label-sm text-success-text">12 períodos liquidados exitosamente (100% percibido a término)</span>
+</div>
+</div>
+<!-- Tarjeta KPI 2: Pendiente -->
+<div class="xl:col-span-4 bg-surface rounded-xl p-6 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between relative overflow-hidden group">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider">Pendiente de transferir</span>
+<div class="mt-3 flex items-baseline gap-2">
+<span class="font-metric-display text-metric-display text-heading tracking-tight tabular-nums">$ 717.600</span>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-warning-soft text-warning flex items-center justify-center flex-shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+</div>
+</div>
+<div class="mt-5 pt-4 bg-surface-muted -mx-6 -mb-6 px-6 py-3 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-warning animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-warning-text">1 liquidación en proceso bancario (Septiembre 2026)</span>
+</div>
+</div>
+<!-- Bloque Bancario Receptor -->
+<div class="xl:col-span-4 bg-surface-container-high rounded-xl p-5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col justify-between">
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-surface flex items-center justify-center text-info shadow-xs">
+<span class="material-symbols-outlined text-[19px]">account_balance</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-heading leading-none">Banco Galicia C/A $</p>
+<span class="font-label-sm text-label-sm text-text-muted">Cuenta receptora</span>
+</div>
+</div>
+<span class="h-6 px-2.5 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+<span>Validada</span>
+</span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-2 bg-surface p-3 rounded-lg">
+<div>
+<span class="font-label-sm text-label-sm text-text-muted block">Titular</span>
+<span class="font-label-md text-label-md text-heading truncate block">Ricardo Sosa</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-text-muted block">Alias asignado</span>
+<span class="font-label-md text-label-md text-primary font-medium tracking-tight truncate block">RICARDO.SOSA.GALICIA</span>
+</div>
+<div class="col-span-2 pt-1 mt-1 bg-surface-muted p-2 rounded">
+<span class="font-label-sm text-label-sm text-text-muted block">CBU</span>
+<span class="font-label-sm text-label-sm text-heading tabular-nums font-mono select-all">0070182230004018291042</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Filtros de Búsqueda -->
+<section class="bg-surface rounded-xl p-4 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] flex flex-col lg:flex-row gap-4 items-center justify-between">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full lg:w-auto">
+<!-- Selector Año -->
+<div class="relative min-w-[140px]">
+<span class="material-symbols-outlined absolute left-3 top-3 text-[18px] text-text-muted pointer-events-none">calendar_month</span>
+<select class="w-full h-11 pl-10 pr-8 bg-surface-muted rounded-lg font-label-md text-label-md text-heading cursor-pointer focus:bg-surface focus:outline-none appearance-none transition-colors">
+<option selected="" value="2026">Año: 2026</option>
+<option value="2025">Año: 2025</option>
+<option value="2024">Año: 2024</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-[18px] text-text-muted pointer-events-none">expand_more</span>
+</div>
+<!-- Selector Inmueble -->
+<div class="relative min-w-[210px]">
+<span class="material-symbols-outlined absolute left-3 top-3 text-[18px] text-text-muted pointer-events-none">apartment</span>
+<select class="w-full h-11 pl-10 pr-8 bg-surface-muted rounded-lg font-label-md text-label-md text-heading cursor-pointer focus:bg-surface focus:outline-none appearance-none transition-colors">
+<option selected="" value="all">Todos los inmuebles</option>
+<option value="belgrano">Belgrano 1250, 4°B</option>
+<option value="sanmartin">San Martín 322, Local 3</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-[18px] text-text-muted pointer-events-none">expand_more</span>
+</div>
+<!-- Selector Estado -->
+<div class="relative min-w-[180px]">
+<span class="material-symbols-outlined absolute left-3 top-3 text-[18px] text-text-muted pointer-events-none">filter_list</span>
+<select class="w-full h-11 pl-10 pr-8 bg-surface-muted rounded-lg font-label-md text-label-md text-heading cursor-pointer focus:bg-surface focus:outline-none appearance-none transition-colors">
+<option selected="" value="all">Todos los estados</option>
+<option value="transferido">Transferido</option>
+<option value="pendiente">Pendiente de Transferencia</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-3 text-[18px] text-text-muted pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Buscador -->
+<div class="relative w-full lg:w-80">
+<span class="material-symbols-outlined absolute left-3.5 top-3 text-[20px] text-text-muted pointer-events-none">search</span>
+<input class="w-full h-11 pl-11 pr-4 bg-surface-muted rounded-lg font-body-sm text-body-sm text-heading placeholder-text-muted focus:bg-surface focus:outline-none transition-all shadow-none" placeholder="Buscar por comprobante o inmueble..." type="text"/>
+</div>
+</section>
+<!-- Tabla Principal de Liquidaciones -->
+<section class="bg-surface rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col">
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-muted">
+<th class="py-4 px-5 font-table-header text-table-header text-on-surface-variant uppercase tracking-wider whitespace-nowrap">Período</th>
+<th class="py-4 px-5 font-table-header text-table-header text-on-surface-variant uppercase tracking-wider whitespace-nowrap">Inmueble</th>
+<th class="py-4 px-5 font-table-header text-table-header text-on-surface-variant uppercase tracking-wider whitespace-nowrap text-right">Bruto Cobrado</th>
+<th class="py-4 px-5 font-table-header text-table-header text-on-surface-variant uppercase tracking-wider whitespace-nowrap text-right">Comisión Retenida</th>
+<th class="py-4 px-5 font-table-header text-table-header text-on-surface-variant uppercase tracking-wider whitespace-nowrap text-right">Neto Propietario</th>
+<th class="py-4 px-5 font-table-header text-table-header text-on-surface-variant uppercase tracking-wider whitespace-nowrap">Estado</th>
+<th class="py-4 px-5 font-table-header text-table-header text-on-surface-variant uppercase tracking-wider whitespace-nowrap">Fecha Acreditación</th>
+<th class="py-4 px-5 font-table-header text-table-header text-on-surface-variant uppercase tracking-wider whitespace-nowrap">N° Operación</th>
+<th class="py-4 px-5 font-table-header text-table-header text-on-surface-variant uppercase tracking-wider text-right whitespace-nowrap">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<!-- Fila 1: Sep 2026 (Belgrano 1250) -->
+<tr class="hover:bg-row-hover transition-colors">
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-headline-sm text-headline-sm text-heading block">Sep 2026</span>
+<span class="font-label-sm text-label-sm text-text-muted">Septiembre 2026</span>
+</td>
+<td class="py-4 px-5 align-middle">
+<span class="font-label-md text-label-md text-heading block whitespace-nowrap">Belgrano 1250, 4°B</span>
+<span class="font-body-sm text-body-sm text-text-muted block whitespace-nowrap">Depto. 3 amb. · Inquilina: Camila Rojas</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-label-md text-label-md text-heading tabular-nums">$ 420.000</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-label-md text-label-md text-danger-text tabular-nums block">10% (-$ 42.000)</span>
+<span class="font-label-sm text-label-sm text-text-muted block">IVA inc.</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-headline-sm text-headline-sm text-heading font-semibold tabular-nums">$ 378.000</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Transferido</span>
+</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-body-sm text-body-sm text-heading tabular-nums">12/10/2026</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-label-sm text-label-sm font-mono text-text-muted bg-surface-muted px-2 py-1 rounded">0051878</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-2">
+<a class="h-8 px-3 rounded-lg bg-surface-muted hover:bg-primary-soft text-primary font-label-sm text-label-sm flex items-center gap-1.5 transition-colors" href="#recibo-LQ-002">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+<span>Ver recibo</span>
+</a>
+<button class="w-8 h-8 rounded-lg bg-surface-muted hover:bg-row-hover text-on-surface-variant flex items-center justify-center transition-colors" title="Imprimir liquidación" type="button">
+<span class="material-symbols-outlined text-[17px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 2: Sep 2026 (San Martín 322) -->
+<tr class="hover:bg-row-hover transition-colors bg-warning-soft/20">
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-headline-sm text-headline-sm text-heading block">Sep 2026</span>
+<span class="font-label-sm text-label-sm text-text-muted">Septiembre 2026</span>
+</td>
+<td class="py-4 px-5 align-middle">
+<span class="font-label-md text-label-md text-heading block whitespace-nowrap">San Martín 322, Local 3</span>
+<span class="font-body-sm text-body-sm text-text-muted block whitespace-nowrap">Local comercial · Inquilina: Valentina Funes</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-label-md text-label-md text-heading tabular-nums">$ 780.000</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-label-md text-label-md text-danger-text tabular-nums block">8% (-$ 62.400)</span>
+<span class="font-label-sm text-label-sm text-text-muted block">IVA inc.</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-headline-sm text-headline-sm text-primary font-semibold tabular-nums">$ 717.600</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-warning-soft text-warning-text font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span>Pendiente de Transferencia</span>
+</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-body-sm text-body-sm text-warning-text flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+<span>En proceso bancario</span>
+</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-label-sm text-label-sm text-text-muted">—</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<div class="flex items-center justify-end">
+<button class="h-8 px-3 rounded-lg bg-surface-container-high hover:bg-surface-container text-heading font-label-sm text-label-sm flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Ver detalle</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 3: Ago 2026 (Belgrano 1250) -->
+<tr class="hover:bg-row-hover transition-colors">
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-headline-sm text-headline-sm text-heading block">Ago 2026</span>
+<span class="font-label-sm text-label-sm text-text-muted">Agosto 2026</span>
+</td>
+<td class="py-4 px-5 align-middle">
+<span class="font-label-md text-label-md text-heading block whitespace-nowrap">Belgrano 1250, 4°B</span>
+<span class="font-body-sm text-body-sm text-text-muted block whitespace-nowrap">Depto. 3 amb.</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-label-md text-label-md text-heading tabular-nums">$ 420.000</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-label-md text-label-md text-danger-text tabular-nums block">10% (-$ 42.000)</span>
+<span class="font-label-sm text-label-sm text-text-muted block">IVA inc.</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-headline-sm text-headline-sm text-heading font-semibold tabular-nums">$ 378.000</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Transferido</span>
+</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-body-sm text-body-sm text-heading tabular-nums">11/09/2026</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-label-sm text-label-sm font-mono text-text-muted bg-surface-muted px-2 py-1 rounded">0049011</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-2">
+<a class="h-8 px-3 rounded-lg bg-surface-muted hover:bg-primary-soft text-primary font-label-sm text-label-sm flex items-center gap-1.5 transition-colors" href="#recibo-LQ-001">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+<span>Ver recibo</span>
+</a>
+<button class="w-8 h-8 rounded-lg bg-surface-muted hover:bg-row-hover text-on-surface-variant flex items-center justify-center transition-colors" title="Imprimir liquidación" type="button">
+<span class="material-symbols-outlined text-[17px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 4: Ago 2026 (San Martín 322) -->
+<tr class="hover:bg-row-hover transition-colors">
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-headline-sm text-headline-sm text-heading block">Ago 2026</span>
+<span class="font-label-sm text-label-sm text-text-muted">Agosto 2026</span>
+</td>
+<td class="py-4 px-5 align-middle">
+<span class="font-label-md text-label-md text-heading block whitespace-nowrap">San Martín 322, Local 3</span>
+<span class="font-body-sm text-body-sm text-text-muted block whitespace-nowrap">Local comercial</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-label-md text-label-md text-heading tabular-nums">$ 780.000</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-label-md text-label-md text-danger-text tabular-nums block">8% (-$ 62.400)</span>
+<span class="font-label-sm text-label-sm text-text-muted block">IVA inc.</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<span class="font-headline-sm text-headline-sm text-heading font-semibold tabular-nums">$ 717.600</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-soft text-success-text font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Transferido</span>
+</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-body-sm text-body-sm text-heading tabular-nums">11/09/2026</span>
+</td>
+<td class="py-4 px-5 align-middle whitespace-nowrap">
+<span class="font-label-sm text-label-sm font-mono text-text-muted bg-surface-muted px-2 py-1 rounded">0049012</span>
+</td>
+<td class="py-4 px-5 align-middle text-right whitespace-nowrap">
+<div class="flex items-center justify-end gap-2">
+<a class="h-8 px-3 rounded-lg bg-surface-muted hover:bg-primary-soft text-primary font-label-sm text-label-sm flex items-center gap-1.5 transition-colors" href="#recibo-LQ-000">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+<span>Ver recibo</span>
+</a>
+<button class="w-8 h-8 rounded-lg bg-surface-muted hover:bg-row-hover text-on-surface-variant flex items-center justify-center transition-colors" title="Imprimir liquidación" type="button">
+<span class="material-symbols-outlined text-[17px]">print</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+<!-- Fila de Totales Acumulados al Pie -->
+<tfoot>
+<tr class="bg-surface-container-high/60 font-label-md text-label-md text-heading">
+<td class="py-4 px-5 align-middle" colspan="2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">calculate</span>
+<span class="font-label-md text-label-md font-semibold text-heading uppercase tracking-wide">TOTAL ACUMULADO EN VISTA</span>
+</div>
+</td>
+<td class="py-4 px-5 align-middle text-right tabular-nums font-semibold">
+                $ 2.400.000
+              </td>
+<td class="py-4 px-5 align-middle text-right tabular-nums text-danger-text font-semibold">
+                -$ 208.800
+              </td>
+<td class="py-4 px-5 align-middle text-right tabular-nums font-bold text-heading">
+                $ 2.191.200
+              </td>
+<td class="py-4 px-5 align-middle" colspan="4">
+<span class="font-label-sm text-label-sm text-text-muted block text-right">
+                  ($ 1.473.600 transferidos + $ 717.600 en trámite bancario)
+                </span>
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<!-- Paginador y Conteo -->
+<div class="p-4 bg-surface-muted flex flex-col sm:flex-row items-center justify-between gap-4">
+<span class="font-body-sm text-body-sm text-text-muted">
+          Mostrando 4 liquidaciones de los últimos períodos
+        </span>
+<div class="flex items-center gap-1.5">
+<button class="w-9 h-9 rounded-lg bg-surface text-text-muted opacity-50 cursor-not-allowed flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold flex items-center justify-center shadow-xs" type="button">
+            1
+          </button>
+<button class="w-9 h-9 rounded-lg bg-surface hover:bg-row-hover text-heading font-label-sm text-label-sm flex items-center justify-center transition-colors" type="button">
+            2
+          </button>
+<button class="w-9 h-9 rounded-lg bg-surface hover:bg-row-hover text-heading flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Recuadro Informativo Inferior -->
+<section class="bg-surface rounded-xl p-5 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-container"></div>
+<div class="flex items-start gap-4 pl-2">
+<div class="w-10 h-10 rounded-full bg-primary-soft text-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="font-label-md text-label-md font-semibold text-heading">Esquema operativo de pagos &amp; soporte asignado</h2>
+<p class="font-body-sm text-body-sm text-text-muted max-w-3xl leading-relaxed">
+            Las transferencias se acreditan en tu CBU dentro de las 48 a 72 hs hábiles posteriores al cobro del canon locativo. Oficial de cuenta asignado: <strong class="text-heading font-medium">Esteban Martínez</strong>.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-3 self-end md:self-auto flex-shrink-0">
+<button class="h-10 px-5 bg-surface hover:bg-surface-muted text-primary hover:text-primary-hover font-label-md text-label-md rounded-lg shadow-sm transition-all flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>Contactar a Esteban</span>
+</button>
+</div>
+</section>
+</div>
+</div></main>
+</div>
+</body></html>

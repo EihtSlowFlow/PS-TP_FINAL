@@ -28,6 +28,8 @@ para conocer cuántas están alquiladas y el total de ingresos que recibí.
 
 **entonces** el sistema muestra el total acreditado en ese período.
 
+Además, muestra el monto de sus liquidaciones pendientes de transferencia.
+
 ### Escenario 3: Contratos por vencer
 
 **Dado** que tengo contratos que vencen en los próximos 60 días,
@@ -48,12 +50,13 @@ para conocer cuántas están alquiladas y el total de ingresos que recibí.
 
 - El propietario solo ve datos de sus propios inmuebles y liquidaciones.
 - El total acreditado incluye únicamente liquidaciones en estado "Transferido".
+- El monto pendiente de transferencia suma únicamente liquidaciones en estado "Pendiente de transferencia".
 - Los inmuebles dados de baja no se cuentan como disponibles.
 
 ## Definition of Done
 
 - [ ] El panel muestra inmuebles totales, alquilados y disponibles.
-- [ ] Se muestra el total acreditado en el último año.
+- [ ] Se muestra el total acreditado en el último año y el monto pendiente de transferencia.
 - [ ] Se muestran las alertas de contratos por vencer.
 - [ ] El propietario solo accede a sus propios datos.
 - [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
