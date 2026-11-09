@@ -4,6 +4,7 @@ use App\Controllers\AuthController;
 use App\Database\Seeds\RoleSeeder;
 use App\Filters\AuthFilter;
 use App\Filters\RoleFilter;
+use CodeIgniter\Security\Exceptions\SecurityException;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
@@ -52,6 +53,109 @@ final class AuthAccessControlTest extends CIUnitTestCase
         $result = $this->get('/');
 
         $result->assertRedirectTo('/auth/login');
+    }
+
+    public function testLoginScreenOnlyLinksToRegisteredAuthRoutes(): void
+    {
+        $body = (string) $this->get('auth/login')->getBody();
+
+        preg_match_all('#href="[^"]*/(auth/[a-z\-]+)"#', $body, $matches);
+        $registered = array_keys(service('routes')->getRoutes('GET'));
+
+        // Control: the collection is readable (otherwise the check below would pass vacuously).
+        $this->assertContains('auth/login', $registered);
+
+        $this->assertSame(
+            [],
+            array_values(array_diff($matches[1], $registered)),
+            'The login screen links to auth routes that are not registered yet.'
+        );
+    }
+
+    public function testLoginScreenShowsRegistrationAndRecoveryLinksOnceTheirRoutesExist(): void
+    {
+        $result = $this->withRoutes([
+            ['get', 'auth/login', 'AuthController::login'],
+            ['get', 'auth/register', 'AuthController::login'],
+            ['get', 'auth/recuperar-password', 'AuthController::login'],
+        ])->get('auth/login');
+
+        $result->assertStatus(200);
+        $result->assertSee('auth/register');
+        $result->assertSee('auth/recuperar-password');
+    }
+
+    public function testLoginFormKeepsNativeBrowserValidationEnabled(): void
+    {
+        $this->get('auth/login')->assertDontSee('novalidate');
+    }
+
+    public function testLoginPostWithoutCsrfTokenIsRejected(): void
+    {
+        $this->createTestUser('owner', 'csrf.hu01@example.com', 'ClaveSegura2026!', '37100200');
+
+        $this->expectException(SecurityException::class);
+
+        $this->post('auth/login', [
+            'email'    => 'csrf.hu01@example.com',
+            'password' => 'ClaveSegura2026!',
+        ]);
+    }
+
+    /**
+     * @return array<string, array{0: string, 1: string, 2: list<string>, 3: list<string>}>
+     */
+    public static function panelNavigationProvider(): array
+    {
+        return [
+            'admin sees dashboard and users' => [
+                'admin', 'admin/dashboard', ['admin/dashboard', 'admin/usuarios'], ['propietario/dashboard', 'inquilino/estado-cuenta'],
+            ],
+            'employee sees dashboard only' => [
+                'employee', 'admin/dashboard', ['admin/dashboard'], ['admin/usuarios', 'propietario/dashboard'],
+            ],
+            'owner sees owner dashboard only' => [
+                'owner', 'propietario/dashboard', ['propietario/dashboard'], ['admin/dashboard', 'admin/usuarios'],
+            ],
+            'tenant sees account state only' => [
+                'tenant', 'inquilino/estado-cuenta', ['inquilino/estado-cuenta'], ['admin/dashboard', 'admin/usuarios'],
+            ],
+        ];
+    }
+
+    /**
+     * @param list<string> $visibleLinks
+     * @param list<string> $hiddenLinks
+     */
+    #[DataProvider('panelNavigationProvider')]
+    public function testSharedPanelLayoutRendersRoleAwareNavigation(
+        string $roleName,
+        string $uri,
+        array $visibleLinks,
+        array $hiddenLinks
+    ): void {
+        $email  = "{$roleName}.layout.hu01@example.com";
+        $userId = $this->createTestUser($roleName, $email, 'ClaveSegura2026!', '36100200');
+
+        $result = $this->withSession([
+            'is_logged_in' => true,
+            'user_id'      => $userId,
+            'user_email'   => $email,
+            'user_name'    => 'Test ' . ucfirst($roleName),
+            'user_role'    => $roleName,
+        ])->get($uri);
+
+        $result->assertStatus(200);
+        $result->assertSeeElement('aside.panel-sidebar');
+        $result->assertSeeElement('main.panel-content');
+
+        foreach ($visibleLinks as $link) {
+            $result->assertSee($link);
+        }
+
+        foreach ($hiddenLinks as $link) {
+            $result->assertDontSee($link);
+        }
     }
 
     /**
@@ -194,6 +298,24 @@ final class AuthAccessControlTest extends CIUnitTestCase
         $result->assertRedirectTo('/auth/login');
         $this->assertNull(session()->get('is_logged_in'));
         $this->assertSame(AuthController::ACCOUNT_DISABLED_MESSAGE, session()->getFlashdata('error'));
+    }
+
+    public function testScenario5DisabledStateIsNotRevealedWithoutTheCorrectPassword(): void
+    {
+        $email = 'deactivated.wrongpass.hu01@example.com';
+        $this->createTestUser('tenant', $email, 'ClaveSegura2026!', '34666778', '2026-10-01 12:00:00');
+
+        $result = $this->postWithCsrf('auth/login', [
+            'email'    => $email,
+            'password' => 'WrongPassword999!',
+        ]);
+
+        // Same generic answer as an unknown email or a wrong password (Scenario 2): no account-state leak.
+        $result->assertRedirectTo('/auth/login');
+        $this->assertNull(session()->get('is_logged_in'));
+        $this->assertSame(AuthController::INVALID_CREDENTIALS_MESSAGE, session()->getFlashdata('error'));
+        $this->assertSame($email, old('email'));
+        $this->assertNull(old('password'));
     }
 
     public function testUserDeactivatedWhileLoggedInIsBlockedOnSubsequentProtectedRequest(): void

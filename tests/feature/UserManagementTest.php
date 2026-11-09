@@ -432,6 +432,159 @@ final class UserManagementTest extends CIUnitTestCase
         $getEdit->assertRedirectTo('/auth/login');
     }
 
+    public function testCreateRejectsInvalidFieldsOnTheServerAndKeepsTheInput(): void
+    {
+        $adminSession = $this->createAdminSession();
+        $usersBefore  = $this->db->table('users')->countAllResults();
+
+        $response = $this->postAsSessionWithCsrf($adminSession, 'admin/usuarios', [
+            'first_name'      => '',
+            'last_name'       => 'X',
+            'document_number' => '12',
+            'email'           => 'no-es-un-email',
+            'phone'           => '123',
+            'address'         => '',
+            'role'            => 'superuser',
+            'password'        => 'abc',
+        ]);
+
+        $response->assertRedirectTo('/admin/usuarios/nuevo');
+        $this->assertSame(UserController::VALIDATION_ERROR_MESSAGE, session()->getFlashdata('error'));
+
+        $errors = session()->getFlashdata('errors');
+        $this->assertIsArray($errors);
+        foreach (['first_name', 'last_name', 'document_number', 'email', 'phone', 'role', 'password'] as $field) {
+            $this->assertArrayHasKey($field, $errors, "Missing validation error for {$field}");
+        }
+
+        $this->assertSame('no-es-un-email', old('email'));
+        $this->assertNull(old('password'));
+        $this->assertSame($usersBefore, $this->db->table('users')->countAllResults());
+    }
+
+    public function testUserFormKeepsNativeBrowserValidationEnabled(): void
+    {
+        $adminSession = $this->createAdminSession();
+
+        $response = $this->withSession($adminSession)->get('admin/usuarios/nuevo');
+
+        $response->assertStatus(200);
+        $response->assertDontSee('novalidate');
+        $response->assertSee('minlength="8"');
+    }
+
+    public function testSoleActiveAdministratorCannotLoseTheAdministratorRoleOnEdit(): void
+    {
+        $adminSession = $this->createAdminSession();
+        $adminId      = $adminSession['user_id'];
+
+        // A deactivated administrator must not count as an available administrator.
+        $this->insertUserRecord(
+            roleName: 'admin',
+            firstName: 'Admin',
+            lastName: 'Retirado',
+            documentNumber: '26111222',
+            email: 'admin.retirado.hu04@example.com',
+            plainPassword: 'Password123!',
+            deletedAt: '2026-09-01 09:00:00'
+        );
+
+        // Case A: self-demotion of the only active administrator is rejected on the server.
+        $demotion = $this->postAsSessionWithCsrf(
+            $adminSession,
+            "admin/usuarios/editar/{$adminId}",
+            $this->adminFormPayload('Laura', 'Benítez', '27000999', 'admin.test.hu04@example.com', 'employee')
+        );
+
+        $demotion->assertRedirectTo("/admin/usuarios/editar/{$adminId}");
+        $this->assertSame(UserController::LAST_ADMIN_ROLE_CHANGE_MESSAGE, session()->getFlashdata('error'));
+        $errors = session()->getFlashdata('errors');
+        $this->assertIsArray($errors);
+        $this->assertSame(UserController::LAST_ADMIN_ROLE_CHANGE_MESSAGE, $errors['role'] ?? null);
+        $this->assertSame('admin', $this->roleNameOf($adminId));
+
+        // Case B: the same administrator can still edit other data while keeping the role.
+        $contactUpdate = $this->postAsSessionWithCsrf(
+            $adminSession,
+            "admin/usuarios/editar/{$adminId}",
+            $this->adminFormPayload('Laura', 'Benítez', '27000999', 'admin.test.hu04@example.com', 'admin', '2995999888')
+        );
+
+        $contactUpdate->assertRedirectTo('/admin/usuarios');
+        $this->assertSame(UserController::USER_UPDATED_MESSAGE, session()->getFlashdata('success'));
+        $this->assertSame('admin', $this->roleNameOf($adminId));
+        $this->assertSame(
+            '2995999888',
+            $this->db->table('users')->where('id', $adminId)->get()->getRow()->phone
+        );
+    }
+
+    public function testAdministratorRoleCanBeRemovedWhileAnotherActiveAdministratorRemains(): void
+    {
+        $adminSession = $this->createAdminSession();
+        $adminId      = $adminSession['user_id'];
+
+        $secondAdminId = $this->insertUserRecord(
+            roleName: 'admin',
+            firstName: 'Segundo',
+            lastName: 'Administrador',
+            documentNumber: '26333444',
+            email: 'segundo.admin.hu04@example.com',
+            plainPassword: 'Password123!'
+        );
+
+        $thirdAdminId = $this->insertUserRecord(
+            roleName: 'admin',
+            firstName: 'Tercer',
+            lastName: 'Administrador',
+            documentNumber: '26555666',
+            email: 'tercer.admin.hu04@example.com',
+            plainPassword: 'Password123!'
+        );
+
+        // Demoting a different administrator is allowed while others remain active.
+        $demoteSecond = $this->postAsSessionWithCsrf(
+            $adminSession,
+            "admin/usuarios/editar/{$secondAdminId}",
+            $this->adminFormPayload('Segundo', 'Administrador', '26333444', 'segundo.admin.hu04@example.com', 'employee')
+        );
+        $demoteSecond->assertRedirectTo('/admin/usuarios');
+        $this->assertSame('employee', $this->roleNameOf($secondAdminId));
+
+        // Self-demotion is allowed (behind the client-side confirmation) when another administrator remains.
+        $demoteSelf = $this->postAsSessionWithCsrf(
+            $adminSession,
+            "admin/usuarios/editar/{$adminId}",
+            $this->adminFormPayload('Laura', 'Benítez', '27000999', 'admin.test.hu04@example.com', 'employee')
+        );
+        $demoteSelf->assertRedirectTo('/admin/usuarios');
+        $this->assertSame(UserController::USER_UPDATED_MESSAGE, session()->getFlashdata('success'));
+        $this->assertSame('employee', $this->roleNameOf($adminId));
+        $this->assertSame('admin', $this->roleNameOf($thirdAdminId));
+    }
+
+    public function testRoleSelectorMarkupKeepsLabelContentValidForHtml5(): void
+    {
+        $adminSession = $this->createAdminSession();
+        $userId       = $this->insertUserRecord(
+            roleName: 'tenant',
+            firstName: 'Valeria',
+            lastName: 'Ortiz',
+            documentNumber: '40222333',
+            email: 'valeria.ortiz.hu04@example.com',
+            plainPassword: 'Password123!'
+        );
+
+        foreach (['admin/usuarios/nuevo', "admin/usuarios/editar/{$userId}"] as $uri) {
+            $response = $this->withSession($adminSession)->get($uri);
+            $response->assertStatus(200);
+            // Sanity check: the role cards are rendered as labels.
+            $response->assertSeeElement('label.role-option-card');
+            // HTML5: <label> only accepts phrasing content, so no block-level descendants.
+            $this->assertSame([], $this->flowElementsInsideLabels((string) $response->getBody()), $uri);
+        }
+    }
+
     /**
      * @return array{is_logged_in: bool, user_id: int, user_email: string, user_name: string, user_role: string}
      */
@@ -453,6 +606,74 @@ final class UserManagementTest extends CIUnitTestCase
             'user_name'    => 'Laura Benítez',
             'user_role'    => 'admin',
         ];
+    }
+
+    /**
+     * Builds the full POST payload of the user form (password left blank, as when editing).
+     *
+     * @return array<string, string>
+     */
+    private function adminFormPayload(
+        string $firstName,
+        string $lastName,
+        string $documentNumber,
+        string $email,
+        string $role,
+        string $phone = '2994000000'
+    ): array {
+        return [
+            'first_name'      => $firstName,
+            'last_name'       => $lastName,
+            'document_number' => $documentNumber,
+            'email'           => $email,
+            'phone'           => $phone,
+            'address'         => 'Dirección de prueba 123',
+            'role'            => $role,
+            'password'        => '',
+        ];
+    }
+
+    /**
+     * Lists flow (non-phrasing) elements nested inside <label>, which HTML5 does not allow.
+     * CI4's DOMParser has no descendant selectors, so this queries the DOM with XPath.
+     *
+     * @return list<string>
+     */
+    private function flowElementsInsideLabels(string $html): array
+    {
+        $flowTags = [
+            'div', 'p', 'ul', 'ol', 'li', 'dl', 'table', 'form', 'fieldset', 'section', 'article',
+            'aside', 'header', 'footer', 'nav', 'main', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+        ];
+
+        $document = new DOMDocument();
+        $previous = libxml_use_internal_errors(true);
+        $document->loadHTML('<?xml encoding="UTF-8">' . $html);
+        libxml_clear_errors();
+        libxml_use_internal_errors($previous);
+
+        $conditions = implode(' or ', array_map(static fn (string $tag): string => "self::{$tag}", $flowTags));
+        $found      = [];
+
+        foreach ((new DOMXPath($document))->query("//label//*[{$conditions}]") ?: [] as $node) {
+            $found[] = $node->nodeName;
+        }
+
+        return $found;
+    }
+
+    private function roleNameOf(int $userId): string
+    {
+        $row = $this->db->table('users')
+            ->select('roles.name AS role_name')
+            ->join('roles', 'roles.id = users.role_id')
+            ->where('users.id', $userId)
+            ->get()
+            ->getRow();
+
+        $this->assertNotNull($row);
+
+        return (string) $row->role_name;
     }
 
     /**

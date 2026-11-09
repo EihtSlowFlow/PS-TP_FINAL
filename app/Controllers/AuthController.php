@@ -40,7 +40,11 @@ class AuthController extends BaseController
             $session->remove(['is_logged_in', 'user_id', 'user_email', 'user_name', 'user_role']);
         }
 
-        return view('auth/login');
+        // Links to HU-02 / HU-03b screens are shown only once their routes exist (no 404 links meanwhile).
+        return view('auth/login', [
+            'showRegisterLink' => $this->routeExists('auth/register'),
+            'showRecoverLink'  => $this->routeExists('auth/recuperar-password'),
+        ]);
     }
 
     /**
@@ -113,9 +117,17 @@ class AuthController extends BaseController
         $deactivatedUser = $userModel->findDeactivatedByEmail($email);
 
         if ($deactivatedUser !== null) {
+            // Disclose the disabled state only to someone who proves knowledge of the password;
+            // otherwise answer like any other invalid attempt (no account-state enumeration).
+            if (password_verify($password, (string) $deactivatedUser['password_hash'])) {
+                return redirect()->to('/auth/login')
+                    ->withInput()
+                    ->with('error', self::ACCOUNT_DISABLED_MESSAGE);
+            }
+
             return redirect()->to('/auth/login')
                 ->withInput()
-                ->with('error', self::ACCOUNT_DISABLED_MESSAGE);
+                ->with('error', self::INVALID_CREDENTIALS_MESSAGE);
         }
 
         password_verify($password, self::DUMMY_PASSWORD_HASH);

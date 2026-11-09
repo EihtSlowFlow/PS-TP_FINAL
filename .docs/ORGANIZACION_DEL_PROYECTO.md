@@ -1,6 +1,6 @@
 # Organización del proyecto — InmoGestión 2026
 
-> Última actualización: 06/11/2026. Este documento resume cómo está organizado el trabajo del equipo: quién hace qué, en qué orden, con qué convenciones y qué falta decidir. La fuente de cada dato se indica entre paréntesis. Si algo cambia en GitHub, hay que actualizarlo acá.
+> Última actualización: 09/11/2026. Este documento resume cómo está organizado el trabajo del equipo: quién hace qué, en qué orden, con qué convenciones y qué falta decidir. La fuente de cada dato se indica entre paréntesis. Si algo cambia en GitHub, hay que actualizarlo acá.
 
 ## Índice
 
@@ -118,7 +118,7 @@ Salen de [`.agents/AGENTS.md`](../.agents/AGENTS.md):
 | [`.docs/TarjetasCRC.md`](TarjetasCRC.md) | Tarjetas CRC por módulo: usuarios, propiedades y contratos, cuotas y mora, pagos, liquidaciones, notificaciones |
 | [`.docs/historias_de_usuario/`](historias_de_usuario/) | Una HU por archivo con escenarios, reglas y Definition of Done. El [`README`](historias_de_usuario/README.md) trae el backlog priorizado y su correspondencia con el presupuesto del análisis |
 | [`.docs/base_de_datos/`](base_de_datos/MODELO_DE_DATOS.md) | Modelo de datos (DER, modelo relacional, decisiones del issue #22) y el esquema en SQL para MySQL Workbench |
-| [`.docs/exec-plans/`](exec-plans/) | Plantilla de traspaso (`HANDOFF_TEMPLATE.md`) y un handoff por tarea (por ejemplo `BD-22_handoff.md`) |
+| [`.docs/exec-plans/`](exec-plans/) | Plantilla de traspaso (`HANDOFF_TEMPLATE.md`) y un handoff por tarea (`BD-22_handoff.md`, `HU-01_handoff.md`, `HU-04_handoff.md`, `HU-05_handoff.md`). [`REVIEW-HU-01-04-05_handoff.md`](exec-plans/REVIEW-HU-01-04-05_handoff.md) documenta el review de esas tres historias y sus correcciones |
 | [`.docs/prototipos_pantallas/`](prototipos_pantallas/) | Prototipos de pantallas (`code.html` y `screen.png` por pantalla), `DESIGN.md` y los prompts usados para generarlos (`PROMPTS_STITCH_PROTOTIPOS.md`, que mapea cada pantalla a su HU y su ruta) |
 | [`.agents/`](../.agents/) | Reglas para asistentes de IA: `AGENTS.md`, glosario del dominio y skills por tecnología |
 | `.context/` | Transcripciones de las clases (un `.txt` por clase) |
@@ -277,8 +277,8 @@ Las nueve decisiones están resueltas y explicadas en la [sección 5 del modelo 
 | Historia | Duda abierta |
 |---|---|
 | HU-03b | Vigencia del token y cómo se entrega (correo o enlace en pantalla) |
-| HU-04 | Contraseña inicial de un usuario creado por el administrador; qué "auditorías básicas" se guardan |
-| HU-05 | Si hay reactivación de usuarios; si se puede dar de baja a quien tiene contratos vigentes; si se protege al último administrador |
+| HU-04 | Resuelto: el administrador define la contraseña inicial (mínimo 8 caracteres, con un generador sugerido) y las "auditorías básicas" son las fechas de alta, última modificación y baja lógica; no se guarda quién las hizo |
+| HU-05 | Resuelto: se protege al último administrador (no se puede dar de baja a sí mismo ni quitarle el rol de Administrador al único administrador activo) y la baja se confirma en el servidor. Abierto: si hay reactivación de usuarios (no está implementada) y si se puede dar de baja a quien tiene contratos vigentes (hoy se permite) |
 | HU-07 | Resuelto: ciudad obligatoria; superficie y servicios incluidos opcionales |
 | HU-08 | Filtro por ubicación, ordenamiento y qué datos son públicos |
 | HU-09 | Si hay reactivación de inmuebles |
@@ -336,3 +336,5 @@ Resueltas el 06/11/2026 (ya no hace falta corregirlas): los enlaces rotos y la v
 | 06/11/2026 | Analizada la transcripción de la charla del 29/10 (`.docs/documentacion/`). Se creó `PRESUPUESTO_Y_PLANIFICACION.md` y se agregaron a este documento la entrega, las decisiones pendientes de presupuesto y de proceso, y las observaciones sobre los puntos |
 | 06/11/2026 | Documentación alineada con el análisis de requerimientos: sección 9 del análisis, totales y correspondencia de puntos en el README de historias, campos de inmueble y contrato, estados, alertas y prototipos |
 | 06/11/2026 | Base de datos (#22) en la rama `feature/base-de-datos`: 11 migraciones, seeders, datos de prueba, esquema para Workbench y pruebas de integridad con PHPUnit. Se agregó el rol Empleado (cuatro roles), se actualizaron 19 issues de GitHub y se agregaron los prompts y los prototipos de las pantallas que faltaban |
+| 09/11/2026 | HU-01, HU-04 y HU-05 implementadas y mergeadas (pull requests #27, #28 y #29) |
+| 09/11/2026 | Review de HU-01, HU-04 y HU-05 y corrección de los 9 hallazgos (3 medios y 6 menores), con PHPUnit instalado: 85 tests y 512 aserciones en verde. Detalle en [`REVIEW-HU-01-04-05_handoff.md`](exec-plans/REVIEW-HU-01-04-05_handoff.md), en la rama `fix/review-hu-01-04-05` |

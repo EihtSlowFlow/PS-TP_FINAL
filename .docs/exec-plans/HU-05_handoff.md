@@ -9,13 +9,13 @@
 | **Sprint / Hito** | Sprint 1 (Etapa 3 — Seguridad y usuarios) |
 | **Rama** | `historia_usuario_cinco` (`Historia-de-usuario-05`) |
 | **Último commit** | `f4e7b67` — feat: implementar baja lógica de usuarios (HU-05) |
-| **Pull Request** | Sin PR (lista para push / PR) |
+| **Pull Request** | [#29](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/29), mergeado en `main` |
 | **Fecha de cierre** | 2026-11-09 18:20 |
 | **Autor / Agente** | Antigravity con `EihtSlowFlow` |
 | **Estado global** | 🟢 Completada |
 | **Avance estimado** | 100 % |
 
-**Resumen:** Se implementó la baja lógica (*soft delete*) de usuarios para el rol Administrador (HU-05): ruta `POST /admin/usuarios/baja/(:num)` protegida con `auth`, `role:admin` y CSRF; método `UserController::deactivate` que persiste `deleted_at` conservando el registro físico y el historial de contratos, cuotas y pagos, e impide la autobaja, la baja del último administrador activo o la baja repetida; métodos de selección de usuarios activos por rol en `UserModel` (`findActiveSelectableByRole`, `findActiveTenantsForContract`, `findActiveOwnersForProperty`) para excluir usuarios inactivos en nuevas operaciones; botones de baja y modal de confirmación accesible en `ADM-02` y `ADM-03b`; y suite de pruebas automatizadas (`UserDeactivationTest`, 4 pruebas / 84 aserciones).
+**Resumen:** Se implementó la baja lógica (*soft delete*) de usuarios para el rol Administrador (HU-05): ruta `POST /admin/usuarios/baja/(:num)` protegida con `auth`, `role:admin` y CSRF; método `UserController::deactivate` que persiste `deleted_at` conservando el registro físico y el historial de contratos, cuotas y pagos, exige confirmación en el servidor (`confirmed=1`; sin ese campo devuelve una página de confirmación, de modo que también funciona sin JavaScript) e impide la autobaja y la baja repetida (la autobaja bloqueada ya garantiza que siempre quede un administrador activo, porque quien da de baja es un administrador activo distinto del objetivo); métodos de selección de usuarios activos por rol en `UserModel` (`findActiveSelectableByRole`, `findActiveTenantsForContract`, `findActiveOwnersForProperty`) para excluir usuarios inactivos en nuevas operaciones; botones de baja y modal de confirmación accesible en `ADM-02` y `ADM-03b`; y suite de pruebas automatizadas (`UserDeactivationTest`, 4 pruebas / 84 aserciones).
 
 ---
 
@@ -25,7 +25,7 @@ Referencia: [`.docs/historias_de_usuario/HU-05_baja_logica_usuario.md`](../histo
 
 | # | Criterio de aceptación (Dado / Cuando / Entonces) | Estado | Evidencia |
 |---|---|---|---|
-| CA-1 | Escenario 1: Dar de baja un usuario activo confirmando la operación; pasa a estado inactivo (`deleted_at IS NOT NULL`), ya no puede iniciar sesión (ni continuar con una sesión abierta) y se conserva su registro | ✅ | `UserDeactivationTest::testScenario1AdminDeactivatesActiveUserPersistsSoftDeleteAndBlocksLoginAndSession` |
+| CA-1 | Escenario 1: Dar de baja un usuario activo confirmando la operación; pasa a estado inactivo (`deleted_at IS NOT NULL`), ya no puede iniciar sesión (ni continuar con una sesión abierta) y se conserva su registro | ✅ | `UserDeactivationTest::testScenario1AdminDeactivatesActiveUserPersistsSoftDeleteAndBlocksLoginAndSession` y `testScenario1DeactivationNeedsServerSideConfirmationEvenWithoutJavaScript` |
 | CA-2 | Escenario 2: Un usuario dado de baja no aparece como opción seleccionable al crear un nuevo contrato u operación | ✅ | `UserDeactivationTest::testScenario2DeactivatedUserIsExcludedFromSelectableOptionsInNewOperations` |
 | CA-3 | Escenario 3: Al confirmar la baja lógica de un usuario con contratos, cuotas o pagos asociados, los registros y sus referencias se conservan y siguen siendo consultables para auditoría | ✅ | `UserDeactivationTest::testScenario3DeactivationPreservesAssociatedContractsInstallmentsAndPaymentsForAudit` |
 | CA-4 | Reglas de negocio y casos de error: bloqueo de autobaja, rechazo de baja repetida o inexistente y control de acceso por rol/autenticación | ✅ | `UserDeactivationTest::testRejectsSelfDeactivationAlreadyDeactivatedNonExistentAndUnauthorizedRequests` |
@@ -40,7 +40,8 @@ Referencia: [`.docs/historias_de_usuario/HU-05_baja_logica_usuario.md`](../histo
 
 | Capa | Archivo | Tipo | Descripción |
 |---|---|---|---|
-| Controller | `app/Controllers/UserController.php` | Modificado | Acción `deactivate(int $id)` con validación de existencia, bloqueo de autobaja, verificación de último admin activo, control de baja previa y `$userModel->delete($id)` |
+| Controller | `app/Controllers/UserController.php` | Modificado | Acción `deactivate(int $id)` con validación de existencia, bloqueo de autobaja, control de baja previa, confirmación en el servidor (`confirmed=1`, si falta devuelve `admin/users/deactivate_confirm`) y `$userModel->delete($id)` |
+| View | `app/Views/admin/users/deactivate_confirm.php` | Nuevo | Página de confirmación de la baja (paso de confirmación del servidor, usado sin JavaScript) |
 | Model | `app/Models/UserModel.php` | Modificado | Métodos `countActiveByRole`, `findActiveSelectableByRole`, `findActiveTenantsForContract` y `findActiveOwnersForProperty` filtrando `users.deleted_at IS NULL` |
 | Routes | `app/Config/Routes.php` | Modificado | Ruta `POST /admin/usuarios/baja/(:num)` → `UserController::deactivate/$1` bajo `auth` + `role:admin` |
 | View | `app/Views/admin/users/index.php` | Modificado | Botón de baja lógica por fila con protección CSRF, candado deshabilitado para el usuario propio y modal de confirmación `#deactivate-user-modal` |
@@ -60,7 +61,8 @@ Referencia: [`.docs/historias_de_usuario/HU-05_baja_logica_usuario.md`](../histo
 | Decisión | Alternativas consideradas | Justificación |
 |---|---|---|
 | Baja mediante `POST /admin/usuarios/baja/(:num)` con formulario HTML y CSRF | Enlace `GET` o llamada `fetch` exclusivamente por JS | Cumple las reglas de `ci4-routing` y `php-security` (las operaciones que cambian estado usan `POST` con token CSRF y degradan limpiamente si JS no está disponible) |
-| Bloqueo de autobaja (`session('user_id') === $id`) y protección del último `admin` activo | Permitir que un administrador se dé de baja a sí mismo | Coincide con el prototipo `ADM-02` (`"No se puede dar de baja (Usuario propio)"`) y evita dejar la plataforma sin administradores activos |
+| Bloqueo de autobaja (`session('user_id') === $id`); sin comprobación adicional de "último admin" | Permitir que un administrador se dé de baja a sí mismo; comprobar además el último admin activo | Coincide con el prototipo `ADM-02` (`"No se puede dar de baja (Usuario propio)"`). Quien da de baja es siempre un administrador activo distinto del objetivo, así que la comprobación del último admin era inalcanzable y se eliminó. La protección equivalente al editar roles vive en `UserController::update` |
+| Confirmación en el servidor (`confirmed=1`) además del modal de JavaScript | Confirmar solo con el modal del cliente | Con JavaScript deshabilitado el botón ya no baja al usuario sin confirmar: el servidor devuelve la página de confirmación |
 | Métodos explícitos `findActiveSelectableByRole`, `findActiveTenantsForContract` y `findActiveOwnersForProperty` en `UserModel` | Filtrar `deleted_at IS NULL` ad-hoc en cada controlador futuro | Centraliza la regla del Escenario 2 en la capa de datos y deja lista la interfaz para HU-07 y HU-10 |
 
 **Seguridad aplicada:** Autorización server-side mediante `AuthFilter` y `RoleFilter` (`role:admin`); revocación inmediata de sesiones abiertas de usuarios dados de baja en `AuthFilter`; bloqueo de inicio de sesión en `AuthController::attemptLogin`; protección CSRF en `POST /admin/usuarios/baja/(:num)`; escape contextual con `esc()` en vistas y uso de `textContent` en `public/js/users.js`.
@@ -104,6 +106,7 @@ Referencia: [`.docs/historias_de_usuario/HU-05_baja_logica_usuario.md`](../histo
 | Fecha | Autor | Resumen | Commit / PR |
 |---|---|---|---|
 | 2026-11-09 | Antigravity con `EihtSlowFlow` | Implementación completa de HU-05 (`UserController::deactivate`, selectores activos en `UserModel`, ruta `POST /admin/usuarios/baja/(:num)`, UI/modal en `ADM-02`/`ADM-03b` y 4 pruebas en `UserDeactivationTest`) | Rama `historia_usuario_cinco` |
+| 2026-11-09 | Claude Code (review posterior a HU-01/04/05) | Hallazgos menores del review: confirmación de baja también en el servidor (`confirmed=1` + página `deactivate_confirm`), eliminación del guard inalcanzable de "último admin" y de `DashboardController::adminUsers()`, y DoD de HU-05 aclarado (la exclusión de inactivos en nuevos contratos está a nivel de modelo hasta HU-10). Suite completa con PHPUnit 11.5.57: 85 tests / 512 aserciones OK | Cambios sin commitear en `main` |
 
 ---
 
