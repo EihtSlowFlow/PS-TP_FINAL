@@ -62,3 +62,20 @@ Además, el contrato queda vinculado al propietario del inmueble, que el formula
 - [ ] El sistema impide contratos duplicados sobre un mismo inmueble.
 - [ ] La operación es atómica y se verifican los permisos de acceso.
 - [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+
+## Notas de integración (desde HU-05)
+
+- Para el selector de inquilinos usar `UserModel::findActiveTenantsForContract()`.
+  No consultar `users` directamente ni usar `findAll()`: la baja lógica
+  (`deleted_at`) se excluye en esos métodos.
+- Para el propietario usar `UserModel::findActiveOwnersForProperty()`.
+- Validar también en el servidor, no solo en el selector. Antes de guardar,
+  comprobar que el inquilino y el propietario sigan activos con
+  `UserModel::findActiveById()`; si no lo están, rechazar la operación.
+- Nunca borrar ni desvincular usuarios con contratos: la baja es lógica y los
+  contratos, cuotas y pagos históricos deben seguir consultables. Al consultar
+  contratos existentes, el JOIN con `users` debe incluir también los inactivos
+  (no filtrar por `deleted_at`), para que un inquilino dado de baja siga
+  apareciendo en el historial.
+- Cubrir con una prueba: un inquilino dado de baja no aparece en el selector y
+  un POST con su id es rechazado.
