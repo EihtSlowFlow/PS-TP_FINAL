@@ -8,7 +8,7 @@
 | **Historia de usuario / Issue** | HU-05 — Dar de baja lógicamente un usuario · [#10](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/10) |
 | **Sprint / Hito** | Sprint 1 (Etapa 3 — Seguridad y usuarios) |
 | **Rama** | `historia_usuario_cinco` (`Historia-de-usuario-05`) |
-| **Último commit** | Pendiente de commit tras verificación final |
+| **Último commit** | `f4e7b67` — feat: implementar baja lógica de usuarios (HU-05) |
 | **Pull Request** | Sin PR (lista para push / PR) |
 | **Fecha de cierre** | 2026-11-09 18:20 |
 | **Autor / Agente** | Antigravity con `EihtSlowFlow` |
