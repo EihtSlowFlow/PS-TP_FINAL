@@ -8,9 +8,9 @@
 | **Historia de usuario / Issue** | HU-01 — Iniciar sesión y acceder según el rol · [#21](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/21) |
 | **Sprint / Hito** | Sprint 1 (Etapa 1 — Seguridad y usuarios) |
 | **Rama** | `feature/hu-01-iniciar-sesion-control-acceso` (creada desde `main` en `aaf956c`) |
-| **Último commit** | Pendiente de commit tras validación de `EihtSlowFlow` |
-| **Pull Request** | Sin PR (listo para commitear y abrir PR hacia `main`) |
-| **Fecha de cierre** | 2026-11-09 14:25 |
+| **Último commit** | `0e678a7` — feat: implementar autenticación de usuarios y control de acceso por roles para HU-01 |
+| **Pull Request** | PR abierto hacia `main` (validado: suite completa 54 tests / 150 aserciones OK, merge sin conflictos) |
+| **Fecha de cierre** | 2026-11-09 15:32 |
 | **Autor / Agente** | Antigravity con `EihtSlowFlow` |
 | **Estado global** | 🟢 Completada |
 | **Avance estimado** | 100 % |
@@ -132,7 +132,7 @@ Referencia: [`.docs/historias_de_usuario/HU-01_iniciar_sesion_control_acceso.md`
 
 | Fecha | Autor | Resumen | Commit / PR |
 |---|---|---|---|
-| 2026-11-09 | Antigravity con `EihtSlowFlow` | Creación de la rama `feature/hu-01-iniciar-sesion-control-acceso`, verificación de entorno MySQL y suite previa, implementación completa de HU-01 (modelo, controlador, filtros, vistas, CSS/JS y 15 tests de integración) y cierre de deuda `R-7` sobre rol `employee` | Pendiente de commit |
+| 2026-11-09 | Antigravity con `EihtSlowFlow` | Creación de la rama `feature/hu-01-iniciar-sesion-control-acceso`, verificación de entorno MySQL y suite previa, implementación completa de HU-01 (modelo, controlador, filtros, vistas, CSS/JS y 15 tests de integración) y cierre de deuda `R-7` sobre rol `employee` | Commit `0e678a7`; PR abierto hacia `main`. Verificación previa al merge: `composer test` 54 tests OK, sin conflictos con `main` |
 
 ---
 
