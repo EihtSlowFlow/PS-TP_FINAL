@@ -113,4 +113,72 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Logical user deactivation confirmation modal (HU-05 Scenario 1)
+    const deactivateModal = document.getElementById('deactivate-user-modal');
+    const deactivateForms = document.querySelectorAll('.js-deactivate-form');
+    if (deactivateModal && deactivateForms.length > 0) {
+        const userNameNode = document.getElementById('deactivate-user-name');
+        const userRoleNode = document.getElementById('deactivate-user-role');
+        const confirmBtn = document.getElementById('deactivate-user-confirm');
+        const cancelBtn = document.getElementById('deactivate-user-cancel');
+        let pendingForm = null;
+        let lastTriggerButton = null;
+
+        const closeDeactivateModal = () => {
+            deactivateModal.hidden = true;
+            pendingForm = null;
+            if (lastTriggerButton) {
+                lastTriggerButton.focus();
+                lastTriggerButton = null;
+            }
+        };
+
+        deactivateForms.forEach((form) => {
+            form.addEventListener('submit', (event) => {
+                if (form.dataset.confirmed === '1') {
+                    return;
+                }
+
+                event.preventDefault();
+                pendingForm = form;
+                lastTriggerButton = form.querySelector('button[type="submit"]');
+
+                if (userNameNode) {
+                    userNameNode.textContent = form.dataset.userName || 'seleccionado';
+                }
+                if (userRoleNode) {
+                    userRoleNode.textContent = form.dataset.userRole || 'Usuario';
+                }
+
+                deactivateModal.hidden = false;
+                if (cancelBtn) {
+                    cancelBtn.focus();
+                }
+            });
+        });
+
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => {
+                if (!pendingForm) {
+                    return;
+                }
+                const targetForm = pendingForm;
+                targetForm.dataset.confirmed = '1';
+                deactivateModal.hidden = true;
+                pendingForm = null;
+                targetForm.submit();
+            });
+        }
+
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', closeDeactivateModal);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !deactivateModal.hidden) {
+                closeDeactivateModal();
+            }
+        });
+    }
 });

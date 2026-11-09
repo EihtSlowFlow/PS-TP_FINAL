@@ -23,6 +23,7 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin']], static function (R
     $routes->post('usuarios', 'UserController::store');
     $routes->get('usuarios/editar/(:num)', 'UserController::edit/$1');
     $routes->post('usuarios/editar/(:num)', 'UserController::update/$1');
+    $routes->post('usuarios/baja/(:num)', 'UserController::deactivate/$1');
 });
 
 // Owner portal routes (HU-01)

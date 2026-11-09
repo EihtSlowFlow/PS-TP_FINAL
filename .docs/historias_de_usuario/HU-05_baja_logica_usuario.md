@@ -46,8 +46,8 @@ Además, se conserva su registro.
 
 ## Definition of Done
 
-- [ ] El administrador puede solicitar y confirmar la baja de un usuario.
-- [ ] El estado inactivo se persiste correctamente.
-- [ ] El usuario inactivo no puede iniciar sesión ni ser seleccionado en nuevos contratos.
-- [ ] Se conserva el historial y se verifican los permisos de acceso.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] El administrador puede solicitar y confirmar la baja de un usuario.
+- [x] El estado inactivo se persiste correctamente.
+- [x] El usuario inactivo no puede iniciar sesión ni ser seleccionado en nuevos contratos.
+- [x] Se conserva el historial y se verifican los permisos de acceso.
+- [x] Se prueban los escenarios de aceptación y los casos de error relevantes.
