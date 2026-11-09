@@ -112,6 +112,7 @@ Referencia: [`.docs/historias_de_usuario/HU-04_gestion_usuarios.md`](../historia
 | Fecha | Autor | Resumen | Commit / PR |
 |---|---|---|---|
 | 2026-11-09 | Antigravity con `EihtSlowFlow` | Implementación completa de HU-04 (`UserModel`, `UserController`, rutas `/admin/usuarios*`, vistas `ADM-02`/`ADM-03a`/`ADM-03b`, CSS/JS y 12 pruebas en `UserManagementTest`) | `f252d47` en rama `Historia-de-usuario-04` |
+| 2026-11-09 | Antigravity con `EihtSlowFlow` | Revisión previa al PR: contraseña sugerida con `crypto.getRandomValues`, modal de confirmación con cooldown de 3 s al cambiar el propio rol (R-2), 66 pruebas / 304 aserciones en verde | `7c4747b` en rama `Historia-de-usuario-04` |
 
 ---
 
