@@ -23,6 +23,7 @@ if (! is_array($errors)) {
 }
 
 $targetUserId  = $isEdit ? (int) $user['id'] : 0;
+$isSelfEdit    = $isEdit && $targetUserId === (int) session()->get('user_id', 0);
 $formAction    = $isEdit
     ? site_url('admin/usuarios/editar/' . $targetUserId)
     : site_url('admin/usuarios');
@@ -164,7 +165,7 @@ $isDeleted      = $isEdit && ! empty($user['deleted_at']);
             </section>
 
             <div class="user-form-layout <?= $isEdit ? 'has-sidebar' : '' ?>">
-                <form action="<?= esc($formAction) ?>" method="post" class="user-main-form" novalidate>
+                <form action="<?= esc($formAction) ?>" method="post" class="user-main-form" novalidate<?php if ($isSelfEdit): ?> data-self-edit="1" data-original-role="<?= esc((string) ($user['role_name'] ?? '')) ?>"<?php endif; ?>>
                     <?= csrf_field() ?>
 
                     <section class="panel-card form-section-card" aria-labelledby="section-personal-data">
@@ -473,6 +474,23 @@ $isDeleted      = $isEdit && ! empty($user['deleted_at']);
             </div>
         </main>
     </div>
+
+    <?php if ($isSelfEdit): ?>
+        <div class="confirm-modal" id="self-role-modal" role="alertdialog" aria-modal="true" aria-labelledby="self-role-title" aria-describedby="self-role-desc" hidden>
+            <div class="confirm-modal-dialog">
+                <h2 class="confirm-modal-title" id="self-role-title">¿Confirmás el cambio de tu propio rol?</h2>
+                <p class="confirm-modal-text" id="self-role-desc">
+                    Estás por cambiar el rol de tu propia cuenta. Si presionás Aceptar, tus permisos se actualizarán
+                    de inmediato y podrías perder el acceso a la gestión de usuarios. Si ningún otro administrador
+                    puede revertirlo, no vas a poder volver a asignarte el rol de Administrador.
+                </p>
+                <div class="confirm-modal-actions">
+                    <button type="button" class="btn btn-secondary" id="self-role-cancel">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="self-role-accept" disabled>Aceptar (3)</button>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 
     <script src="<?= esc(base_url('js/users.js')) ?>"></script>
 </body>

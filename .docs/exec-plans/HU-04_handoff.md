@@ -92,6 +92,7 @@ Referencia: [`.docs/historias_de_usuario/HU-04_gestion_usuarios.md`](../historia
 | ID | Tipo | Descripción | Severidad | Acción sugerida |
 |---|---|---|---|---|
 | R-1 | Continuidad | Falta el endpoint y confirmación de baja lógica de usuario | Baja | Implementar en **HU-05 — Dar de baja lógicamente un usuario (#10)** sobre `UserController` |
+| R-2 | Seguridad / UX | Un admin que edita su propio rol pierde acceso de inmediato; no hay bloqueo ni confirmación | Baja | Mitigado: modal de confirmación con cooldown de 3 s en `form.php`/`users.js` (solo cliente, sin prueba automatizada) |
 
 ---
 
@@ -110,7 +111,7 @@ Referencia: [`.docs/historias_de_usuario/HU-04_gestion_usuarios.md`](../historia
 
 | Fecha | Autor | Resumen | Commit / PR |
 |---|---|---|---|
-| 2026-11-09 | Antigravity con `EihtSlowFlow` | Implementación completa de HU-04 (`UserModel`, `UserController`, rutas `/admin/usuarios*`, vistas `ADM-02`/`ADM-03a`/`ADM-03b`, CSS/JS y 12 pruebas en `UserManagementTest`) | En rama `historia_usuario_cuatro` |
+| 2026-11-09 | Antigravity con `EihtSlowFlow` | Implementación completa de HU-04 (`UserModel`, `UserController`, rutas `/admin/usuarios*`, vistas `ADM-02`/`ADM-03a`/`ADM-03b`, CSS/JS y 12 pruebas en `UserManagementTest`) | `f252d47` en rama `Historia-de-usuario-04` |
 
 ---
 

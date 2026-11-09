@@ -18,9 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const charset = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!#$*';
             let generated = '';
 
-            for (let i = 0; i < 12; i += 1) {
-                const randomIndex = Math.floor(Math.random() * charset.length);
-                generated += charset.charAt(randomIndex);
+            // Use a cryptographically secure source; reject values that would bias the modulo.
+            const limit = 256 - (256 % charset.length);
+            while (generated.length < 12) {
+                const bytes = new Uint8Array(24);
+                window.crypto.getRandomValues(bytes);
+                for (const byte of bytes) {
+                    if (byte < limit && generated.length < 12) {
+                        generated += charset.charAt(byte % charset.length);
+                    }
+                }
             }
 
             passwordInput.type = 'text';
@@ -48,5 +55,62 @@ document.addEventListener('DOMContentLoaded', () => {
             radio.addEventListener('change', syncSelectedCard);
         });
     }
-});
 
+    const userForm = document.querySelector('.user-main-form[data-self-edit="1"]');
+    const modal = document.getElementById('self-role-modal');
+    if (userForm && modal) {
+        const originalRole = userForm.dataset.originalRole;
+        const acceptBtn = document.getElementById('self-role-accept');
+        const cancelBtn = document.getElementById('self-role-cancel');
+        const COOLDOWN_SECONDS = 3;
+        let confirmed = false;
+        let timerId = null;
+
+        const closeModal = () => {
+            window.clearInterval(timerId);
+            modal.hidden = true;
+        };
+
+        userForm.addEventListener('submit', (event) => {
+            const selected = userForm.querySelector('.role-radio-input:checked');
+            if (confirmed || !selected || selected.value === originalRole) {
+                return;
+            }
+
+            event.preventDefault();
+            let remaining = COOLDOWN_SECONDS;
+            acceptBtn.disabled = true;
+            acceptBtn.textContent = `Aceptar (${remaining})`;
+            modal.hidden = false;
+            cancelBtn.focus();
+
+            window.clearInterval(timerId);
+            timerId = window.setInterval(() => {
+                remaining -= 1;
+                if (remaining > 0) {
+                    acceptBtn.textContent = `Aceptar (${remaining})`;
+                    return;
+                }
+                window.clearInterval(timerId);
+                acceptBtn.disabled = false;
+                acceptBtn.textContent = 'Aceptar';
+            }, 1000);
+        });
+
+        acceptBtn.addEventListener('click', () => {
+            if (acceptBtn.disabled) {
+                return;
+            }
+            confirmed = true;
+            closeModal();
+            userForm.submit();
+        });
+
+        cancelBtn.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !modal.hidden) {
+                closeModal();
+            }
+        });
+    }
+});
