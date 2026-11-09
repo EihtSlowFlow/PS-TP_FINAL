@@ -323,13 +323,24 @@ No se recomienda. Hay que usar `php spark migrate`: si las tablas se crean desde
 
 | Tabla | Filas | Qué hay |
 |---|---|---|
-| `users` | 9 | 1 administrador, 3 propietarios, 4 inquilinos y 1 usuario dado de baja. Todos con email `@example.com` |
+| `users` | 10 | 1 administrador, 1 empleado, 3 propietarios, 4 inquilinos y 1 usuario dado de baja. Todos con email `@example.com` |
 | `properties` | 8 | De todos los tipos y estados, y 1 dado de baja con quién lo hizo |
 | `contracts` | 6 | 4 vigentes (uno vence en 45 días), 1 finalizado y 1 rescindido |
 | `installments` | 24 | 16 pagadas, 1 en revisión, 3 vencidas con recargo y 4 pendientes |
 | `payments` | 19 | 16 aprobados, 1 pendiente de validación y 2 rechazados con motivo |
 | `settlements` | 15 | 12 transferidas y 3 pendientes de transferencia |
 | `notifications` | 7 | Leídas y sin leer, para administrador, propietario e inquilinos |
+
+### Cuentas de prueba por rol (para HU-01 y siguientes)
+
+| Rol (`roles.name`) | Etiqueta | Nombre | Correo electrónico | Estado | Contraseña (`.env`) | Ruta inicial tras login |
+|---|---|---|---|---|---|---|
+| `admin` | Administrador | Admin InmoGestion | Valor de `seed.adminEmail` (`admin@inmogestion.com`) | Activo | `seed.adminPassword` | `/admin/dashboard` |
+| `admin` | Administrador | Carla Rossi | `admin.demo@example.com` | Activo | `seed.demoPassword` | `/admin/dashboard` |
+| `employee` | Empleado | Esteban Martínez | `employee.demo@example.com` | Activo | `seed.demoPassword` | `/admin/dashboard` (sin acceso a `/admin/usuarios`) |
+| `owner` | Propietario | María Gómez / Jorge Sosa / Inversiones del Sur SA | `owner1.demo@example.com` / `owner2.demo@example.com` / `owner3.demo@example.com` | Activo | `seed.demoPassword` | `/propietario/dashboard` |
+| `tenant` | Inquilino | Lucas Pérez / Sofía Díaz / Martín López / Camila Torres | `tenant1.demo@example.com` a `tenant4.demo@example.com` | Activo | `seed.demoPassword` | `/inquilino/estado-cuenta` |
+| `tenant` | Inquilino (baja lógica) | Ana Vega | `former.tenant.demo@example.com` | Inactivo (`deleted_at IS NOT NULL`) | `seed.demoPassword` | Ingreso bloqueado (Escenario 5 de HU-01) |
 
 Las fechas son relativas al día de la carga, así que siempre hay cuotas vencidas y un contrato por vencer. No se cargan comprobantes (`payment_receipts`), porque necesitarían archivos reales en `writable/uploads/comprobantes/`.
 

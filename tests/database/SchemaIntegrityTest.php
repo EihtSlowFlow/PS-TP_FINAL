@@ -389,7 +389,7 @@ final class SchemaIntegrityTest extends CIUnitTestCase
         $this->seed(DemoSeeder::class);
 
         $expected = [
-            'users' => 9, 'properties' => 8, 'contracts' => 6, 'installments' => 24, 'payments' => 19,
+            'users' => 10, 'properties' => 8, 'contracts' => 6, 'installments' => 24, 'payments' => 19,
             'settlements' => 15, 'settlement_installments' => 15, 'notifications' => 7,
         ];
 

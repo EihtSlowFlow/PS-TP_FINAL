@@ -63,8 +63,8 @@ Además, se conserva el correo ingresado y se limpia el campo de contraseña.
 
 ## Definition of Done
 
-- [ ] El usuario activo puede iniciar sesión y es redirigido según su rol.
-- [ ] Las credenciales inválidas se rechazan sin revelar qué dato falló.
-- [ ] Las rutas protegidas exigen sesión y verifican el rol en el servidor.
-- [ ] Los usuarios dados de baja no pueden ingresar.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] El usuario activo puede iniciar sesión y es redirigido según su rol.
+- [x] Las credenciales inválidas se rechazan sin revelar qué dato falló.
+- [x] Las rutas protegidas exigen sesión y verifican el rol en el servidor.
+- [x] Los usuarios dados de baja no pueden ingresar.
+- [x] Se prueban los escenarios de aceptación y los casos de error relevantes.
