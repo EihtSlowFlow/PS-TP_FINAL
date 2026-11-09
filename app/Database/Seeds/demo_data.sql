@@ -1,6 +1,6 @@
 -- InmoGestión 2026 - demo / test data (single source for CodeIgniter and MySQL Workbench)
 --
--- WHAT IT LOADS: 9 users (1 admin, 3 owners, 4 tenants, 1 deactivated), 8 properties
+-- WHAT IT LOADS: 10 users (1 admin, 1 employee, 3 owners, 4 tenants, 1 deactivated), 8 properties
 -- (one soft-deleted), 6 contracts (4 in force, 1 finished, 1 rescinded), 24 installments in
 -- every state, 19 payments (approved, pending and rejected), 15 settlements (12 transferred,
 -- 3 pending) and 7 notifications. All emails end in @example.com.
@@ -62,12 +62,14 @@ INSERT IGNORE INTO roles (name, created_at, updated_at) VALUES
 ('tenant', NOW(), NOW());
 
 SET @role_admin = (SELECT id FROM roles WHERE name = 'admin');
+SET @role_employee = (SELECT id FROM roles WHERE name = 'employee');
 SET @role_owner = (SELECT id FROM roles WHERE name = 'owner');
 SET @role_tenant = (SELECT id FROM roles WHERE name = 'tenant');
 
 -- Users
 INSERT INTO users (role_id, first_name, last_name, document_number, email, phone, address, password_hash, created_at, updated_at, deleted_at) VALUES
 (@role_admin, 'Carla', 'Rossi', '27000001', 'admin.demo@example.com', '2991000001', 'Oficina central 100, Cipolletti', @demo_password_hash, NOW(), NOW(), NULL),
+(@role_employee, 'Esteban', 'Martínez', '28000002', 'employee.demo@example.com', '2991000002', 'Oficina central 100, Cipolletti', @demo_password_hash, NOW(), NOW(), NULL),
 (@role_owner, 'María', 'Gómez', '20111222', 'owner1.demo@example.com', '2991000011', 'Av. Roca 1500, Cipolletti', @demo_password_hash, NOW(), NOW(), NULL),
 (@role_owner, 'Jorge', 'Sosa', '20222333', 'owner2.demo@example.com', '2991000012', 'Mitre 320, Neuquén', @demo_password_hash, NOW(), NOW(), NULL),
 (@role_owner, 'Inversiones del Sur SA', 'Empresa', '30711223344', 'owner3.demo@example.com', '2991000013', 'Av. Argentina 900, Neuquén', @demo_password_hash, NOW(), NOW(), NULL),
