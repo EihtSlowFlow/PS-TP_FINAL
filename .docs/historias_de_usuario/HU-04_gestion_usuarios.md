@@ -64,9 +64,9 @@ Además, sin esa opción el listado muestra solo los usuarios activos.
 
 ## Definition of Done
 
-- [ ] El administrador puede crear, listar, buscar y editar usuarios.
-- [ ] Se valida la unicidad de correo y DNI.
-- [ ] La contraseña se almacena cifrada y no se altera al editar sin cambiarla.
-- [ ] (Final) El listado permite incluir los usuarios dados de baja y los identifica como tales.
-- [ ] Se verifican los permisos de acceso.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] El administrador puede crear, listar, buscar y editar usuarios.
+- [x] Se valida la unicidad de correo y DNI.
+- [x] La contraseña se almacena cifrada y no se altera al editar sin cambiarla.
+- [x] (Final) El listado permite incluir los usuarios dados de baja y los identifica como tales.
+- [x] Se verifican los permisos de acceso.
+- [x] Se prueban los escenarios de aceptación y los casos de error relevantes.
