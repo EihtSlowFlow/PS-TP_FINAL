@@ -359,6 +359,46 @@ $extractInitials = static function (string $firstName, string $lastName): string
                                                     </svg>
                                                     <span class="sr-only">Editar</span>
                                                 </a>
+
+                                                <?php if ($itemId === $currentAdminId): ?>
+                                                    <button
+                                                        type="button"
+                                                        class="action-icon-btn is-disabled"
+                                                        disabled
+                                                        title="No se puede dar de baja (Usuario propio)"
+                                                        aria-label="No se puede dar de baja (Usuario propio)"
+                                                    >
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                                        </svg>
+                                                        <span class="sr-only">No se puede dar de baja (Usuario propio)</span>
+                                                    </button>
+                                                <?php elseif (! $isDeleted): ?>
+                                                    <form
+                                                        action="<?= esc(site_url('admin/usuarios/baja/' . $itemId)) ?>"
+                                                        method="post"
+                                                        class="inline-action-form js-deactivate-form"
+                                                        data-user-name="<?= esc($fullName) ?>"
+                                                        data-user-role="<?= esc($itemRoleText) ?>"
+                                                    >
+                                                        <?= csrf_field() ?>
+                                                        <button
+                                                            type="submit"
+                                                            class="action-icon-btn action-icon-btn-danger"
+                                                            title="Dar de baja a <?= esc($fullName) ?>"
+                                                            aria-label="Dar de baja a <?= esc($fullName) ?>"
+                                                        >
+                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                                                <circle cx="8.5" cy="7" r="4"/>
+                                                                <line x1="18" y1="8" x2="23" y2="13"/>
+                                                                <line x1="23" y1="8" x2="18" y2="13"/>
+                                                            </svg>
+                                                            <span class="sr-only">Dar de baja</span>
+                                                        </button>
+                                                    </form>
+                                                <?php endif; ?>
                                             </div>
                                         </td>
                                     </tr>
@@ -408,6 +448,22 @@ $extractInitials = static function (string $firstName, string $lastName): string
         </main>
     </div>
 
+    <div class="confirm-modal" id="deactivate-user-modal" role="alertdialog" aria-modal="true" aria-labelledby="deactivate-user-title" aria-describedby="deactivate-user-desc" hidden>
+        <div class="confirm-modal-dialog">
+            <h2 class="confirm-modal-title" id="deactivate-user-title">¿Confirmás la baja lógica del usuario?</h2>
+            <p class="confirm-modal-text" id="deactivate-user-desc">
+                El usuario <strong id="deactivate-user-name">seleccionado</strong> (<span id="deactivate-user-role">Usuario</span>)
+                pasará a estado inactivo: no podrá iniciar sesión ni ser seleccionado en nuevos contratos, pero se conservarán
+                su registro histórico y sus referencias contables asociadas para consulta y auditoría.
+            </p>
+            <div class="confirm-modal-actions">
+                <button type="button" class="btn btn-secondary" id="deactivate-user-cancel">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="deactivate-user-confirm">Confirmar baja</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="<?= esc(base_url('js/users.js')) ?>"></script>
 </body>
 </html>
 

@@ -6,17 +6,21 @@ use App\Models\UserModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 /**
- * Administrative user management controller (HU-04):
- * listing, searching, filtering, creation, and edition of system users.
+ * Administrative user management controller (HU-04, HU-05):
+ * listing, searching, filtering, creation, edition, and logical deactivation of system users.
  */
 class UserController extends BaseController
 {
-    public const USER_CREATED_MESSAGE     = 'El usuario fue creado exitosamente.';
-    public const USER_UPDATED_MESSAGE     = 'Los datos del usuario fueron actualizados exitosamente.';
-    public const USER_NOT_FOUND_MESSAGE   = 'El usuario solicitado no existe.';
-    public const DUPLICATE_EMAIL_MESSAGE  = 'Ya existe un usuario activo registrado con este correo electrónico.';
-    public const DUPLICATE_DNI_MESSAGE    = 'Ya existe un usuario activo registrado con este DNI.';
-    public const VALIDATION_ERROR_MESSAGE = 'Revisá los campos marcados antes de guardar el usuario.';
+    public const USER_CREATED_MESSAGE                = 'El usuario fue creado exitosamente.';
+    public const USER_UPDATED_MESSAGE                = 'Los datos del usuario fueron actualizados exitosamente.';
+    public const USER_DEACTIVATED_MESSAGE            = 'El usuario fue dado de baja exitosamente.';
+    public const USER_NOT_FOUND_MESSAGE              = 'El usuario solicitado no existe.';
+    public const USER_ALREADY_DEACTIVATED_MESSAGE    = 'El usuario seleccionado ya se encuentra dado de baja.';
+    public const SELF_DEACTIVATION_FORBIDDEN_MESSAGE = 'No podés dar de baja tu propio usuario activo.';
+    public const LAST_ADMIN_DEACTIVATION_MESSAGE     = 'No se puede dar de baja al único administrador activo del sistema.';
+    public const DUPLICATE_EMAIL_MESSAGE             = 'Ya existe un usuario activo registrado con este correo electrónico.';
+    public const DUPLICATE_DNI_MESSAGE               = 'Ya existe un usuario activo registrado con este DNI.';
+    public const VALIDATION_ERROR_MESSAGE            = 'Revisá los campos marcados antes de guardar el usuario.';
 
     /**
      * Renders the paginated user directory with search, role filter, and soft-deleted toggle (HU-04 Scenarios 3 & 5).
@@ -246,6 +250,43 @@ class UserController extends BaseController
 
         return redirect()->to('/admin/usuarios')
             ->with('success', self::USER_UPDATED_MESSAGE);
+    }
+
+    /**
+     * Logically deactivates an active user while preserving their record and historical references (HU-05).
+     */
+    public function deactivate(int $id): RedirectResponse
+    {
+        $userModel = model(UserModel::class);
+        $existing  = $userModel->findByIdWithRole($id, true);
+
+        if ($existing === null) {
+            return redirect()->to('/admin/usuarios')
+                ->with('error', self::USER_NOT_FOUND_MESSAGE);
+        }
+
+        if ((int) session()->get('user_id', 0) === $id) {
+            return redirect()->to('/admin/usuarios')
+                ->with('error', self::SELF_DEACTIVATION_FORBIDDEN_MESSAGE);
+        }
+
+        if ($existing['deleted_at'] !== null) {
+            return redirect()->to('/admin/usuarios')
+                ->with('error', self::USER_ALREADY_DEACTIVATED_MESSAGE);
+        }
+
+        if (
+            (string) ($existing['role_name'] ?? '') === UserModel::ROLE_ADMIN
+            && $userModel->countActiveByRole(UserModel::ROLE_ADMIN) <= 1
+        ) {
+            return redirect()->to('/admin/usuarios')
+                ->with('error', self::LAST_ADMIN_DEACTIVATION_MESSAGE);
+        }
+
+        $userModel->delete($id);
+
+        return redirect()->to('/admin/usuarios')
+            ->with('success', self::USER_DEACTIVATED_MESSAGE);
     }
 
     /**

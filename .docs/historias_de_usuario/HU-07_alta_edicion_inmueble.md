@@ -51,3 +51,17 @@ para ampliar el catálogo y gestionar el inventario de bienes en alquiler.
 - [ ] Solo pueden asignarse propietarios activos.
 - [ ] Se verifican los permisos de acceso.
 - [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+
+## Notas de integración (desde HU-05)
+
+- Para el selector de propietarios usar `UserModel::findActiveOwnersForProperty()`.
+  No consultar `users` directamente ni usar `findAll()`: la baja lógica
+  (`deleted_at`) se excluye en ese método.
+- Validar también en el servidor, no solo en el selector. Antes de guardar,
+  comprobar que el propietario siga activo con `UserModel::findActiveById()`;
+  si no lo está, rechazar la operación.
+- Un propietario dado de baja que ya tiene inmuebles los conserva: al listar o
+  editar inmuebles existentes, el JOIN con `users` debe incluir también los
+  inactivos (no filtrar por `deleted_at`).
+- Cubrir con una prueba: un propietario dado de baja no aparece en el selector
+  y un POST con su id es rechazado.

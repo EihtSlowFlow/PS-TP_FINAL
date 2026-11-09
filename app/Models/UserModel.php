@@ -245,6 +245,61 @@ class UserModel extends Model
     }
 
     /**
+     * Counts active users (deleted_at IS NULL) assigned to a given canonical role name.
+     */
+    public function countActiveByRole(string $roleName): int
+    {
+        return (int) $this->builder()
+            ->join('roles', 'roles.id = users.role_id')
+            ->where('roles.name', $roleName)
+            ->where('users.deleted_at', null)
+            ->countAllResults();
+    }
+
+    /**
+     * Returns active users (deleted_at IS NULL) for a specific role so that deactivated users
+     * never appear as selectable options in new operations such as contracts or properties (HU-05 Scenario 2).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findActiveSelectableByRole(string $roleName): array
+    {
+        if (! array_key_exists($roleName, self::ROLE_LABELS)) {
+            return [];
+        }
+
+        return $this->builder()
+            ->select('users.id, users.first_name, users.last_name, users.document_number, users.email, users.phone, roles.name AS role_name')
+            ->join('roles', 'roles.id = users.role_id')
+            ->where('roles.name', $roleName)
+            ->where('users.deleted_at', null)
+            ->orderBy('users.last_name', 'ASC')
+            ->orderBy('users.first_name', 'ASC')
+            ->get()
+            ->getResultArray();
+    }
+
+    /**
+     * Returns active tenants available to be linked to a new lease contract (HU-05 Scenario 2, HU-10).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findActiveTenantsForContract(): array
+    {
+        return $this->findActiveSelectableByRole(self::ROLE_TENANT);
+    }
+
+    /**
+     * Returns active owners available to be linked to a property or contract (HU-05 Scenario 2, HU-07).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findActiveOwnersForProperty(): array
+    {
+        return $this->findActiveSelectableByRole(self::ROLE_OWNER);
+    }
+
+    /**
      * Searches and paginates users by free-text query, role, and soft-delete visibility (HU-04).
      *
      * @param array{q?: string, role?: string, include_deleted?: bool} $filters

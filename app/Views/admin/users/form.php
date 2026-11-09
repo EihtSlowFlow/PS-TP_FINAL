@@ -118,11 +118,32 @@ $isDeleted      = $isEdit && ! empty($user['deleted_at']);
                 </a>
 
                 <?php if ($isEdit): ?>
-                    <div>
+                    <div class="form-header-status-actions">
                         <?php if ($isDeleted): ?>
                             <span class="badge-pill badge-status-deleted">Dado de baja</span>
                         <?php else: ?>
                             <span class="badge-pill badge-status-active">Activo</span>
+                        <?php endif; ?>
+
+                        <?php if (! $isDeleted && ! $isSelfEdit): ?>
+                            <form
+                                action="<?= esc(site_url('admin/usuarios/baja/' . $targetUserId)) ?>"
+                                method="post"
+                                class="inline-action-form js-deactivate-form"
+                                data-user-name="<?= esc($targetFullName) ?>"
+                                data-user-role="<?= esc($roleLabels[(string) ($user['role_name'] ?? '')] ?? 'Usuario') ?>"
+                            >
+                                <?= csrf_field() ?>
+                                <button type="submit" class="btn btn-danger-outline btn-sm" id="btn-deactivate-user">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="8.5" cy="7" r="4"/>
+                                        <line x1="18" y1="8" x2="23" y2="13"/>
+                                        <line x1="23" y1="8" x2="18" y2="13"/>
+                                    </svg>
+                                    <span>Dar de baja usuario</span>
+                                </button>
+                            </form>
                         <?php endif; ?>
                     </div>
                 <?php endif; ?>
@@ -487,6 +508,23 @@ $isDeleted      = $isEdit && ! empty($user['deleted_at']);
                 <div class="confirm-modal-actions">
                     <button type="button" class="btn btn-secondary" id="self-role-cancel">Cancelar</button>
                     <button type="button" class="btn btn-primary" id="self-role-accept" disabled>Aceptar (3)</button>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($isEdit && ! $isDeleted && ! $isSelfEdit): ?>
+        <div class="confirm-modal" id="deactivate-user-modal" role="alertdialog" aria-modal="true" aria-labelledby="deactivate-user-title" aria-describedby="deactivate-user-desc" hidden>
+            <div class="confirm-modal-dialog">
+                <h2 class="confirm-modal-title" id="deactivate-user-title">¿Confirmás la baja lógica del usuario?</h2>
+                <p class="confirm-modal-text" id="deactivate-user-desc">
+                    El usuario <strong id="deactivate-user-name"><?= esc($targetFullName) ?></strong> (<span id="deactivate-user-role"><?= esc($roleLabels[(string) ($user['role_name'] ?? '')] ?? 'Usuario') ?></span>)
+                    pasará a estado inactivo: no podrá iniciar sesión ni ser seleccionado en nuevos contratos, pero se conservarán
+                    su registro histórico y sus referencias contables asociadas para consulta y auditoría.
+                </p>
+                <div class="confirm-modal-actions">
+                    <button type="button" class="btn btn-secondary" id="deactivate-user-cancel">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="deactivate-user-confirm">Confirmar baja</button>
                 </div>
             </div>
         </div>

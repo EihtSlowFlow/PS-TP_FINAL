@@ -368,6 +368,26 @@ body.panel-page {
     background: var(--row-hover);
 }
 
+.btn-danger {
+    background: var(--danger);
+    color: var(--on-primary);
+}
+
+.btn-danger:hover {
+    background: #DC2626;
+}
+
+.btn-danger-outline {
+    background: var(--surface);
+    color: var(--danger-text);
+    border-color: #FECACA;
+}
+
+.btn-danger-outline:hover {
+    background: var(--danger-soft);
+    border-color: var(--danger);
+}
+
 .badge-pill {
     display: inline-flex;
     align-items: center;
@@ -645,6 +665,10 @@ body.panel-page {
     width: 2rem;
     height: 2rem;
     border-radius: 8px;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -656,6 +680,35 @@ body.panel-page {
 .action-icon-btn:hover {
     background: var(--primary-soft);
     color: var(--primary-hover);
+}
+
+.action-icon-btn-danger:hover {
+    background: var(--danger-soft);
+    color: var(--danger-text);
+}
+
+.action-icon-btn.is-disabled,
+.action-icon-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.action-icon-btn.is-disabled:hover,
+.action-icon-btn:disabled:hover {
+    background: transparent;
+    color: var(--text-muted);
+}
+
+.inline-action-form {
+    display: inline-flex;
+    margin: 0;
+}
+
+.form-header-status-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-wrap: wrap;
 }
 
 .pagination-footer {
