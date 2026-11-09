@@ -18,7 +18,11 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static fu
 
 // Exclusive Administrator routes: User management and logical deactivation (HU-04, HU-05)
 $routes->group('admin', ['filter' => ['auth', 'role:admin']], static function (RouteCollection $routes): void {
-    $routes->get('usuarios', 'DashboardController::adminUsers');
+    $routes->get('usuarios', 'UserController::index');
+    $routes->get('usuarios/nuevo', 'UserController::create');
+    $routes->post('usuarios', 'UserController::store');
+    $routes->get('usuarios/editar/(:num)', 'UserController::edit/$1');
+    $routes->post('usuarios/editar/(:num)', 'UserController::update/$1');
 });
 
 // Owner portal routes (HU-01)
