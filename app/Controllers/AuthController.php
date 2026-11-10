@@ -13,6 +13,10 @@ class AuthController extends BaseController
 {
     public const INVALID_CREDENTIALS_MESSAGE = 'Las credenciales ingresadas no son válidas.';
     public const ACCOUNT_DISABLED_MESSAGE    = AuthFilter::ACCOUNT_DISABLED_MESSAGE;
+    public const REGISTRATION_SUCCESS_MESSAGE = 'Tu cuenta fue creada exitosamente. Ya podés iniciar sesión.';
+    public const DUPLICATE_EMAIL_MESSAGE      = 'Ya existe una cuenta registrada con este correo electrónico.';
+    public const DUPLICATE_DNI_MESSAGE        = 'Ya existe una cuenta registrada con este DNI.';
+    public const REGISTRATION_VALIDATION_MESSAGE = 'Revisá los campos marcados antes de continuar.';
     public const LOGOUT_SUCCESS_MESSAGE      = 'La sesión se cerró correctamente.';
 
     /**
@@ -46,6 +50,177 @@ class AuthController extends BaseController
             'showRegisterLink' => $this->routeExists('auth/register'),
             'showRecoverLink'  => $this->routeExists('auth/recuperar-password'),
         ]);
+    }
+
+    /**
+     * Renders the public registration form for owners and tenants (HU-02).
+     */
+    public function register(): RedirectResponse|string
+    {
+        $session = session();
+
+        if ($session->get('is_logged_in') === true && (int) $session->get('user_id', 0) > 0) {
+            $activeUser = model(UserModel::class)->findActiveById((int) $session->get('user_id'));
+
+            if ($activeUser !== null) {
+                $role = (string) $activeUser['role_name'];
+                $session->set('user_role', $role);
+
+                return redirect()->to(UserModel::homeRouteForRole($role));
+            }
+
+            $session->remove(['is_logged_in', 'user_id', 'user_email', 'user_name', 'user_role']);
+        }
+
+        return view('auth/register');
+    }
+
+    /**
+     * Validates and creates a public owner or tenant account (HU-02).
+     */
+    public function storeRegistration(): RedirectResponse
+    {
+        $rawDni        = trim((string) $this->request->getPost('document_number'));
+        $normalizedDni = preg_replace('/[\.\s-]+/', '', $rawDni) ?? $rawDni;
+        $input         = [
+            'first_name'      => trim((string) $this->request->getPost('first_name')),
+            'last_name'       => trim((string) $this->request->getPost('last_name')),
+            'document_number' => $normalizedDni,
+            'email'           => strtolower(trim((string) $this->request->getPost('email'))),
+            'phone'           => trim((string) $this->request->getPost('phone')),
+            'role'            => trim((string) $this->request->getPost('role')),
+        ];
+        $password        = (string) $this->request->getPost('password');
+        $passwordConfirm = (string) $this->request->getPost('password_confirm');
+
+        service('superglobals')->unsetPost('password');
+        service('superglobals')->unsetPost('password_confirm');
+
+        $validationData = array_merge($input, [
+            'password'         => $password,
+            'password_confirm' => $passwordConfirm,
+        ]);
+        $rules = [
+            'first_name' => [
+                'label'  => 'Nombre',
+                'rules'  => 'required|min_length[2]|max_length[100]',
+                'errors' => [
+                    'required'   => 'Ingresá tu nombre.',
+                    'min_length' => 'El nombre debe tener al menos 2 caracteres.',
+                    'max_length' => 'El nombre no puede superar los 100 caracteres.',
+                ],
+            ],
+            'last_name' => [
+                'label'  => 'Apellido',
+                'rules'  => 'required|min_length[2]|max_length[100]',
+                'errors' => [
+                    'required'   => 'Ingresá tu apellido.',
+                    'min_length' => 'El apellido debe tener al menos 2 caracteres.',
+                    'max_length' => 'El apellido no puede superar los 100 caracteres.',
+                ],
+            ],
+            'document_number' => [
+                'label'  => 'DNI',
+                'rules'  => 'required|alpha_numeric|min_length[6]|max_length[20]',
+                'errors' => [
+                    'required'      => 'Ingresá tu DNI.',
+                    'alpha_numeric' => 'El DNI solo debe contener letras o números, sin símbolos.',
+                    'min_length'    => 'El DNI debe tener al menos 6 caracteres.',
+                    'max_length'    => 'El DNI no puede superar los 20 caracteres.',
+                ],
+            ],
+            'email' => [
+                'label'  => 'Correo electrónico',
+                'rules'  => 'required|valid_email|max_length[255]',
+                'errors' => [
+                    'required'    => 'Ingresá tu correo electrónico.',
+                    'valid_email' => 'Ingresá un correo electrónico con formato válido.',
+                    'max_length'  => 'El correo electrónico no puede superar los 255 caracteres.',
+                ],
+            ],
+            'phone' => [
+                'label'  => 'Teléfono',
+                'rules'  => 'required|min_length[6]|max_length[30]',
+                'errors' => [
+                    'required'   => 'Ingresá tu teléfono de contacto.',
+                    'min_length' => 'El teléfono debe tener al menos 6 caracteres.',
+                    'max_length' => 'El teléfono no puede superar los 30 caracteres.',
+                ],
+            ],
+            'role' => [
+                'label'  => 'Rol',
+                'rules'  => 'required|in_list[owner,tenant]',
+                'errors' => [
+                    'required' => 'Elegí si querés registrarte como propietario o inquilino.',
+                    'in_list'  => 'El registro solo está disponible para propietarios e inquilinos.',
+                ],
+            ],
+            'password' => [
+                'label'  => 'Contraseña',
+                'rules'  => 'required|min_length[8]|max_length[255]',
+                'errors' => [
+                    'required'   => 'Ingresá una contraseña.',
+                    'min_length' => 'La contraseña debe tener al menos 8 caracteres.',
+                    'max_length' => 'La contraseña supera la longitud permitida.',
+                ],
+            ],
+            'password_confirm' => [
+                'label'  => 'Repetir contraseña',
+                'rules'  => 'required|matches[password]',
+                'errors' => [
+                    'required' => 'Repetí tu contraseña.',
+                    'matches'  => 'Las contraseñas no coinciden.',
+                ],
+            ],
+        ];
+
+        $errors = [];
+        if (! $this->validateData($validationData, $rules)) {
+            $errors = $this->validator->getErrors();
+        }
+
+        $userModel = model(UserModel::class);
+        if ($input['email'] !== '' && $userModel->existsActiveEmail($input['email'])) {
+            $errors['email'] = self::DUPLICATE_EMAIL_MESSAGE;
+        }
+        if ($input['document_number'] !== '' && $userModel->existsActiveDocumentNumber($input['document_number'])) {
+            $errors['document_number'] = self::DUPLICATE_DNI_MESSAGE;
+        }
+
+        if ($errors !== []) {
+            $duplicateError = isset($errors['email']) && $errors['email'] === self::DUPLICATE_EMAIL_MESSAGE
+                || isset($errors['document_number']) && $errors['document_number'] === self::DUPLICATE_DNI_MESSAGE;
+
+            return redirect()->to('/auth/register')
+                ->withInput()
+                ->with('errors', $errors)
+                ->with('error', $duplicateError ? implode(' ', array_intersect($errors, [
+                    self::DUPLICATE_EMAIL_MESSAGE,
+                    self::DUPLICATE_DNI_MESSAGE,
+                ])) : self::REGISTRATION_VALIDATION_MESSAGE);
+        }
+
+        $roleId = $userModel->findRoleIdByName($input['role']);
+        if ($roleId === null) {
+            return redirect()->to('/auth/register')
+                ->withInput()
+                ->with('errors', ['role' => 'El rol seleccionado no está disponible.'])
+                ->with('error', self::REGISTRATION_VALIDATION_MESSAGE);
+        }
+
+        $userModel->insert([
+            'role_id'         => $roleId,
+            'first_name'      => $input['first_name'],
+            'last_name'       => $input['last_name'],
+            'document_number' => $input['document_number'],
+            'email'           => $input['email'],
+            'phone'           => $input['phone'],
+            'address'         => null,
+            'password_hash'   => password_hash($password, PASSWORD_BCRYPT),
+        ]);
+
+        return redirect()->to('/auth/login')
+            ->with('success', self::REGISTRATION_SUCCESS_MESSAGE);
     }
 
     /**

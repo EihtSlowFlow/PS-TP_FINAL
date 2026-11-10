@@ -5,10 +5,12 @@ use CodeIgniter\Router\RouteCollection;
 /** @var RouteCollection $routes */
 $routes->get('/', 'Home::index');
 
-// Authentication routes (HU-01)
+// Authentication routes (HU-01, HU-02)
 $routes->group('auth', static function (RouteCollection $routes): void {
     $routes->get('login', 'AuthController::login');
     $routes->post('login', 'AuthController::attemptLogin');
+    $routes->get('register', 'AuthController::register');
+    $routes->post('register', 'AuthController::storeRegistration');
     // HU-03: POST only (with the global CSRF filter) so a link or an image cannot log a user out.
     $routes->post('logout', 'AuthController::logout');
 });
