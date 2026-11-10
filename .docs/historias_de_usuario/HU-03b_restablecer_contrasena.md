@@ -18,7 +18,7 @@ para recuperar el acceso a mi cuenta sin intervención de terceros.
 
 **cuando** ingreso mi correo electrónico registrado,
 
-**entonces** el sistema genera un token temporal de un solo uso y me brinda las instrucciones para definir una nueva contraseña.
+**entonces** el sistema genera un token temporal de un solo uso y me dirige al formulario para definir una nueva contraseña.
 
 ### Escenario 2: Definir una nueva contraseña
 
@@ -52,7 +52,7 @@ para recuperar el acceso a mi cuenta sin intervención de terceros.
 
 ## Definition of Done
 
-- [ ] El usuario puede solicitar y completar el restablecimiento.
-- [ ] El token expira y se invalida tras su uso.
-- [ ] El sistema no revela la existencia de correos registrados.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] El usuario puede solicitar y completar el restablecimiento.
+- [x] El token expira y se invalida tras su uso.
+- [x] El sistema no revela la existencia de correos registrados.
+- [x] Se prueban los escenarios de aceptación y los casos de error relevantes.
