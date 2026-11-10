@@ -9,7 +9,7 @@
 | **Sprint / Hito** | Sprint 1 (Etapa 1 — Seguridad y usuarios) |
 | **Rama** | `feature/hu-01-iniciar-sesion-control-acceso` (creada desde `main` en `aaf956c`) |
 | **Último commit** | `0e678a7` — feat: implementar autenticación de usuarios y control de acceso por roles para HU-01 |
-| **Pull Request** | PR abierto hacia `main` (validado: suite completa 54 tests / 150 aserciones OK, merge sin conflictos) |
+| **Pull Request** | [#27](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/27), mergeado en `main` (validado: suite completa 54 tests / 150 aserciones OK, merge sin conflictos) |
 | **Fecha de cierre** | 2026-11-09 15:32 |
 | **Autor / Agente** | Antigravity con `EihtSlowFlow` |
 | **Estado global** | 🟢 Completada |
@@ -29,7 +29,7 @@ Referencia: [`.docs/historias_de_usuario/HU-01_iniciar_sesion_control_acceso.md`
 | CA-2 | Escenario 2: Credenciales incorrectas (correo inexistente o clave errónea) se rechazan con mensaje genérico unificado, conservando el correo ingresado y limpiando la contraseña | ✅ | `AuthAccessControlTest::testScenario2InvalidCredentialsReturnUnifiedGenericMessageAndPreserveEmail` |
 | CA-3 | Escenario 3: Acceso sin sesión a cualquier ruta protegida redirige a `/auth/login` e informa que debe autenticarse | ✅ | `AuthAccessControlTest::testScenario3UnauthenticatedAccessToProtectedRouteRedirectsToLogin` |
 | CA-4 | Escenario 4: Usuario autenticado sin permiso sobre una sección de otro rol recibe denegación, aviso de falta de autorización y redirección a su propio panel (incluyendo `employee` bloqueado en `/admin/usuarios`) | ✅ | `AuthAccessControlTest::testScenario4RoleWithoutPermissionIsDeniedAndRedirectedToOwnPanel` y `testEmployeeSharesAdminDashboardButIsBlockedFromUserManagement` |
-| CA-5 | Escenario 5: Usuario dado de baja lógicamente (`deleted_at IS NOT NULL`) tiene el ingreso bloqueado y recibe mensaje de cuenta deshabilitada (también si es dado de baja con sesión activa) | ✅ | `AuthAccessControlTest::testScenario5SoftDeletedUserCannotLoginAndReceivesDisabledMessage` y `testUserDeactivatedWhileLoggedInIsBlockedOnSubsequentProtectedRequest` |
+| CA-5 | Escenario 5: Usuario dado de baja lógicamente (`deleted_at IS NOT NULL`) tiene el ingreso bloqueado y recibe mensaje de cuenta deshabilitada solo si acredita la contraseña correcta (con contraseña errónea recibe el mensaje genérico del Escenario 2, sin revelar el estado de la cuenta); también se corta si es dado de baja con sesión activa | ✅ | `AuthAccessControlTest::testScenario5SoftDeletedUserCannotLoginAndReceivesDisabledMessage`, `testScenario5DisabledStateIsNotRevealedWithoutTheCorrectPassword` y `testUserDeactivatedWhileLoggedInIsBlockedOnSubsequentProtectedRequest` |
 
 **Fuera de alcance / diferido:**
 - Cierre de sesión explícito (`POST /auth/logout`, corresponde a **HU-03 — Issue #19**).
@@ -54,7 +54,8 @@ Referencia: [`.docs/historias_de_usuario/HU-01_iniciar_sesion_control_acceso.md`
 | Config | `app/Config/Security.php` | Modificado | Configura `$csrfProtection = 'session'` |
 | Config | `app/Config/Routes.php` | Modificado | Define rutas explícitas de autenticación y grupos protegidos por `auth` y `role` |
 | View | `app/Views/auth/login.php` | Nuevo | Pantalla `AUT-01` en HTML5 semántico con `csrf_field()`, mensajes flash, errores por campo y preservación de `old('email')` |
-| View | `app/Views/dashboard/panel_placeholder.php` | Nuevo | Layout base con sidebar por rol, barra superior y alertas flash |
+| View | `app/Views/dashboard/panel_placeholder.php` | Nuevo | Contenido del panel base por rol (extiende `layouts/panel.php`) |
+| View | `app/Views/layouts/panel.php` | Nuevo (review posterior) | Layout único de las pantallas autenticadas: sidebar por rol, barra superior y alertas flash; lo comparten los dashboards y las vistas de usuarios (HU-04/HU-05) |
 | Assets | `public/css/auth.css`, `public/css/panel.css`, `public/js/auth.js` | Nuevo | Estilos CSS3 basados en `DESIGN.md` y toggle de visibilidad de contraseña con `addEventListener` |
 | Test | `tests/feature/AuthAccessControlTest.php` | Nuevo | 15 pruebas automatizadas cubriendo los 5 escenarios de HU-01 y la separación `admin` vs `employee` |
 | Docs | `.docs/historias_de_usuario/HU-01_iniciar_sesion_control_acceso.md` | Modificado | Marcado del Definition of Done |
@@ -133,6 +134,8 @@ Referencia: [`.docs/historias_de_usuario/HU-01_iniciar_sesion_control_acceso.md`
 | Fecha | Autor | Resumen | Commit / PR |
 |---|---|---|---|
 | 2026-11-09 | Antigravity con `EihtSlowFlow` | Creación de la rama `feature/hu-01-iniciar-sesion-control-acceso`, verificación de entorno MySQL y suite previa, implementación completa de HU-01 (modelo, controlador, filtros, vistas, CSS/JS y 15 tests de integración) y cierre de deuda `R-7` sobre rol `employee` | Commit `0e678a7`; PR abierto hacia `main`. Verificación previa al merge: `composer test` 54 tests OK, sin conflictos con `main` |
+| 2026-11-09 | Claude Code (review posterior a HU-01/04/05) | Endurecimiento tras el review: `AuthController::attemptLogin` ya no revela que una cuenta está deshabilitada si la contraseña es incorrecta (se responde el mensaje genérico y se verifica el hash del usuario inactivo). Suite completa con PHPUnit 11.5.57: 74 tests / 432 aserciones OK | Cambios sin commitear en `main` |
+| 2026-11-09 | Claude Code (review posterior a HU-01/04/05) | Hallazgos menores: el login solo muestra "¿Olvidaste tu contraseña?" y "Registrate" cuando existen las rutas (`BaseController::routeExists()`), por lo que HU-02 y HU-03b solo deben registrar sus rutas para que aparezcan; el formulario de login ya no usa `novalidate` (validación nativa del navegador); layout compartido `layouts/panel.php` y contexto de vistas en `BaseController::panelContext()`. Sigue pendiente el cierre de sesión (HU-03). Suite completa: 85 tests / 512 aserciones OK | Cambios sin commitear en `main` |
 
 ---
 

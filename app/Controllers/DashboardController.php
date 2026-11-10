@@ -2,11 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Models\UserModel;
-
 /**
- * Provides the role-specific landing views and placeholder sections required by HU-01
- * until the full feature stories (HU-04, HU-15, HU-25, HU-26) are implemented.
+ * Provides the role-specific landing views required by HU-01 until the full feature
+ * stories (HU-15, HU-25, HU-26) replace these placeholders.
  */
 class DashboardController extends BaseController
 {
@@ -22,21 +20,6 @@ class DashboardController extends BaseController
             heading: 'Panel de control',
             subtitle: 'Resumen operativo de administración inmobiliaria.',
             allowedNote: 'Sección habilitada para los roles Administrador y Empleado.'
-        );
-    }
-
-    /**
-     * Restricted placeholder for 'admin' only (/admin/usuarios, HU-04 / HU-05).
-     */
-    public function adminUsers(): string
-    {
-        return $this->renderPanel(
-            pageTitle: 'Gestión de usuarios',
-            breadcrumb: 'Usuarios',
-            activeMenu: 'usuarios',
-            heading: 'Usuarios',
-            subtitle: 'Padrón de clientes y personal (exclusivo para Administrador).',
-            allowedNote: 'Sección habilitada únicamente para el rol Administrador.'
         );
     }
 
@@ -78,32 +61,13 @@ class DashboardController extends BaseController
         string $subtitle,
         string $allowedNote
     ): string {
-        $session  = session();
-        $userRole = (string) $session->get('user_role', '');
-        $userName = (string) $session->get('user_name', 'Usuario');
-
-        return view('dashboard/panel_placeholder', [
-            'pageTitle'   => $pageTitle,
-            'breadcrumb'  => $breadcrumb,
-            'activeMenu'  => $activeMenu,
-            'heading'     => $heading,
-            'subtitle'    => $subtitle,
-            'allowedNote' => $allowedNote,
-            'userName'    => $userName,
-            'userEmail'   => (string) $session->get('user_email', ''),
-            'userRole'    => $userRole,
-            'roleLabel'   => UserModel::labelForRole($userRole),
-            'initials'    => $this->extractInitials($userName),
-        ]);
-    }
-
-    private function extractInitials(string $fullName): string
-    {
-        $parts = preg_split('/\s+/', trim($fullName)) ?: [];
-        $first = isset($parts[0][0]) ? mb_strtoupper(mb_substr($parts[0], 0, 1)) : 'U';
-        $last  = isset($parts[1][0]) ? mb_strtoupper(mb_substr($parts[1], 0, 1)) : '';
-
-        return $first . $last;
+        return view('dashboard/panel_placeholder', array_merge(
+            $this->panelContext($pageTitle, $breadcrumb, $activeMenu),
+            [
+                'heading'     => $heading,
+                'subtitle'    => $subtitle,
+                'allowedNote' => $allowedNote,
+            ]
+        ));
     }
 }
-

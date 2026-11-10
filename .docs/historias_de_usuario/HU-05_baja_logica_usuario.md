@@ -48,6 +48,6 @@ Además, se conserva su registro.
 
 - [x] El administrador puede solicitar y confirmar la baja de un usuario.
 - [x] El estado inactivo se persiste correctamente.
-- [x] El usuario inactivo no puede iniciar sesión ni ser seleccionado en nuevos contratos.
+- [x] El usuario inactivo no puede iniciar sesión ni ser seleccionado en nuevos contratos. (La exclusión de inactivos está implementada y probada a nivel de modelo con `UserModel::findActiveTenantsForContract()` y `findActiveOwnersForProperty()`; conectarla al selector del formulario de contratos se completa en HU-10, ver sus notas de integración.)
 - [x] Se conserva el historial y se verifican los permisos de acceso.
 - [x] Se prueban los escenarios de aceptación y los casos de error relevantes.

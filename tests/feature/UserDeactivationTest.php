@@ -68,7 +68,7 @@ final class UserDeactivationTest extends CIUnitTestCase
         $deactivateResponse = $this->postAsSessionWithCsrf(
             $adminSession,
             "admin/usuarios/baja/{$tenantId}",
-            []
+            ['confirmed' => '1']
         );
 
         $deactivateResponse->assertRedirectTo('/admin/usuarios');
@@ -116,6 +116,41 @@ final class UserDeactivationTest extends CIUnitTestCase
         $this->assertSame(AuthFilter::ACCOUNT_DISABLED_MESSAGE, session()->getFlashdata('error'));
     }
 
+    public function testScenario1DeactivationNeedsServerSideConfirmationEvenWithoutJavaScript(): void
+    {
+        $adminSession = $this->createAdminSession();
+        $tenantId     = $this->insertUserRecord(
+            roleName: 'tenant',
+            firstName: 'Nora',
+            lastName: 'Ibáñez',
+            documentNumber: '37123456',
+            email: 'nora.ibanez.hu05@example.com',
+            plainPassword: 'Password123!'
+        );
+
+        // The list/edit forms post confirmed=0 until the in-page modal is accepted (and always without JavaScript).
+        foreach ([[], ['confirmed' => '0'], ['confirmed' => 'yes']] as $payload) {
+            $response = $this->postAsSessionWithCsrf($adminSession, "admin/usuarios/baja/{$tenantId}", $payload);
+
+            // A confirmation page is rendered instead of deactivating the user.
+            $response->assertStatus(200);
+            $response->assertSee('¿Confirmás la baja lógica del usuario?');
+            $response->assertSee('Nora Ibáñez');
+            $response->assertSee('admin/usuarios/baja/' . $tenantId);
+            $response->assertSeeElement('input[name=confirmed]');
+            $this->assertNull(
+                $this->db->table('users')->where('id', $tenantId)->get()->getRow()->deleted_at,
+                'The user must stay active until the confirmation is sent.'
+            );
+        }
+
+        // Sending the confirmation performs the logical deactivation.
+        $confirmed = $this->postAsSessionWithCsrf($adminSession, "admin/usuarios/baja/{$tenantId}", ['confirmed' => '1']);
+        $confirmed->assertRedirectTo('/admin/usuarios');
+        $this->assertSame(UserController::USER_DEACTIVATED_MESSAGE, session()->getFlashdata('success'));
+        $this->assertNotNull($this->db->table('users')->where('id', $tenantId)->get()->getRow()->deleted_at);
+    }
+
     public function testScenario2DeactivatedUserIsExcludedFromSelectableOptionsInNewOperations(): void
     {
         $adminSession = $this->createAdminSession();
@@ -157,10 +192,10 @@ final class UserDeactivationTest extends CIUnitTestCase
         );
 
         // Logically deactivate one tenant and one owner through the controller endpoint
-        $this->postAsSessionWithCsrf($adminSession, "admin/usuarios/baja/{$deactivatedTenantId}", [])
+        $this->postAsSessionWithCsrf($adminSession, "admin/usuarios/baja/{$deactivatedTenantId}", ['confirmed' => '1'])
             ->assertRedirectTo('/admin/usuarios');
 
-        $this->postAsSessionWithCsrf($adminSession, "admin/usuarios/baja/{$deactivatedOwnerId}", [])
+        $this->postAsSessionWithCsrf($adminSession, "admin/usuarios/baja/{$deactivatedOwnerId}", ['confirmed' => '1'])
             ->assertRedirectTo('/admin/usuarios');
 
         $userModel = model(UserModel::class);
@@ -262,7 +297,7 @@ final class UserDeactivationTest extends CIUnitTestCase
         $deactivateResponse = $this->postAsSessionWithCsrf(
             $adminSession,
             "admin/usuarios/baja/{$tenantId}",
-            []
+            ['confirmed' => '1']
         );
 
         $deactivateResponse->assertRedirectTo('/admin/usuarios');

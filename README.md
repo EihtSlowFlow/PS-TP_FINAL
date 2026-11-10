@@ -64,3 +64,6 @@ El diagrama, el modelo relacional, las decisiones, el esquema en SQL y los datos
 - [Organización del proyecto](.docs/ORGANIZACION_DEL_PROYECTO.md) 
 - [Historias de usuario](.docs/historias_de_usuario/)
 - [Modelo de datos y base de datos](.docs/base_de_datos/MODELO_DE_DATOS.md)
+- [Presupuesto y planificación](.docs/PRESUPUESTO_Y_PLANIFICACION.md)
+- [Informes de avance y traspaso (handoffs)](.docs/exec-plans/), incluido el [review de HU-01, HU-04 y HU-05](.docs/exec-plans/REVIEW-HU-01-04-05_handoff.md)
+- [Notas de las reuniones del equipo](.docs/documentacion/)

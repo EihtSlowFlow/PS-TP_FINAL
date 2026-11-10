@@ -165,6 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 const targetForm = pendingForm;
                 targetForm.dataset.confirmed = '1';
+                // The server only deactivates when it receives confirmed=1 (see UserController::deactivate).
+                const confirmedField = targetForm.querySelector('input[name="confirmed"]');
+                if (confirmedField) {
+                    confirmedField.value = '1';
+                }
                 deactivateModal.hidden = true;
                 pendingForm = null;
                 targetForm.submit();

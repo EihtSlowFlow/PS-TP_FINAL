@@ -17,7 +17,7 @@ class UserController extends BaseController
     public const USER_NOT_FOUND_MESSAGE              = 'El usuario solicitado no existe.';
     public const USER_ALREADY_DEACTIVATED_MESSAGE    = 'El usuario seleccionado ya se encuentra dado de baja.';
     public const SELF_DEACTIVATION_FORBIDDEN_MESSAGE = 'No podés dar de baja tu propio usuario activo.';
-    public const LAST_ADMIN_DEACTIVATION_MESSAGE     = 'No se puede dar de baja al único administrador activo del sistema.';
+    public const LAST_ADMIN_ROLE_CHANGE_MESSAGE      = 'No se puede quitar el rol de Administrador al único administrador activo del sistema.';
     public const DUPLICATE_EMAIL_MESSAGE             = 'Ya existe un usuario activo registrado con este correo electrónico.';
     public const DUPLICATE_DNI_MESSAGE               = 'Ya existe un usuario activo registrado con este DNI.';
     public const VALIDATION_ERROR_MESSAGE            = 'Revisá los campos marcados antes de guardar el usuario.';
@@ -50,7 +50,7 @@ class UserController extends BaseController
         $pagination = $userModel->searchAndPaginate($filters, $perPage, $page);
         $roleCounts = $userModel->getRoleCounts();
 
-        return view('admin/users/index', array_merge($this->buildLayoutContext(
+        return view('admin/users/index', array_merge($this->panelContext(
             pageTitle: 'Gestión de usuarios',
             breadcrumb: 'Usuarios',
             activeMenu: 'usuarios'
@@ -69,7 +69,7 @@ class UserController extends BaseController
      */
     public function create(): string
     {
-        return view('admin/users/form', array_merge($this->buildLayoutContext(
+        return view('admin/users/form', array_merge($this->panelContext(
             pageTitle: 'Nuevo usuario',
             breadcrumb: 'Usuarios / Nuevo usuario',
             activeMenu: 'usuarios'
@@ -154,7 +154,7 @@ class UserController extends BaseController
 
         $operationalStats = $userModel->getUserOperationalSummary($id);
 
-        return view('admin/users/form', array_merge($this->buildLayoutContext(
+        return view('admin/users/form', array_merge($this->panelContext(
             pageTitle: 'Editar usuario',
             breadcrumb: 'Usuarios / Editar usuario',
             activeMenu: 'usuarios'
@@ -200,11 +200,16 @@ class UserController extends BaseController
             $duplicateErrors = $this->checkActiveUniqueness($userModel, $input['email'], $input['document_number'], $id);
         }
 
-        $allErrors = array_merge($fieldErrors, $duplicateErrors);
+        // The platform must never be left without an active administrator (enforced on the server,
+        // the client-side self-role confirmation modal is only a usability aid).
+        $roleGuardErrors = $this->checkLastAdministratorRoleRetention($userModel, $existing, $input['role']);
+
+        $businessErrors = array_merge($duplicateErrors, $roleGuardErrors);
+        $allErrors      = array_merge($fieldErrors, $businessErrors);
 
         if ($allErrors !== []) {
-            $flashError = $duplicateErrors !== []
-                ? implode(' ', array_values($duplicateErrors))
+            $flashError = $businessErrors !== []
+                ? implode(' ', array_values($businessErrors))
                 : self::VALIDATION_ERROR_MESSAGE;
 
             return redirect()->to('/admin/usuarios/editar/' . $id)
@@ -254,8 +259,12 @@ class UserController extends BaseController
 
     /**
      * Logically deactivates an active user while preserving their record and historical references (HU-05).
+     *
+     * The deactivation only happens when the request carries `confirmed=1`. Without it (for example when
+     * JavaScript is disabled and the in-page confirmation modal never runs) a server-rendered confirmation
+     * page is returned, so the "confirm the operation" step of Scenario 1 never depends on the client.
      */
-    public function deactivate(int $id): RedirectResponse
+    public function deactivate(int $id): RedirectResponse|string
     {
         $userModel = model(UserModel::class);
         $existing  = $userModel->findByIdWithRole($id, true);
@@ -275,12 +284,19 @@ class UserController extends BaseController
                 ->with('error', self::USER_ALREADY_DEACTIVATED_MESSAGE);
         }
 
-        if (
-            (string) ($existing['role_name'] ?? '') === UserModel::ROLE_ADMIN
-            && $userModel->countActiveByRole(UserModel::ROLE_ADMIN) <= 1
-        ) {
-            return redirect()->to('/admin/usuarios')
-                ->with('error', self::LAST_ADMIN_DEACTIVATION_MESSAGE);
+        // No "last administrator" check is needed here: the caller is an active administrator
+        // (AuthFilter + RoleFilter) and, thanks to the self-deactivation check above, never the target,
+        // so at least one active administrator always remains.
+
+        if ((string) $this->request->getPost('confirmed') !== '1') {
+            return view('admin/users/deactivate_confirm', array_merge($this->panelContext(
+                pageTitle: 'Confirmar baja de usuario',
+                breadcrumb: 'Usuarios / Baja',
+                activeMenu: 'usuarios'
+            ), [
+                'user'            => $existing,
+                'targetRoleLabel' => UserModel::labelForRole((string) ($existing['role_name'] ?? '')),
+            ]));
         }
 
         $userModel->delete($id);
@@ -440,30 +456,26 @@ class UserController extends BaseController
     }
 
     /**
-     * Builds the shared sidebar/topbar context for administrative views.
+     * Rejects removing the administrator role from the only active administrator (HU-04 role edition).
+     *
+     * @param array<string, mixed> $existing User row as returned by UserModel::findByIdWithRole()
      *
      * @return array<string, string>
      */
-    private function buildLayoutContext(string $pageTitle, string $breadcrumb, string $activeMenu): array
+    private function checkLastAdministratorRoleRetention(UserModel $userModel, array $existing, string $newRole): array
     {
-        $session  = session();
-        $userRole = (string) $session->get('user_role', UserModel::ROLE_ADMIN);
-        $userName = (string) $session->get('user_name', 'Administrador');
+        $isActiveAdmin = $existing['deleted_at'] === null
+            && (string) ($existing['role_name'] ?? '') === UserModel::ROLE_ADMIN;
 
-        $parts = preg_split('/\s+/', trim($userName)) ?: [];
-        $first = isset($parts[0][0]) ? mb_strtoupper(mb_substr($parts[0], 0, 1)) : 'A';
-        $last  = isset($parts[1][0]) ? mb_strtoupper(mb_substr($parts[1], 0, 1)) : '';
+        if (
+            $isActiveAdmin
+            && $newRole !== UserModel::ROLE_ADMIN
+            && $userModel->countActiveByRole(UserModel::ROLE_ADMIN) <= 1
+        ) {
+            return ['role' => self::LAST_ADMIN_ROLE_CHANGE_MESSAGE];
+        }
 
-        return [
-            'pageTitle'  => $pageTitle,
-            'breadcrumb' => $breadcrumb,
-            'activeMenu' => $activeMenu,
-            'userName'   => $userName,
-            'userEmail'  => (string) $session->get('user_email', ''),
-            'userRole'   => $userRole,
-            'roleLabel'  => UserModel::labelForRole($userRole),
-            'initials'   => $first . $last,
-        ];
+        return [];
     }
 }
 

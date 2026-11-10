@@ -1,5 +1,11 @@
 <?php
-/** @var array<string, string> $errors */
+/**
+ * @var array<string, string> $errors
+ * @var bool $showRegisterLink Whether the registration route (HU-02) is available
+ * @var bool $showRecoverLink  Whether the password recovery route (HU-03b) is available
+ */
+$showRegisterLink = $showRegisterLink ?? false;
+$showRecoverLink  = $showRecoverLink ?? false;
 $errors       = session()->getFlashdata('errors') ?? [];
 $flashError   = session()->getFlashdata('error');
 $flashSuccess = session()->getFlashdata('success');
@@ -159,7 +165,7 @@ $flashWarning = session()->getFlashdata('warning');
                         </div>
                     <?php endif; ?>
 
-                    <form class="auth-form" action="<?= esc(site_url('auth/login')) ?>" method="post" novalidate>
+                    <form class="auth-form" action="<?= esc(site_url('auth/login')) ?>" method="post">
                         <?= csrf_field() ?>
 
                         <div class="field-group">
@@ -204,9 +210,11 @@ $flashWarning = session()->getFlashdata('warning');
                                 <label for="password" class="field-label">
                                     Contraseña <span class="required-mark" aria-hidden="true">*</span>
                                 </label>
-                                <a href="<?= esc(site_url('auth/recuperar-password')) ?>" class="forgot-link">
-                                    ¿Olvidaste tu contraseña?
-                                </a>
+                                <?php if ($showRecoverLink): ?>
+                                    <a href="<?= esc(site_url('auth/recuperar-password')) ?>" class="forgot-link">
+                                        ¿Olvidaste tu contraseña?
+                                    </a>
+                                <?php endif; ?>
                             </div>
                             <div class="input-wrapper">
                                 <span class="input-icon" aria-hidden="true">
@@ -260,10 +268,12 @@ $flashWarning = session()->getFlashdata('warning');
                         </button>
                     </form>
 
-                    <div class="auth-register-box">
-                        <span>¿No tenés cuenta?</span>
-                        <a href="<?= esc(site_url('auth/register')) ?>" class="register-link">Registrate</a>
-                    </div>
+                    <?php if ($showRegisterLink): ?>
+                        <div class="auth-register-box">
+                            <span>¿No tenés cuenta?</span>
+                            <a href="<?= esc(site_url('auth/register')) ?>" class="register-link">Registrate</a>
+                        </div>
+                    <?php endif; ?>
 
                     <div class="roles-summary-box" aria-label="Roles del sistema">
                         <p class="roles-summary-title">

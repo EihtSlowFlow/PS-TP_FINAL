@@ -9,7 +9,7 @@
 | **Sprint / Hito** | Sprint 1 (Etapa 2 — Seguridad y usuarios) |
 | **Rama** | `Historia-de-usuario-04` (`historia_usuario_cuatro`) |
 | **Último commit** | `feat: implementar módulo de gestión de usuarios con ABMC, filtros por rol y pruebas para HU-04` |
-| **Pull Request** | Rama pusheada a `origin/Historia-de-usuario-04`, lista para PR / merge |
+| **Pull Request** | [#28](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/28), mergeado en `main` |
 | **Fecha de cierre** | 2026-11-09 17:15 |
 | **Autor / Agente** | Antigravity con `EihtSlowFlow` |
 | **Estado global** | 🟢 Completada |
@@ -92,7 +92,7 @@ Referencia: [`.docs/historias_de_usuario/HU-04_gestion_usuarios.md`](../historia
 | ID | Tipo | Descripción | Severidad | Acción sugerida |
 |---|---|---|---|---|
 | R-1 | Continuidad | Falta el endpoint y confirmación de baja lógica de usuario | Baja | Implementar en **HU-05 — Dar de baja lógicamente un usuario (#10)** sobre `UserController` |
-| R-2 | Seguridad / UX | Un admin que edita su propio rol pierde acceso de inmediato; no hay bloqueo ni confirmación | Baja | Mitigado: modal de confirmación con cooldown de 3 s en `form.php`/`users.js` (solo cliente, sin prueba automatizada) |
+| R-2 | Seguridad / UX | Un admin que edita su propio rol pierde acceso de inmediato; no hay bloqueo ni confirmación | Baja | Mitigado: modal de confirmación con cooldown de 3 s en `form.php`/`users.js` (solo cliente) y, en el servidor, `UserController::update` rechaza quitar el rol de Administrador al único administrador activo (`LAST_ADMIN_ROLE_CHANGE_MESSAGE`, cubierto en `UserManagementTest`). Con otro administrador activo el cambio de rol propio sigue permitido |
 
 ---
 
@@ -113,6 +113,8 @@ Referencia: [`.docs/historias_de_usuario/HU-04_gestion_usuarios.md`](../historia
 |---|---|---|---|
 | 2026-11-09 | Antigravity con `EihtSlowFlow` | Implementación completa de HU-04 (`UserModel`, `UserController`, rutas `/admin/usuarios*`, vistas `ADM-02`/`ADM-03a`/`ADM-03b`, CSS/JS y 12 pruebas en `UserManagementTest`) | `f252d47` en rama `Historia-de-usuario-04` |
 | 2026-11-09 | Antigravity con `EihtSlowFlow` | Revisión previa al PR: contraseña sugerida con `crypto.getRandomValues`, modal de confirmación con cooldown de 3 s al cambiar el propio rol (R-2), 66 pruebas / 304 aserciones en verde | `7c4747b` en rama `Historia-de-usuario-04` |
+| 2026-11-09 | Claude Code (review posterior a HU-01/04/05) | Guardia en el servidor para no dejar la plataforma sin administradores al editar roles; el selector de rol de `form.php` usa `span` en lugar de `div`/`p` dentro de `<label>` (HTML5 válido) con prueba que lo verifica. Suite completa con PHPUnit 11.5.57: 74 tests / 432 aserciones OK | Cambios sin commitear en `main` |
+| 2026-11-09 | Claude Code (review posterior a HU-01/04/05) | Hallazgos menores: formularios sin `novalidate` (validación nativa) con `minlength` y `pattern` en nombre, apellido, DNI y teléfono; las vistas `index.php`/`form.php` usan el layout compartido `layouts/panel.php`; tests nuevos de validación en el servidor al crear usuarios. Suite completa: 85 tests / 512 aserciones OK | Cambios sin commitear en `main` |
 
 ---
 
