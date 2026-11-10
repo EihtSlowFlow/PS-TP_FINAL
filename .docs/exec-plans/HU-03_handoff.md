@@ -77,7 +77,7 @@ Referencia: [`.docs/historias_de_usuario/HU-03_cierre_sesion.md`](../historias_d
 | Tests de HU-03 | `php phpunit-11.phar -c phpunit.dist.xml --no-coverage tests/feature/LogoutTest.php` | ✅ 17 casos |
 | Suite completa | Igual, sin archivo | ✅ **102 tests / 636 aserciones** (antes 85 / 512) |
 | Los tests detectan una regresión | Se desactivó temporalmente el vaciado de la sesión | ✅ Fallaron 7 tests; se restauró el código |
-| Prueba de punta a punta | Servidor real (`php spark serve`) sobre la base de pruebas, usuario descartable generado para la prueba y `curl` con cookies | ✅ Ver abajo |
+| Prueba de punta a punta | Servidor real (`php spark serve`) sobre la base de desarrollo, usuario descartable generado para la prueba y `curl` con cookies | ✅ Ver abajo |
 | Sintaxis | `php -l` en los PHP modificados | ✅ |
 
 Resultado de la prueba de punta a punta (tras iniciar sesión, con el panel respondiendo 200 y mostrando el botón):
@@ -88,7 +88,7 @@ Resultado de la prueba de punta a punta (tras iniciar sesión, con el panel resp
 - La pantalla de login que sigue al cierre muestra "La sesión se cerró correctamente."
 - `GET /auth/logout` da 404.
 
-El servidor y el usuario descartable eran solo de la prueba: se detuvo el servidor, se borró el seeder temporal y la base de pruebas se reinicia en cada corrida de PHPUnit.
+El servidor y el usuario descartable eran solo de la prueba: se detuvo el servidor, se borró el seeder temporal y se eliminó el usuario descartable. La prueba corrió contra la base de desarrollo (`inmogestion2026`) y no contra la de pruebas, porque la variable de entorno que debía cambiar la base no tuvo efecto: el `.env` tiene prioridad. Para apuntar a otra base hay que cambiar `database.default.database` en el `.env`.
 
 **Sin verificar:**
 - El botón "atrás" en un navegador real: se comprobó que las páginas protegidas se sirven sin caché y que la sesión vieja no sirve, que es lo que garantiza que no se vean datos, pero el comportamiento visual depende del navegador.
