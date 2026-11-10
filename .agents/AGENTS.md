@@ -14,6 +14,7 @@ Assist with a maintainable web application using **PHP 8.2+, CodeIgniter 4.x, My
 - Keep detailed rules in skills and persistent architecture information in `.docs/`; do not duplicate them here.
 - Before ending a session, update the active handoff document in `.docs/exec-plans/` using the project template (`HANDOFF_TEMPLATE.md`). Record only verified facts: status, scope, changes, tests, risks, and next steps.
 - When resuming work in a new session or on another machine, read the current handoff and the related user story/issue before editing code.
+- Track the time spent on every issue (`.docs/REGISTRO_DE_TIEMPOS.md`): record the start time when work on the issue begins (`Get-Date -Format "yyyy-MM-dd HH:mm"` or `date`), and at the end write start, end and effective time (pauses over 10 minutes excluded) in the handoff, add the row to the register, and post the same figure as a comment on the GitHub issue.
 
 ## Progressive skill disclosure
 1. Identify the task type.

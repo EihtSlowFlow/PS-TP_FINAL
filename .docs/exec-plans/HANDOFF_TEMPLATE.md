@@ -16,6 +16,8 @@
 | **Último commit** | `[hash corto — mensaje]` |
 | **Pull Request** | `[#N° / URL / Sin PR]` |
 | **Fecha de cierre** | `[YYYY-MM-DD HH:MM]` |
+| **Inicio / Fin** | `[YYYY-MM-DD HH:MM → YYYY-MM-DD HH:MM]` (la hora de inicio se anota apenas empieza el issue) |
+| **Tiempo invertido** | `[X h YY min efectivos · X h YY min de reloj · Medido / Reconstruido · pausas descontadas]`. Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
 | **Autor / Agente** | `[nombre]` |
 | **Estado global** | `[🟢 Completada · 🟡 En curso · 🔴 Bloqueada]` |
 | **Avance estimado** | `[0–100 %]` |
@@ -98,9 +100,9 @@ Referencia: `[.docs/historias_de_usuario/HU-XX_nombre.md]`
 
 ## 8. Historial de Sesiones
 
-| Fecha | Autor | Resumen | Commit / PR |
-|---|---|---|---|
-| `[YYYY-MM-DD]` | `[nombre]` | `[Una línea]` | `[hash / #PR]` |
+| Fecha | Autor | Duración | Resumen | Commit / PR |
+|---|---|---|---|---|
+| `[YYYY-MM-DD]` | `[nombre]` | `[X h YY min]` | `[Una línea]` | `[hash / #PR]` |
 
 ---
 
@@ -108,6 +110,7 @@ Referencia: `[.docs/historias_de_usuario/HU-XX_nombre.md]`
 
 1. Leer `.agents/AGENTS.md` y cargar solo los skills indicados en la sección 7.
 2. Leer este handoff y la HU referenciada en la sección 2.
-3. Verificar con `git status` y `git log -n 5` que el estado coincide con lo documentado.
-4. No releer código ajeno al alcance salvo necesidad demostrada.
-5. Al terminar, actualizar este documento (secciones 1, 2, 3, 5, 6, 7 y 8).
+3. Anotar la hora de inicio del issue (`Get-Date -Format "yyyy-MM-dd HH:mm"`); si se retoma el issue, anotar la hora de inicio de la nueva sesión.
+4. Verificar con `git status` y `git log -n 5` que el estado coincide con lo documentado.
+5. No releer código ajeno al alcance salvo necesidad demostrada.
+6. Al terminar, actualizar este documento (secciones 1, 2, 3, 5, 6, 7 y 8), completar la fila del issue en [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) y dejar el tiempo como comentario en el issue de GitHub.

@@ -11,6 +11,8 @@
 | **Último commit** | `0cbe08d` — feat: add the employee role and document the PHPUnit verification. Es el último commit de código; después hay commits de documentación y el merge de `main` |
 | **Pull Request** | [#26](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/26), abierto el 06/11/2026 hacia `main`: mergeable, cierra #22 al mergear, `main` exige 1 aprobación de EihtSlowFlow |
 | **Fecha de cierre** | 2026-11-06 |
+| **Inicio / Fin** | 2026-11-06 11:03 → 2026-11-06 19:14 (dos bloques: 11:03 a 11:53 y 17:56 a 19:14) |
+| **Tiempo invertido** | 1 h 42 min efectivos · 2 h 08 min de reloj · Reconstruido a partir de los registros de sesión y los commits · descontados ≈ 9 min de prompts para Stitch. Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
 | **Autor / Agente** | Claude, con `LauPerisse` |
 | **Estado global** | 🟡 En curso: todo escrito, verificado en instancias descartables y en la base real del equipo (MySQL 8.0.45), y pusheado; la suite PHPUnit pasa; PR #26 abierto: falta la revisión y la confirmación del equipo |
 | **Avance estimado** | 98 % |
