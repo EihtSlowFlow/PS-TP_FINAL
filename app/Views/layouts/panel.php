@@ -55,6 +55,9 @@ $flashSuccess = session()->getFlashdata('success');
                             <span>Usuarios</span>
                         </a>
                     <?php endif; ?>
+                    <a href="<?= esc(site_url('admin/inmuebles')) ?>" class="sidebar-link<?= $activeMenu === 'inmuebles' ? ' is-active' : '' ?>">
+                        <span>Inmuebles</span>
+                    </a>
                 <?php elseif ($userRole === 'owner'): ?>
                     <a href="<?= esc(site_url('propietario/dashboard')) ?>" class="sidebar-link<?= $activeMenu === 'propietario-dashboard' ? ' is-active' : '' ?>">
                         <span>Dashboard</span>
@@ -76,6 +79,18 @@ $flashSuccess = session()->getFlashdata('success');
                         <span class="sidebar-user-role"><?= esc($roleLabel) ?></span>
                     </div>
                 </div>
+
+                <?php /* HU-03: logout is a POST with CSRF token; available from every panel through this layout. */ ?>
+                <form action="<?= esc(site_url('auth/logout')) ?>" method="post" class="logout-form">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="action-icon-btn action-icon-btn-danger" id="btn-logout" title="Cerrar sesión" aria-label="Cerrar sesión">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                    </button>
+                </form>
             </div>
         </div>
     </aside>

@@ -35,7 +35,7 @@ para garantizar que nadie más pueda usar mi cuenta en el dispositivo actual.
 
 ## Definition of Done
 
-- [ ] El usuario puede cerrar sesión desde cualquier panel.
-- [ ] La sesión queda invalidada en el servidor.
-- [ ] Las páginas protegidas no son accesibles tras el cierre.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] El usuario puede cerrar sesión desde cualquier panel.
+- [x] La sesión queda invalidada en el servidor.
+- [x] Las páginas protegidas no son accesibles tras el cierre.
+- [x] Se prueban los escenarios de aceptación y los casos de error relevantes.

@@ -103,7 +103,7 @@ Referencia: [`.docs/historias_de_usuario/HU-01_iniciar_sesion_control_acceso.md`
 | ID | Tipo | Descripción | Severidad | Acción sugerida |
 |---|---|---|---|---|
 | R-1 | Resuelto (`R-7` de BD-22) | Permisos del rol `employee` frente a `admin` | — | Cerrado: `employee` comparte `/admin/dashboard` y rutas operativas (`role:admin,employee`), mientras que `/admin/usuarios*` exige `role:admin` |
-| R-2 | Dependencia | El botón de cierre de sesión definitivo en el sidebar se completa en HU-03 (#19) | Baja | Implementar `POST /auth/logout` en HU-03 reutilizando la sesión de HU-01 |
+| R-2 | Resuelto (HU-03) | El cierre de sesión se implementó en HU-03 (#19): `POST /auth/logout` y botón en el sidebar de `layouts/panel.php` | — | Cerrado; ver [`HU-03_handoff.md`](HU-03_handoff.md) |
 
 ---
 

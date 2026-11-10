@@ -279,7 +279,7 @@ Las nueve decisiones están resueltas y explicadas en la [sección 5 del modelo 
 | HU-03b | Vigencia del token y cómo se entrega (correo o enlace en pantalla) |
 | HU-04 | Resuelto: el administrador define la contraseña inicial (mínimo 8 caracteres, con un generador sugerido) y las "auditorías básicas" son las fechas de alta, última modificación y baja lógica; no se guarda quién las hizo |
 | HU-05 | Resuelto: se protege al último administrador (no se puede dar de baja a sí mismo ni quitarle el rol de Administrador al único administrador activo) y la baja se confirma en el servidor. Abierto: si hay reactivación de usuarios (no está implementada) y si se puede dar de baja a quien tiene contratos vigentes (hoy se permite) |
-| HU-07 | Resuelto: ciudad obligatoria; superficie y servicios incluidos opcionales |
+| HU-07 | Resuelto: ciudad obligatoria; superficie y servicios incluidos opcionales. Al editar se puede pasar entre Disponible y En mantenimiento; «Alquilado» lo asigna el contrato y no se cambia a mano. Pueden usarlo el administrador y el empleado (el análisis deja la función del empleado "por definir") |
 | HU-08 | Filtro por ubicación, ordenamiento y qué datos son públicos |
 | HU-09 | Si hay reactivación de inmuebles |
 | HU-10 | Resuelto: porcentajes de 0 a 100, día de vencimiento de 1 a 28, el propietario es el del inmueble. Abierto: cómo y cuándo se aplica el porcentaje de actualización al canon |
@@ -317,7 +317,7 @@ Fuente: [`documentacion/discord proyecto 6-11-26.md`](documentacion/discord%20pr
 | Base de datos | Se revisaron las migraciones (una por tabla) y se pidió además un esquema y datos de carga para MySQL Workbench. La base quedó creada y verificada con 12 tablas, 16 claves foráneas, 24 restricciones CHECK, roles y administrador | Las 11 tablas del modelo más la tabla `migrations` de CodeIgniter suman las 12; en el esquema SQL se cuentan 16 claves foráneas y 24 CHECK. Esquema y datos en [`base_de_datos/`](base_de_datos/MODELO_DE_DATOS.md) |
 | Datos de prueba | Se notó que faltaba el empleado entre los usuarios | Agregado el rol Empleado y el usuario `employee.demo@example.com` en el `DemoSeeder` |
 | Rama de la base de datos | No hubo pull request sino una rama nueva. Faltaban las pruebas de integridad y el pull request | Trabajada en `feature/base-de-datos` (issue #22) |
-| Cierre de sesión (HU-03) | Se la consideró extra chica: destruir la sesión y ajustar los segundos de duración | Sigue pendiente |
+| Cierre de sesión (HU-03) | Se la consideró extra chica: destruir la sesión y ajustar los segundos de duración | Implementada en la rama `feature/hu-03-cierre-sesion-hu-07-inmuebles` (destruye la sesión). La duración de la sesión no se cambió: no figura en los criterios del issue |
 | PHPUnit | En la computadora de uno de los integrantes no había Composer ni PHPUnit (usa WAMP) | El README explica cómo correr las pruebas con el `phpunit-11.phar` suelto |
 | Issues de la Fase 2 | Solo se habían creado los issues de la cursada; los 9 del final no existían | Sigue así: HU-19 a HU-27 no tienen issues (sección 1) |
 | Plan de entrega | Se contaron 19 historias (las de la cursada) y unos 19 días hasta el 24, que se menciona como fecha de entrega "o antes". Hacer una por día no era realista. Se fijó una meta mínima: al menos 7 historias el domingo siguiente (se las nombró "1 a 7", que probablemente son HU-01 a HU-07) | Al 09/11 están mergeadas HU-01, HU-04 y HU-05 (pull requests #27, #28 y #29) |
@@ -360,3 +360,5 @@ Resueltas el 06/11/2026 (ya no hace falta corregirlas): los enlaces rotos y la v
 | 09/11/2026 | HU-01, HU-04 y HU-05 implementadas y mergeadas (pull requests #27, #28 y #29) |
 | 09/11/2026 | Agregadas las notas de la reunión del 6/11 (`.docs/documentacion/discord proyecto 6-11-26.md`) y resumido lo acordado en la sección 11 |
 | 09/11/2026 | Review de HU-01, HU-04 y HU-05 y corrección de los 9 hallazgos (3 medios y 6 menores), con PHPUnit instalado: 85 tests y 512 aserciones en verde. Detalle en [`REVIEW-HU-01-04-05_handoff.md`](exec-plans/REVIEW-HU-01-04-05_handoff.md), en la rama `fix/review-hu-01-04-05` |
+| 09/11/2026 | HU-03 (cierre de sesión seguro, issue #19) implementada en la rama `feature/hu-03-cierre-sesion-hu-07-inmuebles`: `POST /auth/logout`, botón en el sidebar de todos los paneles y 17 casos de prueba (102 tests y 636 aserciones en verde). Detalle en [`HU-03_handoff.md`](exec-plans/HU-03_handoff.md) |
+| 09/11/2026 | HU-07 (alta y edición de inmuebles, issue #12) implementada en la misma rama `feature/hu-03-cierre-sesion-hu-07-inmuebles`: `/admin/inmuebles` (listado mínimo, alta y edición), propietarios activos, estados y 49 casos de prueba (151 tests y 1200 aserciones en verde). Detalle en [`HU-07_handoff.md`](exec-plans/HU-07_handoff.md) |

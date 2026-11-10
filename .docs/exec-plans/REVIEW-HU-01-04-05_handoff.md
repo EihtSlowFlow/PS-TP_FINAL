@@ -124,7 +124,7 @@ C:\wamp64\bin\php\php8.2.29\php.exe phpunit-11.phar -c phpunit.dist.xml --no-cov
 
 | ID | Tipo | Descripción | Severidad | Acción sugerida |
 |---|---|---|---|---|
-| R-1 | Dependencia | Sigue sin existir el cierre de sesión (HU-03) | Media | Implementarlo en HU-03 y agregar el botón al sidebar de `layouts/panel.php` |
+| R-1 | Dependencia | Sigue sin existir el cierre de sesión (HU-03) | Media | Resuelto después en la rama `feature/hu-03-cierre-sesion-hu-07-inmuebles` (ver [`HU-03_handoff.md`](HU-03_handoff.md)) |
 | R-2 | Deuda | W3C sin validar y JavaScript sin tests | Baja | Pasar el validador antes de la entrega; probar los modales a mano |
 | R-3 | Riesgo | Si dos administradores se quitan el rol a la vez, ambas comprobaciones pueden pasar (no hay transacción con bloqueo) | Baja | Aceptable para el alcance; si importa, envolver la comprobación y la actualización en una transacción |
 | R-4 | Accesibilidad | Los modales no atrapan el foco del teclado | Baja | Mejora opcional |

@@ -13,6 +13,7 @@ class AuthController extends BaseController
 {
     public const INVALID_CREDENTIALS_MESSAGE = 'Las credenciales ingresadas no son válidas.';
     public const ACCOUNT_DISABLED_MESSAGE    = AuthFilter::ACCOUNT_DISABLED_MESSAGE;
+    public const LOGOUT_SUCCESS_MESSAGE      = 'La sesión se cerró correctamente.';
 
     /**
      * Precomputed bcrypt hash used when no active user exists for the submitted email,
@@ -135,5 +136,30 @@ class AuthController extends BaseController
         return redirect()->to('/auth/login')
             ->withInput()
             ->with('error', self::INVALID_CREDENTIALS_MESSAGE);
+    }
+
+    /**
+     * Ends the current session completely on the server and sends the user back to the login screen (HU-03).
+     *
+     * It is deliberately not behind the `auth` filter: anyone holding a session, even a stale one (for example
+     * of a user deactivated in the meantime), must always be able to leave it.
+     */
+    public function logout(): RedirectResponse
+    {
+        $session = session();
+
+        $wasAuthenticated = $session->get('is_logged_in') === true && (int) $session->get('user_id', 0) > 0;
+
+        if (! $wasAuthenticated) {
+            // Nothing to close (expired session, double click): just show the login screen.
+            return redirect()->to('/auth/login');
+        }
+
+        // Drop every value (user data, flash data and temp data) and delete the server-side record of the
+        // old session id, issuing a new id for the next request, so no account data is left behind.
+        $session->remove(array_keys($_SESSION ?? []));
+        $session->regenerate(true);
+
+        return redirect()->to('/auth/login')->with('success', self::LOGOUT_SUCCESS_MESSAGE);
     }
 }
