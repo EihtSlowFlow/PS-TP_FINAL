@@ -570,6 +570,76 @@ body.panel-page {
     border-color: var(--danger);
 }
 
+/* Properties (HU-07) */
+textarea.form-control {
+    height: auto;
+    min-height: 9rem;
+    padding: 0.7rem 0.9rem;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+select.form-control {
+    cursor: pointer;
+}
+
+.form-field-full {
+    grid-column: 1 / -1;
+}
+
+.input-prefix-group {
+    position: relative;
+}
+
+.input-prefix {
+    position: absolute;
+    top: 50%;
+    left: 0.9rem;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.input-prefix-group .form-control {
+    padding-left: 1.9rem;
+}
+
+.char-counter {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.badge-property-available {
+    background: var(--success-soft);
+    color: var(--success-text);
+}
+
+.badge-property-rented {
+    background: var(--info-soft);
+    color: var(--info-text);
+}
+
+.badge-property-maintenance {
+    background: var(--warning-soft);
+    color: var(--warning-text);
+}
+
+.status-options {
+    border: 0;
+    margin: 0 0 0.75rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.status-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+}
+
 .table-card {
     padding: 0;
     overflow: hidden;

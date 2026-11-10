@@ -55,6 +55,9 @@ $flashSuccess = session()->getFlashdata('success');
                             <span>Usuarios</span>
                         </a>
                     <?php endif; ?>
+                    <a href="<?= esc(site_url('admin/inmuebles')) ?>" class="sidebar-link<?= $activeMenu === 'inmuebles' ? ' is-active' : '' ?>">
+                        <span>Inmuebles</span>
+                    </a>
                 <?php elseif ($userRole === 'owner'): ?>
                     <a href="<?= esc(site_url('propietario/dashboard')) ?>" class="sidebar-link<?= $activeMenu === 'propietario-dashboard' ? ' is-active' : '' ?>">
                         <span>Dashboard</span>

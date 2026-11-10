@@ -104,3 +104,12 @@ Además, el inmueble inactivo no se ofrece como opción al crear un contrato.
 - [ ] El sistema impide la baja de inmuebles con contrato vigente.
 - [ ] Se conserva el historial y se verifican los permisos de acceso.
 - [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+
+## Notas de integración (desde HU-07)
+
+- `PropertyModel` ya usa borrado lógico (`$useSoftDeletes`), así que `delete($id)` completa `deleted_at`.
+  Falta guardar `deleted_by` (columna de la tabla `properties`, fuera de `allowedFields`).
+- Los listados y la edición (`findWithOwner()`, `paginateWithOwner()` y `getStatusCounts()`) ya excluyen
+  los inmuebles dados de baja.
+- Para la confirmación de la baja se puede seguir el mismo patrón que HU-05: el servidor exige
+  `confirmed=1` y, si falta, muestra una página de confirmación (funciona también sin JavaScript).

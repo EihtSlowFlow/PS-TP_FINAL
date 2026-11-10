@@ -46,11 +46,11 @@ para ampliar el catálogo y gestionar el inventario de bienes en alquiler.
 
 ## Definition of Done
 
-- [ ] El administrador puede crear y editar inmuebles.
-- [ ] El inmueble nuevo queda en estado "Disponible".
-- [ ] Solo pueden asignarse propietarios activos.
-- [ ] Se verifican los permisos de acceso.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] El administrador puede crear y editar inmuebles.
+- [x] El inmueble nuevo queda en estado "Disponible".
+- [x] Solo pueden asignarse propietarios activos.
+- [x] Se verifican los permisos de acceso.
+- [x] Se prueban los escenarios de aceptación y los casos de error relevantes.
 
 ## Notas de integración (desde HU-05)
 

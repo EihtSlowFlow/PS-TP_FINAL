@@ -279,7 +279,7 @@ Las nueve decisiones están resueltas y explicadas en la [sección 5 del modelo 
 | HU-03b | Vigencia del token y cómo se entrega (correo o enlace en pantalla) |
 | HU-04 | Resuelto: el administrador define la contraseña inicial (mínimo 8 caracteres, con un generador sugerido) y las "auditorías básicas" son las fechas de alta, última modificación y baja lógica; no se guarda quién las hizo |
 | HU-05 | Resuelto: se protege al último administrador (no se puede dar de baja a sí mismo ni quitarle el rol de Administrador al único administrador activo) y la baja se confirma en el servidor. Abierto: si hay reactivación de usuarios (no está implementada) y si se puede dar de baja a quien tiene contratos vigentes (hoy se permite) |
-| HU-07 | Resuelto: ciudad obligatoria; superficie y servicios incluidos opcionales |
+| HU-07 | Resuelto: ciudad obligatoria; superficie y servicios incluidos opcionales. Al editar se puede pasar entre Disponible y En mantenimiento; «Alquilado» lo asigna el contrato y no se cambia a mano. Pueden usarlo el administrador y el empleado (el análisis deja la función del empleado "por definir") |
 | HU-08 | Filtro por ubicación, ordenamiento y qué datos son públicos |
 | HU-09 | Si hay reactivación de inmuebles |
 | HU-10 | Resuelto: porcentajes de 0 a 100, día de vencimiento de 1 a 28, el propietario es el del inmueble. Abierto: cómo y cuándo se aplica el porcentaje de actualización al canon |
@@ -361,3 +361,4 @@ Resueltas el 06/11/2026 (ya no hace falta corregirlas): los enlaces rotos y la v
 | 09/11/2026 | Agregadas las notas de la reunión del 6/11 (`.docs/documentacion/discord proyecto 6-11-26.md`) y resumido lo acordado en la sección 11 |
 | 09/11/2026 | Review de HU-01, HU-04 y HU-05 y corrección de los 9 hallazgos (3 medios y 6 menores), con PHPUnit instalado: 85 tests y 512 aserciones en verde. Detalle en [`REVIEW-HU-01-04-05_handoff.md`](exec-plans/REVIEW-HU-01-04-05_handoff.md), en la rama `fix/review-hu-01-04-05` |
 | 09/11/2026 | HU-03 (cierre de sesión seguro, issue #19) implementada en la rama `feature/hu-03-cierre-sesion-hu-07-inmuebles`: `POST /auth/logout`, botón en el sidebar de todos los paneles y 17 casos de prueba (102 tests y 636 aserciones en verde). Detalle en [`HU-03_handoff.md`](exec-plans/HU-03_handoff.md) |
+| 09/11/2026 | HU-07 (alta y edición de inmuebles, issue #12) implementada en la misma rama `feature/hu-03-cierre-sesion-hu-07-inmuebles`: `/admin/inmuebles` (listado mínimo, alta y edición), propietarios activos, estados y 49 casos de prueba (151 tests y 1200 aserciones en verde). Detalle en [`HU-07_handoff.md`](exec-plans/HU-07_handoff.md) |

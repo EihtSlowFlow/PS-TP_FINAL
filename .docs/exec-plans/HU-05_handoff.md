@@ -86,7 +86,7 @@ Referencia: [`.docs/historias_de_usuario/HU-05_baja_logica_usuario.md`](../histo
 
 | ID | Tipo | Descripción | Severidad | Acción sugerida |
 |---|---|---|---|---|
-| R-1 | Coordinación | Cuando `LauPerisse` implemente HU-07 y HU-10, debe utilizar `UserModel::findActiveOwnersForProperty()` y `UserModel::findActiveTenantsForContract()` (o `findActiveById`) | Baja | Documentado en este handoff y cubierto en `UserModel` |
+| R-1 | Coordinación | HU-07 ya usa `UserModel::findActiveOwnersForProperty()` (ver `HU-07_handoff.md`). Cuando se implemente HU-10, debe utilizar `UserModel::findActiveOwnersForProperty()` y `UserModel::findActiveTenantsForContract()` (o `findActiveById`) | Baja | Documentado en este handoff y cubierto en `UserModel` |
 
 ---
 

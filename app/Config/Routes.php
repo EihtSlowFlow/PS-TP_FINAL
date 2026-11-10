@@ -16,6 +16,13 @@ $routes->group('auth', static function (RouteCollection $routes): void {
 // Administration & Employee operational routes (HU-01 / R-7)
 $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static function (RouteCollection $routes): void {
     $routes->get('dashboard', 'DashboardController::adminDashboard');
+
+    // Property management: listing, creation and edition (HU-07; the listing gets filters in HU-08)
+    $routes->get('inmuebles', 'PropertyController::index');
+    $routes->get('inmuebles/nuevo', 'PropertyController::create');
+    $routes->post('inmuebles', 'PropertyController::store');
+    $routes->get('inmuebles/editar/(:num)', 'PropertyController::edit/$1');
+    $routes->post('inmuebles/editar/(:num)', 'PropertyController::update/$1');
 });
 
 // Exclusive Administrator routes: User management and logical deactivation (HU-04, HU-05)

@@ -58,3 +58,13 @@ Además, puede filtrar por propietario, rango de precio o estado.
 - [ ] Los filtros por estado, tipo y precio funcionan correctamente, y el administrador puede filtrar además por propietario.
 - [ ] Se respetan las restricciones de visibilidad por rol.
 - [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+
+## Notas de integración (desde HU-07)
+
+- El listado base ya existe: `GET /admin/inmuebles` (`PropertyController::index`, vista
+  `app/Views/admin/properties/index.php`). Agregar los filtros ahí y en
+  `PropertyModel::paginateWithOwner()` en lugar de crear otro listado.
+- `PropertyModel` ya trae las etiquetas (`TYPE_LABELS`, `STATUS_LABELS`), excluye los inmuebles
+  dados de baja y une al propietario sin filtrar por baja: un inmueble conserva a su propietario
+  aunque este haya sido dado de baja.
+- Las rutas de `/admin/inmuebles` están en el grupo `auth` + `role:admin,employee`.

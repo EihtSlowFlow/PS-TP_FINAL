@@ -108,17 +108,17 @@ final class AuthAccessControlTest extends CIUnitTestCase
     public static function panelNavigationProvider(): array
     {
         return [
-            'admin sees dashboard and users' => [
-                'admin', 'admin/dashboard', ['admin/dashboard', 'admin/usuarios'], ['propietario/dashboard', 'inquilino/estado-cuenta'],
+            'admin sees dashboard, users and properties' => [
+                'admin', 'admin/dashboard', ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles'], ['propietario/dashboard', 'inquilino/estado-cuenta'],
             ],
-            'employee sees dashboard only' => [
-                'employee', 'admin/dashboard', ['admin/dashboard'], ['admin/usuarios', 'propietario/dashboard'],
+            'employee sees dashboard and properties but not users' => [
+                'employee', 'admin/dashboard', ['admin/dashboard', 'admin/inmuebles'], ['admin/usuarios', 'propietario/dashboard'],
             ],
             'owner sees owner dashboard only' => [
-                'owner', 'propietario/dashboard', ['propietario/dashboard'], ['admin/dashboard', 'admin/usuarios'],
+                'owner', 'propietario/dashboard', ['propietario/dashboard'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles'],
             ],
             'tenant sees account state only' => [
-                'tenant', 'inquilino/estado-cuenta', ['inquilino/estado-cuenta'], ['admin/dashboard', 'admin/usuarios'],
+                'tenant', 'inquilino/estado-cuenta', ['inquilino/estado-cuenta'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles'],
             ],
         ];
     }
