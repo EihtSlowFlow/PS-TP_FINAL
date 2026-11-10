@@ -79,3 +79,12 @@ Además, el contrato queda vinculado al propietario del inmueble, que el formula
   apareciendo en el historial.
 - Cubrir con una prueba: un inquilino dado de baja no aparece en el selector y
   un POST con su id es rechazado.
+
+## Notas de integración (desde HU-07)
+
+- El estado «Alquilado» de un inmueble lo asigna el contrato: al crear el contrato hay que pasar el
+  inmueble a `PropertyModel::STATUS_RENTED` (`rented`) dentro de la misma transacción. Desde la
+  edición de inmuebles no se puede asignar ni quitar a mano.
+- El selector de inmuebles del contrato debe ofrecer solo los que están en `available` y no dados de baja.
+  `PropertyModel` excluye los dados de baja en sus consultas; el filtro por estado hay que agregarlo.
+- El propietario del contrato es el del inmueble (`properties.owner_id`).
