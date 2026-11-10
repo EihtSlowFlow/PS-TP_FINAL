@@ -405,6 +405,11 @@ body.auth-page {
     padding-right: 2.75rem;
 }
 
+.auth-input-password::-ms-reveal,
+.auth-input-password::-ms-clear {
+    display: none;
+}
+
 .auth-input:focus {
     outline: none;
     border-color: var(--primary);

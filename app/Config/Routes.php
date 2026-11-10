@@ -46,3 +46,10 @@ $routes->group('propietario', ['filter' => ['auth', 'role:owner']], static funct
 $routes->group('inquilino', ['filter' => ['auth', 'role:tenant']], static function (RouteCollection $routes): void {
     $routes->get('estado-cuenta', 'DashboardController::tenantAccountStatus');
 });
+
+// Personal profile routes for owners and tenants (HU-06)
+$routes->group('perfil', ['filter' => ['auth', 'role:owner,tenant']], static function (RouteCollection $routes): void {
+    $routes->get('/', 'ProfileController::show');
+    $routes->post('contacto', 'ProfileController::updateContact');
+    $routes->post('contrasena', 'ProfileController::changePassword');
+});
