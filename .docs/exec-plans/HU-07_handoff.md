@@ -11,6 +11,8 @@
 | **Último commit** | `feat: implementar alta y edición de inmuebles para HU-07` (commit de esta rama; ver `git log`; el anterior es `a24187f`, de HU-03) |
 | **Pull Request** | Todavía no se abrió. Depende del [#30](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/30) (layout compartido) |
 | **Fecha de cierre** | 2026-11-09 |
+| **Inicio / Fin** | 2026-11-09 21:20 → 2026-11-09 21:48 |
+| **Tiempo invertido** | 28 min efectivos · 28 min de reloj · Reconstruido a partir de los registros de sesión y los commits · sin pausas; no incluye los ≈ 3 min de tildar criterios y mover tarjetas en GitHub, que cubrieron también HU-03. Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
 | **Autor / Agente** | Claude Code con `LauPerisse` |
 | **Estado global** | 🟢 Completada |
 | **Avance estimado** | 100 % |
