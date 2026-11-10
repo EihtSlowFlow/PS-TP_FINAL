@@ -383,11 +383,11 @@ class UserController extends BaseController
             ],
             'phone' => [
                 'label'  => 'Teléfono',
-                'rules'  => 'required|min_length[6]|max_length[30]',
+                'rules'  => 'required|max_length[30]|valid_phone',
                 'errors' => [
                     'required'   => 'Ingresá el teléfono de contacto.',
-                    'min_length' => 'El teléfono debe tener al menos 6 caracteres.',
                     'max_length' => 'El teléfono no puede superar los 30 caracteres.',
+                    'valid_phone' => 'Ingresá un teléfono válido con entre 6 y 15 dígitos. Podés usar +, espacios, paréntesis, puntos y guiones.',
                 ],
             ],
             'address' => [
@@ -410,20 +410,22 @@ class UserController extends BaseController
         if ($isUpdate) {
             $rules['password'] = [
                 'label'  => 'Contraseña',
-                'rules'  => 'permit_empty|min_length[8]|max_length[255]',
+                'rules'  => 'permit_empty|min_length[8]|max_length[255]|strong_password',
                 'errors' => [
                     'min_length' => 'La nueva contraseña debe tener al menos 8 caracteres.',
                     'max_length' => 'La contraseña supera la longitud permitida.',
+                    'strong_password' => 'La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo.',
                 ],
             ];
         } else {
             $rules['password'] = [
                 'label'  => 'Contraseña',
-                'rules'  => 'required|min_length[8]|max_length[255]',
+                'rules'  => 'required|min_length[8]|max_length[255]|strong_password',
                 'errors' => [
                     'required'   => 'Ingresá una contraseña inicial.',
                     'min_length' => 'La contraseña debe tener al menos 8 caracteres.',
                     'max_length' => 'La contraseña supera la longitud permitida.',
+                    'strong_password' => 'La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo.',
                 ],
             ];
         }
@@ -478,4 +480,3 @@ class UserController extends BaseController
         return [];
     }
 }
-

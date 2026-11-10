@@ -16,7 +16,7 @@ para mantener mis datos al día y proteger mi cuenta.
 
 **Dado** que estoy autenticado y accedo a mi perfil,
 
-**cuando** modifico mi teléfono o mi dirección con datos válidos,
+**cuando** modifico mi teléfono (entre 6 y 15 dígitos; se permiten formatos internacionales) o mi dirección con datos válidos,
 
 **entonces** el sistema guarda los cambios y muestra un mensaje de confirmación.
 
@@ -24,9 +24,9 @@ para mantener mis datos al día y proteger mi cuenta.
 
 **Dado** que deseo cambiar mi contraseña,
 
-**cuando** ingreso mi contraseña actual correcta y una nueva de al menos 8 caracteres,
+**cuando** ingreso mi contraseña actual correcta, una nueva que no sea igual a la actual y la confirmo,
 
-**entonces** el sistema actualiza mi contraseña almacenándola cifrada.
+**entonces** el sistema verifica que la nueva tenga al menos 8 caracteres, una mayúscula, un número y un símbolo, y la almacena cifrada.
 
 ### Escenario 3: Contraseña actual incorrecta
 
@@ -40,11 +40,13 @@ para mantener mis datos al día y proteger mi cuenta.
 
 - Cada usuario solo puede ver y editar su propio perfil.
 - Para cambiar la contraseña se exige verificar la contraseña actual.
+- La nueva contraseña debe diferir de la actual y contener al menos 8 caracteres, una mayúscula, un número y un símbolo.
+- Los teléfonos deben tener entre 6 y 15 dígitos; se permiten `+`, espacios, paréntesis, puntos y guiones como formato.
 - El rol y el DNI no pueden modificarse desde el perfil propio.
 
 ## Definition of Done
 
-- [ ] El usuario puede consultar y editar sus datos de contacto.
-- [ ] El cambio de contraseña exige la contraseña actual y se almacena cifrada.
-- [ ] Un usuario no puede acceder al perfil de otro.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] El usuario puede consultar y editar sus datos de contacto.
+- [x] El cambio de contraseña exige la contraseña actual, confirmación, política de complejidad y se almacena cifrada.
+- [x] Un usuario no puede acceder al perfil de otro.
+- [ ] Se ejecutan los escenarios de aceptación y los casos de error relevantes. (Pruebas agregadas; ejecución pendiente por incompatibilidad del PHPUnit disponible.)

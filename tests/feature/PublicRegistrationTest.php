@@ -119,7 +119,23 @@ final class PublicRegistrationTest extends CIUnitTestCase
                 'field' => 'email',
             ],
             [
+                'data' => ['phone' => '12abc456'],
+                'field' => 'phone',
+            ],
+            [
                 'data' => ['password' => 'short', 'password_confirm' => 'short'],
+                'field' => 'password',
+            ],
+            [
+                'data' => ['password' => 'clavesegura2026!', 'password_confirm' => 'clavesegura2026!'],
+                'field' => 'password',
+            ],
+            [
+                'data' => ['password' => 'ClaveSegura!', 'password_confirm' => 'ClaveSegura!'],
+                'field' => 'password',
+            ],
+            [
+                'data' => ['password' => 'ClaveSegura2026', 'password_confirm' => 'ClaveSegura2026'],
                 'field' => 'password',
             ],
             [
