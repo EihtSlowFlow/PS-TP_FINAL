@@ -1,8 +1,8 @@
 # Presupuesto y planificación — InmoGestión 2026
 
-> Última actualización: 06/11/2026. Este documento complementa a [`ANALISIS_DE_REQUERIMIENTOS.md`](ANALISIS_DE_REQUERIMIENTOS.md), que sigue siendo la fuente de las cifras (sección 8). Acá se deja asentado **por qué** salieron esas cifras, qué restricciones las condicionan y qué inconsistencias quedan por corregir.
+> Última actualización: 09/11/2026. Este documento complementa a [`ANALISIS_DE_REQUERIMIENTOS.md`](ANALISIS_DE_REQUERIMIENTOS.md), que sigue siendo la fuente de las cifras (sección 8). Acá se deja asentado **por qué** salieron esas cifras, qué restricciones las condicionan y qué inconsistencias quedan por corregir.
 >
-> **Fuentes:** la charla del equipo del 29/10/2026 ([`documentacion/discord proyecto 29-10-26.md`](documentacion/discord%20proyecto%2029-10-26.md)), contrastada con las clases del 17/9 y del 20/10 (`.context/`), el enunciado ([`2026 - inmogestion.md`](2026%20-%20inmogestion.md)) y los demás documentos del repositorio. La transcripción es un dictado automático con mucho ruido: solo se tomó lo que se entiende con claridad y coincide con otras fuentes. Lo dudoso se marca como tal.
+> **Fuentes:** la charla del equipo del 29/10/2026 ([`documentacion/discord proyecto 29-10-26.md`](documentacion/discord%20proyecto%2029-10-26.md)) y, para la confirmación de las cifras vigentes, la del 6/11/2026 ([`documentacion/discord proyecto 6-11-26.md`](documentacion/discord%20proyecto%206-11-26.md)), contrastadas con las clases del 17/9 y del 20/10 (`.context/`), el enunciado ([`2026 - inmogestion.md`](2026%20-%20inmogestion.md)) y los demás documentos del repositorio. Lo dudoso se marca como tal.
 
 ## Índice
 
@@ -127,6 +127,8 @@ Para corregir en [`ANALISIS_DE_REQUERIMIENTOS.md`](ANALISIS_DE_REQUERIMIENTOS.md
 | 6 | **"Todas las funcionalidades" en el enunciado** | La sección de entrega dice que en la fecha de la entrega final "se debe cumplir con todas las funcionalidades para aprobar la cursada", mientras que la matriz de requisitos separa cursada y final. En la charla también quedó la duda de qué implica terminar todo antes de tiempo para la promoción |
 
 **Actualización del 06/11/2026:** los puntos 1, 2, 4 y 5 quedaron resueltos al alinear la documentación con el análisis. La sección 9.1 del análisis fija 83,33 h y $1.500.000 como estimación vigente (punto 1) y explica la relación entre las dos escalas de puntos, que también está en el README de historias (punto 4). La sección 9.2 explica que las notificaciones forman parte del esfuerzo de la Fase 2, y HU-04 incluye para el final la consulta de usuarios dados de baja (punto 2). El `README.md` ya no tiene enlaces rotos (punto 5). **Siguen abiertos** el punto 3 (equivalencia de puntos a horas) y el 6 (qué se exige en la entrega).
+
+**Actualización del 09/11/2026:** en la charla del 6/11 el equipo revisó los documentos del proyecto y confirmó que la cifra buena es la del análisis de requerimientos (42 puntos: 33 de cursada y 9 del final, 83,33 horas y $1.500.000), no los totales de 81 y 104 puntos que aparecían en otros documentos. Es lo que ya quedó asentado en los puntos 1 y 4. En esa charla tampoco se resolvieron los puntos 3 y 6, que siguen abiertos. El resumen completo de la charla está en la sección 11 de [`ORGANIZACION_DEL_PROYECTO.md`](ORGANIZACION_DEL_PROYECTO.md).
 
 ---
 

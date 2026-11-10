@@ -111,7 +111,7 @@ Salen de [`.agents/AGENTS.md`](../.agents/AGENTS.md):
 | [`README.md`](../README.md) | Descripción general, tecnologías, cronograma y presupuesto |
 | [`.docs/ANALISIS_DE_REQUERIMIENTOS.md`](ANALISIS_DE_REQUERIMIENTOS.md) | **Fuente de verdad del alcance.** Alcance, roles, requerimientos RF/RNF, riesgos, sprints y presupuesto; la sección 9 fija el glosario de estados y los valores que el análisis deja abiertos |
 | [`.docs/PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md) | Cómo se llegó a la estimación: método, restricciones de tiempo y capacidad, tarifa, alcance, inconsistencias detectadas y decisiones pendientes |
-| [`.docs/documentacion/`](documentacion/) | Transcripciones de reuniones del equipo. Hoy: la charla de Discord del 29/10 sobre estimación y presupuesto (dictado automático, con mucho ruido) |
+| [`.docs/documentacion/`](documentacion/) | Notas de las reuniones del equipo. Hoy: la reunión de Discord del 29/10 sobre estimación y presupuesto y la del 6/11 sobre la revisión de la documentación, la base de datos y el plan de entrega |
 | [`.docs/base_de_datos/`](base_de_datos/MODELO_DE_DATOS.md) | Base de datos: DER, modelo relacional, decisiones resueltas, esquema en SQL para MySQL Workbench y cómo usarlos. La fuente de verdad son las migraciones de `app/Database/Migrations/` |
 | [`.docs/2026 - inmogestion.md`](2026%20-%20inmogestion.md) | Enunciado del trabajo y tabla de alcances por etapa |
 | [`.docs/GUIA TP-FINAL.md`](GUIA%20TP-FINAL.md) | Índice que pide la cátedra para el informe (incluye DER y modelo relacional en la sección 3.3) |
@@ -303,6 +303,27 @@ Detalle en [`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md) (s
 2. **Sprint en el tablero:** el tablero no tiene un campo de iteración (Sprint 1 y Sprint 2). Agregarlo permitiría ver el backlog a la izquierda y el sprint actual a continuación, como se propuso en la charla.
 3. **Reunión breve periódica:** se habló de la reunión diaria de 15 minutos de Scrum y uno de los integrantes dudó de su utilidad. No se decidió nada.
 
+### Charla del 6/11: lo que se habló y cómo quedó
+
+Fuente: [`documentacion/discord proyecto 6-11-26.md`](documentacion/discord%20proyecto%206-11-26.md). Esa reunión fue una revisión de los documentos, la base de datos y los prototipos, y un reparto del tiempo que quedaba hasta la entrega. La columna de la derecha se contrastó con el estado actual del repositorio.
+
+| Tema | Qué se habló | Cómo está hoy en el repositorio |
+|---|---|---|
+| Cifras de estimación | Se compararon tres totales en documentos distintos (42, 81 y 104 puntos). Se acordó que el bueno es el del análisis de requerimientos: 42 puntos (33 de cursada y 9 del final), 83,33 horas y $1.500.000 | Es la estimación vigente ([`PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md), sección 1). Los puntos del backlog son otra escala, explicada en el README de historias |
+| README de historias | Faltaba HU-03 y decía 27 historias cuando había 28 archivos | Corregido: incluye HU-03 y suma 28 historias |
+| Roles | El enunciado habla de cuatro roles pero describe tres | Cuatro roles: Administrador, Empleado, Propietario e Inquilino (nota del enunciado) |
+| Prototipos | Se comprobó que las pantallas coinciden con lo definido. Al actualizar los roles faltaban pantallas y se pidió generarlas con Stitch | `PROMPTS_STITCH_PANTALLAS_FALTANTES.md` y los prototipos nuevos en `.docs/prototipos_pantallas/` |
+| PHP | Se subió la versión del README de 7.4 a 8.2 | README y `composer.json` indican PHP `^8.2` |
+| Base de datos | Se revisaron las migraciones (una por tabla) y se pidió además un esquema y datos de carga para MySQL Workbench. La base quedó creada y verificada con 12 tablas, 16 claves foráneas, 24 restricciones CHECK, roles y administrador | Las 11 tablas del modelo más la tabla `migrations` de CodeIgniter suman las 12; en el esquema SQL se cuentan 16 claves foráneas y 24 CHECK. Esquema y datos en [`base_de_datos/`](base_de_datos/MODELO_DE_DATOS.md) |
+| Datos de prueba | Se notó que faltaba el empleado entre los usuarios | Agregado el rol Empleado y el usuario `employee.demo@example.com` en el `DemoSeeder` |
+| Rama de la base de datos | No hubo pull request sino una rama nueva. Faltaban las pruebas de integridad y el pull request | Trabajada en `feature/base-de-datos` (issue #22) |
+| Cierre de sesión (HU-03) | Se la consideró extra chica: destruir la sesión y ajustar los segundos de duración | Sigue pendiente |
+| PHPUnit | En la computadora de uno de los integrantes no había Composer ni PHPUnit (usa WAMP) | El README explica cómo correr las pruebas con el `phpunit-11.phar` suelto |
+| Issues de la Fase 2 | Solo se habían creado los issues de la cursada; los 9 del final no existían | Sigue así: HU-19 a HU-27 no tienen issues (sección 1) |
+| Plan de entrega | Se contaron 19 historias (las de la cursada) y unos 19 días hasta el 24, que se menciona como fecha de entrega "o antes". Hacer una por día no era realista. Se fijó una meta mínima: al menos 7 historias el domingo siguiente (se las nombró "1 a 7", que probablemente son HU-01 a HU-07) | Al 09/11 están mergeadas HU-01, HU-04 y HU-05 (pull requests #27, #28 y #29) |
+
+**Quedó sin precisar:** la fecha exacta del cierre del primer sprint ("el domingo siguiente") y qué historias son exactamente las "1 a 7" de la meta mínima.
+
 ---
 
 ## 12. Observaciones sobre el repositorio
@@ -333,8 +354,9 @@ Resueltas el 06/11/2026 (ya no hace falta corregirlas): los enlaces rotos y la v
 | 28/10/2026 | Estimación del issue de base de datos corregida de 999 a 8 puntos, con desglose |
 | 28/10/2026 | Reparto en partes iguales entre los tres integrantes y orden cronológico de trabajo |
 | 28/10/2026 | Este documento |
-| 06/11/2026 | Analizada la transcripción de la charla del 29/10 (`.docs/documentacion/`). Se creó `PRESUPUESTO_Y_PLANIFICACION.md` y se agregaron a este documento la entrega, las decisiones pendientes de presupuesto y de proceso, y las observaciones sobre los puntos |
+| 06/11/2026 | Analizada la reunión del 29/10 (notas en `.docs/documentacion/`). Se creó `PRESUPUESTO_Y_PLANIFICACION.md` y se agregaron a este documento la entrega, las decisiones pendientes de presupuesto y de proceso, y las observaciones sobre los puntos |
 | 06/11/2026 | Documentación alineada con el análisis de requerimientos: sección 9 del análisis, totales y correspondencia de puntos en el README de historias, campos de inmueble y contrato, estados, alertas y prototipos |
 | 06/11/2026 | Base de datos (#22) en la rama `feature/base-de-datos`: 11 migraciones, seeders, datos de prueba, esquema para Workbench y pruebas de integridad con PHPUnit. Se agregó el rol Empleado (cuatro roles), se actualizaron 19 issues de GitHub y se agregaron los prompts y los prototipos de las pantallas que faltaban |
 | 09/11/2026 | HU-01, HU-04 y HU-05 implementadas y mergeadas (pull requests #27, #28 y #29) |
+| 09/11/2026 | Agregadas las notas de la reunión del 6/11 (`.docs/documentacion/discord proyecto 6-11-26.md`) y resumido lo acordado en la sección 11 |
 | 09/11/2026 | Review de HU-01, HU-04 y HU-05 y corrección de los 9 hallazgos (3 medios y 6 menores), con PHPUnit instalado: 85 tests y 512 aserciones en verde. Detalle en [`REVIEW-HU-01-04-05_handoff.md`](exec-plans/REVIEW-HU-01-04-05_handoff.md), en la rama `fix/review-hu-01-04-05` |
