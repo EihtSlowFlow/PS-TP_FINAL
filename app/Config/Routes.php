@@ -9,6 +9,8 @@ $routes->get('/', 'Home::index');
 $routes->group('auth', static function (RouteCollection $routes): void {
     $routes->get('login', 'AuthController::login');
     $routes->post('login', 'AuthController::attemptLogin');
+    // HU-03: POST only (with the global CSRF filter) so a link or an image cannot log a user out.
+    $routes->post('logout', 'AuthController::logout');
 });
 
 // Administration & Employee operational routes (HU-01 / R-7)

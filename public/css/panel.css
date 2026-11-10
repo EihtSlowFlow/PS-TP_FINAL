@@ -140,6 +140,11 @@ body.panel-page {
     gap: 0.5rem;
 }
 
+.logout-form {
+    margin: 0;
+    flex-shrink: 0;
+}
+
 .sidebar-user-info {
     display: flex;
     align-items: center;
