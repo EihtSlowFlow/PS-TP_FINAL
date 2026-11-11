@@ -50,3 +50,18 @@ Además, puede buscar por inquilino, propietario o dirección y filtrar por esta
 - [ ] El propietario solo ve los contratos de sus inmuebles.
 - [ ] Se deniega el acceso a contratos ajenos.
 - [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+
+## Notas de integración (desde HU-10)
+
+- Ya existen `ContractModel` (`app/Models/ContractModel.php`) y `ContractController` con la ficha del contrato
+  (`GET /admin/contratos/(:num)`, vista `admin/contracts/show.php`, pantalla ADM-08). La ficha es mínima (partes,
+  plazo y condiciones); el listado, la búsqueda y los filtros son de esta historia.
+- `ContractModel::findWithDetails()` une el inmueble y los dos usuarios **sin filtrar por `deleted_at`**, para que un
+  inquilino, un propietario o un inmueble dado de baja siga apareciendo en el historial. Reutilizar ese criterio en el
+  listado.
+- Las rutas de contratos están en el grupo `auth` + `role:admin,employee`. Para el propietario hay que agregar un grupo
+  propio (`propietario/contratos`) que filtre por `contracts.owner_id` igual al usuario de la sesión.
+- El enlace «Contratos» del menú lateral (`layouts/panel.php`) apunta hoy a `admin/contratos/nuevo`; cuando exista el
+  listado hay que apuntarlo a `admin/contratos`. Los enlaces «Volver al listado de inmuebles» de la ficha y del
+  formulario también deberían volver al listado de contratos.
+- `ContractController::show()` redirige al panel si el contrato no existe; con el listado puede redirigir a él.

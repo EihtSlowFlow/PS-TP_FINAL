@@ -25,6 +25,11 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static fu
     $routes->post('inmuebles', 'PropertyController::store');
     $routes->get('inmuebles/editar/(:num)', 'PropertyController::edit/$1');
     $routes->post('inmuebles/editar/(:num)', 'PropertyController::update/$1');
+
+    // Lease contracts: creation and contract file (HU-10; the listing is HU-11 and the closing HU-12)
+    $routes->get('contratos/nuevo', 'ContractController::create');
+    $routes->post('contratos', 'ContractController::store');
+    $routes->get('contratos/(:num)', 'ContractController::show/$1');
 });
 
 // Exclusive Administrator routes: User management and logical deactivation (HU-04, HU-05)
