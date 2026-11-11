@@ -7,14 +7,14 @@
 | **Proyecto** | InmoGestión 2026 |
 | **Historia de usuario / Issue** | HU-13 — Emisión masiva de cuotas · [#6](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/6) |
 | **Sprint / Hito** | Sprint 2 (Módulo financiero: cuotas y mora) |
-| **Rama** | `feature/hu-13-emision-cuotas` (creada desde `feature/hu-10-alta-contratos`: HU-13 depende de HU-10 y esa rama todavía no está en `main`) |
-| **Último commit** | Sin commit: los cambios están en el árbol de trabajo, sin confirmar |
-| **Pull Request** | Sin PR |
-| **Fecha de cierre** | 2026-11-10 23:52 |
-| **Inicio / Fin** | 2026-11-10 23:28 → 2026-11-10 23:52 (el «fin» es el cierre de la implementación; todavía no hay commit) |
-| **Tiempo invertido** | 24 min efectivos · 24 min de reloj · Medido · sin pausas de más de 10 minutos. Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
+| **Rama** | `feature/hu-13-emision-cuotas` (creada desde `feature/hu-10-alta-contratos`, que ya estaba fusionada en `main`; luego se fusionó `origin/main` en la rama) |
+| **Último commit** | `4886e8b` — fix: reiniciar el estado de transacción de la conexión tras revertir un guardado fallido (antes: `5026276` feat, `5683474` docs y `f0037f9` merge de `main`) |
+| **Pull Request** | [#39](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/39) → `main` |
+| **Fecha de cierre** | 2026-11-11 00:20 |
+| **Inicio / Fin** | 2026-11-10 23:28 → 2026-11-11 00:20 (implementación 23:28–23:52; commit, merge de `main`, corrección, push y pull request 23:53–00:20) |
+| **Tiempo invertido** | 51 min efectivos · 51 min de reloj · Medido (implementación, 24 min) y reconstruido por los commits (cierre, 27 min) · sin pausas de más de 10 minutos. Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
 | **Autor / Agente** | Claude Code con `LauPerisse` |
-| **Estado global** | 🟢 Completada (falta commit, pull request y el comentario del tiempo en el issue) |
+| **Estado global** | 🟢 Completada (pull request abierto; falta el comentario del tiempo en el issue y la revisión del equipo) |
 | **Avance estimado** | 100 % del alcance del issue |
 
 **Resumen:** Se implementó la emisión de cuotas mensuales para administradores y empleados: la pantalla `ADM-09a` (`/admin/cuotas/emitir`, selector de mes y año, vista previa y confirmación, masiva o de un solo contrato) y el informe `ADM-09b` (`/admin/cuotas/emitir/resultado`, cuotas emitidas, omitidas y monto a recaudar). La emisión es una transacción que bloquea los contratos, omite los que ya tienen cuota del período, numera de forma correlativa por contrato y revierte todo si algo falla. Se agregaron 110 pruebas (82 de integración y 28 unitarias).
@@ -52,7 +52,7 @@ Referencia: [`.docs/historias_de_usuario/HU-13_emision_masiva_cuotas.md`](../his
 | Capa | Archivo | Tipo | Descripción |
 |---|---|---|---|
 | Model | `app/Models/InstallmentModel.php` | Nuevo | Estados y etiquetas, `buildPeriod()` (año y mes → primer día del mes, con límites 2000–2100), `labelForPeriod()`, `dueDateFor()`, `sumAmounts()` (suma exacta en centavos), `issueForPeriod()` (transacción con bloqueo, omisión de duplicados y numeración correlativa) y `findWithDetails()` para el informe |
-| Model | `app/Models/ContractModel.php` | Modificado | `findInForceCoveringPeriod()` (vista previa, con la cuota ya emitida si existe), `lockInForceCoveringPeriod()` (`FOR UPDATE`, en orden de `id`) y `coverageCondition()` (la regla de «cubre el período») |
+| Model | `app/Models/ContractModel.php` | Modificado | `findInForceCoveringPeriod()` (vista previa, con la cuota ya emitida si existe), `lockInForceCoveringPeriod()` (`FOR UPDATE`, en orden de `id`) y `coverageCondition()` (la regla de «cubre el período»). También `resetTransStatus()` tras el rollback de `createAndRentProperty()` (ver R-8) |
 | Controller | `app/Controllers/InstallmentController.php` | Nuevo | `emit` (formulario y vista previa), `issue` (validación y emisión) y `result` (informe), con los mensajes |
 | Routes | `app/Config/Routes.php` | Modificado | `GET /admin/cuotas/emitir`, `POST /admin/cuotas/emitir`, `GET /admin/cuotas/emitir/resultado` dentro del grupo `auth` + `role:admin,employee` |
 | View | `app/Views/admin/installments/emit.php` | Nuevo | Selector de período, cuatro tarjetas de resumen, tabla de vista previa con el botón «Emitir solo esta» por fila y confirmación (pantalla `ADM-09a`) |
@@ -62,6 +62,7 @@ Referencia: [`.docs/historias_de_usuario/HU-13_emision_masiva_cuotas.md`](../his
 | Test | `tests/feature/InstallmentIssuingTest.php` | Nuevo | 82 casos de prueba (los escenarios 1 a 5, vista previa, numeración, atomicidad y permisos) |
 | Test | `tests/unit/InstallmentPeriodTest.php` | Nuevo | 28 casos: período, etiqueta, vencimiento, suma de importes y etiquetas de estado |
 | Test | `tests/feature/AuthAccessControlTest.php` | Modificado | La prueba del menú por rol incluye «Cuotas» |
+| Test | `tests/feature/ContractCreationTest.php` | Modificado | La prueba de atomicidad comprueba que la conexión no queda en estado de transacción fallida (R-8) |
 | Docs | `.docs/historias_de_usuario/HU-13…`, `.docs/REGISTRO_DE_TIEMPOS.md` y este informe | Modificado / Nuevo | DoD de HU-13, decisiones y notas de integración, fila del tiempo |
 
 **Cambios de esquema de BD:** Ninguno (usa `installments`, `contracts`, `properties` y `users`, creadas en el issue #22; la tabla ya tiene la clave única `(contract_id, period)`, la de `(contract_id, number)` y las restricciones `CHECK`).
@@ -99,7 +100,8 @@ Referencia: [`.docs/historias_de_usuario/HU-13_emision_masiva_cuotas.md`](../his
 |---|---|---|
 | Tests de HU-13 | `php phpunit-11.phar -c phpunit.dist.xml --no-coverage tests/feature/InstallmentIssuingTest.php` | ✅ 82 casos / 1202 aserciones |
 | Tests unitarios | `… tests/unit/InstallmentPeriodTest.php` | ✅ 28 casos / 41 aserciones |
-| Suite completa | Igual, sin archivo | ✅ 348 de 349 · **349 tests / 3243 aserciones** (antes 241) · ❌ 1 falla previa, ver R-1. Corrida antes de agregar las dos últimas pruebas (selección de año enviada como lista); después se repitió completo el archivo de HU-13 (82 casos OK) y no la suite entera (351 tests en total) |
+| Suite completa | Igual, sin archivo | Sobre la rama con `main` fusionado: **399 tests / 3614 aserciones** · ✅ 396 pasan · ❌ 3 errores previos, los mismos que da `origin/main` sin estos cambios (ver R-1). Antes de la corrección de la conexión compartida daba 20 errores: esos 3 más 17 de `PasswordResetTest` (ver R-8) |
+| Comparación con `main` | Los tres archivos con errores, corridos en una copia limpia de `origin/main` | ✅ Fallan igual, sin cambios de HU-13 |
 | Sintaxis | `php -l` en los 10 PHP nuevos o modificados | ✅ |
 | Revisión visual | Páginas renderizadas por la aplicación con los datos de demostración en la base de pruebas y abiertas en el navegador: vista previa del mes siguiente (4 contratos «Se emitirá»), del mes en curso (4 «Ya emitida», total 0) e informe | ✅ Se ven como el prototipo (adaptado al estilo del panel). Se corrigieron dos desbordes que mostró la revisión (importes partidos en dos líneas y etiqueta de estado demasiado larga) |
 | Hallazgos de la propia revisión | Una selección de año enviada como lista (`year[]=…`) y volviendo a mostrar el formulario | Corregido (ver sección 8) |
@@ -118,13 +120,14 @@ Referencia: [`.docs/historias_de_usuario/HU-13_emision_masiva_cuotas.md`](../his
 
 | ID | Tipo | Descripción | Severidad | Acción sugerida |
 |---|---|---|---|---|
-| R-1 | Falla previa | `PublicRegistrationTest::testRegistrationPageRendersOnlyPublicRolesAndCsrfField` (HU-02) falla en la suite completa; ya fallaba antes de tocar código de esta historia (ver HU-10, R-1) | Media | Volver a correrla tras fusionar `origin/main`; si sigue fallando, avisar a quien hizo HU-02 |
+| R-1 | Falla previa | Tres pruebas de `main` fallan en esta máquina con el mismo error del `DOMParser` del framework («Attempt to read property "length" on bool»): `PublicRegistrationTest::testRegistrationPageRendersOnlyPublicRolesAndCsrfField` (HU-02) y `ProfileManagementTest::testClientCanSeeOnlyTheirOwnProfileAndImmutableAccountDetails` con `owner` y con `tenant` (HU-06). Fallan igual en una copia limpia de `origin/main` | Media | Avisar a quienes hicieron HU-02 y HU-06; el selector que usan no lo soporta el `DOMParser` (ver cómo lo resuelve `InstallmentIssuingTest::seeXPath()`) |
 | R-2 | Pendiente de definir | La regla de «cubre el período» y la política de períodos pasados y futuros son decisiones mías, no del análisis | Media | Confirmarlas con el equipo; el cambio de la regla es una función (`ContractModel::coverageCondition()`) y se refleja en la prueba de los 24 períodos |
-| R-3 | Dependencia | Esta rama sale de `feature/hu-10-alta-contratos`, que todavía no está fusionada en `main`: el pull request de HU-13 arrastra los commits de HU-10 si se abre antes | Media | Fusionar primero el PR de HU-10, o abrir el de HU-13 contra esa rama |
+| R-3 | Resuelto | La rama salía de `feature/hu-10-alta-contratos`; al abrir el pull request se comprobó que HU-10 ya estaba en `main`, así que el PR #39 solo trae los commits de HU-13 | — | Cerrado |
 | R-4 | Pendiente de definir | Permisos del empleado sobre la emisión (el análisis: «por definir») | Baja | Confirmarlo con el equipo; es un cambio de filtro en las tres rutas |
 | R-5 | Deuda | `formatMoney` y `formatDate` están repetidos como funciones locales en cada vista (también en las de HU-07 y HU-10) | Baja | Moverlos a un helper cuando se toquen esas vistas |
 | R-6 | Caso borde | Un contrato vigente cuyo inquilino fue dado de baja sigue emitiendo cuotas (la vista previa lo marca como «dado de baja») | Baja | Decidirlo con el equipo junto con R-7 de `REVIEW-HU-01-04-05_handoff.md` (baja de usuarios con contratos vigentes) |
 | R-7 | Alcance | No hay forma de «deshacer» una emisión (anular cuotas emitidas por error) | Baja | Si hace falta, es una historia aparte; mientras tanto la cuota emitida es modificable solo por las historias de mora y pagos |
+| R-8 | Deuda (resuelta aquí) | Tras un guardado fallido dentro de una transacción, la conexión compartida de las pruebas quedaba en estado «fallida» (modo estricto) y la siguiente transacción se revertía sola: la prueba de atomicidad de HU-10 hacía fallar 17 pruebas de `PasswordResetTest` (HU-03b), también en `main`. Se agregó `resetTransStatus()` tras el rollback en `ContractModel` (HU-10) y en `InstallmentModel`, con una aserción de regresión en cada prueba de atomicidad | Media | Cualquier modelo nuevo con `transBegin()`/`transRollback()` manual debe hacer lo mismo |
 
 ---
 
@@ -132,8 +135,8 @@ Referencia: [`.docs/historias_de_usuario/HU-13_emision_masiva_cuotas.md`](../his
 
 | Prioridad | Tarea | Archivos previstos | Skills a cargar |
 |---|---|---|---|
-| 1 | Confirmar el commit, abrir el pull request desde `feature/hu-13-emision-cuotas` y comentar el tiempo en el issue #6 (el `gh` de esta máquina no tiene sesión: `gh auth login`) | — | — |
-| 2 | Fusionar `origin/main` y el PR de HU-10 antes del PR de HU-13 y repetir la suite | — | — |
+| 1 | Revisión del equipo del [PR #39](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/39) y comentar el tiempo en el issue #6 (el `gh` de esta máquina no tiene sesión: `gh auth login`; el PR se abrió desde Chrome) | — | — |
+| 2 | Confirmar con el equipo las decisiones de la sección 4 (regla de «cubre el período», períodos pasados y futuros, empleado) | `app/Models/ContractModel.php` | `ci4-data-layer` |
 | 3 | HU-14 — Cálculo del recargo por mora (pasar `pending` vencidas a `overdue` y calcular `late_fee`) | `app/Models/InstallmentModel.php`, `app/Controllers/`, `app/Views/` | `ci4-core`, `ci4-data-layer`, `qa-regression` |
 | 4 | HU-15 — Estado de cuenta del inquilino (consume las cuotas emitidas) | `app/Controllers/DashboardController.php`, `app/Models/InstallmentModel.php` | `ci4-core`, `ci4-data-layer`, `frontend-html-css` |
 
@@ -146,7 +149,8 @@ Referencia: [`.docs/historias_de_usuario/HU-13_emision_masiva_cuotas.md`](../his
 
 | Fecha | Autor | Duración | Resumen | Commit / PR |
 |---|---|---|---|---|
-| 2026-11-10 | Claude Code con `LauPerisse` | 24 min | Lectura del issue #6, de HU-10 y del código de contratos; `InstallmentModel` con la transacción, `InstallmentController`, rutas, vistas, estilos, 110 pruebas, revisión visual con datos de demostración, corrección de la selección de año enviada como lista y documentación. Suite completa: 349 tests / 3243 aserciones, 1 falla previa de HU-02 (antes de las dos últimas pruebas). | Rama `feature/hu-13-emision-cuotas`, sin commit |
+| 2026-11-10 | Claude Code con `LauPerisse` | 24 min | Lectura del issue #6, de HU-10 y del código de contratos; `InstallmentModel` con la transacción, `InstallmentController`, rutas, vistas, estilos, 110 pruebas, revisión visual con datos de demostración, corrección de la selección de año enviada como lista y documentación. Suite completa: 349 tests / 3243 aserciones, 1 falla previa de HU-02 (antes de las dos últimas pruebas). | `5026276`, `5683474` (rama `feature/hu-13-emision-cuotas`) |
+| 2026-11-10 / 11 | Claude Code con `LauPerisse` | 27 min | Commit de la implementación, merge de `origin/main` con conflictos en el registro de tiempos y en `panel.css`, diagnóstico de 17 errores de `PasswordResetTest` (ya presentes en `main`, causados por el estado de transacción de la conexión compartida) y su corrección, comparación con una copia limpia de `main`, push y apertura del pull request. Suite completa: 399 tests / 3614 aserciones, 3 errores previos de HU-02 y HU-06 | `f0037f9`, `4886e8b` · [PR #39](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/39) |
 
 ---
 
