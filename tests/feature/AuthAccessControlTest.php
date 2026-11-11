@@ -108,17 +108,17 @@ final class AuthAccessControlTest extends CIUnitTestCase
     public static function panelNavigationProvider(): array
     {
         return [
-            'admin sees dashboard, users, properties and contracts' => [
-                'admin', 'admin/dashboard', ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos/nuevo'], ['propietario/dashboard', 'inquilino/estado-cuenta'],
+            'admin sees dashboard, users, properties, contracts and installments' => [
+                'admin', 'admin/dashboard', ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos/nuevo', 'admin/cuotas/emitir'], ['propietario/dashboard', 'inquilino/estado-cuenta'],
             ],
-            'employee sees dashboard, properties and contracts but not users' => [
-                'employee', 'admin/dashboard', ['admin/dashboard', 'admin/inmuebles', 'admin/contratos/nuevo'], ['admin/usuarios', 'propietario/dashboard'],
+            'employee sees dashboard, properties, contracts and installments but not users' => [
+                'employee', 'admin/dashboard', ['admin/dashboard', 'admin/inmuebles', 'admin/contratos/nuevo', 'admin/cuotas/emitir'], ['admin/usuarios', 'propietario/dashboard'],
             ],
             'owner sees owner dashboard only' => [
-                'owner', 'propietario/dashboard', ['propietario/dashboard'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos/nuevo'],
+                'owner', 'propietario/dashboard', ['propietario/dashboard'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos/nuevo', 'admin/cuotas/emitir'],
             ],
             'tenant sees account state only' => [
-                'tenant', 'inquilino/estado-cuenta', ['inquilino/estado-cuenta'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos/nuevo'],
+                'tenant', 'inquilino/estado-cuenta', ['inquilino/estado-cuenta'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos/nuevo', 'admin/cuotas/emitir'],
             ],
         ];
     }

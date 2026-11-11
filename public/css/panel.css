@@ -1185,3 +1185,91 @@ select.form-control {
 .confirm-modal-text { font-size: 0.9rem; line-height: 1.5; margin: 0 0 1.25rem; }
 .confirm-modal-actions { display: flex; justify-content: flex-end; gap: 0.5rem; }
 .confirm-modal-actions .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Installment issuing (HU-13) */
+.panel-flash-info {
+    background: var(--info-soft);
+    color: var(--info-text);
+    border-left-color: var(--info);
+}
+
+.period-form {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) auto;
+    gap: 1.15rem;
+    align-items: end;
+    margin-bottom: 0.85rem;
+}
+
+.table-card-heading {
+    padding: 1.25rem 1.5rem 1rem;
+}
+
+.table-total-row td {
+    background: var(--surface-muted);
+    font-weight: 700;
+    color: var(--heading);
+    border-bottom: none;
+}
+
+.emit-confirm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.result-kpi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.badge-installment-pending {
+    background: var(--warning-soft);
+    color: var(--warning-text);
+}
+
+.badge-installment-overdue {
+    background: var(--danger-soft);
+    color: var(--danger-text);
+}
+
+.badge-installment-under_review {
+    background: var(--info-soft);
+    color: var(--info-text);
+}
+
+.badge-installment-paid {
+    background: var(--success-soft);
+    color: var(--success-text);
+}
+
+@media (max-width: 900px) {
+    .period-form,
+    .result-kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .emit-confirm {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+.nowrap-cell {
+    white-space: nowrap;
+}
+
+.emit-kpi-grid .kpi-value {
+    font-size: 1.35rem;
+}
+
+.emit-confirm .btn {
+    white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+    .emit-kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
