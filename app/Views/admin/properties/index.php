@@ -5,11 +5,21 @@
  * @var list<array<string, mixed>> $properties
  * @var array{items: list<array<string, mixed>>, total: int, perPage: int, currentPage: int, totalPages: int, from: int, to: int} $pagination
  * @var array{available: int, rented: int, maintenance: int, total: int} $statusCounts
+ * @var array{status: string, type: string, min_price: string, max_price: string, owner_id: string} $filters
+ * @var array<string, string> $filterErrors
+ * @var list<array{id: int, first_name: string, last_name: string, deleted_at: string|null}> $owners
  */
 use App\Models\PropertyModel;
 
-$buildPageUrl = static function (int $targetPage) use ($pagination): string {
+$buildPageUrl = static function (int $targetPage) use ($pagination, $filters): string {
     $query = [];
+
+    foreach ($filters as $key => $value) {
+        if ($value !== '') {
+            $query[$key] = $value;
+        }
+    }
+
     if ($pagination['perPage'] !== 10) {
         $query['per_page'] = (string) $pagination['perPage'];
     }
@@ -75,6 +85,63 @@ $this->extend('layouts/panel');
                 </div>
             </section>
 
+            <section class="panel-card catalog-filters" aria-labelledby="property-filters-heading">
+                <h2 id="property-filters-heading" class="section-title">Filtrar inmuebles</h2>
+                <form action="<?= esc(site_url('admin/inmuebles')) ?>" method="get" class="catalog-filter-form">
+                    <div class="form-field">
+                        <label for="filter-status">Estado</label>
+                        <select id="filter-status" name="status" class="form-control<?= isset($filterErrors['status']) ? ' is-invalid' : '' ?>">
+                            <option value="">Todos los estados</option>
+                            <?php foreach (PropertyModel::STATUS_LABELS as $statusValue => $statusLabel): ?>
+                                <option value="<?= esc($statusValue) ?>"<?= $filters['status'] === $statusValue ? ' selected' : '' ?>>
+                                    <?= esc($statusLabel) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?php if (isset($filterErrors['status'])): ?><span class="field-error" role="alert"><?= esc($filterErrors['status']) ?></span><?php endif; ?>
+                    </div>
+                    <div class="form-field">
+                        <label for="filter-type">Tipo</label>
+                        <select id="filter-type" name="type" class="form-control<?= isset($filterErrors['type']) ? ' is-invalid' : '' ?>">
+                            <option value="">Todos los tipos</option>
+                            <?php foreach (PropertyModel::TYPE_LABELS as $typeValue => $typeLabel): ?>
+                                <option value="<?= esc($typeValue) ?>"<?= $filters['type'] === $typeValue ? ' selected' : '' ?>>
+                                    <?= esc($typeLabel) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?php if (isset($filterErrors['type'])): ?><span class="field-error" role="alert"><?= esc($filterErrors['type']) ?></span><?php endif; ?>
+                    </div>
+                    <div class="form-field">
+                        <label for="filter-owner">Propietario</label>
+                        <select id="filter-owner" name="owner_id" class="form-control<?= isset($filterErrors['owner_id']) ? ' is-invalid' : '' ?>">
+                            <option value="">Todos los propietarios</option>
+                            <?php foreach ($owners as $owner): ?>
+                                <?php $ownerLabel = trim($owner['first_name'] . ' ' . $owner['last_name']); ?>
+                                <option value="<?= esc((string) $owner['id']) ?>"<?= $filters['owner_id'] === (string) $owner['id'] ? ' selected' : '' ?>>
+                                    <?= esc($ownerLabel) ?><?= $owner['deleted_at'] !== null ? ' (dado de baja)' : '' ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?php if (isset($filterErrors['owner_id'])): ?><span class="field-error" role="alert"><?= esc($filterErrors['owner_id']) ?></span><?php endif; ?>
+                    </div>
+                    <div class="form-field">
+                        <label for="filter-min-price">Precio mínimo</label>
+                        <input id="filter-min-price" name="min_price" type="number" min="0.01" step="0.01" value="<?= esc($filters['min_price']) ?>" class="form-control<?= isset($filterErrors['min_price']) ? ' is-invalid' : '' ?>">
+                        <?php if (isset($filterErrors['min_price'])): ?><span class="field-error" role="alert"><?= esc($filterErrors['min_price']) ?></span><?php endif; ?>
+                    </div>
+                    <div class="form-field">
+                        <label for="filter-max-price">Precio máximo</label>
+                        <input id="filter-max-price" name="max_price" type="number" min="0.01" step="0.01" value="<?= esc($filters['max_price']) ?>" class="form-control<?= isset($filterErrors['max_price']) ? ' is-invalid' : '' ?>">
+                        <?php if (isset($filterErrors['max_price'])): ?><span class="field-error" role="alert"><?= esc($filterErrors['max_price']) ?></span><?php endif; ?>
+                    </div>
+                    <div class="catalog-filter-actions">
+                        <a href="<?= esc(site_url('admin/inmuebles')) ?>" class="btn btn-secondary">Limpiar</a>
+                        <button type="submit" class="btn btn-primary">Aplicar filtros</button>
+                    </div>
+                </form>
+            </section>
+
             <section class="panel-card table-card" aria-label="Listado de inmuebles">
                 <div class="table-responsive">
                     <table class="users-table">
@@ -93,7 +160,7 @@ $this->extend('layouts/panel');
                             <?php if ($properties === []): ?>
                                 <tr>
                                     <td colspan="7" class="empty-table-cell">
-                                        Todavía no hay inmuebles registrados.
+                                        No se encontraron inmuebles con los filtros seleccionados.
                                     </td>
                                 </tr>
                             <?php else: ?>

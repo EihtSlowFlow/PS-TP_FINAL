@@ -24,17 +24,18 @@ class PropertyController extends BaseController
     public const RENTED_STATUS_LOCKED_MESSAGE = 'El estado «Alquilado» lo asigna el contrato y no se puede modificar desde el inmueble.';
 
     /**
-     * Renders the paginated property listing (HU-07 Scenario 1 shows new properties here).
+     * Renders the administrator and employee catalog with filters.
      */
     public function index(): string
     {
         $propertyModel = model(PropertyModel::class);
-
-        $page    = max(1, (int) $this->request->getGet('page'));
-        $perPage = (int) $this->request->getGet('per_page');
-        $perPage = $perPage > 0 ? min(50, $perPage) : 10;
-
-        $pagination = $propertyModel->paginateWithOwner($perPage, $page);
+        $pageData     = $this->catalogPage();
+        $filterData   = $this->catalogFilters(true, true);
+        $pagination   = $propertyModel->paginateWithOwner(
+            $pageData['perPage'],
+            $pageData['page'],
+            $filterData['filters']
+        );
 
         return view('admin/properties/index', array_merge($this->panelContext(
             pageTitle: 'Inmuebles',
@@ -44,7 +45,59 @@ class PropertyController extends BaseController
             'properties'   => $pagination['items'],
             'pagination'   => $pagination,
             'statusCounts' => $propertyModel->getStatusCounts(),
+            'filters'      => $filterData['values'],
+            'filterErrors' => $filterData['errors'],
+            'owners'       => $propertyModel->getOwnerFilterOptions(),
         ]));
+    }
+
+    /**
+     * Renders the authenticated owner's own properties only.
+     */
+    public function ownerIndex(): string
+    {
+        $propertyModel = model(PropertyModel::class);
+        $pageData      = $this->catalogPage();
+        $filterData    = $this->catalogFilters(true, false);
+        $pagination    = $propertyModel->paginateForOwner(
+            (int) session()->get('user_id'),
+            $pageData['perPage'],
+            $pageData['page'],
+            $filterData['filters']
+        );
+
+        return view('properties/owner_catalog', array_merge($this->panelContext(
+            pageTitle: 'Mis inmuebles',
+            breadcrumb: 'Mis inmuebles',
+            activeMenu: 'propietario-inmuebles'
+        ), [
+            'properties'   => $pagination['items'],
+            'pagination'   => $pagination,
+            'filters'      => $filterData['values'],
+            'filterErrors' => $filterData['errors'],
+        ]));
+    }
+
+    /**
+     * Renders the public catalog with available properties and public fields only.
+     */
+    public function publicIndex(): string
+    {
+        $propertyModel = model(PropertyModel::class);
+        $pageData      = $this->catalogPage();
+        $filterData    = $this->catalogFilters(false, false);
+        $pagination    = $propertyModel->paginatePublic(
+            $pageData['perPage'],
+            $pageData['page'],
+            $filterData['filters']
+        );
+
+        return view('properties/public_catalog', [
+            'properties'   => $pagination['items'],
+            'pagination'   => $pagination,
+            'filters'      => $filterData['values'],
+            'filterErrors' => $filterData['errors'],
+        ]);
     }
 
     /**
@@ -400,5 +453,116 @@ class PropertyController extends BaseController
         }
 
         return $options;
+    }
+
+    /**
+     * @return array{page: int, perPage: int}
+     */
+    private function catalogPage(): array
+    {
+        $pageValue    = $this->request->getGet('page');
+        $perPageValue = $this->request->getGet('per_page');
+        $page         = is_scalar($pageValue) && ctype_digit((string) $pageValue) ? max(1, (int) $pageValue) : 1;
+        $perPage      = is_scalar($perPageValue) && ctype_digit((string) $perPageValue) ? (int) $perPageValue : 10;
+
+        return [
+            'page'    => $page,
+            'perPage' => $perPage > 0 ? min(50, $perPage) : 10,
+        ];
+    }
+
+    /**
+     * Validates catalog query parameters and returns only supported filter values.
+     *
+     * @return array{
+     *     filters: array<string, string|int|float>,
+     *     values: array{status: string, type: string, min_price: string, max_price: string, owner_id: string},
+     *     errors: array<string, string>
+     * }
+     */
+    private function catalogFilters(bool $allowStatus, bool $allowOwner): array
+    {
+        $values = [
+            'status'    => '',
+            'type'      => '',
+            'min_price' => '',
+            'max_price' => '',
+            'owner_id'  => '',
+        ];
+        $filters = [];
+        $errors  = [];
+        $fields  = ['type', 'min_price', 'max_price'];
+
+        if ($allowStatus) {
+            $fields[] = 'status';
+        }
+
+        if ($allowOwner) {
+            $fields[] = 'owner_id';
+        }
+
+        foreach ($fields as $field) {
+            $raw = $this->request->getGet($field);
+
+            if ($raw === null) {
+                continue;
+            }
+
+            if (! is_string($raw) && ! is_numeric($raw)) {
+                $errors[$field] = 'El filtro ingresado no es válido.';
+                continue;
+            }
+
+            $value          = trim((string) $raw);
+            $values[$field] = $value;
+
+            if ($value === '') {
+                continue;
+            }
+
+            if ($field === 'status') {
+                if (! array_key_exists($value, PropertyModel::STATUS_LABELS)) {
+                    $errors[$field] = 'Seleccioná un estado válido.';
+                    continue;
+                }
+
+                $filters[$field] = $value;
+            } elseif ($field === 'type') {
+                if (! array_key_exists($value, PropertyModel::TYPE_LABELS)) {
+                    $errors[$field] = 'Seleccioná un tipo de inmueble válido.';
+                    continue;
+                }
+
+                $filters[$field] = $value;
+            } elseif ($field === 'owner_id') {
+                if (preg_match('/^[1-9][0-9]*$/D', $value) !== 1) {
+                    $errors[$field] = 'Seleccioná un propietario válido.';
+                    continue;
+                }
+
+                $filters[$field] = (int) $value;
+            } else {
+                if (
+                    preg_match('/^[0-9]+(?:\.[0-9]{1,2})?$/D', $value) !== 1
+                    || ! is_finite((float) $value)
+                    || (float) $value <= 0
+                ) {
+                    $errors[$field] = 'Ingresá un precio mayor a cero con hasta dos decimales.';
+                    continue;
+                }
+
+                $filters[$field] = (float) $value;
+            }
+        }
+
+        if (
+            isset($filters['min_price'], $filters['max_price'])
+            && (float) $filters['min_price'] > (float) $filters['max_price']
+        ) {
+            $errors['max_price'] = 'El precio máximo debe ser igual o mayor al precio mínimo.';
+            unset($filters['min_price'], $filters['max_price']);
+        }
+
+        return ['filters' => $filters, 'values' => $values, 'errors' => $errors];
     }
 }

@@ -66,6 +66,9 @@ $flashSuccess = session()->getFlashdata('success');
                     <a href="<?= esc(site_url('propietario/dashboard')) ?>" class="sidebar-link<?= $activeMenu === 'propietario-dashboard' ? ' is-active' : '' ?>">
                         <span>Dashboard</span>
                     </a>
+                    <a href="<?= esc(site_url('propietario/inmuebles')) ?>" class="sidebar-link<?= $activeMenu === 'propietario-inmuebles' ? ' is-active' : '' ?>">
+                        <span>Mis inmuebles</span>
+                    </a>
                     <a href="<?= esc(site_url('perfil')) ?>" class="sidebar-link<?= $activeMenu === 'perfil' ? ' is-active' : '' ?>">
                         <span>Mi perfil</span>
                     </a>
