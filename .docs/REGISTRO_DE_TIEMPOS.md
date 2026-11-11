@@ -22,7 +22,8 @@
 | [#19](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/19) | HU-03 | Cierre de sesión | LauPerisse | 1 | 09/11 21:05 | 09/11 21:21 | **16 min** | 16 min | Reconstruido |
 | [#12](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/12) | HU-07 | Alta y edición de inmuebles | LauPerisse | 5 | 09/11 21:20 | 09/11 21:48 | **28 min** | 28 min | Reconstruido |
 | [#15](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/15) | HU-10 | Alta y vinculación de contratos | LauPerisse | 8 | 10/11 20:47 | 10/11 21:07 | **20 min** | 20 min | Medido |
-| **Total registrado** | | | | **27** | | | **3 h 30 min** | 3 h 56 min | |
+| [#6](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/6) | HU-13 | Emisión masiva de cuotas | LauPerisse | 5 | 10/11 23:28 | 10/11 23:52 | **24 min** | 24 min | Medido |
+| **Total registrado** | | | | **32** | | | **3 h 54 min** | 4 h 20 min | |
 
 Sin registro de tiempo (los hizo otro integrante; que cada responsable complete su fila con el método de la [sección 3](#3-cómo-registrar-el-tiempo-de-cada-issue-de-ahora-en-adelante)):
 
@@ -42,6 +43,7 @@ Sin registro de tiempo (los hizo otro integrante; que cada responsable complete 
 | #19 | Del pedido del issue (21:05) al commit `a24187f` (21:21): ruta, controlador, botón en el sidebar, 17 casos de prueba y prueba de punta a punta con servidor real | — |
 | #12 | Del pedido del issue (21:20) al commit `7a17382` (21:48): modelo, controlador, rutas, vistas, JavaScript, 49 casos de prueba y revisión visual en vivo | Los ≈ 3 min de tildar los criterios y mover las tarjetas en GitHub, que cubrieron los dos issues juntos |
 | #15 | Del pedido del issue (20:47) al cierre de la implementación (21:07): lectura del issue y del código, `ContractModel` con la transacción, `ContractController`, rutas, formulario y ficha, JavaScript, 85 pruebas nuevas (75 de integración y 10 unitarias), revisión visual en el navegador y la suite completa (que corrió en segundo plano mientras se escribía la documentación). Hora de inicio y de fin anotadas en el momento | El commit, el pull request y el comentario en el issue de GitHub, que quedaron pendientes (el `gh` de esta máquina no tiene sesión iniciada). Sin pausas de más de 10 minutos |
+| #6 | Del pedido del issue (23:28) al cierre de la implementación (23:52): lectura del issue, de HU-10 y del código de contratos, `InstallmentModel` con la transacción y la numeración correlativa, `ContractModel` (regla de cobertura), `InstallmentController`, rutas, vista previa e informe, estilos, 110 pruebas nuevas (82 de integración y 28 unitarias), revisión visual con los datos de demostración, la suite completa (5 min 47 s, en segundo plano mientras se escribía la documentación) y la documentación. Hora de inicio y de fin anotadas en el momento | El commit, el pull request y el comentario en el issue de GitHub, que quedaron pendientes (el `gh` de esta máquina no tiene sesión iniciada). Sin pausas de más de 10 minutos |
 
 ---
 
