@@ -2,18 +2,20 @@
 
 ## 1. Resumen Ejecutivo
 
-| Campo                           | Valor                                                                       |
-| ------------------------------- | --------------------------------------------------------------------------- |
-| **Proyecto**                    | InmoGestión 2026                                                            |
-| **Historia de usuario / Issue** | HU-06 — Gestionar mi perfil · Issue no confirmado en la documentación local |
-| **Sprint / Hito**               | Sprint 1 · Gestión de usuarios                                              |
-| **Rama**                        | `feature/hu-06-perfil-propio`                                               |
-| **Último commit**               | Sin commit de HU-06; rama basada en `90042c9`                               |
-| **Pull Request**                | No abierto                                                                  |
-| **Fecha de actualización**      | 2026-11-10                                                                  |
-| **Autor / Agente**              | Copilot SDK en VS Code                                                      |
-| **Estado global**               | 🟡 Implementación realizada; ejecución de pruebas pendiente                 |
-| **Avance estimado**             | 100 %                                                                       |
+| Campo                           | Valor                                                                               |
+| ------------------------------- | ----------------------------------------------------------------------------------- |
+| **Proyecto**                    | InmoGestión 2026                                                                    |
+| **Historia de usuario / Issue** | HU-06 — Gestionar mi perfil · Issue no confirmado en la documentación local         |
+| **Sprint / Hito**               | Sprint 1 · Gestión de usuarios                                                      |
+| **Rama**                        | `feature/hu-06-perfil-propio`                                                       |
+| **Commit de implementación**    | `0f6fb4b` — `feat(profile): add profile management features for owners and tenants` |
+| **Pull Request**                | #34 — mergeado el 2026-11-10 20:44                                                  |
+| **Fecha de actualización**      | 2026-11-10                                                                          |
+| **Inicio / Fin**                | 2026-11-10 16:42 → 2026-11-10 17:16 · último commit verificable: 20:04             |
+| **Tiempo invertido**            | 34 min de reloj (tiempo efectivo no especificado)                                    |
+| **Autor / Agente**              | Copilot SDK en VS Code                                                              |
+| **Estado global**               | 🟡 Implementación realizada; ejecución de pruebas pendiente                         |
+| **Avance estimado**             | 100 %                                                                               |
 
 **Resumen:** Se agregó el perfil propio para propietarios e inquilinos, siguiendo la referencia visual `mi_perfil_inmogesti_n_2026`: datos identificatorios protegidos, contacto editable y cambio de contraseña. Se amplió la validación de teléfonos y contraseñas en perfil, registro público y gestión administrativa. La implementación y las pruebas están en la rama indicada; PHP lint, las reglas aisladas y las rutas se verificaron. El PHPUnit global disponible es incompatible con PHP actual, por lo que las pruebas feature no llegaron a ejecutar sus aserciones.
 
@@ -85,7 +87,7 @@ Referencia: [`HU-06_gestion_perfil_propio.md`](../historias_de_usuario/HU-06_ges
 | --- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------- |
 | B-1 | Bloqueo de verificación | El PHPUnit global falla antes de correr tests (`Call to undefined function each()`); faltan dependencias locales del proyecto | Media     | Instalar dependencias declaradas y ejecutar con PHPUnit compatible                                |
 | B-2 | Bloqueo de entorno      | No se ejecutó el test feature con una conexión de base descartable confirmada                                                 | Media     | Configurar el grupo de pruebas de `.env` solo con una BD desechable y ejecutar la prueba dirigida |
-| R-1 | Riesgo de integración   | El estado de PR/issue de HU-06 no está documentado localmente                                                                 | Baja      | Confirmar issue/PR al preparar revisión                                                           |
+| R-1 | Riesgo de integración   | El issue de HU-06 no está identificado en la documentación local; el PR #34 sí está mergeado                                  | Baja      | Confirmar el issue asociado si se requiere seguimiento                                            |
 
 ## 7. Próximos Pasos
 
@@ -100,9 +102,9 @@ Referencia: [`HU-06_gestion_perfil_propio.md`](../historias_de_usuario/HU-06_ges
 
 ## 8. Historial de Sesiones
 
-| Fecha      | Autor                  | Resumen                                                                                                                     | Commit / PR     |
-| ---------- | ---------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| 2026-11-10 | Copilot SDK en VS Code | HU-06 y validaciones comunes de teléfono/contraseña; lint, reglas aisladas y rutas verificadas; PHPUnit global incompatible | Sin commit / PR |
+| Fecha      | Autor                  | Duración                        | Resumen                                                                                                                     | Commit / PR                      |
+| ---------- | ---------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| 2026-11-10 | Copilot SDK en VS Code | 34 min de reloj (efectivo no especificado) | HU-06 y validaciones comunes de teléfono/contraseña; lint, reglas aisladas y rutas verificadas; PHPUnit global incompatible | `0f6fb4b` / PR #34 (merge 20:44) |
 
 ## 9. Protocolo de Inicio para el Nuevo Agente
 

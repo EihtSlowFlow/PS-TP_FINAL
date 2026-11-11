@@ -9,8 +9,9 @@
 | **Sprint / Hito**                   | Sprint 1 — Registro de clientes externos                                                                        |
 | **Rama**                            | `Historia-de-usuario-02`                                                                                        |
 | **Último commit de implementación** | `7f86da8` — feat: implement public registration for owners and tenants (HU-02)                                  |
-| **Pull Request**                    | No confirmado en esta sesión                                                                                    |
+| **Pull Request**                    | [#32 — Historia de usuario 02](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/32), creado y fusionado el 2026-11-10 |
 | **Fecha de actualización**          | 2026-11-10                                                                                                      |
+| **Tiempo de trabajo**               | 9:47 a. m. a 10:36 a. m. (49 minutos)                                                                           |
 | **Autor / Agente**                  | Joaquín (`joaquincorbalan`), con Copilot SDK en VS Code                                                         |
 | **Estado global**                   | 🟡 Implementación realizada;                                                                                    |
 | **Avance estimado**                 | 100 %                                                                                                           |
@@ -96,7 +97,7 @@ Referencia: [HU-02 — Registro de clientes externos](../historias_de_usuario/HU
 
 | Fecha      | Autor                                                | Resumen                                                                                                                                                   | Commit / PR                                          |
 | ---------- | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| 2026-11-10 | Joaquín (`joaquincorbalan`) y Copilot SDK en VS Code | Implementación HU-02 en `AuthController`, formulario, rutas y pruebas; sintaxis/rutas verificadas; ejecución de PHPUnit bloqueada por configuración de BD | Commit de implementación `7f86da8`; PR no confirmado |
+| 2026-11-10 | Joaquín (`joaquincorbalan`) y Copilot SDK en VS Code | Implementación HU-02 en `AuthController`, formulario, rutas y pruebas; PR creado y fusionado el mismo día | Commit de implementación `7f86da8`; [PR #32](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/32) |
 
 ## 9. Protocolo de Inicio para el Nuevo Agente
 
@@ -104,4 +105,4 @@ Referencia: [HU-02 — Registro de clientes externos](../historias_de_usuario/HU
 2. Revisar HU-02 y el estado actual de `Historia-de-usuario-02`; no asumir que el commit listado sigue siendo HEAD.
 3. Configurar una base exclusiva para pruebas y ejecutar primero `PublicRegistrationTest`.
 4. No modificar credenciales reales ni apuntar las pruebas a una base de desarrollo/producción.
-5. Actualizar este handoff con resultados comprobados, y confirmar el PR antes de dar HU-02 por cerrada.
+5. Si se hacen cambios posteriores, actualizar este handoff y verificar su estado en el PR #32 antes de dar HU-02 por cerrada.
