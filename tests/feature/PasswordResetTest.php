@@ -2,6 +2,7 @@
 
 use App\Controllers\PasswordResetController;
 use App\Database\Seeds\RoleSeeder;
+use App\Libraries\ResetAttemptLimiter;
 use App\Models\PasswordResetModel;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
@@ -30,11 +31,15 @@ final class PasswordResetTest extends CIUnitTestCase
         parent::setUp();
 
         $_SESSION = [];
+        cache()->clean();
+        // Reset the shared route collection in case an earlier test called withRoutes().
+        service('routes')->resetRoutes();
     }
 
     protected function tearDown(): void
     {
         $_SESSION = [];
+        cache()->clean();
 
         parent::tearDown();
     }
@@ -45,6 +50,8 @@ final class PasswordResetTest extends CIUnitTestCase
         $recovery->assertStatus(200);
         $recovery->assertSee('Restablecer contraseña');
         $recovery->assertSeeElement('span.input-icon');
+        $recovery->assertSeeElement('input[name=email]');
+        $recovery->assertSeeElement('input[name=document_number]');
 
         $login = $this->get('auth/login');
         $login->assertStatus(200);
@@ -58,7 +65,7 @@ final class PasswordResetTest extends CIUnitTestCase
     {
         $userId = $this->createUser('tenant', 'reset.s1@example.com');
 
-        $result = $this->postWithCsrf('auth/recuperar-password', ['email' => 'Reset.S1@Example.com']);
+        $result = $this->requestReset('Reset.S1@Example.com', $this->dniOf($userId));
 
         $this->assertMatchesRegularExpression(
             '#/auth/restablecer-password/[a-f0-9]{64}$#',
@@ -81,7 +88,7 @@ final class PasswordResetTest extends CIUnitTestCase
         $resets   = new PasswordResetModel();
         $previous = $resets->issueFor($userId, 60);
 
-        $result = $this->postWithCsrf('auth/recuperar-password', ['email' => 'reset.twice@example.com']);
+        $result = $this->requestReset('reset.twice@example.com', $this->dniOf($userId));
         $this->assertMatchesRegularExpression(
             '#/auth/restablecer-password/[a-f0-9]{64}$#',
             $result->response()->getHeaderLine('Location')
@@ -89,6 +96,17 @@ final class PasswordResetTest extends CIUnitTestCase
 
         $this->assertNull($resets->findUsableByToken($previous));
         $this->assertSame(1, $this->db->table('password_resets')->where('user_id', $userId)->where('used_at', null)->countAllResults());
+    }
+
+    public function testDniIsAcceptedWithSeparatorsLikeInTheRegistration(): void
+    {
+        $userId = $this->createUser('tenant', 'reset.dni.format@example.com');
+        $dni    = $this->dniOf($userId);
+        $dotted = substr($dni, 0, 2) . '.' . substr($dni, 2, 3) . '.' . substr($dni, 5);
+
+        $this->requestReset('reset.dni.format@example.com', $dotted);
+
+        $this->assertSame(1, $this->db->table('password_resets')->where('user_id', $userId)->countAllResults());
     }
 
     public function testTokensAreUnpredictable(): void
@@ -103,36 +121,178 @@ final class PasswordResetTest extends CIUnitTestCase
         $this->assertNotSame($first, $second);
     }
 
-    public function testRequestWithInvalidEmailFormatIsRejectedWithoutCreatingTokens(): void
+    public function testRequestWithInvalidEmailOrDniFormatIsRejectedWithoutCreatingTokens(): void
     {
-        $result = $this->postWithCsrf('auth/recuperar-password', ['email' => 'no-es-un-correo']);
+        $userId = $this->createUser('tenant', 'reset.format@example.com');
 
-        $result->assertRedirectTo('/auth/recuperar-password');
-        $this->assertSame(PasswordResetController::REQUEST_INVALID_EMAIL_MESSAGE, session()->getFlashdata('error'));
+        foreach ([
+            ['no-es-un-correo', $this->dniOf($userId)],
+            ['reset.format@example.com', ''],
+            ['reset.format@example.com', '12$34*56'],
+        ] as [$email, $dni]) {
+            $result = $this->requestReset($email, $dni);
+
+            $result->assertRedirectTo('/auth/recuperar-password');
+            $this->assertSame(PasswordResetController::REQUEST_INVALID_DATA_MESSAGE, session()->getFlashdata('error'));
+        }
+
         $this->assertSame(0, $this->db->table('password_resets')->countAllResults());
     }
 
     // Scenario 4 --------------------------------------------------------------------------------------------
+    // Any non-matching combination (unknown email, wrong DNI, or deactivated user) stays on the request screen
+    // with the same generic message ("Las credenciales ingresadas son incorrectas.") and creates no token.
 
-    public function testScenario4UnknownEmailGetsTheSameNeutralAnswerAndNoToken(): void
+    public function testScenario4UnknownEmailIsRejectedWithGenericErrorAndNoToken(): void
     {
-        $result = $this->postWithCsrf('auth/recuperar-password', ['email' => 'nadie@example.com']);
+        $result = $this->requestReset('nadie@example.com', '30111222');
 
         $result->assertRedirectTo('/auth/recuperar-password');
-        $this->assertSame(PasswordResetController::REQUEST_NEUTRAL_MESSAGE, session()->getFlashdata('success'));
-        $this->assertNull(session()->getFlashdata('error'));
+        $this->assertSame(PasswordResetController::INVALID_CREDENTIALS_MESSAGE, session()->getFlashdata('error'));
         $this->assertSame(0, $this->db->table('password_resets')->countAllResults());
     }
 
-    public function testDeactivatedUserGetsTheSameNeutralAnswerAndNoToken(): void
+    public function testScenario4RealEmailWithWrongDniGetsTheSameGenericErrorAndNoToken(): void
     {
-        $this->createUser('tenant', 'reset.baja@example.com', '2026-10-01 12:00:00');
+        $userId = $this->createUser('tenant', 'reset.wrongdni@example.com');
 
-        $result = $this->postWithCsrf('auth/recuperar-password', ['email' => 'reset.baja@example.com']);
+        $result = $this->requestReset('reset.wrongdni@example.com', '99999999');
 
         $result->assertRedirectTo('/auth/recuperar-password');
-        $this->assertSame(PasswordResetController::REQUEST_NEUTRAL_MESSAGE, session()->getFlashdata('success'));
+        $this->assertSame(PasswordResetController::INVALID_CREDENTIALS_MESSAGE, session()->getFlashdata('error'));
+        $this->assertSame(0, $this->db->table('password_resets')->where('user_id', $userId)->countAllResults());
+    }
+
+    public function testDeactivatedUserGetsTheDisabledMessageAndNoToken(): void
+    {
+        $userId = $this->createUser('tenant', 'reset.baja@example.com', '2026-10-01 12:00:00');
+
+        $result = $this->requestReset('reset.baja@example.com', $this->dniOf($userId));
+
+        $result->assertRedirectTo('/auth/recuperar-password');
+        $this->assertSame(PasswordResetController::ACCOUNT_DISABLED_MESSAGE, session()->getFlashdata('error'));
         $this->assertSame(0, $this->db->table('password_resets')->countAllResults());
+    }
+
+    public function testDeactivatedUserWithWrongDniGetsGenericErrorWithoutRevealingDisabledState(): void
+    {
+        $this->createUser('tenant', 'reset.baja.wrongdni@example.com', '2026-10-01 12:00:00');
+
+        $result = $this->requestReset('reset.baja.wrongdni@example.com', '99999999');
+
+        $result->assertRedirectTo('/auth/recuperar-password');
+        $this->assertSame(PasswordResetController::INVALID_CREDENTIALS_MESSAGE, session()->getFlashdata('error'));
+        $this->assertSame(0, $this->db->table('password_resets')->countAllResults());
+    }
+
+    // Cooldown ----------------------------------------------------------------------------------------------
+    // Three non-matching attempts start a 2-minute cooldown immediately on the third failure.
+
+    public function testThirdNonMatchingAttemptStartsTheTwoMinuteCooldownImmediately(): void
+    {
+        $userId = $this->createUser('tenant', 'reset.cooldown@example.com');
+
+        for ($attempt = 1; $attempt < ResetAttemptLimiter::MAX_ATTEMPTS; $attempt++) {
+            $result = $this->requestReset('reset.cooldown@example.com', '99999999');
+
+            $result->assertRedirectTo('/auth/recuperar-password');
+            $this->assertSame(PasswordResetController::INVALID_CREDENTIALS_MESSAGE, session()->getFlashdata('error'));
+            $this->assertNull(session()->getFlashdata('retry_after'));
+        }
+
+        // The 3rd failed attempt triggers the 2-minute cooldown right away.
+        $third = $this->requestReset('reset.cooldown@example.com', '99999999');
+        $third->assertRedirectTo('/auth/recuperar-password');
+        $this->assertStringContainsString('segundos', (string) session()->getFlashdata('error'));
+        $retryAfter = (int) session()->getFlashdata('retry_after');
+        $this->assertGreaterThan(0, $retryAfter);
+        $this->assertLessThanOrEqual(ResetAttemptLimiter::COOLDOWN_SECONDS, $retryAfter);
+
+        // Locked: even the correct DNI gets nothing while the cooldown lasts.
+        $locked = $this->requestReset('reset.cooldown@example.com', $this->dniOf($userId));
+
+        $locked->assertRedirectTo('/auth/recuperar-password');
+        $this->assertStringContainsString('segundos', (string) session()->getFlashdata('error'));
+        $this->assertGreaterThan(0, (int) session()->getFlashdata('retry_after'));
+        $this->assertSame(0, $this->db->table('password_resets')->countAllResults());
+    }
+
+    public function testAttemptsWithAnUnknownEmailAreLockedToo(): void
+    {
+        for ($attempt = 1; $attempt <= ResetAttemptLimiter::MAX_ATTEMPTS; $attempt++) {
+            $this->requestReset('nadie.cooldown@example.com', '30111222');
+        }
+
+        $locked = $this->requestReset('nadie.cooldown@example.com', '30111222');
+
+        $locked->assertRedirectTo('/auth/recuperar-password');
+        $this->assertGreaterThan(0, (int) session()->getFlashdata('retry_after'));
+    }
+
+    public function testTheCooldownIsPerIpSoAnotherEmailFromTheSameAddressIsAlsoLocked(): void
+    {
+        $userId = $this->createUser('tenant', 'reset.otheremail@example.com');
+
+        for ($attempt = 1; $attempt <= ResetAttemptLimiter::MAX_ATTEMPTS; $attempt++) {
+            $this->requestReset('nadie.ip@example.com', '30111222');
+        }
+
+        $this->requestReset('reset.otheremail@example.com', $this->dniOf($userId))->assertRedirectTo('/auth/recuperar-password');
+        $this->assertGreaterThan(0, (int) session()->getFlashdata('retry_after'));
+        $this->assertSame(0, $this->db->table('password_resets')->countAllResults());
+    }
+
+    public function testRequestsWorkAgainOnceTheCooldownHasEnded(): void
+    {
+        $userId = $this->createUser('tenant', 'reset.after@example.com');
+
+        for ($attempt = 1; $attempt <= ResetAttemptLimiter::MAX_ATTEMPTS; $attempt++) {
+            $this->requestReset('reset.after@example.com', '99999999');
+        }
+
+        // Simulates the 2 minutes going by.
+        (new ResetAttemptLimiter())->clear(['ip:' . $this->limiterIp(), 'email:reset.after@example.com']);
+
+        $result = $this->requestReset('reset.after@example.com', $this->dniOf($userId));
+
+        $this->assertMatchesRegularExpression(
+            '#/auth/restablecer-password/[a-f0-9]{64}$#',
+            $result->response()->getHeaderLine('Location')
+        );
+        $this->assertSame(1, $this->db->table('password_resets')->where('user_id', $userId)->countAllResults());
+    }
+
+    public function testTwoFailedAttemptsDoNotLockAndASuccessfulOneClearsTheEmailCounter(): void
+    {
+        $userId = $this->createUser('tenant', 'reset.twofails@example.com');
+
+        $this->requestReset('reset.twofails@example.com', '99999999');
+        $this->requestReset('reset.twofails@example.com', '88888888');
+        $this->assertSame(0, (new ResetAttemptLimiter())->secondsLocked(['email:reset.twofails@example.com']));
+
+        $this->requestReset('reset.twofails@example.com', $this->dniOf($userId));
+        $this->assertSame(1, $this->db->table('password_resets')->where('user_id', $userId)->countAllResults());
+
+        // The email counter restarted, so two more failures still do not lock that email.
+        $this->requestReset('reset.twofails@example.com', '77777777');
+        $this->requestReset('reset.twofails@example.com', '66666666');
+        $this->assertSame(0, (new ResetAttemptLimiter())->secondsLocked(['email:reset.twofails@example.com']));
+    }
+
+    public function testRequestsWithInvalidFormatAreNotCounted(): void
+    {
+        $userId = $this->createUser('tenant', 'reset.nocount@example.com');
+
+        for ($attempt = 1; $attempt <= 6; $attempt++) {
+            $this->requestReset('reset.nocount@example.com', '12$34*56');
+        }
+
+        $result = $this->requestReset('reset.nocount@example.com', $this->dniOf($userId));
+
+        $this->assertMatchesRegularExpression(
+            '#/auth/restablecer-password/[a-f0-9]{64}$#',
+            $result->response()->getHeaderLine('Location')
+        );
     }
 
     // Scenario 2 --------------------------------------------------------------------------------------------
@@ -202,6 +362,26 @@ final class PasswordResetTest extends CIUnitTestCase
         $this->assertSame(PasswordResetController::RESET_VALIDATION_MESSAGE, session()->getFlashdata('error'));
         $this->assertArrayHasKey('password', session()->getFlashdata('errors'));
         $this->assertTrue($this->passwordIs($userId, self::OLD_PASSWORD));
+        $this->assertNotNull($resets->findUsableByToken($token));
+    }
+
+    public function testScenario2PasswordWithoutComplexityIsRejectedAndTheTokenStaysUsable(): void
+    {
+        $userId = $this->createUser('tenant', 'reset.weak@example.com');
+        $resets = new PasswordResetModel();
+        $token  = $resets->issueFor($userId, 60);
+
+        foreach (['sinmayuscula1!', 'SinNumeroAqui!', 'SinSimbolo2026'] as $weak) {
+            $result = $this->postWithCsrf('auth/restablecer-password/' . $token, [
+                'password'         => $weak,
+                'password_confirm' => $weak,
+            ]);
+
+            $result->assertRedirectTo('/auth/restablecer-password/' . $token);
+            $this->assertArrayHasKey('password', session()->getFlashdata('errors'));
+            $this->assertTrue($this->passwordIs($userId, self::OLD_PASSWORD));
+        }
+
         $this->assertNotNull($resets->findUsableByToken($token));
     }
 
@@ -311,6 +491,21 @@ final class PasswordResetTest extends CIUnitTestCase
     }
 
     // Helpers -----------------------------------------------------------------------------------------------
+
+    private function limiterIp(): string
+    {
+        return service('request')->getIPAddress();
+    }
+
+    private function dniOf(int $userId): string
+    {
+        return (string) $this->db->table('users')->where('id', $userId)->get()->getRow()->document_number;
+    }
+
+    private function requestReset(string $email, string $dni)
+    {
+        return $this->postWithCsrf('auth/recuperar-password', ['email' => $email, 'document_number' => $dni]);
+    }
 
     private function passwordIs(int $userId, string $plain): bool
     {

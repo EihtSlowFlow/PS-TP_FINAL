@@ -2,26 +2,35 @@
 
 namespace App\Controllers;
 
+use App\Libraries\ResetAttemptLimiter;
 use App\Models\PasswordResetModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 /**
  * Password recovery by single-use, expiring token (HU-03b).
+ *
+ * Accepted design decisions (agreed with the instructor; see .docs/exec-plans/HU-03b_handoff.md):
+ * - No external channel (email/SMS) is used, so the token is handed over in the same response.
+ * - To reduce the account-takeover risk that follows, the request needs two data of the account (email + DNI).
+ * - Any non-matching combination (unknown email, deactivated user, or wrong DNI) is rejected on the request screen
+ *   with the same generic message ("Las credenciales ingresadas son incorrectas."), without revealing which piece failed.
+ * - On the third non-matching attempt (per IP and per email), a 2-minute cooldown is activated immediately.
  */
 class PasswordResetController extends BaseController
 {
     public const TOKEN_TTL_MINUTES = 60;
 
-    /** Neutral answer for an unknown or inactive email (Scenario 4). */
-    public const REQUEST_NEUTRAL_MESSAGE = 'Si el correo ingresado pertenece a una cuenta activa, podrás continuar con el restablecimiento de contraseña.';
-    public const REQUEST_INVALID_EMAIL_MESSAGE = 'Ingresá un correo electrónico con formato válido.';
+    public const INVALID_CREDENTIALS_MESSAGE   = 'Las credenciales ingresadas son incorrectas.';
+    public const ACCOUNT_DISABLED_MESSAGE      = 'Usuario dado de baja, hable con un administrador.';
+    public const REQUEST_INVALID_DATA_MESSAGE  = 'Revisá el correo electrónico y el DNI ingresados.';
+    public const COOLDOWN_MESSAGE              = 'Hiciste demasiados intentos. Por seguridad, esperá %d segundos antes de volver a intentarlo.';
     public const INVALID_TOKEN_MESSAGE         = 'El enlace de restablecimiento no es válido o venció. Solicitá un nuevo restablecimiento.';
     public const RESET_SUCCESS_MESSAGE         = 'Tu contraseña fue actualizada. Ya podés iniciar sesión.';
     public const RESET_VALIDATION_MESSAGE      = 'Revisá los campos marcados antes de continuar.';
 
     /**
-     * Renders the form asking for the account email.
+     * Renders the form asking for the account email and DNI.
      */
     public function requestForm(): string
     {
@@ -29,12 +38,26 @@ class PasswordResetController extends BaseController
     }
 
     /**
-     * Issues a token for an active user and opens the reset form directly.
-     * Unknown or inactive emails keep the neutral response (Scenario 4).
+     * Issues a token when email and DNI match an active user and opens the reset form directly.
+     * Any non-matching combination (Scenario 4) stays on the request form with a generic error,
+     * and the third failed attempt triggers a 2-minute cooldown.
      */
     public function sendLink(): RedirectResponse
     {
         $email = strtolower(trim((string) $this->request->getPost('email')));
+        $dni   = $this->normalizeDni((string) $this->request->getPost('document_number'));
+
+        // Cooldown first: while it lasts nothing is looked up, so a locked key is no oracle.
+        $limiterKeys = ['ip:' . $this->request->getIPAddress(), 'email:' . $email];
+        $limiter     = new ResetAttemptLimiter();
+        $lockedFor   = $limiter->secondsLocked($limiterKeys);
+
+        if ($lockedFor > 0) {
+            return redirect()->to('/auth/recuperar-password')
+                ->withInput()
+                ->with('error', sprintf(self::COOLDOWN_MESSAGE, $lockedFor))
+                ->with('retry_after', $lockedFor);
+        }
 
         $rules = [
             'email' => [
@@ -42,29 +65,63 @@ class PasswordResetController extends BaseController
                 'rules'  => 'required|valid_email|max_length[255]',
                 'errors' => [
                     'required'    => 'Ingresá tu correo electrónico.',
-                    'valid_email' => self::REQUEST_INVALID_EMAIL_MESSAGE,
+                    'valid_email' => 'Ingresá un correo electrónico con formato válido.',
                     'max_length'  => 'El correo electrónico no puede superar los 255 caracteres.',
+                ],
+            ],
+            'document_number' => [
+                'label'  => 'DNI',
+                'rules'  => 'required|alpha_numeric|max_length[20]',
+                'errors' => [
+                    'required'      => 'Ingresá tu DNI.',
+                    'alpha_numeric' => 'El DNI solo debe contener letras o números, sin símbolos.',
+                    'max_length'    => 'El DNI no puede superar los 20 caracteres.',
                 ],
             ],
         ];
 
-        if (! $this->validateData(['email' => $email], $rules)) {
+        // Format-only validation: it says nothing about which accounts exist.
+        if (! $this->validateData(['email' => $email, 'document_number' => $dni], $rules)) {
             return redirect()->to('/auth/recuperar-password')
                 ->withInput()
                 ->with('errors', $this->validator->getErrors())
-                ->with('error', self::REQUEST_INVALID_EMAIL_MESSAGE);
+                ->with('error', self::REQUEST_INVALID_DATA_MESSAGE);
         }
 
-        $user = model(UserModel::class)->findActiveByEmail($email);
+        $userModel = model(UserModel::class);
+        $user      = $userModel->findActiveByEmail($email);
 
-        if ($user !== null) {
+        if ($user !== null && hash_equals(strtolower((string) $user['document_number']), strtolower($dni))) {
             $token = model(PasswordResetModel::class)->issueFor((int) $user['id'], self::TOKEN_TTL_MINUTES);
+            // Only the email key is cleared: clearing the IP key would let a guesser reset its own counter.
+            $limiter->clear(['email:' . $email]);
 
             return redirect()->to('/auth/restablecer-password/' . $token);
         }
 
+        if ($user === null) {
+            $deactivatedUser = $userModel->findDeactivatedByEmail($email);
+
+            if ($deactivatedUser !== null && hash_equals(strtolower((string) $deactivatedUser['document_number']), strtolower($dni))) {
+                return redirect()->to('/auth/recuperar-password')
+                    ->withInput()
+                    ->with('error', self::ACCOUNT_DISABLED_MESSAGE);
+            }
+        }
+
+        $limiter->registerFailure($limiterKeys);
+        $lockedFor = $limiter->secondsLocked($limiterKeys);
+
+        if ($lockedFor > 0) {
+            return redirect()->to('/auth/recuperar-password')
+                ->withInput()
+                ->with('error', sprintf(self::COOLDOWN_MESSAGE, $lockedFor))
+                ->with('retry_after', $lockedFor);
+        }
+
         return redirect()->to('/auth/recuperar-password')
-            ->with('success', self::REQUEST_NEUTRAL_MESSAGE);
+            ->withInput()
+            ->with('error', self::INVALID_CREDENTIALS_MESSAGE);
     }
 
     /**
@@ -102,11 +159,12 @@ class PasswordResetController extends BaseController
         $rules = [
             'password' => [
                 'label'  => 'Contraseña',
-                'rules'  => 'required|min_length[8]|max_length[255]',
+                'rules'  => 'required|min_length[8]|max_length[255]|strong_password',
                 'errors' => [
-                    'required'   => 'Ingresá una contraseña.',
-                    'min_length' => 'La contraseña debe tener al menos 8 caracteres.',
-                    'max_length' => 'La contraseña supera la longitud permitida.',
+                    'required'        => 'Ingresá una contraseña.',
+                    'min_length'      => 'La contraseña debe tener al menos 8 caracteres.',
+                    'max_length'      => 'La contraseña supera la longitud permitida.',
+                    'strong_password' => 'La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo.',
                 ],
             ],
             'password_confirm' => [
@@ -155,11 +213,26 @@ class PasswordResetController extends BaseController
      */
     private function usableToken(string $token): ?array
     {
-        if (preg_match('/^[a-f0-9]{64}$/', $token) !== 1) {
+        if (! $this->isWellFormedToken($token)) {
             return null;
         }
 
         return model(PasswordResetModel::class)->findUsableByToken($token);
+    }
+
+    private function isWellFormedToken(string $token): bool
+    {
+        return preg_match('/^[a-f0-9]{64}$/', $token) === 1;
+    }
+
+    /**
+     * Same DNI normalization as the public registration (dots, spaces and hyphens removed).
+     */
+    private function normalizeDni(string $rawDni): string
+    {
+        $rawDni = trim($rawDni);
+
+        return preg_replace('/[\.\s-]+/', '', $rawDni) ?? $rawDni;
     }
 
     private function invalidTokenRedirect(): RedirectResponse

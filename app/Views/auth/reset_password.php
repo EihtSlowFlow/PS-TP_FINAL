@@ -33,7 +33,7 @@ $flashError = session()->getFlashdata('error');
                     <span>InmoGestión</span>
                 </a>
                 <h1 id="reset-heading" class="auth-title">Definir nueva contraseña</h1>
-                <p class="auth-subtitle">Elegí una contraseña de al menos 8 caracteres. Este enlace solo puede usarse una vez.</p>
+                <p class="auth-subtitle">Este enlace solo puede usarse una vez.</p>
             </header>
 
             <?php if (is_string($flashError) && $flashError !== ''): ?>
@@ -64,7 +64,7 @@ $flashError = session()->getFlashdata('error');
                             </svg>
                         </button>
                     </div>
-                    <span id="password-help" class="field-help">Usá al menos 8 caracteres.</span>
+                    <span id="password-help" class="field-help">Debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo.</span>
                     <?php if (isset($errors['password'])): ?><span id="password-error" class="field-error" role="alert"><?= esc($errors['password']) ?></span><?php endif; ?>
                 </div>
 
