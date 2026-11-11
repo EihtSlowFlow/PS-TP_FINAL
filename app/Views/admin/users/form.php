@@ -202,14 +202,16 @@ $this->extend('layouts/panel');
                                     name="phone"
                                     value="<?= esc($phoneValue) ?>"
                                     required
-                                    minlength="6"
                                     maxlength="30"
+                                    pattern="\+?[0-9][0-9 ().-]{5,29}"
+                                    title="Ingresá entre 6 y 15 dígitos. Podés usar +, espacios, paréntesis, puntos y guiones."
                                     class="form-control<?= isset($errors['phone']) ? ' is-invalid' : '' ?>"
                                     aria-invalid="<?= isset($errors['phone']) ? 'true' : 'false' ?>"
+                                    aria-describedby="<?= isset($errors['phone']) ? 'phone-help phone-error' : 'phone-help' ?>"
                                 >
-                                <span class="field-help">Canal prioritario de contacto</span>
+                                <span id="phone-help" class="field-help">Canal prioritario de contacto. Usá entre 6 y 15 dígitos.</span>
                                 <?php if (isset($errors['phone'])): ?>
-                                    <p class="field-error" role="alert"><?= esc((string) $errors['phone']) ?></p>
+                                        <p id="phone-error" class="field-error" role="alert"><?= esc((string) $errors['phone']) ?></p>
                                 <?php endif; ?>
                             </div>
 
@@ -290,8 +292,8 @@ $this->extend('layouts/panel');
                                     </label>
                                     <p class="field-help">
                                         <?= $isEdit
-                                            ? 'Dejá en blanco para no modificar la contraseña actual (mínimo 8 caracteres si deseás cambiarla).'
-                                            : 'Mínimo 8 caracteres. Se almacenará cifrada con BCRYPT.' ?>
+                                            ? 'Dejá en blanco para mantener la contraseña actual. Si la cambiás, debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo.'
+                                            : 'Al menos 8 caracteres, una mayúscula, un número y un símbolo. Se almacenará cifrada con BCRYPT.' ?>
                                     </p>
                                 </div>
                                 <button type="button" class="btn btn-secondary btn-sm" id="btn-suggest-password">
@@ -308,7 +310,7 @@ $this->extend('layouts/panel');
                                     <?= $isEdit ? '' : 'required' ?>
                                     minlength="8"
                                     maxlength="255"
-                                    placeholder="<?= $isEdit ? '•••••••• (sin cambios)' : 'Ingresá al menos 8 caracteres' ?>"
+                                    placeholder="<?= $isEdit ? '•••••••• (sin cambios)' : 'Ingresá una contraseña segura' ?>"
                                     class="form-control<?= isset($errors['password']) ? ' is-invalid' : '' ?>"
                                     aria-invalid="<?= isset($errors['password']) ? 'true' : 'false' ?>"
                                 >

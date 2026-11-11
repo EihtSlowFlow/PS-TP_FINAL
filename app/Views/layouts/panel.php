@@ -62,9 +62,15 @@ $flashSuccess = session()->getFlashdata('success');
                     <a href="<?= esc(site_url('propietario/dashboard')) ?>" class="sidebar-link<?= $activeMenu === 'propietario-dashboard' ? ' is-active' : '' ?>">
                         <span>Dashboard</span>
                     </a>
+                    <a href="<?= esc(site_url('perfil')) ?>" class="sidebar-link<?= $activeMenu === 'perfil' ? ' is-active' : '' ?>">
+                        <span>Mi perfil</span>
+                    </a>
                 <?php elseif ($userRole === 'tenant'): ?>
                     <a href="<?= esc(site_url('inquilino/estado-cuenta')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-estado-cuenta' ? ' is-active' : '' ?>">
                         <span>Estado de cuenta</span>
+                    </a>
+                    <a href="<?= esc(site_url('perfil')) ?>" class="sidebar-link<?= $activeMenu === 'perfil' ? ' is-active' : '' ?>">
+                        <span>Mi perfil</span>
                     </a>
                 <?php endif; ?>
             </nav>

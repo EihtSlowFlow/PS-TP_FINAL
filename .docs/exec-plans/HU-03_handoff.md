@@ -11,6 +11,8 @@
 | **Último commit** | `feat: implementar cierre de sesión seguro para HU-03` (commit de esta rama; ver `git log`) |
 | **Pull Request** | Sin PR. Depende del [#30](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/30) porque usa el layout `layouts/panel.php` que introduce esa PR |
 | **Fecha de cierre** | 2026-11-09 |
+| **Inicio / Fin** | 2026-11-09 21:05 → 2026-11-09 21:21 |
+| **Tiempo invertido** | 16 min efectivos · 16 min de reloj · Reconstruido a partir de los registros de sesión y los commits · sin pausas. Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
 | **Autor / Agente** | Claude Code con `LauPerisse` |
 | **Estado global** | 🟢 Completada |
 | **Avance estimado** | 100 % |
