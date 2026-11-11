@@ -111,7 +111,7 @@ Salen de [`.agents/AGENTS.md`](../.agents/AGENTS.md):
 | [`README.md`](../README.md) | Descripción general, tecnologías, cronograma y presupuesto |
 | [`.docs/ANALISIS_DE_REQUERIMIENTOS.md`](ANALISIS_DE_REQUERIMIENTOS.md) | **Fuente de verdad del alcance.** Alcance, roles, requerimientos RF/RNF, riesgos, sprints y presupuesto; la sección 9 fija el glosario de estados y los valores que el análisis deja abiertos |
 | [`.docs/PRESUPUESTO_Y_PLANIFICACION.md`](PRESUPUESTO_Y_PLANIFICACION.md) | Cómo se llegó a la estimación: método, restricciones de tiempo y capacidad, tarifa, alcance, inconsistencias detectadas y decisiones pendientes |
-| [`.docs/REGISTRO_DE_TIEMPOS.md`](REGISTRO_DE_TIEMPOS.md) | Cuánto se tardó en hacer cada issue (hoy #22, #19 y #12), cómo se calcula y cómo registrar el tiempo de los que vienen |
+| [`.docs/REGISTRO_DE_TIEMPOS.md`](REGISTRO_DE_TIEMPOS.md) | Cuánto se tardó en hacer cada issue (hoy #2, #22, #19, #12 y #15), cómo se calcula y cómo registrar el tiempo de los que vienen |
 | [`.docs/documentacion/`](documentacion/) | Notas de las reuniones del equipo. Hoy: la reunión de Discord del 29/10 sobre estimación y presupuesto y la del 6/11 sobre la revisión de la documentación, la base de datos y el plan de entrega |
 | [`.docs/base_de_datos/`](base_de_datos/MODELO_DE_DATOS.md) | Base de datos: DER, modelo relacional, decisiones resueltas, esquema en SQL para MySQL Workbench y cómo usarlos. La fuente de verdad son las migraciones de `app/Database/Migrations/` |
 | [`.docs/2026 - inmogestion.md`](2026%20-%20inmogestion.md) | Enunciado del trabajo y tabla de alcances por etapa |
@@ -146,7 +146,7 @@ Backlog (tablero por estado), Priority board, Team items (tabla agrupada por per
 | **Priority** | P0, P1, P2 | La prioridad de cada HU viene del backlog: P1 alta, P2 media. P0 solo para la base de datos, porque bloquea todo |
 | **Estimate** | número | Puntos de historia (story points) de cada HU, tomados de su documento |
 | **Size** | XS, S, M, L, XL | Derivado de los puntos: 1 = XS, 2 = S, 3 = M, 5 = L, 8 = XL |
-| **Start date / Target date** | fechas | Solo el issue de base de datos las tiene (29/10 y 30/10) |
+| **Start date / Target date** | fechas | Solo las tienen el issue de base de datos (29/10 y 30/10) y el pull request de prototipos (#2, 28/10 y 28/10) |
 
 El total cargado en el tablero es de 81 puntos: 73 de las 19 historias y 8 de la base de datos.
 
@@ -364,3 +364,5 @@ Resueltas el 06/11/2026 (ya no hace falta corregirlas): los enlaces rotos y la v
 | 09/11/2026 | HU-03 (cierre de sesión seguro, issue #19) implementada en la rama `feature/hu-03-cierre-sesion-hu-07-inmuebles`: `POST /auth/logout`, botón en el sidebar de todos los paneles y 17 casos de prueba (102 tests y 636 aserciones en verde). Detalle en [`HU-03_handoff.md`](exec-plans/HU-03_handoff.md) |
 | 09/11/2026 | HU-07 (alta y edición de inmuebles, issue #12) implementada en la misma rama `feature/hu-03-cierre-sesion-hu-07-inmuebles`: `/admin/inmuebles` (listado mínimo, alta y edición), propietarios activos, estados y 49 casos de prueba (151 tests y 1200 aserciones en verde). Detalle en [`HU-07_handoff.md`](exec-plans/HU-07_handoff.md) |
 | 10/11/2026 | Registro de tiempos por issue ([`REGISTRO_DE_TIEMPOS.md`](REGISTRO_DE_TIEMPOS.md)): tiempos reconstruidos de #22 (1 h 42 min), #19 (16 min) y #12 (28 min), y método para registrar el de los issues siguientes en el handoff, en el registro y en un comentario del issue |
+| 10/11/2026 | Completado en el tablero el ítem del pull request #2 (prototipos de pantallas), que había quedado vacío: prioridad P1, tamaño L, 5 puntos, fechas del 28/10, descripción del pull request y comentario de tiempo (44 min, reconstruido; fila agregada a [`REGISTRO_DE_TIEMPOS.md`](REGISTRO_DE_TIEMPOS.md)) |
+| 10/11/2026 | HU-10 (alta y vinculación de contratos, issue #15) implementada en la rama `feature/hu-10-alta-contratos`: `/admin/contratos/nuevo`, guardado atómico del contrato y del estado «Alquilado» del inmueble, ficha del contrato y 85 casos de prueba (241 tests y 2006 aserciones; 1 falla previa de HU-02). Tiempo: 20 min, medido. Detalle en [`HU-10_handoff.md`](exec-plans/HU-10_handoff.md) |

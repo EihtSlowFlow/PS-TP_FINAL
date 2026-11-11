@@ -57,11 +57,11 @@ Además, el contrato queda vinculado al propietario del inmueble, que el formula
 
 ## Definition of Done
 
-- [ ] El administrador puede crear contratos con todos los datos requeridos.
-- [ ] El contrato queda "Vigente" y el inmueble "Alquilado".
-- [ ] El sistema impide contratos duplicados sobre un mismo inmueble.
-- [ ] La operación es atómica y se verifican los permisos de acceso.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] El administrador puede crear contratos con todos los datos requeridos.
+- [x] El contrato queda "Vigente" y el inmueble "Alquilado".
+- [x] El sistema impide contratos duplicados sobre un mismo inmueble.
+- [x] La operación es atómica y se verifican los permisos de acceso.
+- [x] Se prueban los escenarios de aceptación y los casos de error relevantes.
 
 ## Notas de integración (desde HU-05)
 

@@ -624,6 +624,39 @@ select.form-control {
     color: var(--warning-text);
 }
 
+/* Contracts (HU-10) */
+.badge-contract-in_force {
+    background: var(--success-soft);
+    color: var(--success-text);
+}
+
+.badge-contract-finished {
+    background: var(--surface-muted);
+    color: var(--text-muted);
+    border: 1px solid var(--border-default);
+}
+
+.badge-contract-rescinded {
+    background: var(--danger-soft);
+    color: var(--danger-text);
+}
+
+.linked-party-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    background: var(--surface-muted);
+    font-size: 0.88rem;
+    color: var(--heading);
+}
+
+.linked-party-box span {
+    color: var(--text-muted);
+}
+
 .status-options {
     border: 0;
     margin: 0 0 0.75rem;
