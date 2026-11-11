@@ -12,6 +12,11 @@ $routes->group('auth', static function (RouteCollection $routes): void {
     $routes->post('login', 'AuthController::attemptLogin');
     $routes->get('register', 'AuthController::register');
     $routes->post('register', 'AuthController::storeRegistration');
+    // HU-03b: public recovery flow. State changes remain POST-only and use the global CSRF filter.
+    $routes->get('recuperar-password', 'PasswordResetController::requestForm');
+    $routes->post('recuperar-password', 'PasswordResetController::sendLink');
+    $routes->get('restablecer-password/(:segment)', 'PasswordResetController::resetForm/$1');
+    $routes->post('restablecer-password/(:segment)', 'PasswordResetController::updatePassword/$1');
     // HU-03: POST only (with the global CSRF filter) so a link or an image cannot log a user out.
     $routes->post('logout', 'AuthController::logout');
 });
@@ -26,6 +31,11 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static fu
     $routes->post('inmuebles', 'PropertyController::store');
     $routes->get('inmuebles/editar/(:num)', 'PropertyController::edit/$1');
     $routes->post('inmuebles/editar/(:num)', 'PropertyController::update/$1');
+
+    // Lease contracts: creation and contract file (HU-10; the listing is HU-11 and the closing HU-12)
+    $routes->get('contratos/nuevo', 'ContractController::create');
+    $routes->post('contratos', 'ContractController::store');
+    $routes->get('contratos/(:num)', 'ContractController::show/$1');
 });
 
 // Exclusive Administrator routes: User management and logical deactivation (HU-04, HU-05)

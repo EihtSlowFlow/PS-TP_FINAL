@@ -52,3 +52,16 @@ Además, el sistema registra la fecha del cierre y, si se informó, el motivo.
 - [ ] Se conserva todo el historial financiero.
 - [ ] Se verifican los permisos de acceso.
 - [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+
+## Notas de integración (desde HU-10)
+
+- El alta (`ContractModel::createAndRentProperty()`) es el modelo a seguir para el cierre: abre una transacción,
+  **bloquea la fila del inmueble** (`SELECT … FOR UPDATE`), cambia el contrato y el inmueble, y revierte todo si algo
+  falla. El cierre debe hacer lo mismo en sentido inverso: contrato a `finished` o `rescinded` con `closed_at` y
+  `closing_reason` (la tabla exige ambos nulos mientras está `in_force`) e inmueble a `PropertyModel::STATUS_AVAILABLE`.
+- Al salir de `in_force`, la columna generada `contracts.active_property_id` pasa a `NULL`: eso libera el índice único y
+  permite crear un contrato nuevo sobre el mismo inmueble. No hace falta tocarla.
+- Si el inmueble está en `maintenance` o fue dado de baja cuando se cierra el contrato, decidir si vuelve igual a
+  «Disponible» (la regla actual dice que sí vuelve) o conserva su estado.
+- La ficha (`admin/contracts/show.php`) ya muestra «Cerrado el» y «Motivo» para los contratos no vigentes: el cierre solo
+  tiene que guardar esos datos. Falta agregar ahí el botón de cierre.

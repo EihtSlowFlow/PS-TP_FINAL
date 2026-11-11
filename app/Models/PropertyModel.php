@@ -114,6 +114,26 @@ class PropertyModel extends Model
     }
 
     /**
+     * Lists the properties that can be offered for a new contract (HU-10): not deactivated, in status "available"
+     * and owned by an active owner. Ordered by address.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findAvailableForContract(): array
+    {
+        return $this->builder()
+            ->select($this->ownerSelect())
+            ->join('users', 'users.id = properties.owner_id')
+            ->where('properties.status', self::STATUS_AVAILABLE)
+            ->where('properties.deleted_at', null)
+            ->where('users.deleted_at', null)
+            ->orderBy('properties.address', 'ASC')
+            ->orderBy('properties.id', 'ASC')
+            ->get()
+            ->getResultArray();
+    }
+
+    /**
      * Lists the properties newest first, paginated, with their owner's data (including deactivated owners).
      *
      * @return array{

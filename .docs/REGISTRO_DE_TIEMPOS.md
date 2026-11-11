@@ -17,6 +17,7 @@
 
 | Issue | HU | Historia | Responsable | Pts | Inicio | Fin | Tiempo efectivo | Tiempo de reloj | Fuente |
 |---|---|---|---|---|---|---|---|---|---|
+| [#2](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/2) (pull request) | — | Prototipos de pantallas | LauPerisse (prompts hechos con Claude; las pantallas se generaron en Google Stitch) | 5 | 28/10 18:50 | 28/10 20:33 | **44 min** | 44 min | Reconstruido |
 | [#22](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/22) | — | Base de datos | LauPerisse (parte hecha con Claude; el issue es de los tres) | 8 | 06/11 11:03 | 06/11 19:14 | **1 h 42 min** | 2 h 08 min | Reconstruido |
 | [#19](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/19) | HU-03 | Cierre de sesión | LauPerisse | 1 | 09/11 21:05 | 09/11 21:21 | **16 min** | 16 min | Reconstruido |
 | [#12](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/12) | HU-07 | Alta y edición de inmuebles | LauPerisse | 5 | 09/11 21:20 | 09/11 21:48 | **28 min** | 28 min | Reconstruido |
@@ -24,6 +25,9 @@
 | [#11](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/11) | HU-06 | Gestionar mi perfil | joaquincorbalan | 2 | 10/11 16:42 | 10/11 17:16 | **34 min** | 34 min | Medido (handoff) |
 | [#3](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/3) | HU-08 | Catálogo y filtros de inmuebles | joaquincorbalan (Copilot SDK en VS Code) | 3 | 10/11 21:16 | 10/11 22:26 | **56 min** | 56 min | Medido (2 sesiones; pausa descontada) |
 | **Total registrado** | | | | **22** | | | **4 h 45 min** | **5 h 11 min** | |
+| [#15](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/15) | HU-10 | Alta y vinculación de contratos | LauPerisse | 8 | 10/11 20:47 | 10/11 21:07 | **20 min** | 20 min | Medido |
+| [#18](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/18) | HU-03b | Restablecer la contraseña | EihtSlowFlow | 3 | 10/11 20:37 | 10/11 22:58 | **1 h 36 min** | 2 h 21 min | Medido (sesión de revisión y cierre; pausa 21:42–22:27 descontada) |
+| **Total registrado** | | | | **30** | | | **5 h 06 min** | 6 h 17 min | |
 
 Sin registro de tiempo (los hizo otro integrante; que cada responsable complete su fila con el método de la [sección 3](#3-cómo-registrar-el-tiempo-de-cada-issue-de-ahora-en-adelante)):
 
@@ -37,9 +41,12 @@ Sin registro de tiempo (los hizo otro integrante; que cada responsable complete 
 
 | Issue | Qué entra en el tiempo | Qué no entra |
 |---|---|---|
+| #2 | Dos bloques el 28/10: **18:50 a 19:27** (armado de los prompts de cada pantalla, vínculo con el repositorio y manejo del `.env`; 37 min) y **20:26 a 20:33** (`.env` al `.gitignore`, commit de los prototipos y pull request; 7 min). Del pedido (18:50) al commit `c403491` (20:33) | El lapso de las 19:27 a las 20:26 (≈ 59 min), sin registro de sesión: es cuando se generaron las pantallas en Google Stitch, fuera de Claude Code. Tampoco la revisión del pull request. Los puntos (5, tamaño L) y las fechas se cargaron en el tablero el 10/11, porque el ítem había quedado vacío |
 | #22 | Dos bloques el 06/11: **11:03 a 11:53** (diseño, 11 migraciones, seeders, esquema SQL y documentación; 33 min efectivos de 50 de reloj) y **17:56 a 19:14** (base real del equipo, rol Empleado, actualización de los 19 issues, pruebas de integridad, commit y pull request; 69 min) | Los ≈ 9 min de prompts para Stitch (18:23 a 18:32), que no son parte del issue. Tampoco el trabajo de los otros dos integrantes ni la preparación del issue del 28/10 |
 | #19 | Del pedido del issue (21:05) al commit `a24187f` (21:21): ruta, controlador, botón en el sidebar, 17 casos de prueba y prueba de punta a punta con servidor real | — |
 | #12 | Del pedido del issue (21:20) al commit `7a17382` (21:48): modelo, controlador, rutas, vistas, JavaScript, 49 casos de prueba y revisión visual en vivo | Los ≈ 3 min de tildar los criterios y mover las tarjetas en GitHub, que cubrieron los dos issues juntos |
+| #15 | Del pedido del issue (20:47) al cierre de la implementación (21:07): lectura del issue y del código, `ContractModel` con la transacción, `ContractController`, rutas, formulario y ficha, JavaScript, 85 pruebas nuevas (75 de integración y 10 unitarias), revisión visual en el navegador y la suite completa (que corrió en segundo plano mientras se escribía la documentación). Hora de inicio y de fin anotadas en el momento | El commit, el pull request y el comentario en el issue de GitHub, que quedaron pendientes (el `gh` de esta máquina no tiene sesión iniciada). Sin pausas de más de 10 minutos |
+| #18 | Dos bloques en la sesión de revisión y cierre del 10/11: **20:37 a 21:42** (65 min: revisión integral de HU-03b, merge de `main`, validación de DNI como segundo dato, `strong_password`, enfriamiento de 2 min con `ResetAttemptLimiter` y cuenta regresiva en vivo, diagnóstico de la suite completa y pruebas automatizadas) y **22:27 a 22:58** (31 min: nuevo merge de `main`, rechazo directo con mensaje de credenciales incorrectas y de usuario dado de baja, prueba manual en navegador, commit y PR) | La pausa de 45 min entre las 21:42 y las 22:27; tampoco la sesión previa donde se creó el commit inicial `5b86cb4` (17:49), cuyo inicio no se había medido |
 
 ---
 
