@@ -78,6 +78,9 @@ $this->extend('layouts/panel');
                                 <dd>
                                     <?= esc((string) $contract['property_address']) ?>, <?= esc((string) $contract['property_city']) ?>
                                     <span class="badge-pill badge-property-<?= esc((string) $contract['property_status']) ?>"><?= esc(PropertyModel::labelForStatus((string) $contract['property_status'])) ?></span>
+                                    <?php if (! empty($contract['property_deleted_at'])): ?>
+                                        <span class="badge-pill badge-danger">Dado de baja</span>
+                                    <?php endif; ?>
                                 </dd>
                             </div>
                             <div class="audit-item">

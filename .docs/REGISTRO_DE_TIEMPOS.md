@@ -27,7 +27,8 @@
 | **Total registrado** | | | | **22** | | | **4 h 45 min** | **5 h 11 min** | |
 | [#15](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/15) | HU-10 | Alta y vinculación de contratos | LauPerisse | 8 | 10/11 20:47 | 10/11 21:07 | **20 min** | 20 min | Medido |
 | [#18](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/18) | HU-03b | Restablecer la contraseña | EihtSlowFlow | 3 | 10/11 20:37 | 10/11 22:58 | **1 h 36 min** | 2 h 21 min | Medido (sesión de revisión y cierre; pausa 21:42–22:27 descontada) |
-| **Total registrado** | | | | **30** | | | **5 h 06 min** | 6 h 17 min | |
+| [#13](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/13) | HU-09 | Baja lógica de inmuebles | EihtSlowFlow | 2 | 10/11 23:10 | 10/11 23:42 | **32 min** | 32 min | Medido |
+| **Total registrado** | | | | **35** | | | **7 h 13 min** | **8 h 24 min** | |
 
 Sin registro de tiempo (los hizo otro integrante; que cada responsable complete su fila con el método de la [sección 3](#3-cómo-registrar-el-tiempo-de-cada-issue-de-ahora-en-adelante)):
 

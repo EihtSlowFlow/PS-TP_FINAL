@@ -7,21 +7,23 @@ use App\Models\UserModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 /**
- * Property management for administrators and employees (HU-07): listing, creation and edition.
- *
- * The listing is intentionally minimal (it exists to show the result of the creation); HU-08 adds the filters
- * and HU-09 the logical deactivation.
+ * Property management for administrators and employees (HU-07, HU-08, HU-09):
+ * listing, filters, creation, edition and logical deactivation.
  */
 class PropertyController extends BaseController
 {
-    public const PROPERTY_CREATED_MESSAGE     = 'El inmueble fue creado exitosamente.';
-    public const PROPERTY_UPDATED_MESSAGE     = 'Los datos del inmueble fueron actualizados exitosamente.';
-    public const PROPERTY_NOT_FOUND_MESSAGE   = 'El inmueble solicitado no existe.';
-    public const VALIDATION_ERROR_MESSAGE     = 'Revisá los campos marcados antes de guardar el inmueble.';
-    public const INVALID_OWNER_MESSAGE        = 'Seleccioná un propietario válido.';
-    public const INACTIVE_OWNER_MESSAGE       = 'El propietario seleccionado está dado de baja. Elegí un propietario activo.';
-    public const INVALID_STATUS_MESSAGE       = 'Seleccioná un estado válido: Disponible o En mantenimiento.';
-    public const RENTED_STATUS_LOCKED_MESSAGE = 'El estado «Alquilado» lo asigna el contrato y no se puede modificar desde el inmueble.';
+    public const PROPERTY_CREATED_MESSAGE             = 'El inmueble fue creado exitosamente.';
+    public const PROPERTY_UPDATED_MESSAGE             = 'Los datos del inmueble fueron actualizados exitosamente.';
+    public const PROPERTY_DEACTIVATED_MESSAGE         = 'El inmueble fue dado de baja exitosamente.';
+    public const PROPERTY_NOT_FOUND_MESSAGE           = 'El inmueble solicitado no existe.';
+    public const PROPERTY_ALREADY_DEACTIVATED_MESSAGE = 'El inmueble seleccionado ya se encuentra dado de baja.';
+    public const ACTIVE_CONTRACT_DEACTIVATION_MESSAGE = 'No es posible dar de baja un inmueble con contrato de locación vigente.';
+    public const DEACTIVATION_ERROR_MESSAGE           = 'No pudimos dar de baja el inmueble por un error interno. Intentá nuevamente.';
+    public const VALIDATION_ERROR_MESSAGE             = 'Revisá los campos marcados antes de guardar el inmueble.';
+    public const INVALID_OWNER_MESSAGE                = 'Seleccioná un propietario válido.';
+    public const INACTIVE_OWNER_MESSAGE               = 'El propietario seleccionado está dado de baja. Elegí un propietario activo.';
+    public const INVALID_STATUS_MESSAGE               = 'Seleccioná un estado válido: Disponible o En mantenimiento.';
+    public const RENTED_STATUS_LOCKED_MESSAGE         = 'El estado «Alquilado» lo asigna el contrato y no se puede modificar desde el inmueble.';
 
     /**
      * Renders the administrator and employee catalog with filters.
@@ -29,13 +31,14 @@ class PropertyController extends BaseController
     public function index(): string
     {
         $propertyModel = model(PropertyModel::class);
-        $pageData     = $this->catalogPage();
-        $filterData   = $this->catalogFilters(true, true);
-        $pagination   = $propertyModel->paginateWithOwner(
+        $pageData      = $this->catalogPage();
+        $filterData    = $this->catalogFilters(true, true, true);
+        $pagination    = $propertyModel->paginateWithOwner(
             $pageData['perPage'],
             $pageData['page'],
             $filterData['filters']
         );
+        $onlyInactive  = ($filterData['filters']['status'] ?? '') === PropertyModel::FILTER_STATUS_INACTIVE;
 
         return view('admin/properties/index', array_merge($this->panelContext(
             pageTitle: 'Inmuebles',
@@ -47,7 +50,7 @@ class PropertyController extends BaseController
             'statusCounts' => $propertyModel->getStatusCounts(),
             'filters'      => $filterData['values'],
             'filterErrors' => $filterData['errors'],
-            'owners'       => $propertyModel->getOwnerFilterOptions(),
+            'owners'       => $propertyModel->getOwnerFilterOptions($onlyInactive),
         ]));
     }
 
@@ -198,6 +201,63 @@ class PropertyController extends BaseController
 
         return redirect()->to('/admin/inmuebles')
             ->with('success', self::PROPERTY_UPDATED_MESSAGE);
+    }
+
+    /**
+     * Logically deactivates an active property without a contract in force, recording the date and the responsible
+     * user while preserving its physical record and historical references (HU-09 Scenarios 1, 2, 3, 7, 8).
+     *
+     * The deactivation only happens when the request carries `confirmed=1`. Without it (for example when JavaScript
+     * is disabled and the in-page confirmation modal never runs) a server-rendered confirmation page is returned,
+     * so the confirmation step of Scenario 1 never depends on the client.
+     */
+    public function deactivate(int $id): RedirectResponse|string
+    {
+        $propertyModel = model(PropertyModel::class);
+        $existing      = $propertyModel->findWithOwner($id, true);
+
+        if ($existing === null) {
+            return redirect()->to('/admin/inmuebles')
+                ->with('error', self::PROPERTY_NOT_FOUND_MESSAGE);
+        }
+
+        if ($existing['deleted_at'] !== null) {
+            return redirect()->to('/admin/inmuebles')
+                ->with('error', self::PROPERTY_ALREADY_DEACTIVATED_MESSAGE);
+        }
+
+        if ((string) $existing['status'] === PropertyModel::STATUS_RENTED || ! empty($existing['has_active_contract'])) {
+            return redirect()->to('/admin/inmuebles')
+                ->with('error', self::ACTIVE_CONTRACT_DEACTIVATION_MESSAGE);
+        }
+
+        if ((string) $this->request->getPost('confirmed') !== '1') {
+            return view('admin/properties/deactivate_confirm', array_merge($this->panelContext(
+                pageTitle: 'Confirmar baja de inmueble',
+                breadcrumb: 'Inmuebles / Baja',
+                activeMenu: 'inmuebles'
+            ), [
+                'property' => $existing,
+            ]));
+        }
+
+        $actorId = (int) session()->get('user_id', 0);
+        $result  = $propertyModel->deactivate($id, $actorId);
+
+        if (! $result['ok']) {
+            $message = match ($result['error']) {
+                PropertyModel::ERROR_NOT_FOUND         => self::PROPERTY_NOT_FOUND_MESSAGE,
+                PropertyModel::ERROR_ALREADY_DELETED   => self::PROPERTY_ALREADY_DEACTIVATED_MESSAGE,
+                PropertyModel::ERROR_CONTRACT_IN_FORCE => self::ACTIVE_CONTRACT_DEACTIVATION_MESSAGE,
+                default                                => self::DEACTIVATION_ERROR_MESSAGE,
+            };
+
+            return redirect()->to('/admin/inmuebles')
+                ->with('error', $message);
+        }
+
+        return redirect()->to('/admin/inmuebles')
+            ->with('success', self::PROPERTY_DEACTIVATED_MESSAGE);
     }
 
     /**
@@ -480,7 +540,7 @@ class PropertyController extends BaseController
      *     errors: array<string, string>
      * }
      */
-    private function catalogFilters(bool $allowStatus, bool $allowOwner): array
+    private function catalogFilters(bool $allowStatus, bool $allowOwner, bool $allowLifecycleStatus = false): array
     {
         $values = [
             'status'    => '',
@@ -521,12 +581,26 @@ class PropertyController extends BaseController
             }
 
             if ($field === 'status') {
-                if (! array_key_exists($value, PropertyModel::STATUS_LABELS)) {
+                $normalizedStatus = $value;
+                if ($allowLifecycleStatus) {
+                    $normalizedStatus = match (mb_strtolower($value)) {
+                        'activo'   => PropertyModel::FILTER_STATUS_ACTIVE,
+                        'inactivo' => PropertyModel::FILTER_STATUS_INACTIVE,
+                        default    => $value,
+                    };
+                }
+
+                $allowedStatuses = $allowLifecycleStatus
+                    ? PropertyModel::ADMIN_FILTER_STATUS_LABELS
+                    : PropertyModel::STATUS_LABELS;
+
+                if (! array_key_exists($normalizedStatus, $allowedStatuses)) {
                     $errors[$field] = 'Seleccioná un estado válido.';
                     continue;
                 }
 
-                $filters[$field] = $value;
+                $values[$field]  = $normalizedStatus;
+                $filters[$field] = $normalizedStatus;
             } elseif ($field === 'type') {
                 if (! array_key_exists($value, PropertyModel::TYPE_LABELS)) {
                     $errors[$field] = 'Seleccioná un tipo de inmueble válido.';

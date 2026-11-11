@@ -35,4 +35,81 @@ document.addEventListener('DOMContentLoaded', () => {
         description.addEventListener('input', updateCounter);
         updateCounter();
     }
+
+    // Logical property deactivation confirmation modal (HU-09 Scenarios 1, 2, 3)
+    const deactivateModal = document.getElementById('deactivate-property-modal');
+    const deactivateForms = document.querySelectorAll('.js-deactivate-property-form');
+    if (deactivateModal && deactivateForms.length > 0) {
+        const addressNode = document.getElementById('deactivate-property-address');
+        const typeNode = document.getElementById('deactivate-property-type');
+        const ownerNode = document.getElementById('deactivate-property-owner');
+        const confirmBtn = document.getElementById('deactivate-property-confirm');
+        const cancelBtn = document.getElementById('deactivate-property-cancel');
+        let pendingForm = null;
+        let lastTriggerButton = null;
+
+        const closeDeactivateModal = () => {
+            deactivateModal.hidden = true;
+            pendingForm = null;
+            if (lastTriggerButton) {
+                lastTriggerButton.focus();
+                lastTriggerButton = null;
+            }
+        };
+
+        deactivateForms.forEach((form) => {
+            form.addEventListener('submit', (event) => {
+                if (form.dataset.confirmed === '1') {
+                    return;
+                }
+
+                event.preventDefault();
+                pendingForm = form;
+                lastTriggerButton = form.querySelector('button[type="submit"]');
+
+                if (addressNode) {
+                    addressNode.textContent = form.dataset.propertyAddress || 'seleccionado';
+                }
+                if (typeNode) {
+                    typeNode.textContent = form.dataset.propertyType || 'Inmueble';
+                }
+                if (ownerNode) {
+                    ownerNode.textContent = form.dataset.propertyOwner || '—';
+                }
+
+                deactivateModal.hidden = false;
+                if (cancelBtn) {
+                    cancelBtn.focus();
+                }
+            });
+        });
+
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => {
+                if (!pendingForm) {
+                    return;
+                }
+                const targetForm = pendingForm;
+                targetForm.dataset.confirmed = '1';
+                // The server only deactivates when it receives confirmed=1 (see PropertyController::deactivate).
+                const confirmedField = targetForm.querySelector('input[name="confirmed"]');
+                if (confirmedField) {
+                    confirmedField.value = '1';
+                }
+                deactivateModal.hidden = true;
+                pendingForm = null;
+                targetForm.submit();
+            });
+        }
+
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', closeDeactivateModal);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !deactivateModal.hidden) {
+                closeDeactivateModal();
+            }
+        });
+    }
 });

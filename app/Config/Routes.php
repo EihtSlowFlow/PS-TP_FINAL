@@ -25,12 +25,13 @@ $routes->group('auth', static function (RouteCollection $routes): void {
 $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static function (RouteCollection $routes): void {
     $routes->get('dashboard', 'DashboardController::adminDashboard');
 
-    // Property management: listing, creation and edition (HU-07; the listing gets filters in HU-08)
+    // Property management: listing, creation, edition and logical deactivation (HU-07, HU-08, HU-09)
     $routes->get('inmuebles', 'PropertyController::index');
     $routes->get('inmuebles/nuevo', 'PropertyController::create');
     $routes->post('inmuebles', 'PropertyController::store');
     $routes->get('inmuebles/editar/(:num)', 'PropertyController::edit/$1');
     $routes->post('inmuebles/editar/(:num)', 'PropertyController::update/$1');
+    $routes->post('inmuebles/baja/(:num)', 'PropertyController::deactivate/$1');
 
     // Lease contracts: creation and contract file (HU-10; the listing is HU-11 and the closing HU-12)
     $routes->get('contratos/nuevo', 'ContractController::create');

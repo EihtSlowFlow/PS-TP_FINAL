@@ -49,6 +49,9 @@ $this->extend('layouts/panel');
                     <div class="users-heading-row">
                         <h1 class="panel-title">Inmuebles</h1>
                         <span class="badge-pill badge-neutral"><?= esc((string) $statusCounts['total']) ?> registrados</span>
+                        <?php if ($filters['status'] === PropertyModel::FILTER_STATUS_INACTIVE && ($statusCounts['inactive'] ?? 0) > 0): ?>
+                            <span class="badge-pill badge-danger"><?= esc((string) $statusCounts['inactive']) ?> inactivos</span>
+                        <?php endif; ?>
                     </div>
                     <p class="panel-subtitle">Gestión de cartera, unidades locativas y estados de disponibilidad</p>
                 </div>
@@ -92,7 +95,7 @@ $this->extend('layouts/panel');
                         <label for="filter-status">Estado</label>
                         <select id="filter-status" name="status" class="form-control<?= isset($filterErrors['status']) ? ' is-invalid' : '' ?>">
                             <option value="">Todos los estados</option>
-                            <?php foreach (PropertyModel::STATUS_LABELS as $statusValue => $statusLabel): ?>
+                            <?php foreach (PropertyModel::ADMIN_FILTER_STATUS_LABELS as $statusValue => $statusLabel): ?>
                                 <option value="<?= esc($statusValue) ?>"<?= $filters['status'] === $statusValue ? ' selected' : '' ?>>
                                     <?= esc($statusLabel) ?>
                                 </option>
@@ -166,13 +169,22 @@ $this->extend('layouts/panel');
                             <?php else: ?>
                                 <?php foreach ($properties as $item): ?>
                                     <?php
-                                    $itemId     = (int) $item['id'];
-                                    $ownerFirst = (string) ($item['owner_first_name'] ?? '');
-                                    $ownerLast  = (string) ($item['owner_last_name'] ?? '');
-                                    $ownerName  = trim($ownerFirst . ' ' . $ownerLast);
-                                    $status     = (string) $item['status'];
+                                    $itemId            = (int) $item['id'];
+                                    $ownerFirst        = (string) ($item['owner_first_name'] ?? '');
+                                    $ownerLast         = (string) ($item['owner_last_name'] ?? '');
+                                    $ownerName         = trim($ownerFirst . ' ' . $ownerLast);
+                                    $status            = (string) $item['status'];
+                                    $typeLabel         = PropertyModel::labelForType((string) $item['type']);
+                                    $isDeleted         = ! empty($item['deleted_at']);
+                                    $hasActiveContract = ! empty($item['has_active_contract']) || $status === PropertyModel::STATUS_RENTED;
+                                    $deletedAtFormatted = $isDeleted
+                                        ? date('d/m/Y', strtotime((string) $item['deleted_at']))
+                                        : '';
+                                    $deletedByName = trim(
+                                        ((string) ($item['deleted_by_first_name'] ?? '')) . ' ' . ((string) ($item['deleted_by_last_name'] ?? ''))
+                                    );
                                     ?>
-                                    <tr>
+                                    <tr class="<?= $isDeleted ? 'row-deactivated' : '' ?>">
                                         <td>
                                             <div class="user-cell-meta">
                                                 <span class="user-cell-name"><?= esc((string) $item['address']) ?></span>
@@ -180,7 +192,7 @@ $this->extend('layouts/panel');
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="badge-pill badge-neutral"><?= esc(PropertyModel::labelForType((string) $item['type'])) ?></span>
+                                            <span class="badge-pill badge-neutral"><?= esc($typeLabel) ?></span>
                                         </td>
                                         <td class="mono-cell"><?= $item['rooms'] !== null ? esc((string) $item['rooms']) . ' amb.' : '—' ?></td>
                                         <td class="mono-cell"><?= esc($formatMoney($item['base_rent'])) ?></td>
@@ -196,38 +208,93 @@ $this->extend('layouts/panel');
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="badge-pill badge-property-<?= esc($status) ?>"><?= esc(PropertyModel::labelForStatus($status)) ?></span>
+                                            <?php if ($isDeleted): ?>
+                                                <div class="user-cell-meta">
+                                                    <span class="badge-pill badge-status-deleted" title="Baja: <?= esc($deletedAtFormatted) ?>">Inactivo</span>
+                                                    <span class="user-cell-sub">
+                                                        Baja: <?= esc($deletedAtFormatted) ?><?= $deletedByName !== '' ? ' · ' . esc($deletedByName) : '' ?>
+                                                    </span>
+                                                </div>
+                                            <?php else: ?>
+                                                <span class="badge-pill badge-property-<?= esc($status) ?>"><?= esc(PropertyModel::labelForStatus($status)) ?></span>
+                                            <?php endif; ?>
                                         </td>
                                         <td class="text-right">
                                             <div class="table-actions">
-                                                <?php if ($status === PropertyModel::STATUS_AVAILABLE && empty($item['owner_deleted_at'])): ?>
+                                                <?php if ($isDeleted): ?>
+                                                    <span class="user-cell-sub">Dado de baja</span>
+                                                <?php else: ?>
+                                                    <?php if ($status === PropertyModel::STATUS_AVAILABLE && empty($item['owner_deleted_at'])): ?>
+                                                        <a
+                                                            href="<?= esc(site_url('admin/contratos/nuevo') . '?property_id=' . $itemId) ?>"
+                                                            class="action-icon-btn"
+                                                            title="Crear contrato para <?= esc((string) $item['address']) ?>"
+                                                            aria-label="Crear contrato para <?= esc((string) $item['address']) ?>"
+                                                        >
+                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                                                <polyline points="14 2 14 8 20 8"/>
+                                                                <line x1="12" y1="18" x2="12" y2="12"/>
+                                                                <line x1="9" y1="15" x2="15" y2="15"/>
+                                                            </svg>
+                                                            <span class="sr-only">Crear contrato</span>
+                                                        </a>
+                                                    <?php endif; ?>
                                                     <a
-                                                        href="<?= esc(site_url('admin/contratos/nuevo') . '?property_id=' . $itemId) ?>"
+                                                        href="<?= esc(site_url('admin/inmuebles/editar/' . $itemId)) ?>"
                                                         class="action-icon-btn"
-                                                        title="Crear contrato para <?= esc((string) $item['address']) ?>"
-                                                        aria-label="Crear contrato para <?= esc((string) $item['address']) ?>"
+                                                        title="Editar <?= esc((string) $item['address']) ?>"
+                                                        aria-label="Editar <?= esc((string) $item['address']) ?>"
                                                     >
                                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                                            <polyline points="14 2 14 8 20 8"/>
-                                                            <line x1="12" y1="18" x2="12" y2="12"/>
-                                                            <line x1="9" y1="15" x2="15" y2="15"/>
+                                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
                                                         </svg>
-                                                        <span class="sr-only">Crear contrato</span>
+                                                        <span class="sr-only">Editar</span>
                                                     </a>
+                                                    <?php if ($hasActiveContract): ?>
+                                                        <button
+                                                            type="button"
+                                                            class="action-icon-btn is-disabled"
+                                                            disabled
+                                                            title="No se puede dar de baja (Contrato vigente)"
+                                                            aria-label="No se puede dar de baja (Contrato vigente)"
+                                                        >
+                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                                            </svg>
+                                                            <span class="sr-only">No se puede dar de baja (Contrato vigente)</span>
+                                                        </button>
+                                                    <?php else: ?>
+                                                        <form
+                                                            action="<?= esc(site_url('admin/inmuebles/baja/' . $itemId)) ?>"
+                                                            method="post"
+                                                            class="inline-action-form js-deactivate-property-form"
+                                                            data-property-address="<?= esc((string) $item['address'] . ', ' . (string) $item['city']) ?>"
+                                                            data-property-type="<?= esc($typeLabel) ?>"
+                                                            data-property-owner="<?= esc($ownerName) ?>"
+                                                        >
+                                                            <?= csrf_field() ?>
+                                                            <?php /* "0" = ask for confirmation on the server; properties.js sets "1" once the modal is accepted. */ ?>
+                                                            <input type="hidden" name="confirmed" value="0">
+                                                            <button
+                                                                type="submit"
+                                                                class="action-icon-btn action-icon-btn-danger"
+                                                                title="Dar de baja <?= esc((string) $item['address']) ?>"
+                                                                aria-label="Dar de baja <?= esc((string) $item['address']) ?>"
+                                                            >
+                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                                    <polyline points="3 6 5 6 21 6"/>
+                                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                                                    <line x1="10" y1="11" x2="10" y2="17"/>
+                                                                    <line x1="14" y1="11" x2="14" y2="17"/>
+                                                                </svg>
+                                                                <span class="sr-only">Dar de baja</span>
+                                                            </button>
+                                                        </form>
+                                                    <?php endif; ?>
                                                 <?php endif; ?>
-                                                <a
-                                                    href="<?= esc(site_url('admin/inmuebles/editar/' . $itemId)) ?>"
-                                                    class="action-icon-btn"
-                                                    title="Editar <?= esc((string) $item['address']) ?>"
-                                                    aria-label="Editar <?= esc((string) $item['address']) ?>"
-                                                >
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
-                                                    </svg>
-                                                    <span class="sr-only">Editar</span>
-                                                </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -270,4 +337,27 @@ $this->extend('layouts/panel');
                     <?php endif; ?>
                 </div>
             </section>
+<?php $this->endSection() ?>
+
+<?php $this->section('modals') ?>
+    <div class="confirm-modal" id="deactivate-property-modal" role="alertdialog" aria-modal="true" aria-labelledby="deactivate-property-title" aria-describedby="deactivate-property-desc" hidden>
+        <div class="confirm-modal-dialog">
+            <h2 class="confirm-modal-title" id="deactivate-property-title">¿Confirmás la baja lógica del inmueble?</h2>
+            <p class="confirm-modal-text" id="deactivate-property-desc">
+                El inmueble ubicado en <strong id="deactivate-property-address">seleccionado</strong>
+                (<span id="deactivate-property-type">Inmueble</span> · Propietario: <span id="deactivate-property-owner">—</span>)
+                pasará a estado inactivo: se retirará de la operatoria activa y no podrá seleccionarse ni asociarse a nuevos contratos
+                de locación, pero se conservarán todos sus datos y su registro histórico (contratos, cuotas y pagos asociados) para
+                consulta y auditoría.
+            </p>
+            <div class="confirm-modal-actions">
+                <button type="button" class="btn btn-secondary" id="deactivate-property-cancel">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="deactivate-property-confirm">Confirmar baja</button>
+            </div>
+        </div>
+    </div>
+<?php $this->endSection() ?>
+
+<?php $this->section('scripts') ?>
+    <script src="<?= esc(base_url('js/properties.js')) ?>"></script>
 <?php $this->endSection() ?>
