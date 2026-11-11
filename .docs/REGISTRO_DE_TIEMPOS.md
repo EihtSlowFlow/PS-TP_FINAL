@@ -21,16 +21,19 @@
 | [#22](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/22) | — | Base de datos | LauPerisse (parte hecha con Claude; el issue es de los tres) | 8 | 06/11 11:03 | 06/11 19:14 | **1 h 42 min** | 2 h 08 min | Reconstruido |
 | [#19](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/19) | HU-03 | Cierre de sesión | LauPerisse | 1 | 09/11 21:05 | 09/11 21:21 | **16 min** | 16 min | Reconstruido |
 | [#12](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/12) | HU-07 | Alta y edición de inmuebles | LauPerisse | 5 | 09/11 21:20 | 09/11 21:48 | **28 min** | 28 min | Reconstruido |
+| [#20](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/20) | HU-02 | Registro de propietarios e inquilinos | joaquincorbalan | 3 | 10/11 09:47 | 10/11 10:36 | **49 min** | 49 min | Medido (handoff) |
+| [#11](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/11) | HU-06 | Gestionar mi perfil | joaquincorbalan | 2 | 10/11 16:42 | 10/11 17:16 | **34 min** | 34 min | Medido (handoff) |
+| [#3](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/3) | HU-08 | Catálogo y filtros de inmuebles | joaquincorbalan (Copilot SDK en VS Code) | 3 | 10/11 21:16 | 10/11 22:26 | **56 min** | 56 min | Medido (2 sesiones; pausa descontada) |
 | [#15](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/15) | HU-10 | Alta y vinculación de contratos | LauPerisse | 8 | 10/11 20:47 | 10/11 21:07 | **20 min** | 20 min | Medido |
+| [#18](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/18) | HU-03b | Restablecer la contraseña | EihtSlowFlow | 3 | 10/11 20:37 | 10/11 22:58 | **1 h 36 min** | 2 h 21 min | Medido (sesión de revisión y cierre; pausa 21:42–22:27 descontada) |
 | [#6](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/6) | HU-13 | Emisión masiva de cuotas | LauPerisse | 5 | 10/11 23:28 | 10/11 23:52 | **24 min** | 24 min | Medido |
-| **Total registrado** | | | | **32** | | | **3 h 54 min** | 4 h 20 min | |
+| **Total registrado** | | | | **43** | | | **7 h 49 min** | 9 h 00 min | |
 
 Sin registro de tiempo (los hizo otro integrante; que cada responsable complete su fila con el método de la [sección 3](#3-cómo-registrar-el-tiempo-de-cada-issue-de-ahora-en-adelante)):
 
 | Issue | HU | Historia | Responsable | Pts | Estado |
 |---|---|---|---|---|---|
 | [#21](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/21) | HU-01 | Iniciar sesión y control de acceso | EihtSlowFlow | 5 | Mergeada (PR #27), sin tiempo registrado |
-| [#20](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/20) | HU-02 | Registro de propietarios e inquilinos | joaquincorbalan | 3 | Mergeada (PR #32), sin tiempo registrado |
 | [#17](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/17) | HU-04 | Gestión de usuarios | EihtSlowFlow | 5 | Mergeada (PR #28), sin tiempo registrado |
 | [#10](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/10) | HU-05 | Baja lógica de usuarios | EihtSlowFlow | 2 | Mergeada (PR #29), sin tiempo registrado |
 
@@ -43,6 +46,7 @@ Sin registro de tiempo (los hizo otro integrante; que cada responsable complete 
 | #19 | Del pedido del issue (21:05) al commit `a24187f` (21:21): ruta, controlador, botón en el sidebar, 17 casos de prueba y prueba de punta a punta con servidor real | — |
 | #12 | Del pedido del issue (21:20) al commit `7a17382` (21:48): modelo, controlador, rutas, vistas, JavaScript, 49 casos de prueba y revisión visual en vivo | Los ≈ 3 min de tildar los criterios y mover las tarjetas en GitHub, que cubrieron los dos issues juntos |
 | #15 | Del pedido del issue (20:47) al cierre de la implementación (21:07): lectura del issue y del código, `ContractModel` con la transacción, `ContractController`, rutas, formulario y ficha, JavaScript, 85 pruebas nuevas (75 de integración y 10 unitarias), revisión visual en el navegador y la suite completa (que corrió en segundo plano mientras se escribía la documentación). Hora de inicio y de fin anotadas en el momento | El commit, el pull request y el comentario en el issue de GitHub, que quedaron pendientes (el `gh` de esta máquina no tiene sesión iniciada). Sin pausas de más de 10 minutos |
+| #18 | Dos bloques en la sesión de revisión y cierre del 10/11: **20:37 a 21:42** (65 min: revisión integral de HU-03b, merge de `main`, validación de DNI como segundo dato, `strong_password`, enfriamiento de 2 min con `ResetAttemptLimiter` y cuenta regresiva en vivo, diagnóstico de la suite completa y pruebas automatizadas) y **22:27 a 22:58** (31 min: nuevo merge de `main`, rechazo directo con mensaje de credenciales incorrectas y de usuario dado de baja, prueba manual en navegador, commit y PR) | La pausa de 45 min entre las 21:42 y las 22:27; tampoco la sesión previa donde se creó el commit inicial `5b86cb4` (17:49), cuyo inicio no se había medido |
 | #6 | Del pedido del issue (23:28) al cierre de la implementación (23:52): lectura del issue, de HU-10 y del código de contratos, `InstallmentModel` con la transacción y la numeración correlativa, `ContractModel` (regla de cobertura), `InstallmentController`, rutas, vista previa e informe, estilos, 110 pruebas nuevas (82 de integración y 28 unitarias), revisión visual con los datos de demostración, la suite completa (5 min 47 s, en segundo plano mientras se escribía la documentación) y la documentación. Hora de inicio y de fin anotadas en el momento | El commit, el pull request y el comentario en el issue de GitHub, que quedaron pendientes (el `gh` de esta máquina no tiene sesión iniciada). Sin pausas de más de 10 minutos |
 
 ---

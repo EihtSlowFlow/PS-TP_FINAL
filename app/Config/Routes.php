@@ -4,6 +4,7 @@ use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
 $routes->get('/', 'Home::index');
+$routes->get('catalogo-inmuebles', 'PropertyController::publicIndex');
 
 // Authentication routes (HU-01, HU-02)
 $routes->group('auth', static function (RouteCollection $routes): void {
@@ -11,6 +12,11 @@ $routes->group('auth', static function (RouteCollection $routes): void {
     $routes->post('login', 'AuthController::attemptLogin');
     $routes->get('register', 'AuthController::register');
     $routes->post('register', 'AuthController::storeRegistration');
+    // HU-03b: public recovery flow. State changes remain POST-only and use the global CSRF filter.
+    $routes->get('recuperar-password', 'PasswordResetController::requestForm');
+    $routes->post('recuperar-password', 'PasswordResetController::sendLink');
+    $routes->get('restablecer-password/(:segment)', 'PasswordResetController::resetForm/$1');
+    $routes->post('restablecer-password/(:segment)', 'PasswordResetController::updatePassword/$1');
     // HU-03: POST only (with the global CSRF filter) so a link or an image cannot log a user out.
     $routes->post('logout', 'AuthController::logout');
 });
@@ -50,9 +56,17 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin']], static function (R
 // Owner portal routes (HU-01)
 $routes->group('propietario', ['filter' => ['auth', 'role:owner']], static function (RouteCollection $routes): void {
     $routes->get('dashboard', 'DashboardController::ownerDashboard');
+    $routes->get('inmuebles', 'PropertyController::ownerIndex');
 });
 
 // Tenant portal routes (HU-01)
 $routes->group('inquilino', ['filter' => ['auth', 'role:tenant']], static function (RouteCollection $routes): void {
     $routes->get('estado-cuenta', 'DashboardController::tenantAccountStatus');
+});
+
+// Personal profile routes for owners and tenants (HU-06)
+$routes->group('perfil', ['filter' => ['auth', 'role:owner,tenant']], static function (RouteCollection $routes): void {
+    $routes->get('/', 'ProfileController::show');
+    $routes->post('contacto', 'ProfileController::updateContact');
+    $routes->post('contrasena', 'ProfileController::changePassword');
 });

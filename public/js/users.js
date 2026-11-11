@@ -15,20 +15,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (passwordInput && suggestBtn) {
         suggestBtn.addEventListener('click', () => {
-            const charset = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!#$*';
-            let generated = '';
+            const uppercase = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+            const lowercase = 'abcdefghijkmnpqrstuvwxyz';
+            const numbers = '23456789';
+            const symbols = '!#$*';
+            const charset = uppercase + lowercase + numbers + symbols;
+            const randomIndex = (maximum) => {
+                const range = 0x100000000;
+                const limit = range - (range % maximum);
+                const bytes = new Uint32Array(1);
+                do {
+                    window.crypto.getRandomValues(bytes);
+                } while (bytes[0] >= limit);
+                return bytes[0] % maximum;
+            };
+            const pick = (characters) => characters[randomIndex(characters.length)];
+            const characters = [pick(uppercase), pick(numbers), pick(symbols)];
 
-            // Use a cryptographically secure source; reject values that would bias the modulo.
-            const limit = 256 - (256 % charset.length);
-            while (generated.length < 12) {
-                const bytes = new Uint8Array(24);
-                window.crypto.getRandomValues(bytes);
-                for (const byte of bytes) {
-                    if (byte < limit && generated.length < 12) {
-                        generated += charset.charAt(byte % charset.length);
-                    }
-                }
+            while (characters.length < 12) {
+                characters.push(pick(charset));
             }
+
+            for (let index = characters.length - 1; index > 0; index -= 1) {
+                const swapIndex = randomIndex(index + 1);
+                [characters[index], characters[swapIndex]] = [characters[swapIndex], characters[index]];
+            }
+
+            const generated = characters.join('');
 
             passwordInput.type = 'text';
             passwordInput.value = generated;

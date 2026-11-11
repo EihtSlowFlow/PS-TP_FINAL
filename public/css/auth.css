@@ -405,6 +405,11 @@ body.auth-page {
     padding-right: 2.75rem;
 }
 
+.auth-input-password::-ms-reveal,
+.auth-input-password::-ms-clear {
+    display: none;
+}
+
 .auth-input:focus {
     outline: none;
     border-color: var(--primary);
@@ -493,6 +498,24 @@ body.auth-page {
 
 .register-link:hover,
 .register-link:focus-visible {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+.public-catalog-login-link {
+    margin: 1rem 0 0;
+    text-align: center;
+}
+
+.public-catalog-login-link a {
+    color: var(--primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.public-catalog-login-link a:hover,
+.public-catalog-login-link a:focus-visible {
     color: var(--primary-hover);
     text-decoration: underline;
 }

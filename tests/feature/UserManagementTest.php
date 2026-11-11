@@ -442,7 +442,7 @@ final class UserManagementTest extends CIUnitTestCase
             'last_name'       => 'X',
             'document_number' => '12',
             'email'           => 'no-es-un-email',
-            'phone'           => '123',
+            'phone'           => '12abc456',
             'address'         => '',
             'role'            => 'superuser',
             'password'        => 'abc',
@@ -723,4 +723,3 @@ final class UserManagementTest extends CIUnitTestCase
         return (int) $this->db->insertID();
     }
 }
-

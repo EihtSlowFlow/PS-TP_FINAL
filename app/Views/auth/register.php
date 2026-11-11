@@ -87,8 +87,11 @@ $selectedRole = old('role', '');
                 <div class="field-group register-field-full">
                     <label for="phone" class="field-label">Teléfono <span class="required-mark" aria-hidden="true">*</span></label>
                     <input type="tel" id="phone" name="phone" class="auth-input register-input<?= isset($errors['phone']) ? ' is-invalid' : '' ?>"
-                        value="<?= esc(old('phone', '')) ?>" required minlength="6" maxlength="30" autocomplete="tel"
-                        <?= isset($errors['phone']) ? 'aria-invalid="true" aria-describedby="phone-error"' : '' ?>>
+                        value="<?= esc(old('phone', '')) ?>" required maxlength="30" pattern="\+?[0-9][0-9 ().-]{5,29}"
+                        title="Ingresá entre 6 y 15 dígitos. Podés usar +, espacios, paréntesis, puntos y guiones." autocomplete="tel"
+                        aria-describedby="<?= isset($errors['phone']) ? 'phone-help phone-error' : 'phone-help' ?>"
+                        <?= isset($errors['phone']) ? 'aria-invalid="true"' : '' ?>>
+                    <span id="phone-help" class="field-help">Ingresá entre 6 y 15 dígitos; se permiten formatos internacionales.</span>
                     <?php if (isset($errors['phone'])): ?><span id="phone-error" class="field-error" role="alert"><?= esc($errors['phone']) ?></span><?php endif; ?>
                 </div>
 
@@ -122,7 +125,7 @@ $selectedRole = old('role', '');
                             </svg>
                         </button>
                     </div>
-                    <span id="password-help" class="field-help">Usá al menos 8 caracteres.</span>
+                    <span id="password-help" class="field-help">Debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo.</span>
                     <?php if (isset($errors['password'])): ?><span id="password-error" class="field-error" role="alert"><?= esc($errors['password']) ?></span><?php endif; ?>
                 </div>
 

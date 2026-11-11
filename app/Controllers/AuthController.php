@@ -140,11 +140,11 @@ class AuthController extends BaseController
             ],
             'phone' => [
                 'label'  => 'Teléfono',
-                'rules'  => 'required|min_length[6]|max_length[30]',
+                'rules'  => 'required|max_length[30]|valid_phone',
                 'errors' => [
                     'required'   => 'Ingresá tu teléfono de contacto.',
-                    'min_length' => 'El teléfono debe tener al menos 6 caracteres.',
                     'max_length' => 'El teléfono no puede superar los 30 caracteres.',
+                    'valid_phone' => 'Ingresá un teléfono válido con entre 6 y 15 dígitos. Podés usar +, espacios, paréntesis, puntos y guiones.',
                 ],
             ],
             'role' => [
@@ -157,11 +157,12 @@ class AuthController extends BaseController
             ],
             'password' => [
                 'label'  => 'Contraseña',
-                'rules'  => 'required|min_length[8]|max_length[255]',
+                'rules'  => 'required|min_length[8]|max_length[255]|strong_password',
                 'errors' => [
                     'required'   => 'Ingresá una contraseña.',
                     'min_length' => 'La contraseña debe tener al menos 8 caracteres.',
                     'max_length' => 'La contraseña supera la longitud permitida.',
+                    'strong_password' => 'La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un símbolo.',
                 ],
             ],
             'password_confirm' => [
