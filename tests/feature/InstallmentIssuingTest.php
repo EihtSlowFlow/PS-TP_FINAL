@@ -787,6 +787,7 @@ final class InstallmentIssuingTest extends CIUnitTestCase
             ->assertRedirectTo('/admin/cuotas/emitir?month=12&year=2026');
 
         $this->assertSame(InstallmentController::SAVE_ERROR_MESSAGE, session()->getFlashdata('error'));
+        $this->assertTrue($this->db->transStatus(), 'A failed issuing must not leave the shared connection in a failed transaction state.');
         $this->assertSame(0, $this->db->table('installments')->countAllResults(), 'No installment may survive a failed issuing.');
 
         // Once the fault is gone the same request works: the failed attempt left nothing behind.

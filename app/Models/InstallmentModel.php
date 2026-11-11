@@ -218,6 +218,9 @@ class InstallmentModel extends Model
             }
         } catch (Throwable $e) {
             $this->db->transRollback();
+            // A failed query leaves the connection's transaction status "failed" (strict mode), which would make the
+            // next transaction on this connection roll back too; the rollback above already discarded everything.
+            $this->db->resetTransStatus();
             log_message('error', 'Installment issuing failed and was rolled back: {message}', ['message' => $e->getMessage()]);
 
             return $this->issueResult(self::ERROR_PERSISTENCE);
