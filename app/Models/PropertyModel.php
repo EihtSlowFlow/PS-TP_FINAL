@@ -126,15 +126,137 @@ class PropertyModel extends Model
      *     to: int
      * }
      */
-    public function paginateWithOwner(int $perPage = 10, int $page = 1): array
+    public function paginateWithOwner(int $perPage = 10, int $page = 1, array $filters = []): array
     {
+        return $this->paginateProperties($perPage, $page, $filters, true);
+    }
+
+    /**
+     * Lists only a specific owner's active properties and excludes internal owner/audit fields.
+     *
+     * @param array<string, string|int|float> $filters
+     *
+     * @return array{
+     *     items: list<array<string, mixed>>,
+     *     total: int,
+     *     perPage: int,
+     *     currentPage: int,
+     *     totalPages: int,
+     *     from: int,
+     *     to: int
+     * }
+     */
+    public function paginateForOwner(int $ownerId, int $perPage = 10, int $page = 1, array $filters = []): array
+    {
+        return $this->paginateProperties($perPage, $page, $filters, false, $ownerId);
+    }
+
+    /**
+     * Lists only active and available properties, returning public property data only.
+     *
+     * @param array<string, string|int|float> $filters
+     *
+     * @return array{
+     *     items: list<array<string, mixed>>,
+     *     total: int,
+     *     perPage: int,
+     *     currentPage: int,
+     *     totalPages: int,
+     *     from: int,
+     *     to: int
+     * }
+     */
+    public function paginatePublic(int $perPage = 10, int $page = 1, array $filters = []): array
+    {
+        return $this->paginateProperties($perPage, $page, $filters, false, null, true);
+    }
+
+    /**
+     * Owners associated with active properties, including owners deactivated after those properties were created.
+     *
+     * @return list<array{id: int, first_name: string, last_name: string, deleted_at: string|null}>
+     */
+    public function getOwnerFilterOptions(): array
+    {
+        return $this->db->table('properties')
+            ->select('users.id, users.first_name, users.last_name, users.deleted_at')
+            ->join('users', 'users.id = properties.owner_id')
+            ->where('properties.deleted_at', null)
+            ->groupBy(['users.id', 'users.first_name', 'users.last_name', 'users.deleted_at'])
+            ->orderBy('users.last_name', 'ASC')
+            ->orderBy('users.first_name', 'ASC')
+            ->get()
+            ->getResultArray();
+    }
+
+    /**
+     * @param array<string, string|int|float> $filters
+     *
+     * @return array{
+     *     items: list<array<string, mixed>>,
+     *     total: int,
+     *     perPage: int,
+     *     currentPage: int,
+     *     totalPages: int,
+     *     from: int,
+     *     to: int
+     * }
+     */
+    private function paginateProperties(
+        int $perPage,
+        int $page,
+        array $filters,
+        bool $includeOwner,
+        ?int $ownerId = null,
+        bool $publicOnly = false
+    ): array {
         $perPage     = max(1, min(100, $perPage));
         $currentPage = max(1, $page);
-
-        $builder = $this->builder()
-            ->select($this->ownerSelect())
-            ->join('users', 'users.id = properties.owner_id')
+        $builder     = $this->builder()
+            ->select($includeOwner ? $this->ownerSelect() : $this->listingSelect())
             ->where('properties.deleted_at', null);
+
+        if ($includeOwner) {
+            $builder->join('users', 'users.id = properties.owner_id');
+        }
+
+        if ($ownerId !== null) {
+            $builder->where('properties.owner_id', $ownerId);
+        }
+
+        if ($publicOnly) {
+            $builder->where('properties.status', self::STATUS_AVAILABLE);
+        }
+
+        if (isset($filters['status']) && in_array($filters['status'], array_keys(self::STATUS_LABELS), true)) {
+            $builder->where('properties.status', $filters['status']);
+        }
+
+        if (isset($filters['type']) && in_array($filters['type'], array_keys(self::TYPE_LABELS), true)) {
+            $builder->where('properties.type', $filters['type']);
+        }
+
+        if (
+            isset($filters['min_price'])
+            && is_numeric($filters['min_price'])
+            && is_finite((float) $filters['min_price'])
+            && (float) $filters['min_price'] > 0
+        ) {
+            $builder->where('properties.base_rent >=', (float) $filters['min_price']);
+        }
+
+        if (
+            isset($filters['max_price'])
+            && is_numeric($filters['max_price'])
+            && is_finite((float) $filters['max_price'])
+            && (float) $filters['max_price'] > 0
+        ) {
+            $builder->where('properties.base_rent <=', (float) $filters['max_price']);
+        }
+
+        if ($includeOwner && isset($filters['owner_id']) && (int) $filters['owner_id'] > 0) {
+            $builder->where('properties.owner_id', (int) $filters['owner_id']);
+        }
 
         $total      = (int) $builder->countAllResults(false);
         $totalPages = max(1, (int) ceil($total / $perPage));
@@ -144,8 +266,7 @@ class PropertyModel extends Model
         }
 
         $offset = ($currentPage - 1) * $perPage;
-
-        $items = $builder
+        $items  = $builder
             ->orderBy('properties.id', 'DESC')
             ->limit($perPage, $offset)
             ->get()
@@ -203,5 +324,12 @@ class PropertyModel extends Model
         return 'properties.*, '
             . 'users.first_name AS owner_first_name, users.last_name AS owner_last_name, '
             . 'users.document_number AS owner_document_number, users.deleted_at AS owner_deleted_at';
+    }
+
+    private function listingSelect(): string
+    {
+        return 'properties.id, properties.address, properties.city, properties.type, properties.rooms, '
+            . 'properties.surface, properties.included_services, properties.base_rent, properties.description, '
+            . 'properties.status';
     }
 }

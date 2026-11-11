@@ -4,6 +4,7 @@ use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
 $routes->get('/', 'Home::index');
+$routes->get('catalogo-inmuebles', 'PropertyController::publicIndex');
 
 // Authentication routes (HU-01, HU-02)
 $routes->group('auth', static function (RouteCollection $routes): void {
@@ -40,6 +41,7 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin']], static function (R
 // Owner portal routes (HU-01)
 $routes->group('propietario', ['filter' => ['auth', 'role:owner']], static function (RouteCollection $routes): void {
     $routes->get('dashboard', 'DashboardController::ownerDashboard');
+    $routes->get('inmuebles', 'PropertyController::ownerIndex');
 });
 
 // Tenant portal routes (HU-01)

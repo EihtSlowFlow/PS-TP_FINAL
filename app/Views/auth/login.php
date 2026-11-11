@@ -274,6 +274,9 @@ $flashWarning = session()->getFlashdata('warning');
                             <a href="<?= esc(site_url('auth/register')) ?>" class="register-link">Registrate</a>
                         </div>
                     <?php endif; ?>
+                    <p class="public-catalog-login-link">
+                        <a href="<?= esc(site_url('catalogo-inmuebles')) ?>">Explorar propiedades disponibles</a>
+                    </p>
 
                     <div class="roles-summary-box" aria-label="Roles del sistema">
                         <p class="roles-summary-title">
@@ -320,4 +323,3 @@ $flashWarning = session()->getFlashdata('warning');
     <script src="<?= esc(base_url('js/auth.js')) ?>" defer></script>
 </body>
 </html>
-

@@ -5,14 +5,14 @@
 | Campo                           | Valor                                                                               |
 | ------------------------------- | ----------------------------------------------------------------------------------- |
 | **Proyecto**                    | InmoGestión 2026                                                                    |
-| **Historia de usuario / Issue** | HU-06 — Gestionar mi perfil · Issue no confirmado en la documentación local         |
+| **Historia de usuario / Issue** | HU-06 — Gestionar mi perfil · [#11](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/11) |
 | **Sprint / Hito**               | Sprint 1 · Gestión de usuarios                                                      |
 | **Rama**                        | `feature/hu-06-perfil-propio`                                                       |
 | **Commit de implementación**    | `0f6fb4b` — `feat(profile): add profile management features for owners and tenants` |
 | **Pull Request**                | #34 — mergeado el 2026-11-10 20:44                                                  |
 | **Fecha de actualización**      | 2026-11-10                                                                          |
 | **Inicio / Fin**                | 2026-11-10 16:42 → 2026-11-10 17:16 · último commit verificable: 20:04             |
-| **Tiempo invertido**            | 34 min de reloj (tiempo efectivo no especificado)                                    |
+| **Tiempo invertido**            | 34 min efectivos · 34 min de reloj · medido según el horario registrado              |
 | **Autor / Agente**              | Copilot SDK en VS Code                                                              |
 | **Estado global**               | 🟡 Implementación realizada; ejecución de pruebas pendiente                         |
 | **Avance estimado**             | 100 %                                                                               |
@@ -87,7 +87,6 @@ Referencia: [`HU-06_gestion_perfil_propio.md`](../historias_de_usuario/HU-06_ges
 | --- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------- |
 | B-1 | Bloqueo de verificación | El PHPUnit global falla antes de correr tests (`Call to undefined function each()`); faltan dependencias locales del proyecto | Media     | Instalar dependencias declaradas y ejecutar con PHPUnit compatible                                |
 | B-2 | Bloqueo de entorno      | No se ejecutó el test feature con una conexión de base descartable confirmada                                                 | Media     | Configurar el grupo de pruebas de `.env` solo con una BD desechable y ejecutar la prueba dirigida |
-| R-1 | Riesgo de integración   | El issue de HU-06 no está identificado en la documentación local; el PR #34 sí está mergeado                                  | Baja      | Confirmar el issue asociado si se requiere seguimiento                                            |
 
 ## 7. Próximos Pasos
 
@@ -104,7 +103,7 @@ Referencia: [`HU-06_gestion_perfil_propio.md`](../historias_de_usuario/HU-06_ges
 
 | Fecha      | Autor                  | Duración                        | Resumen                                                                                                                     | Commit / PR                      |
 | ---------- | ---------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| 2026-11-10 | Copilot SDK en VS Code | 34 min de reloj (efectivo no especificado) | HU-06 y validaciones comunes de teléfono/contraseña; lint, reglas aisladas y rutas verificadas; PHPUnit global incompatible | `0f6fb4b` / PR #34 (merge 20:44) |
+| 2026-11-10 | Copilot SDK en VS Code | 34 min efectivos / 34 min de reloj | HU-06 y validaciones comunes de teléfono/contraseña; lint, reglas aisladas y rutas verificadas; PHPUnit global incompatible | `0f6fb4b` / PR #34 (merge 20:44) |
 
 ## 9. Protocolo de Inicio para el Nuevo Agente
 
