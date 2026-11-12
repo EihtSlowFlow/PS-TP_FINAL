@@ -109,16 +109,16 @@ final class AuthAccessControlTest extends CIUnitTestCase
     {
         return [
             'admin sees dashboard, users, properties and contracts' => [
-                'admin', 'admin/dashboard', ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos/nuevo'], ['propietario/dashboard', 'inquilino/estado-cuenta'],
+                'admin', 'admin/dashboard', ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos'], ['propietario/dashboard', 'inquilino/estado-cuenta'],
             ],
             'employee sees dashboard, properties and contracts but not users' => [
-                'employee', 'admin/dashboard', ['admin/dashboard', 'admin/inmuebles', 'admin/contratos/nuevo'], ['admin/usuarios', 'propietario/dashboard'],
+                'employee', 'admin/dashboard', ['admin/dashboard', 'admin/inmuebles', 'admin/contratos'], ['admin/usuarios', 'propietario/dashboard'],
             ],
-            'owner sees owner dashboard only' => [
-                'owner', 'propietario/dashboard', ['propietario/dashboard'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos/nuevo'],
+            'owner sees dashboard, properties and contracts' => [
+                'owner', 'propietario/dashboard', ['propietario/dashboard', 'propietario/inmuebles', 'propietario/contratos'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos'],
             ],
             'tenant sees account state only' => [
-                'tenant', 'inquilino/estado-cuenta', ['inquilino/estado-cuenta'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos/nuevo'],
+                'tenant', 'inquilino/estado-cuenta', ['inquilino/estado-cuenta'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos', 'propietario/contratos'],
             ],
         ];
     }

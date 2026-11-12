@@ -5,6 +5,7 @@
  * Deactivated tenants, owners and properties are shown on purpose: a contract keeps its history (HU-04, HU-05).
  *
  * @var array<string, mixed> $contract Row returned by ContractModel::findWithDetails()
+ * @var bool $isOwner
  */
 use App\Models\ContractModel;
 use App\Models\PropertyModel;
@@ -38,16 +39,18 @@ $fullName = static function (array $row, string $prefix): string {
     return trim($row[$prefix . '_last_name'] . ', ' . $row[$prefix . '_first_name']);
 };
 
+$contractListUrl = $isOwner ? 'propietario/contratos' : 'admin/contratos';
+
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
             <div class="form-back-row">
-                <a href="<?= esc(site_url('admin/inmuebles')) ?>" class="back-link">
+                <a href="<?= esc(site_url($contractListUrl)) ?>" class="back-link">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <line x1="19" y1="12" x2="5" y2="12"/>
                         <polyline points="12 19 5 12 12 5"/>
                     </svg>
-                    <span>Volver al listado de inmuebles</span>
+                    <span>Volver al listado de contratos</span>
                 </a>
             </div>
 
@@ -171,6 +174,18 @@ $this->extend('layouts/panel');
                         </p>
                         <?php if ($status === ContractModel::STATUS_IN_FORCE): ?>
                             <p class="field-help">Mientras el contrato esté vigente, el inmueble figura como «Alquilado» y no puede asociarse a otro contrato.</p>
+                            <div class="form-actions" style="margin-top: 1rem;">
+                                <form action="<?= esc(site_url('admin/contratos/' . $contract['id'] . '/finalizar')) ?>" method="post">
+                                    <?= csrf_field() ?>
+                                    <input type="hidden" name="closing_reason" value="">
+                                    <button type="submit" class="btn btn-warning">Finalizar contrato</button>
+                                </form>
+                                <form action="<?= esc(site_url('admin/contratos/' . $contract['id'] . '/rescindir')) ?>" method="post" style="margin-top: 0.75rem;">
+                                    <?= csrf_field() ?>
+                                    <input type="hidden" name="closing_reason" value="">
+                                    <button type="submit" class="btn btn-secondary">Rescindir contrato</button>
+                                </form>
+                            </div>
                         <?php else: ?>
                             <dl class="audit-list">
                                 <div class="audit-item">

@@ -58,8 +58,7 @@ $flashSuccess = session()->getFlashdata('success');
                     <a href="<?= esc(site_url('admin/inmuebles')) ?>" class="sidebar-link<?= $activeMenu === 'inmuebles' ? ' is-active' : '' ?>">
                         <span>Inmuebles</span>
                     </a>
-                    <?php /* HU-10: until the contract listing (HU-11) exists, the menu entry opens the new contract form. */ ?>
-                    <a href="<?= esc(site_url('admin/contratos/nuevo')) ?>" class="sidebar-link<?= $activeMenu === 'contratos' ? ' is-active' : '' ?>">
+                    <a href="<?= esc(site_url('admin/contratos')) ?>" class="sidebar-link<?= $activeMenu === 'contratos' ? ' is-active' : '' ?>">
                         <span>Contratos</span>
                     </a>
                 <?php elseif ($userRole === 'owner'): ?>
@@ -68,6 +67,9 @@ $flashSuccess = session()->getFlashdata('success');
                     </a>
                     <a href="<?= esc(site_url('propietario/inmuebles')) ?>" class="sidebar-link<?= $activeMenu === 'propietario-inmuebles' ? ' is-active' : '' ?>">
                         <span>Mis inmuebles</span>
+                    </a>
+                    <a href="<?= esc(site_url('propietario/contratos')) ?>" class="sidebar-link<?= $activeMenu === 'propietario-contratos' ? ' is-active' : '' ?>">
+                        <span>Mis contratos</span>
                     </a>
                     <a href="<?= esc(site_url('perfil')) ?>" class="sidebar-link<?= $activeMenu === 'perfil' ? ' is-active' : '' ?>">
                         <span>Mi perfil</span>
