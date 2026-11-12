@@ -570,6 +570,7 @@ final class ContractCreationTest extends CIUnitTestCase
             ->assertRedirectTo('/admin/contratos/nuevo');
 
         $this->assertSame(ContractController::SAVE_ERROR_MESSAGE, session()->getFlashdata('error'));
+        $this->assertTrue($this->db->transStatus(), 'A failed save must not leave the shared connection in a failed transaction state.');
         $this->assertSame(0, $this->db->table('contracts')->countAllResults(), 'The contract must be rolled back with the failed update.');
         $this->assertSame('available', $this->propertyStatus($fixture['property']));
 

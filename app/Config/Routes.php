@@ -40,6 +40,11 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static fu
     $routes->post('contratos/(:num)/rescindir', 'ContractController::rescind/$1');
     $routes->post('contratos/(:num)/cerrar', 'ContractController::close/$1');
     $routes->get('contratos/(:num)', 'ContractController::show/$1');
+
+    // Monthly installment issuing: period and preview, confirmation and report (HU-13)
+    $routes->get('cuotas/emitir', 'InstallmentController::emit');
+    $routes->post('cuotas/emitir', 'InstallmentController::issue');
+    $routes->get('cuotas/emitir/resultado', 'InstallmentController::result');
 });
 
 // Exclusive Administrator routes: User management and logical deactivation (HU-04, HU-05)

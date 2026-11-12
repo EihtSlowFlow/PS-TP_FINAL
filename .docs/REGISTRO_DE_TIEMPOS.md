@@ -1,6 +1,6 @@
 # Registro de tiempos por issue — InmoGestión 2026
 
-> Última actualización: 11/11/2026. Acá queda asentado cuánto se tardó en hacer cada issue. Es el complemento de los handoffs ([`exec-plans/`](exec-plans/)): el handoff cuenta **qué** se hizo y este registro **cuánto tiempo** llevó.
+> Última actualización: 12/11/2026. Acá queda asentado cuánto se tardó en hacer cada issue. Es el complemento de los handoffs ([`exec-plans/`](exec-plans/)): el handoff cuenta **qué** se hizo y este registro **cuánto tiempo** llevó.
 >
 > Alcance: tiempo de desarrollo de una persona trabajando con asistencia de IA, desde que se pide el issue hasta su commit. No incluye reuniones, la lectura previa de otros integrantes ni la revisión del pull request.
 
@@ -29,7 +29,8 @@
 | [#18](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/18) | HU-03b | Restablecer la contraseña | EihtSlowFlow | 3 | 10/11 20:37 | 10/11 22:58 | **1 h 36 min** | 2 h 21 min | Medido (sesión de revisión y cierre; pausa 21:42–22:27 descontada) |
 | [#16](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/16) | HU-11 | Consulta de contratos y estados | joaquincorbalan (Copilot SDK en VS Code) | 3 | 11/11 16:40 | 11/11 17:23 | **43 min** | 43 min | Medido (handoff; sin pausas informadas) |
 | [#9](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/9) | HU-12 | Cierre de contratos | Finalizar y rescindir contratos vigentes | joaquincorbalan (Copilot SDK en VS Code) | 3 | 11/11 18:56 | 11/11 19:39 | **43 min** | 43 min | Medido |
-| **Total registrado** | | | | **39** | | | **8 h 07 min** | **9 h 18 min** | |
+| [#6](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/6) | HU-13 | Emisión masiva de cuotas | LauPerisse | 5 | 10/11 23:28 | 11/11 00:20 | **51 min** | 51 min | Medido (implementación) y reconstruido (cierre) |
+| **Total registrado** | | | | **44** | | | **8 h 58 min** | **10 h 09 min** | |
 
 Sin registro de tiempo (los hizo otro integrante; que cada responsable complete su fila con el método de la [sección 3](#3-cómo-registrar-el-tiempo-de-cada-issue-de-ahora-en-adelante)):
 
@@ -50,6 +51,7 @@ Sin registro de tiempo (los hizo otro integrante; que cada responsable complete 
 | #15 | Del pedido del issue (20:47) al cierre de la implementación (21:07): lectura del issue y del código, `ContractModel` con la transacción, `ContractController`, rutas, formulario y ficha, JavaScript, 85 pruebas nuevas (75 de integración y 10 unitarias), revisión visual en el navegador y la suite completa (que corrió en segundo plano mientras se escribía la documentación). Hora de inicio y de fin anotadas en el momento | El commit, el pull request y el comentario en el issue de GitHub, que quedaron pendientes (el `gh` de esta máquina no tiene sesión iniciada). Sin pausas de más de 10 minutos |
 | #18 | Dos bloques en la sesión de revisión y cierre del 10/11: **20:37 a 21:42** (65 min: revisión integral de HU-03b, merge de `main`, validación de DNI como segundo dato, `strong_password`, enfriamiento de 2 min con `ResetAttemptLimiter` y cuenta regresiva en vivo, diagnóstico de la suite completa y pruebas automatizadas) y **22:27 a 22:58** (31 min: nuevo merge de `main`, rechazo directo con mensaje de credenciales incorrectas y de usuario dado de baja, prueba manual en navegador, commit y PR) | La pausa de 45 min entre las 21:42 y las 22:27; tampoco la sesión previa donde se creó el commit inicial `5b86cb4` (17:49), cuyo inicio no se había medido |
 | #16 | Del primer mensaje de trabajo (11/11 16:40) a la hora indicada por el usuario como fin de medición (17:23): implementación de HU-11, pruebas focalizadas y documentación del handoff. **43 min** de tiempo de reloj; se registra el mismo tiempo efectivo porque no se informaron pausas | El commit, el pull request, la validación visual y el cierre del issue quedaron pendientes |
+| #6 | Dos bloques. **23:28 a 23:52** (24 min, medidos): del pedido del issue al cierre de la implementación: lectura del issue, de HU-10 y del código de contratos, `InstallmentModel` con la transacción y la numeración correlativa, `ContractModel` (regla de cobertura), `InstallmentController`, rutas, vista previa e informe, estilos, 110 pruebas nuevas (82 de integración y 28 unitarias), revisión visual con los datos de demostración, la suite completa (5 min 47 s, en segundo plano mientras se escribía la documentación) y la documentación. Hora de inicio y de fin anotadas en el momento. **23:53 a 00:20** (27 min, reconstruidos por la hora de los commits `5026276` 23:54 y `4886e8b` 00:12 y del pull request): commits, merge de `main` con conflictos en este registro y en `panel.css`, diagnóstico y corrección de 17 errores de `PasswordResetTest` que ya existían en `main` (estado de transacción de la conexión compartida), dos corridas más de la suite completa (≈ 6 min cada una, esperadas en segundo plano), push y [pull request #39](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/39) abierto desde Chrome | El comentario en el issue de GitHub, que quedó pendiente (el `gh` de esta máquina no tiene sesión iniciada). Tampoco la revisión del pull request. Sin pausas de más de 10 minutos |
 
 ---
 

@@ -155,6 +155,9 @@ class ContractModel extends Model
             }
         } catch (Throwable $e) {
             $this->db->transRollback();
+            // A failed query leaves the connection's transaction status "failed" (strict mode), which would make the
+            // next transaction on this connection roll back too; the rollback above already discarded everything.
+            $this->db->resetTransStatus();
             log_message('error', 'Contract creation failed and was rolled back: {message}', ['message' => $e->getMessage()]);
 
             return ['id' => null, 'error' => self::ERROR_PERSISTENCE];
@@ -262,6 +265,84 @@ class ContractModel extends Model
             ->getRowArray();
 
         return $row ?: null;
+    }
+
+    /**
+     * Lists the contracts in force that cover a period, with their property and tenant data and the id of the
+     * installment already issued for that period, if any (HU-13 preview). Deactivated tenants and properties are
+     * included on purpose: a contract in force keeps being billed whatever happened to its parties.
+     *
+     * A contract covers a period when the due date of that month falls inside its term (see
+     * {@see coverageCondition()}).
+     *
+     * @param string $period First day of the month, "YYYY-MM-01"
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findInForceCoveringPeriod(string $period): array
+    {
+        $contracts    = $this->db->protectIdentifiers('contracts', true);
+        $properties   = $this->db->protectIdentifiers('properties', true);
+        $users        = $this->db->protectIdentifiers('users', true);
+        $installments = $this->db->protectIdentifiers('installments', true);
+
+        $sql = 'SELECT c.id, c.start_date, c.end_date, c.monthly_rent, c.due_day, '
+            . 'p.address AS property_address, p.city AS property_city, p.type AS property_type, '
+            . 'p.rooms AS property_rooms, '
+            . 'tenant.first_name AS tenant_first_name, tenant.last_name AS tenant_last_name, '
+            . 'tenant.document_number AS tenant_document_number, tenant.deleted_at AS tenant_deleted_at, '
+            . 'i.id AS installment_id '
+            . "FROM {$contracts} AS c "
+            . "JOIN {$properties} AS p ON p.id = c.property_id "
+            . "JOIN {$users} AS tenant ON tenant.id = c.tenant_id "
+            . "LEFT JOIN {$installments} AS i ON i.contract_id = c.id AND i.period = ? "
+            . 'WHERE ' . $this->coverageCondition('c') . ' '
+            . 'ORDER BY c.id ASC';
+
+        return $this->db->query($sql, [$period, $period, $period])->getResultArray();
+    }
+
+    /**
+     * Locks, until the end of the current transaction, the contracts in force that cover a period (or just one of
+     * them) and returns their id, monthly rent and due day, in id order. It must run inside a transaction: the
+     * installment issuing (HU-13) uses it to keep two simultaneous issuings from creating the same installment or
+     * taking the same number.
+     *
+     * @param string   $period     First day of the month, "YYYY-MM-01"
+     * @param int|null $contractId Limits the result to this contract (null for all)
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function lockInForceCoveringPeriod(string $period, ?int $contractId = null): array
+    {
+        $contracts = $this->db->protectIdentifiers('contracts', true);
+        $binds     = [$period, $period];
+
+        $sql = "SELECT c.id, c.monthly_rent, c.due_day FROM {$contracts} AS c WHERE " . $this->coverageCondition('c');
+
+        if ($contractId !== null) {
+            $sql    .= ' AND c.id = ?';
+            $binds[] = $contractId;
+        }
+
+        return $this->db->query($sql . ' ORDER BY c.id ASC FOR UPDATE', $binds)->getResultArray();
+    }
+
+    /**
+     * SQL condition (two `?` placeholders, both for the period) that selects the contracts that cover a period: they
+     * are in force and the due date of that month falls inside their term. Each contract's due day is 1 to 28, so the
+     * due date always exists, no installment is due before the contract starts or after it ends, and a contract of N
+     * whole months (from a day to the day before the same day N months later) is covered by exactly N periods.
+     *
+     * @param string $alias Alias of the contracts table in the query
+     */
+    private function coverageCondition(string $alias): string
+    {
+        $dueDate = "DATE_ADD(CAST(? AS DATE), INTERVAL ({$alias}.due_day - 1) DAY)";
+
+        return "{$alias}.status = '" . self::STATUS_IN_FORCE . "' "
+            . "AND {$alias}.start_date <= {$dueDate} "
+            . "AND {$alias}.end_date >= {$dueDate}";
     }
 
     /**

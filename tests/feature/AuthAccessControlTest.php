@@ -108,17 +108,17 @@ final class AuthAccessControlTest extends CIUnitTestCase
     public static function panelNavigationProvider(): array
     {
         return [
-            'admin sees dashboard, users, properties and contracts' => [
-                'admin', 'admin/dashboard', ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos'], ['propietario/dashboard', 'inquilino/estado-cuenta'],
+            'admin sees dashboard, users, properties, contracts and installments' => [
+                'admin', 'admin/dashboard', ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos', 'admin/cuotas/emitir'], ['propietario/dashboard', 'inquilino/estado-cuenta'],
             ],
-            'employee sees dashboard, properties and contracts but not users' => [
-                'employee', 'admin/dashboard', ['admin/dashboard', 'admin/inmuebles', 'admin/contratos'], ['admin/usuarios', 'propietario/dashboard'],
+            'employee sees dashboard, properties, contracts and installments but not users' => [
+                'employee', 'admin/dashboard', ['admin/dashboard', 'admin/inmuebles', 'admin/contratos', 'admin/cuotas/emitir'], ['admin/usuarios', 'propietario/dashboard'],
             ],
             'owner sees dashboard, properties and contracts' => [
-                'owner', 'propietario/dashboard', ['propietario/dashboard', 'propietario/inmuebles', 'propietario/contratos'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos'],
+                'owner', 'propietario/dashboard', ['propietario/dashboard', 'propietario/inmuebles', 'propietario/contratos'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos', 'admin/cuotas/emitir'],
             ],
             'tenant sees account state only' => [
-                'tenant', 'inquilino/estado-cuenta', ['inquilino/estado-cuenta'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos', 'propietario/contratos'],
+                'tenant', 'inquilino/estado-cuenta', ['inquilino/estado-cuenta'], ['admin/dashboard', 'admin/usuarios', 'admin/inmuebles', 'admin/contratos', 'propietario/contratos', 'admin/cuotas/emitir'],
             ],
         ];
     }
