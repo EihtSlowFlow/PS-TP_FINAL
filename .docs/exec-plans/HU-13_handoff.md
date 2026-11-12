@@ -7,7 +7,7 @@
 | **Proyecto** | InmoGestión 2026 |
 | **Historia de usuario / Issue** | HU-13 — Emisión masiva de cuotas · [#6](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/6) |
 | **Sprint / Hito** | Sprint 2 (Módulo financiero: cuotas y mora) |
-| **Rama** | `feature/hu-13-emision-cuotas` (creada desde `feature/hu-10-alta-contratos`, que ya estaba fusionada en `main`; luego se fusionó `origin/main` en la rama) |
+| **Rama** | `feature/hu-13-emision-cuotas` (creada desde `feature/hu-10-alta-contratos`, que ya estaba fusionada en `main`; luego se fusionó `origin/main` dos veces: la segunda con HU-11 y HU-12) |
 | **Último commit** | `4886e8b` — fix: reiniciar el estado de transacción de la conexión tras revertir un guardado fallido (antes: `5026276` feat, `5683474` docs y `f0037f9` merge de `main`) |
 | **Pull Request** | [#39](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/39) → `main` |
 | **Fecha de cierre** | 2026-11-11 00:20 |
@@ -127,7 +127,7 @@ Referencia: [`.docs/historias_de_usuario/HU-13_emision_masiva_cuotas.md`](../his
 | R-5 | Deuda | `formatMoney` y `formatDate` están repetidos como funciones locales en cada vista (también en las de HU-07 y HU-10) | Baja | Moverlos a un helper cuando se toquen esas vistas |
 | R-6 | Caso borde | Un contrato vigente cuyo inquilino fue dado de baja sigue emitiendo cuotas (la vista previa lo marca como «dado de baja») | Baja | Decidirlo con el equipo junto con R-7 de `REVIEW-HU-01-04-05_handoff.md` (baja de usuarios con contratos vigentes) |
 | R-7 | Alcance | No hay forma de «deshacer» una emisión (anular cuotas emitidas por error) | Baja | Si hace falta, es una historia aparte; mientras tanto la cuota emitida es modificable solo por las historias de mora y pagos |
-| R-8 | Deuda (resuelta aquí) | Tras un guardado fallido dentro de una transacción, la conexión compartida de las pruebas quedaba en estado «fallida» (modo estricto) y la siguiente transacción se revertía sola: la prueba de atomicidad de HU-10 hacía fallar 17 pruebas de `PasswordResetTest` (HU-03b), también en `main`. Se agregó `resetTransStatus()` tras el rollback en `ContractModel` (HU-10) y en `InstallmentModel`, con una aserción de regresión en cada prueba de atomicidad | Media | Cualquier modelo nuevo con `transBegin()`/`transRollback()` manual debe hacer lo mismo |
+| R-8 | Deuda (resuelta aquí) | Tras un guardado fallido dentro de una transacción, la conexión compartida de las pruebas quedaba en estado «fallida» (modo estricto) y la siguiente transacción se revertía sola: la prueba de atomicidad de HU-10 hacía fallar 17 pruebas de `PasswordResetTest` (HU-03b), también en `main`. Se agregó `resetTransStatus()` tras el rollback en `ContractModel` (HU-10) y en `InstallmentModel`, con una aserción de regresión en cada prueba de atomicidad | Media | Cualquier modelo con `transBegin()`/`transRollback()` manual debe hacer lo mismo. `ContractModel::closeContract()` (HU-12) todavía no lo hace; no rompe hoy porque su prueba no provoca un fallo de base de datos, pero lo haría si se agrega |
 
 ---
 
@@ -151,6 +151,7 @@ Referencia: [`.docs/historias_de_usuario/HU-13_emision_masiva_cuotas.md`](../his
 |---|---|---|---|---|
 | 2026-11-10 | Claude Code con `LauPerisse` | 24 min | Lectura del issue #6, de HU-10 y del código de contratos; `InstallmentModel` con la transacción, `InstallmentController`, rutas, vistas, estilos, 110 pruebas, revisión visual con datos de demostración, corrección de la selección de año enviada como lista y documentación. Suite completa: 349 tests / 3243 aserciones, 1 falla previa de HU-02 (antes de las dos últimas pruebas). | `5026276`, `5683474` (rama `feature/hu-13-emision-cuotas`) |
 | 2026-11-10 / 11 | Claude Code con `LauPerisse` | 27 min | Commit de la implementación, merge de `origin/main` con conflictos en el registro de tiempos y en `panel.css`, diagnóstico de 17 errores de `PasswordResetTest` (ya presentes en `main`, causados por el estado de transacción de la conexión compartida) y su corrección, comparación con una copia limpia de `main`, push y apertura del pull request. Suite completa: 399 tests / 3614 aserciones, 3 errores previos de HU-02 y HU-06 | `f0037f9`, `4886e8b` · [PR #39](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/39) |
+| 2026-11-12 | Claude Code con `LauPerisse` | No medido (retrabajo pedido en la revisión del PR) | La revisión del PR señaló que el merge anterior había pisado tiempos ya escritos en `REGISTRO_DE_TIEMPOS.md` (se había quitado la fila de subtotal de `main` y reemplazado su total). Se fusionó de nuevo `origin/main` (entró HU-11 y HU-12), se dejó el registro exactamente como está en `main` y solo se agregó la fila y el detalle de HU-13 con el total actualizado (44 pts, 8 h 58 min efectivos, 10 h 09 min de reloj); en `ContractModel` y en la prueba del menú se conservaron los cambios de HU-11 y HU-12 junto con los de esta historia | `cbceac4` · [PR #39](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/39) |
 
 ---
 
