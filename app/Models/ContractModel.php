@@ -20,6 +20,10 @@ class ContractModel extends Model
     public const STATUS_FINISHED  = 'finished';
     public const STATUS_RESCINDED = 'rescinded';
 
+    public const ERROR_NOT_FOUND   = 'not_found';
+    public const ERROR_NOT_IN_FORCE = 'not_in_force';
+    public const ERROR_INVALID_STATUS = 'invalid_status';
+
     /**
      * Spanish labels for each contract status.
      *
@@ -160,34 +164,180 @@ class ContractModel extends Model
     }
 
     /**
+     * Closes a contract in force and returns the property to "available" in the same transaction.
+     *
+     * @return array{success: bool, error: string|null}
+     */
+    public function closeContract(int $contractId, string $status, ?string $closingReason = null): array
+    {
+        $status = trim($status);
+
+        if (! in_array($status, [self::STATUS_FINISHED, self::STATUS_RESCINDED], true)) {
+            return ['success' => false, 'error' => self::ERROR_INVALID_STATUS];
+        }
+
+        $reason = trim((string) $closingReason);
+        $reason = $reason === '' ? null : mb_substr($reason, 0, 255);
+
+        $this->db->transBegin();
+
+        try {
+            $contract = $this->db
+                ->query('SELECT id, property_id, status FROM contracts WHERE id = ? FOR UPDATE', [$contractId])
+                ->getRowArray();
+
+            if ($contract === null) {
+                $this->db->transRollback();
+
+                return ['success' => false, 'error' => self::ERROR_NOT_FOUND];
+            }
+
+            if ((string) $contract['status'] !== self::STATUS_IN_FORCE) {
+                $this->db->transRollback();
+
+                return ['success' => false, 'error' => self::ERROR_NOT_IN_FORCE];
+            }
+
+            $property = $this->db
+                ->query('SELECT id, status FROM properties WHERE id = ? AND deleted_at IS NULL FOR UPDATE', [$contract['property_id']])
+                ->getRowArray();
+
+            if ($property === null) {
+                $this->db->transRollback();
+
+                return ['success' => false, 'error' => self::ERROR_PROPERTY_UNAVAILABLE];
+            }
+
+            $updated = $this->update($contractId, [
+                'status'         => $status,
+                'closed_at'      => date('Y-m-d'),
+                'closing_reason' => $reason,
+            ]);
+
+            if ($updated === false) {
+                throw new RuntimeException('The contract status could not be updated.');
+            }
+
+            $propertyUpdated = model(PropertyModel::class)->update((int) $contract['property_id'], [
+                'status' => PropertyModel::STATUS_AVAILABLE,
+            ]);
+
+            if ($propertyUpdated === false) {
+                throw new RuntimeException('The property status could not be reset to available.');
+            }
+
+            if (! $this->db->transCommit()) {
+                throw new RuntimeException('The transaction could not be committed.');
+            }
+        } catch (Throwable $e) {
+            $this->db->transRollback();
+            log_message('error', 'Contract closure failed and was rolled back: {message}', ['message' => $e->getMessage()]);
+
+            return ['success' => false, 'error' => self::ERROR_PERSISTENCE];
+        }
+
+        return ['success' => true, 'error' => null];
+    }
+
+    /**
      * Finds a contract by id with its property, tenant and owner data (HU-10 file screen). Deactivated users and
      * properties are included on purpose: the history of a contract must stay consultable.
      *
      * @return array<string, mixed>|null
      */
-    public function findWithDetails(int $id): ?array
+    public function findWithDetails(int $id, ?int $ownerId = null): ?array
     {
-        $row = $this->builder()
-            ->select(
-                'contracts.*, '
-                . 'properties.address AS property_address, properties.city AS property_city, '
-                . 'properties.type AS property_type, properties.rooms AS property_rooms, '
-                . 'properties.status AS property_status, properties.deleted_at AS property_deleted_at, '
-                . 'tenant.first_name AS tenant_first_name, tenant.last_name AS tenant_last_name, '
-                . 'tenant.document_number AS tenant_document_number, tenant.email AS tenant_email, '
-                . 'tenant.phone AS tenant_phone, tenant.deleted_at AS tenant_deleted_at, '
-                . 'owner.first_name AS owner_first_name, owner.last_name AS owner_last_name, '
-                . 'owner.document_number AS owner_document_number, owner.email AS owner_email, '
-                . 'owner.phone AS owner_phone, owner.deleted_at AS owner_deleted_at'
-            )
+        $builder = $this->builder()
+            ->select($this->detailsSelect())
             ->join('properties', 'properties.id = contracts.property_id')
             ->join('users AS tenant', 'tenant.id = contracts.tenant_id')
             ->join('users AS owner', 'owner.id = contracts.owner_id')
-            ->where('contracts.id', $id)
-            ->get()
+            ->where('contracts.id', $id);
+
+        if ($ownerId !== null) {
+            $builder->where('contracts.owner_id', $ownerId);
+        }
+
+        $row = $builder->get()
             ->getRowArray();
 
         return $row ?: null;
+    }
+
+    /**
+     * Lists contracts with all related parties, including deactivated users and properties.
+     *
+     * @param array{q?: string, status?: string} $filters
+     *
+     * @return array{
+     *     items: list<array<string, mixed>>,
+     *     total: int,
+     *     perPage: int,
+     *     currentPage: int,
+     *     totalPages: int,
+     *     from: int,
+     *     to: int
+     * }
+     */
+    public function paginateWithDetails(
+        int $perPage = 10,
+        int $page = 1,
+        array $filters = [],
+        ?int $ownerId = null
+    ): array {
+        $perPage     = max(1, min(100, $perPage));
+        $currentPage = max(1, $page);
+        $builder     = $this->builder()
+            ->select($this->detailsSelect())
+            ->join('properties', 'properties.id = contracts.property_id')
+            ->join('users AS tenant', 'tenant.id = contracts.tenant_id')
+            ->join('users AS owner', 'owner.id = contracts.owner_id');
+
+        if ($ownerId !== null) {
+            $builder->where('contracts.owner_id', $ownerId);
+        }
+
+        if (isset($filters['status']) && array_key_exists($filters['status'], self::STATUS_LABELS)) {
+            $builder->where('contracts.status', $filters['status']);
+        }
+
+        if (isset($filters['q']) && $filters['q'] !== '') {
+            $query = $filters['q'];
+            $builder->groupStart()
+                ->like('tenant.first_name', $query)
+                ->orLike('tenant.last_name', $query)
+                ->orLike('tenant.email', $query)
+                ->orLike('owner.first_name', $query)
+                ->orLike('owner.last_name', $query)
+                ->orLike('owner.email', $query)
+                ->orLike('properties.address', $query)
+                ->orLike('properties.city', $query)
+                ->groupEnd();
+        }
+
+        $total      = (int) $builder->countAllResults(false);
+        $totalPages = max(1, (int) ceil($total / $perPage));
+
+        if ($currentPage > $totalPages) {
+            $currentPage = $totalPages;
+        }
+
+        $offset = ($currentPage - 1) * $perPage;
+        $items  = $builder
+            ->orderBy('contracts.id', 'DESC')
+            ->limit($perPage, $offset)
+            ->get()
+            ->getResultArray();
+
+        return [
+            'items'       => $items,
+            'total'       => $total,
+            'perPage'     => $perPage,
+            'currentPage' => $currentPage,
+            'totalPages'  => $totalPages,
+            'from'        => $total > 0 ? $offset + 1 : 0,
+            'to'          => $total > 0 ? min($total, $offset + count($items)) : 0,
+        ];
     }
 
     /**
@@ -215,5 +365,22 @@ class ContractModel extends Model
             ->where('property_id', $propertyId)
             ->where('status', self::STATUS_IN_FORCE)
             ->countAllResults() > 0;
+    }
+
+    /**
+     * Columns shared by the contract file and the searchable listing.
+     */
+    private function detailsSelect(): string
+    {
+        return 'contracts.*, '
+            . 'properties.address AS property_address, properties.city AS property_city, '
+            . 'properties.type AS property_type, properties.rooms AS property_rooms, '
+            . 'properties.status AS property_status, properties.deleted_at AS property_deleted_at, '
+            . 'tenant.first_name AS tenant_first_name, tenant.last_name AS tenant_last_name, '
+            . 'tenant.document_number AS tenant_document_number, tenant.email AS tenant_email, '
+            . 'tenant.phone AS tenant_phone, tenant.deleted_at AS tenant_deleted_at, '
+            . 'owner.first_name AS owner_first_name, owner.last_name AS owner_last_name, '
+            . 'owner.document_number AS owner_document_number, owner.email AS owner_email, '
+            . 'owner.phone AS owner_phone, owner.deleted_at AS owner_deleted_at';
     }
 }

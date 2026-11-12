@@ -32,9 +32,13 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static fu
     $routes->get('inmuebles/editar/(:num)', 'PropertyController::edit/$1');
     $routes->post('inmuebles/editar/(:num)', 'PropertyController::update/$1');
 
-    // Lease contracts: creation and contract file (HU-10; the listing is HU-11 and the closing HU-12)
+    // Lease contracts: creation, listing and contract file (HU-10/11; closing is HU-12)
+    $routes->get('contratos', 'ContractController::index');
     $routes->get('contratos/nuevo', 'ContractController::create');
     $routes->post('contratos', 'ContractController::store');
+    $routes->post('contratos/(:num)/finalizar', 'ContractController::finalize/$1');
+    $routes->post('contratos/(:num)/rescindir', 'ContractController::rescind/$1');
+    $routes->post('contratos/(:num)/cerrar', 'ContractController::close/$1');
     $routes->get('contratos/(:num)', 'ContractController::show/$1');
 });
 
@@ -52,6 +56,8 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin']], static function (R
 $routes->group('propietario', ['filter' => ['auth', 'role:owner']], static function (RouteCollection $routes): void {
     $routes->get('dashboard', 'DashboardController::ownerDashboard');
     $routes->get('inmuebles', 'PropertyController::ownerIndex');
+    $routes->get('contratos', 'ContractController::ownerIndex');
+    $routes->get('contratos/(:num)', 'ContractController::ownerShow/$1');
 });
 
 // Tenant portal routes (HU-01)
