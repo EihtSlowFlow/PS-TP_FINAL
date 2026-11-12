@@ -47,11 +47,11 @@ Además, el sistema registra la fecha del cierre y, si se informó, el motivo.
 
 ## Definition of Done
 
-- [ ] El administrador puede finalizar o rescindir contratos vigentes.
-- [ ] El inmueble vuelve a "Disponible" tras el cierre.
-- [ ] Se conserva todo el historial financiero.
-- [ ] Se verifican los permisos de acceso.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] El administrador puede finalizar o rescindir contratos vigentes.
+- [x] El inmueble vuelve a "Disponible" tras el cierre.
+- [x] Se conserva todo el historial financiero.
+- [x] Se verifican los permisos de acceso.
+- [x] Se prueban los escenarios de aceptación y los casos de error relevantes.
 
 ## Notas de integración (desde HU-10)
 

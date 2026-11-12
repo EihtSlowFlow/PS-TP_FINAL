@@ -642,9 +642,98 @@ final class ContractCreationTest extends CIUnitTestCase
 
     public function testTheFileOfAMissingContractRedirectsWithAMessage(): void
     {
-        $this->withSession($this->sessionFor('admin'))->get('admin/contratos/999999')->assertRedirectTo('/admin/dashboard');
+        $this->withSession($this->sessionFor('admin'))->get('admin/contratos/999999')->assertRedirectTo('/admin/contratos');
 
         $this->assertSame(ContractController::CONTRACT_NOT_FOUND_MESSAGE, session()->getFlashdata('error'));
+    }
+
+    public function testAdministratorsCanSearchContractsAndFilterHistoricalStatuses(): void
+    {
+        $admin   = $this->sessionFor('admin');
+        $fixture = $this->fixture();
+        $this->insertContract($fixture['property'], $fixture['tenant'], $fixture['owner']);
+
+        $finishedProperty = $this->insertProperty($fixture['owner'], [
+            'address' => 'Sarmiento 120',
+            'status'  => 'rented',
+        ]);
+        $this->insertContract($finishedProperty, $fixture['tenant'], $fixture['owner'], ['status' => 'finished']);
+
+        $otherOwner  = $this->createUser('owner', 'Ricardo', 'Sosa', '24118905', 'ricardo.sosa.hu11@example.com');
+        $otherTenant = $this->createUser('tenant', 'Lucía', 'Vega', '29413876', 'lucia.vega.hu11@example.com');
+        $otherProperty = $this->insertProperty($otherOwner, [
+            'address' => 'San Martín 450',
+            'status'  => 'rented',
+        ]);
+        $this->insertContract($otherProperty, $otherTenant, $otherOwner, ['status' => 'rescinded']);
+
+        $allContracts = $this->withSession($admin)->get('admin/contratos');
+        $allContracts->assertStatus(200);
+        $allContracts->assertSee('Mitre 845');
+        $allContracts->assertSee('Sarmiento 120');
+        $allContracts->assertSee('San Martín 450');
+        $allContracts->assertSee('Vigente');
+        $allContracts->assertSee('Finalizado');
+        $allContracts->assertSee('Rescindido');
+
+        $tenantSearch = $this->withSession($admin)->get('admin/contratos?q=Camila');
+        $tenantSearch->assertStatus(200);
+        $tenantSearch->assertSee('Mitre 845');
+        $tenantSearch->assertSee('Sarmiento 120');
+        $tenantSearch->assertDontSee('San Martín 450');
+
+        $ownerSearch = $this->withSession($admin)->get('admin/contratos?q=Ricardo');
+        $ownerSearch->assertSee('San Martín 450');
+        $ownerSearch->assertDontSee('Mitre 845');
+
+        $addressSearch = $this->withSession($admin)->get('admin/contratos?q=Sarmiento');
+        $addressSearch->assertSee('Sarmiento 120');
+        $addressSearch->assertDontSee('Mitre 845');
+
+        $historicalFilter = $this->withSession($admin)->get('admin/contratos?status=finished');
+        $historicalFilter->assertSee('Sarmiento 120');
+        $historicalFilter->assertSee('Finalizado');
+        $historicalFilter->assertDontSee('Mitre 845');
+        $historicalFilter->assertDontSee('San Martín 450');
+    }
+
+    public function testOwnerSeesOnlyOwnContractsAndMayOpenOnlyOwnContractFiles(): void
+    {
+        $fixture = $this->fixture();
+        $ownId   = $this->insertContract($fixture['property'], $fixture['tenant'], $fixture['owner']);
+
+        $otherOwner   = $this->createUser('owner', 'Ricardo', 'Sosa', '24118905', 'ricardo.sosa.hu11@example.com');
+        $otherTenant  = $this->createUser('tenant', 'Lucía', 'Vega', '29413876', 'lucia.vega.hu11@example.com');
+        $otherProperty = $this->insertProperty($otherOwner, [
+            'address' => 'San Martín 450',
+            'status'  => 'rented',
+        ]);
+        $otherId = $this->insertContract($otherProperty, $otherTenant, $otherOwner);
+
+        $ownerSession = [
+            'is_logged_in' => true,
+            'user_id'      => $fixture['owner'],
+            'user_email'   => 'marta.quiroga.hu10@example.com',
+            'user_name'    => 'Marta Quiroga',
+            'user_role'    => 'owner',
+        ];
+
+        $list = $this->withSession($ownerSession)->get('propietario/contratos');
+        $list->assertStatus(200);
+        $list->assertSee('Mitre 845');
+        $list->assertSee('camila.rojas.hu10@example.com');
+        $list->assertSee('$ 500.000');
+        $list->assertSee('8 %');
+        $list->assertDontSee('San Martín 450');
+        $list->assertDontSee('lucia.vega.hu11@example.com');
+
+        $ownFile = $this->withSession($ownerSession)->get('propietario/contratos/' . $ownId);
+        $ownFile->assertStatus(200);
+        $ownFile->assertSee('Contrato #' . $ownId);
+
+        $foreignFile = $this->withSession($ownerSession)->get('propietario/contratos/' . $otherId);
+        $foreignFile->assertRedirectTo('/propietario/contratos');
+        $this->assertSame(ContractController::OWNER_CONTRACT_NOT_FOUND_MESSAGE, session()->getFlashdata('error'));
     }
 
     public function testTheDataShownByTheFormAndTheFileIsEscaped(): void
@@ -675,7 +764,7 @@ final class ContractCreationTest extends CIUnitTestCase
         $fixture    = $this->fixture();
         $contractId = $this->insertContract($this->insertProperty($fixture['owner'], ['address' => 'Otra 5', 'status' => 'rented']), $fixture['tenant'], $fixture['owner']);
 
-        foreach (['admin/contratos/nuevo', "admin/contratos/{$contractId}"] as $uri) {
+        foreach (['admin/contratos', 'admin/contratos/nuevo', "admin/contratos/{$contractId}"] as $uri) {
             $this->withSession($session)->get($uri)->assertStatus(200);
         }
 
@@ -696,7 +785,7 @@ final class ContractCreationTest extends CIUnitTestCase
     }
 
     #[DataProvider('externalRoleProvider')]
-    public function testOwnersAndTenantsCannotReachAnyContractRoute(string $roleName, string $ownPanel): void
+    public function testOwnersAndTenantsCannotReachAdministrativeContractRoutes(string $roleName, string $ownPanel): void
     {
         $session    = $this->sessionFor($roleName);
         $fixture    = $this->fixture();
@@ -718,7 +807,7 @@ final class ContractCreationTest extends CIUnitTestCase
         $fixture    = $this->fixture();
         $contractId = $this->insertContract($this->insertProperty($fixture['owner'], ['address' => 'Otra 5', 'status' => 'rented']), $fixture['tenant'], $fixture['owner']);
 
-        foreach (['admin/contratos/nuevo', "admin/contratos/{$contractId}"] as $uri) {
+        foreach (['admin/contratos', 'admin/contratos/nuevo', "admin/contratos/{$contractId}", 'propietario/contratos'] as $uri) {
             $this->get($uri)->assertRedirectTo('/auth/login');
             $this->assertSame(AuthFilter::AUTH_REQUIRED_MESSAGE, session()->getFlashdata('error'));
         }
@@ -735,6 +824,86 @@ final class ContractCreationTest extends CIUnitTestCase
         $this->expectException(SecurityException::class);
 
         $this->withSession($session)->post('admin/contratos', $this->validPayload($fixture));
+    }
+
+    /**
+     * @return array<string, array{0: string, 1: string, 2: string}>
+     */
+    public static function closeStatusProvider(): array
+    {
+        return [
+            'finalized' => [ContractModel::STATUS_FINISHED, 'Vencimiento del contrato', ContractController::CONTRACT_FINISHED_MESSAGE],
+            'rescinded' => [ContractModel::STATUS_RESCINDED, 'Rescisión por incumplimiento', ContractController::CONTRACT_RESCINDED_MESSAGE],
+        ];
+    }
+
+    public function testClosureConfirmationShowsThePropertyForFinalizationAndRescission(): void
+    {
+        $admin   = $this->sessionFor('admin');
+        $fixture = $this->fixture();
+
+        foreach ([
+            ['finalizar', ContractModel::STATUS_FINISHED, 'Finalizado'],
+            ['rescindir', ContractModel::STATUS_RESCINDED, 'Rescindido'],
+        ] as $index => [$action, $status, $statusLabel]) {
+            $propertyId = $index === 0 ? $fixture['property'] : $this->insertProperty($fixture['owner']);
+            $contractId = $this->insertContract($propertyId, $fixture['tenant'], $fixture['owner']);
+            $this->db->table('properties')->where('id', $propertyId)->update(['status' => 'rented']);
+
+            $confirmation = $this->postWithSession($admin, "admin/contratos/{$contractId}/{$action}", []);
+
+            $confirmation->assertOK();
+            $confirmation->assertSee('Mitre 845');
+            $confirmation->assertSee($statusLabel);
+            $this->assertSame(ContractModel::STATUS_IN_FORCE, $this->db->table('contracts')->where('id', $contractId)->get()->getRow()->status);
+            $this->assertSame('rented', $this->propertyStatus($propertyId));
+        }
+    }
+
+    #[DataProvider('closeStatusProvider')]
+    public function testClosingAContractClosesTheLeaseAndReturnsThePropertyToAvailable(string $status, string $reason, string $successMessage): void
+    {
+        $admin  = $this->sessionFor('admin');
+        $fixture = $this->fixture();
+        $contractId = $this->insertContract($fixture['property'], $fixture['tenant'], $fixture['owner']);
+
+        $response = $this->postWithSession($admin, "admin/contratos/{$contractId}/cerrar", [
+            'status'         => $status,
+            'closing_reason' => $reason,
+            'confirmed'      => '1',
+        ]);
+
+        $response->assertRedirectTo('/admin/contratos/' . $contractId);
+        $this->assertSame($successMessage, session()->getFlashdata('success'));
+
+        $contract = $this->db->table('contracts')->where('id', $contractId)->get()->getRow();
+        $this->assertNotNull($contract);
+        $this->assertSame($status, $contract->status);
+        $this->assertSame(date('Y-m-d'), $contract->closed_at);
+        $this->assertSame($reason, $contract->closing_reason);
+        $this->assertSame('available', $this->propertyStatus($fixture['property']));
+    }
+
+    public function testClosingAnAlreadyClosedContractIsRejected(): void
+    {
+        $admin  = $this->sessionFor('admin');
+        $fixture = $this->fixture();
+        $contractId = $this->insertContract($fixture['property'], $fixture['tenant'], $fixture['owner']);
+
+        $this->postWithSession($admin, "admin/contratos/{$contractId}/cerrar", [
+            'status'         => ContractModel::STATUS_FINISHED,
+            'closing_reason' => 'Vencimiento',
+            'confirmed'      => '1',
+        ]);
+
+        $second = $this->postWithSession($admin, "admin/contratos/{$contractId}/cerrar", [
+            'status'         => ContractModel::STATUS_FINISHED,
+            'closing_reason' => 'Reintento',
+            'confirmed'      => '1',
+        ]);
+
+        $second->assertRedirectTo('/admin/contratos/' . $contractId);
+        $this->assertSame(ContractController::CONTRACT_ALREADY_CLOSED_MESSAGE, session()->getFlashdata('error'));
     }
 
     // ---------------------------------------------------------------------------------------------

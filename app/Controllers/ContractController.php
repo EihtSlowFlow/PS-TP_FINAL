@@ -8,21 +8,60 @@ use App\Models\UserModel;
 use CodeIgniter\HTTP\RedirectResponse;
 
 /**
- * Lease contracts for administrators and employees (HU-10): creation and the contract file.
- *
- * The listing, search and filters belong to HU-11 and the closing of a contract to HU-12.
+ * Lease contract management for administrators and employees, plus owner-scoped consultation (HU-10/11).
+ * Closing a contract belongs to HU-12.
  */
 class ContractController extends BaseController
 {
-    public const CONTRACT_CREATED_MESSAGE      = 'El contrato fue registrado exitosamente. El inmueble pasó a estado «Alquilado».';
-    public const CONTRACT_NOT_FOUND_MESSAGE    = 'El contrato solicitado no existe.';
-    public const VALIDATION_ERROR_MESSAGE      = 'Revisá los campos marcados antes de guardar el contrato.';
-    public const PROPERTY_UNAVAILABLE_MESSAGE  = 'El inmueble seleccionado no está disponible: ya tiene un contrato vigente, está en mantenimiento o fue dado de baja.';
-    public const INVALID_PROPERTY_MESSAGE      = 'Seleccioná el inmueble del contrato.';
-    public const INACTIVE_OWNER_MESSAGE        = 'El propietario de este inmueble está dado de baja. Asignale un propietario activo desde la edición del inmueble antes de crear el contrato.';
-    public const INVALID_TENANT_MESSAGE        = 'Seleccioná un inquilino activo. El usuario elegido no existe, no es inquilino o está dado de baja.';
-    public const INVALID_DATE_ORDER_MESSAGE    = 'La fecha de finalización debe ser posterior a la fecha de inicio.';
-    public const SAVE_ERROR_MESSAGE            = 'No pudimos registrar el contrato por un error interno. No se guardó ningún cambio: el inmueble sigue como estaba. Intentá nuevamente.';
+    public const CONTRACT_CREATED_MESSAGE         = 'El contrato fue registrado exitosamente. El inmueble pasó a estado «Alquilado».';
+    public const CONTRACT_NOT_FOUND_MESSAGE       = 'El contrato solicitado no existe.';
+    public const OWNER_CONTRACT_NOT_FOUND_MESSAGE = 'El contrato solicitado no existe o no está disponible para tu cuenta.';
+    public const VALIDATION_ERROR_MESSAGE         = 'Revisá los campos marcados antes de guardar el contrato.';
+    public const PROPERTY_UNAVAILABLE_MESSAGE     = 'El inmueble seleccionado no está disponible: ya tiene un contrato vigente, está en mantenimiento o fue dado de baja.';
+    public const INVALID_PROPERTY_MESSAGE         = 'Seleccioná el inmueble del contrato.';
+    public const INACTIVE_OWNER_MESSAGE           = 'El propietario de este inmueble está dado de baja. Asignale un propietario activo desde la edición del inmueble antes de crear el contrato.';
+    public const INVALID_TENANT_MESSAGE           = 'Seleccioná un inquilino activo. El usuario elegido no existe, no es inquilino o está dado de baja.';
+    public const INVALID_DATE_ORDER_MESSAGE       = 'La fecha de finalización debe ser posterior a la fecha de inicio.';
+    public const SAVE_ERROR_MESSAGE               = 'No pudimos registrar el contrato por un error interno. No se guardó ningún cambio: el inmueble sigue como estaba. Intentá nuevamente.';
+    public const CONTRACT_FINISHED_MESSAGE        = 'El contrato fue finalizado correctamente y el inmueble volvió a estar disponible.';
+    public const CONTRACT_RESCINDED_MESSAGE      = 'El contrato fue rescindido correctamente y el inmueble volvió a estar disponible.';
+    public const CONTRACT_ALREADY_CLOSED_MESSAGE  = 'El contrato no está vigente y no puede cerrarse nuevamente.';
+    public const INVALID_CLOSE_STATUS_MESSAGE     = 'Seleccioná si se finaliza o se rescinde el contrato.';
+    public const CLOSURE_ERROR_MESSAGE            = 'No pudimos cerrar el contrato por un error interno. No se guardó ningún cambio.';
+
+    /**
+     * Lists all contracts for administrators and employees with optional search and status filters.
+     */
+    public function index(): string
+    {
+        $listing = $this->contractListingData();
+
+        return view('contracts/index', array_merge($this->panelContext(
+            pageTitle: 'Contratos',
+            breadcrumb: 'Contratos',
+            activeMenu: 'contratos'
+        ), $listing, [
+            'isOwner'        => false,
+            'listingBaseUrl' => 'admin/contratos',
+        ]));
+    }
+
+    /**
+     * Lists only contracts owned by the authenticated owner.
+     */
+    public function ownerIndex(): string
+    {
+        $listing = $this->contractListingData((int) session()->get('user_id'));
+
+        return view('contracts/index', array_merge($this->panelContext(
+            pageTitle: 'Mis contratos',
+            breadcrumb: 'Mis contratos',
+            activeMenu: 'propietario-contratos'
+        ), $listing, [
+            'isOwner'        => true,
+            'listingBaseUrl' => 'propietario/contratos',
+        ]));
+    }
 
     /**
      * Renders the new contract form (screen ADM-07). `?property_id=` preselects a property.
@@ -70,17 +109,171 @@ class ContractController extends BaseController
         $contract = model(ContractModel::class)->findWithDetails($id);
 
         if ($contract === null) {
-            return redirect()->to('/admin/dashboard')
+            return redirect()->to('/admin/contratos')
                 ->with('error', self::CONTRACT_NOT_FOUND_MESSAGE);
         }
 
+        return $this->renderContractFile($contract, $id, false);
+    }
+
+    /**
+     * Renders the file only when the contract belongs to the authenticated owner.
+     */
+    public function ownerShow(int $id): RedirectResponse|string
+    {
+        $contract = model(ContractModel::class)->findWithDetails($id, (int) session()->get('user_id'));
+
+        if ($contract === null) {
+            return redirect()->to('/propietario/contratos')
+                ->with('error', self::OWNER_CONTRACT_NOT_FOUND_MESSAGE);
+        }
+
+        return $this->renderContractFile($contract, $id, true);
+    }
+
+    /**
+     * Confirms or executes a contract closure for the administrative screens.
+     */
+    public function close(int $id): RedirectResponse|string
+    {
+        return $this->closeContractStatus($id, trim((string) $this->request->getPost('status')));
+    }
+
+    /**
+     * Finalizes a contract in force.
+     */
+    public function finalize(int $id): RedirectResponse|string
+    {
+        return $this->closeContractStatus($id, ContractModel::STATUS_FINISHED);
+    }
+
+    /**
+     * Rescinds a contract in force.
+     */
+    public function rescind(int $id): RedirectResponse|string
+    {
+        return $this->closeContractStatus($id, ContractModel::STATUS_RESCINDED);
+    }
+
+    /**
+     * Executes or confirms a contract closure for the selected status.
+     */
+    private function closeContractStatus(int $id, string $requestedStatus): RedirectResponse|string
+    {
+        $contract = model(ContractModel::class)->findWithDetails($id);
+
+        if ($contract === null) {
+            return redirect()->to('/admin/contratos')
+                ->with('error', self::CONTRACT_NOT_FOUND_MESSAGE);
+        }
+
+        $requestedStatus = trim($requestedStatus);
+        if (in_array($requestedStatus, [ContractModel::STATUS_FINISHED, ContractModel::STATUS_RESCINDED], true) === false) {
+            return redirect()->to('/admin/contratos/' . $id)
+                ->with('error', self::INVALID_CLOSE_STATUS_MESSAGE);
+        }
+
+        if ((string) $this->request->getPost('confirmed') !== '1') {
+            return view('admin/contracts/close_confirm', array_merge($this->panelContext(
+                pageTitle: 'Confirmar cierre de contrato',
+                breadcrumb: 'Contratos / Cierre del contrato',
+                activeMenu: 'contratos'
+            ), [
+                'contract' => $contract,
+                'status'   => $requestedStatus,
+            ]));
+        }
+
+        $result = model(ContractModel::class)->closeContract($id, $requestedStatus, (string) $this->request->getPost('closing_reason'));
+
+        if ($result['error'] === ContractModel::ERROR_NOT_IN_FORCE) {
+            return redirect()->to('/admin/contratos/' . $id)
+                ->with('error', self::CONTRACT_ALREADY_CLOSED_MESSAGE);
+        }
+
+        if ($result['error'] !== null) {
+            return redirect()->to('/admin/contratos/' . $id)
+                ->with('error', self::CLOSURE_ERROR_MESSAGE);
+        }
+
+        return redirect()->to('/admin/contratos/' . $id)
+            ->with('success', $requestedStatus === ContractModel::STATUS_FINISHED
+                ? self::CONTRACT_FINISHED_MESSAGE
+                : self::CONTRACT_RESCINDED_MESSAGE);
+    }
+
+    /**
+     * Builds the shared contract file for the administrator and owner portals.
+     *
+     * @param array<string, mixed> $contract
+     */
+    private function renderContractFile(array $contract, int $id, bool $isOwner): string
+    {
         return view('admin/contracts/show', array_merge($this->panelContext(
             pageTitle: 'Contrato #' . $id,
-            breadcrumb: 'Contratos / Contrato #' . $id,
-            activeMenu: 'contratos'
+            breadcrumb: ($isOwner ? 'Mis contratos' : 'Contratos') . ' / Contrato #' . $id,
+            activeMenu: $isOwner ? 'propietario-contratos' : 'contratos'
         ), [
             'contract' => $contract,
+            'isOwner'  => $isOwner,
         ]));
+    }
+
+    /**
+     * Returns validated filters and paginated records for either portal.
+     *
+     * @return array{
+     *     contracts: list<array<string, mixed>>,
+     *     pagination: array{items: list<array<string, mixed>>, total: int, perPage: int, currentPage: int, totalPages: int, from: int, to: int},
+     *     filters: array{q: string, status: string},
+     *     filterErrors: array<string, string>
+     * }
+     */
+    private function contractListingData(?int $ownerId = null): array
+    {
+        $queryRaw  = $this->request->getGet('q');
+        $statusRaw = $this->request->getGet('status');
+        $query     = is_string($queryRaw) ? trim($queryRaw) : '';
+        $status    = is_string($statusRaw) ? trim($statusRaw) : '';
+        $errors    = [];
+        $filters   = [];
+
+        if ($queryRaw !== null && ! is_string($queryRaw) && ! is_numeric($queryRaw)) {
+            $errors['q'] = 'Ingresá un término de búsqueda válido.';
+        }
+
+        if ($query !== '' && mb_strlen($query) > 100) {
+            $errors['q'] = 'La búsqueda no puede superar los 100 caracteres.';
+        } elseif ($query !== '') {
+            $filters['q'] = $query;
+        }
+
+        if ($statusRaw !== null && ! is_string($statusRaw) && ! is_numeric($statusRaw)) {
+            $errors['status'] = 'Seleccioná un estado válido.';
+        }
+
+        if ($status !== '') {
+            if (! array_key_exists($status, ContractModel::STATUS_LABELS)) {
+                $errors['status'] = 'Seleccioná un estado válido.';
+            } else {
+                $filters['status'] = $status;
+            }
+        }
+
+        $pageRaw    = $this->request->getGet('page');
+        $perPageRaw = $this->request->getGet('per_page');
+        $page       = is_scalar($pageRaw) && ctype_digit((string) $pageRaw) ? max(1, (int) $pageRaw) : 1;
+        $perPage    = is_scalar($perPageRaw) && ctype_digit((string) $perPageRaw) ? (int) $perPageRaw : 10;
+        $perPage    = $perPage > 0 ? min(50, $perPage) : 10;
+
+        $pagination = model(ContractModel::class)->paginateWithDetails($perPage, $page, $filters, $ownerId);
+
+        return [
+            'contracts'    => $pagination['items'],
+            'pagination'   => $pagination,
+            'filters'      => ['q' => $query, 'status' => $status],
+            'filterErrors' => $errors,
+        ];
     }
 
     /**

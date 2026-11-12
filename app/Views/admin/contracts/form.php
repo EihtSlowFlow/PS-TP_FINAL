@@ -39,12 +39,12 @@ $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
             <div class="form-back-row">
-                <a href="<?= esc(site_url('admin/inmuebles')) ?>" class="back-link">
+                <a href="<?= esc(site_url('admin/contratos')) ?>" class="back-link">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <line x1="19" y1="12" x2="5" y2="12"/>
                         <polyline points="12 19 5 12 12 5"/>
                     </svg>
-                    <span>Volver al listado de inmuebles</span>
+                    <span>Volver al listado de contratos</span>
                 </a>
             </div>
 
