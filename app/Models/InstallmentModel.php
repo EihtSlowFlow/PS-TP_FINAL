@@ -2,16 +2,23 @@
 
 namespace App\Models;
 
+use App\Libraries\LateFeeCalculator;
+use CodeIgniter\Database\BaseBuilder;
+use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
 use RuntimeException;
 use Throwable;
 
 /**
- * Persistence for the monthly rent installments and their issuing (HU-13).
+ * Persistence for the monthly rent installments, their issuing (HU-13) and their late fees (HU-14).
  *
  * An installment belongs to a contract and to a "period", which is always the first day of a month. The database
  * allows one installment per contract and period and one number per contract; this model also makes sure the numbers
  * are sequential for each contract.
+ *
+ * The late fee stored in `installments.late_fee` is a pure function of the base amount, the contract's daily
+ * percentage, the due date and the day it is calculated for ({@see LateFeeCalculator}); {@see refreshLateFees()} keeps
+ * the stored status and fee in line with a given day and is called whenever installments are consulted.
  */
 class InstallmentModel extends Model
 {
@@ -89,6 +96,15 @@ class InstallmentModel extends Model
     public static function labelForStatus(string $status): string
     {
         return self::STATUS_LABELS[$status] ?? $status;
+    }
+
+    /**
+     * Today's date ("YYYY-MM-DD") in the application's time zone: the day late fees are calculated for. A single
+     * place, so tests can freeze it with `Time::setTestNow()`.
+     */
+    public static function today(): string
+    {
+        return Time::now()->format('Y-m-d');
     }
 
     /**
@@ -236,6 +252,230 @@ class InstallmentModel extends Model
     }
 
     /**
+     * Brings the status and the late fee of the unpaid installments up to date for a day (HU-14 Scenarios 1 and 3).
+     *
+     * It only looks at installments that are "pending" or "overdue" and whose due date is BEFORE `$today`:
+     * - a "pending" one becomes "overdue" (Scenario 1);
+     * - every one of them gets `late_fee = base × daily % ÷ 100 × days late` ({@see LateFeeCalculator}), rounded to
+     *   cents, with the percentage of its contract, so the fee grows one day at a time and is the same whenever and
+     *   as many times as it is calculated for the same day (idempotent and reproducible).
+     * Installments "under review" and "paid" are never touched (Scenarios 2 and 3: the fee stays as it was while a
+     * payment is under review, and a paid installment keeps its fee), and neither are those not yet past due.
+     *
+     * Every row is updated with its own statement that repeats the status condition, so a payment that moves an
+     * installment to "under review" or "paid" at the same moment is not overwritten with an old status. Rows whose
+     * status and fee are already right are not written, so `updated_at` only moves when something changed.
+     *
+     * @param string|null $today         Day to calculate for, "YYYY-MM-DD" (null: today, see {@see today()})
+     * @param int|null    $installmentId Limits the refresh to this installment (null: all of them)
+     *
+     * @return array{checked: int, marked_overdue: int, updated: int, failed: int} Installments examined, turned
+     *                                                                              overdue, written (including
+     *                                                                              those turned overdue) and not
+     *                                                                              written because the update failed
+     *
+     * @throws \InvalidArgumentException when `$today` is not a valid "YYYY-MM-DD" date
+     */
+    public function refreshLateFees(?string $today = null, ?int $installmentId = null): array
+    {
+        $today ??= self::today();
+        LateFeeCalculator::assertValidDate($today);
+
+        $now = date('Y-m-d H:i:s');
+
+        $builder = $this->builder()
+            ->select(
+                'installments.id, installments.status, installments.due_date, installments.base_amount, '
+                . 'installments.late_fee, contracts.late_fee_daily_percentage'
+            )
+            ->join('contracts', 'contracts.id = installments.contract_id')
+            ->whereIn('installments.status', [self::STATUS_PENDING, self::STATUS_OVERDUE])
+            ->where('installments.due_date <', $today);
+
+        if ($installmentId !== null) {
+            $builder->where('installments.id', $installmentId);
+        }
+
+        $rows   = $builder->orderBy('installments.id', 'ASC')->get()->getResultArray();
+        $result = ['checked' => count($rows), 'marked_overdue' => 0, 'updated' => 0, 'failed' => 0];
+
+        foreach ($rows as $row) {
+            $lateFee = LateFeeCalculator::forInstallment(
+                (string) $row['base_amount'],
+                (string) $row['late_fee_daily_percentage'],
+                (string) $row['due_date'],
+                $today
+            );
+            $wasPending = (string) $row['status'] === self::STATUS_PENDING;
+
+            if (! $wasPending && self::sumAmounts([$row['late_fee']]) === self::sumAmounts([$lateFee])) {
+                continue;
+            }
+
+            $updated = $this->builder()
+                ->where('id', (int) $row['id'])
+                ->whereIn('status', [self::STATUS_PENDING, self::STATUS_OVERDUE])
+                ->update([
+                    'status'     => self::STATUS_OVERDUE,
+                    'late_fee'   => $lateFee,
+                    'updated_at' => $now,
+                ]);
+
+            if ($updated === false) {
+                $result['failed']++;
+                log_message('error', 'The late fee of installment {id} could not be updated.', ['id' => $row['id']]);
+
+                continue;
+            }
+
+            if ($this->db->affectedRows() > 0) {
+                $result['updated']++;
+                $result['marked_overdue'] += $wasPending ? 1 : 0;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Pages the installments for the collections screen (ADM-10), most recent period first, with the tenant and
+     * property data. Deactivated tenants and properties are included on purpose: the debt stays consultable.
+     *
+     * @param array{q?: string, status?: string, period?: string} $filters `q` searches tenant name or document and
+     *                                                                     property address or city; `period` is the
+     *                                                                     first day of a month ("YYYY-MM-01")
+     *
+     * @return array{
+     *     items: list<array<string, mixed>>,
+     *     total: int,
+     *     perPage: int,
+     *     currentPage: int,
+     *     totalPages: int,
+     *     from: int,
+     *     to: int
+     * }
+     */
+    public function paginateCollections(int $perPage = 10, int $page = 1, array $filters = []): array
+    {
+        $perPage     = max(1, min(100, $perPage));
+        $currentPage = max(1, $page);
+
+        $total       = (int) $this->collectionsBuilder($filters)->countAllResults();
+        $totalPages  = max(1, (int) ceil($total / $perPage));
+        $currentPage = min($currentPage, $totalPages);
+        $offset      = ($currentPage - 1) * $perPage;
+
+        $items = $this->collectionsBuilder($filters)
+            ->select(
+                'installments.*, contracts.late_fee_daily_percentage, '
+                . 'properties.address AS property_address, properties.city AS property_city, '
+                . 'properties.type AS property_type, properties.rooms AS property_rooms, '
+                . 'tenant.first_name AS tenant_first_name, tenant.last_name AS tenant_last_name, '
+                . 'tenant.document_number AS tenant_document_number, tenant.deleted_at AS tenant_deleted_at'
+            )
+            ->orderBy('installments.period', 'DESC')
+            ->orderBy('installments.contract_id', 'ASC')
+            ->orderBy('installments.id', 'ASC')
+            ->limit($perPage, $offset)
+            ->get()
+            ->getResultArray();
+
+        return [
+            'items'       => $items,
+            'total'       => $total,
+            'perPage'     => $perPage,
+            'currentPage' => $currentPage,
+            'totalPages'  => $totalPages,
+            'from'        => $total > 0 ? $offset + 1 : 0,
+            'to'          => $total > 0 ? min($total, $offset + count($items)) : 0,
+        ];
+    }
+
+    /**
+     * Adds up the installments that match the same filters as {@see paginateCollections()} (all pages), by status:
+     * how many there are and the sum of their base amounts and of their late fees, as strings with two decimals.
+     *
+     * @param array{q?: string, status?: string, period?: string} $filters
+     *
+     * @return array<string, array{count: int, base: string, late_fee: string}> Every status is present
+     */
+    public function summarizeCollections(array $filters = []): array
+    {
+        $summary = [];
+
+        foreach (array_keys(self::STATUS_LABELS) as $status) {
+            $summary[$status] = ['count' => 0, 'base' => '0.00', 'late_fee' => '0.00'];
+        }
+
+        $rows = $this->collectionsBuilder($filters)
+            ->select(
+                'installments.status, COUNT(*) AS installments_count, '
+                . 'SUM(installments.base_amount) AS base_total, SUM(installments.late_fee) AS late_fee_total',
+                false
+            )
+            ->groupBy('installments.status')
+            ->get()
+            ->getResultArray();
+
+        foreach ($rows as $row) {
+            $summary[(string) $row['status']] = [
+                'count'    => (int) $row['installments_count'],
+                'base'     => self::sumAmounts([$row['base_total']]),
+                'late_fee' => self::sumAmounts([$row['late_fee_total']]),
+            ];
+        }
+
+        return $summary;
+    }
+
+    /**
+     * The periods ("YYYY-MM-01") that have installments, most recent first, for the period filter.
+     *
+     * @return list<string>
+     */
+    public function periodsWithInstallments(): array
+    {
+        $rows = $this->builder()
+            ->select('period')
+            ->distinct()
+            ->orderBy('period', 'DESC')
+            ->limit(120)
+            ->get()
+            ->getResultArray();
+
+        return array_map(static fn (array $row): string => (string) $row['period'], $rows);
+    }
+
+    /**
+     * One installment with its contract, property and tenant data for the detail screen (deactivated users and
+     * properties included on purpose), or null when it does not exist.
+     *
+     * @return array<string, mixed>|null
+     */
+    public function findCollectionDetail(int $id): ?array
+    {
+        $row = $this->builder()
+            ->select(
+                'installments.*, contracts.late_fee_daily_percentage, contracts.monthly_rent AS contract_monthly_rent, '
+                . 'contracts.due_day AS contract_due_day, contracts.status AS contract_status, '
+                . 'contracts.start_date AS contract_start_date, contracts.end_date AS contract_end_date, '
+                . 'properties.address AS property_address, properties.city AS property_city, '
+                . 'properties.type AS property_type, properties.rooms AS property_rooms, '
+                . 'tenant.first_name AS tenant_first_name, tenant.last_name AS tenant_last_name, '
+                . 'tenant.document_number AS tenant_document_number, tenant.email AS tenant_email, '
+                . 'tenant.phone AS tenant_phone, tenant.deleted_at AS tenant_deleted_at'
+            )
+            ->join('contracts', 'contracts.id = installments.contract_id')
+            ->join('properties', 'properties.id = contracts.property_id')
+            ->join('users AS tenant', 'tenant.id = contracts.tenant_id')
+            ->where('installments.id', $id)
+            ->get()
+            ->getRowArray();
+
+        return $row ?: null;
+    }
+
+    /**
      * Finds installments by id with the contract, property and tenant data the issuing report shows. Deactivated
      * tenants are included on purpose: the history must stay consultable.
      *
@@ -315,6 +555,45 @@ class InstallmentModel extends Model
         }
 
         return $numbers;
+    }
+
+    /**
+     * The query shared by the collections listing, its count and its totals: installments joined with their
+     * contract, property and tenant, filtered by status, period and a free-text search.
+     *
+     * @param array{q?: string, status?: string, period?: string} $filters
+     */
+    private function collectionsBuilder(array $filters): BaseBuilder
+    {
+        $builder = $this->builder()
+            ->join('contracts', 'contracts.id = installments.contract_id')
+            ->join('properties', 'properties.id = contracts.property_id')
+            ->join('users AS tenant', 'tenant.id = contracts.tenant_id');
+
+        if (isset($filters['status']) && array_key_exists($filters['status'], self::STATUS_LABELS)) {
+            $builder->where('installments.status', $filters['status']);
+        }
+
+        if (isset($filters['period']) && $filters['period'] !== '') {
+            $builder->where('installments.period', $filters['period']);
+        }
+
+        if (isset($filters['q']) && $filters['q'] !== '') {
+            // `%` and `_` typed by the user are searched literally, not as LIKE wildcards (the query builder appends
+            // the matching ESCAPE clause).
+            $escape = $this->db->likeEscapeChar;
+            $term   = str_replace([$escape, '%', '_'], [$escape . $escape, $escape . '%', $escape . '_'], $filters['q']);
+
+            $builder->groupStart()
+                ->like('tenant.first_name', $term, 'both', true)
+                ->orLike('tenant.last_name', $term, 'both', true)
+                ->orLike('tenant.document_number', $term, 'both', true)
+                ->orLike('properties.address', $term, 'both', true)
+                ->orLike('properties.city', $term, 'both', true)
+                ->groupEnd();
+        }
+
+        return $builder;
     }
 
     /**
