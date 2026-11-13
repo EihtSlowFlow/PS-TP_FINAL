@@ -1692,3 +1692,81 @@ select.form-control {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+/* Collections and late fees (HU-14) */
+.text-danger {
+    color: var(--danger-text);
+}
+
+.kpi-card-danger {
+    border-color: var(--danger);
+    background: var(--danger-soft);
+}
+
+.users-table tr.row-overdue td {
+    background: var(--danger-soft);
+}
+
+.cell-note {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.cell-note.text-danger {
+    color: var(--danger-text);
+}
+
+.breakdown-list {
+    margin: 0;
+}
+
+.breakdown-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border-default);
+}
+
+.breakdown-row dt {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.breakdown-row dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    color: var(--heading);
+    white-space: nowrap;
+}
+
+.breakdown-hint {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.breakdown-total {
+    border-bottom: none;
+}
+
+.breakdown-total dt,
+.breakdown-total dd {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--heading);
+}
+
+/* The collections table has nine columns: tighter cells so it fits a laptop screen without scrolling sideways. */
+.installments-table th,
+.installments-table td {
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+}

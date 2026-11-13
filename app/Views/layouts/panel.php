@@ -64,6 +64,9 @@ $flashSuccess = session()->getFlashdata('success');
                     <a href="<?= esc(site_url('admin/cuotas/emitir')) ?>" class="sidebar-link<?= $activeMenu === 'cuotas' ? ' is-active' : '' ?>">
                         <span>Cuotas</span>
                     </a>
+                    <a href="<?= esc(site_url('admin/cuotas')) ?>" class="sidebar-link<?= $activeMenu === 'cobranzas' ? ' is-active' : '' ?>">
+                        <span>Cobranzas</span>
+                    </a>
                 <?php elseif ($userRole === 'owner'): ?>
                     <a href="<?= esc(site_url('propietario/dashboard')) ?>" class="sidebar-link<?= $activeMenu === 'propietario-dashboard' ? ' is-active' : '' ?>">
                         <span>Dashboard</span>

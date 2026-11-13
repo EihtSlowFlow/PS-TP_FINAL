@@ -2,19 +2,30 @@
 
 namespace App\Controllers;
 
+use App\Libraries\LateFeeCalculator;
 use App\Models\ContractModel;
 use App\Models\InstallmentModel;
 use CodeIgniter\HTTP\RedirectResponse;
 use DateTimeImmutable;
 
 /**
- * Monthly installment issuing for administrators and employees (HU-13): choose a period, preview the installments
- * that will be created and confirm, for all the contracts in force that cover it or for just one of them.
+ * Installments for administrators and employees: monthly issuing (HU-13: choose a period, preview the installments
+ * that will be created and confirm, for all the contracts in force that cover it or for just one of them) and the
+ * collections screen with the automatic late fee (HU-14: the unpaid installments past their due date are marked
+ * "overdue" and their fee is calculated every time they are consulted).
  *
- * Calculating late fees belongs to HU-14 and the tenant's account statement to HU-15.
+ * The tenant's account statement belongs to HU-15; it must call `InstallmentModel::refreshLateFees()` as well.
  */
 class InstallmentController extends BaseController
 {
+    /** Installments per page of the collections screen. */
+    public const COLLECTIONS_PER_PAGE = 10;
+
+    public const INSTALLMENT_NOT_FOUND_MESSAGE = 'La cuota solicitada no existe.';
+    public const INVALID_QUERY_MESSAGE         = 'Ingresá un término de búsqueda válido, de hasta 100 caracteres.';
+    public const INVALID_STATUS_FILTER_MESSAGE = 'Seleccioná un estado válido.';
+    public const INVALID_PERIOD_FILTER_MESSAGE = 'Seleccioná un período válido.';
+
     public const INVALID_PERIOD_MESSAGE   = 'Seleccioná un período válido: el mes y el año de las cuotas que querés emitir.';
     public const INVALID_CONTRACT_MESSAGE = 'El contrato elegido no existe, no está vigente o no cubre el período. No se generó ninguna cuota.';
     /** Message with the period label as its only `%s`. */
@@ -23,6 +34,115 @@ class InstallmentController extends BaseController
 
     /** Flash key that carries the issuing report from the POST to the report page. */
     public const REPORT_FLASH_KEY = 'installment_issue_report';
+
+    /**
+     * Renders the collections screen (screen ADM-10, HU-14 Scenario 1): first brings the status and the late fee of
+     * the unpaid installments up to date for today, then lists the installments (with their base amount, late fee and
+     * total) and the totals, filtered by tenant or property, period and status.
+     */
+    public function index(): string
+    {
+        $today   = InstallmentModel::today();
+        $model   = model(InstallmentModel::class);
+        $refresh = $model->refreshLateFees($today);
+
+        [$filters, $filterErrors, $page] = $this->collectionFilters();
+
+        $pagination = $model->paginateCollections(self::COLLECTIONS_PER_PAGE, $page, $filters);
+        $summary    = $model->summarizeCollections($filters);
+
+        $items = [];
+
+        foreach ($pagination['items'] as $row) {
+            $items[] = $this->withDelayData($row, $today);
+        }
+
+        $pending     = $summary[InstallmentModel::STATUS_PENDING];
+        $underReview = $summary[InstallmentModel::STATUS_UNDER_REVIEW];
+        $overdue     = $summary[InstallmentModel::STATUS_OVERDUE];
+        $paid        = $summary[InstallmentModel::STATUS_PAID];
+
+        $totals = [
+            'count'    => array_sum(array_column($summary, 'count')),
+            'base'     => InstallmentModel::sumAmounts(array_column($summary, 'base')),
+            'late_fee' => InstallmentModel::sumAmounts(array_column($summary, 'late_fee')),
+        ];
+        $totals['total'] = InstallmentModel::sumAmounts([$totals['base'], $totals['late_fee']]);
+
+        $kpis = [
+            // Not due yet or being checked: nothing is late.
+            'to_collect' => [
+                'count'  => $pending['count'] + $underReview['count'],
+                'amount' => InstallmentModel::sumAmounts([$pending['base'], $pending['late_fee'], $underReview['base'], $underReview['late_fee']]),
+            ],
+            'collected'  => [
+                'count'  => $paid['count'],
+                'amount' => InstallmentModel::sumAmounts([$paid['base'], $paid['late_fee']]),
+            ],
+            'overdue'    => [
+                'count'    => $overdue['count'],
+                'amount'   => InstallmentModel::sumAmounts([$overdue['base'], $overdue['late_fee']]),
+                'late_fee' => $overdue['late_fee'],
+            ],
+        ];
+
+        $periods = $model->periodsWithInstallments();
+
+        if (isset($filters['period']) && ! in_array($filters['period'], $periods, true)) {
+            $periods[] = $filters['period'];
+            rsort($periods);
+        }
+
+        return view('admin/installments/index', array_merge($this->panelContext(
+            pageTitle: 'Cobranzas',
+            breadcrumb: 'Cuotas / Cobranzas',
+            activeMenu: 'cobranzas'
+        ), [
+            'today'        => $today,
+            'refresh'      => $refresh,
+            'installments' => $items,
+            'pagination'   => $pagination,
+            'filters'      => [
+                'q'      => $filters['q'] ?? '',
+                'status' => $filters['status'] ?? '',
+                'period' => isset($filters['period']) ? substr($filters['period'], 0, 7) : '',
+            ],
+            'filterErrors' => $filterErrors,
+            'periods'      => $periods,
+            'totals'       => $totals,
+            'kpis'         => $kpis,
+        ]));
+    }
+
+    /**
+     * Renders the detail of one installment (HU-14 Scenarios 1 to 3): after bringing its late fee up to date, the
+     * base amount, the late fee with the days and percentage it comes from, and the total, next to its data.
+     */
+    public function show(int|string $id): RedirectResponse|string
+    {
+        $id    = (int) $id;
+        $today = InstallmentModel::today();
+        $model = model(InstallmentModel::class);
+
+        $model->refreshLateFees($today, $id);
+        $installment = $model->findCollectionDetail($id);
+
+        if ($installment === null) {
+            return redirect()->to('/admin/cuotas')->with('error', self::INSTALLMENT_NOT_FOUND_MESSAGE);
+        }
+
+        $installment = $this->withDelayData($installment, $today);
+
+        return view('admin/installments/show', array_merge($this->panelContext(
+            pageTitle: 'Cuota #' . $installment['number'] . ' del contrato #' . $installment['contract_id'],
+            breadcrumb: 'Cuotas / Cobranzas / Detalle',
+            activeMenu: 'cobranzas'
+        ), [
+            'today'       => $today,
+            'installment' => $installment,
+            'periodLabel' => InstallmentModel::labelForPeriod((string) $installment['period']),
+        ]));
+    }
 
     /**
      * Renders the period form (screen ADM-09a). When a month and a year come in the query string it also shows the
@@ -158,6 +278,74 @@ class InstallmentController extends BaseController
             'periodLabel'  => InstallmentModel::labelForPeriod((string) $report['period']),
             'installments' => $installments,
         ]));
+    }
+
+    /**
+     * Reads and validates the filters and the page of the collections screen from the query string. A filter that is
+     * not valid is ignored and reported, so the screen still lists everything else.
+     *
+     * @return array{0: array{q?: string, status?: string, period?: string}, 1: array<string, string>, 2: int}
+     */
+    private function collectionFilters(): array
+    {
+        $filters = [];
+        $errors  = [];
+
+        $query = $this->request->getGet('q');
+
+        if ($query !== null && $query !== '') {
+            $query = is_string($query) ? trim($query) : null;
+
+            if ($query === null || mb_strlen($query) > 100) {
+                $errors['q'] = self::INVALID_QUERY_MESSAGE;
+            } elseif ($query !== '') {
+                $filters['q'] = $query;
+            }
+        }
+
+        $status = $this->request->getGet('status');
+
+        if ($status !== null && $status !== '') {
+            if (is_string($status) && array_key_exists($status, InstallmentModel::STATUS_LABELS)) {
+                $filters['status'] = $status;
+            } else {
+                $errors['status'] = self::INVALID_STATUS_FILTER_MESSAGE;
+            }
+        }
+
+        $period = $this->request->getGet('period');
+
+        if ($period !== null && $period !== '') {
+            if (is_string($period) && preg_match('/^([0-9]{4})-(0[1-9]|1[0-2])$/', $period, $parts) === 1
+                && InstallmentModel::buildPeriod($parts[1], $parts[2]) !== null
+            ) {
+                $filters['period'] = InstallmentModel::buildPeriod($parts[1], $parts[2]);
+            } else {
+                $errors['period'] = self::INVALID_PERIOD_FILTER_MESSAGE;
+            }
+        }
+
+        $page = $this->request->getGet('page');
+        $page = is_scalar($page) && ctype_digit((string) $page) ? max(1, (int) $page) : 1;
+
+        return [$filters, $errors, $page];
+    }
+
+    /**
+     * Adds to an installment row the days it is late (0 while it is not past due) and the days left until its due
+     * date (0 once it is due), both counted from today.
+     *
+     * @param array<string, mixed> $row
+     *
+     * @return array<string, mixed>
+     */
+    private function withDelayData(array $row, string $today): array
+    {
+        $row['days_late']   = LateFeeCalculator::daysLate((string) $row['due_date'], $today);
+        $row['days_to_due'] = LateFeeCalculator::daysUntilDue((string) $row['due_date'], $today);
+        $row['total']       = InstallmentModel::sumAmounts([$row['base_amount'], $row['late_fee']]);
+
+        return $row;
     }
 
     /**
