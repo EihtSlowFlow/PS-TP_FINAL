@@ -8,13 +8,13 @@
 | **Historia de usuario / Issue** | HU-14 — Cálculo automático de recargo por mora · [#8](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/8) |
 | **Sprint / Hito** | Sprint 2 (Módulo financiero: cuotas y mora) |
 | **Rama** | `feature/hu-14-recargo-mora` (creada desde `origin/main` con HU-13 ya fusionada, PR #39) |
-| **Último commit** | El que agrega este informe (`feat: calcular automáticamente el recargo por mora de las cuotas vencidas (HU-14)`) |
-| **Pull Request** | Abierto desde Chrome tras el push (el `gh` de esta máquina no tiene sesión): ver el enlace en el issue #8 y en el historial de la rama |
+| **Último commit** | `46cdb3d` — feat: calcular automáticamente el recargo por mora de las cuotas vencidas (HU-14) |
+| **Pull Request** | [#41](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/41) → `main` (abierto desde Chrome: el `gh` de esta máquina no tiene sesión) |
 | **Fecha de cierre** | 2026-11-13 07:34 |
 | **Inicio / Fin** | 2026-11-13 06:26 → 2026-11-13 07:34 |
 | **Tiempo invertido** | 50 min efectivos · 1 h 08 min de reloj · Medido · pausa de 18 min (06:46 a 07:04) descontada. Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
 | **Autor / Agente** | Claude Code con `LauPerisse` |
-| **Estado global** | 🟢 Completada (pull request abierto; falta la revisión del equipo) |
+| **Estado global** | 🟢 Completada (pull request abierto, comentario del tiempo publicado en el issue y tarjeta en «In review»; falta la revisión del equipo) |
 | **Avance estimado** | 100 % del alcance del issue |
 
 **Resumen:** Se implementó el cálculo automático del recargo por mora. `LateFeeCalculator` calcula con aritmética entera (sin decimales binarios) `base × % diario ÷ 100 × días de atraso`, contando desde el día siguiente al vencimiento y redondeando al centavo (la mitad hacia arriba). `InstallmentModel::refreshLateFees()` pasa a «Vencida» las cuotas `pending` con vencimiento anterior a hoy y guarda su recargo en `installments.late_fee`; lo hace en cada consulta y nunca toca las cuotas en revisión ni las pagadas. Hay una pantalla nueva de cobranzas (`/admin/cuotas`, `ADM-10`) con el desglose base, mora y total, totales, filtros y paginación, y el detalle de una cuota (`/admin/cuotas/{id}`). Se agregaron 174 pruebas (101 unitarias y 73 de integración).
@@ -130,10 +130,9 @@ Referencia: [`.docs/historias_de_usuario/HU-14_calculo_recargo_mora.md`](../hist
 
 | Prioridad | Tarea | Archivos previstos | Skills a cargar |
 |---|---|---|---|
-| 1 | Revisión del equipo del pull request de HU-14 y confirmar las decisiones de la sección 4 (redondeo, sin tope, recálculo en cada consulta, zona horaria R-2) | `app/Libraries/LateFeeCalculator.php`, `app/Models/InstallmentModel.php` | `ci4-data-layer` |
+| 1 | Revisión del equipo del [PR #41](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/41) y confirmar las decisiones de la sección 4 (redondeo, sin tope, recálculo en cada consulta, zona horaria R-2) | `app/Libraries/LateFeeCalculator.php`, `app/Models/InstallmentModel.php` | `ci4-data-layer` |
 | 2 | HU-15 — Estado de cuenta del inquilino: llamar a `model(InstallmentModel::class)->refreshLateFees(null, null)` al abrir la pantalla (o, con `$installmentId`, por cuota) y mostrar base, recargo y total como `admin/installments/show.php` | `app/Controllers/DashboardController.php`, `app/Models/InstallmentModel.php` | `ci4-core`, `ci4-data-layer`, `frontend-html-css` |
 | 3 | HU-16 y HU-17 — Pagos: al informar un pago la cuota pasa a `under_review` (el recálculo la ignora) y al aprobarlo a `paid` | `app/Models/`, `app/Controllers/` | `ci4-core`, `ci4-data-layer` |
-| 4 | Comentar el tiempo en el issue #8 (se hace desde Chrome: el `gh` de esta máquina no tiene sesión) | — | — |
 
 **Siguiente HU sugerida:** HU-15 (estado de cuenta del inquilino), que depende de esta.
 **Prerrequisitos del entorno:** `.env` con `database.default.*` y `database.tests.*`; MySQL en marcha con la base `inmogestion2026_test` creada (el usuario de pruebas necesita permiso `TRIGGER`). Para correr los tests: `php phpunit-11.phar -c phpunit.dist.xml --no-coverage` (el phar de PHPUnit 11 se descarga de phar.phpunit.de, fuera del proyecto).
@@ -144,7 +143,7 @@ Referencia: [`.docs/historias_de_usuario/HU-14_calculo_recargo_mora.md`](../hist
 
 | Fecha | Autor | Duración | Resumen | Commit / PR |
 |---|---|---|---|---|
-| 2026-11-13 | Claude Code con `LauPerisse` | 50 min efectivos (68 min de reloj) | Lectura del issue #8, del handoff de HU-13, del prototipo `ADM-10` y del código de cuotas y contratos; `LateFeeCalculator`, `refreshLateFees()` y las consultas de cobranzas, controlador, rutas, vistas y estilos; 174 pruebas; base de pruebas aislada por no poder iniciar el servicio de MySQL; corrección de la búsqueda con `%` y `_`; revisión visual y ajuste del ancho de la tabla; suite completa (579 tests, 3 errores previos); documentación; issue pasado a «In review» en el tablero | Commit de esta rama · pull request contra `main` |
+| 2026-11-13 | Claude Code con `LauPerisse` | 50 min efectivos (68 min de reloj) | Lectura del issue #8, del handoff de HU-13, del prototipo `ADM-10` y del código de cuotas y contratos; `LateFeeCalculator`, `refreshLateFees()` y las consultas de cobranzas, controlador, rutas, vistas y estilos; 174 pruebas; base de pruebas aislada por no poder iniciar el servicio de MySQL; corrección de la búsqueda con `%` y `_`; revisión visual y ajuste del ancho de la tabla; suite completa (579 tests, 3 errores previos); documentación; issue pasado a «In review» en el tablero | `46cdb3d` · [PR #41](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/41) |
 
 ---
 
