@@ -70,10 +70,15 @@ $routes->group('propietario', ['filter' => ['auth', 'role:owner']], static funct
     $routes->get('contratos/(:num)', 'ContractController::ownerShow/$1');
 });
 
-// Tenant portal routes (HU-01)
+// Tenant portal routes (HU-01, HU-16)
 $routes->group('inquilino', ['filter' => ['auth', 'role:tenant']], static function (RouteCollection $routes): void {
     $routes->get('estado-cuenta', 'DashboardController::tenantAccountStatus');
+    $routes->get('cuotas/(:num)/informar-pago', 'PaymentController::create/$1');
+    $routes->post('cuotas/(:num)/informar-pago', 'PaymentController::store/$1');
 });
+
+// Protected receipt download/preview for owning tenant or admin/employee (HU-16)
+$routes->get('comprobantes/(:num)', 'PaymentController::receipt/$1', ['filter' => 'auth']);
 
 // Personal profile routes for owners and tenants (HU-06)
 $routes->group('perfil', ['filter' => ['auth', 'role:owner,tenant']], static function (RouteCollection $routes): void {

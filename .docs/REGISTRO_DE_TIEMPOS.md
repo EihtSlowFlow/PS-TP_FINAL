@@ -32,7 +32,8 @@
 | [#9](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/9) | HU-12 | Cierre de contratos | Finalizar y rescindir contratos vigentes | joaquincorbalan (Copilot SDK en VS Code) | 3 | 11/11 18:56 | 11/11 19:39 | **43 min** | 43 min | Medido |
 | [#6](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/6) | HU-13 | Emisión masiva de cuotas | LauPerisse | 5 | 10/11 23:28 | 11/11 00:20 | **51 min** | 51 min | Medido (implementación) y reconstruido (cierre) |
 | [#8](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/8) | HU-14 | Recargo automático por mora | LauPerisse | 5 | 13/11 06:26 | 13/11 07:34 | **50 min** | 1 h 08 min | Medido (pausa de 18 min descontada) |
-| **Total registrado** | | | | **51** | | | **10 h 20 min** | **11 h 49 min** | |
+| — | HU-16 | Registro de pago y comprobante | Antigravity | 8 | 16/11 18:36 | 16/11 19:42 | **1 h 06 min** | 1 h 06 min | Medido |
+| **Total registrado** | | | | **59** | | | **11 h 26 min** | **12 h 55 min** | |
 
 Sin registro de tiempo (los hizo otro integrante; que cada responsable complete su fila con el método de la [sección 3](#3-cómo-registrar-el-tiempo-de-cada-issue-de-ahora-en-adelante)):
 

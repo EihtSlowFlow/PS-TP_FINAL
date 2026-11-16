@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Libraries\ReceiptStorage;
 use CodeIgniter\Config\BaseService;
 
 /**
@@ -19,14 +20,15 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
-    /*
-     * public static function example($getShared = true)
-     * {
-     *     if ($getShared) {
-     *         return static::getSharedInstance('example');
-     *     }
-     *
-     *     return new \CodeIgniter\Example();
-     * }
+    /**
+     * Private storage of payment receipts (HU-16). A service so tests can swap the upload machinery.
      */
+    public static function receiptStorage(bool $getShared = true): ReceiptStorage
+    {
+        if ($getShared) {
+            return static::getSharedInstance('receiptStorage');
+        }
+
+        return new ReceiptStorage();
+    }
 }
