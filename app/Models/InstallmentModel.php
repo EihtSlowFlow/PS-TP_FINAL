@@ -456,7 +456,8 @@ class InstallmentModel extends Model
     {
         $row = $this->builder()
             ->select(
-                'installments.*, contracts.late_fee_daily_percentage, contracts.monthly_rent AS contract_monthly_rent, '
+                'installments.*, contracts.tenant_id AS tenant_id, contracts.late_fee_daily_percentage, '
+                . 'contracts.monthly_rent AS contract_monthly_rent, '
                 . 'contracts.due_day AS contract_due_day, contracts.status AS contract_status, '
                 . 'contracts.start_date AS contract_start_date, contracts.end_date AS contract_end_date, '
                 . 'properties.address AS property_address, properties.city AS property_city, '
