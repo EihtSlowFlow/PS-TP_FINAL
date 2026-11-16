@@ -45,6 +45,10 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static fu
     $routes->get('cuotas/emitir', 'InstallmentController::emit');
     $routes->post('cuotas/emitir', 'InstallmentController::issue');
     $routes->get('cuotas/emitir/resultado', 'InstallmentController::result');
+
+    // Collections: installments with their automatic late fee, and the detail of one (HU-14)
+    $routes->get('cuotas', 'InstallmentController::index');
+    $routes->get('cuotas/(:num)', 'InstallmentController::show/$1');
 });
 
 // Exclusive Administrator routes: User management and logical deactivation (HU-04, HU-05)

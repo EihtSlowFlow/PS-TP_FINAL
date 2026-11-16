@@ -286,7 +286,7 @@ Las nueve decisiones están resueltas y explicadas en la [sección 5 del modelo 
 | HU-10 | Resuelto: porcentajes de 0 a 100, día de vencimiento de 1 a 28, el propietario es el del inmueble. Abierto: cómo y cuándo se aplica el porcentaje de actualización al canon |
 | HU-12 | Resuelto: se guardan fecha y motivo del cierre. Abierto: qué pasa con las cuotas pendientes |
 | HU-13 | Resuelto: el período es el primer día del mes y hay emisión individual además de la masiva |
-| HU-14 | Redondeo, tope del recargo y si se guarda o se recalcula |
+| HU-14 | Resuelto: redondeo al centavo (la mitad hacia arriba), sin tope de negocio (solo el límite de la columna) y recálculo guardado en cada consulta de cobranzas, no con una tarea programada. A confirmar con el equipo; detalle en la HU |
 | HU-16 | Resuelto: medios de pago transferencia, depósito y pasarela digital (etiqueta de carga manual); si el monto no coincide, el pago se registra y se marca la diferencia |
 
 ### Presupuesto y alcance
