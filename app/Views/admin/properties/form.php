@@ -37,6 +37,13 @@ $descriptionValue = (string) old('description', $isEdit ? (string) ($property['d
 $statusValue      = (string) old('status', $currentStatus);
 
 $isLand = $typeValue === PropertyModel::TYPE_LAND;
+$canDeactivate = $isEdit
+    && empty($property['deleted_at'])
+    && $currentStatus !== PropertyModel::STATUS_RENTED
+    && empty($property['has_active_contract']);
+$ownerFullName = $isEdit
+    ? trim(((string) ($property['owner_first_name'] ?? '')) . ' ' . ((string) ($property['owner_last_name'] ?? '')))
+    : '';
 
 $formatDateTime = static function (mixed $value): string {
     return ! empty($value) ? date('d/m/Y H:i', strtotime((string) $value)) : '—';
@@ -53,6 +60,25 @@ $this->extend('layouts/panel');
                     </svg>
                     <span>Volver al listado de inmuebles</span>
                 </a>
+
+                <?php if ($canDeactivate): ?>
+                    <div class="form-header-status-actions">
+                        <form
+                            action="<?= esc(site_url('admin/inmuebles/baja/' . $propertyId)) ?>"
+                            method="post"
+                            class="inline-action-form js-deactivate-property-form"
+                            data-property-address="<?= esc((string) $property['address'] . ', ' . (string) $property['city']) ?>"
+                            data-property-type="<?= esc(PropertyModel::labelForType((string) $property['type'])) ?>"
+                            data-property-owner="<?= esc($ownerFullName) ?>"
+                        >
+                            <?= csrf_field() ?>
+                            <input type="hidden" name="confirmed" value="0">
+                            <button type="submit" class="btn btn-danger-outline btn-sm" id="btn-deactivate-property">
+                                <span>Dar de baja inmueble</span>
+                            </button>
+                        </form>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <section class="panel-card form-banner-card">
@@ -359,6 +385,27 @@ $this->extend('layouts/panel');
                     <?php endif; ?>
                 </aside>
             </div>
+<?php $this->endSection() ?>
+
+<?php $this->section('modals') ?>
+    <?php if ($canDeactivate): ?>
+        <div class="confirm-modal" id="deactivate-property-modal" role="alertdialog" aria-modal="true" aria-labelledby="deactivate-property-title" aria-describedby="deactivate-property-desc" hidden>
+            <div class="confirm-modal-dialog">
+                <h2 class="confirm-modal-title" id="deactivate-property-title">¿Confirmás la baja lógica del inmueble?</h2>
+                <p class="confirm-modal-text" id="deactivate-property-desc">
+                    El inmueble ubicado en <strong id="deactivate-property-address"><?= esc((string) $property['address'] . ', ' . (string) $property['city']) ?></strong>
+                    (<span id="deactivate-property-type"><?= esc(PropertyModel::labelForType((string) $property['type'])) ?></span> · Propietario: <span id="deactivate-property-owner"><?= esc($ownerFullName) ?></span>)
+                    pasará a estado inactivo: se retirará de la operatoria activa y no podrá seleccionarse ni asociarse a nuevos contratos
+                    de locación, pero se conservarán todos sus datos y su registro histórico (contratos, cuotas y pagos asociados) para
+                    consulta y auditoría.
+                </p>
+                <div class="confirm-modal-actions">
+                    <button type="button" class="btn btn-secondary" id="deactivate-property-cancel">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="deactivate-property-confirm">Confirmar baja</button>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 <?php $this->endSection() ?>
 
 <?php $this->section('scripts') ?>
