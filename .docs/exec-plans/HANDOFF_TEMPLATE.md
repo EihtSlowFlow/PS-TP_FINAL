@@ -73,6 +73,7 @@ Referencia: `[.docs/historias_de_usuario/HU-XX_nombre.md]`
 | Migraciones | `php spark migrate` | `[Resultado]` |
 | Prueba manual | `[Flujo probado y roles usados]` | `[Resultado]` |
 | Regresión | `[Funcionalidades adyacentes revisadas]` | `[Resultado]` |
+| Estilos (solo si hay pantallas) | Sin hex/rgb/degradados fuera de `public/css/tokens.css`; clases de la [guía de estilos](../prototipos_pantallas/guia_de_estilos.html); estados con ícono + texto + color; revisada a 1440 px y 390 px | `[✅ / ❌ / ⏳ No aplica]` |
 
 **Sin verificar:** `[Lo que NO se pudo probar y por qué.]`
 

@@ -20,9 +20,9 @@ $formatDate = static function (mixed $value): string {
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
-            <div class="users-page-header">
+            <div class="page-header">
                 <div>
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title">Mis pagos</h1>
                         <span class="badge-pill badge-neutral"><?= esc((string) count($payments)) ?> <?= count($payments) === 1 ? 'pago' : 'pagos' ?></span>
                     </div>
@@ -43,7 +43,7 @@ $this->extend('layouts/panel');
                         <h2 id="tenant-payment-history-heading" class="section-title">Historial</h2>
                     </div>
 
-                    <div class="responsive-table-wrap">
+                    <div class="table-responsive">
                         <table class="data-table" aria-label="Historial de pagos del inquilino">
                             <thead>
                                 <tr>
@@ -68,7 +68,7 @@ $this->extend('layouts/panel');
                                         <td><?= esc($formatMoney((string) ($payment['amount'] ?? '0.00'))) ?></td>
                                         <td><?= esc(PaymentModel::labelForMethod((string) ($payment['method'] ?? ''))) ?></td>
                                         <td>
-                                            <span class="status-inline status-inline-<?= esc($status === PaymentModel::STATUS_REJECTED ? 'danger' : ($status === PaymentModel::STATUS_APPROVED ? 'success' : 'warning')) ?>"><?= esc(PaymentModel::labelForStatus($status)) ?></span>
+                                            <span class="badge-pill badge-payment-<?= esc($status) ?>"><?= esc(PaymentModel::labelForStatus($status)) ?></span>
                                             <?php if ($status === PaymentModel::STATUS_REJECTED && ! empty($payment['rejection_reason'])): ?>
                                                 <br><span class="field-help">Motivo: <?= esc((string) $payment['rejection_reason']) ?></span>
                                             <?php endif; ?>

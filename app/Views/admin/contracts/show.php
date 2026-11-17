@@ -56,7 +56,7 @@ $this->extend('layouts/panel');
 
             <section class="panel-card form-banner-card">
                 <div class="form-banner-heading">
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title">Contrato #<?= esc((string) $contract['id']) ?> · <?= esc((string) $contract['property_address']) ?></h1>
                         <span class="badge-pill badge-contract-<?= esc($status) ?>"><?= esc(ContractModel::labelForStatus($status)) ?></span>
                     </div>
@@ -67,8 +67,8 @@ $this->extend('layouts/panel');
                 </div>
             </section>
 
-            <div class="user-form-layout has-sidebar">
-                <div class="user-main-form">
+            <div class="form-layout has-sidebar">
+                <div class="form-main">
                     <section class="panel-card form-section-card" aria-labelledby="section-file-parties">
                         <div class="section-header">
                             <h2 id="section-file-parties" class="section-title">Partes e inmueble</h2>
@@ -169,7 +169,7 @@ $this->extend('layouts/panel');
                     </section>
                 </div>
 
-                <aside class="user-audit-sidebar" aria-label="Estado del contrato">
+                <aside class="form-aside" aria-label="Estado del contrato">
                     <section class="panel-card audit-card">
                         <h3 class="section-title">Estado</h3>
                         <p class="section-subtitle">
@@ -177,13 +177,13 @@ $this->extend('layouts/panel');
                         </p>
                         <?php if ($status === ContractModel::STATUS_IN_FORCE): ?>
                             <p class="field-help">Mientras el contrato esté vigente, el inmueble figura como «Alquilado» y no puede asociarse a otro contrato.</p>
-                            <div class="form-actions" style="margin-top: 1rem;">
-                                <form action="<?= esc(site_url('admin/contratos/' . $contract['id'] . '/finalizar')) ?>" method="post">
+                            <div class="inline-actions-row stacked">
+                                <form action="<?= esc(site_url('admin/contratos/' . $contract['id'] . '/finalizar')) ?>" method="post" class="inline-form-action">
                                     <?= csrf_field() ?>
                                     <input type="hidden" name="closing_reason" value="">
                                     <button type="submit" class="btn btn-warning">Finalizar contrato</button>
                                 </form>
-                                <form action="<?= esc(site_url('admin/contratos/' . $contract['id'] . '/rescindir')) ?>" method="post" style="margin-top: 0.75rem;">
+                                <form action="<?= esc(site_url('admin/contratos/' . $contract['id'] . '/rescindir')) ?>" method="post" class="inline-form-action">
                                     <?= csrf_field() ?>
                                     <input type="hidden" name="closing_reason" value="">
                                     <button type="submit" class="btn btn-secondary">Rescindir contrato</button>

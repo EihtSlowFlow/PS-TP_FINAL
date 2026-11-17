@@ -39,9 +39,9 @@ $this->extend('layouts/panel');
 
             <section class="panel-card form-banner-card">
                 <div class="form-banner-heading">
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title">Revisión de pago #<?= esc((string) $paymentId) ?></h1>
-                        <span class="badge-pill badge-installment-<?= esc((string) $payment['status']) ?>"><?= esc(PaymentModel::labelForStatus((string) $payment['status'])) ?></span>
+                        <span class="badge-pill badge-payment-<?= esc((string) $payment['status']) ?>"><?= esc(PaymentModel::labelForStatus((string) $payment['status'])) ?></span>
                     </div>
                     <p class="panel-subtitle">
                         Cuota <?= esc((string) ($payment['installment_number'] ?? '')) ?> · <?= esc($periodLabel) ?> ·
@@ -50,8 +50,8 @@ $this->extend('layouts/panel');
                 </div>
             </section>
 
-            <div class="user-form-layout has-sidebar">
-                <div class="user-main-form">
+            <div class="form-layout has-sidebar">
+                <div class="form-main">
                     <section class="panel-card form-section-card" aria-labelledby="payment-review-data">
                         <div class="section-header">
                             <h2 id="payment-review-data" class="section-title">Datos del pago informado</h2>
@@ -112,7 +112,7 @@ $this->extend('layouts/panel');
                     </section>
                 </div>
 
-                <aside class="user-side-panel">
+                <aside class="form-aside">
                     <section class="panel-card form-section-card" aria-labelledby="payment-resolution-heading">
                         <div class="section-header">
                             <h2 id="payment-resolution-heading" class="section-title">Resolver pago</h2>

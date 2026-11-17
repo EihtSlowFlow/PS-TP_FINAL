@@ -84,7 +84,7 @@ $this->extend('layouts/panel');
             <section class="panel-card form-banner-card">
                 <div class="form-banner-heading">
                     <?php if ($isEdit): ?>
-                        <div class="users-heading-row">
+                        <div class="page-heading-row">
                             <h1 class="panel-title">Editar inmueble: <?= esc((string) $property['address']) ?></h1>
                             <span class="badge-pill badge-property-<?= esc($currentStatus) ?>"><?= esc(PropertyModel::labelForStatus($currentStatus)) ?></span>
                         </div>
@@ -96,8 +96,8 @@ $this->extend('layouts/panel');
                 </div>
             </section>
 
-            <div class="user-form-layout has-sidebar">
-                <form action="<?= esc($formAction) ?>" method="post" id="property-form" class="user-main-form property-form">
+            <div class="form-layout has-sidebar">
+                <form action="<?= esc($formAction) ?>" method="post" id="property-form" class="form-main property-form">
                     <?= csrf_field() ?>
 
                     <section class="panel-card form-section-card" aria-labelledby="section-property-data">
@@ -319,7 +319,7 @@ $this->extend('layouts/panel');
                     </div>
                 </form>
 
-                <aside class="user-audit-sidebar" aria-label="Estado del inmueble">
+                <aside class="form-aside" aria-label="Estado del inmueble">
                     <?php if ($isEdit): ?>
                         <section class="panel-card audit-card">
                             <h3 class="section-title">Estado operativo</h3>

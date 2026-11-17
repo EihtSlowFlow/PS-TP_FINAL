@@ -1,6 +1,6 @@
 # Registro de tiempos por issue — InmoGestión 2026
 
-> Última actualización: 16/11/2026. Acá queda asentado cuánto se tardó en hacer cada issue. Es el complemento de los handoffs ([`exec-plans/`](exec-plans/)): el handoff cuenta **qué** se hizo y este registro **cuánto tiempo** llevó.
+> Última actualización: 17/11/2026. Acá queda asentado cuánto se tardó en hacer cada issue. Es el complemento de los handoffs ([`exec-plans/`](exec-plans/)): el handoff cuenta **qué** se hizo y este registro **cuánto tiempo** llevó.
 >
 > Alcance: tiempo de desarrollo de una persona trabajando con asistencia de IA, desde que se pide el issue hasta su commit. No incluye reuniones, la lectura previa de otros integrantes ni la revisión del pull request.
 
@@ -36,7 +36,8 @@
 | [#7](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/7) | HU-15 | Estado de cuenta del inquilino | joaquincorbalan (Copilot SDK en VS Code) | 3 | 16/11 19:57 | 16/11 22:01 | **34 min** | 2 h 04 min | Medido (1 h 30 min de pausa/tareas ajenas descontada) |
 | [#4](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/4) | HU-17 | Verificación y aprobación de pagos | joaquincorbalan (Copilot SDK en VS Code) | 5 | 16/11 22:37 | 16/11 23:13 | **36 min** | 36 min | Reconstruido (horarios informados después; sin pausas >10 min informadas) |
 | [#14](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/14) | HU-18 | Historial de pagos y comprobantes | joaquincorbalan (Copilot SDK en VS Code) | 2 | 16/11 23:19 | 16/11 23:51 | **32 min** | 32 min | Reconstruido (desde la conversación; sin pausas >10 min registradas) |
-| **Total registrado** | | | | **69** | | | **13 h 08 min** | **16 h 07 min** | |
+| [#33](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/33) | — | Refactor de las pantallas: identidad visual (madera y melamina) | LauPerisse (con Claude Code) | 5 | 17/11 08:32 | 17/11 10:23 | **44 min** | 45 min | Medido (implementación) y reconstruido (localhost, commit y PR; [pull request #43](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/43)) |
+| **Total registrado** | | | | **74** | | | **13 h 52 min** | **16 h 52 min** | |
 
 Sin registro de tiempo (los hizo otro integrante; que cada responsable complete su fila con el método de la [sección 3](#3-cómo-registrar-el-tiempo-de-cada-issue-de-ahora-en-adelante)):
 
@@ -62,6 +63,7 @@ Sin registro de tiempo (los hizo otro integrante; que cada responsable complete 
 | HU-15 | Sesión del 16/11: **19:57 a 22:01**. Implementación de la vista del estado de cuenta del inquilino, cuotas agrupadas por estado, detalle de recargos y pagos aprobados/en revisión, integración del acceso a informar pago con HU-16, pruebas de aceptación y actualización de documentación. Tiempo de reloj: 2 h 04 min; tiempo efectivo: 34 min, según los horarios informados por el usuario | **1 h 30 min** dedicados a descanso y tareas ajenas al issue |
 | #4 | Del 16/11 **22:37 a 23:13**, según los horarios informados por el usuario después. Tiempo de reloj: 36 min; se registra el mismo tiempo efectivo porque no se informaron pausas mayores a 10 min | No se indicó pausa |
 | #14 | Del primer mensaje de HU-18 (16/11 **23:19**) hasta el cierre de esta sesión (**23:51**): historial para inquilino y administración, filtros, navegación, corrección del orden de períodos con `DISTINCT` y validación de sintaxis PHP. Tiempo de reloj: 32 min; tiempo efectivo registrado como 32 min al no haber pausas mayores a 10 min en la conversación | No se generó commit durante la sesión |
+| #33 | Tres bloques el 17/11. **08:32 a 09:06** (34 min, medidos): lectura del issue y de las pantallas de `origin/Sprint-2`, `tokens.css` con la paleta y la verificación de contraste (41 pares), tema aplicado a login, panel y todas las vistas, drawer móvil, guía de estilos, los dos `DESIGN.md`, los prompts de Stitch, revisión en el navegador con datos de demostración, la suite completa (624 pruebas, ≈ 13 min en segundo plano por tener que levantar una instancia MySQL aislada) y el handoff. **10:08 a 10:15** (7 min, reconstruidos con el registro de la sesión): instancia MySQL aislada y servidor local con los datos de demostración para revisar las pantallas nuevas. **10:19 a 10:23** (3 min, reconstruidos): commit, push y pull request #43. Las horas de la implementación se anotaron en el momento; el tiempo efectivo de los tres bloques se calculó con el método de la sección 4 | Las capturas antes y después y el comentario en el issue, que quedan pendientes. Sin pausas de más de 10 minutos dentro de cada bloque |
 
 ---
 

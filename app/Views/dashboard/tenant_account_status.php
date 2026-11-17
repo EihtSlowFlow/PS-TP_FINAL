@@ -24,9 +24,9 @@ $plural = static fn (int $count, string $one, string $many): string => $count . 
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
-            <div class="users-page-header">
+            <div class="page-header">
                 <div>
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title">Estado de cuenta</h1>
                         <span class="badge-pill badge-neutral"><?= esc($plural($totalCount, 'cuota', 'cuotas')) ?></span>
                     </div>
@@ -51,7 +51,7 @@ $this->extend('layouts/panel');
                             </h2>
                         </div>
                         <div class="table-responsive">
-                            <table class="users-table" data-status="<?= esc($status) ?>">
+                            <table class="data-table" data-status="<?= esc($status) ?>">
                                 <thead>
                                     <tr>
                                         <th scope="col">Cuota</th>
@@ -74,11 +74,11 @@ $this->extend('layouts/panel');
                                         ?>
                                         <tr data-installment-id="<?= esc((string) $item['id']) ?>">
                                             <td>
-                                                <span class="user-cell-name"><?= esc(InstallmentModel::labelForPeriod((string) $item['period'])) ?></span>
+                                                <span class="cell-title"><?= esc(InstallmentModel::labelForPeriod((string) $item['period'])) ?></span>
                                                 <span class="cell-note">Cuota <?= esc((string) $item['number']) ?></span>
                                             </td>
                                             <td>
-                                                <span class="user-cell-name"><?= esc((string) $item['property_address']) ?></span>
+                                                <span class="cell-title"><?= esc((string) $item['property_address']) ?></span>
                                                 <span class="cell-note"><?= esc((string) $item['property_city']) ?></span>
                                             </td>
                                             <td class="nowrap-cell">
@@ -105,13 +105,13 @@ $this->extend('layouts/panel');
                                             <td class="mono-cell nowrap-cell text-right"><strong><?= esc($formatMoney($item['total'])) ?></strong></td>
                                             <td>
                                                 <?php if ($statusValue === InstallmentModel::STATUS_PAID && is_array($payment) && $payment['status'] === PaymentModel::STATUS_APPROVED): ?>
-                                                    <span class="user-cell-name"><?= esc($formatDate($payment['paid_on'])) ?></span>
+                                                    <span class="cell-title"><?= esc($formatDate($payment['paid_on'])) ?></span>
                                                     <span class="cell-note"><?= esc(PaymentModel::labelForMethod((string) $payment['method'])) ?></span>
                                                     <?php if (! empty($payment['receipt_id'])): ?>
                                                         <a class="cell-note" href="<?= esc(site_url('comprobantes/' . (int) $payment['receipt_id'])) ?>">Ver comprobante aprobado</a>
                                                     <?php endif; ?>
                                                 <?php elseif ($statusValue === InstallmentModel::STATUS_UNDER_REVIEW): ?>
-                                                    <span class="user-cell-name">Pago informado</span>
+                                                    <span class="cell-title">Pago informado</span>
                                                     <?php if (is_array($payment)): ?>
                                                         <span class="cell-note"><?= esc(PaymentModel::labelForMethod((string) $payment['method'])) ?> · <?= esc($formatDate($payment['paid_on'])) ?></span>
                                                     <?php endif; ?>

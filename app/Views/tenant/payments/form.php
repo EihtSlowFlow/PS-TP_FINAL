@@ -45,7 +45,7 @@ $this->extend('layouts/panel');
 
             <section class="panel-card form-banner-card">
                 <div class="form-banner-heading">
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title">Informar pago</h1>
                         <span class="badge-pill badge-installment-<?= esc($status) ?>" id="installment-status">
                             <?= esc(InstallmentModel::labelForStatus($status)) ?> · <?= esc($periodLabel) ?>
@@ -80,8 +80,8 @@ $this->extend('layouts/panel');
                 </div>
             <?php endif; ?>
 
-            <div class="user-form-layout has-sidebar">
-                <div class="user-main-form">
+            <div class="form-layout has-sidebar">
+                <div class="form-main">
                     <form action="<?= esc(site_url('inquilino/cuotas/' . (int) $installment['id'] . '/informar-pago')) ?>"
                           method="post"
                           enctype="multipart/form-data"
@@ -191,7 +191,7 @@ $this->extend('layouts/panel');
                     </form>
                 </div>
 
-                <aside class="user-side-panel">
+                <aside class="form-aside">
                     <section class="panel-card form-section-card" aria-labelledby="section-summary">
                         <div class="section-header">
                             <h2 id="section-summary" class="section-title">Resumen de cuota</h2>
@@ -221,7 +221,7 @@ $this->extend('layouts/panel');
                                 <dt>Recargo por mora</dt>
                                 <dd><?= $hasLateFee ? esc($formatMoney($installment['late_fee'])) : '$ 0' ?></dd>
                             </div>
-                            <div class="breakdown-row breakdown-row-total">
+                            <div class="breakdown-row breakdown-total">
                                 <dt>Total exigible hoy</dt>
                                 <dd><?= esc($formatMoney($totalDue)) ?></dd>
                             </div>

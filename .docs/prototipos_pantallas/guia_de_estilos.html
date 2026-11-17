@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de estilos - InmoGestión 2026</title>
+    <!--
+        Guía de estilos VIVA de InmoGestión 2026 (identidad «madera y melamina», issue #33).
+        No es un prototipo: usa los mismos CSS reales del proyecto, así que siempre muestra lo que hay en producción.
+        Abrir este archivo directo en el navegador. Si cambia public/css/tokens.css o panel.css, esta página cambia sola.
+        Para una pantalla nueva: copiar el esqueleto de la sección 12 y reutilizar estas clases (ver DESIGN.md).
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/tokens.css">
+    <link rel="stylesheet" href="../../public/css/panel.css">
+    <script src="../../public/js/layout.js"></script>
+    <style>
+        /* Page-specific helpers for the guide only. They use tokens, never literals. */
+        .guide-section { margin-bottom: 2rem; }
+        .guide-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.75rem; }
+        .swatch { border: 1px solid var(--border-default); border-radius: var(--radius-sm); overflow: hidden; background: var(--surface); }
+        .swatch-chip { height: 3.25rem; border-bottom: 1px solid var(--border-default); }
+        .swatch-meta { padding: 0.5rem 0.65rem; font-size: 0.75rem; line-height: 1.35; }
+        .swatch-meta code { display: block; color: var(--text-muted); }
+        .guide-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+        .guide-code { margin: 0; padding: 1rem 1.15rem; overflow-x: auto; border: 1px solid var(--border-default); border-radius: var(--radius-sm); background: var(--surface-muted); color: var(--text-main); font-size: 0.8rem; line-height: 1.5; }
+        .guide-note { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 1rem; }
+        .guide-texture { height: 9rem; border-radius: var(--radius-md); border-right: 3px solid var(--sidebar-edge); background-color: var(--sidebar-bg); background-image: var(--texture-wood-grain); background-size: var(--texture-size); color: var(--sidebar-text); padding: 1.25rem; }
+        .guide-type-sample { margin: 0.25rem 0; }
+        .guide-toc { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; margin: 0 0 1.5rem; padding: 0; list-style: none; font-size: 0.85rem; }
+    </style>
+</head>
+<body class="panel-page">
+
+    <aside class="panel-sidebar" id="panel-sidebar" aria-label="Menú principal">
+        <div>
+            <div class="sidebar-brand">
+                <div class="sidebar-brand-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="sidebar-brand-title">InmoGestión</span>
+                    <span class="sidebar-brand-sub">Plataforma Inmobiliaria 2026</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#colores" class="sidebar-link is-active"><span>Dashboard (ítem activo)</span></a>
+                <a href="#botones" class="sidebar-link"><span>Usuarios</span></a>
+                <a href="#tablas" class="sidebar-link"><span>Inmuebles</span></a>
+                <a href="#formularios" class="sidebar-link"><span>Contratos</span></a>
+            </nav>
+        </div>
+        <div class="sidebar-user-footer">
+            <div class="sidebar-user-card">
+                <div class="sidebar-user-info">
+                    <div class="user-avatar" aria-hidden="true">AD</div>
+                    <div>
+                        <span class="sidebar-user-name">Ana Díaz</span>
+                        <span class="sidebar-user-role">Administrador</span>
+                    </div>
+                </div>
+                <button type="button" class="action-icon-btn action-icon-btn-danger" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                        <polyline points="16 17 21 12 16 7"/>
+                        <line x1="21" y1="12" x2="9" y2="12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <div class="panel-wrapper">
+        <header class="panel-topbar">
+            <div class="topbar-start">
+                <button type="button" class="sidebar-toggle" id="sidebar-toggle" aria-controls="panel-sidebar" aria-expanded="false" aria-label="Abrir menú">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+                <div class="breadcrumb">
+                    <span>InmoGestión</span>
+                    <span aria-hidden="true">/</span>
+                    <span class="breadcrumb-current">Guía de estilos</span>
+                </div>
+            </div>
+            <div class="topbar-meta">
+                <span class="role-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    <span>Administrador</span>
+                </span>
+            </div>
+        </header>
+
+        <main class="panel-content">
+            <div class="page-header">
+                <div>
+                    <div class="page-heading-row">
+                        <h1 class="panel-title">Guía de estilos</h1>
+                        <span class="badge-pill badge-neutral">Madera y melamina</span>
+                    </div>
+                    <p class="panel-subtitle">Colores, tipografía y componentes de InmoGestión 2026. Todo sale de <code>public/css/tokens.css</code>.</p>
+                </div>
+            </div>
+
+            <ul class="guide-toc" aria-label="Secciones">
+                <li><a class="link-button" href="#colores">1. Colores</a></li>
+                <li><a class="link-button" href="#tipografia">2. Tipografía</a></li>
+                <li><a class="link-button" href="#botones">3. Botones</a></li>
+                <li><a class="link-button" href="#estados">4. Estados</a></li>
+                <li><a class="link-button" href="#mensajes">5. Mensajes</a></li>
+                <li><a class="link-button" href="#formularios">6. Formularios</a></li>
+                <li><a class="link-button" href="#tablas">7. Tablas</a></li>
+                <li><a class="link-button" href="#kpi">8. KPI</a></li>
+                <li><a class="link-button" href="#vacio">9. Estado vacío</a></li>
+                <li><a class="link-button" href="#textura">10. Textura</a></li>
+                <li><a class="link-button" href="#reglas">11. Reglas</a></li>
+                <li><a class="link-button" href="#esqueleto">12. Esqueleto</a></li>
+            </ul>
+
+            <section class="panel-card guide-section" id="colores" aria-labelledby="h-colores">
+                <div class="section-header">
+                    <h2 id="h-colores" class="section-title">1. Colores</h2>
+                    <p class="section-subtitle">Cada color se define una sola vez en <code>tokens.css</code>. En el CSS y en las vistas se usa siempre <code>var(--token)</code>.</p>
+                </div>
+
+                <h3 class="section-title">Marca</h3>
+                <div class="guide-grid">
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--primary)"></div><div class="swatch-meta"><strong>Nogal</strong><code>--primary #7A4B2A</code>Botones, enlaces, foco</div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--primary-hover)"></div><div class="swatch-meta"><strong>Nogal oscuro</strong><code>--primary-hover #5F3A20</code>Hover y texto sobre claro</div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--primary-soft)"></div><div class="swatch-meta"><strong>Roble claro</strong><code>--primary-soft #F0E2CF</code>Chips y rellenos suaves</div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--accent)"></div><div class="swatch-meta"><strong>Miel</strong><code>--accent #D9A566</code>Ítem activo del sidebar</div></div>
+                </div>
+
+                <h3 class="section-title" style="margin-top: 1.25rem;">Fondos y superficies</h3>
+                <div class="guide-grid">
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--sidebar-bg)"></div><div class="swatch-meta"><strong>Café</strong><code>--sidebar-bg #3B2A20</code>Sidebar y panel de marca</div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--bg-app)"></div><div class="swatch-meta"><strong>Lino</strong><code>--bg-app #F5EFE6</code>Fondo de la app (plano)</div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--surface)"></div><div class="swatch-meta"><strong>Melamina blanca</strong><code>--surface #FFFDF9</code>Tarjetas, tablas, formularios</div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--surface-muted)"></div><div class="swatch-meta"><strong>Superficie suave</strong><code>--surface-muted #F8F1E7</code>Cabecera de tabla</div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--edge)"></div><div class="swatch-meta"><strong>Canto</strong><code>--edge #D3C3AE</code>Borde inferior de 2 px</div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--border-input)"></div><div class="swatch-meta"><strong>Borde de campo</strong><code>--border-input #8C7B6B</code>4,01:1 (mín. 3:1)</div></div>
+                </div>
+
+                <h3 class="section-title" style="margin-top: 1.25rem;">Texto</h3>
+                <div class="guide-grid">
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--heading)"></div><div class="swatch-meta"><strong>Títulos</strong><code>--heading #2B1D14</code></div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--text-main)"></div><div class="swatch-meta"><strong>Contenido</strong><code>--text-main #3A2E26</code>11,49:1 sobre lino</div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--text-muted)"></div><div class="swatch-meta"><strong>Secundario</strong><code>--text-muted #6B5E52</code>5,49:1 sobre lino</div></div>
+                </div>
+
+                <h3 class="section-title" style="margin-top: 1.25rem;">Semánticos (no cambian: son los estados de negocio)</h3>
+                <div class="guide-grid">
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--success-soft)"></div><div class="swatch-meta"><strong style="color: var(--success-text)">Éxito</strong><code>--success / -soft / -text</code></div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--warning-soft)"></div><div class="swatch-meta"><strong style="color: var(--warning-text)">Advertencia</strong><code>--warning / -soft / -text</code></div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--danger-soft)"></div><div class="swatch-meta"><strong style="color: var(--danger-text)">Peligro</strong><code>--danger / -soft / -text</code></div></div>
+                    <div class="swatch"><div class="swatch-chip" style="background: var(--info-soft)"></div><div class="swatch-meta"><strong style="color: var(--info-text)">Información</strong><code>--info / -soft / -text</code></div></div>
+                </div>
+            </section>
+
+            <section class="panel-card guide-section" id="tipografia" aria-labelledby="h-tipografia">
+                <div class="section-header">
+                    <h2 id="h-tipografia" class="section-title">2. Tipografía</h2>
+                    <p class="section-subtitle">Inter para datos y formularios. Una serif (Fraunces) solo para títulos de página, vacíos y marca.</p>
+                </div>
+                <p class="guide-type-sample" style="font-family: var(--font-display); font-size: 1.75rem; font-weight: 600; color: var(--heading);">Título de página · Fraunces 600 · <code>--font-display</code></p>
+                <p class="guide-type-sample" style="font-size: 1.1rem; font-weight: 600; color: var(--heading);">Título de sección · Inter 600 · <code>--font-body</code></p>
+                <p class="guide-type-sample">Texto de contenido en Inter 400. Los montos usan cifras tabulares: <span class="mono-cell"><strong>$ 420.000</strong> · $ 1.250.500</span>.</p>
+                <p class="guide-type-sample" style="color: var(--text-muted); font-size: 0.85rem;">Texto secundario o de ayuda en Inter 400, color <code>--text-muted</code>.</p>
+            </section>
+
+            <section class="panel-card guide-section" id="botones" aria-labelledby="h-botones">
+                <div class="section-header">
+                    <h2 id="h-botones" class="section-title">3. Botones</h2>
+                    <p class="section-subtitle">Los botones sólidos de peligro, éxito y advertencia usan un tono más oscuro para que el texto cumpla 4,5:1.</p>
+                </div>
+                <div class="guide-row">
+                    <button type="button" class="btn btn-primary">Primario</button>
+                    <button type="button" class="btn btn-secondary">Secundario</button>
+                    <button type="button" class="btn btn-success">Éxito (aprobar)</button>
+                    <button type="button" class="btn btn-warning">Advertencia (editar)</button>
+                    <button type="button" class="btn btn-danger">Peligro</button>
+                    <button type="button" class="btn btn-danger-outline">Peligro (contorno)</button>
+                    <button type="button" class="btn btn-primary btn-sm">Pequeño</button>
+                    <button type="button" class="btn btn-primary" disabled>Deshabilitado</button>
+                </div>
+                <p class="guide-note" style="margin-top: 1rem;">Probá el teclado: el foco se ve con un contorno de 3&nbsp;px (miel sobre el sidebar).</p>
+            </section>
+
+            <section class="panel-card guide-section" id="estados" aria-labelledby="h-estados">
+                <div class="section-header">
+                    <h2 id="h-estados" class="section-title">4. Estados de negocio</h2>
+                    <p class="section-subtitle">Cada estado lleva ícono + texto + color; el ícono lo genera el CSS. En la vista alcanza con <code>badge-pill badge-&lt;entidad&gt;-&lt;estado&gt;</code>.</p>
+                </div>
+                <div class="guide-row" style="margin-bottom: 0.75rem;">
+                    <strong>Inmueble</strong>
+                    <span class="badge-pill badge-property-available">Disponible</span>
+                    <span class="badge-pill badge-property-rented">Alquilado</span>
+                    <span class="badge-pill badge-property-maintenance">En mantenimiento</span>
+                    <span class="badge-pill badge-status-deleted">Dado de baja</span>
+                </div>
+                <div class="guide-row" style="margin-bottom: 0.75rem;">
+                    <strong>Contrato</strong>
+                    <span class="badge-pill badge-contract-in_force">Vigente</span>
+                    <span class="badge-pill badge-contract-finished">Finalizado</span>
+                    <span class="badge-pill badge-contract-rescinded">Rescindido</span>
+                </div>
+                <div class="guide-row" style="margin-bottom: 0.75rem;">
+                    <strong>Cuota</strong>
+                    <span class="badge-pill badge-installment-pending">Pendiente</span>
+                    <span class="badge-pill badge-installment-overdue">Vencida</span>
+                    <span class="badge-pill badge-installment-under_review">En revisión</span>
+                    <span class="badge-pill badge-installment-paid">Pagada</span>
+                </div>
+                <div class="guide-row" style="margin-bottom: 0.75rem;">
+                    <strong>Pago</strong>
+                    <span class="badge-pill badge-payment-pending_validation">Pendiente de validación</span>
+                    <span class="badge-pill badge-payment-approved">Aprobado</span>
+                    <span class="badge-pill badge-payment-rejected">Rechazado</span>
+                </div>
+                <div class="guide-row">
+                    <strong>Rol</strong>
+                    <span class="badge-pill badge-role-admin">Administrador</span>
+                    <span class="badge-pill badge-role-employee">Empleado</span>
+                    <span class="badge-pill badge-role-owner">Propietario</span>
+                    <span class="badge-pill badge-role-tenant">Inquilino</span>
+                    <span class="badge-pill badge-neutral">3 registros</span>
+                </div>
+            </section>
+
+            <section class="guide-section" id="mensajes" aria-labelledby="h-mensajes">
+                <h2 id="h-mensajes" class="section-title">5. Mensajes flash</h2>
+                <div class="panel-flash panel-flash-success" role="status"><span>Éxito: el inmueble se guardó correctamente.</span></div>
+                <div class="panel-flash panel-flash-danger" role="alert"><span>Peligro: no es posible dar de baja un inmueble con contrato vigente.</span></div>
+                <div class="panel-flash panel-flash-warning" role="status"><span>Advertencia: el contrato vence en 30 días.</span></div>
+                <div class="panel-flash panel-flash-info" role="status"><span>Información: las cuotas de noviembre ya fueron emitidas.</span></div>
+            </section>
+
+            <section class="panel-card guide-section" id="formularios" aria-labelledby="h-formularios">
+                <div class="section-header">
+                    <h2 id="h-formularios" class="section-title">6. Formularios</h2>
+                    <p class="section-subtitle">Etiqueta arriba, asterisco en obligatorios, ayuda debajo y error debajo del campo. El alta y la edición van en página propia.</p>
+                </div>
+                <form class="form-grid-two" onsubmit="return false;" novalidate>
+                    <div class="form-field">
+                        <label class="form-label" for="g-name">Nombre <span class="required-mark" aria-hidden="true">*</span></label>
+                        <input class="form-control" id="g-name" type="text" value="Elena Arias">
+                        <span class="field-help">Ayuda debajo del campo.</span>
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label" for="g-mail">Correo <span class="required-mark" aria-hidden="true">*</span></label>
+                        <input class="form-control is-invalid" id="g-mail" type="email" value="elena@" aria-invalid="true" aria-describedby="g-mail-err">
+                        <p class="field-error" id="g-mail-err">Ingresá un correo válido.</p>
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label" for="g-type">Tipo</label>
+                        <select class="form-control" id="g-type"><option>Departamento</option><option>Casa</option></select>
+                    </div>
+                    <div class="form-field">
+                        <label class="form-label" for="g-ro">Campo de solo lectura</label>
+                        <input class="form-control profile-readonly" id="g-ro" type="text" value="No editable" readonly>
+                    </div>
+                    <div class="form-field form-field-full">
+                        <label class="form-label" for="g-notes">Observaciones <span class="optional-tag">Opcional</span></label>
+                        <textarea class="form-control" id="g-notes" rows="3">Texto largo.</textarea>
+                    </div>
+                </form>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </section>
+
+            <section class="guide-section" id="tablas" aria-labelledby="h-tablas">
+                <h2 id="h-tablas" class="section-title">7. Tablas</h2>
+                <div class="panel-card table-card">
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Inmueble</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col" class="text-right">Alquiler</th>
+                                    <th scope="col" class="text-right">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="cell-title">Belgrano 1250, 4°B</span><span class="cell-note">Capital Federal</span></td>
+                                    <td><span class="badge-pill badge-property-rented">Alquilado</span></td>
+                                    <td class="mono-cell text-right">$ 420.000</td>
+                                    <td class="text-right"><span class="table-actions"><a href="#tablas" class="action-icon-btn" aria-label="Editar">✎</a></span></td>
+                                </tr>
+                                <tr class="row-overdue">
+                                    <td><span class="cell-title">Mitre 340</span><span class="cell-note text-danger">12 días de atraso</span></td>
+                                    <td><span class="badge-pill badge-installment-overdue">Vencida</span></td>
+                                    <td class="mono-cell text-right">$ 87.750</td>
+                                    <td class="text-right"><span class="table-actions"><a href="#tablas" class="action-icon-btn" aria-label="Ver">›</a></span></td>
+                                </tr>
+                                <tr class="table-total-row">
+                                    <td>Total</td><td></td><td class="mono-cell text-right">$ 507.750</td><td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-footer">
+                        <span class="pagination-summary">Mostrando 2 de 2</span>
+                        <span class="pagination-controls">
+                            <span class="pagination-btn is-disabled">Anterior</span>
+                            <a class="pagination-page is-current" href="#tablas">1</a>
+                            <span class="pagination-btn is-disabled">Siguiente</span>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="guide-section" id="kpi" aria-labelledby="h-kpi">
+                <h2 id="h-kpi" class="section-title">8. Tarjetas de KPI</h2>
+                <div class="kpi-grid">
+                    <div class="kpi-card"><div><span class="kpi-label">Inmuebles</span><span class="kpi-value">42</span><span class="kpi-note kpi-note-primary">Total cargado</span></div><div class="kpi-icon kpi-icon-primary" aria-hidden="true">▦</div></div>
+                    <div class="kpi-card"><div><span class="kpi-label">Disponibles</span><span class="kpi-value">11</span><span class="kpi-note kpi-note-success">Listos para alquilar</span></div><div class="kpi-icon kpi-icon-success" aria-hidden="true">✓</div></div>
+                    <div class="kpi-card"><div><span class="kpi-label">Alquilados</span><span class="kpi-value">28</span><span class="kpi-note kpi-note-info">Con contrato vigente</span></div><div class="kpi-icon kpi-icon-info" aria-hidden="true">i</div></div>
+                    <div class="kpi-card kpi-card-danger"><div><span class="kpi-label">Vencido</span><span class="kpi-value">$ 406.000</span><span class="kpi-note text-danger">Con recargo</span></div><div class="kpi-icon kpi-icon-warning" aria-hidden="true">!</div></div>
+                </div>
+            </section>
+
+            <section class="guide-section" id="vacio" aria-labelledby="h-vacio">
+                <h2 id="h-vacio" class="section-title">9. Estado vacío</h2>
+                <div class="empty-state">
+                    <h3 class="empty-state-title">Todavía no hay contratos</h3>
+                    <p>Cuando cargues el primero, va a aparecer en este listado.</p>
+                    <a class="btn btn-primary" href="#vacio">Nuevo contrato</a>
+                </div>
+            </section>
+
+            <section class="panel-card guide-section" id="textura" aria-labelledby="h-textura">
+                <div class="section-header">
+                    <h2 id="h-textura" class="section-title">10. Textura de madera</h2>
+                    <p class="section-subtitle">Decorativa y sutil: solo en el sidebar y en el panel de marca del login. Nunca detrás de tablas, formularios ni tarjetas. En impresión se quita.</p>
+                </div>
+                <div class="guide-texture"><strong style="font-family: var(--font-display); font-size: 1.2rem;">Café + veta</strong><br>Texto claro sobre el fondo café: 11,38:1.</div>
+            </section>
+
+            <section class="panel-card guide-section" id="reglas" aria-labelledby="h-reglas">
+                <div class="section-header">
+                    <h2 id="h-reglas" class="section-title">11. Reglas para pantallas nuevas</h2>
+                </div>
+                <ol>
+                    <li>Ningún hex, rgb ni degradado nuevo en el CSS o en una vista: solo <code>var(--token)</code>. Si falta un color, se agrega en <code>tokens.css</code> y se documenta en <code>DESIGN.md</code>.</li>
+                    <li>Vistas del panel: <code>$this-&gt;extend('layouts/panel')</code>. Vistas públicas: enlazar <code>tokens.css</code> antes de <code>panel.css</code> o <code>auth.css</code>.</li>
+                    <li>Reutilizar los nombres de esta guía (<code>page-header</code>, <code>panel-card</code>, <code>data-table</code>, <code>kpi-grid</code>, <code>form-layout</code>, <code>badge-pill</code>…). No crear nombres atados a una entidad (<code>users-…</code>).</li>
+                    <li>Un estado se informa siempre con ícono + texto + color. Usar los <code>badge-&lt;entidad&gt;-&lt;estado&gt;</code> existentes; si hay un estado nuevo, agregarlo en <code>panel.css</code> con su ícono.</li>
+                    <li>Contraste mínimo 4,5:1 para texto y 3:1 para controles. No quitar el contorno de foco.</li>
+                    <li>Alta y edición en página propia, nunca en modal. La baja confirma en modal.</li>
+                    <li>Textos de la interfaz en español rioplatense; fechas dd/mm/aaaa; montos <code>$ 420.000</code>.</li>
+                </ol>
+            </section>
+
+            <section class="panel-card guide-section" id="esqueleto" aria-labelledby="h-esqueleto">
+                <div class="section-header">
+                    <h2 id="h-esqueleto" class="section-title">12. Esqueleto de una vista nueva</h2>
+                    <p class="section-subtitle">Listado con encabezado, filtros, tabla y estado vacío. Copiar y adaptar.</p>
+                </div>
+<pre class="guide-code"><code>&lt;?php $this-&gt;extend('layouts/panel'); ?&gt;
+&lt;?php $this-&gt;section('content'); ?&gt;
+    &lt;div class="page-header"&gt;
+        &lt;div&gt;
+            &lt;div class="page-heading-row"&gt;
+                &lt;h1 class="panel-title"&gt;Título&lt;/h1&gt;
+                &lt;span class="badge-pill badge-neutral"&gt;N registros&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;p class="panel-subtitle"&gt;Descripción corta.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;a href="..." class="btn btn-primary"&gt;Nuevo …&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;div class="panel-card table-card"&gt;
+        &lt;div class="table-responsive"&gt;
+            &lt;table class="data-table"&gt;…&lt;/table&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;?php $this-&gt;endSection(); ?&gt;</code></pre>
+            </section>
+        </main>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay" hidden></div>
+</body>
+</html>
