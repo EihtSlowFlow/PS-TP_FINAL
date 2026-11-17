@@ -948,7 +948,9 @@ select.form-control {
 
 .table-actions {
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-end;
     gap: 0.35rem;
 }
 
@@ -1818,6 +1820,9 @@ select.form-control {
 .badge-payment-rejected::before,
 .badge-property-rented::before,
 .badge-installment-under_review::before,
+.badge-approval-pending::before,
+.badge-approval-approved::before,
+.badge-approval-rejected::before,
 .badge-contract-finished::before {
     display: inline-flex;
     align-items: center;
@@ -1837,6 +1842,7 @@ select.form-control {
 .badge-property-available::before,
 .badge-contract-in_force::before,
 .badge-installment-paid::before,
+.badge-approval-approved::before,
 .badge-payment-approved::before {
     content: "\2713";
     content: "\2713" / "";
@@ -1845,6 +1851,7 @@ select.form-control {
 /* warning: exclamation */
 .badge-property-maintenance::before,
 .badge-installment-pending::before,
+.badge-approval-pending::before,
 .badge-payment-pending_validation::before {
     content: "!";
     content: "!" / "";
@@ -1855,6 +1862,7 @@ select.form-control {
 .badge-status-deleted::before,
 .badge-contract-rescinded::before,
 .badge-installment-overdue::before,
+.badge-approval-rejected::before,
 .badge-payment-rejected::before {
     content: "\2715";
     content: "\2715" / "";
@@ -1887,6 +1895,65 @@ select.form-control {
 .badge-payment-rejected {
     background: var(--danger-soft);
     color: var(--danger-text);
+}
+
+/* Review of the properties published by owners (HU-32, HU-33) */
+.badge-approval-pending {
+    background: var(--warning-soft);
+    color: var(--warning-text);
+}
+
+.badge-approval-approved {
+    background: var(--success-soft);
+    color: var(--success-text);
+}
+
+.badge-approval-rejected {
+    background: var(--danger-soft);
+    color: var(--danger-text);
+}
+
+/* Count of properties waiting for review, next to the "Inmuebles" entry of the administration menu. */
+.sidebar-badge {
+    margin-left: auto;
+    min-width: 1.4rem;
+    padding: 0.05rem 0.45rem;
+    border-radius: var(--radius-pill);
+    background: var(--warning-soft);
+    color: var(--warning-text);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* Why the administration rejected a property, quoted where the owner reads it. */
+.review-reason {
+    margin: 0.35rem 0 0;
+    padding: 0.5rem 0.7rem;
+    border-left: 3px solid var(--danger-text);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    background: var(--danger-soft);
+    color: var(--danger-text);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+}
+
+.review-reason strong {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.review-note {
+    margin: 0;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    background: var(--surface-muted);
+    color: var(--text-muted);
+    font-size: 0.875rem;
 }
 
 /* --------------------------------------------------------------------------

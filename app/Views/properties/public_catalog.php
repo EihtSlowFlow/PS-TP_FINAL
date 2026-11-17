@@ -45,6 +45,8 @@ $formatMoney = static function (mixed $amount): string {
     <header class="public-catalog-header">
         <a class="public-catalog-brand" href="<?= esc(site_url('catalogo-inmuebles')) ?>">InmoGestión</a>
         <nav aria-label="Navegación pública">
+            <?php /* HU-32: owners publish from their portal; a visitor is asked to sign in first. */ ?>
+            <a href="<?= esc(site_url('propietario/inmuebles/nuevo')) ?>" id="publish-property-link">Publicar mi inmueble</a>
             <a href="<?= esc(site_url('auth/login')) ?>">Ingresar</a>
             <a href="<?= esc(site_url('auth/register')) ?>">Registrarse</a>
         </nav>

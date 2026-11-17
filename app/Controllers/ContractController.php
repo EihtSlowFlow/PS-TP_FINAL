@@ -17,7 +17,7 @@ class ContractController extends BaseController
     public const CONTRACT_NOT_FOUND_MESSAGE       = 'El contrato solicitado no existe.';
     public const OWNER_CONTRACT_NOT_FOUND_MESSAGE = 'El contrato solicitado no existe o no está disponible para tu cuenta.';
     public const VALIDATION_ERROR_MESSAGE         = 'Revisá los campos marcados antes de guardar el contrato.';
-    public const PROPERTY_UNAVAILABLE_MESSAGE     = 'El inmueble seleccionado no está disponible: ya tiene un contrato vigente, está en mantenimiento o fue dado de baja.';
+    public const PROPERTY_UNAVAILABLE_MESSAGE     = 'El inmueble seleccionado no está disponible: ya tiene un contrato vigente, está en mantenimiento, fue dado de baja o todavía no fue aprobado por la administración.';
     public const INVALID_PROPERTY_MESSAGE         = 'Seleccioná el inmueble del contrato.';
     public const INACTIVE_OWNER_MESSAGE           = 'El propietario de este inmueble está dado de baja. Asignale un propietario activo desde la edición del inmueble antes de crear el contrato.';
     public const INVALID_TENANT_MESSAGE           = 'Seleccioná un inquilino activo. El usuario elegido no existe, no es inquilino o está dado de baja.';
@@ -506,15 +506,19 @@ class ContractController extends BaseController
     }
 
     /**
-     * Checks that the property can be linked to a new contract: it exists, is not deactivated, is "available" and
-     * belongs to an active owner (HU-10 Scenario 2 and business rules). The atomic operation checks the status
+     * Checks that the property can be linked to a new contract: it exists, is not deactivated, is approved by the
+     * administration (HU-33), is "available" and belongs to an active owner (HU-10 Scenario 2 and business rules). The atomic operation checks the status
      * again under a lock, so two simultaneous requests cannot both succeed.
      */
     private function checkProperty(int $propertyId): ?string
     {
         $property = model(PropertyModel::class)->findWithOwner($propertyId);
 
-        if ($property === null || (string) $property['status'] !== PropertyModel::STATUS_AVAILABLE) {
+        if (
+            $property === null
+            || (string) $property['status'] !== PropertyModel::STATUS_AVAILABLE
+            || (string) $property['approval_status'] !== PropertyModel::APPROVAL_APPROVED
+        ) {
             return self::PROPERTY_UNAVAILABLE_MESSAGE;
         }
 

@@ -130,6 +130,7 @@ class ContractModel extends Model
 
             if ($property === null
                 || (string) $property['status'] !== PropertyModel::STATUS_AVAILABLE
+                || (string) $property['approval_status'] !== PropertyModel::APPROVAL_APPROVED
                 || $this->hasContractInForce($propertyId)
             ) {
                 $this->db->transRollback();
@@ -431,7 +432,7 @@ class ContractModel extends Model
         $table = $this->db->protectIdentifiers('properties', true);
 
         $row = $this->db
-            ->query("SELECT id, owner_id, status FROM {$table} WHERE id = ? AND deleted_at IS NULL FOR UPDATE", [$propertyId])
+            ->query("SELECT id, owner_id, status, approval_status FROM {$table} WHERE id = ? AND deleted_at IS NULL FOR UPDATE", [$propertyId])
             ->getRowArray();
 
         return $row ?: null;

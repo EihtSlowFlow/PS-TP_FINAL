@@ -38,6 +38,8 @@ erDiagram
     users ||--o{ password_resets : "solicita"
     users ||--o{ properties : "es propietario de"
     users ||--o{ properties : "da de baja (deleted_by)"
+    users ||--o{ properties : "publica (submitted_by)"
+    users ||--o{ properties : "revisa (reviewed_by)"
     users ||--o{ contracts : "inquilino"
     users ||--o{ contracts : "propietario"
     properties ||--o{ contracts : "se alquila en"
@@ -76,8 +78,11 @@ erDiagram
         string type
         decimal base_rent
         string status
+        string approval_status "revision HU-32/33"
+        int submitted_by FK
         datetime deleted_at "baja logica"
         int deleted_by FK
+        int reviewed_by FK
     }
     contracts {
         int id PK
@@ -153,7 +158,8 @@ users(id PK, role_id FK→roles, first_name, last_name, document_number, email, 
 password_resets(id PK, user_id FK→users, token_hash UK, expires_at, used_at?)
 
 properties(id PK, owner_id FK→users, address, city, type, rooms?, surface?, included_services?,
-           base_rent, description?, status, deleted_at?, deleted_by? FK→users)
+           base_rent, description?, status, approval_status, submitted_by? FK→users, rejection_reason?,
+           reviewed_by? FK→users, reviewed_at?, deleted_at?, deleted_by? FK→users)
 
 contracts(id PK, property_id FK→properties, tenant_id FK→users, owner_id FK→users,
           start_date, end_date, monthly_rent, update_percentage, due_day,
@@ -187,6 +193,7 @@ Los valores se guardan en inglés; las etiquetas en español las pone la aplicac
 |---|---|
 | `properties.type` | `apartment` departamento, `house` casa, `commercial` local comercial, `land` terreno, `office` oficina |
 | `properties.status` | `available` disponible, `rented` alquilado, `maintenance` en mantenimiento |
+| `properties.approval_status` | `pending` pendiente de aprobación, `approved` aprobado (valor por defecto: lo que ya existía y lo que carga la administración), `rejected` rechazado |
 | `contracts.status` | `in_force` vigente, `finished` finalizado, `rescinded` rescindido |
 | `installments.status` | `pending` pendiente, `overdue` vencida, `under_review` en revisión, `paid` pagada |
 | `payments.method` | `bank_transfer` transferencia, `deposit` depósito, `digital_gateway` pasarela digital |

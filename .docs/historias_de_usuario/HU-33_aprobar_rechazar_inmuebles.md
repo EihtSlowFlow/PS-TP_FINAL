@@ -70,17 +70,18 @@ para controlar qué se publica en el catálogo y mantener la información correc
 
 ## Por definir
 
-- Propuesta: no permitir aprobar «en mantenimiento» directamente; se aprueba y luego se edita el estado comercial mediante HU-07.
+- Propuesta: no permitir aprobar «en mantenimiento» directamente; se aprueba y luego se edita el estado comercial mediante HU-07. **Decidido (17/11/2026): se implementó así.**
+- Los avisos al propietario (escenarios 2 y 3) dependen de HU-22 (#47), que todavía no existe: quedan pendientes (ver el [handoff](../exec-plans/HU-33_handoff.md)).
 
 ## Definition of Done
 
-- [ ] El listado administrativo filtra pendientes y muestra el contador.
-- [ ] Aprobar publica el inmueble donde corresponde.
-- [ ] Rechazar exige motivo y lo muestra el propietario.
-- [ ] Una segunda resolución no cambia el inmueble.
-- [ ] Se verifican los permisos.
-- [ ] Se prueban los escenarios y casos de error.
-- [ ] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue.
+- [x] El listado administrativo filtra pendientes y muestra el contador.
+- [x] Aprobar publica el inmueble donde corresponde.
+- [x] Rechazar exige motivo y lo muestra el propietario.
+- [x] Una segunda resolución no cambia el inmueble.
+- [x] Se verifican los permisos.
+- [x] Se prueban los escenarios y casos de error.
+- [x] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue (el comentario se publica al confirmar el commit).
 
 ## Dependencias
 
