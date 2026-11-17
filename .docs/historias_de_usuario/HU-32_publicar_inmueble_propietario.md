@@ -68,6 +68,22 @@ para ofrecerlos en alquiler, quedando sujetos a la aprobación de la inmobiliari
 
 **entonces** veo el llamado «Registrar mi primer inmueble».
 
+### Escenario 8: Baja del propio inmueble
+
+**Dado** que soy propietario de un inmueble pendiente, rechazado o aprobado,
+
+**cuando** pido darlo de baja (en «Mis inmuebles»: «Cancelar solicitud» si nunca se aprobó, «Dar de baja» si ya está aprobado) y confirmo,
+
+**entonces** el inmueble se da de baja (baja lógica de HU-09, con yo como responsable), deja de figurar en mi lista, en el catálogo, en el selector de contratos y en la cola de revisión, y se conservan sus datos.
+
+**Dado** que el inmueble tiene un contrato vigente,
+
+**cuando** intento darlo de baja,
+
+**entonces** el sistema no lo permite e indica que la administración debe finalizar o rescindir el contrato primero.
+
+Si el inmueble es de otro propietario, la solicitud responde 404.
+
 ## Reglas de negocio
 
 - `owner_id` sale de la sesión y no del formulario.
@@ -84,18 +100,19 @@ Filtrar por aprobación en catálogo público, selector de contratos, indicadore
 
 ## Por definir
 
-- Edición posterior a la aprobación: propuesta, solo por administración.
-- Baja de inmueble aprobado o pendiente: propuesta, el propietario puede dar de baja los pendientes y la administración los aprobados.
+- Edición posterior a la aprobación: propuesta, solo por administración. **Decidido (17/11/2026): se implementó así** (el propietario recibe el mensaje de que los cambios se piden a la administración).
+- Baja de inmueble aprobado o pendiente: la propuesta del issue era que el propietario diera de baja solo los pendientes. **Decidido por `LauPerisse` (17/11/2026):** el propietario puede **cancelar la solicitud** de un inmueble pendiente o rechazado y también **dar de baja uno aprobado**, siempre con la regla de HU-09 (no con un contrato vigente). Es el escenario 8 de abajo; el texto del issue #57 no lo trae y conviene actualizarlo.
 
 ## Definition of Done
 
-- [ ] El propietario registra inmuebles pendientes de aprobación.
-- [ ] Los inmuebles pendientes o rechazados no aparecen en consultas públicas ni operativas.
-- [ ] Se puede corregir y reenviar un inmueble rechazado.
-- [ ] Los inmuebles administrativos siguen aprobados automáticamente.
-- [ ] No se pueden ver ni editar inmuebles ajenos.
-- [ ] Se prueban visibilidad, validaciones y casos de error.
-- [ ] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue.
+- [x] El propietario registra inmuebles pendientes de aprobación.
+- [x] Los inmuebles pendientes o rechazados no aparecen en consultas públicas ni operativas (catálogo público, selector de contratos, creación de contratos e indicadores). El detalle público de HU-29 todavía no existe: debe aplicar el mismo filtro.
+- [x] Se puede corregir y reenviar un inmueble rechazado.
+- [x] Los inmuebles administrativos siguen aprobados automáticamente.
+- [x] No se pueden ver ni editar inmuebles ajenos.
+- [x] El propietario puede cancelar la solicitud de un inmueble pendiente o rechazado y dar de baja uno aprobado, salvo con un contrato vigente (escenario 8).
+- [x] Se prueban visibilidad, validaciones y casos de error.
+- [x] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue (el comentario se publica al confirmar el commit).
 
 ## Dependencias
 

@@ -4,8 +4,8 @@
  *
  * @var list<array<string, mixed>> $properties
  * @var array{items: list<array<string, mixed>>, total: int, perPage: int, currentPage: int, totalPages: int, from: int, to: int} $pagination
- * @var array{available: int, rented: int, maintenance: int, total: int} $statusCounts
- * @var array{status: string, type: string, min_price: string, max_price: string, owner_id: string} $filters
+ * @var array{available: int, rented: int, maintenance: int, total: int, pending_approval: int} $statusCounts
+ * @var array{status: string, type: string, min_price: string, max_price: string, owner_id: string, approval: string} $filters
  * @var array<string, string> $filterErrors
  * @var list<array{id: int, first_name: string, last_name: string, deleted_at: string|null}> $owners
  */
@@ -51,6 +51,13 @@ $this->extend('layouts/panel');
                         <span class="badge-pill badge-neutral"><?= esc((string) $statusCounts['total']) ?> registrados</span>
                         <?php if ($filters['status'] === PropertyModel::FILTER_STATUS_INACTIVE && ($statusCounts['inactive'] ?? 0) > 0): ?>
                             <span class="badge-pill badge-danger"><?= esc((string) $statusCounts['inactive']) ?> inactivos</span>
+                        <?php endif; ?>
+                        <?php if (($statusCounts['pending_approval'] ?? 0) > 0): ?>
+                            <a
+                                href="<?= esc(site_url('admin/inmuebles') . '?approval=' . PropertyModel::APPROVAL_PENDING) ?>"
+                                class="badge-pill badge-approval-pending"
+                                id="pending-approval-link"
+                            ><?= esc((string) $statusCounts['pending_approval']) ?> <?= $statusCounts['pending_approval'] === 1 ? 'pendiente' : 'pendientes' ?> de aprobación</a>
                         <?php endif; ?>
                     </div>
                     <p class="panel-subtitle">Gestión de cartera, unidades locativas y estados de disponibilidad</p>
@@ -102,6 +109,18 @@ $this->extend('layouts/panel');
                             <?php endforeach; ?>
                         </select>
                         <?php if (isset($filterErrors['status'])): ?><span class="field-error" role="alert"><?= esc($filterErrors['status']) ?></span><?php endif; ?>
+                    </div>
+                    <div class="form-field">
+                        <label for="filter-approval">Revisión</label>
+                        <select id="filter-approval" name="approval" class="form-control<?= isset($filterErrors['approval']) ? ' is-invalid' : '' ?>">
+                            <option value="">Todas</option>
+                            <?php foreach (PropertyModel::APPROVAL_FILTER_LABELS as $approvalValue => $approvalLabel): ?>
+                                <option value="<?= esc($approvalValue) ?>"<?= $filters['approval'] === $approvalValue ? ' selected' : '' ?>>
+                                    <?= esc($approvalLabel) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?php if (isset($filterErrors['approval'])): ?><span class="field-error" role="alert"><?= esc($filterErrors['approval']) ?></span><?php endif; ?>
                     </div>
                     <div class="form-field">
                         <label for="filter-type">Tipo</label>
@@ -174,6 +193,8 @@ $this->extend('layouts/panel');
                                     $ownerLast         = (string) ($item['owner_last_name'] ?? '');
                                     $ownerName         = trim($ownerFirst . ' ' . $ownerLast);
                                     $status            = (string) $item['status'];
+                                    $approvalStatus    = (string) ($item['approval_status'] ?? PropertyModel::APPROVAL_APPROVED);
+                                    $isApproved        = $approvalStatus === PropertyModel::APPROVAL_APPROVED;
                                     $typeLabel         = PropertyModel::labelForType((string) $item['type']);
                                     $isDeleted         = ! empty($item['deleted_at']);
                                     $hasActiveContract = ! empty($item['has_active_contract']) || $status === PropertyModel::STATUS_RENTED;
@@ -204,6 +225,10 @@ $this->extend('layouts/panel');
                                                     <?php if (! empty($item['owner_deleted_at'])): ?>
                                                         <span class="cell-sub">Dado de baja</span>
                                                     <?php endif; ?>
+                                                    <?php if (! empty($item['submitted_by'])): ?>
+                                                        <?php /* HU-33: the owner published it; the administration did not load it. */ ?>
+                                                        <span class="cell-sub">Lo publicó el propietario</span>
+                                                    <?php endif; ?>
                                                 </div>
                                             </div>
                                         </td>
@@ -215,6 +240,14 @@ $this->extend('layouts/panel');
                                                         Baja: <?= esc($deletedAtFormatted) ?><?= $deletedByName !== '' ? ' · ' . esc($deletedByName) : '' ?>
                                                     </span>
                                                 </div>
+                                            <?php elseif (! $isApproved): ?>
+                                                <?php /* Pending or rejected: the review state is what matters until it is approved (HU-33). */ ?>
+                                                <div class="cell-meta">
+                                                    <span class="badge-pill badge-approval-<?= esc($approvalStatus) ?>"><?= esc(PropertyModel::labelForApproval($approvalStatus)) ?></span>
+                                                    <?php if ($approvalStatus === PropertyModel::APPROVAL_REJECTED && (string) ($item['rejection_reason'] ?? '') !== ''): ?>
+                                                        <span class="cell-sub"><?= esc((string) $item['rejection_reason']) ?></span>
+                                                    <?php endif; ?>
+                                                </div>
                                             <?php else: ?>
                                                 <span class="badge-pill badge-property-<?= esc($status) ?>"><?= esc(PropertyModel::labelForStatus($status)) ?></span>
                                             <?php endif; ?>
@@ -224,7 +257,14 @@ $this->extend('layouts/panel');
                                                 <?php if ($isDeleted): ?>
                                                     <span class="cell-sub">Dado de baja</span>
                                                 <?php else: ?>
-                                                    <?php if ($status === PropertyModel::STATUS_AVAILABLE && empty($item['owner_deleted_at'])): ?>
+                                                    <?php if ($approvalStatus === PropertyModel::APPROVAL_PENDING): ?>
+                                                        <a
+                                                            href="<?= esc(site_url('admin/inmuebles/editar/' . $itemId)) ?>"
+                                                            class="btn btn-secondary btn-sm"
+                                                            aria-label="Revisar <?= esc((string) $item['address']) ?>"
+                                                        >Revisar</a>
+                                                    <?php endif; ?>
+                                                    <?php if ($isApproved && $status === PropertyModel::STATUS_AVAILABLE && empty($item['owner_deleted_at'])): ?>
                                                         <a
                                                             href="<?= esc(site_url('admin/contratos/nuevo') . '?property_id=' . $itemId) ?>"
                                                             class="action-icon-btn"

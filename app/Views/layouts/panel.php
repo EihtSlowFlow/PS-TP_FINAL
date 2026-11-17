@@ -13,9 +13,11 @@
  * @var string $userRole
  * @var string $roleLabel
  * @var string $initials
+ * @var int    $pendingPropertyCount Properties waiting for review (administration menu badge, HU-33)
  */
-$flashError   = session()->getFlashdata('error');
-$flashSuccess = session()->getFlashdata('success');
+$flashError           = session()->getFlashdata('error');
+$flashSuccess         = session()->getFlashdata('success');
+$pendingPropertyCount = (int) ($pendingPropertyCount ?? 0);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -59,6 +61,13 @@ $flashSuccess = session()->getFlashdata('success');
                     <?php endif; ?>
                     <a href="<?= esc(site_url('admin/inmuebles')) ?>" class="sidebar-link<?= $activeMenu === 'inmuebles' ? ' is-active' : '' ?>">
                         <span>Inmuebles</span>
+                        <?php if ($pendingPropertyCount > 0): ?>
+                            <?php /* HU-33: the queue of properties published by owners that still need review. */ ?>
+                            <span class="sidebar-badge" id="pending-properties-badge" title="Inmuebles pendientes de aprobación">
+                                <?= esc((string) $pendingPropertyCount) ?>
+                                <span class="sr-only"><?= $pendingPropertyCount === 1 ? 'pendiente' : 'pendientes' ?> de aprobación</span>
+                            </span>
+                        <?php endif; ?>
                     </a>
                     <a href="<?= esc(site_url('admin/contratos')) ?>" class="sidebar-link<?= $activeMenu === 'contratos' ? ' is-active' : '' ?>">
                         <span>Contratos</span>

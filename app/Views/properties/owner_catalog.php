@@ -29,16 +29,35 @@ $formatMoney = static function (mixed $amount): string {
     return '$ ' . number_format($value, fmod($value, 1.0) === 0.0 ? 0 : 2, ',', '.');
 };
 
+// The owner has no properties at all (no filter applied): offer to publish the first one (HU-32 Scenario 7).
+$hasFilters  = array_filter(
+    array_intersect_key($filters, array_flip(['status', 'type', 'min_price', 'max_price'])),
+    static fn (string $value): bool => $value !== ''
+) !== [];
+$hasNoProperties = $pagination['total'] === 0 && ! $hasFilters;
+
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
             <div class="page-header">
                 <div>
                     <h1 class="panel-title">Mis inmuebles</h1>
-                    <p class="panel-subtitle">Consultá tus propiedades y su estado de disponibilidad</p>
+                    <p class="panel-subtitle">Consultá tus propiedades, su estado de disponibilidad y la revisión de la administración</p>
+                </div>
+                <div>
+                    <a href="<?= esc(site_url('propietario/inmuebles/nuevo')) ?>" class="btn btn-primary" id="btn-new-owner-property">
+                        <span>+ Registrar inmueble</span>
+                    </a>
                 </div>
             </div>
 
+            <?php if ($hasNoProperties): ?>
+                <section class="empty-state" id="owner-properties-empty" aria-label="Sin inmuebles">
+                    <h2 class="empty-state-title">Todavía no registraste ningún inmueble</h2>
+                    <p>Cargá tu propiedad y la administración la revisa: cuando la aprueba, se publica en el catálogo para alquilarla.</p>
+                    <a href="<?= esc(site_url('propietario/inmuebles/nuevo')) ?>" class="btn btn-primary" id="btn-first-owner-property">Registrar mi primer inmueble</a>
+                </section>
+            <?php else: ?>
             <section class="panel-card catalog-filters" aria-labelledby="owner-property-filters-heading">
                 <h2 id="owner-property-filters-heading" class="section-title">Filtrar mis inmuebles</h2>
                 <form action="<?= esc(site_url('propietario/inmuebles')) ?>" method="get" class="catalog-filter-form">
@@ -93,16 +112,22 @@ $this->extend('layouts/panel');
                                 <th scope="col">Ambientes</th>
                                 <th scope="col">Precio base mensual</th>
                                 <th scope="col">Estado</th>
+                                <th scope="col" class="text-right">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php if ($properties === []): ?>
                                 <tr>
-                                    <td colspan="5" class="empty-table-cell">No se encontraron inmuebles con los filtros seleccionados.</td>
+                                    <td colspan="6" class="empty-table-cell">No se encontraron inmuebles con los filtros seleccionados.</td>
                                 </tr>
                             <?php else: ?>
                                 <?php foreach ($properties as $item): ?>
-                                    <?php $status = (string) $item['status']; ?>
+                                    <?php
+                                    $status         = (string) $item['status'];
+                                    $approvalStatus = (string) ($item['approval_status'] ?? PropertyModel::APPROVAL_APPROVED);
+                                    $isApproved     = $approvalStatus === PropertyModel::APPROVAL_APPROVED;
+                                    $rejectionText  = (string) ($item['rejection_reason'] ?? '');
+                                    ?>
                                     <tr>
                                         <td>
                                             <div class="cell-meta">
@@ -113,7 +138,46 @@ $this->extend('layouts/panel');
                                         <td><span class="badge-pill badge-neutral"><?= esc(PropertyModel::labelForType((string) $item['type'])) ?></span></td>
                                         <td class="mono-cell"><?= $item['rooms'] !== null ? esc((string) $item['rooms']) . ' amb.' : '—' ?></td>
                                         <td class="mono-cell"><?= esc($formatMoney($item['base_rent'])) ?></td>
-                                        <td><span class="badge-pill badge-property-<?= esc($status) ?>"><?= esc(PropertyModel::labelForStatus($status)) ?></span></td>
+                                        <td>
+                                            <?php if ($isApproved): ?>
+                                                <span class="badge-pill badge-property-<?= esc($status) ?>"><?= esc(PropertyModel::labelForStatus($status)) ?></span>
+                                            <?php else: ?>
+                                                <?php /* Pending or rejected: not published yet, so the commercial status says nothing useful. */ ?>
+                                                <span class="badge-pill badge-approval-<?= esc($approvalStatus) ?>"><?= esc(PropertyModel::labelForApproval($approvalStatus, true)) ?></span>
+                                                <?php if ($approvalStatus === PropertyModel::APPROVAL_REJECTED && $rejectionText !== ''): ?>
+                                                    <p class="review-reason"><strong>Motivo del rechazo</strong><?= esc($rejectionText) ?></p>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td class="text-right">
+                                            <div class="table-actions">
+                                                <?php if ($isApproved): ?>
+                                                    <span class="cell-sub">Cambios: pedilos a la administración</span>
+                                                <?php else: ?>
+                                                    <a
+                                                        href="<?= esc(site_url('propietario/inmuebles/editar/' . (int) $item['id'])) ?>"
+                                                        class="btn btn-secondary btn-sm"
+                                                        aria-label="Corregir <?= esc((string) $item['address']) ?>"
+                                                    >Corregir</a>
+                                                <?php endif; ?>
+
+                                                <?php if ($status === PropertyModel::STATUS_RENTED): ?>
+                                                    <?php /* A contract in force blocks the deactivation (HU-09); only the administration closes it. */ ?>
+                                                    <span class="cell-sub">Con contrato vigente: no se puede dar de baja</span>
+                                                <?php else: ?>
+                                                    <?php /* Without `confirmed=1` the server answers a confirmation page: it never deactivates on the first click. */ ?>
+                                                    <form action="<?= esc(site_url('propietario/inmuebles/baja/' . (int) $item['id'])) ?>" method="post" class="inline-action-form">
+                                                        <?= csrf_field() ?>
+                                                        <input type="hidden" name="confirmed" value="0">
+                                                        <button
+                                                            type="submit"
+                                                            class="btn btn-danger-outline btn-sm"
+                                                            aria-label="<?= $isApproved ? 'Dar de baja' : 'Cancelar solicitud de' ?> <?= esc((string) $item['address']) ?>"
+                                                        ><?= $isApproved ? 'Dar de baja' : 'Cancelar solicitud' ?></button>
+                                                    </form>
+                                                <?php endif; ?>
+                                            </div>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php endif; ?>
@@ -142,4 +206,5 @@ $this->extend('layouts/panel');
                     <?php endif; ?>
                 </div>
             </section>
+            <?php endif; ?>
 <?php $this->endSection() ?>

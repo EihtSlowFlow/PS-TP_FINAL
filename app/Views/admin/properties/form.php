@@ -18,25 +18,16 @@ $propertyId   = $isEdit ? (int) $property['id'] : 0;
 $formAction   = $isEdit ? site_url('admin/inmuebles/editar/' . $propertyId) : site_url('admin/inmuebles');
 $currentStatus = $isEdit ? (string) $property['status'] : PropertyModel::STATUS_AVAILABLE;
 
-/** Removes the useless zeros of a stored decimal ("420000.00" becomes "420000"). */
-$plainDecimal = static function (mixed $value): string {
-    $text = (string) $value;
+// The data fields and the description are shared with the owner's form (HU-32): `properties/form_fields` and
+// `properties/form_description`, which read the same `$mode` and `$property`.
+$ownerValue  = (string) old('owner_id', $isEdit ? (string) $property['owner_id'] : '');
+$statusValue = (string) old('status', $currentStatus);
 
-    return str_contains($text, '.') ? rtrim(rtrim($text, '0'), '.') : $text;
-};
+// Review of the properties published by owners (HU-33): only these have something to resolve.
+$approvalStatus   = $isEdit ? (string) ($property['approval_status'] ?? PropertyModel::APPROVAL_APPROVED) : PropertyModel::APPROVAL_APPROVED;
+$isPendingReview  = $isEdit && empty($property['deleted_at']) && $approvalStatus === PropertyModel::APPROVAL_PENDING;
+$submittedByOwner = $isEdit && ! empty($property['submitted_by']);
 
-$ownerValue       = (string) old('owner_id', $isEdit ? (string) $property['owner_id'] : '');
-$addressValue     = (string) old('address', $isEdit ? (string) $property['address'] : '');
-$cityValue        = (string) old('city', $isEdit ? (string) $property['city'] : '');
-$typeValue        = (string) old('type', $isEdit ? (string) $property['type'] : PropertyModel::TYPE_APARTMENT);
-$roomsValue       = (string) old('rooms', $isEdit ? (string) ($property['rooms'] ?? '') : '');
-$surfaceValue     = (string) old('surface', $isEdit ? $plainDecimal($property['surface'] ?? '') : '');
-$servicesValue    = (string) old('included_services', $isEdit ? (string) ($property['included_services'] ?? '') : '');
-$baseRentValue    = (string) old('base_rent', $isEdit ? $plainDecimal($property['base_rent']) : '');
-$descriptionValue = (string) old('description', $isEdit ? (string) ($property['description'] ?? '') : '');
-$statusValue      = (string) old('status', $currentStatus);
-
-$isLand = $typeValue === PropertyModel::TYPE_LAND;
 $canDeactivate = $isEdit
     && empty($property['deleted_at'])
     && $currentStatus !== PropertyModel::STATUS_RENTED
@@ -87,8 +78,17 @@ $this->extend('layouts/panel');
                         <div class="page-heading-row">
                             <h1 class="panel-title">Editar inmueble: <?= esc((string) $property['address']) ?></h1>
                             <span class="badge-pill badge-property-<?= esc($currentStatus) ?>"><?= esc(PropertyModel::labelForStatus($currentStatus)) ?></span>
+                            <?php if ($approvalStatus !== PropertyModel::APPROVAL_APPROVED): ?>
+                                <span class="badge-pill badge-approval-<?= esc($approvalStatus) ?>" id="approval-badge"><?= esc(PropertyModel::labelForApproval($approvalStatus)) ?></span>
+                            <?php endif; ?>
                         </div>
-                        <p class="panel-subtitle">Modificá los datos de la unidad. Los cambios se reflejan de inmediato en el listado.</p>
+                        <p class="panel-subtitle">
+                            <?php if ($isPendingReview): ?>
+                                Revisá los datos del inmueble. Podés corregirlos antes de aprobarlo: seguirá pendiente hasta que lo resuelvas.
+                            <?php else: ?>
+                                Modificá los datos de la unidad. Los cambios se reflejan de inmediato en el listado.
+                            <?php endif; ?>
+                        </p>
                     <?php else: ?>
                         <h1 class="panel-title">Nuevo inmueble</h1>
                         <p class="panel-subtitle">Registrá una nueva unidad locativa en la cartera y asignale un propietario titular.</p>
@@ -131,185 +131,11 @@ $this->extend('layouts/panel');
                                 <?php endif; ?>
                             </div>
 
-                            <div class="form-field">
-                                <label for="address" class="form-label">
-                                    <span>Dirección exacta <span class="required-mark" aria-hidden="true">*</span></span>
-                                </label>
-                                <input
-                                    type="text"
-                                    id="address"
-                                    name="address"
-                                    value="<?= esc($addressValue) ?>"
-                                    required
-                                    minlength="3"
-                                    maxlength="255"
-                                    class="form-control<?= isset($errors['address']) ? ' is-invalid' : '' ?>"
-                                    aria-invalid="<?= isset($errors['address']) ? 'true' : 'false' ?>"
-                                >
-                                <span class="field-help">Incluí piso, departamento o número de local si corresponde.</span>
-                                <?php if (isset($errors['address'])): ?>
-                                    <p class="field-error" role="alert"><?= esc((string) $errors['address']) ?></p>
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="form-field">
-                                <label for="city" class="form-label">
-                                    <span>Ciudad <span class="required-mark" aria-hidden="true">*</span></span>
-                                </label>
-                                <input
-                                    type="text"
-                                    id="city"
-                                    name="city"
-                                    value="<?= esc($cityValue) ?>"
-                                    required
-                                    minlength="2"
-                                    maxlength="100"
-                                    class="form-control<?= isset($errors['city']) ? ' is-invalid' : '' ?>"
-                                    aria-invalid="<?= isset($errors['city']) ? 'true' : 'false' ?>"
-                                >
-                                <?php if (isset($errors['city'])): ?>
-                                    <p class="field-error" role="alert"><?= esc((string) $errors['city']) ?></p>
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="form-field">
-                                <label for="type" class="form-label">
-                                    <span>Tipo de inmueble <span class="required-mark" aria-hidden="true">*</span></span>
-                                </label>
-                                <select
-                                    id="type"
-                                    name="type"
-                                    required
-                                    class="form-control<?= isset($errors['type']) ? ' is-invalid' : '' ?>"
-                                    aria-invalid="<?= isset($errors['type']) ? 'true' : 'false' ?>"
-                                >
-                                    <?php foreach (PropertyModel::TYPE_LABELS as $typeKey => $typeLabel): ?>
-                                        <option value="<?= esc($typeKey) ?>"<?= $typeValue === $typeKey ? ' selected' : '' ?>><?= esc($typeLabel) ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <?php if (isset($errors['type'])): ?>
-                                    <p class="field-error" role="alert"><?= esc((string) $errors['type']) ?></p>
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="form-field">
-                                <label for="rooms" class="form-label">
-                                    <span>Cantidad de ambientes <span class="required-mark" id="rooms-required-mark" aria-hidden="true"<?= $isLand ? ' hidden' : '' ?>>*</span></span>
-                                </label>
-                                <input
-                                    type="number"
-                                    id="rooms"
-                                    name="rooms"
-                                    value="<?= esc($roomsValue) ?>"
-                                    <?= $isLand ? '' : 'required' ?>
-                                    min="1"
-                                    max="255"
-                                    step="1"
-                                    class="form-control<?= isset($errors['rooms']) ? ' is-invalid' : '' ?>"
-                                    aria-invalid="<?= isset($errors['rooms']) ? 'true' : 'false' ?>"
-                                >
-                                <span class="field-help" id="rooms-help">Número entero mayor a cero. No se exige en terrenos.</span>
-                                <?php if (isset($errors['rooms'])): ?>
-                                    <p class="field-error" role="alert"><?= esc((string) $errors['rooms']) ?></p>
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="form-field">
-                                <div class="form-label-row">
-                                    <label for="surface" class="form-label">Superficie (m²)</label>
-                                    <span class="optional-tag">Opcional</span>
-                                </div>
-                                <input
-                                    type="number"
-                                    id="surface"
-                                    name="surface"
-                                    value="<?= esc($surfaceValue) ?>"
-                                    min="0.01"
-                                    max="999999.99"
-                                    step="0.01"
-                                    class="form-control<?= isset($errors['surface']) ? ' is-invalid' : '' ?>"
-                                    aria-invalid="<?= isset($errors['surface']) ? 'true' : 'false' ?>"
-                                >
-                                <span class="field-help">Si la informás, tiene que ser mayor a cero.</span>
-                                <?php if (isset($errors['surface'])): ?>
-                                    <p class="field-error" role="alert"><?= esc((string) $errors['surface']) ?></p>
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="form-field">
-                                <div class="form-label-row">
-                                    <label for="included_services" class="form-label">Servicios incluidos</label>
-                                    <span class="optional-tag">Opcional</span>
-                                </div>
-                                <input
-                                    type="text"
-                                    id="included_services"
-                                    name="included_services"
-                                    value="<?= esc($servicesValue) ?>"
-                                    maxlength="255"
-                                    class="form-control<?= isset($errors['included_services']) ? ' is-invalid' : '' ?>"
-                                    aria-invalid="<?= isset($errors['included_services']) ? 'true' : 'false' ?>"
-                                >
-                                <span class="field-help">Por ejemplo: agua, luz, gas, internet.</span>
-                                <?php if (isset($errors['included_services'])): ?>
-                                    <p class="field-error" role="alert"><?= esc((string) $errors['included_services']) ?></p>
-                                <?php endif; ?>
-                            </div>
-
-                            <div class="form-field form-field-full">
-                                <label for="base_rent" class="form-label">
-                                    <span>Precio base de alquiler sugerido (ARS por mes) <span class="required-mark" aria-hidden="true">*</span></span>
-                                </label>
-                                <div class="input-prefix-group">
-                                    <span class="input-prefix" aria-hidden="true">$</span>
-                                    <input
-                                        type="number"
-                                        id="base_rent"
-                                        name="base_rent"
-                                        value="<?= esc($baseRentValue) ?>"
-                                        required
-                                        min="0.01"
-                                        step="0.01"
-                                        placeholder="450000"
-                                        class="form-control<?= isset($errors['base_rent']) ? ' is-invalid' : '' ?>"
-                                        aria-invalid="<?= isset($errors['base_rent']) ? 'true' : 'false' ?>"
-                                    >
-                                </div>
-                                <span class="field-help">Monto mensual de referencia, mayor a cero. Se toma de base al confeccionar un contrato.</span>
-                                <?php if (isset($errors['base_rent'])): ?>
-                                    <p class="field-error" role="alert"><?= esc((string) $errors['base_rent']) ?></p>
-                                <?php endif; ?>
-                            </div>
+                            <?= $this->include('properties/form_fields') ?>
                         </div>
                     </section>
 
-                    <section class="panel-card form-section-card" aria-labelledby="section-property-description">
-                        <div class="section-header">
-                            <h2 id="section-property-description" class="section-title">Descripción</h2>
-                            <p class="section-subtitle">Estado de conservación y comodidades disponibles.</p>
-                        </div>
-
-                        <div class="form-field">
-                            <div class="form-label-row">
-                                <label for="description" class="form-label">Estado y comodidades</label>
-                                <span class="char-counter" id="description-counter" aria-live="polite">
-                                    <?= esc((string) mb_strlen($descriptionValue)) ?> / 1.000 caracteres
-                                </span>
-                            </div>
-                            <textarea
-                                id="description"
-                                name="description"
-                                rows="6"
-                                maxlength="1000"
-                                class="form-control<?= isset($errors['description']) ? ' is-invalid' : '' ?>"
-                                aria-invalid="<?= isset($errors['description']) ? 'true' : 'false' ?>"
-                            ><?= esc($descriptionValue) ?></textarea>
-                            <span class="field-help">Opcional. Máximo 1.000 caracteres.</span>
-                            <?php if (isset($errors['description'])): ?>
-                                <p class="field-error" role="alert"><?= esc((string) $errors['description']) ?></p>
-                            <?php endif; ?>
-                        </div>
-                    </section>
+                    <?= $this->include('properties/form_description') ?>
 
                     <div class="form-actions-footer">
                         <a href="<?= esc(site_url('admin/inmuebles')) ?>" class="btn btn-secondary">Cancelar</a>
@@ -320,6 +146,78 @@ $this->extend('layouts/panel');
                 </form>
 
                 <aside class="form-aside" aria-label="Estado del inmueble">
+                    <?php if ($isEdit && ($submittedByOwner || $approvalStatus !== PropertyModel::APPROVAL_APPROVED)): ?>
+                        <?php
+                        $reviewerName = trim(
+                            ((string) ($property['reviewed_by_first_name'] ?? '')) . ' ' . ((string) ($property['reviewed_by_last_name'] ?? ''))
+                        );
+                        $rejectionError = $errors['rejection_reason'] ?? null;
+                        ?>
+                        <section class="panel-card audit-card" id="property-review-card" aria-labelledby="property-review-title">
+                            <h3 class="section-title" id="property-review-title">Revisión del inmueble</h3>
+                            <p class="section-subtitle">
+                                <span class="badge-pill badge-approval-<?= esc($approvalStatus) ?>"><?= esc(PropertyModel::labelForApproval($approvalStatus)) ?></span>
+                            </p>
+
+                            <?php if ($submittedByOwner): ?>
+                                <p class="field-help">Lo publicó el propietario: <?= esc($ownerFullName) ?>.</p>
+                            <?php endif; ?>
+
+                            <?php if ($isPendingReview): ?>
+                                <p class="field-help">Mientras esté pendiente no figura en el catálogo ni se puede elegir en un contrato.</p>
+
+                                <div class="inline-actions-row stacked">
+                                    <form action="<?= esc(site_url('admin/inmuebles/' . $propertyId . '/aprobacion')) ?>" method="post" class="inline-form-action">
+                                        <?= csrf_field() ?>
+                                        <button type="submit" class="btn btn-primary" id="btn-approve-property">Aprobar inmueble</button>
+                                    </form>
+                                </div>
+
+                                <form action="<?= esc(site_url('admin/inmuebles/' . $propertyId . '/rechazo')) ?>" method="post" class="form-section-card nested-form" id="property-rejection-form">
+                                    <?= csrf_field() ?>
+                                    <div class="form-field">
+                                        <label for="rejection_reason" class="form-label">Motivo del rechazo <span class="required-mark" aria-hidden="true">*</span></label>
+                                        <textarea
+                                            id="rejection_reason"
+                                            name="rejection_reason"
+                                            rows="4"
+                                            maxlength="255"
+                                            required
+                                            class="form-control<?= $rejectionError !== null ? ' is-invalid' : '' ?>"
+                                            aria-invalid="<?= $rejectionError !== null ? 'true' : 'false' ?>"
+                                            placeholder="Contale al propietario qué debe corregir."
+                                        ><?= esc((string) old('rejection_reason', '')) ?></textarea>
+                                        <span class="field-help">Obligatorio, hasta 255 caracteres. El propietario lo ve en «Mis inmuebles».</span>
+                                        <?php if ($rejectionError !== null): ?>
+                                            <p class="field-error" role="alert"><?= esc((string) $rejectionError) ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                    <button type="submit" class="btn btn-danger" id="btn-reject-property">Rechazar inmueble</button>
+                                </form>
+                            <?php elseif ($approvalStatus === PropertyModel::APPROVAL_REJECTED): ?>
+                                <?php if ((string) ($property['rejection_reason'] ?? '') !== ''): ?>
+                                    <p class="review-reason"><strong>Motivo del rechazo</strong><?= esc((string) $property['rejection_reason']) ?></p>
+                                <?php endif; ?>
+                                <p class="field-help">El propietario puede corregirlo y reenviarlo: volverá a quedar pendiente.</p>
+                            <?php endif; ?>
+
+                            <?php if (! empty($property['reviewed_at'])): ?>
+                                <dl class="audit-list">
+                                    <div class="audit-item">
+                                        <dt>Resuelto el</dt>
+                                        <dd><?= esc($formatDateTime($property['reviewed_at'])) ?></dd>
+                                    </div>
+                                    <?php if ($reviewerName !== ''): ?>
+                                        <div class="audit-item">
+                                            <dt>Resuelto por</dt>
+                                            <dd><?= esc($reviewerName) ?></dd>
+                                        </div>
+                                    <?php endif; ?>
+                                </dl>
+                            <?php endif; ?>
+                        </section>
+                    <?php endif; ?>
+
                     <?php if ($isEdit): ?>
                         <section class="panel-card audit-card">
                             <h3 class="section-title">Estado operativo</h3>

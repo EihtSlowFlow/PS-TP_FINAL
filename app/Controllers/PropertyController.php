@@ -4,11 +4,16 @@ namespace App\Controllers;
 
 use App\Models\PropertyModel;
 use App\Models\UserModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 
 /**
- * Property management for administrators and employees (HU-07, HU-08, HU-09):
- * listing, filters, creation, edition and logical deactivation.
+ * Property management for administrators and employees (HU-07, HU-08, HU-09): listing, filters, creation, edition and
+ * logical deactivation; the review of the properties that owners publish (HU-33); and the owner's own portal to
+ * publish and correct them (HU-32).
+ *
+ * The owner's flow reuses the same input collection, validation and payload as HU-07: the only differences are
+ * that the owner comes from the session and that what the owner saves is left pending for the administration.
  */
 class PropertyController extends BaseController
 {
@@ -25,6 +30,24 @@ class PropertyController extends BaseController
     public const INVALID_STATUS_MESSAGE               = 'Seleccioná un estado válido: Disponible o En mantenimiento.';
     public const RENTED_STATUS_LOCKED_MESSAGE         = 'El estado «Alquilado» lo asigna el contrato y no se puede modificar desde el inmueble.';
 
+    // HU-32: the owner publishes and corrects their own properties.
+    public const OWNER_PROPERTY_SUBMITTED_MESSAGE   = 'Registramos tu inmueble. Quedó pendiente de aprobación: la administración lo revisa antes de publicarlo.';
+    public const OWNER_PROPERTY_RESUBMITTED_MESSAGE = 'Guardamos los cambios. El inmueble volvió a quedar pendiente de aprobación.';
+    public const OWNER_PROPERTY_APPROVED_LOCKED_MESSAGE = 'Este inmueble ya fue aprobado y no se puede editar desde tu portal. Pedile los cambios a la administración.';
+    public const OWNER_SUBMISSION_ERROR_MESSAGE     = 'No pudimos guardar el inmueble por un error interno. Intentá nuevamente.';
+    public const OWNER_REQUEST_CANCELED_MESSAGE     = 'Cancelaste la solicitud: el inmueble se dio de baja y la administración ya no lo revisa.';
+    public const OWNER_PROPERTY_DEACTIVATED_MESSAGE = 'Diste de baja el inmueble. Ya no figura en el catálogo ni se puede usar en contratos nuevos.';
+    public const OWNER_CONTRACT_IN_FORCE_MESSAGE    = 'No podés dar de baja un inmueble con un contrato de locación vigente. Pedile a la administración que primero finalice o rescinda el contrato.';
+
+    // HU-33: the administration approves or rejects them.
+    public const PROPERTY_APPROVED_MESSAGE          = 'El inmueble fue aprobado. Ya se puede publicar y usar en contratos, y el propietario lo ve aprobado.';
+    public const PROPERTY_REJECTED_MESSAGE          = 'El inmueble fue rechazado. El propietario verá el motivo en «Mis inmuebles» y podrá corregirlo.';
+    public const APPROVAL_ALREADY_RESOLVED_MESSAGE  = 'Este inmueble ya fue aprobado o rechazado por otro usuario. No se modificó nada.';
+    public const APPROVAL_DEACTIVATED_MESSAGE       = 'El inmueble está dado de baja y no se puede aprobar ni rechazar.';
+    public const APPROVAL_ERROR_MESSAGE             = 'No pudimos resolver la revisión por un error interno. Intentá nuevamente.';
+    public const REJECTION_REASON_REQUIRED_MESSAGE  = 'Ingresá el motivo del rechazo.';
+    public const REJECTION_REASON_TOO_LONG_MESSAGE  = 'El motivo del rechazo no puede superar los 255 caracteres.';
+
     /**
      * Renders the administrator and employee catalog with filters.
      */
@@ -32,7 +55,7 @@ class PropertyController extends BaseController
     {
         $propertyModel = model(PropertyModel::class);
         $pageData      = $this->catalogPage();
-        $filterData    = $this->catalogFilters(true, true, true);
+        $filterData    = $this->catalogFilters(true, true, true, true);
         $pagination    = $propertyModel->paginateWithOwner(
             $pageData['perPage'],
             $pageData['page'],
@@ -135,8 +158,10 @@ class PropertyController extends BaseController
                 ->with('error', self::VALIDATION_ERROR_MESSAGE);
         }
 
-        $payload           = $this->buildPayload($input);
-        $payload['status'] = PropertyModel::STATUS_AVAILABLE;
+        $payload                    = $this->buildPayload($input);
+        $payload['status']          = PropertyModel::STATUS_AVAILABLE;
+        // What the administration loads is approved on the spot; only an owner's own submission waits for review.
+        $payload['approval_status'] = PropertyModel::APPROVAL_APPROVED;
 
         model(PropertyModel::class)->insert($payload);
 
@@ -261,7 +286,255 @@ class PropertyController extends BaseController
     }
 
     /**
+     * Renders the form where an owner publishes a new property (HU-32 Scenario 1). It is the HU-07 form without the
+     * owner selector: the owner is always the one in the session.
+     */
+    public function ownerCreate(): string
+    {
+        return view('properties/owner_form', array_merge($this->panelContext(
+            pageTitle: 'Registrar inmueble',
+            breadcrumb: 'Mis inmuebles / Registrar inmueble',
+            activeMenu: 'propietario-inmuebles'
+        ), [
+            'mode'     => 'create',
+            'property' => null,
+        ]));
+    }
+
+    /**
+     * Validates with the HU-07 rules and stores a property for the owner in the session, "pending" until the
+     * administration reviews it (HU-32 Scenarios 1 and 2). The owner is never read from the form.
+     */
+    public function ownerStore(): RedirectResponse
+    {
+        $ownerId = $this->sessionUserId();
+        $input   = $this->collectInput($ownerId);
+        $errors  = $this->validateInput($input, null);
+
+        if ($errors !== []) {
+            return redirect()->to('/propietario/inmuebles/nuevo')
+                ->withInput()
+                ->with('errors', $errors)
+                ->with('error', self::VALIDATION_ERROR_MESSAGE);
+        }
+
+        if (model(PropertyModel::class)->submitForApproval($ownerId, $this->buildPayload($input)) === false) {
+            return redirect()->to('/propietario/inmuebles/nuevo')
+                ->withInput()
+                ->with('error', self::OWNER_SUBMISSION_ERROR_MESSAGE);
+        }
+
+        return redirect()->to('/propietario/inmuebles')
+            ->with('success', self::OWNER_PROPERTY_SUBMITTED_MESSAGE);
+    }
+
+    /**
+     * Renders the form to correct a pending or rejected property of the owner (HU-32 Scenarios 4 to 6): somebody
+     * else's property answers 404 and an approved one cannot be edited from the portal.
+     */
+    public function ownerEdit(int $id): RedirectResponse|string
+    {
+        $property = $this->findOwnProperty($id);
+
+        if ((string) $property['approval_status'] === PropertyModel::APPROVAL_APPROVED) {
+            return $this->ownerApprovedLockedRedirect();
+        }
+
+        return view('properties/owner_form', array_merge($this->panelContext(
+            pageTitle: 'Corregir inmueble',
+            breadcrumb: 'Mis inmuebles / Corregir inmueble',
+            activeMenu: 'propietario-inmuebles'
+        ), [
+            'mode'     => 'edit',
+            'property' => $property,
+        ]));
+    }
+
+    /**
+     * Saves the corrections of a pending or rejected property and leaves it pending again, without the previous
+     * rejection reason (HU-32 Scenario 4).
+     */
+    public function ownerUpdate(int $id): RedirectResponse
+    {
+        $ownerId  = $this->sessionUserId();
+        $property = $this->findOwnProperty($id);
+
+        if ((string) $property['approval_status'] === PropertyModel::APPROVAL_APPROVED) {
+            return $this->ownerApprovedLockedRedirect();
+        }
+
+        $input  = $this->collectInput($ownerId);
+        $errors = $this->validateInput($input, $property);
+
+        if ($errors !== []) {
+            return redirect()->to('/propietario/inmuebles/editar/' . $id)
+                ->withInput()
+                ->with('errors', $errors)
+                ->with('error', self::VALIDATION_ERROR_MESSAGE);
+        }
+
+        $result = model(PropertyModel::class)->resubmitForApproval($id, $ownerId, $this->buildPayload($input));
+
+        if (! $result['ok']) {
+            return match ($result['error']) {
+                PropertyModel::ERROR_NOT_FOUND        => throw PageNotFoundException::forPageNotFound(),
+                PropertyModel::ERROR_ALREADY_APPROVED => $this->ownerApprovedLockedRedirect(),
+                default                               => redirect()->to('/propietario/inmuebles/editar/' . $id)
+                    ->withInput()
+                    ->with('error', self::OWNER_SUBMISSION_ERROR_MESSAGE),
+            };
+        }
+
+        return redirect()->to('/propietario/inmuebles')
+            ->with('success', self::OWNER_PROPERTY_RESUBMITTED_MESSAGE);
+    }
+
+    /**
+     * Lets an owner deactivate their own property: cancelling the request while it is pending or rejected, or taking an
+     * approved one down. It is the logical deactivation of HU-09 (so the same rule applies: not with a contract in
+     * force), asking for confirmation on a server-rendered page first, and the owner is recorded as the one who did it.
+     * Somebody else's property answers 404.
+     */
+    public function ownerDeactivate(int $id): RedirectResponse|string
+    {
+        $ownerId   = $this->sessionUserId();
+        $property  = $this->findOwnProperty($id);
+        $isRequest = (string) $property['approval_status'] !== PropertyModel::APPROVAL_APPROVED;
+        $model     = model(PropertyModel::class);
+
+        if ((string) $property['status'] === PropertyModel::STATUS_RENTED || $model->hasContractInForce($id)) {
+            return redirect()->to('/propietario/inmuebles')
+                ->with('error', self::OWNER_CONTRACT_IN_FORCE_MESSAGE);
+        }
+
+        if ((string) $this->request->getPost('confirmed') !== '1') {
+            return view('properties/owner_deactivate_confirm', array_merge($this->panelContext(
+                pageTitle: $isRequest ? 'Cancelar solicitud' : 'Dar de baja inmueble',
+                breadcrumb: 'Mis inmuebles / ' . ($isRequest ? 'Cancelar solicitud' : 'Baja'),
+                activeMenu: 'propietario-inmuebles'
+            ), [
+                'property'  => $property,
+                'isRequest' => $isRequest,
+            ]));
+        }
+
+        $result = $model->deactivate($id, $ownerId, $ownerId);
+
+        if (! $result['ok']) {
+            return match ($result['error']) {
+                PropertyModel::ERROR_NOT_FOUND         => throw PageNotFoundException::forPageNotFound(),
+                PropertyModel::ERROR_ALREADY_DELETED   => redirect()->to('/propietario/inmuebles')
+                    ->with('error', self::PROPERTY_ALREADY_DEACTIVATED_MESSAGE),
+                PropertyModel::ERROR_CONTRACT_IN_FORCE => redirect()->to('/propietario/inmuebles')
+                    ->with('error', self::OWNER_CONTRACT_IN_FORCE_MESSAGE),
+                default                                => redirect()->to('/propietario/inmuebles')
+                    ->with('error', self::DEACTIVATION_ERROR_MESSAGE),
+            };
+        }
+
+        return redirect()->to('/propietario/inmuebles')
+            ->with('success', $isRequest ? self::OWNER_REQUEST_CANCELED_MESSAGE : self::OWNER_PROPERTY_DEACTIVATED_MESSAGE);
+    }
+
+    /**
+     * Approves a property published by an owner; it stays "available" and becomes visible in the catalog and in the
+     * contract selector (HU-33 Scenario 2).
+     */
+    public function approve(int $id): RedirectResponse
+    {
+        $result = model(PropertyModel::class)->resolveApproval($id, $this->sessionUserId(), true);
+
+        return $this->afterReview($id, $result, self::PROPERTY_APPROVED_MESSAGE);
+    }
+
+    /**
+     * Rejects a property published by an owner with a mandatory reason of up to 255 characters, which the owner sees
+     * in "Mis inmuebles" (HU-33 Scenario 3).
+     */
+    public function reject(int $id): RedirectResponse
+    {
+        $reason = trim((string) $this->request->getPost('rejection_reason'));
+
+        if ($reason === '' || mb_strlen($reason) > PropertyModel::REJECTION_REASON_MAX_LENGTH) {
+            return redirect()->to('/admin/inmuebles/editar/' . $id)
+                ->withInput()
+                ->with('errors', ['rejection_reason' => $reason === ''
+                    ? self::REJECTION_REASON_REQUIRED_MESSAGE
+                    : self::REJECTION_REASON_TOO_LONG_MESSAGE])
+                ->with('error', $reason === ''
+                    ? self::REJECTION_REASON_REQUIRED_MESSAGE
+                    : self::REJECTION_REASON_TOO_LONG_MESSAGE);
+        }
+
+        $result = model(PropertyModel::class)->resolveApproval($id, $this->sessionUserId(), false, $reason);
+
+        return $this->afterReview($id, $result, self::PROPERTY_REJECTED_MESSAGE);
+    }
+
+    /**
+     * Turns the outcome of a review into the redirect and the message the reviewer sees. A property somebody else
+     * already resolved is reported and nothing changes (HU-33 Scenario 5).
+     *
+     * @param array{ok: bool, error: string|null} $result
+     */
+    private function afterReview(int $id, array $result, string $successMessage): RedirectResponse
+    {
+        if ($result['ok']) {
+            // Keep reviewing the queue while there is something left in it.
+            $target = model(PropertyModel::class)->countPendingApproval() > 0
+                ? '/admin/inmuebles?approval=' . PropertyModel::APPROVAL_PENDING
+                : '/admin/inmuebles';
+
+            return redirect()->to($target)->with('success', $successMessage);
+        }
+
+        $message = match ($result['error']) {
+            PropertyModel::ERROR_NOT_FOUND        => self::PROPERTY_NOT_FOUND_MESSAGE,
+            PropertyModel::ERROR_ALREADY_DELETED  => self::APPROVAL_DEACTIVATED_MESSAGE,
+            PropertyModel::ERROR_ALREADY_RESOLVED => self::APPROVAL_ALREADY_RESOLVED_MESSAGE,
+            default                               => self::APPROVAL_ERROR_MESSAGE,
+        };
+
+        $target = $result['error'] === PropertyModel::ERROR_PERSISTENCE
+            ? '/admin/inmuebles/editar/' . $id
+            : '/admin/inmuebles';
+
+        return redirect()->to($target)->with('error', $message);
+    }
+
+    /**
+     * Loads a property of the owner in the session, or answers 404 when it does not exist, is deactivated or belongs
+     * to somebody else, without telling which one it was (HU-32 Scenario 6).
+     *
+     * @return array<string, mixed>
+     */
+    private function findOwnProperty(int $id): array
+    {
+        $property = model(PropertyModel::class)->findForOwner($id, $this->sessionUserId());
+
+        if ($property === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        return $property;
+    }
+
+    private function ownerApprovedLockedRedirect(): RedirectResponse
+    {
+        return redirect()->to('/propietario/inmuebles')
+            ->with('error', self::OWNER_PROPERTY_APPROVED_LOCKED_MESSAGE);
+    }
+
+    private function sessionUserId(): int
+    {
+        return (int) session()->get('user_id', 0);
+    }
+
+    /**
      * Collects and normalizes the form fields from the POST request.
+     *
+     * When `$ownerId` is given (the owner's own portal) it replaces whatever the form sent as owner, and the
+     * commercial status is ignored: an owner cannot choose either.
      *
      * @return array{
      *     owner_id: string,
@@ -276,10 +549,10 @@ class PropertyController extends BaseController
      *     status: string
      * }
      */
-    private function collectInput(): array
+    private function collectInput(?int $ownerId = null): array
     {
         return [
-            'owner_id'          => trim((string) $this->request->getPost('owner_id')),
+            'owner_id'          => $ownerId !== null ? (string) $ownerId : trim((string) $this->request->getPost('owner_id')),
             'address'           => trim((string) $this->request->getPost('address')),
             'city'              => trim((string) $this->request->getPost('city')),
             'type'              => trim((string) $this->request->getPost('type')),
@@ -288,7 +561,7 @@ class PropertyController extends BaseController
             'included_services' => trim((string) $this->request->getPost('included_services')),
             'base_rent'         => $this->normalizeDecimal((string) $this->request->getPost('base_rent')),
             'description'       => trim((string) $this->request->getPost('description')),
-            'status'            => trim((string) $this->request->getPost('status')),
+            'status'            => $ownerId !== null ? '' : trim((string) $this->request->getPost('status')),
         ];
     }
 
@@ -536,18 +809,23 @@ class PropertyController extends BaseController
      *
      * @return array{
      *     filters: array<string, string|int|float>,
-     *     values: array{status: string, type: string, min_price: string, max_price: string, owner_id: string},
+     *     values: array{status: string, type: string, min_price: string, max_price: string, owner_id: string, approval: string},
      *     errors: array<string, string>
      * }
      */
-    private function catalogFilters(bool $allowStatus, bool $allowOwner, bool $allowLifecycleStatus = false): array
-    {
+    private function catalogFilters(
+        bool $allowStatus,
+        bool $allowOwner,
+        bool $allowLifecycleStatus = false,
+        bool $allowApproval = false
+    ): array {
         $values = [
             'status'    => '',
             'type'      => '',
             'min_price' => '',
             'max_price' => '',
             'owner_id'  => '',
+            'approval'  => '',
         ];
         $filters = [];
         $errors  = [];
@@ -559,6 +837,11 @@ class PropertyController extends BaseController
 
         if ($allowOwner) {
             $fields[] = 'owner_id';
+        }
+
+        // The review filter (HU-33) is administrative: the public catalog and the owner never accept it.
+        if ($allowApproval) {
+            $fields[] = 'approval';
         }
 
         foreach ($fields as $field) {
@@ -604,6 +887,13 @@ class PropertyController extends BaseController
             } elseif ($field === 'type') {
                 if (! array_key_exists($value, PropertyModel::TYPE_LABELS)) {
                     $errors[$field] = 'Seleccioná un tipo de inmueble válido.';
+                    continue;
+                }
+
+                $filters[$field] = $value;
+            } elseif ($field === 'approval') {
+                if (! array_key_exists($value, PropertyModel::APPROVAL_LABELS)) {
+                    $errors[$field] = 'Seleccioná una revisión válida.';
                     continue;
                 }
 

@@ -32,6 +32,9 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static fu
     $routes->get('inmuebles/editar/(:num)', 'PropertyController::edit/$1');
     $routes->post('inmuebles/editar/(:num)', 'PropertyController::update/$1');
     $routes->post('inmuebles/baja/(:num)', 'PropertyController::deactivate/$1');
+    // Review of the properties published by owners: POST only, behind the CSRF filter (HU-33)
+    $routes->post('inmuebles/(:num)/aprobacion', 'PropertyController::approve/$1');
+    $routes->post('inmuebles/(:num)/rechazo', 'PropertyController::reject/$1');
 
     // Lease contracts: creation, listing and contract file (HU-10/11; closing is HU-12)
     $routes->get('contratos', 'ContractController::index');
@@ -70,10 +73,17 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin']], static function (R
     $routes->post('usuarios/baja/(:num)', 'UserController::deactivate/$1');
 });
 
-// Owner portal routes (HU-01)
+// Owner portal routes (HU-01, HU-32)
 $routes->group('propietario', ['filter' => ['auth', 'role:owner']], static function (RouteCollection $routes): void {
     $routes->get('dashboard', 'DashboardController::ownerDashboard');
     $routes->get('inmuebles', 'PropertyController::ownerIndex');
+    // The owner publishes a property and corrects it until the administration approves it (HU-32)
+    $routes->get('inmuebles/nuevo', 'PropertyController::ownerCreate');
+    $routes->post('inmuebles', 'PropertyController::ownerStore');
+    $routes->get('inmuebles/editar/(:num)', 'PropertyController::ownerEdit/$1');
+    $routes->post('inmuebles/editar/(:num)', 'PropertyController::ownerUpdate/$1');
+    // Cancel the request of a pending property or take an approved one down (logical deactivation, HU-09 rules)
+    $routes->post('inmuebles/baja/(:num)', 'PropertyController::ownerDeactivate/$1');
     $routes->get('contratos', 'ContractController::ownerIndex');
     $routes->get('contratos/(:num)', 'ContractController::ownerShow/$1');
 });

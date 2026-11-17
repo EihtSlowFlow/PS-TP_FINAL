@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\PropertyModel;
 use App\Models\UserModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
@@ -56,7 +57,8 @@ abstract class BaseController extends Controller
      *     userEmail: string,
      *     userRole: string,
      *     roleLabel: string,
-     *     initials: string
+     *     initials: string,
+     *     pendingPropertyCount: int
      * }
      */
     protected function panelContext(string $pageTitle, string $breadcrumb, string $activeMenu): array
@@ -80,6 +82,10 @@ abstract class BaseController extends Controller
             'userRole'   => $userRole,
             'roleLabel'  => UserModel::labelForRole($userRole),
             'initials'   => $initials,
+            // The "Inmuebles" menu entry of the administration shows how many properties wait for review (HU-33).
+            'pendingPropertyCount' => in_array($userRole, [UserModel::ROLE_ADMIN, UserModel::ROLE_EMPLOYEE], true)
+                ? model(PropertyModel::class)->countPendingApproval()
+                : 0,
         ];
     }
 
