@@ -4,67 +4,44 @@
     <meta charset="utf-8">
     <title><?= lang('Errors.pageNotFound') ?></title>
 
+    <!-- Same identity as the rest of the app: colours and fonts come from the shared tokens (issue #33). -->
+    <link rel="stylesheet" href="<?= esc(base_url('css/tokens.css')) ?>">
     <style>
-        div.logo {
-            height: 200px;
-            width: 155px;
-            display: inline-block;
-            opacity: 0.08;
-            position: absolute;
-            top: 2rem;
-            left: 50%;
-            margin-left: -73px;
-        }
         body {
             height: 100%;
-            background: #fafafa;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            color: #777;
-            font-weight: 300;
+            margin: 0;
+            background: var(--bg-app);
+            font-family: var(--font-body);
+            color: var(--text-muted);
+            font-weight: 400;
         }
         h1 {
-            font-weight: lighter;
+            font-family: var(--font-display);
+            font-weight: 600;
             letter-spacing: normal;
             font-size: 3rem;
             margin-top: 0;
             margin-bottom: 0;
-            color: #222;
+            color: var(--heading);
         }
         .wrap {
             max-width: 1024px;
             margin: 5rem auto;
             padding: 2rem;
-            background: #fff;
+            background: var(--surface);
             text-align: center;
-            border: 1px solid #efefef;
-            border-radius: 0.5rem;
+            border: 1px solid var(--border-default);
+            border-bottom: 2px solid var(--edge);
+            border-radius: var(--radius-md);
             position: relative;
-        }
-        pre {
-            white-space: normal;
-            margin-top: 1.5rem;
-        }
-        code {
-            background: #fafafa;
-            border: 1px solid #efefef;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            display: block;
         }
         p {
             margin-top: 1.5rem;
         }
-        .footer {
-            margin-top: 2rem;
-            border-top: 1px solid #efefef;
-            padding: 1em 2em 0 2em;
-            font-size: 85%;
-            color: #999;
-        }
         a:active,
         a:link,
         a:visited {
-            color: #dd4814;
+            color: var(--primary);
         }
     </style>
 </head>

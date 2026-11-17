@@ -20,9 +20,9 @@ $formatDate = static function (mixed $value): string {
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
-            <div class="users-page-header">
+            <div class="page-header">
                 <div>
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title">Pagos</h1>
                         <span class="badge-pill badge-neutral"><?= esc((string) count($payments)) ?> <?= count($payments) === 1 ? 'pendiente' : 'pendientes' ?></span>
                     </div>
@@ -47,7 +47,7 @@ $this->extend('layouts/panel');
                         <p class="section-subtitle">Se ordenan por antigüedad para priorizar la conciliación contable.</p>
                     </div>
 
-                    <div class="responsive-table-wrap">
+                    <div class="table-responsive">
                         <table class="data-table" aria-label="Pagos pendientes de validación">
                             <thead>
                                 <tr>
@@ -74,7 +74,7 @@ $this->extend('layouts/panel');
                                     <tr>
                                         <td>
                                             <strong>#<?= esc((string) ($payment['payment_id'] ?? $payment['id'] ?? '')) ?></strong><br>
-                                            <span class="status-inline status-inline-warning"><?= esc(PaymentModel::labelForStatus((string) ($payment['status'] ?? PaymentModel::STATUS_PENDING_VALIDATION))) ?></span>
+                                            <span class="badge-pill badge-payment-<?= esc((string) ($payment['status'] ?? PaymentModel::STATUS_PENDING_VALIDATION)) ?>"><?= esc(PaymentModel::labelForStatus((string) ($payment['status'] ?? PaymentModel::STATUS_PENDING_VALIDATION))) ?></span>
                                         </td>
                                         <td><?= esc($tenantName !== ',' ? $tenantName : 'Sin nombre') ?></td>
                                         <td>
@@ -98,7 +98,7 @@ $this->extend('layouts/panel');
                                         <td><?= esc($formatDate((string) ($payment['paid_on'] ?? $payment['submitted_at'] ?? ''))) ?></td>
                                         <td>
                                             <div class="action-list-inline">
-                                                <a href="<?= esc(site_url('admin/pagos/' . (int) ($payment['payment_id'] ?? $payment['id']))) ?>" class="btn btn-secondary btn-small">Revisar</a>
+                                                <a href="<?= esc(site_url('admin/pagos/' . (int) ($payment['payment_id'] ?? $payment['id']))) ?>" class="btn btn-secondary btn-sm">Revisar</a>
                                             </div>
                                         </td>
                                     </tr>

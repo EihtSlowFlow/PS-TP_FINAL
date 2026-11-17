@@ -19,7 +19,8 @@ $flashWarning = session()->getFlashdata('warning');
     <title>Iniciar sesión - InmoGestión 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= esc(base_url('css/tokens.css')) ?>">
     <link rel="stylesheet" href="<?= esc(base_url('css/auth.css')) ?>">
 </head>
 <body class="auth-page">
@@ -27,7 +28,7 @@ $flashWarning = session()->getFlashdata('warning');
     <main class="auth-main">
         <div class="auth-shell">
 
-            <!-- Left Column: Indigo Branding and Key Capabilities -->
+            <!-- Left Column: walnut/café branding and key capabilities -->
             <section class="auth-brand" aria-label="Información de la plataforma">
                 <div class="auth-brand-top">
                     <div class="brand-logo">
@@ -121,7 +122,7 @@ $flashWarning = session()->getFlashdata('warning');
                         <div class="auth-header-meta">
                             <span class="auth-portal-badge">Acceso al Portal</span>
                             <span class="auth-security-note">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                                 </svg>
                                 Acceso protegido
@@ -280,7 +281,7 @@ $flashWarning = session()->getFlashdata('warning');
 
                     <div class="roles-summary-box" aria-label="Roles del sistema">
                         <p class="roles-summary-title">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <circle cx="12" cy="12" r="10"/>
                                 <line x1="12" y1="16" x2="12" y2="12"/>
                                 <line x1="12" y1="8" x2="12.01" y2="8"/>

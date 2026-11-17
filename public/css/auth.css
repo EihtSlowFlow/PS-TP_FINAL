@@ -1,31 +1,9 @@
-:root {
-    --primary: #4F46E5;
-    --primary-hover: #4338CA;
-    --primary-soft: #E0E7FF;
-    --on-primary: #FFFFFF;
-    --heading: #111827;
-    --text-main: #1F2937;
-    --text-muted: #6B7280;
-    --bg-gradient: linear-gradient(135deg, #F0F4F8 0%, #D9E2EC 100%);
-    --surface: #FFFFFF;
-    --surface-muted: #F9FAFB;
-    --border-default: #E5E7EB;
-    --border-input: #D1D5DB;
-    --success: #10B981;
-    --success-soft: #ECFDF5;
-    --success-text: #065F46;
-    --danger: #EF4444;
-    --danger-hover: #DC2626;
-    --danger-soft: #FEF2F2;
-    --danger-text: #B91C1C;
-    --warning: #F59E0B;
-    --warning-soft: #FFFBEB;
-    --warning-text: #92400E;
-    --info: #2563EB;
-    --info-soft: #DBEAFE;
-    --info-text: #1E40AF;
-    --shadow-card: 0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 1px 3px 0 rgba(0, 0, 0, 0.05);
-}
+/*
+ * InmoGestión 2026 — public auth pages (login, register, password recovery).
+ *
+ * Colours, fonts, radii, shadows and textures live in tokens.css (loaded BEFORE this file) and nowhere else:
+ * here use only var(--token). Never write a hex/rgb literal. See .docs/prototipos_pantallas/DESIGN.md.
+ */
 
 *,
 *::before,
@@ -34,16 +12,31 @@
 }
 
 body.auth-page {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-body);
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: var(--bg-gradient);
+    background: var(--bg-app);
     color: var(--text-main);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     -webkit-font-smoothing: antialiased;
+}
+
+/* Keyboard focus: always visible, never colour-only (3px outline, 2px offset). */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+}
+
+.auth-brand a:focus-visible,
+.auth-brand button:focus-visible {
+    outline-color: var(--focus-on-dark);
 }
 
 .auth-main {
@@ -59,19 +52,22 @@ body.auth-page {
     width: 100%;
     max-width: 1200px;
     background: var(--surface);
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     border: 1px solid var(--border-default);
+    border-bottom: 2px solid var(--edge);
     overflow: hidden;
     display: grid;
     grid-template-columns: 5fr 7fr;
     min-height: 660px;
 }
 
-/* Left Brand Panel */
+/* Left Brand Panel: café with decorative wood grain (texture never sits behind form content) */
 .auth-brand {
-    background-color: var(--primary);
-    color: var(--on-primary);
+    background-color: var(--sidebar-bg);
+    background-image: var(--texture-wood-grain);
+    background-size: var(--texture-size);
+    color: var(--sidebar-text);
     padding: 3rem;
     display: flex;
     flex-direction: column;
@@ -87,8 +83,8 @@ body.auth-page {
     right: -6rem;
     width: 18rem;
     height: 18rem;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-pill);
+    background: var(--on-dark-faint);
     pointer-events: none;
 }
 
@@ -107,20 +103,21 @@ body.auth-page {
 .brand-logo-icon {
     width: 2.75rem;
     height: 2.75rem;
-    background: var(--surface);
-    color: var(--primary);
+    background: var(--accent);
+    color: var(--on-accent);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-pop);
 }
 
 .brand-logo-title {
-    font-size: 1.5rem;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     display: block;
     line-height: 1.2;
 }
@@ -130,7 +127,7 @@ body.auth-page {
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #C7D2FE;
+    color: var(--sidebar-text-muted);
     display: block;
 }
 
@@ -139,9 +136,10 @@ body.auth-page {
     align-items: center;
     gap: 0.5rem;
     padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.12);
-    color: #E0E7FF;
+    border-radius: var(--radius-pill);
+    background: var(--on-dark-faint);
+    border: 1px solid var(--on-dark-line);
+    color: var(--sidebar-text);
     font-size: 0.75rem;
     font-weight: 500;
     margin-bottom: 1rem;
@@ -150,23 +148,24 @@ body.auth-page {
 .brand-pill-dot {
     width: 0.5rem;
     height: 0.5rem;
-    border-radius: 999px;
-    background: #34D399;
+    border-radius: var(--radius-pill);
+    background: var(--accent);
 }
 
 .brand-headline {
-    font-size: 1.85rem;
+    font-family: var(--font-display);
+    font-size: 1.95rem;
     font-weight: 600;
     line-height: 1.25;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     margin: 0 0 0.75rem 0;
-    color: var(--on-primary);
+    color: var(--sidebar-text);
 }
 
 .brand-lead {
     font-size: 0.95rem;
     line-height: 1.55;
-    color: #E0E7FF;
+    color: var(--sidebar-text);
     margin: 0 0 2.25rem 0;
 }
 
@@ -189,8 +188,9 @@ body.auth-page {
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: var(--on-dark-faint);
+    border: 1px solid var(--on-dark-line);
+    color: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -202,13 +202,13 @@ body.auth-page {
     font-size: 0.98rem;
     font-weight: 600;
     margin: 0 0 0.2rem 0;
-    color: var(--on-primary);
+    color: var(--sidebar-text);
 }
 
 .brand-feature-desc {
     font-size: 0.85rem;
     line-height: 1.45;
-    color: #C7D2FE;
+    color: var(--sidebar-text-muted);
     margin: 0;
 }
 
@@ -217,12 +217,12 @@ body.auth-page {
     z-index: 1;
     padding-top: 1.5rem;
     margin-top: 2rem;
-    border-top: 1px solid rgba(199, 210, 254, 0.25);
+    border-top: 1px solid var(--on-dark-line);
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-size: 0.75rem;
-    color: #C7D2FE;
+    color: var(--sidebar-text-muted);
 }
 
 /* Right Form Panel */
@@ -256,10 +256,10 @@ body.auth-page {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--primary-hover);
+    color: var(--primary-text);
     background: var(--primary-soft);
     padding: 0.25rem 0.65rem;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
 }
 
 .auth-security-note {
@@ -270,11 +270,20 @@ body.auth-page {
     gap: 0.35rem;
 }
 
+.auth-security-note svg {
+    color: var(--success-text);
+}
+
+.roles-summary-title svg {
+    color: var(--primary);
+}
+
 .auth-title {
+    font-family: var(--font-display);
     font-size: 1.75rem;
     font-weight: 600;
     color: var(--heading);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     margin: 0 0 0.4rem 0;
 }
 
@@ -364,13 +373,13 @@ body.auth-page {
     font-size: 0.78rem;
     font-weight: 500;
     color: var(--primary);
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
 }
 
 .forgot-link:hover,
 .forgot-link:focus-visible {
     color: var(--primary-hover);
-    text-decoration: underline;
 }
 
 .input-wrapper {
@@ -411,9 +420,8 @@ body.auth-page {
 }
 
 .auth-input:focus {
-    outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    box-shadow: 0 0 0 4px var(--focus-halo);
 }
 
 .auth-input.is-invalid {
@@ -439,7 +447,6 @@ body.auth-page {
 .password-toggle-btn:focus-visible {
     color: var(--text-main);
     background: var(--surface-muted);
-    outline: none;
 }
 
 .field-error {
@@ -472,12 +479,7 @@ body.auth-page {
 
 .btn-submit:hover {
     background-color: var(--primary-hover);
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
-}
-
-.btn-submit:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+    box-shadow: var(--shadow-button);
 }
 
 .auth-register-box {
@@ -492,14 +494,14 @@ body.auth-page {
 .register-link {
     font-weight: 600;
     color: var(--primary);
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
     margin-left: 0.25rem;
 }
 
 .register-link:hover,
 .register-link:focus-visible {
     color: var(--primary-hover);
-    text-decoration: underline;
 }
 
 .public-catalog-login-link {
@@ -511,13 +513,13 @@ body.auth-page {
     color: var(--primary);
     font-size: 0.875rem;
     font-weight: 600;
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
 }
 
 .public-catalog-login-link a:hover,
 .public-catalog-login-link a:focus-visible {
     color: var(--primary-hover);
-    text-decoration: underline;
 }
 
 .register-page {
@@ -535,7 +537,8 @@ body.auth-page {
     padding: 2.5rem;
     background: var(--surface);
     border: 1px solid var(--border-default);
-    border-radius: 16px;
+    border-bottom: 2px solid var(--edge);
+    border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
 }
 
@@ -549,6 +552,8 @@ body.auth-page {
     gap: 0.6rem;
     margin-bottom: 1.5rem;
     color: var(--heading);
+    font-family: var(--font-display);
+    font-size: 1.2rem;
     font-weight: 700;
     text-decoration: none;
 }
@@ -616,8 +621,8 @@ body.auth-page {
 
 .register-role-option:has(input:checked) {
     border-color: var(--primary);
-    background: #F5F6FF;
-    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+    background: var(--surface-muted);
+    box-shadow: inset 0 0 0 1px var(--primary);
 }
 
 .register-role-option input {
@@ -631,7 +636,7 @@ body.auth-page {
 }
 
 .register-role-option:focus-within {
-    outline: 3px solid rgba(79, 70, 229, 0.2);
+    outline: 3px solid var(--focus);
     outline-offset: 2px;
 }
 
@@ -711,8 +716,8 @@ body.auth-page {
     text-align: center;
     font-size: 0.75rem;
     color: var(--text-muted);
-    border-top: 1px solid rgba(229, 231, 235, 0.7);
-    background: rgba(255, 255, 255, 0.65);
+    border-top: 2px solid var(--edge);
+    background: var(--surface);
 }
 
 .auth-footer-inner {
@@ -744,6 +749,19 @@ body.auth-page {
 }
 
 @media (max-width: 600px) {
+    .auth-main {
+        padding: 1rem;
+    }
+
+    .brand-features,
+    .brand-lead {
+        display: none;
+    }
+
+    .auth-form-panel {
+        padding: 1.5rem 1.1rem;
+    }
+
     .register-main {
         padding: 1rem;
     }
@@ -755,5 +773,13 @@ body.auth-page {
     .register-form,
     .register-role-options {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Printable views: no textures, no shadows. */
+@media print {
+    .auth-shell,
+    .register-card {
+        box-shadow: none;
     }
 }

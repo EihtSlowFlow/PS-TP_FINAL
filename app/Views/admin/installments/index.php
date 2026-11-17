@@ -62,9 +62,9 @@ $this->extend('layouts/panel');
                 </span>
             </div>
 
-            <div class="users-page-header">
+            <div class="page-header">
                 <div>
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title">Cobranzas</h1>
                         <span class="badge-pill badge-neutral"><?= esc((string) $pagination['total']) ?> <?= $pagination['total'] === 1 ? 'cuota' : 'cuotas' ?></span>
                     </div>
@@ -73,7 +73,7 @@ $this->extend('layouts/panel');
                 <a href="<?= esc(site_url('admin/cuotas/emitir')) ?>" class="btn btn-secondary" id="btn-emit-installments">Emitir cuotas</a>
             </div>
 
-            <section class="users-kpi-grid result-kpi-grid emit-kpi-grid" aria-label="Resumen de cobranzas">
+            <section class="kpi-grid result-kpi-grid emit-kpi-grid" aria-label="Resumen de cobranzas">
                 <div class="kpi-card">
                     <div>
                         <span class="kpi-label">A cobrar (en plazo o en revisión)</span>
@@ -150,7 +150,7 @@ $this->extend('layouts/panel');
 
             <section class="panel-card table-card" aria-label="Listado de cuotas">
                 <div class="table-responsive">
-                    <table class="users-table installments-table" id="installments-table">
+                    <table class="data-table installments-table" id="installments-table">
                         <thead>
                             <tr>
                                 <th scope="col">Inquilino</th>
@@ -186,18 +186,18 @@ $this->extend('layouts/panel');
                                 ?>
                                 <tr data-installment-id="<?= esc((string) $installmentId) ?>" data-status="<?= esc($status) ?>"<?= $isOverdue ? ' class="row-overdue"' : '' ?>>
                                     <td>
-                                        <div class="user-cell-meta">
-                                            <span class="user-cell-name"><?= esc($tenantName) ?></span>
-                                            <span class="user-cell-sub">
+                                        <div class="cell-meta">
+                                            <span class="cell-title"><?= esc($tenantName) ?></span>
+                                            <span class="cell-sub">
                                                 DNI <?= esc((string) $row['tenant_document_number']) ?>
                                                 <?= ! empty($row['tenant_deleted_at']) ? ' · dado de baja' : '' ?>
                                             </span>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="user-cell-meta">
-                                            <span class="user-cell-name"><?= esc((string) $row['property_address']) ?></span>
-                                            <span class="user-cell-sub">
+                                        <div class="cell-meta">
+                                            <span class="cell-title"><?= esc((string) $row['property_address']) ?></span>
+                                            <span class="cell-sub">
                                                 <?= esc((string) $row['property_city']) ?> · <?= esc(PropertyModel::labelForType((string) $row['property_type'])) ?><?= $row['property_rooms'] !== null ? ' · ' . esc((string) $row['property_rooms']) . ' amb.' : '' ?>
                                             </span>
                                         </div>

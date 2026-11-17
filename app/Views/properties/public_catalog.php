@@ -37,7 +37,8 @@ $formatMoney = static function (mixed $amount): string {
     <title>Propiedades disponibles - InmoGestión 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= esc(base_url('css/tokens.css')) ?>">
     <link rel="stylesheet" href="<?= esc(base_url('css/panel.css')) ?>">
 </head>
 <body class="panel-page public-catalog-page">
@@ -50,7 +51,7 @@ $formatMoney = static function (mixed $amount): string {
     </header>
 
     <main class="public-catalog-main">
-        <div class="users-page-header">
+        <div class="page-header">
             <div>
                 <h1 class="panel-title">Propiedades disponibles</h1>
                 <p class="panel-subtitle">Encontrá tu próximo lugar entre los inmuebles disponibles para alquilar.</p>

@@ -120,10 +120,10 @@ Salen de [`.agents/AGENTS.md`](../.agents/AGENTS.md):
 | [`.docs/historias_de_usuario/`](historias_de_usuario/) | Una HU por archivo con escenarios, reglas y Definition of Done. El [`README`](historias_de_usuario/README.md) trae el backlog priorizado y su correspondencia con el presupuesto del análisis |
 | [`.docs/base_de_datos/`](base_de_datos/MODELO_DE_DATOS.md) | Modelo de datos (DER, modelo relacional, decisiones del issue #22) y el esquema en SQL para MySQL Workbench |
 | [`.docs/exec-plans/`](exec-plans/) | Plantilla de traspaso (`HANDOFF_TEMPLATE.md`) y un handoff por tarea (`BD-22_handoff.md`, `HU-01_handoff.md`, `HU-04_handoff.md`, `HU-05_handoff.md`). [`REVIEW-HU-01-04-05_handoff.md`](exec-plans/REVIEW-HU-01-04-05_handoff.md) documenta el review de esas tres historias y sus correcciones |
-| [`.docs/prototipos_pantallas/`](prototipos_pantallas/) | Prototipos de pantallas (`code.html` y `screen.png` por pantalla), `DESIGN.md` y los prompts usados para generarlos (`PROMPTS_STITCH_PROTOTIPOS.md`, que mapea cada pantalla a su HU y su ruta) |
+| [`.docs/prototipos_pantallas/`](prototipos_pantallas/) | Prototipos de pantallas (`code.html` y `screen.png` por pantalla; quedan como referencia de estructura), `DESIGN.md` con la identidad visual «madera y melamina», la [guía de estilos](prototipos_pantallas/guia_de_estilos.html) y los prompts usados para generarlos (`PROMPTS_STITCH_PROTOTIPOS.md`, que mapea cada pantalla a su HU y su ruta) |
 | [`.agents/`](../.agents/) | Reglas para asistentes de IA: `AGENTS.md`, glosario del dominio y skills por tecnología |
 | `.context/` | Transcripciones de las clases (un `.txt` por clase) |
-| `.sprint2_referencia/` | Código y dump SQL de referencia del Sprint 2 (`abm.php`, `bd.php`, `Sprint2_P_ABM.sql`) |
+| `.sprint2_referencia/` | Código y dump SQL de referencia del Sprint 2 (`abm.php`, `bd.php`, `Sprint2_P_ABM.sql`) y la hoja de estilos que usaba (`css/styles.css`, archivada: ya no está en `public/`) |
 
 ---
 

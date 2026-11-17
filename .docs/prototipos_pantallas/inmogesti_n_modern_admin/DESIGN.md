@@ -1,68 +1,71 @@
 ---
-name: InmoGestión Modern Admin
+name: InmoGestión Wood & Melamine
 colors:
-  surface: '#FFFFFF'
-  surface-dim: '#d0dbed'
-  surface-bright: '#f8f9ff'
-  surface-container-lowest: '#ffffff'
-  surface-container-low: '#eff4ff'
-  surface-container: '#e6eeff'
-  surface-container-high: '#dee9fc'
-  surface-container-highest: '#d9e3f6'
-  on-surface: '#121c2a'
-  on-surface-variant: '#464555'
-  inverse-surface: '#27313f'
-  inverse-on-surface: '#eaf1ff'
-  outline: '#777587'
-  outline-variant: '#c7c4d8'
-  surface-tint: '#4d44e3'
-  primary: '#4F46E5'
-  on-primary: '#ffffff'
-  primary-container: '#4f46e5'
-  on-primary-container: '#dad7ff'
-  inverse-primary: '#c3c0ff'
-  secondary: '#5c5f62'
-  on-secondary: '#ffffff'
-  secondary-container: '#dee0e4'
-  on-secondary-container: '#606366'
-  tertiary: '#7e3000'
-  on-tertiary: '#ffffff'
-  tertiary-container: '#a44100'
-  on-tertiary-container: '#ffd2be'
-  error: '#ba1a1a'
-  on-error: '#ffffff'
-  error-container: '#ffdad6'
-  on-error-container: '#93000a'
-  primary-fixed: '#e2dfff'
-  primary-fixed-dim: '#c3c0ff'
-  on-primary-fixed: '#0f0069'
-  on-primary-fixed-variant: '#3323cc'
-  secondary-fixed: '#e0e2e6'
-  secondary-fixed-dim: '#c4c7ca'
-  on-secondary-fixed: '#191c1f'
-  on-secondary-fixed-variant: '#44474a'
-  tertiary-fixed: '#ffdbcc'
-  tertiary-fixed-dim: '#ffb695'
-  on-tertiary-fixed: '#351000'
-  on-tertiary-fixed-variant: '#7b2f00'
-  background: '#f8f9ff'
-  on-background: '#121c2a'
-  surface-variant: '#d9e3f6'
-  primary-hover: '#4338CA'
-  primary-soft: '#E0E7FF'
-  heading: '#111827'
-  text-muted: '#6B7280'
-  background-start: '#F0F4F8'
-  background-end: '#D9E2EC'
-  surface-muted: '#F9FAFB'
-  row-hover: '#F3F4F6'
-  border: '#E5E7EB'
-  border-input: '#D1D5DB'
+  surface: '#FFFDF9'
+  surface-dim: '#E4D9C9'
+  surface-bright: '#FFFDF9'
+  surface-container-lowest: '#FFFFFF'
+  surface-container-low: '#FBF6EE'
+  surface-container: '#F8F1E7'
+  surface-container-high: '#F4ECDF'
+  surface-container-highest: '#EDE2D2'
+  on-surface: '#2B1D14'
+  on-surface-variant: '#6B5E52'
+  inverse-surface: '#3B2A20'
+  inverse-on-surface: '#F3E9DC'
+  outline: '#8C7B6B'
+  outline-variant: '#E4D9C9'
+  surface-tint: '#7A4B2A'
+  primary: '#7A4B2A'
+  on-primary: '#FFFFFF'
+  primary-container: '#F0E2CF'
+  on-primary-container: '#5F3A20'
+  inverse-primary: '#D9A566'
+  secondary: '#3B2A20'
+  on-secondary: '#F3E9DC'
+  secondary-container: '#D9A566'
+  on-secondary-container: '#2B1D14'
+  tertiary: '#D9A566'
+  on-tertiary: '#2B1D14'
+  tertiary-container: '#F0E2CF'
+  on-tertiary-container: '#5F3A20'
+  error: '#B91C1C'
+  on-error: '#FFFFFF'
+  error-container: '#FEF2F2'
+  on-error-container: '#B91C1C'
+  primary-fixed: '#F0E2CF'
+  primary-fixed-dim: '#D9A566'
+  on-primary-fixed: '#2B1D14'
+  on-primary-fixed-variant: '#5F3A20'
+  secondary-fixed: '#E4D9C9'
+  secondary-fixed-dim: '#D2C1AE'
+  on-secondary-fixed: '#241811'
+  on-secondary-fixed-variant: '#4A372B'
+  tertiary-fixed: '#F0E2CF'
+  tertiary-fixed-dim: '#D9A566'
+  on-tertiary-fixed: '#2B1D14'
+  on-tertiary-fixed-variant: '#5F3A20'
+  background: '#F5EFE6'
+  on-background: '#3A2E26'
+  surface-variant: '#F8F1E7'
+  primary-hover: '#5F3A20'
+  primary-soft: '#F0E2CF'
+  accent: '#D9A566'
+  heading: '#2B1D14'
+  text-muted: '#6B5E52'
+  sidebar-bg: '#3B2A20'
+  sidebar-text: '#F3E9DC'
+  bg-app: '#F5EFE6'
+  surface-muted: '#F8F1E7'
+  row-hover: '#F4ECDF'
+  border: '#E4D9C9'
+  border-input: '#8C7B6B'
+  edge: '#D3C3AE'
   success: '#10B981'
   success-soft: '#ECFDF5'
   success-text: '#065F46'
   danger: '#EF4444'
-  danger-hover: '#DC2626'
+  danger-hover: '#991B1B'
   danger-soft: '#FEF2F2'
   danger-text: '#B91C1C'
   warning: '#F59E0B'
@@ -73,24 +76,24 @@ colors:
   info-text: '#1E40AF'
 typography:
   headline-lg:
-    fontFamily: Inter
+    fontFamily: Fraunces
     fontSize: 28px
     fontWeight: '600'
     lineHeight: 36px
   headline-lg-mobile:
-    fontFamily: Inter
+    fontFamily: Fraunces
     fontSize: 22px
     fontWeight: '600'
     lineHeight: 28px
   headline-md:
     fontFamily: Inter
     fontSize: 20px
-    fontWeight: '500'
+    fontWeight: '600'
     lineHeight: 26px
   headline-sm:
     fontFamily: Inter
     fontSize: 18px
-    fontWeight: '500'
+    fontWeight: '600'
     lineHeight: 24px
   body-lg:
     fontFamily: Inter
@@ -110,23 +113,23 @@ typography:
   label-md:
     fontFamily: Inter
     fontSize: 13px
-    fontWeight: '500'
+    fontWeight: '600'
     lineHeight: 18px
   label-sm:
     fontFamily: Inter
     fontSize: 12px
-    fontWeight: '500'
+    fontWeight: '600'
     lineHeight: 16px
   table-header:
     fontFamily: Inter
-    fontSize: 13px
-    fontWeight: '500'
+    fontSize: 12px
+    fontWeight: '600'
     lineHeight: 18px
-    letterSpacing: 0.05em
+    letterSpacing: 0.04em
   metric-display:
     fontFamily: Inter
     fontSize: 32px
-    fontWeight: '600'
+    fontWeight: '700'
     lineHeight: 38px
 rounded:
   sm: 0.25rem
@@ -149,93 +152,93 @@ spacing:
 
 ## Brand & Style
 
-The design system embodies a modern, disciplined, corporate administrative aesthetic tailored specifically for real estate portfolio tracking, lease accounting, and tenant-owner lifecycle management. It prioritizes clarity, financial accountability, and operational efficiency over marketing flair.
+> Source of truth for every value: `public/css/tokens.css`. The Spanish document `../DESIGN.md` describes the same identity in full and lists the CSS class vocabulary; this file is the Stitch-format copy of it and must stay aligned with both.
 
-The UI leverages crisp, high-density dashboard layouts balanced by calm, light surfaces. The dominant personality is trustworthy, precise, and understated:
-- **Tone:** Methodical, structured, and institutional yet fresh and approachable.
-- **Visual Style:** Corporate Modern with refined atmospheric canvas depth—pairing a cool-slate gradient backdrop (`#F0F4F8` to `#D9E2EC`) with crisp white card containers, restrained 1px structural dividers, and purposeful semantic accents.
-- **Role Differentiation:** Clear spatial organization adapts gracefully across three discrete operational roles: Administrator/Staff, Property Owner, and Tenant.
+The design system embodies a warm, disciplined administrative aesthetic for real estate portfolio tracking, lease accounting and tenant-owner lifecycle management, with its own identity: **wood and melamine**, like melamine furniture in walnut and beige. It prioritizes clarity, financial accountability and operational efficiency over marketing flair.
+
+- **Tone:** methodical, structured and trustworthy, but warm and approachable.
+- **Visual style:** solid-colour melamine surfaces on a flat linen canvas. A café-brown sidebar carries a very subtle wood-grain texture. Content (tables, forms, cards) always sits on smooth surfaces, never on texture.
+- **Melamine reference:** of the four melamine finishes (solid colour, wood-grain, material imitation, patterns) only **solid colour** (content) and a decorative **wood-grain** (sidebar and login brand panel) are used.
+- **Role differentiation:** the layout adapts to three operational roles: Administrator/Staff, Property Owner and Tenant.
 
 ## Colors
 
-The palette establishes an authoritative visual hierarchy designed for heavy transactional interfaces:
-
-- **Primary (`#4F46E5`):** Reserved for primary interactive controls, main focus rings, active navigation indicators, and navigational badges.
-- **Canvas Backdrop:** A linear vertical gradient running from `#F0F4F8` at the top to `#D9E2EC` at the bottom, which provides visual grounding while setting off pure `#FFFFFF` data containers and cards.
-- **Neutrals:** Text hierarchy relies on stark contrast: `#111827` for page titles and high-priority metrics, `#1F2937` for standard reading and data entry, and `#6B7280` for secondary metadata and table headers. Structural hairline borders utilize `#E5E7EB`.
-- **Semantic Status Architecture:** Business states are paired with low-saturation backgrounds and high-contrast foreground text to preserve WCAG AA legibility:
-  - **Success (`#10B981`, soft `#ECFDF5`, text `#065F46`):** Active contracts, validated payments, available units, completed payouts.
-  - **Warning (`#F59E0B`, soft `#FFFBEB`, text `#92400E`):** Pending reviews, payment verifications awaiting admin action, scheduled maintenance.
-  - **Danger (`#EF4444`, soft `#FEF2F2`, text `#B91C1C`):** Overdue installments, terminated leases, rejected payment slips, destructive prompts.
-  - **Info (`#2563EB`, soft `#DBEAFE`, text `#1E40AF`):** Leased units, active audit logs, installments under review (En Revisión).
+- **Primary — walnut (`#7A4B2A`):** primary controls, links and focus. White on it is 7.32:1. Hover is `#5F3A20`. The soft variant is light oak `#F0E2CF` with `#5F3A20` text (7.80:1).
+- **Accent — honey (`#D9A566`):** the active sidebar item and small brand details only. Text on it is `#2B1D14` (7.39:1).
+- **Sidebar and brand panel — café (`#3B2A20`):** text `#F3E9DC` (11.38:1).
+- **Canvas — linen (`#F5EFE6`):** flat, no gradient. Cards, tables, forms and the top bar are white melamine `#FFFDF9`, bounded by a 1px hairline `#E4D9C9` and a 2px darker bottom "edge" `#D3C3AE`, like the edge of a melamine board.
+- **Neutrals:** `#2B1D14` for titles, `#3A2E26` for standard reading (11.49:1 on linen) and `#6B5E52` for secondary text (5.49:1 on linen). Input borders use `#8C7B6B` (4.01:1, minimum 3:1 for controls).
+- **Semantic status architecture (unchanged):** business states keep their colours so they stay recognizable across properties, contracts, installments and payments, each with a soft background and a dark text tone:
+  - **Success (`#10B981`, soft `#ECFDF5`, text `#065F46`):** active contracts, approved payments, available units, completed payouts.
+  - **Warning (`#F59E0B`, soft `#FFFBEB`, text `#92400E`):** pending reviews, payments awaiting validation, maintenance.
+  - **Danger (`#EF4444`, soft `#FEF2F2`, text `#B91C1C`):** overdue installments, rescinded leases, rejected payments, destructive prompts.
+  - **Info (`#2563EB`, soft `#DBEAFE`, text `#1E40AF`):** leased units and installments under review.
 
 ## Typography
 
-The typography uses Inter across all levels to maintain crisp geometry and high legibility at micro sizes.
-
-- **Tabular Figures:** All financial figures, contract amounts, and ledger values must enforce `font-feature-settings: "tnum" 1` to guarantee vertical decimal alignment across multi-row data tables.
-- **Table Headers:** Rendered uppercase with letter spacing of `0.05em` at 13px weight 500 to cleanly separate structural metadata from cell contents.
-- **Scale Behavior:** Page titles gracefully contract from 28px on desktop to 22px on handheld screens, preventing awkward wrapping on localized strings and Argentine Peso currency statements.
+- **Inter** for data, tables, forms and menus. **Fraunces** (a serif, weights 600 and 700) only for page titles, the "InmoGestión" brand mark, the login title and empty-state titles.
+- **Tabular figures:** financial figures and ledger values use tabular numerals so decimals align across rows.
+- **Table headers:** uppercase, 12px weight 600, letter spacing `0.04em`.
+- **Scale behavior:** page titles contract from 28px on desktop to 22px on handheld screens.
 
 ## Layout & Spacing
 
-The layout is structured around an administrative fixed-fluid hybrid grid:
-
-- **Desktop Structure (1024px+):** Fixed left navigation rail at 260px width. The main workspace spans a max-width container of 1200px centered in the remaining viewport, flanked by 32px (`space-xl`) outer margins and 24px (`space-lg`) gutters across a 12-column grid.
-- **Top Navigation Bar:** Persistent 64px height carrying dynamic route breadcrumbs on the left, and operational items (notification bell with red unread counter badge, profile trigger) pinned right.
-- **Mobile Adaptation (<768px):** The left sidebar collapses into an off-canvas drawer controlled via a header hamburger toggle with a high-blur neutral overlay. Workspaces drop to 16px (`space-md`) outer margins. Multi-column forms reflow into single columns, and table rows convert into stacked card tiles.
-- **Rhythm:** Standard card and container internal padding defaults to 24px (`space-lg`). Compact component grouping (inputs, badges, table cells) adheres strictly to the 4px base increment (`xs: 4px`, `sm: 8px`, `md: 16px`).
+- **Desktop (1024px+):** fixed left navigation rail of 260px. The workspace is a centered container of up to 1200px with 32px outer margins and 24px gutters.
+- **Top bar:** 64px high, breadcrumb on the left and the role badge on the right.
+- **Mobile (≤900px):** the sidebar becomes an off-canvas drawer opened by a 44px hamburger button in the top bar, with a dark overlay. It closes with the overlay or Escape and keeps focus inside while open. Multi-column forms reflow into one column and primary buttons stretch to full width. Tables stay tables and scroll horizontally inside their card; the page itself never scrolls sideways.
+- **Rhythm:** card padding defaults to 28px 32px; compact grouping follows a 4px base increment.
 
 ## Elevation & Depth
 
-Visual hierarchy uses a refined blend of subtle surface separation and low-opacity ambient shadows:
-
-- **Baseline Surfaces:** Canvas background carries the slate gradient (`#F0F4F8` to `#D9E2EC`). Workspaces, table wrappers, and sidebar panels sit on pristine `#FFFFFF` surfaces bounded by a crisp 1px hairline border (`#E5E7EB`).
-- **Cards & Data Tables:** Elevated with a wide, soft ambient shadow: `box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1)`. This establishes clear separation without harsh lines or stark drops.
-- **Modals & Drawers:** Elevated using an intentional layering shadow: `0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)`, underpinned by a semi-opaque neutral backdrop (`rgba(17, 24, 39, 0.5)`).
-- **Print Optimization:** In print media stylesheets (`@media print`), all box shadows, background gradients, and decorative borders are stripped to preserve ink density and ensure clean hard copies of settlement receipts and lease contracts.
+- **Surfaces:** white melamine cards with a hairline border and a 2px darker bottom edge, lifted by a wide soft warm shadow (`0 10px 40px -10px`, café at 14%).
+- **Modals and drawers:** a stronger layered shadow over a café backdrop at 55% opacity.
+- **Texture:** the wood grain is a lightweight inline SVG (two `feTurbulence` layers, no images or libraries), declared once in `tokens.css`, at 22% opacity, allowed only on the sidebar and the login brand panel, never behind content.
+- **Print optimization:** in `@media print` textures, shadows and gradients are removed and the sidebar and top bar are hidden, so settlement receipts and reports stay clean.
 
 ## Shapes
 
-The interface embraces a balanced roundedness model to soften administrative density:
-
-- **Interactive Controls (Inputs, Buttons):** Rounded at 8px (`rounded-sm`), delivering a disciplined, click-ready form appearance.
-- **Content Cards & Data Tables:** Enclosed with 12px corners (`rounded-md`), softening the containment of complex data matrices.
-- **Major Modals & Slide-overs:** Framed with 16px radius (`rounded-lg`) along exposed corners.
-- **Badges & Avatars:** Fully rounded pill geometries (`999px`) to immediately distinguish categorical meta-tags from square interactive controls.
-- **Iconography:** 20px outlined stroke icons paired consistently with explicit textual labels.
+- **Interactive controls (inputs, buttons):** 8px radius.
+- **Content cards and data tables:** 12px radius.
+- **Large containers:** 16px radius.
+- **Badges and avatars:** fully rounded (`999px`).
+- **Iconography:** 20px outlined stroke icons, always paired with text.
 
 ## Components
 
 ### Buttons
-- **Primary:** Solid indigo (`#4F46E5`), text white, 8px border-radius, horizontal padding 24px, height 42px. Hover transitions to `#4338CA`. Active focus applies an outline offset with a 3px ring at 15% opacity (`rgba(79, 70, 229, 0.15)`).
-- **Secondary:** Surface `#E5E7EB`, text `#374151`, hover `#D1D5DB`.
-- **Destructive:** Solid `#EF4444`, text white; hover `#DC2626`. Used for contract rescissions and account deactivations.
-- **Success:** Solid `#10B981`, text white. Strictly reserved for payment approval and disbursement execution.
-- **Mobile Behavior:** Primary action buttons stretch to 100% container width on viewports under 480px, maintaining minimum 44px tap targets.
+- **Primary:** solid walnut, white text, 8px radius, height 42px. Hover `#5F3A20`.
+- **Secondary:** white surface, `#3A2E26` text, 1px border `#8C7B6B`.
+- **Destructive:** solid `#B91C1C` with white text; hover `#991B1B`. Used for rescissions and deactivations.
+- **Success:** solid `#065F46` with white text. Reserved for payment approval.
+- **Warning:** solid `#F59E0B` with dark text `#2B1D14`. Used for edit and close actions.
+- **Focus (all interactive elements):** a solid 3px outline with 2px offset (walnut on light surfaces, honey on the sidebar). The outline is never removed.
+- **Mobile behavior:** primary action buttons stretch to 100% width below 600px, with a minimum 44px tap target.
 
 ### Form Inputs & Fields
-- **Container:** Pure `#FFFFFF` surface, 1px border `#D1D5DB`, height 44px, padding 10px 16px, 8px border radius.
-- **States:** Focus replaces border with `#4F46E5` and a 3px matching halo. Error shifts border to `#EF4444` accompanied by a micro validation error message with icon directly below the field.
-- **Layout Rule:** Dedicated full-page workflows for entity creation and edits (Inmuebles, Contratos, Usuarios); form flows never open inside cramped popups or nested modals.
+- **Container:** white melamine surface, 1px border `#8C7B6B`, height 42px, 8px radius.
+- **States:** focus shows a walnut border, a soft halo and the 3px outline. Error shifts the border to `#EF4444` with an error message under the field.
+- **Layout rule:** dedicated full-page workflows for creating and editing entities; forms never open inside modals.
 
 ### Status Badges & Chips
-- **Geometry:** Height 24px, 4px vertical / 12px horizontal padding, full pill radius (`999px`).
-- **Pairing Rule:** Never rely on color alone. Always display an accompanying icon (or status dot) alongside explicit text in Argentine Spanish.
+- **Geometry:** full pill radius, small vertical padding.
+- **Pairing rule:** never rely on colour alone. Every state shows an icon, the text and the colour. The icon is generated by CSS (check for success, exclamation for warning, cross for danger, "i" for info, dash for finished).
 - **Values:**
-  - *Disponible / Vigente / Pagada / Aprobado / Transferido:* `#ECFDF5` background, `#065F46` label.
-  - *En Mantenimiento / Pendiente / Pendiente de Validación / Pendiente de Transferencia:* `#FFFBEB` background, `#92400E` label.
-  - *Alquilado / En Revisión:* `#DBEAFE` background, `#1E40AF` label.
-  - *Finalizado:* neutral gray background (`#F3F4F6`), `#374151` label.
-  - *Vencida / Rescindido / Rechazado:* `#FEF2F2` background, `#B91C1C` label.
+  - *Available / In force / Paid / Approved / Transferred:* `#ECFDF5` background, `#065F46` label.
+  - *Maintenance / Pending / Pending validation / Pending transfer:* `#FFFBEB` background, `#92400E` label.
+  - *Rented / Under review:* `#DBEAFE` background, `#1E40AF` label.
+  - *Finished:* neutral background `#F8F1E7`, `#6B5E52` label.
+  - *Overdue / Rescinded / Rejected:* `#FEF2F2` background, `#B91C1C` label.
 
 ### Data Tables
-- **Header:** Background `#F9FAFB`, border-bottom 1px `#E5E7EB`, typography `table-header` with uppercase text.
-- **Rows:** Alternating clean rows with responsive hover highlighting (`#F3F4F6`), 16px vertical padding. Monospaced or tabular figure rendering for amounts (`$ 420.000`).
-- **Footer:** Pinned calculation totals row with bold metrics and lower pagination controls (records count, page selector).
+- **Header:** background `#F8F1E7`, hairline bottom border, uppercase `table-header` text.
+- **Rows:** hover `#F4ECDF`; tabular figures for amounts (`$ 420.000`).
+- **Footer:** pinned totals row and pagination controls.
 
 ### Flash Alerts & Banners
-- Positioned directly above content containers, incorporating a 4px thick left accent bar matching the semantic tone (indigo, emerald, amber, or red), light tint fill, lead icon, and a dismissal button on the far right.
+- Placed above the content, with a 4px accent bar on the left in the semantic tone (success, danger, warning or info), a light tint fill and a lead icon.
 
 ### Metric / KPI Cards
-- White 12px rounded cards containing an upper icon encapsulated in a 40px soft-tinted circular badge, an uppercase 13px label, a large display value (`metric-display`), and a trend or contextual comparative caption underneath.
+- White rounded cards with a 2px bottom edge: a soft circular icon, an uppercase label, a large value and a short caption.
+
+### Empty State
+- Serif title, short text and an optional button inside a 2px dashed `#D3C3AE` border.

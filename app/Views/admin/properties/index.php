@@ -44,9 +44,9 @@ $initialsOf = static function (string $firstName, string $lastName): string {
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
-            <div class="users-page-header">
+            <div class="page-header">
                 <div>
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title">Inmuebles</h1>
                         <span class="badge-pill badge-neutral"><?= esc((string) $statusCounts['total']) ?> registrados</span>
                         <?php if ($filters['status'] === PropertyModel::FILTER_STATUS_INACTIVE && ($statusCounts['inactive'] ?? 0) > 0): ?>
@@ -62,7 +62,7 @@ $this->extend('layouts/panel');
                 </div>
             </div>
 
-            <section class="users-kpi-grid" aria-label="Resumen por estado">
+            <section class="kpi-grid" aria-label="Resumen por estado">
                 <div class="kpi-card">
                     <div>
                         <span class="kpi-label">Disponibles</span>
@@ -147,7 +147,7 @@ $this->extend('layouts/panel');
 
             <section class="panel-card table-card" aria-label="Listado de inmuebles">
                 <div class="table-responsive">
-                    <table class="users-table">
+                    <table class="data-table">
                         <thead>
                             <tr>
                                 <th scope="col">Dirección</th>
@@ -186,9 +186,9 @@ $this->extend('layouts/panel');
                                     ?>
                                     <tr class="<?= $isDeleted ? 'row-deactivated' : '' ?>">
                                         <td>
-                                            <div class="user-cell-meta">
-                                                <span class="user-cell-name"><?= esc((string) $item['address']) ?></span>
-                                                <span class="user-cell-sub"><?= esc((string) $item['city']) ?></span>
+                                            <div class="cell-meta">
+                                                <span class="cell-title"><?= esc((string) $item['address']) ?></span>
+                                                <span class="cell-sub"><?= esc((string) $item['city']) ?></span>
                                             </div>
                                         </td>
                                         <td>
@@ -197,21 +197,21 @@ $this->extend('layouts/panel');
                                         <td class="mono-cell"><?= $item['rooms'] !== null ? esc((string) $item['rooms']) . ' amb.' : '—' ?></td>
                                         <td class="mono-cell"><?= esc($formatMoney($item['base_rent'])) ?></td>
                                         <td>
-                                            <div class="user-cell">
-                                                <div class="user-cell-avatar badge-role-owner" aria-hidden="true"><?= esc($initialsOf($ownerFirst, $ownerLast)) ?></div>
-                                                <div class="user-cell-meta">
-                                                    <span class="user-cell-name"><?= esc($ownerName) ?></span>
+                                            <div class="cell-identity">
+                                                <div class="cell-avatar badge-role-owner" aria-hidden="true"><?= esc($initialsOf($ownerFirst, $ownerLast)) ?></div>
+                                                <div class="cell-meta">
+                                                    <span class="cell-title"><?= esc($ownerName) ?></span>
                                                     <?php if (! empty($item['owner_deleted_at'])): ?>
-                                                        <span class="user-cell-sub">Dado de baja</span>
+                                                        <span class="cell-sub">Dado de baja</span>
                                                     <?php endif; ?>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <?php if ($isDeleted): ?>
-                                                <div class="user-cell-meta">
+                                                <div class="cell-meta">
                                                     <span class="badge-pill badge-status-deleted" title="Baja: <?= esc($deletedAtFormatted) ?>">Inactivo</span>
-                                                    <span class="user-cell-sub">
+                                                    <span class="cell-sub">
                                                         Baja: <?= esc($deletedAtFormatted) ?><?= $deletedByName !== '' ? ' · ' . esc($deletedByName) : '' ?>
                                                     </span>
                                                 </div>
@@ -222,7 +222,7 @@ $this->extend('layouts/panel');
                                         <td class="text-right">
                                             <div class="table-actions">
                                                 <?php if ($isDeleted): ?>
-                                                    <span class="user-cell-sub">Dado de baja</span>
+                                                    <span class="cell-sub">Dado de baja</span>
                                                 <?php else: ?>
                                                     <?php if ($status === PropertyModel::STATUS_AVAILABLE && empty($item['owner_deleted_at'])): ?>
                                                         <a

@@ -50,9 +50,9 @@ $formatPercentage = static function (mixed $value): string {
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
-            <div class="users-page-header">
+            <div class="page-header">
                 <div>
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title"><?= $isOwner ? 'Mis contratos' : 'Contratos' ?></h1>
                         <span class="badge-pill badge-neutral"><?= esc((string) $pagination['total']) ?> registrados</span>
                     </div>
@@ -105,7 +105,7 @@ $this->extend('layouts/panel');
 
             <section class="panel-card table-card" aria-label="<?= $isOwner ? 'Mis contratos' : 'Listado de contratos' ?>">
                 <div class="table-responsive">
-                    <table class="users-table">
+                    <table class="data-table">
                         <thead>
                             <tr>
                                 <th scope="col">Inmueble</th>
@@ -139,15 +139,15 @@ $this->extend('layouts/panel');
                                     ?>
                                     <tr>
                                         <td>
-                                            <div class="user-cell-meta">
-                                                <span class="user-cell-name"><?= esc((string) $contract['property_address']) ?></span>
-                                                <span class="user-cell-sub"><?= esc((string) $contract['property_city']) ?></span>
+                                            <div class="cell-meta">
+                                                <span class="cell-title"><?= esc((string) $contract['property_address']) ?></span>
+                                                <span class="cell-sub"><?= esc((string) $contract['property_city']) ?></span>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="user-cell-meta">
-                                                <span class="user-cell-name"><?= esc($fullName($contract, 'tenant')) ?></span>
-                                                <span class="user-cell-sub"><?= esc((string) $contract['tenant_email']) ?><?= $isOwner && ! empty($contract['tenant_phone']) ? ' · ' . esc((string) $contract['tenant_phone']) : '' ?></span>
+                                            <div class="cell-meta">
+                                                <span class="cell-title"><?= esc($fullName($contract, 'tenant')) ?></span>
+                                                <span class="cell-sub"><?= esc((string) $contract['tenant_email']) ?><?= $isOwner && ! empty($contract['tenant_phone']) ? ' · ' . esc((string) $contract['tenant_phone']) : '' ?></span>
                                             </div>
                                         </td>
                                         <?php if ($isOwner): ?>

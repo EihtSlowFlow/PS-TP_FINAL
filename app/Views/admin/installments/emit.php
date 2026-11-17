@@ -42,9 +42,9 @@ $fieldInvalid   = $periodError !== null ? ' is-invalid' : '';
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
-            <div class="users-page-header">
+            <div class="page-header">
                 <div>
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title">Emitir cuotas</h1>
                         <span class="badge-pill badge-neutral">Cierre mensual</span>
                     </div>
@@ -96,7 +96,7 @@ $this->extend('layouts/panel');
             </section>
 
 <?php if ($hasPreview): ?>
-            <section class="users-kpi-grid emit-kpi-grid" aria-label="Resumen de la emisión">
+            <section class="kpi-grid emit-kpi-grid" aria-label="Resumen de la emisión">
                 <div class="kpi-card">
                     <div>
                         <span class="kpi-label">Período destino</span>
@@ -152,7 +152,7 @@ $this->extend('layouts/panel');
                     </div>
 
                     <div class="table-responsive">
-                        <table class="users-table" id="preview-table">
+                        <table class="data-table" id="preview-table">
                             <thead>
                                 <tr>
                                     <th scope="col">Contrato</th>
@@ -184,18 +184,18 @@ $this->extend('layouts/panel');
                                             <a href="<?= esc(site_url('admin/contratos/' . $contractId)) ?>">#<?= esc((string) $contractId) ?></a>
                                         </td>
                                         <td>
-                                            <div class="user-cell-meta">
-                                                <span class="user-cell-name"><?= esc($tenantName) ?></span>
-                                                <span class="user-cell-sub">
+                                            <div class="cell-meta">
+                                                <span class="cell-title"><?= esc($tenantName) ?></span>
+                                                <span class="cell-sub">
                                                     DNI <?= esc((string) $row['tenant_document_number']) ?>
                                                     <?= ! empty($row['tenant_deleted_at']) ? ' · dado de baja' : '' ?>
                                                 </span>
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="user-cell-meta">
-                                                <span class="user-cell-name"><?= esc((string) $row['property_address']) ?></span>
-                                                <span class="user-cell-sub">
+                                            <div class="cell-meta">
+                                                <span class="cell-title"><?= esc((string) $row['property_address']) ?></span>
+                                                <span class="cell-sub">
                                                     <?= esc((string) $row['property_city']) ?> · <?= esc(PropertyModel::labelForType((string) $row['property_type'])) ?><?= $row['property_rooms'] !== null ? ' · ' . esc((string) $row['property_rooms']) . ' amb.' : '' ?>
                                                 </span>
                                             </div>

@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const userForm = document.querySelector('.user-main-form[data-self-edit="1"]');
+    const userForm = document.querySelector('.form-main[data-self-edit="1"]');
     const modal = document.getElementById('self-role-modal');
     if (userForm && modal) {
         const originalRole = userForm.dataset.originalRole;

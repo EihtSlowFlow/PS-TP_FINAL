@@ -51,7 +51,7 @@ $this->extend('layouts/panel');
 
             <section class="panel-card form-banner-card">
                 <div class="form-banner-heading">
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title">Cuota <?= esc((string) $installment['number']) ?> · <?= esc($periodLabel) ?></h1>
                         <span class="badge-pill badge-installment-<?= esc($status) ?>" id="installment-status"><?= esc(InstallmentModel::labelForStatus($status)) ?></span>
                     </div>
@@ -63,8 +63,8 @@ $this->extend('layouts/panel');
                 </div>
             </section>
 
-            <div class="user-form-layout has-sidebar">
-                <div class="user-main-form">
+            <div class="form-layout has-sidebar">
+                <div class="form-main">
                     <section class="panel-card form-section-card" aria-labelledby="section-breakdown">
                         <div class="section-header">
                             <h2 id="section-breakdown" class="section-title">Monto exigible</h2>
@@ -157,7 +157,7 @@ $this->extend('layouts/panel');
                     </section>
                 </div>
 
-                <aside class="user-audit-sidebar" aria-label="Cómo se calcula el recargo">
+                <aside class="form-aside" aria-label="Cómo se calcula el recargo">
                     <section class="panel-card form-section-card">
                         <h2 class="section-title">Cómo se calcula</h2>
                         <p class="section-subtitle">

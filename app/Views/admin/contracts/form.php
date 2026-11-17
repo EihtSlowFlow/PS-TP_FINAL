@@ -55,8 +55,8 @@ $this->extend('layouts/panel');
                 </div>
             </section>
 
-            <div class="user-form-layout has-sidebar">
-                <form action="<?= esc(site_url('admin/contratos')) ?>" method="post" id="contract-form" class="user-main-form contract-form">
+            <div class="form-layout has-sidebar">
+                <form action="<?= esc(site_url('admin/contratos')) ?>" method="post" id="contract-form" class="form-main contract-form">
                     <?= csrf_field() ?>
 
                     <section class="panel-card form-section-card" aria-labelledby="section-contract-parties">
@@ -321,7 +321,7 @@ $this->extend('layouts/panel');
                     </div>
                 </form>
 
-                <aside class="user-audit-sidebar" aria-label="Resumen del contrato">
+                <aside class="form-aside" aria-label="Resumen del contrato">
                     <section class="panel-card audit-card">
                         <h3 class="section-title">Resumen</h3>
                         <p class="section-subtitle" id="summary-property"><?= $selectedProperty !== null ? esc($selectedProperty['address'] . ', ' . $selectedProperty['city']) : 'Todavía no elegiste un inmueble.' ?></p>
