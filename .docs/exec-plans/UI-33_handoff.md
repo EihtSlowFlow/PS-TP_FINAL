@@ -8,13 +8,13 @@
 | **Historia de usuario / Issue** | Refactor de las pantallas: identidad visual propia (madera y melamina) · [#33](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/33) (mejora transversal `ui-ux`, P2, 5 pts; no es una HU) |
 | **Sprint / Hito** | Sprint 2 |
 | **Rama** | `feature/ui-33-identidad-visual`, creada desde `origin/Sprint-2` (`6885f8d`, la rama más actualizada: trae HU-14, HU-15, HU-16, HU-17 y HU-18) |
-| **Último commit** | Sin commit: los cambios quedan en el árbol de trabajo para revisarlos antes de confirmar |
-| **Pull Request** | Sin PR |
-| **Fecha de cierre** | 2026-11-17 09:06 (implementación y verificación; sin commit ni PR) |
-| **Inicio / Fin** | 2026-11-17 08:32 → 2026-11-17 09:06 |
-| **Tiempo invertido** | 34 min efectivos · 34 min de reloj · Medido · sin pausas de más de 10 min. Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
+| **Último commit** | `6a6c9e4` — feat: identidad visual madera y melamina en todas las pantallas (#33) |
+| **Pull Request** | [#43](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/43) → `Sprint-2` (abierto con `gh`; lleva `Closes #33` pero GitHub no lo toma como cierre porque la base no es `main`, ver R-7) |
+| **Fecha de cierre** | 2026-11-17 10:23 (implementación 09:06; commit, push y PR 10:23) |
+| **Inicio / Fin** | 2026-11-17 08:32 → 2026-11-17 10:23 (tres bloques: 08:32–09:06, 10:08–10:15 y 10:19–10:23) |
+| **Tiempo invertido** | 44 min efectivos · 45 min de reloj · Medido (implementación, 34 min) y reconstruido por el registro de la sesión (levantar el localhost para revisar las pantallas, 7 min; commit, push y PR, 3 min) · sin pausas de más de 10 min dentro de cada bloque. Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
 | **Autor / Agente** | Claude Code con `LauPerisse` |
-| **Estado global** | 🟡 Implementado y verificado; sin commit. Falta la validación de la paleta con el equipo, las capturas antes y después, el pull request y el comentario del tiempo en el issue |
+| **Estado global** | 🟡 Implementado, verificado y con pull request abierto. Falta la validación de la paleta con el equipo, las capturas antes y después, la revisión del PR y el comentario del tiempo en el issue |
 | **Avance estimado** | 90 % (queda lo que depende del equipo) |
 
 **Resumen:** Se aplicó la identidad «madera y melamina» a **todas** las pantallas del proyecto (login, registro y recuperación, panel, usuarios, inmuebles, contratos, cuotas, cobranzas, pagos, estado de cuenta, perfil, catálogos y páginas 404/400), no solo a las cuatro que nombra el issue. Todos los colores, fuentes, radios, sombras y la textura viven una sola vez en `public/css/tokens.css`; `panel.css` y `auth.css` solo usan variables. Quedó además una guía de estilos viva y el vocabulario de clases documentado para que los próximos issues partan de esta base.
@@ -34,7 +34,7 @@ Referencia: issue [#33](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/33).
 | DoD | Paleta, tipografía y textura en un único archivo de variables | ✅ | `public/css/tokens.css` |
 | DoD | Sin hex sueltos en `public/css/` | ✅ | `panel.css` y `auth.css` sin ningún literal de color (ni `rgb`); `styles.css` ya no está en `public/css/` |
 | DoD | `DESIGN.md` alineado con el CSS real | ✅ | Los dos `DESIGN.md` reescritos con los valores de `tokens.css` |
-| DoD | Pull request con capturas antes y después, revisado por el equipo | ⏳ | Pendiente (lo hace quien abra el PR) |
+| DoD | Pull request con capturas antes y después, revisado por el equipo | 🟡 | PR [#43](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/43) abierto; faltan las capturas y la revisión |
 
 **Fuera de alcance / diferido:** el modo oscuro (el issue lo excluye); regenerar los prototipos de Stitch (quedan como referencia de estructura, como propone el issue); convertir las tablas en tarjetas apiladas en celular (ver R-1).
 
@@ -114,6 +114,7 @@ Los puntos «Por definir» del issue no estaban cerrados por el equipo: se tomar
 | R-3 | Riesgo | Fraunces se pide a Google Fonts; sin conexión cae a Georgia | Baja | Aceptable (Inter ya dependía de lo mismo) |
 | R-4 | Deuda | Siguen con el estilo del framework `errors/html/production.php`, la vista de depuración y `welcome_message.php` | Baja | Dejarlos: no los ve el usuario final |
 | R-5 | Deuda | Los prototipos de Stitch ya generados conservan el índigo | Baja | Por decisión del issue quedan como referencia de estructura |
+| R-7 | Riesgo | El PR apunta a `Sprint-2`, que no es la rama por defecto: `Closes #33` no cierra el issue al mergear (GitHub solo lo hace al llegar a `main`), así que el issue y su tarjeta no pasan solos a «Done» | Media | Cerrar el issue y pasar la tarjeta a mano al mergear, o automatizarlo con una GitHub Action que cierre los issues del PR al mergear a `Sprint-2` |
 | R-6 | Deuda ajena | Las 3 pruebas de `PaymentReviewTest` (HU-17) ya fallaban en `origin/Sprint-2`: dos mandan un POST sin token CSRF y una espera el texto «TRF-777» que la pantalla no muestra | Media | Avisar a quien hizo HU-17 (joaquincorbalan); no es de este issue |
 
 ---
@@ -136,7 +137,7 @@ Los puntos «Por definir» del issue no estaban cerrados por el equipo: se tomar
 
 | Fecha | Autor | Duración | Resumen | Commit / PR |
 |---|---|---|---|---|
-| 2026-11-17 | Claude Code con `LauPerisse` | 34 min | Tokens, tema aplicado a todas las pantallas, drawer, guía de estilos y documentación | Sin commit |
+| 2026-11-17 | Claude Code con `LauPerisse` | 44 min | Tokens, tema aplicado a todas las pantallas, drawer, guía de estilos y documentación; revisión local; commit, push y PR | `6a6c9e4` / #43 |
 
 ---
 
