@@ -10,13 +10,13 @@
 | **Historia de usuario / Issue** | HU-33 — Aprobar o rechazar inmuebles publicados por propietarios · [#58](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/58) (P1, 3 pts) |
 | **Sprint / Hito** | Sprint 2 (ampliación detectada el 17/11/2026) |
 | **Rama** | `feature/hu-32-33-propietario-publica-admin-aprueba`, creada desde `origin/Sprint-2` (`a81a942`) |
-| **Último commit** | Sin commit todavía (los cambios están en el árbol de trabajo) |
-| **Pull Request** | Sin PR |
-| **Fecha de cierre** | Pendiente (implementación y verificación terminadas el 2026-11-17) |
-| **Inicio / Fin** | 2026-11-17 19:34 → 2026-11-17 20:10 (implementación y verificación; falta el commit) |
-| **Tiempo invertido** | 36 min efectivos · 36 min de reloj · Medido (tiempo **conjunto** de HU-32 y HU-33; sin pausas de más de 10 min). Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
+| **Último commit** | `3fe4ffa` — feat: el propietario publica sus inmuebles y la administración los aprueba o rechaza (HU-32, HU-33) |
+| **Pull Request** | [#63](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/63) → `Sprint-2` (lleva `Closes #57` y `Closes #58`, pero GitHub no los cierra solos porque la base no es `main`) |
+| **Fecha de cierre** | 2026-11-17 20:12 (commit, push y pull request) |
+| **Inicio / Fin** | 2026-11-17 19:34 → 2026-11-17 20:12 (dos bloques: 19:34–20:10 y 20:10–20:12) |
+| **Tiempo invertido** | 38 min efectivos · 38 min de reloj · Medido (implementación, 36 min) y reconstruido por el registro de la sesión (commit, push y PR, 2 min); tiempo **conjunto** de HU-32 y HU-33, sin pausas de más de 10 min. Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
 | **Autor / Agente** | Claude Code con `LauPerisse` |
-| **Estado global** | 🟡 Implementada y verificada; falta el commit, el PR, el comentario del tiempo en el issue y los avisos de HU-22 |
+| **Estado global** | 🟡 Implementada, verificada y con pull request abierto; falta la revisión del PR, el comentario del tiempo en el issue y los avisos de HU-22 |
 | **Avance estimado** | 90 % (los avisos dependen de HU-22) |
 
 **Resumen:** el administrador y el empleado ven la cola de inmuebles publicados por propietarios (filtro «Revisión» en `/admin/inmuebles` y contador en el menú «Inmuebles»), los revisan en la ficha de edición de HU-07 y los **aprueban** (se publican y pasan a ser elegibles en contratos, siguen «Disponible») o los **rechazan con un motivo obligatorio de hasta 255 caracteres**, que el propietario ve en «Mis inmuebles». Cada resolución guarda quién y cuándo, y una segunda resolución sobre el mismo inmueble se informa sin cambiar nada.
@@ -102,7 +102,7 @@ Referencia: [`../historias_de_usuario/HU-33_aprobar_rechazar_inmuebles.md`](../h
 
 | Prioridad | Tarea | Archivos previstos | Skills a cargar |
 |---|---|---|---|
-| 1 | Confirmar el commit, el PR contra `Sprint-2` y publicar el comentario del tiempo en #57 y #58 | — | — |
+| 1 | Revisión del PR #63 y comentario del tiempo en #57 y #58 | — | — |
 | 2 | Avisos de HU-22 al aprobar/rechazar y al llegar un inmueble nuevo | `PropertyModel`, `notifications` | — |
 
 **Siguiente HU sugerida:** HU-22 — Notificaciones de pagos (#47)
@@ -114,4 +114,4 @@ Referencia: [`../historias_de_usuario/HU-33_aprobar_rechazar_inmuebles.md`](../h
 
 | Fecha | Autor | Duración | Resumen | Commit / PR |
 |---|---|---|---|---|
-| 2026-11-17 | Claude Code con `LauPerisse` | 36 min (conjunta con HU-32) | Revisión por la administración: ficha, filtro, contador, aprobar y rechazar con motivo, 27 pruebas | Sin commit todavía |
+| 2026-11-17 | Claude Code con `LauPerisse` | 38 min (conjunta con HU-32) | Revisión por la administración: ficha, filtro, contador, aprobar y rechazar con motivo, 27 pruebas | `3fe4ffa` / [#63](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/63) |

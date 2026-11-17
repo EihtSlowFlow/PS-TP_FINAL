@@ -10,14 +10,14 @@
 | **Historia de usuario / Issue** | HU-32 — Publicar un inmueble propio (propietario) · [#57](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/57) (P1, 5 pts) |
 | **Sprint / Hito** | Sprint 2 (ampliación detectada el 17/11/2026) |
 | **Rama** | `feature/hu-32-33-propietario-publica-admin-aprueba`, creada desde `origin/Sprint-2` (`a81a942`, la versión más reciente: trae #33 y las historias HU-28 a HU-34 documentadas) |
-| **Último commit** | Sin commit todavía (los cambios están en el árbol de trabajo) |
-| **Pull Request** | Sin PR |
-| **Fecha de cierre** | Pendiente (implementación y verificación terminadas el 2026-11-17) |
-| **Inicio / Fin** | 2026-11-17 19:34 → 2026-11-17 20:10 (implementación y verificación; falta el commit) |
-| **Tiempo invertido** | 36 min efectivos · 36 min de reloj · Medido (tiempo **conjunto** de HU-32 y HU-33; sin pausas de más de 10 min). Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
+| **Último commit** | `3fe4ffa` — feat: el propietario publica sus inmuebles y la administración los aprueba o rechaza (HU-32, HU-33) |
+| **Pull Request** | [#63](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/63) → `Sprint-2` (lleva `Closes #57` y `Closes #58`, pero GitHub no los cierra solos porque la base no es `main`) |
+| **Fecha de cierre** | 2026-11-17 20:12 (commit, push y pull request) |
+| **Inicio / Fin** | 2026-11-17 19:34 → 2026-11-17 20:12 (dos bloques: 19:34–20:10 y 20:10–20:12) |
+| **Tiempo invertido** | 38 min efectivos · 38 min de reloj · Medido (implementación, 36 min) y reconstruido por el registro de la sesión (commit, push y PR, 2 min); tiempo **conjunto** de HU-32 y HU-33, sin pausas de más de 10 min. Ver [`../REGISTRO_DE_TIEMPOS.md`](../REGISTRO_DE_TIEMPOS.md) |
 | **Autor / Agente** | Claude Code con `LauPerisse` |
-| **Estado global** | 🟡 Implementada y verificada; falta el commit, el PR y el comentario del tiempo en el issue |
-| **Avance estimado** | 95 % |
+| **Estado global** | 🟡 Implementada, verificada y con pull request abierto; falta la revisión del PR y el comentario del tiempo en el issue |
+| **Avance estimado** | 95 % (queda la revisión del PR) |
 
 **Resumen:** el propietario registra sus inmuebles desde «Mis inmuebles» con el mismo formulario y las mismas validaciones de HU-07; quedan a su nombre con la revisión «Pendiente de aprobación» y no aparecen en el catálogo público, en el selector de contratos, al crear un contrato ni en los indicadores hasta que la administración los aprueba (HU-33). Puede corregirlos y reenviarlos mientras estén pendientes o rechazados; una vez aprobados, solo los edita la administración. Un inmueble ajeno responde 404.
 
@@ -126,7 +126,7 @@ Referencia: [`../historias_de_usuario/HU-32_publicar_inmueble_propietario.md`](.
 
 | Prioridad | Tarea | Archivos previstos | Skills a cargar |
 |---|---|---|---|
-| 1 | Confirmar el commit, abrir el pull request contra `Sprint-2` y publicar el comentario del tiempo en #57 y #58 | — | — |
+| 1 | Revisión del PR #63 y comentario del tiempo en #57 y #58 | — | — |
 | 2 | HU-28 (#53): enlazar «Publicar mi inmueble» desde la página de inicio | `app/Views/home/…` | — |
 | 3 | HU-29 (#54): detalle público con el filtro de aprobación | `PropertyModel`, vista pública | — |
 
@@ -139,4 +139,4 @@ Referencia: [`../historias_de_usuario/HU-32_publicar_inmueble_propietario.md`](.
 
 | Fecha | Autor | Duración | Resumen | Commit / PR |
 |---|---|---|---|---|
-| 2026-11-17 | Claude Code con `LauPerisse` | 36 min | HU-32 y HU-33 en una rama desde `origin/Sprint-2`: migración, modelo, controlador, vistas, 78 pruebas y documentación | Sin commit todavía |
+| 2026-11-17 | Claude Code con `LauPerisse` | 38 min | HU-32 y HU-33 en una rama desde `origin/Sprint-2`: migración, modelo, controlador, vistas, 78 pruebas y documentación | `3fe4ffa` / [#63](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/63) |
