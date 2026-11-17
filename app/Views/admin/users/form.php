@@ -86,7 +86,7 @@ $this->extend('layouts/panel');
             <section class="panel-card form-banner-card">
                 <div class="form-banner-heading">
                     <?php if ($isEdit): ?>
-                        <div class="users-heading-row">
+                        <div class="page-heading-row">
                             <h1 class="panel-title">Editar usuario: <?= esc($targetFullName) ?></h1>
                             <span class="badge-pill badge-neutral">ID #USR-<?= esc((string) $targetUserId) ?></span>
                         </div>
@@ -98,8 +98,8 @@ $this->extend('layouts/panel');
                 </div>
             </section>
 
-            <div class="user-form-layout <?= $isEdit ? 'has-sidebar' : '' ?>">
-                <form action="<?= esc($formAction) ?>" method="post" class="user-main-form"<?php if ($isSelfEdit): ?> data-self-edit="1" data-original-role="<?= esc((string) ($user['role_name'] ?? '')) ?>"<?php endif; ?>>
+            <div class="form-layout <?= $isEdit ? 'has-sidebar' : '' ?>">
+                <form action="<?= esc($formAction) ?>" method="post" class="form-main"<?php if ($isSelfEdit): ?> data-self-edit="1" data-original-role="<?= esc((string) ($user['role_name'] ?? '')) ?>"<?php endif; ?>>
                     <?= csrf_field() ?>
 
                     <section class="panel-card form-section-card" aria-labelledby="section-personal-data">
@@ -341,7 +341,7 @@ $this->extend('layouts/panel');
                 </form>
 
                 <?php if ($isEdit): ?>
-                    <aside class="user-audit-sidebar" aria-label="Trazabilidad y contexto operativo">
+                    <aside class="form-aside" aria-label="Trazabilidad y contexto operativo">
                         <section class="panel-card audit-card">
                             <h3 class="section-title">Registro y trazabilidad</h3>
                             <dl class="audit-list">

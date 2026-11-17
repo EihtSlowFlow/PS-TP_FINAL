@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use RuntimeException;
+use Throwable;
 
 /**
- * Persistence and lookup queries for the properties managed by the agency (HU-07).
+ * Persistence and lookup queries for the properties managed by the agency (HU-07, HU-08, HU-09).
  *
- * Deactivation (HU-09) is a soft delete, so every query here leaves out deactivated properties. Owners are
- * always joined without filtering by `users.deleted_at`: a property keeps its owner even if the owner was
- * deactivated afterwards (HU-05).
+ * Deactivation (HU-09) is a soft delete (`deleted_at` + `deleted_by`), so every active query leaves out deactivated
+ * properties unless the administrator explicitly filters by inactive status. Owners are always joined without
+ * filtering by `users.deleted_at`: a property keeps its owner even if the owner was deactivated afterwards (HU-05).
  */
 class PropertyModel extends Model
 {
@@ -22,6 +24,14 @@ class PropertyModel extends Model
     public const STATUS_AVAILABLE   = 'available';
     public const STATUS_RENTED      = 'rented';
     public const STATUS_MAINTENANCE = 'maintenance';
+
+    public const FILTER_STATUS_ACTIVE   = 'active';
+    public const FILTER_STATUS_INACTIVE = 'inactive';
+
+    public const ERROR_NOT_FOUND         = 'not_found';
+    public const ERROR_ALREADY_DELETED   = 'already_deleted';
+    public const ERROR_CONTRACT_IN_FORCE = 'contract_in_force';
+    public const ERROR_PERSISTENCE       = 'persistence';
 
     /**
      * Spanish labels for each property type.
@@ -37,7 +47,7 @@ class PropertyModel extends Model
     ];
 
     /**
-     * Spanish labels for each property status.
+     * Spanish labels for each operational property status.
      *
      * @var array<string, string>
      */
@@ -45,6 +55,19 @@ class PropertyModel extends Model
         self::STATUS_AVAILABLE   => 'Disponible',
         self::STATUS_RENTED      => 'Alquilado',
         self::STATUS_MAINTENANCE => 'En mantenimiento',
+    ];
+
+    /**
+     * Status filter options available in the administrative listing (HU-08, HU-09 Scenario 5).
+     *
+     * @var array<string, string>
+     */
+    public const ADMIN_FILTER_STATUS_LABELS = [
+        self::FILTER_STATUS_ACTIVE   => 'Activo',
+        self::STATUS_AVAILABLE       => 'Disponible',
+        self::STATUS_RENTED          => 'Alquilado',
+        self::STATUS_MAINTENANCE     => 'En mantenimiento',
+        self::FILTER_STATUS_INACTIVE => 'Inactivo',
     ];
 
     /**
@@ -96,21 +119,96 @@ class PropertyModel extends Model
     }
 
     /**
-     * Finds a (not deactivated) property by id together with its owner's data, including deactivated owners.
+     * Finds a property by id together with its owner's data (including deactivated owners).
+     * By default it leaves out deactivated properties unless `$withDeleted` is set to true.
      *
      * @return array<string, mixed>|null
      */
-    public function findWithOwner(int $id): ?array
+    public function findWithOwner(int $id, bool $withDeleted = false): ?array
     {
-        $row = $this->builder()
+        $builder = $this->builder()
             ->select($this->ownerSelect())
             ->join('users', 'users.id = properties.owner_id')
-            ->where('properties.id', $id)
-            ->where('properties.deleted_at', null)
-            ->get()
-            ->getRowArray();
+            ->join('users AS deleted_by_user', 'deleted_by_user.id = properties.deleted_by', 'left')
+            ->where('properties.id', $id);
+
+        if (! $withDeleted) {
+            $builder->where('properties.deleted_at', null);
+        }
+
+        $row = $builder->get()->getRowArray();
 
         return $row ?: null;
+    }
+
+    /**
+     * Tells whether the property currently has a lease contract in force (HU-09 Scenario 8).
+     */
+    public function hasContractInForce(int $propertyId): bool
+    {
+        return $this->db->table('contracts')
+            ->where('property_id', $propertyId)
+            ->where('status', ContractModel::STATUS_IN_FORCE)
+            ->countAllResults() > 0;
+    }
+
+    /**
+     * Logically deactivates an active property that has no contract in force, recording `deleted_at` and `deleted_by`
+     * atomically while keeping all physical data and historical references intact (HU-09 Scenarios 2, 7, 8).
+     *
+     * @return array{ok: bool, error: string|null}
+     */
+    public function deactivate(int $id, int $deletedByUserId): array
+    {
+        if ($deletedByUserId <= 0) {
+            return ['ok' => false, 'error' => self::ERROR_PERSISTENCE];
+        }
+
+        $this->db->transBegin();
+
+        try {
+            $table = $this->db->protectIdentifiers('properties', true);
+            $row   = $this->db
+                ->query("SELECT id, status, deleted_at FROM {$table} WHERE id = ? FOR UPDATE", [$id])
+                ->getRowArray();
+
+            if ($row === null) {
+                $this->db->transRollback();
+
+                return ['ok' => false, 'error' => self::ERROR_NOT_FOUND];
+            }
+
+            if ($row['deleted_at'] !== null) {
+                $this->db->transRollback();
+
+                return ['ok' => false, 'error' => self::ERROR_ALREADY_DELETED];
+            }
+
+            if ((string) $row['status'] === self::STATUS_RENTED || $this->hasContractInForce($id)) {
+                $this->db->transRollback();
+
+                return ['ok' => false, 'error' => self::ERROR_CONTRACT_IN_FORCE];
+            }
+
+            if ($this->builder()->where('id', $id)->update(['deleted_by' => $deletedByUserId]) === false) {
+                throw new RuntimeException('The user responsible for the property deactivation could not be stored.');
+            }
+
+            if ($this->delete($id) === false) {
+                throw new RuntimeException('The property could not be soft-deleted.');
+            }
+
+            if (! $this->db->transCommit()) {
+                throw new RuntimeException('The property deactivation transaction could not be committed.');
+            }
+        } catch (Throwable $e) {
+            $this->db->transRollback();
+            log_message('error', 'Property deactivation failed and was rolled back: {message}', ['message' => $e->getMessage()]);
+
+            return ['ok' => false, 'error' => self::ERROR_PERSISTENCE];
+        }
+
+        return ['ok' => true, 'error' => null];
     }
 
     /**
@@ -124,6 +222,7 @@ class PropertyModel extends Model
         return $this->builder()
             ->select($this->ownerSelect())
             ->join('users', 'users.id = properties.owner_id')
+            ->join('users AS deleted_by_user', 'deleted_by_user.id = properties.deleted_by', 'left')
             ->where('properties.status', self::STATUS_AVAILABLE)
             ->where('properties.deleted_at', null)
             ->where('users.deleted_at', null)
@@ -192,16 +291,24 @@ class PropertyModel extends Model
     }
 
     /**
-     * Owners associated with active properties, including owners deactivated after those properties were created.
+     * Owners associated with active (or inactive, when filtering by inactive status) properties, including owners
+     * deactivated after those properties were created.
      *
      * @return list<array{id: int, first_name: string, last_name: string, deleted_at: string|null}>
      */
-    public function getOwnerFilterOptions(): array
+    public function getOwnerFilterOptions(bool $onlyInactive = false): array
     {
-        return $this->db->table('properties')
+        $builder = $this->db->table('properties')
             ->select('users.id, users.first_name, users.last_name, users.deleted_at')
-            ->join('users', 'users.id = properties.owner_id')
-            ->where('properties.deleted_at', null)
+            ->join('users', 'users.id = properties.owner_id');
+
+        if ($onlyInactive) {
+            $builder->where('properties.deleted_at IS NOT NULL');
+        } else {
+            $builder->where('properties.deleted_at', null);
+        }
+
+        return $builder
             ->groupBy(['users.id', 'users.first_name', 'users.last_name', 'users.deleted_at'])
             ->orderBy('users.last_name', 'ASC')
             ->orderBy('users.first_name', 'ASC')
@@ -230,14 +337,26 @@ class PropertyModel extends Model
         ?int $ownerId = null,
         bool $publicOnly = false
     ): array {
-        $perPage     = max(1, min(100, $perPage));
-        $currentPage = max(1, $page);
-        $builder     = $this->builder()
-            ->select($includeOwner ? $this->ownerSelect() : $this->listingSelect())
-            ->where('properties.deleted_at', null);
+        $perPage      = max(1, min(100, $perPage));
+        $currentPage  = max(1, $page);
+        $onlyInactive = $includeOwner
+            && ! $publicOnly
+            && $ownerId === null
+            && ($filters['status'] ?? '') === self::FILTER_STATUS_INACTIVE;
+
+        $builder = $this->builder()
+            ->select($includeOwner ? $this->ownerSelect() : $this->listingSelect());
+
+        if ($onlyInactive) {
+            $builder->where('properties.deleted_at IS NOT NULL');
+        } else {
+            $builder->where('properties.deleted_at', null);
+        }
 
         if ($includeOwner) {
-            $builder->join('users', 'users.id = properties.owner_id');
+            $builder
+                ->join('users', 'users.id = properties.owner_id')
+                ->join('users AS deleted_by_user', 'deleted_by_user.id = properties.deleted_by', 'left');
         }
 
         if ($ownerId !== null) {
@@ -248,7 +367,11 @@ class PropertyModel extends Model
             $builder->where('properties.status', self::STATUS_AVAILABLE);
         }
 
-        if (isset($filters['status']) && in_array($filters['status'], array_keys(self::STATUS_LABELS), true)) {
+        if (
+            ! $onlyInactive
+            && isset($filters['status'])
+            && in_array($filters['status'], array_keys(self::STATUS_LABELS), true)
+        ) {
             $builder->where('properties.status', $filters['status']);
         }
 
@@ -304,9 +427,9 @@ class PropertyModel extends Model
     }
 
     /**
-     * Counts the registered (not deactivated) properties per status.
+     * Counts the registered (not deactivated) properties per status, plus the total of deactivated ones.
      *
-     * @return array{available: int, rented: int, maintenance: int, total: int}
+     * @return array{available: int, rented: int, maintenance: int, inactive: int, total: int}
      */
     public function getStatusCounts(): array
     {
@@ -314,6 +437,7 @@ class PropertyModel extends Model
             self::STATUS_AVAILABLE   => 0,
             self::STATUS_RENTED      => 0,
             self::STATUS_MAINTENANCE => 0,
+            self::FILTER_STATUS_INACTIVE => 0,
             'total'                  => 0,
         ];
 
@@ -333,17 +457,28 @@ class PropertyModel extends Model
             }
         }
 
+        $counts[self::FILTER_STATUS_INACTIVE] = (int) $this->builder()
+            ->where('deleted_at IS NOT NULL')
+            ->countAllResults();
+
         return $counts;
     }
 
     /**
-     * Columns of a property plus the data of its owner needed by the listing and the form.
+     * Columns of a property plus the data of its owner, the user who deactivated it (when applicable),
+     * and whether it has a lease contract in force.
      */
     private function ownerSelect(): string
     {
+        $contractsTable  = $this->db->prefixTable('contracts');
+        $propertiesTable = $this->db->prefixTable('properties');
+        $inForceStatus   = ContractModel::STATUS_IN_FORCE;
+
         return 'properties.*, '
             . 'users.first_name AS owner_first_name, users.last_name AS owner_last_name, '
-            . 'users.document_number AS owner_document_number, users.deleted_at AS owner_deleted_at';
+            . 'users.document_number AS owner_document_number, users.deleted_at AS owner_deleted_at, '
+            . 'deleted_by_user.first_name AS deleted_by_first_name, deleted_by_user.last_name AS deleted_by_last_name, '
+            . "EXISTS(SELECT 1 FROM `{$contractsTable}` c WHERE c.property_id = `{$propertiesTable}`.`id` AND c.status = '{$inForceStatus}') AS has_active_contract";
     }
 
     private function listingSelect(): string

@@ -32,7 +32,7 @@ $formatMoney = static function (mixed $amount): string {
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
-            <div class="users-page-header">
+            <div class="page-header">
                 <div>
                     <h1 class="panel-title">Mis inmuebles</h1>
                     <p class="panel-subtitle">Consultá tus propiedades y su estado de disponibilidad</p>
@@ -85,7 +85,7 @@ $this->extend('layouts/panel');
 
             <section class="panel-card table-card" aria-label="Mis inmuebles">
                 <div class="table-responsive">
-                    <table class="users-table">
+                    <table class="data-table">
                         <thead>
                             <tr>
                                 <th scope="col">Dirección</th>
@@ -105,9 +105,9 @@ $this->extend('layouts/panel');
                                     <?php $status = (string) $item['status']; ?>
                                     <tr>
                                         <td>
-                                            <div class="user-cell-meta">
-                                                <span class="user-cell-name"><?= esc((string) $item['address']) ?></span>
-                                                <span class="user-cell-sub"><?= esc((string) $item['city']) ?></span>
+                                            <div class="cell-meta">
+                                                <span class="cell-title"><?= esc((string) $item['address']) ?></span>
+                                                <span class="cell-sub"><?= esc((string) $item['city']) ?></span>
                                             </div>
                                         </td>
                                         <td><span class="badge-pill badge-neutral"><?= esc(PropertyModel::labelForType((string) $item['type'])) ?></span></td>

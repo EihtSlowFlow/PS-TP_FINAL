@@ -52,7 +52,7 @@ para conocer mis compromisos de pago y poder informar un pago rápidamente.
 
 ## Definition of Done
 
-- [ ] El inquilino ve sus cuotas agrupadas por estado.
-- [ ] Se muestra el desglose de mora en las cuotas vencidas.
-- [ ] Se restringe el acceso a datos de otros inquilinos.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] El inquilino ve sus cuotas agrupadas por estado.
+- [x] Se muestra el desglose de mora en las cuotas vencidas.
+- [x] Se restringe el acceso a datos de otros inquilinos.
+- [x] Se prueban los escenarios de aceptación y los casos de error relevantes.

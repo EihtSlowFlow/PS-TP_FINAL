@@ -45,9 +45,9 @@ $extractInitials = static function (string $firstName, string $lastName): string
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
-            <div class="users-page-header">
+            <div class="page-header">
                 <div>
-                    <div class="users-heading-row">
+                    <div class="page-heading-row">
                         <h1 class="panel-title">Usuarios</h1>
                         <span class="badge-pill badge-neutral"><?= esc((string) $roleCounts['total_active']) ?> activos</span>
                         <?php if ($filters['include_deleted'] && $roleCounts['total_deleted'] > 0): ?>
@@ -69,7 +69,7 @@ $this->extend('layouts/panel');
                 </div>
             </div>
 
-            <section class="users-kpi-grid" aria-label="Resumen por rol">
+            <section class="kpi-grid" aria-label="Resumen por rol">
                 <div class="kpi-card">
                     <div>
                         <span class="kpi-label">Inquilinos</span>
@@ -127,7 +127,7 @@ $this->extend('layouts/panel');
             </section>
 
             <section class="panel-card filter-card" aria-label="Filtros de búsqueda">
-                <form action="<?= esc(site_url('admin/usuarios')) ?>" method="get" class="users-filter-form">
+                <form action="<?= esc(site_url('admin/usuarios')) ?>" method="get" class="filter-form">
                     <div class="filter-search-group">
                         <label for="search-q" class="sr-only">Buscar por nombre, DNI o correo</label>
                         <input
@@ -178,7 +178,7 @@ $this->extend('layouts/panel');
 
             <section class="panel-card table-card" aria-label="Listado de usuarios">
                 <div class="table-responsive">
-                    <table class="users-table">
+                    <table class="data-table">
                         <thead>
                             <tr>
                                 <th scope="col">Usuario</th>
@@ -224,13 +224,13 @@ $this->extend('layouts/panel');
                                     ?>
                                     <tr class="<?= $isDeleted ? 'row-deactivated' : '' ?>">
                                         <td>
-                                            <div class="user-cell">
-                                                <div class="user-cell-avatar <?= esc($roleBadgeClass) ?>" aria-hidden="true">
+                                            <div class="cell-identity">
+                                                <div class="cell-avatar <?= esc($roleBadgeClass) ?>" aria-hidden="true">
                                                     <?= esc($itemInitials) ?>
                                                 </div>
-                                                <div class="user-cell-meta">
-                                                    <span class="user-cell-name"><?= esc($fullName) ?></span>
-                                                    <span class="user-cell-sub">
+                                                <div class="cell-meta">
+                                                    <span class="cell-title"><?= esc($fullName) ?></span>
+                                                    <span class="cell-sub">
                                                         <?= esc((string) ($item['address'] ?: 'Sin dirección registrada')) ?>
                                                     </span>
                                                 </div>

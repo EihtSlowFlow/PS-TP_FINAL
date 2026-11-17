@@ -25,12 +25,14 @@ $flashSuccess = session()->getFlashdata('success');
     <title><?= esc($pageTitle) ?> - InmoGestión 2026</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= esc(base_url('css/tokens.css')) ?>">
     <link rel="stylesheet" href="<?= esc(base_url('css/panel.css')) ?>">
+    <script src="<?= esc(base_url('js/layout.js')) ?>"></script>
 </head>
 <body class="panel-page">
 
-    <aside class="panel-sidebar" aria-label="Menú principal">
+    <aside class="panel-sidebar" id="panel-sidebar" aria-label="Menú principal">
         <div>
             <div class="sidebar-brand">
                 <div class="sidebar-brand-icon" aria-hidden="true">
@@ -64,6 +66,15 @@ $flashSuccess = session()->getFlashdata('success');
                     <a href="<?= esc(site_url('admin/cuotas/emitir')) ?>" class="sidebar-link<?= $activeMenu === 'cuotas' ? ' is-active' : '' ?>">
                         <span>Cuotas</span>
                     </a>
+                    <a href="<?= esc(site_url('admin/cuotas')) ?>" class="sidebar-link<?= $activeMenu === 'cobranzas' ? ' is-active' : '' ?>">
+                        <span>Cobranzas</span>
+                    </a>
+                    <a href="<?= esc(site_url('admin/pagos')) ?>" class="sidebar-link<?= $activeMenu === 'pagos' ? ' is-active' : '' ?>">
+                        <span>Pagos</span>
+                    </a>
+                    <a href="<?= esc(site_url('admin/pagos/historial')) ?>" class="sidebar-link<?= $activeMenu === 'pagos-historial' ? ' is-active' : '' ?>">
+                        <span>Historial</span>
+                    </a>
                 <?php elseif ($userRole === 'owner'): ?>
                     <a href="<?= esc(site_url('propietario/dashboard')) ?>" class="sidebar-link<?= $activeMenu === 'propietario-dashboard' ? ' is-active' : '' ?>">
                         <span>Dashboard</span>
@@ -80,6 +91,9 @@ $flashSuccess = session()->getFlashdata('success');
                 <?php elseif ($userRole === 'tenant'): ?>
                     <a href="<?= esc(site_url('inquilino/estado-cuenta')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-estado-cuenta' ? ' is-active' : '' ?>">
                         <span>Estado de cuenta</span>
+                    </a>
+                    <a href="<?= esc(site_url('inquilino/mis-pagos')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-mis-pagos' ? ' is-active' : '' ?>">
+                        <span>Mis pagos</span>
                     </a>
                     <a href="<?= esc(site_url('perfil')) ?>" class="sidebar-link<?= $activeMenu === 'perfil' ? ' is-active' : '' ?>">
                         <span>Mi perfil</span>
@@ -115,10 +129,20 @@ $flashSuccess = session()->getFlashdata('success');
 
     <div class="panel-wrapper">
         <header class="panel-topbar">
-            <div class="breadcrumb">
-                <span>InmoGestión</span>
-                <span aria-hidden="true">/</span>
-                <span class="breadcrumb-current"><?= esc($breadcrumb) ?></span>
+            <div class="topbar-start">
+                <?php /* Mobile drawer toggle: shown only below 900 px and only when public/js/layout.js is running. */ ?>
+                <button type="button" class="sidebar-toggle" id="sidebar-toggle" aria-controls="panel-sidebar" aria-expanded="false" aria-label="Abrir menú">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+                <div class="breadcrumb">
+                    <span>InmoGestión</span>
+                    <span aria-hidden="true">/</span>
+                    <span class="breadcrumb-current"><?= esc($breadcrumb) ?></span>
+                </div>
             </div>
             <div class="topbar-meta">
                 <span class="role-badge">
@@ -155,6 +179,8 @@ $flashSuccess = session()->getFlashdata('success');
             <?= $this->renderSection('content') ?>
         </main>
     </div>
+
+    <div class="sidebar-overlay" id="sidebar-overlay" hidden></div>
 
     <?= $this->renderSection('modals') ?>
     <?= $this->renderSection('scripts') ?>

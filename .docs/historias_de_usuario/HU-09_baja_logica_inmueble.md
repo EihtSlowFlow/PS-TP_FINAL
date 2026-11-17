@@ -96,20 +96,17 @@ Además, el inmueble inactivo no se ofrece como opción al crear un contrato.
 
 ## Definition of Done
 
-- [ ] El administrador puede solicitar la baja, y confirmarla o cancelarla.
-- [ ] Sin confirmación no se modifica el inmueble.
-- [ ] El estado inactivo, la fecha y el usuario responsable se persisten correctamente.
-- [ ] El listado excluye los inmuebles inactivos por defecto y el filtro por estado funciona según lo definido.
-- [ ] El servidor impide asociar inmuebles inactivos a nuevos contratos, incluso ante solicitudes directas.
-- [ ] El sistema impide la baja de inmuebles con contrato vigente.
-- [ ] Se conserva el historial y se verifican los permisos de acceso.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] El administrador puede solicitar la baja, y confirmarla o cancelarla.
+- [x] Sin confirmación no se modifica el inmueble.
+- [x] El estado inactivo, la fecha y el usuario responsable se persisten correctamente.
+- [x] El listado excluye los inmuebles inactivos por defecto y el filtro por estado funciona según lo definido.
+- [x] El servidor impide asociar inmuebles inactivos a nuevos contratos, incluso ante solicitudes directas.
+- [x] El sistema impide la baja de inmuebles con contrato vigente.
+- [x] Se conserva el historial y se verifican los permisos de acceso.
+- [x] Se prueban los escenarios de aceptación y los casos de error relevantes.
 
-## Notas de integración (desde HU-07)
+## Notas de integración (implementado en HU-09)
 
-- `PropertyModel` ya usa borrado lógico (`$useSoftDeletes`), así que `delete($id)` completa `deleted_at`.
-  Falta guardar `deleted_by` (columna de la tabla `properties`, fuera de `allowedFields`).
-- Los listados y la edición (`findWithOwner()`, `paginateWithOwner()` y `getStatusCounts()`) ya excluyen
-  los inmuebles dados de baja.
-- Para la confirmación de la baja se puede seguir el mismo patrón que HU-05: el servidor exige
-  `confirmed=1` y, si falta, muestra una página de confirmación (funciona también sin JavaScript).
+- `PropertyModel::deactivate(int $id, int $deletedByUserId)` ejecuta en una transacción con bloqueo (`SELECT ... FOR UPDATE`) la verificación de existencia, baja previa y contrato vigente, persiste `deleted_by` fuera de `allowedFields` y completa `deleted_at` mediante `delete($id)`.
+- `PropertyController::deactivate(int $id)` (`POST /admin/inmuebles/baja/(:num)`, protegido por `auth`, `role:admin,employee` y CSRF) exige `confirmed=1` y, si falta, renderiza la confirmación explícita en `app/Views/admin/properties/deactivate_confirm.php` (además del modal accesible en cliente en `app/Views/admin/properties/index.php` y `form.php`).
+- El listado administrativo (`/admin/inmuebles`) excluye por defecto los inmuebles inactivos y permite filtrar por estado `active`/`activo`, los estados operativos (`available`, `rented`, `maintenance`) e `inactive`/`inactivo` (mostrando la fecha de baja y el responsable).

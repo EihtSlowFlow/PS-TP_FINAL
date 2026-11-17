@@ -25,12 +25,13 @@ $routes->group('auth', static function (RouteCollection $routes): void {
 $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static function (RouteCollection $routes): void {
     $routes->get('dashboard', 'DashboardController::adminDashboard');
 
-    // Property management: listing, creation and edition (HU-07; the listing gets filters in HU-08)
+    // Property management: listing, creation, edition and logical deactivation (HU-07, HU-08, HU-09)
     $routes->get('inmuebles', 'PropertyController::index');
     $routes->get('inmuebles/nuevo', 'PropertyController::create');
     $routes->post('inmuebles', 'PropertyController::store');
     $routes->get('inmuebles/editar/(:num)', 'PropertyController::edit/$1');
     $routes->post('inmuebles/editar/(:num)', 'PropertyController::update/$1');
+    $routes->post('inmuebles/baja/(:num)', 'PropertyController::deactivate/$1');
 
     // Lease contracts: creation, listing and contract file (HU-10/11; closing is HU-12)
     $routes->get('contratos', 'ContractController::index');
@@ -45,6 +46,18 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static fu
     $routes->get('cuotas/emitir', 'InstallmentController::emit');
     $routes->post('cuotas/emitir', 'InstallmentController::issue');
     $routes->get('cuotas/emitir/resultado', 'InstallmentController::result');
+
+    // Collections: installments with their automatic late fee, and the detail of one (HU-14)
+    $routes->get('cuotas', 'InstallmentController::index');
+    $routes->get('cuotas/(:num)', 'InstallmentController::show/$1');
+
+    // Payment review queue and resolution (HU-17)
+    $routes->get('pagos', 'PaymentController::index');
+    $routes->get('pagos/pendientes', 'PaymentController::index');
+    $routes->get('pagos/historial', 'PaymentController::history');
+    $routes->get('pagos/(:num)', 'PaymentController::show/$1');
+    $routes->post('pagos/(:num)/aprobacion', 'PaymentController::resolve/$1');
+    $routes->post('pagos/(:num)/rechazo', 'PaymentController::reject/$1');
 });
 
 // Exclusive Administrator routes: User management and logical deactivation (HU-04, HU-05)
@@ -65,10 +78,16 @@ $routes->group('propietario', ['filter' => ['auth', 'role:owner']], static funct
     $routes->get('contratos/(:num)', 'ContractController::ownerShow/$1');
 });
 
-// Tenant portal routes (HU-01)
+// Tenant portal routes (HU-01, HU-16, HU-18)
 $routes->group('inquilino', ['filter' => ['auth', 'role:tenant']], static function (RouteCollection $routes): void {
     $routes->get('estado-cuenta', 'DashboardController::tenantAccountStatus');
+    $routes->get('mis-pagos', 'PaymentController::tenantHistory');
+    $routes->get('cuotas/(:num)/informar-pago', 'PaymentController::create/$1');
+    $routes->post('cuotas/(:num)/informar-pago', 'PaymentController::store/$1');
 });
+
+// Protected receipt download/preview for owning tenant or admin/employee (HU-16)
+$routes->get('comprobantes/(:num)', 'PaymentController::receipt/$1', ['filter' => 'auth']);
 
 // Personal profile routes for owners and tenants (HU-06)
 $routes->group('perfil', ['filter' => ['auth', 'role:owner,tenant']], static function (RouteCollection $routes): void {

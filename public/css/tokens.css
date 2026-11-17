@@ -1,0 +1,126 @@
+/*
+ * InmoGestión 2026 — design tokens (issue #33: identidad visual «madera y melamina»).
+ *
+ * THE single source of truth for colour, type, radius, shadow and texture.
+ * Every colour in the project is declared ONCE, here. panel.css, auth.css and any
+ * future stylesheet or view must use these variables and never write a hex/rgb literal.
+ * To re-skin the whole system edit this file only. Reference: .docs/prototipos_pantallas/DESIGN.md
+ *
+ * Load order in every page:  tokens.css  →  panel.css (panel and public catalog) or auth.css (login/register/recovery).
+ *
+ * Contrast (WCAG 2.1, checked on the real values): normal text ≥ 4.5:1, controls and large text ≥ 3:1.
+ * Pairs that are guaranteed are noted next to each token. Keep them when you change a value.
+ */
+
+:root {
+    /* ---------------------------------------------------------------
+     * 1. Brand — nogal (walnut) and miel (honey)
+     * ------------------------------------------------------------- */
+    --primary: #7A4B2A;              /* nogal: buttons, links, focus. White on it 7.32:1 */
+    --primary-hover: #5F3A20;        /* hover of buttons. White on it 9.94:1 */
+    --primary-soft: #F0E2CF;         /* roble claro: active chip, role chip, soft fills */
+    --primary-text: var(--primary-hover); /* text on --primary-soft (7.80:1) and on light surfaces */
+    --on-primary: #FFFFFF;
+    --accent: #D9A566;               /* miel: active sidebar item and small brand details */
+    --on-accent: var(--heading);     /* text on --accent (7.39:1) */
+
+    /* ---------------------------------------------------------------
+     * 2. Sidebar and dark brand panels — café
+     * ------------------------------------------------------------- */
+    --sidebar-bg: #3B2A20;           /* sidebar and login brand panel */
+    --sidebar-bg-raised: #4A372B;    /* hover, user card */
+    --sidebar-edge: #241811;         /* darker "canto" on the sidebar edge */
+    --sidebar-line: #5A4535;         /* dividers on dark */
+    --sidebar-text: #F3E9DC;         /* 11.38:1 on --sidebar-bg */
+    --sidebar-text-muted: #D2C1AE;   /* secondary text on dark, ≥ 7:1 */
+    --on-dark-faint: rgba(243, 233, 220, 0.08);  /* translucent tile on a dark panel */
+    --on-dark-line: rgba(243, 233, 220, 0.20);   /* hairline on a dark panel */
+
+    /* ---------------------------------------------------------------
+     * 3. Surfaces — lino (linen) and melamina blanca
+     * ------------------------------------------------------------- */
+    --bg-app: #F5EFE6;               /* lino: app background (flat, no gradient). Text 11.49:1 */
+    --surface: #FFFDF9;              /* melamina blanca: cards, tables, forms. Text 12.93:1 */
+    --surface-muted: #F8F1E7;        /* table head, read-only fields, nested boxes */
+    --row-hover: #F4ECDF;
+    --border-default: #E4D9C9;       /* decorative hairlines */
+    --border-input: #8C7B6B;         /* field and secondary-button border. 4.01:1 on --surface (min 3:1) */
+    --edge: #D3C3AE;                 /* "canto": 2px darker bottom edge of cards, like a melamine board */
+
+    /* ---------------------------------------------------------------
+     * 4. Text
+     * ------------------------------------------------------------- */
+    --heading: #2B1D14;
+    --text-main: #3A2E26;
+    --text-muted: #6B5E52;           /* 6.17:1 on --surface, 5.49:1 on --bg-app */
+
+    /* ---------------------------------------------------------------
+     * 5. Semantic — business states keep their colour. Never inform a state with colour alone.
+     *    Solid buttons use the *-text shade (white on it ≥ 5.9:1); soft fills carry the badges and flashes.
+     * ------------------------------------------------------------- */
+    --success: #10B981;
+    --success-soft: #ECFDF5;
+    --success-text: #065F46;
+    --success-hover: #064E3B;
+    --danger: #EF4444;
+    --danger-soft: #FEF2F2;
+    --danger-text: #B91C1C;
+    --danger-hover: #991B1B;
+    --danger-border: #FECACA;
+    --warning: #F59E0B;
+    --warning-soft: #FFFBEB;
+    --warning-text: #92400E;
+    --warning-hover: #D97706;
+    --info: #2563EB;
+    --info-soft: #DBEAFE;
+    --info-text: #1E40AF;
+    --info-border: #BFDBFE;
+
+    /* ---------------------------------------------------------------
+     * 6. Focus, overlays and shadows
+     * ------------------------------------------------------------- */
+    --focus: var(--primary);                      /* keyboard focus outline on light surfaces (6:1) */
+    --focus-on-dark: var(--accent);               /* keyboard focus outline on --sidebar-bg */
+    --focus-halo: rgba(122, 75, 42, 0.22);        /* soft halo around a focused field */
+    --overlay: rgba(43, 29, 20, 0.55);            /* modal and drawer backdrop */
+    --shadow-soft: 0 10px 40px -10px rgba(59, 42, 32, 0.14);
+    --shadow-card: 0 10px 40px -10px rgba(59, 42, 32, 0.14), 0 1px 3px 0 rgba(59, 42, 32, 0.06);
+    --shadow-pop: 0 20px 25px -5px rgba(43, 29, 20, 0.22), 0 10px 10px -5px rgba(43, 29, 20, 0.08);
+    --shadow-button: 0 4px 12px rgba(95, 58, 32, 0.28);
+
+    /* ---------------------------------------------------------------
+     * 7. Typography — Inter for data and forms, a serif only for titles and brand
+     * ------------------------------------------------------------- */
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+
+    /* ---------------------------------------------------------------
+     * 8. Shape
+     * ------------------------------------------------------------- */
+    --radius-sm: 8px;                /* buttons, inputs */
+    --radius-md: 12px;               /* cards, tables */
+    --radius-lg: 16px;               /* large containers */
+    --radius-pill: 999px;            /* badges, avatars */
+
+    /* ---------------------------------------------------------------
+     * 9. Texture — decorative wood grain, CSS/SVG only.
+     *    Allowed ONLY on the sidebar and on the dark brand panel of the auth pages,
+     *    never behind content (tables, forms, cards). Removed in print.
+     *    Source (readable): an SVG 360×360 with two feTurbulence layers (fractalNoise,
+     *    baseFrequency "0.85 0.011" light streaks and "0.30 0.006" dark streaks) over the café colour.
+     * ------------------------------------------------------------- */
+    --texture-wood-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cfilter id='g' x='0' y='0' width='100%' height='100%'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85 0.011' numOctaves='3' seed='7' stitchTiles='stitch' result='a'/%3E%3CfeColorMatrix in='a' type='matrix' values='0 0 0 0 0.86 0 0 0 0 0.66 0 0 0 0 0.45 1.9 0 0 0 -0.92' result='l'/%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.30 0.006' numOctaves='2' seed='3' stitchTiles='stitch' result='b'/%3E%3CfeColorMatrix in='b' type='matrix' values='0 0 0 0 0.08 0 0 0 0 0.05 0 0 0 0 0.03 2.4 0 0 0 -1.25' result='d'/%3E%3CfeMerge%3E%3CfeMergeNode in='d'/%3E%3CfeMergeNode in='l'/%3E%3C/feMerge%3E%3C/filter%3E%3Crect width='360' height='360' filter='url(%23g)' opacity='0.22'/%3E%3C/svg%3E");
+    --texture-size: 360px 360px;
+}
+
+/* Printable views (settlement receipt, delinquency report): flat, no textures, no shadows. */
+@media print {
+    :root {
+        --texture-wood-grain: none;
+        --shadow-soft: none;
+        --shadow-card: none;
+        --shadow-pop: none;
+        --shadow-button: none;
+        --bg-app: #FFFFFF;
+    }
+}
