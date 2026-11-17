@@ -67,6 +67,12 @@ $flashSuccess = session()->getFlashdata('success');
                     <a href="<?= esc(site_url('admin/cuotas')) ?>" class="sidebar-link<?= $activeMenu === 'cobranzas' ? ' is-active' : '' ?>">
                         <span>Cobranzas</span>
                     </a>
+                    <a href="<?= esc(site_url('admin/pagos')) ?>" class="sidebar-link<?= $activeMenu === 'pagos' ? ' is-active' : '' ?>">
+                        <span>Pagos</span>
+                    </a>
+                    <a href="<?= esc(site_url('admin/pagos/historial')) ?>" class="sidebar-link<?= $activeMenu === 'pagos-historial' ? ' is-active' : '' ?>">
+                        <span>Historial</span>
+                    </a>
                 <?php elseif ($userRole === 'owner'): ?>
                     <a href="<?= esc(site_url('propietario/dashboard')) ?>" class="sidebar-link<?= $activeMenu === 'propietario-dashboard' ? ' is-active' : '' ?>">
                         <span>Dashboard</span>
@@ -83,6 +89,9 @@ $flashSuccess = session()->getFlashdata('success');
                 <?php elseif ($userRole === 'tenant'): ?>
                     <a href="<?= esc(site_url('inquilino/estado-cuenta')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-estado-cuenta' ? ' is-active' : '' ?>">
                         <span>Estado de cuenta</span>
+                    </a>
+                    <a href="<?= esc(site_url('inquilino/mis-pagos')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-mis-pagos' ? ' is-active' : '' ?>">
+                        <span>Mis pagos</span>
                     </a>
                     <a href="<?= esc(site_url('perfil')) ?>" class="sidebar-link<?= $activeMenu === 'perfil' ? ' is-active' : '' ?>">
                         <span>Mi perfil</span>

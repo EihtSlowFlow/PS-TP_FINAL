@@ -19,6 +19,156 @@ use DateTimeImmutable;
  */
 class PaymentController extends BaseController
 {
+    public const PAYMENT_NOT_FOUND_MESSAGE     = 'El pago solicitado no existe.';
+    public const INVALID_REASON_MESSAGE        = 'Ingresá un motivo para rechazar el pago.';
+    public const RESOLUTION_NOT_ALLOWED_MESSAGE = 'Solo se pueden resolver pagos pendientes de validación.';
+
+    /**
+     * Lists today’s pending validations for admins/employees (HU-17).
+     */
+    public function index(): string
+    {
+        $pending = model(PaymentModel::class)->findPendingValidationQueue();
+
+        return view('admin/payments/index', array_merge($this->panelContext(
+            pageTitle: 'Pagos',
+            breadcrumb: 'Pagos / Pendientes de validación',
+            activeMenu: 'pagos'
+        ), [
+            'payments' => $pending,
+        ]));
+    }
+
+    /**
+     * Shows the review page for a pending payment (HU-17).
+     */
+    public function history(): string
+    {
+        $status = $this->normalizeStatusFilter($this->request->getGet('status'));
+        $period = $this->normalizePeriodFilter($this->request->getGet('period'));
+
+        return view('admin/payments/history', array_merge($this->panelContext(
+            pageTitle: 'Historial de pagos',
+            breadcrumb: 'Pagos / Historial',
+            activeMenu: 'pagos-historial'
+        ), [
+            'payments' => model(PaymentModel::class)->findAdminHistory($status, $period),
+            'periods'  => model(PaymentModel::class)->periodsWithPayments(),
+            'filters'  => [
+                'status' => $status,
+                'period' => $period,
+            ],
+            'statusOptions' => PaymentModel::STATUS_LABELS,
+        ]));
+    }
+
+    /**
+     * Alias for the admin payment history (HU-18).
+     */
+    public function adminHistory(): string
+    {
+        return $this->history();
+    }
+
+    /**
+     * Shows the tenant payment history (HU-18).
+     */
+    public function tenantHistory(): string
+    {
+        $tenantId = (int) session()->get('user_id');
+
+        return view('tenant/payments/history', array_merge($this->panelContext(
+            pageTitle: 'Mis pagos',
+            breadcrumb: 'Estado de cuenta / Mis pagos',
+            activeMenu: 'inquilino-mis-pagos'
+        ), [
+            'payments' => model(PaymentModel::class)->findTenantHistory($tenantId),
+        ]));
+    }
+
+    public function show(int|string $paymentId): RedirectResponse|string
+    {
+        $payment = model(PaymentModel::class)->findForReview((int) $paymentId);
+
+        if ($payment === null) {
+            return redirect()->to(site_url('admin/pagos'))->with('error', self::PAYMENT_NOT_FOUND_MESSAGE);
+        }
+
+        if ((string) $payment['status'] !== PaymentModel::STATUS_PENDING_VALIDATION) {
+            return redirect()->to(site_url('admin/pagos'))->with('error', self::RESOLUTION_NOT_ALLOWED_MESSAGE);
+        }
+
+        $installmentTotal = InstallmentModel::sumAmounts([
+            $payment['base_amount'],
+            $payment['late_fee'],
+        ]);
+
+        return view('admin/payments/show', array_merge($this->panelContext(
+            pageTitle: 'Revisión de pago',
+            breadcrumb: 'Pagos / Revisión de pago',
+            activeMenu: 'pagos'
+        ), [
+            'payment' => $payment,
+            'periodLabel' => InstallmentModel::labelForPeriod((string) $payment['period']),
+            'installmentTotal' => $installmentTotal,
+            'amountDifference' => PaymentModel::amountDifference((string) $payment['amount'], $installmentTotal),
+            'reviewerId' => (int) session()->get('user_id'),
+        ]));
+    }
+
+    /**
+     * Approves a pending payment.
+     */
+    public function resolve(int|string $paymentId): RedirectResponse
+    {
+        $paymentId = (int) $paymentId;
+        $userId    = (int) session()->get('user_id');
+
+        $payment = model(PaymentModel::class)->findForReview($paymentId);
+        if ($payment === null || (string) $payment['status'] !== PaymentModel::STATUS_PENDING_VALIDATION) {
+            return redirect()->to(site_url('admin/pagos'))->with('error', self::RESOLUTION_NOT_ALLOWED_MESSAGE);
+        }
+
+        $result = model(PaymentModel::class)->resolvePendingPayment($paymentId, $userId, true);
+
+        if (! $result['ok']) {
+            return redirect()->to(site_url('admin/pagos/' . $paymentId))->with('error', 'No se pudo aprobar el pago. Intentá nuevamente.');
+        }
+
+        return redirect()->to(site_url('admin/pagos'))->with('success', 'Pago aprobado y cuota marcada como pagada.');
+    }
+
+    /**
+     * Rejects a pending payment with a mandatory reason.
+     */
+    public function reject(int|string $paymentId): RedirectResponse
+    {
+        $paymentId = (int) $paymentId;
+        $userId    = (int) session()->get('user_id');
+        $reason    = trim((string) $this->request->getPost('rejection_reason'));
+
+        $payment = model(PaymentModel::class)->findForReview($paymentId);
+        if ($payment === null || (string) $payment['status'] !== PaymentModel::STATUS_PENDING_VALIDATION) {
+            return redirect()->to(site_url('admin/pagos'))->with('error', self::RESOLUTION_NOT_ALLOWED_MESSAGE);
+        }
+
+        if ($reason === '') {
+            return redirect()->to(site_url('admin/pagos/' . $paymentId))->with('error', self::INVALID_REASON_MESSAGE);
+        }
+
+        $result = model(PaymentModel::class)->resolvePendingPayment($paymentId, $userId, false, $reason);
+
+        if (! $result['ok']) {
+            if ($result['error'] === 'missing_reason') {
+                return redirect()->to(site_url('admin/pagos/' . $paymentId))->with('error', self::INVALID_REASON_MESSAGE);
+            }
+
+            return redirect()->to(site_url('admin/pagos/' . $paymentId))->with('error', 'No se pudo rechazar el pago. Intentá nuevamente.');
+        }
+
+        return redirect()->to(site_url('admin/pagos'))->with('success', 'Pago rechazado y cuota devuelta a su estado anterior.');
+    }
+
     /**
      * Shows the "Informar pago" form for a tenant's pending or overdue installment (HU-16).
      */
@@ -274,6 +424,28 @@ class PaymentController extends BaseController
             ContractModel::STATUS_RESCINDED => 'Contrato rescindido',
             default                         => null,
         };
+    }
+
+    private function normalizeStatusFilter(?string $status): ?string
+    {
+        $status = trim((string) $status);
+
+        return $status !== '' && array_key_exists($status, PaymentModel::STATUS_LABELS) ? $status : null;
+    }
+
+    private function normalizePeriodFilter(?string $period): ?string
+    {
+        $period = trim((string) $period);
+
+        if ($period === '') {
+            return null;
+        }
+
+        if (preg_match('/^\d{4}-\d{2}$/', $period) === 1 || preg_match('/^\d{4}-\d{2}-\d{2}$/', $period) === 1) {
+            return $period;
+        }
+
+        return null;
     }
 
     private function normalizeDecimal(string $value): string

@@ -50,6 +50,14 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static fu
     // Collections: installments with their automatic late fee, and the detail of one (HU-14)
     $routes->get('cuotas', 'InstallmentController::index');
     $routes->get('cuotas/(:num)', 'InstallmentController::show/$1');
+
+    // Payment review queue and resolution (HU-17)
+    $routes->get('pagos', 'PaymentController::index');
+    $routes->get('pagos/pendientes', 'PaymentController::index');
+    $routes->get('pagos/historial', 'PaymentController::history');
+    $routes->get('pagos/(:num)', 'PaymentController::show/$1');
+    $routes->post('pagos/(:num)/aprobacion', 'PaymentController::resolve/$1');
+    $routes->post('pagos/(:num)/rechazo', 'PaymentController::reject/$1');
 });
 
 // Exclusive Administrator routes: User management and logical deactivation (HU-04, HU-05)
@@ -70,9 +78,10 @@ $routes->group('propietario', ['filter' => ['auth', 'role:owner']], static funct
     $routes->get('contratos/(:num)', 'ContractController::ownerShow/$1');
 });
 
-// Tenant portal routes (HU-01, HU-16)
+// Tenant portal routes (HU-01, HU-16, HU-18)
 $routes->group('inquilino', ['filter' => ['auth', 'role:tenant']], static function (RouteCollection $routes): void {
     $routes->get('estado-cuenta', 'DashboardController::tenantAccountStatus');
+    $routes->get('mis-pagos', 'PaymentController::tenantHistory');
     $routes->get('cuotas/(:num)/informar-pago', 'PaymentController::create/$1');
     $routes->post('cuotas/(:num)/informar-pago', 'PaymentController::store/$1');
 });

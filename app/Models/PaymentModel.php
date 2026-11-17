@@ -87,8 +87,299 @@ class PaymentModel extends Model
     }
 
     /**
+     * The latest approved or pending-validation payment for each installment in an account statement.
+     *
+     * @param list<int> $installmentIds
+     *
+     * @return array<int, array<string, mixed>> Keyed by installment id.
+     */
+    public function findTenantAccountDetails(array $installmentIds): array
+    {
+        if ($installmentIds === []) {
+            return [];
+        }
+
+        $rows = $this->builder()
+            ->select(
+                'payments.id, payments.installment_id, payments.amount, payments.paid_on, payments.method, '
+                . 'payments.status, payment_receipts.id AS receipt_id'
+            )
+            ->join('installments', 'installments.id = payments.installment_id')
+            ->join('payment_receipts', 'payment_receipts.payment_id = payments.id', 'left')
+            ->whereIn('payments.installment_id', $installmentIds)
+            ->groupStart()
+                ->groupStart()
+                    ->where('installments.status', InstallmentModel::STATUS_PAID)
+                    ->where('payments.status', self::STATUS_APPROVED)
+                ->groupEnd()
+                ->orGroupStart()
+                    ->where('installments.status', InstallmentModel::STATUS_UNDER_REVIEW)
+                    ->where('payments.status', self::STATUS_PENDING_VALIDATION)
+                ->groupEnd()
+            ->groupEnd()
+            ->orderBy('payments.id', 'DESC')
+            ->get()
+            ->getResultArray();
+
+        $details = [];
+
+        foreach ($rows as $row) {
+            $installmentId = (int) $row['installment_id'];
+
+            if (! isset($details[$installmentId])) {
+                $details[$installmentId] = $row;
+            }
+        }
+
+        return $details;
+    }
+
+    /**
      * Computes `paidAmount - expectedTotal` in exact cents, formatted with two decimals (e.g. "-1500.00" or "0.00").
      */
+    /**
+     * Lists all payments waiting for an admin/employee review ordered by oldest first.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findPendingValidationQueue(): array
+    {
+        $rows = $this->builder()
+            ->select(
+                'payments.id AS payment_id, payments.amount, payments.paid_on, payments.method, payments.reference_number, '
+                . 'payments.created_at AS submitted_at, payments.status, '
+                . 'installments.id AS installment_id, installments.number AS installment_number, installments.period, '
+                . 'installments.base_amount, installments.late_fee, installments.due_date, installments.status AS installment_status, '
+                . 'contracts.id AS contract_id, '
+                . 'tenant.first_name AS tenant_first_name, tenant.last_name AS tenant_last_name, '
+                . 'property.address AS property_address, property.city AS property_city, '
+                . 'receipt.id AS receipt_id, receipt.original_name AS receipt_original_name, receipt.mime_type AS receipt_mime_type, receipt.size_bytes AS receipt_size_bytes'
+            )
+            ->join('installments', 'installments.id = payments.installment_id')
+            ->join('contracts', 'contracts.id = installments.contract_id')
+            ->join('users AS tenant', 'tenant.id = contracts.tenant_id')
+            ->join('properties AS property', 'property.id = contracts.property_id')
+            ->join('payment_receipts AS receipt', 'receipt.payment_id = payments.id', 'left')
+            ->where('payments.status', self::STATUS_PENDING_VALIDATION)
+            ->orderBy('payments.created_at', 'ASC')
+            ->orderBy('payments.id', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        return array_values($rows);
+    }
+
+    /**
+     * Returns the full data needed to review one pending payment.
+     *
+     * @return array<string, mixed>|null
+     */
+    public function findForReview(int $paymentId): ?array
+    {
+        $row = $this->builder()
+            ->select(
+                'payments.*, '
+                . 'installments.id AS installment_id, installments.number AS installment_number, installments.period, '
+                . 'installments.base_amount, installments.late_fee, installments.due_date, installments.status AS installment_status, '
+                . 'contracts.id AS contract_id, contracts.owner_id, contracts.status AS contract_status, '
+                . 'tenant.id AS tenant_id, tenant.first_name AS tenant_first_name, tenant.last_name AS tenant_last_name, '
+                . 'property.address AS property_address, property.city AS property_city, '
+                . 'receipt.id AS receipt_id, receipt.original_name AS receipt_original_name, receipt.mime_type AS receipt_mime_type, receipt.size_bytes AS receipt_size_bytes'
+            )
+            ->join('installments', 'installments.id = payments.installment_id')
+            ->join('contracts', 'contracts.id = installments.contract_id')
+            ->join('users AS tenant', 'tenant.id = contracts.tenant_id')
+            ->join('properties AS property', 'property.id = contracts.property_id')
+            ->join('payment_receipts AS receipt', 'receipt.payment_id = payments.id', 'left')
+            ->where('payments.id', $paymentId)
+            ->get()
+            ->getRowArray();
+
+        return $row ?: null;
+    }
+
+    /**
+     * Lists a tenant's payment history, newest first, including receipt metadata when present.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findTenantHistory(int $tenantId, ?string $status = null): array
+    {
+        $builder = $this->builder()
+            ->select(
+                'payments.id AS payment_id, payments.amount, payments.paid_on, payments.method, payments.status, '
+                . 'payments.rejection_reason, payments.created_at, payments.resolved_at, '
+                . 'installments.id AS installment_id, installments.number AS installment_number, installments.period, '
+                . 'installments.base_amount, installments.late_fee, '
+                . 'payment_receipts.id AS receipt_id, payment_receipts.original_name AS receipt_original_name'
+            )
+            ->join('installments', 'installments.id = payments.installment_id')
+            ->join('contracts', 'contracts.id = installments.contract_id')
+            ->join('payment_receipts', 'payment_receipts.payment_id = payments.id', 'left')
+            ->where('contracts.tenant_id', $tenantId)
+            ->orderBy('payments.created_at', 'DESC')
+            ->orderBy('payments.id', 'DESC');
+
+        if ($status !== null && $status !== '') {
+            $builder->where('payments.status', $status);
+        }
+
+        return $builder->get()->getResultArray();
+    }
+
+    /**
+     * Lists the complete payment history for admin/employee filtering by status and period.
+     *
+     * @param string|null $status
+     * @param string|null $period
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findAdminHistory(?string $status = null, ?string $period = null): array
+    {
+        $builder = $this->builder()
+            ->select(
+                'payments.id AS payment_id, payments.amount, payments.paid_on, payments.method, payments.status, '
+                . 'payments.rejection_reason, payments.created_at, payments.resolved_at, '
+                . 'installments.id AS installment_id, installments.number AS installment_number, installments.period, '
+                . 'installments.base_amount, installments.late_fee, '
+                . 'contracts.id AS contract_id, contracts.status AS contract_status, '
+                . 'tenant.id AS tenant_id, tenant.first_name AS tenant_first_name, tenant.last_name AS tenant_last_name, '
+                . 'property.address AS property_address, property.city AS property_city, '
+                . 'payment_receipts.id AS receipt_id, payment_receipts.original_name AS receipt_original_name'
+            )
+            ->join('installments', 'installments.id = payments.installment_id')
+            ->join('contracts', 'contracts.id = installments.contract_id')
+            ->join('users AS tenant', 'tenant.id = contracts.tenant_id')
+            ->join('properties AS property', 'property.id = contracts.property_id')
+            ->join('payment_receipts', 'payment_receipts.payment_id = payments.id', 'left')
+            ->orderBy('payments.created_at', 'DESC')
+            ->orderBy('payments.id', 'DESC');
+
+        if ($status !== null && $status !== '') {
+            $builder->where('payments.status', $status);
+        }
+
+        if ($period !== null && $period !== '') {
+            if (preg_match('/^\d{4}-\d{2}$/', $period) === 1) {
+                $builder->where('SUBSTR(installments.period, 1, 7) =', $period);
+            } else {
+                $builder->where('installments.period', $period);
+            }
+        }
+
+        return $builder->get()->getResultArray();
+    }
+
+    /**
+     * Returns unique payment periods ordered newest first.
+     *
+     * @return list<string>
+     */
+    public function periodsWithPayments(): array
+    {
+        $rows = $this->builder()
+            ->select('DISTINCT SUBSTR(installments.period, 1, 7) AS period')
+            ->join('installments', 'installments.id = payments.installment_id')
+            ->orderBy('period', 'DESC')
+            ->get()
+            ->getResultArray();
+
+        return array_values(array_map(static fn (array $row): string => (string) ($row['period'] ?? ''), $rows));
+    }
+
+    /**
+     * Resolves a pending payment; approves it or rejects it with a required reason.
+     *
+     * @return array{ok: bool, error?: string, payment_status?: string, installment_status?: string}
+     */
+    public function resolvePendingPayment(int $paymentId, int $resolverId, bool $approve, ?string $rejectionReason = null): array
+    {
+        $db   = $this->db;
+        $now  = date('Y-m-d H:i:s');
+        $row  = $db->query(
+            'SELECT p.*, i.id AS installment_id, i.status AS installment_status, i.due_date, i.base_amount, i.late_fee '
+            . 'FROM payments p '
+            . 'INNER JOIN installments i ON i.id = p.installment_id '
+            . 'WHERE p.id = ? '
+            . 'FOR UPDATE',
+            [$paymentId]
+        )->getRowArray();
+
+        if ($row === null) {
+            return ['ok' => false, 'error' => 'not_found'];
+        }
+
+        if ((string) $row['status'] !== self::STATUS_PENDING_VALIDATION) {
+            return ['ok' => false, 'error' => 'invalid_status'];
+        }
+
+        if ($approve) {
+            $update = [
+                'status'           => self::STATUS_APPROVED,
+                'rejection_reason' => null,
+                'resolved_by'      => $resolverId,
+                'resolved_at'      => $now,
+                'updated_at'       => $now,
+            ];
+            $installmentStatus = InstallmentModel::STATUS_PAID;
+        } else {
+            $reason = trim((string) ($rejectionReason ?? ''));
+
+            if ($reason === '') {
+                return ['ok' => false, 'error' => 'missing_reason'];
+            }
+
+            $update = [
+                'status'           => self::STATUS_REJECTED,
+                'rejection_reason' => $reason,
+                'resolved_by'      => $resolverId,
+                'resolved_at'      => $now,
+                'updated_at'       => $now,
+            ];
+            $installmentStatus = (string) $row['due_date'] < date('Y-m-d')
+                ? InstallmentModel::STATUS_OVERDUE
+                : InstallmentModel::STATUS_PENDING;
+        }
+
+        $db->transBegin();
+
+        try {
+            $updatedPayment = $db->table('payments')
+                ->where('id', $paymentId)
+                ->update($update);
+
+            if ($updatedPayment === false) {
+                throw new RuntimeException('Could not resolve payment record.');
+            }
+
+            $updatedInstallment = $db->table('installments')
+                ->where('id', (int) $row['installment_id'])
+                ->update([
+                    'status'     => $installmentStatus,
+                    'updated_at' => $now,
+                ]);
+
+            if ($updatedInstallment === false) {
+                throw new RuntimeException('Could not update installment state after payment resolution.');
+            }
+
+            $db->transCommit();
+
+            return [
+                'ok' => true,
+                'payment_status' => $approve ? self::STATUS_APPROVED : self::STATUS_REJECTED,
+                'installment_status' => $installmentStatus,
+            ];
+        } catch (Throwable $e) {
+            $db->transRollback();
+            $db->resetTransStatus();
+            log_message('error', 'Failed to resolve payment {id}: {message}', ['id' => $paymentId, 'message' => $e->getMessage()]);
+
+            return ['ok' => false, 'error' => 'persistence'];
+        }
+    }
+
     public static function amountDifference(string|float $paidAmount, string|float $expectedTotal): string
     {
         $paidCents     = (int) round(((float) $paidAmount) * 100);
@@ -257,4 +548,3 @@ class PaymentModel extends Model
         }
     }
 }
-

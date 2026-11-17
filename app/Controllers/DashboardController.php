@@ -2,6 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Libraries\LateFeeCalculator;
+use App\Models\InstallmentModel;
+use App\Models\PaymentModel;
+
 /**
  * Provides the role-specific landing views required by HU-01 until the full feature
  * stories (HU-15, HU-25, HU-26) replace these placeholders.
@@ -38,19 +42,43 @@ class DashboardController extends BaseController
         );
     }
 
-    /**
-     * Landing panel for 'tenant' role (/inquilino/estado-cuenta).
-     */
+    /** Tenant account statement (HU-15). */
     public function tenantAccountStatus(): string
     {
-        return $this->renderPanel(
-            pageTitle: 'Estado de cuenta',
-            breadcrumb: 'Estado de cuenta',
-            activeMenu: 'inquilino-estado-cuenta',
-            heading: 'Estado de cuenta',
-            subtitle: 'Consulta tus cuotas emitidas, vencimientos y estado de pagos.',
-            allowedNote: 'Sección habilitada para el rol Inquilino.'
+        $today = InstallmentModel::today();
+        $model = model(InstallmentModel::class);
+        $model->refreshLateFees($today);
+
+        $installments = $model->findTenantAccount((int) session()->get('user_id'));
+        $payments     = model(PaymentModel::class)->findTenantAccountDetails(
+            array_map(static fn (array $row): int => (int) $row['id'], $installments)
         );
+        $byStatus     = array_fill_keys(array_keys(InstallmentModel::STATUS_LABELS), []);
+
+        foreach ($installments as $installment) {
+            $installment['days_late']   = LateFeeCalculator::daysLate((string) $installment['due_date'], $today);
+            $installment['days_to_due'] = LateFeeCalculator::daysUntilDue((string) $installment['due_date'], $today);
+            $installment['total']       = InstallmentModel::sumAmounts([
+                $installment['base_amount'],
+                $installment['late_fee'],
+            ]);
+            $installment['payment'] = $payments[(int) $installment['id']] ?? null;
+            $byStatus[(string) $installment['status']][] = $installment;
+        }
+
+        return view('dashboard/tenant_account_status', array_merge(
+            $this->panelContext('Estado de cuenta', 'Estado de cuenta', 'inquilino-estado-cuenta'),
+            [
+                'byStatus'    => $byStatus,
+                'totalCount'  => count($installments),
+                'statusOrder' => [
+                    InstallmentModel::STATUS_PENDING,
+                    InstallmentModel::STATUS_OVERDUE,
+                    InstallmentModel::STATUS_UNDER_REVIEW,
+                    InstallmentModel::STATUS_PAID,
+                ],
+            ]
+        ));
     }
 
     private function renderPanel(

@@ -477,6 +477,27 @@ class InstallmentModel extends Model
     }
 
     /**
+     * All installments owned by one tenant, with the property and contract data needed by the account statement.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findTenantAccount(int $tenantId): array
+    {
+        return $this->builder()
+            ->select(
+                'installments.*, contracts.late_fee_daily_percentage, contracts.status AS contract_status, '
+                . 'properties.address AS property_address, properties.city AS property_city'
+            )
+            ->join('contracts', 'contracts.id = installments.contract_id')
+            ->join('properties', 'properties.id = contracts.property_id')
+            ->where('contracts.tenant_id', $tenantId)
+            ->orderBy('installments.period', 'DESC')
+            ->orderBy('installments.number', 'DESC')
+            ->get()
+            ->getResultArray();
+    }
+
+    /**
      * Finds installments by id with the contract, property and tenant data the issuing report shows. Deactivated
      * tenants are included on purpose: the history must stay consultable.
      *
