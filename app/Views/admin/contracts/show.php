@@ -177,18 +177,23 @@ $this->extend('layouts/panel');
                         </p>
                         <?php if ($status === ContractModel::STATUS_IN_FORCE): ?>
                             <p class="field-help">Mientras el contrato esté vigente, el inmueble figura como «Alquilado» y no puede asociarse a otro contrato.</p>
-                            <div class="inline-actions-row stacked">
-                                <form action="<?= esc(site_url('admin/contratos/' . $contract['id'] . '/finalizar')) ?>" method="post" class="inline-form-action">
-                                    <?= csrf_field() ?>
-                                    <input type="hidden" name="closing_reason" value="">
-                                    <button type="submit" class="btn btn-warning">Finalizar contrato</button>
-                                </form>
-                                <form action="<?= esc(site_url('admin/contratos/' . $contract['id'] . '/rescindir')) ?>" method="post" class="inline-form-action">
-                                    <?= csrf_field() ?>
-                                    <input type="hidden" name="closing_reason" value="">
-                                    <button type="submit" class="btn btn-secondary">Rescindir contrato</button>
-                                </form>
-                            </div>
+                            <?php if ($isOwner): ?>
+                                <?php /* HU-11: the owner only consults the contract; closing it is the administration's (HU-12). */ ?>
+                                <p class="field-help" id="owner-closing-notice">Si necesitás finalizar o rescindir el contrato, comunicate con la administración: es quien registra el cierre.</p>
+                            <?php else: ?>
+                                <div class="inline-actions-row stacked">
+                                    <form action="<?= esc(site_url('admin/contratos/' . $contract['id'] . '/finalizar')) ?>" method="post" class="inline-form-action">
+                                        <?= csrf_field() ?>
+                                        <input type="hidden" name="closing_reason" value="">
+                                        <button type="submit" class="btn btn-warning">Finalizar contrato</button>
+                                    </form>
+                                    <form action="<?= esc(site_url('admin/contratos/' . $contract['id'] . '/rescindir')) ?>" method="post" class="inline-form-action">
+                                        <?= csrf_field() ?>
+                                        <input type="hidden" name="closing_reason" value="">
+                                        <button type="submit" class="btn btn-secondary">Rescindir contrato</button>
+                                    </form>
+                                </div>
+                            <?php endif; ?>
                         <?php else: ?>
                             <dl class="audit-list">
                                 <div class="audit-item">

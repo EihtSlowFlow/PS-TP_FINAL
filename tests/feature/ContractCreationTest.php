@@ -736,6 +736,43 @@ final class ContractCreationTest extends CIUnitTestCase
         $this->assertSame(ContractController::OWNER_CONTRACT_NOT_FOUND_MESSAGE, session()->getFlashdata('error'));
     }
 
+    public function testTheOwnerFileOfAContractInForceOffersNoClosingActions(): void
+    {
+        $fixture    = $this->fixture();
+        $contractId = $this->insertContract($fixture['property'], $fixture['tenant'], $fixture['owner']);
+        $owner      = [
+            'is_logged_in' => true,
+            'user_id'      => $fixture['owner'],
+            'user_email'   => 'marta.quiroga.hu10@example.com',
+            'user_name'    => 'Marta Quiroga',
+            'user_role'    => 'owner',
+        ];
+
+        // HU-11: the owner only consults the contract; finishing or rescinding it is the administration's (HU-12).
+        $file = $this->withSession($owner)->get('propietario/contratos/' . $contractId);
+        $file->assertStatus(200);
+        $file->assertDontSee('Finalizar contrato');
+        $file->assertDontSee('Rescindir contrato');
+        $file->assertDontSee(site_url('admin/contratos/' . $contractId . '/finalizar'));
+        $file->assertSeeElement('#owner-closing-notice');
+
+        // Even a hand-made request is stopped by the role filter and leaves the contract in force.
+        foreach (['finalizar', 'rescindir'] as $action) {
+            $_SESSION = [];
+            $this->postWithSession($owner, "admin/contratos/{$contractId}/{$action}", ['closing_reason' => 'Lo cierro yo'])
+                ->assertRedirectTo('/propietario/dashboard');
+        }
+
+        $this->assertSame('in_force', $this->db->table('contracts')->where('id', $contractId)->get()->getRowArray()['status']);
+
+        // The administration still has both actions.
+        $_SESSION = [];
+        $adminFile = $this->withSession($this->sessionFor('admin'))->get('admin/contratos/' . $contractId);
+        $adminFile->assertSee('Finalizar contrato');
+        $adminFile->assertSee('Rescindir contrato');
+        $adminFile->assertDontSeeElement('#owner-closing-notice');
+    }
+
     public function testTheDataShownByTheFormAndTheFileIsEscaped(): void
     {
         $admin  = $this->sessionFor('admin');
