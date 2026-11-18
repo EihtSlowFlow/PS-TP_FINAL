@@ -3,9 +3,11 @@
 use App\Database\Seeds\RoleSeeder;
 use App\Models\PropertyModel;
 use App\Models\UserModel;
+use CodeIgniter\Config\Factories;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
+use Config\Agency;
 
 /**
  * Acceptance tests for HU-28: Public landing page.
@@ -33,6 +35,7 @@ final class PublicLandingTest extends CIUnitTestCase
     protected function tearDown(): void
     {
         $_SESSION = [];
+        Factories::reset('config');
 
         parent::tearDown();
     }
@@ -142,6 +145,76 @@ final class PublicLandingTest extends CIUnitTestCase
 
         $response->assertStatus(200);
         $response->assertSee('No hay propiedades disponibles');
+    }
+
+    public function testLandingExplainsTheProcessInStepsForTenantsAndOwners(): void
+    {
+        $body = (string) $this->get('/')->getBody();
+
+        // Two ordered lists (tenants and owners), each with its steps.
+        $this->assertSame(2, preg_match_all('/<ol class="landing-steps">(.*?)<\/ol>/s', $body, $lists));
+
+        foreach ($lists[1] as $list) {
+            $this->assertGreaterThanOrEqual(3, substr_count($list, '<li>'));
+        }
+
+        $this->assertStringContainsString('Para Inquilinos', $body);
+        $this->assertStringContainsString('Para Propietarios', $body);
+    }
+
+    public function testLandingContactDataComesFromTheConfiguration(): void
+    {
+        $agency          = new Agency();
+        $agency->address = 'Calle Configurada 123, Neuquén';
+        $agency->phone   = '+54 (11) 5555-0000';
+        $agency->email   = 'ventas@agencia.example.test';
+        $agency->hours   = 'Martes a Sábados de 10 a 16 hs';
+        Factories::injectMock('config', 'Agency', $agency);
+
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee('Calle Configurada 123, Neuquén');
+        $response->assertSee('+54 (11) 5555-0000');
+        $response->assertSee('ventas@agencia.example.test');
+        $response->assertSee('Martes a Sábados de 10 a 16 hs');
+        $response->assertDontSee('contacto@inmogestion2026.com.ar');
+    }
+
+    public function testPublicFooterKeepsThePublishLinkOnEveryPublicPage(): void
+    {
+        $ownerId    = $this->createUser(UserModel::ROLE_OWNER);
+        $propertyId = $this->createProperty($ownerId);
+
+        foreach (['/', 'catalogo-inmuebles', 'catalogo-inmuebles/' . $propertyId] as $path) {
+            $response = $this->get($path);
+
+            $response->assertStatus(200);
+            $response->assertSee('id="publish-property-link"');
+            $response->assertSee('Publicar mi inmueble');
+            $response->assertSee('href="' . site_url('propietario/inmuebles/nuevo') . '"');
+        }
+    }
+
+    public function testCatalogCardsOfferTheRequestButtonOnlyToTenants(): void
+    {
+        $ownerId    = $this->createUser(UserModel::ROLE_OWNER);
+        $propertyId = $this->createProperty($ownerId);
+        $tenantId   = $this->createUser(UserModel::ROLE_TENANT);
+        $requestUrl = site_url('inquilino/inmuebles/' . $propertyId . '/solicitar');
+
+        $tenant = $this->withSession($this->sessionFor($tenantId, UserModel::ROLE_TENANT))->get('catalogo-inmuebles');
+        $tenant->assertStatus(200);
+        $tenant->assertSee('Ver detalle');
+        $tenant->assertSee('Solicitar alquiler');
+        $tenant->assertSee($requestUrl);
+
+        $_SESSION = [];
+        $visitor  = $this->withSession([])->get('catalogo-inmuebles');
+        $visitor->assertStatus(200);
+        $visitor->assertSee('Ver detalle');
+        $visitor->assertDontSee('Solicitar alquiler');
+        $visitor->assertDontSee($requestUrl);
     }
 
     public function testOnlyActiveApprovedAndAvailablePropertiesOfActiveOwnersAreShown(): void

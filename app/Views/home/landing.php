@@ -8,6 +8,9 @@
  */
 use App\Models\PropertyModel;
 
+/** @var \Config\Agency $agency Contact data of the agency (app/Config/Agency.php) */
+$agency = config('Agency');
+
 $formatMoney = static function (mixed $amount): string {
     $value = (float) $amount;
 
@@ -117,7 +120,12 @@ $formatMoney = static function (mixed $amount): string {
                     </svg>
                 </div>
                 <h3>Para Inquilinos</h3>
-                <p>Encontrá tu próximo hogar fácilmente en nuestro catálogo público. Solicitá el alquiler en línea, consultá el estado de tu cuenta mes a mes, descargá tus cuotas e informá los comprobantes de transferencia sin demoras.</p>
+                <ol class="landing-steps">
+                    <li>Encontrá tu próximo hogar en el catálogo público.</li>
+                    <li>Registrate como inquilino y solicitá el alquiler en línea.</li>
+                    <li>La administración revisa tu solicitud y registra el contrato.</li>
+                    <li>Consultá tu estado de cuenta mes a mes e informá tus pagos con el comprobante.</li>
+                </ol>
                 <div class="landing-info-actions">
                     <a href="<?= esc(site_url('auth/register?role=tenant')) ?>" class="btn btn-primary btn-sm">Crear cuenta de Inquilino</a>
                 </div>
@@ -131,7 +139,12 @@ $formatMoney = static function (mixed $amount): string {
                     </svg>
                 </div>
                 <h3>Para Propietarios</h3>
-                <p>Publicá tus inmuebles para que sean revisados y difundidos por nuestro equipo. Seguí el estado de los contratos de locación vigentes y recibí liquidaciones mensuales transparentes con rendición detallada de comisión y transferencias.</p>
+                <ol class="landing-steps">
+                    <li>Registrate como propietario.</li>
+                    <li>Publicá tu inmueble: nuestro equipo lo revisa y lo difunde en el catálogo.</li>
+                    <li>Seguí el estado de los contratos de locación vigentes.</li>
+                    <li>Recibí liquidaciones mensuales con la comisión y las transferencias detalladas.</li>
+                </ol>
                 <div class="landing-info-actions">
                     <a href="<?= esc(site_url('auth/register?role=owner')) ?>" class="btn btn-primary btn-sm">Publicar como Propietario</a>
                 </div>
@@ -149,19 +162,19 @@ $formatMoney = static function (mixed $amount): string {
             <div class="landing-contact-grid">
                 <div class="landing-contact-item">
                     <span class="landing-contact-label">Dirección</span>
-                    <span class="landing-contact-value">Av. Alem 1250, Cipolletti, Río Negro</span>
+                    <span class="landing-contact-value"><?= esc($agency->address) ?></span>
                 </div>
                 <div class="landing-contact-item">
                     <span class="landing-contact-label">Teléfono</span>
-                    <span class="landing-contact-value">+54 (299) 477-8899</span>
+                    <span class="landing-contact-value"><?= esc($agency->phone) ?></span>
                 </div>
                 <div class="landing-contact-item">
                     <span class="landing-contact-label">Correo electrónico</span>
-                    <span class="landing-contact-value">contacto@inmogestion2026.com.ar</span>
+                    <span class="landing-contact-value"><?= esc($agency->email) ?></span>
                 </div>
                 <div class="landing-contact-item">
                     <span class="landing-contact-label">Horario de atención</span>
-                    <span class="landing-contact-value">Lunes a Viernes de 9:00 a 18:00 hs</span>
+                    <span class="landing-contact-value"><?= esc($agency->hours) ?></span>
                 </div>
             </div>
         </div>

@@ -30,6 +30,9 @@ $formatMoney = static function (mixed $amount): string {
 
     return '$ ' . number_format($value, fmod($value, 1.0) === 0.0 ? 0 : 2, ',', '.');
 };
+
+// HU-30: a tenant can ask for the rental straight from the card; everybody else reaches the detail page (HU-29).
+$isTenant = (bool) session()->get('is_logged_in') && (string) session()->get('user_role') === 'tenant';
 ?>
 <?= $this->extend('layouts/public') ?>
 
@@ -99,7 +102,12 @@ $formatMoney = static function (mixed $amount): string {
                     <?php endif; ?>
                     <div class="public-property-footer">
                         <p class="public-property-price"><?= esc($formatMoney($item['base_rent'])) ?><span> / mes</span></p>
-                        <a href="<?= esc(site_url('catalogo-inmuebles/' . (int) $item['id'])) ?>" class="btn btn-primary btn-sm">Ver detalle</a>
+                        <div class="public-property-actions">
+                            <a href="<?= esc(site_url('catalogo-inmuebles/' . (int) $item['id'])) ?>" class="btn <?= $isTenant ? 'btn-secondary' : 'btn-primary' ?> btn-sm">Ver detalle</a>
+                            <?php if ($isTenant): ?>
+                                <a href="<?= esc(site_url('inquilino/inmuebles/' . (int) $item['id'] . '/solicitar')) ?>" class="btn btn-primary btn-sm">Solicitar alquiler</a>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </article>
             <?php endforeach; ?>

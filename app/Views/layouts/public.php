@@ -58,6 +58,8 @@ $flashSuccess = session()->getFlashdata('success');
     <footer class="public-footer">
         <div class="public-footer-inner">
             <span>© 2026 InmoGestión por Nico Tech. Todos los derechos reservados.</span>
+            <?php /* HU-32: owners publish from their portal; a visitor is asked to sign in first (prototype AUT-04 footer). */ ?>
+            <a href="<?= esc(site_url('propietario/inmuebles/nuevo')) ?>" id="publish-property-link" class="public-footer-link">Publicar mi inmueble</a>
             <span>Catálogo · Contratos · Cobranzas · Liquidaciones</span>
         </div>
     </footer>

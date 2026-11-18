@@ -134,9 +134,11 @@ class PropertyController extends BaseController
      * Only available, approved and active properties of active owners are visible;
      * anything else throws PageNotFoundException (404).
      */
-    public function publicShow(int $id): string
+    public function publicShow(string $id): string
     {
-        $property = model(PropertyModel::class)->findPublicDetail($id);
+        // The route accepts any run of digits; one too long for an integer must answer 404 like any other unknown id.
+        $propertyId = ctype_digit($id) && strlen($id) <= 18 ? (int) $id : 0;
+        $property   = $propertyId > 0 ? model(PropertyModel::class)->findPublicDetail($propertyId) : null;
 
         if ($property === null) {
             throw PageNotFoundException::forPageNotFound();
@@ -556,26 +558,32 @@ class PropertyController extends BaseController
     }
 
     /**
-     * Keeps supported catalog filters when the detail page is reached from the public catalog.
+     * Keeps supported catalog filters when the detail page is reached from the public catalog (HU-29).
+     *
+     * The page of the catalog is recognized by its own address (`site_url()`, so it also works with `index.php` in the
+     * URL or with the app in a subfolder), and only the known filters are copied: anything else in the `Referer`,
+     * including a page of another site, is ignored.
      */
     private function publicCatalogBackUrl(): string
     {
-        $referer = trim((string) $this->request->getServer('HTTP_REFERER'));
+        $catalogUrl = site_url('catalogo-inmuebles');
+        $referer    = trim($this->request->getHeaderLine('Referer'));
 
         if ($referer === '') {
-            return site_url('catalogo-inmuebles');
+            return $catalogUrl;
         }
 
-        $parts = parse_url($referer);
-        $base  = parse_url((string) base_url());
+        $parts   = parse_url($referer);
+        $catalog = parse_url($catalogUrl);
 
         if (
             ! is_array($parts)
-            || ! is_array($base)
-            || ($parts['host'] ?? null) !== ($base['host'] ?? null)
-            || rtrim((string) ($parts['path'] ?? ''), '/') !== '/catalogo-inmuebles'
+            || ! is_array($catalog)
+            || ($parts['host'] ?? null) !== ($catalog['host'] ?? null)
+            || ($parts['port'] ?? null) !== ($catalog['port'] ?? null)
+            || rtrim((string) ($parts['path'] ?? ''), '/') !== rtrim((string) ($catalog['path'] ?? ''), '/')
         ) {
-            return site_url('catalogo-inmuebles');
+            return $catalogUrl;
         }
 
         parse_str((string) ($parts['query'] ?? ''), $query);
@@ -587,9 +595,7 @@ class PropertyController extends BaseController
             }
         }
 
-        $url = site_url('catalogo-inmuebles');
-
-        return $filters === [] ? $url : $url . '?' . http_build_query($filters);
+        return $filters === [] ? $catalogUrl : $catalogUrl . '?' . http_build_query($filters);
     }
 
     private function sessionUserId(): int

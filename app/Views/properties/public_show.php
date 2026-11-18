@@ -20,6 +20,9 @@ $formatMoney = static function (mixed $amount): string {
     return '$ ' . number_format($value, fmod($value, 1.0) === 0.0 ? 0 : 2, ',', '.');
 };
 
+/** @var \Config\Agency $agency Contact data of the agency (app/Config/Agency.php) */
+$agency = config('Agency');
+
 $waMessage = rawurlencode('Hola, quisiera consultar por el inmueble en ' . $property['address'] . ', ' . $property['city']);
 ?>
 <?= $this->extend('layouts/public') ?>
@@ -163,7 +166,7 @@ $waMessage = rawurlencode('Hola, quisiera consultar por el inmueble en ' . $prop
                 <!-- Direct Contact Channels (HU-29 Escenario 4) -->
                 <div class="property-contact-box">
                     <h3 class="property-contact-title">Canales de atención directa</h3>
-                    <a href="https://wa.me/5492994778899?text=<?= esc($waMessage, 'attr') ?>" target="_blank" rel="noopener noreferrer" class="btn btn-secondary property-whatsapp-btn" id="btn-whatsapp">
+                    <a href="https://wa.me/<?= esc(preg_replace('/\D+/', '', $agency->whatsapp), 'url') ?>?text=<?= esc($waMessage, 'attr') ?>" target="_blank" rel="noopener noreferrer" class="btn btn-secondary property-whatsapp-btn" id="btn-whatsapp">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                         </svg>
@@ -173,15 +176,15 @@ $waMessage = rawurlencode('Hola, quisiera consultar por el inmueble en ' . $prop
                     <div class="property-contact-details">
                         <div class="property-contact-line">
                             <span class="property-contact-sub">Teléfono:</span>
-                            <span class="property-contact-val">+54 (299) 477-8899</span>
+                            <span class="property-contact-val"><?= esc($agency->phone) ?></span>
                         </div>
                         <div class="property-contact-line">
                             <span class="property-contact-sub">Correo:</span>
-                            <span class="property-contact-val">contacto@inmogestion2026.com.ar</span>
+                            <span class="property-contact-val"><?= esc($agency->email) ?></span>
                         </div>
                         <div class="property-contact-line">
                             <span class="property-contact-sub">Horario:</span>
-                            <span class="property-contact-val">Lunes a Viernes de 9:00 a 18:00 hs</span>
+                            <span class="property-contact-val"><?= esc($agency->hours) ?></span>
                         </div>
                     </div>
                 </div>

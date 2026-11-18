@@ -2779,3 +2779,40 @@ a.contact-value:hover {
     justify-content: center;
     margin-top: 1rem;
 }
+
+/* --------------------------------------------------------------------------
+ * Public pages, corrections: numbered steps of the landing (HU-28), the
+ * "Publicar mi inmueble" link of the public footer (HU-32) and the actions of
+ * a catalog card (HU-29, HU-30).
+ * ------------------------------------------------------------------------ */
+.landing-steps {
+    flex-grow: 1;
+    margin: 0;
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.landing-steps li::marker {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.public-footer-link {
+    color: var(--primary-text);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.public-footer-link:hover {
+    text-decoration: underline;
+}
+
+.public-property-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
