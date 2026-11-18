@@ -48,11 +48,12 @@ final class AuthAccessControlTest extends CIUnitTestCase
         $result->assertSee(csrf_token());
     }
 
-    public function testRootRedirectsGuestToLogin(): void
+    public function testRootShowsPublicLandingPageToGuest(): void
     {
         $result = $this->get('/');
 
-        $result->assertRedirectTo('/auth/login');
+        $result->assertStatus(200);
+        $result->assertSee('Gestión transparente y moderna de alquileres');
     }
 
     public function testLoginScreenOnlyLinksToRegisteredAuthRoutes(): void

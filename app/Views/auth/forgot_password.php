@@ -23,7 +23,7 @@ $retryAfter   = (int) session()->getFlashdata('retry_after');
     <main class="auth-main register-main">
         <section class="register-card" aria-labelledby="recover-heading">
             <header class="register-header">
-                <a class="register-brand" href="<?= esc(site_url('auth/login')) ?>" aria-label="InmoGestión, ir al inicio de sesión">
+                <a class="register-brand" href="<?= esc(site_url('/')) ?>" aria-label="InmoGestión, ir al inicio">
                     <span class="register-brand-icon" aria-hidden="true">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>

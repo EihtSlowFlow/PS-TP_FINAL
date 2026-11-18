@@ -5,6 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /** @var RouteCollection $routes */
 $routes->get('/', 'Home::index');
 $routes->get('catalogo-inmuebles', 'PropertyController::publicIndex');
+$routes->get('catalogo-inmuebles/(:num)', 'PropertyController::publicShow/$1');
 
 // Authentication routes (HU-01, HU-02)
 $routes->group('auth', static function (RouteCollection $routes): void {

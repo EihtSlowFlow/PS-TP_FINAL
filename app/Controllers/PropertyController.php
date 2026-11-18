@@ -120,10 +120,39 @@ class PropertyController extends BaseController
         );
 
         return view('properties/public_catalog', [
+            'pageTitle'    => 'Propiedades disponibles',
+            'activeNav'    => 'catalogo',
             'properties'   => $pagination['items'],
             'pagination'   => $pagination,
             'filters'      => $filterData['values'],
             'filterErrors' => $filterData['errors'],
+        ]);
+    }
+
+    /**
+     * Renders the public property detail sheet (HU-29).
+     * Only available, approved and active properties of active owners are visible;
+     * anything else throws PageNotFoundException (404).
+     */
+    public function publicShow(int $id): string
+    {
+        $property = model(PropertyModel::class)->findPublicDetail($id);
+
+        if ($property === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $session    = session();
+        $isLoggedIn = (bool) $session->get('is_logged_in');
+        $userRole   = (string) $session->get('user_role', '');
+
+        return view('properties/public_show', [
+            'pageTitle'  => $property['address'] . ' - Detalle',
+            'activeNav'  => 'catalogo',
+            'property'   => $property,
+            'isLoggedIn' => $isLoggedIn,
+            'userRole'   => $userRole,
+            'catalogBackUrl' => $this->publicCatalogBackUrl(),
         ]);
     }
 
@@ -524,6 +553,43 @@ class PropertyController extends BaseController
     {
         return redirect()->to('/propietario/inmuebles')
             ->with('error', self::OWNER_PROPERTY_APPROVED_LOCKED_MESSAGE);
+    }
+
+    /**
+     * Keeps supported catalog filters when the detail page is reached from the public catalog.
+     */
+    private function publicCatalogBackUrl(): string
+    {
+        $referer = trim((string) $this->request->getServer('HTTP_REFERER'));
+
+        if ($referer === '') {
+            return site_url('catalogo-inmuebles');
+        }
+
+        $parts = parse_url($referer);
+        $base  = parse_url((string) base_url());
+
+        if (
+            ! is_array($parts)
+            || ! is_array($base)
+            || ($parts['host'] ?? null) !== ($base['host'] ?? null)
+            || rtrim((string) ($parts['path'] ?? ''), '/') !== '/catalogo-inmuebles'
+        ) {
+            return site_url('catalogo-inmuebles');
+        }
+
+        parse_str((string) ($parts['query'] ?? ''), $query);
+        $filters = [];
+
+        foreach (['type', 'min_price', 'max_price', 'page'] as $field) {
+            if (isset($query[$field]) && is_string($query[$field]) && trim($query[$field]) !== '') {
+                $filters[$field] = trim($query[$field]);
+            }
+        }
+
+        $url = site_url('catalogo-inmuebles');
+
+        return $filters === [] ? $url : $url . '?' . http_build_query($filters);
     }
 
     private function sessionUserId(): int

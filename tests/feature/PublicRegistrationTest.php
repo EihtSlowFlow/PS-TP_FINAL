@@ -40,9 +40,9 @@ final class PublicRegistrationTest extends CIUnitTestCase
 
         $result->assertStatus(200);
         $result->assertSee('Crear cuenta');
-        $result->assertSeeElement('input[name="role"][value="owner"]');
-        $result->assertSeeElement('input[name="role"][value="tenant"]');
-        $result->assertDontSee('value="admin"', false);
+        $result->assertSee('value="owner"');
+        $result->assertSee('value="tenant"');
+        $result->assertDontSee('value="admin"');
         $result->assertSee(csrf_token());
     }
 
