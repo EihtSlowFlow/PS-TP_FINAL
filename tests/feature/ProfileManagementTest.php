@@ -5,6 +5,7 @@ use App\Database\Seeds\RoleSeeder;
 use App\Filters\AuthFilter;
 use App\Filters\RoleFilter;
 use CodeIgniter\Test\CIUnitTestCase;
+use CodeIgniter\Test\DOMParser;
 use CodeIgniter\Test\DatabaseTestTrait;
 use CodeIgniter\Test\FeatureTestTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -90,8 +91,10 @@ final class ProfileManagementTest extends CIUnitTestCase
         $response->assertSee($email);
         $response->assertSee($roleLabel);
         $response->assertDontSee('otra.persona.hu06@example.test');
-        $response->assertDontSeeElement('input[name="document_number"]');
-        $response->assertDontSeeElement('input[name="role"]');
+        // The DOMParser of CodeIgniter does not understand "tag[attr=value]" selectors; XPath does.
+        $page = (new DOMParser())->withString((string) $response->getBody());
+        $this->assertTrue($page->dontSeeXPath('//input[@name="document_number"]'), 'The document number must not be editable.');
+        $this->assertTrue($page->dontSeeXPath('//input[@name="role"]'), 'The role must not be editable.');
         $response->assertSee(csrf_token());
     }
 

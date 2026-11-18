@@ -113,7 +113,8 @@ final class RentalRequestAdminTest extends CIUnitTestCase
         $response->assertSee('Cancelado, Carlos');
 
         // Pending requests appear before resolved or cancelled ones.
-        $body = (string) $response->getBody();
+        // The body carries HTML entities (Andr&eacute;s): decode it before looking for accented text.
+        $body = html_entity_decode((string) $response->getBody(), ENT_QUOTES | ENT_HTML5, 'UTF-8');
         $this->assertLessThan(
             strpos($body, 'Aprobado, Andrés'),
             strpos($body, 'Pendiente, Paula'),

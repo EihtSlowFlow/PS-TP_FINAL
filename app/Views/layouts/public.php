@@ -8,7 +8,9 @@
  * @var string $pageTitle  Browser tab title
  * @var string $activeNav  Which nav link to highlight: 'inicio' | 'catalogo' | ''
  */
-$isTenant = (bool) session()->get('is_logged_in') && (string) session()->get('user_role') === 'tenant';
+$isLoggedIn   = (bool) session()->get('is_logged_in');
+$userRole     = (string) session()->get('user_role');
+$isTenant     = $isLoggedIn && $userRole === 'tenant';
 $flashError   = session()->getFlashdata('error');
 $flashSuccess = session()->getFlashdata('success');
 ?>
@@ -34,8 +36,17 @@ $flashSuccess = session()->getFlashdata('success');
                 <a href="<?= esc(site_url('inquilino/solicitudes')) ?>">Mis solicitudes</a>
                 <a href="<?= esc(site_url('inquilino/estado-cuenta')) ?>">Estado de cuenta</a>
             <?php endif; ?>
-            <a href="<?= esc(site_url('auth/login')) ?>">Ingresar</a>
-            <a href="<?= esc(site_url('auth/register')) ?>">Registrarse</a>
+            <?php if ($isLoggedIn): ?>
+                <a href="<?= esc(site_url(\App\Models\UserModel::homeRouteForRole($userRole))) ?>">Mi panel</a>
+                <?php /* HU-03: logout is a POST with CSRF token, also from the public pages. */ ?>
+                <form action="<?= esc(site_url('auth/logout')) ?>" method="post" class="public-logout-form">
+                    <?= csrf_field() ?>
+                    <button type="submit" id="public-logout">Cerrar sesión</button>
+                </form>
+            <?php else: ?>
+                <a href="<?= esc(site_url('auth/login')) ?>">Ingresar</a>
+                <a href="<?= esc(site_url('auth/register')) ?>">Registrarse</a>
+            <?php endif; ?>
         </nav>
     </header>
 

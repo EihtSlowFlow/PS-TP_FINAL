@@ -427,8 +427,8 @@ final class SchemaIntegrityTest extends CIUnitTestCase
         $this->seed(DemoSeeder::class);
 
         $expected = [
-            'users' => 10, 'properties' => 8, 'contracts' => 6, 'installments' => 24, 'payments' => 19,
-            'settlements' => 15, 'settlement_installments' => 15, 'notifications' => 7,
+            'users' => 10, 'properties' => 10, 'contracts' => 6, 'installments' => 24, 'payments' => 19,
+            'settlements' => 15, 'settlement_installments' => 15, 'notifications' => 7, 'rental_requests' => 3,
         ];
 
         foreach ($expected as $table => $count) {
