@@ -11,10 +11,11 @@ use CodeIgniter\HTTP\RedirectResponse;
  * Password recovery by single-use, expiring token (HU-03b).
  *
  * Accepted design decisions (agreed with the instructor; see .docs/exec-plans/HU-03b_handoff.md):
- * - No external channel (email/SMS) is used, so the token is handed over in the same response.
- * - To reduce the account-takeover risk that follows, the request needs two data of the account (email + DNI).
- * - Any non-matching combination (unknown email, deactivated user, or wrong DNI) is rejected on the request screen
- *   with the same generic message ("Las credenciales ingresadas son incorrectas."), without revealing which piece failed.
+ * - The system is a simulation and uses no external channel (email/SMS), so the token is handed over in the same
+ *   response and the request needs only the email of the account. This means that whoever knows an email can reset
+ *   its password: it is acceptable here and must not be copied to a real system.
+ * - An unknown email is rejected on the request screen with a generic message ("Las credenciales ingresadas son
+ *   incorrectas."); a deactivated user is told so.
  * - On the third non-matching attempt (per IP and per email), a 2-minute cooldown is activated immediately.
  */
 class PasswordResetController extends BaseController
@@ -23,14 +24,14 @@ class PasswordResetController extends BaseController
 
     public const INVALID_CREDENTIALS_MESSAGE   = 'Las credenciales ingresadas son incorrectas.';
     public const ACCOUNT_DISABLED_MESSAGE      = 'Usuario dado de baja, hable con un administrador.';
-    public const REQUEST_INVALID_DATA_MESSAGE  = 'Revisá el correo electrónico y el DNI ingresados.';
+    public const REQUEST_INVALID_DATA_MESSAGE  = 'Revisá el correo electrónico ingresado.';
     public const COOLDOWN_MESSAGE              = 'Hiciste demasiados intentos. Por seguridad, esperá %d segundos antes de volver a intentarlo.';
     public const INVALID_TOKEN_MESSAGE         = 'El enlace de restablecimiento no es válido o venció. Solicitá un nuevo restablecimiento.';
     public const RESET_SUCCESS_MESSAGE         = 'Tu contraseña fue actualizada. Ya podés iniciar sesión.';
     public const RESET_VALIDATION_MESSAGE      = 'Revisá los campos marcados antes de continuar.';
 
     /**
-     * Renders the form asking for the account email and DNI.
+     * Renders the form asking for the account email.
      */
     public function requestForm(): string
     {
@@ -38,14 +39,13 @@ class PasswordResetController extends BaseController
     }
 
     /**
-     * Issues a token when email and DNI match an active user and opens the reset form directly.
-     * Any non-matching combination (Scenario 4) stays on the request form with a generic error,
+     * Issues a token when the email belongs to an active user and opens the reset form directly.
+     * An unknown email (Scenario 4) stays on the request form with a generic error,
      * and the third failed attempt triggers a 2-minute cooldown.
      */
     public function sendLink(): RedirectResponse
     {
         $email = strtolower(trim((string) $this->request->getPost('email')));
-        $dni   = $this->normalizeDni((string) $this->request->getPost('document_number'));
 
         // Cooldown first: while it lasts nothing is looked up, so a locked key is no oracle.
         $limiterKeys = ['ip:' . $this->request->getIPAddress(), 'email:' . $email];
@@ -69,19 +69,11 @@ class PasswordResetController extends BaseController
                     'max_length'  => 'El correo electrónico no puede superar los 255 caracteres.',
                 ],
             ],
-            'document_number' => [
-                'label'  => 'DNI',
-                'rules'  => 'required|alpha_numeric|max_length[20]',
-                'errors' => [
-                    'required'      => 'Ingresá tu DNI.',
-                    'alpha_numeric' => 'El DNI solo debe contener letras o números, sin símbolos.',
-                    'max_length'    => 'El DNI no puede superar los 20 caracteres.',
-                ],
-            ],
+
         ];
 
         // Format-only validation: it says nothing about which accounts exist.
-        if (! $this->validateData(['email' => $email, 'document_number' => $dni], $rules)) {
+        if (! $this->validateData(['email' => $email], $rules)) {
             return redirect()->to('/auth/recuperar-password')
                 ->withInput()
                 ->with('errors', $this->validator->getErrors())
@@ -91,7 +83,7 @@ class PasswordResetController extends BaseController
         $userModel = model(UserModel::class);
         $user      = $userModel->findActiveByEmail($email);
 
-        if ($user !== null && hash_equals(strtolower((string) $user['document_number']), strtolower($dni))) {
+        if ($user !== null) {
             $token = model(PasswordResetModel::class)->issueFor((int) $user['id'], self::TOKEN_TTL_MINUTES);
             // Only the email key is cleared: clearing the IP key would let a guesser reset its own counter.
             $limiter->clear(['email:' . $email]);
@@ -100,9 +92,7 @@ class PasswordResetController extends BaseController
         }
 
         if ($user === null) {
-            $deactivatedUser = $userModel->findDeactivatedByEmail($email);
-
-            if ($deactivatedUser !== null && hash_equals(strtolower((string) $deactivatedUser['document_number']), strtolower($dni))) {
+            if ($userModel->findDeactivatedByEmail($email) !== null) {
                 return redirect()->to('/auth/recuperar-password')
                     ->withInput()
                     ->with('error', self::ACCOUNT_DISABLED_MESSAGE);
@@ -225,15 +215,6 @@ class PasswordResetController extends BaseController
         return preg_match('/^[a-f0-9]{64}$/', $token) === 1;
     }
 
-    /**
-     * Same DNI normalization as the public registration (dots, spaces and hyphens removed).
-     */
-    private function normalizeDni(string $rawDni): string
-    {
-        $rawDni = trim($rawDni);
-
-        return preg_replace('/[\.\s-]+/', '', $rawDni) ?? $rawDni;
-    }
 
     private function invalidTokenRedirect(): RedirectResponse
     {

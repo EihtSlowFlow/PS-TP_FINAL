@@ -74,10 +74,10 @@ Referencia: `.docs/historias_de_usuario/HU-03b_*.md`
 
 | Decisión / riesgo | Detalle |
 | --- | --- |
-| **No se envía correo ni SMS (decisión)** | El token se entrega en la misma respuesta HTTP cuando correo y DNI coinciden con una cuenta activa. |
-| **Segundo dato: DNI (mitigación)** | Hace falta conocer correo **y** DNI de la cuenta. Con solo el correo ya no se puede tomar la cuenta. |
+| **No se envía correo ni SMS (decisión)** | El token se entrega en la misma respuesta HTTP cuando el correo corresponde a una cuenta activa (desde el 18/11/2026 ya no se pide el DNI). |
+| **Segundo dato: DNI (retirado el 18/11/2026)** | Al principio hacía falta conocer correo **y** DNI. El docente indicó que, al ser una aplicación simulada, alcanza con el correo: el campo DNI se quitó del formulario y de `PasswordResetController::sendLink`. Con solo el correo ya se puede tomar la cuenta (riesgo aceptado, no apto para un sistema real). |
 | **Error genérico sin dejar avanzar (mitigación y UX)** | Si el correo no existe, está dado de baja o el DNI no coincide, se permanece en `/auth/recuperar-password` y se muestra `"Las credenciales ingresadas son incorrectas."` sin revelar cuál de los dos datos falló. |
-| **R-2 · Toma de cuenta (riesgo aceptado)** | Quien conozca correo y DNI de un usuario puede cambiarle la contraseña, incluido el administrador. Ambos datos son semi-públicos. Se acepta por el alcance de cursada. **No usar en producción sin canal externo.** |
+| **R-2 · Toma de cuenta (riesgo aceptado)** | Quien conozca el correo de un usuario puede cambiarle la contraseña, incluido el administrador (hasta el 17/11/2026 también hacía falta su DNI, un dato semi-público). Se acepta por el alcance de cursada. **No usar en producción sin canal externo.** |
 | **Enfriamiento de intentos (mitigación)** | El tercer intento que no coincide activa de inmediato un bloqueo de 2 minutos tanto para la IP como para el correo; con el bloqueo activo ni el DNI correcto obtiene un token. El mensaje muestra los segundos que faltan y la pantalla los cuenta en vivo (`auth.js`). |
 | **R-3 · Fuerza bruta sobre el DNI (riesgo reducido, no eliminado)** | Quedan 3 intentos cada 2 minutos por correo. Un atacante con muchas IP igual está limitado por el contador del correo, pero el bloqueo por correo permite que alguien deje sin poder pedir el restablecimiento a un usuario ajeno (denegación de servicio menor). El contador vive en la cache de archivos del servidor: reiniciarla (borrar `writable/cache`) lo reinicia. |
 | **El Escenario 4 cambió** | De "mensaje neutro" a rechazo con mensaje de error genérico (`"Las credenciales ingresadas son incorrectas."`) sin revelar qué dato falló. Está reescrito en la HU. |

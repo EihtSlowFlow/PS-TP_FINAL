@@ -33,7 +33,7 @@ $retryAfter   = (int) session()->getFlashdata('retry_after');
                     <span>InmoGestión</span>
                 </a>
                 <h1 id="recover-heading" class="auth-title">Restablecer contraseña</h1>
-                <p class="auth-subtitle">Ingresá el correo y el DNI de tu cuenta para definir una nueva contraseña.</p>
+                <p class="auth-subtitle">Ingresá el correo de tu cuenta para definir una nueva contraseña.</p>
             </header>
 
             <?php if (is_string($flashError) && $flashError !== ''): ?>
@@ -65,25 +65,6 @@ $retryAfter   = (int) session()->getFlashdata('retry_after');
                             <?= isset($errors['email']) ? 'aria-invalid="true" aria-describedby="email-error"' : '' ?>>
                     </div>
                     <?php if (isset($errors['email'])): ?><span id="email-error" class="field-error" role="alert"><?= esc($errors['email']) ?></span><?php endif; ?>
-                </div>
-
-                <div class="field-group">
-                    <label for="document_number" class="field-label">DNI <span class="required-mark" aria-hidden="true">*</span></label>
-                    <div class="input-wrapper">
-                        <span class="input-icon" aria-hidden="true">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="4" width="18" height="16" rx="2"/>
-                                <circle cx="9" cy="10" r="2"/>
-                                <path d="M15 8h2M15 12h2M7 16h10"/>
-                            </svg>
-                        </span>
-                        <input type="text" id="document_number" name="document_number" class="auth-input<?= isset($errors['document_number']) ? ' is-invalid' : '' ?>"
-                            value="<?= esc(old('document_number', '')) ?>" required maxlength="20" inputmode="numeric" autocomplete="off"
-                            aria-describedby="<?= isset($errors['document_number']) ? 'document_number-help document_number-error' : 'document_number-help' ?>"
-                            <?= isset($errors['document_number']) ? 'aria-invalid="true"' : '' ?>>
-                    </div>
-                    <span id="document_number-help" class="field-help">Es el DNI con el que te registraste.</span>
-                    <?php if (isset($errors['document_number'])): ?><span id="document_number-error" class="field-error" role="alert"><?= esc($errors['document_number']) ?></span><?php endif; ?>
                 </div>
 
                 <button type="submit" class="btn-submit"<?= $retryAfter > 0 ? ' disabled data-retry-button' : '' ?>>Continuar</button>
