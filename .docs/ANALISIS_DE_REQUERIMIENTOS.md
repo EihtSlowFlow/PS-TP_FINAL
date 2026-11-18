@@ -346,6 +346,7 @@ La sección 4 detalla la funcionalidad por objetivo y la sección 8 agrupa el es
 | :--- | :--- | :--- |
 | Inmueble | `Disponible`, `Alquilado`, `En Mantenimiento` | |
 | Inmueble (revisión) | `Pendiente de aprobación`, `Aprobado`, `Rechazado` | Solo se aplica a lo que el propietario publica por su cuenta (HU-32, HU-33). Es un eje **independiente** del estado comercial: un inmueble pendiente o rechazado no figura en el catálogo público, en el selector de contratos ni en los indicadores de ocupación, y uno aprobado nace `Disponible`. Lo que carga la administración entra `Aprobado`. El propietario lo ve como «En revisión» o «Rechazado» |
+| Solicitud de alquiler | `Pendiente`, `Aprobada`, `Rechazada`, `Cancelada` | Solicitudes enviadas por inquilinos sobre inmuebles disponibles (HU-30, HU-31). Enviar una solicitud no reserva el inmueble ni cambia su estado comercial; un inquilino tiene como máximo una solicitud `Pendiente` por inmueble |
 | Contrato | `Vigente`, `Finalizado`, `Rescindido` | |
 | Cuota | `Pendiente`, `Vencida`, `En Revisión`, `Pagada` | `En Revisión` es la cuota (pendiente o vencida) que tiene un pago informado esperando verificación. No altera el cálculo de mora. |
 | Pago | `Pendiente de Validación`, `Aprobado`, `Rechazado` | Equivale al `Pendiente`, `Aprobada` y `Rechazada` del resultado de la verificación (objetivo 7, condición 9). |

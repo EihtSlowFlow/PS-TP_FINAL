@@ -341,6 +341,29 @@ final class PropertyApprovalTest extends CIUnitTestCase
         $this->assertNull($row['reviewed_by']);
     }
 
+    public function testScenario4TheOwnerOfAnOwnerSubmittedPropertyIsLockedAndCannotBeChangedByTheAdministration(): void
+    {
+        $adminId      = $this->makeUser('admin');
+        $ownerId      = $this->makeUser('owner', null, 'Marta', 'Quiroga');
+        $anotherOwner = $this->makeUser('owner', null, 'Carlos', 'Gómez');
+        $session      = $this->sessionOf($adminId, 'admin');
+        $propertyId   = $this->makePendingProperty($ownerId, ['address' => 'Casa De Marta 10']);
+
+        $editForm = $this->withSession($session)->get("admin/inmuebles/editar/{$propertyId}");
+        $editForm->assertOK();
+        $editForm->assertSee('El propietario titular envió la solicitud de alta de este inmueble y no se puede modificar.');
+        $editForm->assertDontSee('Gómez, Carlos');
+
+        $response = $this->postWithSession($session, "admin/inmuebles/editar/{$propertyId}", $this->validPropertyPayload([
+            'owner_id' => (string) $anotherOwner,
+            'address'  => 'Casa De Marta 10',
+        ]));
+
+        $response->assertRedirectTo("/admin/inmuebles/editar/{$propertyId}");
+        $this->assertSame(PropertyController::SUBMITTED_OWNER_LOCKED_MESSAGE, session()->getFlashdata('errors')['owner_id'] ?? null);
+        $this->assertSame($ownerId, (int) $this->propertyRow($propertyId)['owner_id']);
+    }
+
     public function testScenario4TheEditFormOffersTheReviewActionsOnlyForAPendingProperty(): void
     {
         $adminId  = $this->makeUser('admin');

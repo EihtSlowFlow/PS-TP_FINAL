@@ -83,13 +83,13 @@ para atender interesados sin cargar manualmente sus datos ni perder el origen de
 
 ## Definition of Done
 
-- [ ] Se pueden listar, filtrar y abrir solicitudes.
-- [ ] Aprobar abre el contrato prellenado y vincula la solicitud de forma atómica.
-- [ ] Las demás solicitudes pendientes del inmueble se rechazan automáticamente.
-- [ ] El rechazo exige motivo y se muestra al inquilino.
-- [ ] Se actualizan menú y contador de pendientes.
-- [ ] Se verifican permisos y atomicidad ante fallos.
-- [ ] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue.
+- [x] Se pueden listar, filtrar y abrir solicitudes.
+- [x] Aprobar abre el contrato prellenado y vincula la solicitud de forma atómica.
+- [x] Las demás solicitudes pendientes del inmueble se rechazan automáticamente.
+- [x] El rechazo exige motivo y se muestra al inquilino.
+- [x] Se actualizan menú y contador de pendientes.
+- [x] Se verifican permisos y atomicidad ante fallos.
+- [x] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue.
 
 ## Dependencias
 

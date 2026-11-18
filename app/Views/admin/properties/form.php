@@ -111,21 +111,41 @@ $this->extend('layouts/panel');
                                 <label for="owner_id" class="form-label">
                                     <span>Propietario titular <span class="required-mark" aria-hidden="true">*</span></span>
                                 </label>
-                                <select
-                                    id="owner_id"
-                                    name="owner_id"
-                                    required
-                                    class="form-control<?= isset($errors['owner_id']) ? ' is-invalid' : '' ?>"
-                                    aria-invalid="<?= isset($errors['owner_id']) ? 'true' : 'false' ?>"
-                                >
-                                    <option value="">Seleccionar propietario…</option>
-                                    <?php foreach ($owners as $owner): ?>
-                                        <option value="<?= esc((string) $owner['id']) ?>"<?= $ownerValue === (string) $owner['id'] ? ' selected' : '' ?>>
-                                            <?= esc($owner['label']) ?>
-                                        </option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <span class="field-help">Solo se pueden asignar usuarios con rol Propietario activo.</span>
+                                <?php if ($submittedByOwner): ?>
+                                    <input type="hidden" name="owner_id" value="<?= esc((string) $property['owner_id']) ?>">
+                                    <select
+                                        id="owner_id"
+                                        disabled
+                                        aria-disabled="true"
+                                        class="form-control<?= isset($errors['owner_id']) ? ' is-invalid' : '' ?>"
+                                        aria-invalid="<?= isset($errors['owner_id']) ? 'true' : 'false' ?>"
+                                    >
+                                        <?php foreach ($owners as $owner): ?>
+                                            <?php if ((int) $owner['id'] === (int) $property['owner_id']): ?>
+                                                <option value="<?= esc((string) $owner['id']) ?>" selected>
+                                                    <?= esc($owner['label']) ?>
+                                                </option>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <span class="field-help">El propietario titular envió la solicitud de alta de este inmueble y no se puede modificar.</span>
+                                <?php else: ?>
+                                    <select
+                                        id="owner_id"
+                                        name="owner_id"
+                                        required
+                                        class="form-control<?= isset($errors['owner_id']) ? ' is-invalid' : '' ?>"
+                                        aria-invalid="<?= isset($errors['owner_id']) ? 'true' : 'false' ?>"
+                                    >
+                                        <option value="">Seleccionar propietario…</option>
+                                        <?php foreach ($owners as $owner): ?>
+                                            <option value="<?= esc((string) $owner['id']) ?>"<?= $ownerValue === (string) $owner['id'] ? ' selected' : '' ?>>
+                                                <?= esc($owner['label']) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <span class="field-help">Solo se pueden asignar usuarios con rol Propietario activo.</span>
+                                <?php endif; ?>
                                 <?php if (isset($errors['owner_id'])): ?>
                                     <p class="field-error" role="alert"><?= esc((string) $errors['owner_id']) ?></p>
                                 <?php endif; ?>

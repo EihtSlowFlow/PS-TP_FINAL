@@ -37,7 +37,11 @@ $this->extend('layouts/panel');
             <?php if ($totalCount === 0): ?>
                 <section class="panel-card" aria-labelledby="tenant-empty-state">
                     <h2 id="tenant-empty-state" class="section-title">Todavía no tenés cuotas emitidas</h2>
-                    <p class="panel-subtitle">Cuando se emitan cuotas de tus contratos, aparecerán aquí.</p>
+                    <p class="panel-subtitle">Cuando se emitan cuotas de tus contratos, aparecerán aquí. Mientras tanto, podés explorar el catálogo de propiedades disponibles o seguir el estado de tus solicitudes de alquiler.</p>
+                    <div class="inline-actions-row">
+                        <a href="<?= esc(site_url('catalogo-inmuebles')) ?>" class="btn btn-primary" id="btn-empty-account-search-properties">Buscar inmuebles</a>
+                        <a href="<?= esc(site_url('inquilino/solicitudes')) ?>" class="btn btn-secondary" id="btn-empty-account-my-requests">Mis solicitudes</a>
+                    </div>
                 </section>
             <?php else: ?>
                 <?php foreach ($statusOrder as $status): ?>

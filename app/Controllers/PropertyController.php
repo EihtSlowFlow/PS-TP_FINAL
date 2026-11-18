@@ -27,6 +27,7 @@ class PropertyController extends BaseController
     public const VALIDATION_ERROR_MESSAGE             = 'Revisá los campos marcados antes de guardar el inmueble.';
     public const INVALID_OWNER_MESSAGE                = 'Seleccioná un propietario válido.';
     public const INACTIVE_OWNER_MESSAGE               = 'El propietario seleccionado está dado de baja. Elegí un propietario activo.';
+    public const SUBMITTED_OWNER_LOCKED_MESSAGE       = 'El propietario de un inmueble enviado por su titular no se puede modificar.';
     public const INVALID_STATUS_MESSAGE               = 'Seleccioná un estado válido: Disponible o En mantenimiento.';
     public const RENTED_STATUS_LOCKED_MESSAGE         = 'El estado «Alquilado» lo asigna el contrato y no se puede modificar desde el inmueble.';
 
@@ -717,6 +718,10 @@ class PropertyController extends BaseController
      */
     private function checkOwner(int $ownerId, ?array $existing): ?string
     {
+        if ($existing !== null && ! empty($existing['submitted_by']) && $ownerId !== (int) $existing['owner_id']) {
+            return self::SUBMITTED_OWNER_LOCKED_MESSAGE;
+        }
+
         if ($existing !== null && $ownerId === (int) $existing['owner_id']) {
             return null;
         }

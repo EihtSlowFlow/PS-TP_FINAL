@@ -4,8 +4,10 @@ namespace App\Controllers;
 
 use App\Models\ContractModel;
 use App\Models\PropertyModel;
+use App\Models\RentalRequestModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\RedirectResponse;
+use DateTimeImmutable;
 
 /**
  * Lease contract management for administrators and employees, plus owner-scoped consultation (HU-10/11).
@@ -28,6 +30,11 @@ class ContractController extends BaseController
     public const CONTRACT_ALREADY_CLOSED_MESSAGE  = 'El contrato no está vigente y no puede cerrarse nuevamente.';
     public const INVALID_CLOSE_STATUS_MESSAGE     = 'Seleccioná si se finaliza o se rescinde el contrato.';
     public const CLOSURE_ERROR_MESSAGE            = 'No pudimos cerrar el contrato por un error interno. No se guardó ningún cambio.';
+
+    // HU-31: approving a pending rental request and linking it atomically to the new contract.
+    public const REQUEST_NOT_FOUND_MESSAGE   = 'La solicitud de alquiler indicada no existe.';
+    public const REQUEST_NOT_PENDING_MESSAGE = 'Solo se pueden aprobar solicitudes en estado «Pendiente».';
+    public const REQUEST_MISMATCH_MESSAGE    = 'El inmueble y el inquilino del contrato deben coincidir con los de la solicitud que estás aprobando.';
 
     /**
      * Lists all contracts for administrators and employees with optional search and status filters.
@@ -64,34 +71,93 @@ class ContractController extends BaseController
     }
 
     /**
-     * Renders the new contract form (screen ADM-07). `?property_id=` preselects a property.
+     * Renders the new contract form (screen ADM-07). `?property_id=` preselects a property; `?request_id=` preselects
+     * the property, tenant and suggested term from a pending rental request (HU-31 Scenario 3).
      */
-    public function create(): string
+    public function create(): RedirectResponse|string
     {
         return $this->renderForm();
     }
 
     /**
      * Validates the data and registers a contract "in force", setting the property to "rented" atomically
-     * (HU-10 Scenarios 1 to 4).
+     * (HU-10 Scenarios 1 to 4; HU-31 Scenarios 3, 4 and 6 when `request_id` is present).
      */
     public function store(): RedirectResponse
     {
-        $input  = $this->collectInput();
-        $errors = $this->validateInput($input);
+        $input        = $this->collectInput();
+        $requestIdRaw = trim((string) $this->request->getPost('request_id'));
+        $requestId    = null;
 
-        if ($errors !== []) {
-            return $this->backToForm($errors, $this->headlineFor($errors));
+        if ($requestIdRaw !== '') {
+            if (! ctype_digit($requestIdRaw) || (int) $requestIdRaw <= 0) {
+                return redirect()->to('/admin/solicitudes')
+                    ->with('error', self::REQUEST_NOT_FOUND_MESSAGE);
+            }
+
+            $requestId     = (int) $requestIdRaw;
+            $rentalRequest = model(RentalRequestModel::class)->findForAdmin($requestId);
+
+            if ($rentalRequest === null) {
+                return redirect()->to('/admin/solicitudes')
+                    ->with('error', self::REQUEST_NOT_FOUND_MESSAGE);
+            }
+
+            if ((string) $rentalRequest['status'] !== RentalRequestModel::STATUS_PENDING) {
+                return redirect()->to('/admin/solicitudes')
+                    ->with('error', self::REQUEST_NOT_PENDING_MESSAGE);
+            }
+
+            $errors = $this->validateInput($input);
+
+            if (! isset($errors['property_id']) && (int) $input['property_id'] !== (int) $rentalRequest['property_id']) {
+                $errors['property_id'] = self::REQUEST_MISMATCH_MESSAGE;
+            }
+
+            if (! isset($errors['tenant_id']) && (int) $input['tenant_id'] !== (int) $rentalRequest['tenant_id']) {
+                $errors['tenant_id'] = self::REQUEST_MISMATCH_MESSAGE;
+            }
+
+            if ($errors !== []) {
+                return $this->backToForm($errors, $this->headlineFor($errors), $requestId);
+            }
+        } else {
+            $errors = $this->validateInput($input);
+
+            if ($errors !== []) {
+                return $this->backToForm($errors, $this->headlineFor($errors));
+            }
         }
 
-        $result = model(ContractModel::class)->createAndRentProperty($this->buildPayload($input));
+        $actorId = (int) session()->get('user_id', 0);
+        $result  = model(ContractModel::class)->createAndRentProperty($this->buildPayload($input), $requestId, $actorId);
 
         if ($result['error'] === ContractModel::ERROR_PROPERTY_UNAVAILABLE) {
-            return $this->backToForm(['property_id' => self::PROPERTY_UNAVAILABLE_MESSAGE], self::PROPERTY_UNAVAILABLE_MESSAGE);
+            return $this->backToForm(['property_id' => self::PROPERTY_UNAVAILABLE_MESSAGE], self::PROPERTY_UNAVAILABLE_MESSAGE, $requestId);
+        }
+
+        if ($result['error'] === ContractModel::ERROR_REQUEST_NOT_FOUND) {
+            return redirect()->to('/admin/solicitudes')
+                ->with('error', self::REQUEST_NOT_FOUND_MESSAGE);
+        }
+
+        if ($result['error'] === ContractModel::ERROR_REQUEST_NOT_PENDING) {
+            return redirect()->to('/admin/solicitudes')
+                ->with('error', self::REQUEST_NOT_PENDING_MESSAGE);
+        }
+
+        if ($result['error'] === ContractModel::ERROR_REQUEST_MISMATCH) {
+            return $this->backToForm(
+                ['property_id' => self::REQUEST_MISMATCH_MESSAGE, 'tenant_id' => self::REQUEST_MISMATCH_MESSAGE],
+                self::REQUEST_MISMATCH_MESSAGE,
+                $requestId
+            );
         }
 
         if ($result['error'] !== null || $result['id'] === null) {
-            return redirect()->to('/admin/contratos/nuevo')
+            $target = $requestId !== null ? '/admin/contratos/nuevo?request_id=' . $requestId : '/admin/contratos/nuevo';
+
+            return redirect()->to($target)
                 ->withInput()
                 ->with('error', self::SAVE_ERROR_MESSAGE);
         }
@@ -277,10 +343,60 @@ class ContractController extends BaseController
     }
 
     /**
-     * Renders the form with the properties and tenants that can be selected.
+     * Renders the form with the properties and tenants that can be selected. When `?request_id=` is passed (HU-31
+     * Scenario 3), verifies that the request is still pending and that the property and tenant satisfy HU-10 rules
+     * (Scenario 6), then preselects them and suggests the start and end dates from the request.
      */
-    private function renderForm(): string
+    private function renderForm(): RedirectResponse|string
     {
+        $requestIdRaw       = trim((string) ($this->request->getGet('request_id') ?? old('request_id', '')));
+        $rentalRequest      = null;
+        $preselectedProp    = trim((string) $this->request->getGet('property_id'));
+        $preselectedTenant  = '';
+        $suggestedStartDate = '';
+        $suggestedEndDate   = '';
+
+        if ($requestIdRaw !== '') {
+            if (! ctype_digit($requestIdRaw) || (int) $requestIdRaw <= 0) {
+                return redirect()->to('/admin/solicitudes')
+                    ->with('error', self::REQUEST_NOT_FOUND_MESSAGE);
+            }
+
+            $requestId     = (int) $requestIdRaw;
+            $rentalRequest = model(RentalRequestModel::class)->findForAdmin($requestId);
+
+            if ($rentalRequest === null) {
+                return redirect()->to('/admin/solicitudes')
+                    ->with('error', self::REQUEST_NOT_FOUND_MESSAGE);
+            }
+
+            if ((string) $rentalRequest['status'] !== RentalRequestModel::STATUS_PENDING) {
+                return redirect()->to('/admin/solicitudes')
+                    ->with('error', self::REQUEST_NOT_PENDING_MESSAGE);
+            }
+
+            $propertyError = $this->checkProperty((int) $rentalRequest['property_id']);
+            if ($propertyError !== null) {
+                return redirect()->to('/admin/solicitudes/' . $requestId)
+                    ->with('error', $propertyError);
+            }
+
+            $tenant = model(UserModel::class)->findActiveById((int) $rentalRequest['tenant_id']);
+            if ($tenant === null || (string) $tenant['role_name'] !== UserModel::ROLE_TENANT) {
+                return redirect()->to('/admin/solicitudes/' . $requestId)
+                    ->with('error', self::INVALID_TENANT_MESSAGE);
+            }
+
+            $preselectedProp    = (string) $rentalRequest['property_id'];
+            $preselectedTenant  = (string) $rentalRequest['tenant_id'];
+            $suggestedStartDate = (string) $rentalRequest['desired_start_date'];
+            $months             = max(1, (int) $rentalRequest['desired_months']);
+            $suggestedEndDate   = (new DateTimeImmutable($suggestedStartDate))
+                ->modify("+{$months} months")
+                ->modify('-1 day')
+                ->format('Y-m-d');
+        }
+
         $properties = [];
 
         foreach (model(PropertyModel::class)->findAvailableForContract() as $property) {
@@ -313,9 +429,13 @@ class ContractController extends BaseController
             breadcrumb: 'Contratos / Nuevo contrato',
             activeMenu: 'contratos'
         ), [
-            'properties'         => $properties,
-            'tenants'            => $tenants,
-            'preselectedProperty' => trim((string) $this->request->getGet('property_id')),
+            'properties'          => $properties,
+            'tenants'             => $tenants,
+            'preselectedProperty' => $preselectedProp,
+            'preselectedTenant'   => $preselectedTenant,
+            'suggestedStartDate'  => $suggestedStartDate,
+            'suggestedEndDate'    => $suggestedEndDate,
+            'rentalRequest'       => $rentalRequest,
         ]));
     }
 
@@ -324,9 +444,11 @@ class ContractController extends BaseController
      *
      * @param array<string, string> $errors
      */
-    private function backToForm(array $errors, string $headline): RedirectResponse
+    private function backToForm(array $errors, string $headline, ?int $requestId = null): RedirectResponse
     {
-        return redirect()->to('/admin/contratos/nuevo')
+        $target = $requestId !== null ? '/admin/contratos/nuevo?request_id=' . $requestId : '/admin/contratos/nuevo';
+
+        return redirect()->to($target)
             ->withInput()
             ->with('errors', $errors)
             ->with('error', $headline);
@@ -339,9 +461,15 @@ class ContractController extends BaseController
      */
     private function headlineFor(array $errors): string
     {
-        return ($errors['property_id'] ?? null) === self::PROPERTY_UNAVAILABLE_MESSAGE
-            ? self::PROPERTY_UNAVAILABLE_MESSAGE
-            : self::VALIDATION_ERROR_MESSAGE;
+        if (($errors['property_id'] ?? null) === self::PROPERTY_UNAVAILABLE_MESSAGE) {
+            return self::PROPERTY_UNAVAILABLE_MESSAGE;
+        }
+
+        if (($errors['property_id'] ?? null) === self::REQUEST_MISMATCH_MESSAGE || ($errors['tenant_id'] ?? null) === self::REQUEST_MISMATCH_MESSAGE) {
+            return self::REQUEST_MISMATCH_MESSAGE;
+        }
+
+        return self::VALIDATION_ERROR_MESSAGE;
     }
 
     /**

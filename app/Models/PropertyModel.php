@@ -619,6 +619,8 @@ class PropertyModel extends Model
 
         if ($publicOnly) {
             $builder
+                ->join('users AS public_owner', 'public_owner.id = properties.owner_id')
+                ->where('public_owner.deleted_at', null)
                 ->where('properties.status', self::STATUS_AVAILABLE)
                 ->where('properties.approval_status', self::APPROVAL_APPROVED);
         }

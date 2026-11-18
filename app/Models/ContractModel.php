@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
 use DateTimeImmutable;
 use RuntimeException;
@@ -37,6 +38,11 @@ class ContractModel extends Model
 
     /** The property cannot be linked to a new contract (rented, in maintenance, deactivated or missing). */
     public const ERROR_PROPERTY_UNAVAILABLE = 'property_unavailable';
+
+    /** Errors returned when approving a rental request into a contract (HU-31 Scenarios 3 and 6). */
+    public const ERROR_REQUEST_NOT_FOUND   = 'request_not_found';
+    public const ERROR_REQUEST_NOT_PENDING = 'request_not_pending';
+    public const ERROR_REQUEST_MISMATCH    = 'request_mismatch';
 
     /** The contract or the property update could not be stored; nothing was persisted. */
     public const ERROR_PERSISTENCE = 'persistence';
@@ -114,14 +120,17 @@ class ContractModel extends Model
      * one waits, then finds it already rented. The contract's owner is taken from the locked property row, never from
      * the caller. If anything fails, neither the contract nor the property change is stored.
      *
-     * @param array<string, mixed> $data Contract columns: property_id, tenant_id, start_date, end_date, monthly_rent,
-     *                                   update_percentage, due_day, commission_percentage, late_fee_daily_percentage
+     * @param array<string, mixed> $data             Contract columns: property_id, tenant_id, start_date, end_date, monthly_rent,
+     *                                               update_percentage, due_day, commission_percentage, late_fee_daily_percentage
+     * @param int|null             $requestId        Rental request being approved into this contract (HU-31 Scenario 3)
+     * @param int|null             $resolvedByUserId Administrator or employee resolving the request (HU-31)
      *
      * @return array{id: int|null, error: string|null}
      */
-    public function createAndRentProperty(array $data): array
+    public function createAndRentProperty(array $data, ?int $requestId = null, ?int $resolvedByUserId = null): array
     {
         $propertyId = (int) ($data['property_id'] ?? 0);
+        $tenantId   = (int) ($data['tenant_id'] ?? 0);
 
         $this->db->transBegin();
 
@@ -138,6 +147,34 @@ class ContractModel extends Model
                 return ['id' => null, 'error' => self::ERROR_PROPERTY_UNAVAILABLE];
             }
 
+            if ($requestId !== null) {
+                $requestsTable = $this->db->protectIdentifiers('rental_requests', true);
+                $requestRow    = $this->db
+                    ->query(
+                        "SELECT id, property_id, tenant_id, status FROM {$requestsTable} WHERE id = ? FOR UPDATE",
+                        [$requestId]
+                    )
+                    ->getRowArray();
+
+                if ($requestRow === null) {
+                    $this->db->transRollback();
+
+                    return ['id' => null, 'error' => self::ERROR_REQUEST_NOT_FOUND];
+                }
+
+                if ((string) $requestRow['status'] !== RentalRequestModel::STATUS_PENDING) {
+                    $this->db->transRollback();
+
+                    return ['id' => null, 'error' => self::ERROR_REQUEST_NOT_PENDING];
+                }
+
+                if ((int) $requestRow['property_id'] !== $propertyId || (int) $requestRow['tenant_id'] !== $tenantId) {
+                    $this->db->transRollback();
+
+                    return ['id' => null, 'error' => self::ERROR_REQUEST_MISMATCH];
+                }
+            }
+
             $data['owner_id'] = (int) $property['owner_id'];
             $data['status']   = self::STATUS_IN_FORCE;
 
@@ -149,6 +186,54 @@ class ContractModel extends Model
 
             if (model(PropertyModel::class)->update($propertyId, ['status' => PropertyModel::STATUS_RENTED]) === false) {
                 throw new RuntimeException('The property status could not be updated.');
+            }
+
+            $resolverId = ($resolvedByUserId !== null && $resolvedByUserId > 0)
+                ? $resolvedByUserId
+                : (int) session()->get('user_id', 0);
+            $now        = Time::now()->toDateTimeString();
+
+            if ($requestId !== null) {
+                $approved = $this->db->table('rental_requests')
+                    ->where('id', $requestId)
+                    ->update([
+                        'status'           => RentalRequestModel::STATUS_APPROVED,
+                        'contract_id'      => (int) $contractId,
+                        'rejection_reason' => null,
+                        'resolved_by'      => $resolverId > 0 ? $resolverId : null,
+                        'resolved_at'      => $now,
+                        'updated_at'       => $now,
+                    ]);
+
+                if ($approved === false) {
+                    throw new RuntimeException('The rental request could not be marked as approved.');
+                }
+            }
+
+            // HU-31 Scenario 4: any other pending requests on the same property are automatically rejected.
+            $requestsTable = $this->db->protectIdentifiers('rental_requests', true);
+            $otherPending  = $this->db
+                ->query(
+                    "SELECT id FROM {$requestsTable} WHERE property_id = ? AND status = ? FOR UPDATE",
+                    [$propertyId, RentalRequestModel::STATUS_PENDING]
+                )
+                ->getResultArray();
+
+            if ($otherPending !== []) {
+                $otherRejected = $this->db->table('rental_requests')
+                    ->where('property_id', $propertyId)
+                    ->where('status', RentalRequestModel::STATUS_PENDING)
+                    ->update([
+                        'status'           => RentalRequestModel::STATUS_REJECTED,
+                        'rejection_reason' => RentalRequestModel::AUTO_REJECTION_REASON_PROPERTY_RENTED,
+                        'resolved_by'      => $resolverId > 0 ? $resolverId : null,
+                        'resolved_at'      => $now,
+                        'updated_at'       => $now,
+                    ]);
+
+                if ($otherRejected === false) {
+                    throw new RuntimeException('Competing pending rental requests could not be rejected.');
+                }
             }
 
             if (! $this->db->transCommit()) {

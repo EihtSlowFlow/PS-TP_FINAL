@@ -274,3 +274,33 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   CONSTRAINT `chk_notifications_reference` CHECK ((((`reference_type` is null) and (`reference_id` is null)) or ((`reference_type` is not null) and (`reference_id` is not null))))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE IF NOT EXISTS `rental_requests` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `property_id` int unsigned NOT NULL,
+  `tenant_id` int unsigned NOT NULL,
+  `desired_start_date` date NOT NULL,
+  `desired_months` tinyint unsigned NOT NULL,
+  `contact_phone` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `message` varchar(500) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `status` enum('pending','approved','rejected','cancelled') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'pending',
+  `rejection_reason` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `resolved_by` int unsigned DEFAULT NULL,
+  `resolved_at` datetime DEFAULT NULL,
+  `contract_id` int unsigned DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_rental_requests_property_status` (`property_id`,`status`),
+  KEY `idx_rental_requests_tenant_id` (`tenant_id`),
+  KEY `idx_rental_requests_resolved_by` (`resolved_by`),
+  KEY `idx_rental_requests_contract_id` (`contract_id`),
+  CONSTRAINT `fk_rental_requests_contract_id` FOREIGN KEY (`contract_id`) REFERENCES `contracts` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_rental_requests_property_id` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_rental_requests_resolved_by` FOREIGN KEY (`resolved_by`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `fk_rental_requests_tenant_id` FOREIGN KEY (`tenant_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `chk_rental_requests_desired_months` CHECK ((`desired_months` > 0)),
+  CONSTRAINT `chk_rental_requests_rejection_reason` CHECK (((`status` <> _utf8mb4'rejected') or ((`rejection_reason` is not null) and (`rejection_reason` <> _utf8mb4''))))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
