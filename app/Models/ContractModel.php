@@ -354,6 +354,53 @@ class ContractModel extends Model
     }
 
     /**
+     * Lists the contracts of one tenant for the tenant portal (HU-34): the ones in force first, then the most recent
+     * ones. Deactivated properties are included on purpose: the history of a contract must stay consultable. The
+     * query selects only the columns a tenant may see (see {@see tenantSelect()}).
+     *
+     * @param string|null $status Limits the result to one contract status (null for all of them)
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findForTenant(int $tenantId, ?string $status = null): array
+    {
+        $builder = $this->builder()
+            ->select($this->tenantSelect())
+            ->join('properties', 'properties.id = contracts.property_id')
+            ->where('contracts.tenant_id', $tenantId);
+
+        if ($status !== null) {
+            $builder->where('contracts.status', $status);
+        }
+
+        return $builder
+            ->orderBy("contracts.status = '" . self::STATUS_IN_FORCE . "'", 'DESC', false)
+            ->orderBy('contracts.start_date', 'DESC')
+            ->orderBy('contracts.id', 'DESC')
+            ->get()
+            ->getResultArray();
+    }
+
+    /**
+     * Finds one contract by id only when it belongs to the tenant (HU-34 Scenario 3): a contract of anybody else is
+     * indistinguishable from one that does not exist.
+     *
+     * @return array<string, mixed>|null
+     */
+    public function findOneForTenant(int $id, int $tenantId): ?array
+    {
+        $row = $this->builder()
+            ->select($this->tenantSelect())
+            ->join('properties', 'properties.id = contracts.property_id')
+            ->where('contracts.id', $id)
+            ->where('contracts.tenant_id', $tenantId)
+            ->get()
+            ->getRowArray();
+
+        return $row ?: null;
+    }
+
+    /**
      * Lists the contracts in force that cover a period, with their property and tenant data and the id of the
      * installment already issued for that period, if any (HU-13 preview). Deactivated tenants and properties are
      * included on purpose: a contract in force keeps being billed whatever happened to its parties.
@@ -532,6 +579,19 @@ class ContractModel extends Model
             ->where('property_id', $propertyId)
             ->where('status', self::STATUS_IN_FORCE)
             ->countAllResults() > 0;
+    }
+
+    /**
+     * Columns of the tenant portal (HU-34), listed one by one on purpose: the agency commission, the owner and the
+     * audit fields are never selected, so no view can print them by mistake.
+     */
+    private function tenantSelect(): string
+    {
+        return 'contracts.id, contracts.property_id, contracts.start_date, contracts.end_date, '
+            . 'contracts.monthly_rent, contracts.update_percentage, contracts.due_day, '
+            . 'contracts.late_fee_daily_percentage, contracts.status, contracts.closed_at, contracts.closing_reason, '
+            . 'properties.address AS property_address, properties.city AS property_city, '
+            . 'properties.type AS property_type, properties.rooms AS property_rooms';
     }
 
     /**

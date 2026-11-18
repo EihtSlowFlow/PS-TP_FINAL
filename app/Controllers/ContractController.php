@@ -6,12 +6,13 @@ use App\Models\ContractModel;
 use App\Models\PropertyModel;
 use App\Models\RentalRequestModel;
 use App\Models\UserModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
 use DateTimeImmutable;
 
 /**
- * Lease contract management for administrators and employees, plus owner-scoped consultation (HU-10/11).
- * Closing a contract belongs to HU-12.
+ * Lease contract management for administrators and employees, plus owner-scoped (HU-11) and tenant-scoped (HU-34)
+ * consultation. Closing a contract belongs to HU-12.
  */
 class ContractController extends BaseController
 {
@@ -195,6 +196,50 @@ class ContractController extends BaseController
         }
 
         return $this->renderContractFile($contract, $id, true);
+    }
+
+    /**
+     * Lists the contracts of the authenticated tenant, the ones in force first (HU-34 Scenarios 1 and 4). Read only.
+     */
+    public function tenantIndex(): string
+    {
+        $contracts = model(ContractModel::class)->findForTenant((int) session()->get('user_id'));
+
+        return view('tenant/contracts/index', array_merge($this->panelContext(
+            pageTitle: 'Mi contrato',
+            breadcrumb: 'Mi contrato',
+            activeMenu: 'inquilino-contratos'
+        ), [
+            'contracts' => $contracts,
+        ]));
+    }
+
+    /**
+     * Renders the file of one contract of the authenticated tenant (HU-34 Scenario 2). The contract of another
+     * tenant, an unknown id and an id that is not a valid number answer 404, so the page never reveals which
+     * identifiers exist. The amounts and dates are the stored ones: nothing is recalculated in the view.
+     */
+    public function tenantShow(string $id): string
+    {
+        // The route accepts any run of digits; one too long for an integer must answer 404 like any other unknown id.
+        $contractId = ctype_digit($id) && strlen($id) <= 18 ? (int) $id : 0;
+        $contract   = $contractId > 0
+            ? model(ContractModel::class)->findOneForTenant($contractId, (int) session()->get('user_id'))
+            : null;
+
+        if ($contract === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $contract['duration'] = ContractModel::describeDuration((string) $contract['start_date'], (string) $contract['end_date']);
+
+        return view('tenant/contracts/show', array_merge($this->panelContext(
+            pageTitle: 'Contrato #' . $contractId,
+            breadcrumb: 'Mi contrato / Contrato #' . $contractId,
+            activeMenu: 'inquilino-contratos'
+        ), [
+            'contract' => $contract,
+        ]));
     }
 
     /**

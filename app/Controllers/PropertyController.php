@@ -120,10 +120,41 @@ class PropertyController extends BaseController
         );
 
         return view('properties/public_catalog', [
+            'pageTitle'    => 'Propiedades disponibles',
+            'activeNav'    => 'catalogo',
             'properties'   => $pagination['items'],
             'pagination'   => $pagination,
             'filters'      => $filterData['values'],
             'filterErrors' => $filterData['errors'],
+        ]);
+    }
+
+    /**
+     * Renders the public property detail sheet (HU-29).
+     * Only available, approved and active properties of active owners are visible;
+     * anything else throws PageNotFoundException (404).
+     */
+    public function publicShow(string $id): string
+    {
+        // The route accepts any run of digits; one too long for an integer must answer 404 like any other unknown id.
+        $propertyId = ctype_digit($id) && strlen($id) <= 18 ? (int) $id : 0;
+        $property   = $propertyId > 0 ? model(PropertyModel::class)->findPublicDetail($propertyId) : null;
+
+        if ($property === null) {
+            throw PageNotFoundException::forPageNotFound();
+        }
+
+        $session    = session();
+        $isLoggedIn = (bool) $session->get('is_logged_in');
+        $userRole   = (string) $session->get('user_role', '');
+
+        return view('properties/public_show', [
+            'pageTitle'  => $property['address'] . ' - Detalle',
+            'activeNav'  => 'catalogo',
+            'property'   => $property,
+            'isLoggedIn' => $isLoggedIn,
+            'userRole'   => $userRole,
+            'catalogBackUrl' => $this->publicCatalogBackUrl(),
         ]);
     }
 
@@ -524,6 +555,47 @@ class PropertyController extends BaseController
     {
         return redirect()->to('/propietario/inmuebles')
             ->with('error', self::OWNER_PROPERTY_APPROVED_LOCKED_MESSAGE);
+    }
+
+    /**
+     * Keeps supported catalog filters when the detail page is reached from the public catalog (HU-29).
+     *
+     * The page of the catalog is recognized by its own address (`site_url()`, so it also works with `index.php` in the
+     * URL or with the app in a subfolder), and only the known filters are copied: anything else in the `Referer`,
+     * including a page of another site, is ignored.
+     */
+    private function publicCatalogBackUrl(): string
+    {
+        $catalogUrl = site_url('catalogo-inmuebles');
+        $referer    = trim($this->request->getHeaderLine('Referer'));
+
+        if ($referer === '') {
+            return $catalogUrl;
+        }
+
+        $parts   = parse_url($referer);
+        $catalog = parse_url($catalogUrl);
+
+        if (
+            ! is_array($parts)
+            || ! is_array($catalog)
+            || ($parts['host'] ?? null) !== ($catalog['host'] ?? null)
+            || ($parts['port'] ?? null) !== ($catalog['port'] ?? null)
+            || rtrim((string) ($parts['path'] ?? ''), '/') !== rtrim((string) ($catalog['path'] ?? ''), '/')
+        ) {
+            return $catalogUrl;
+        }
+
+        parse_str((string) ($parts['query'] ?? ''), $query);
+        $filters = [];
+
+        foreach (['type', 'min_price', 'max_price', 'page'] as $field) {
+            if (isset($query[$field]) && is_string($query[$field]) && trim($query[$field]) !== '') {
+                $filters[$field] = trim($query[$field]);
+            }
+        }
+
+        return $filters === [] ? $catalogUrl : $catalogUrl . '?' . http_build_query($filters);
     }
 
     private function sessionUserId(): int

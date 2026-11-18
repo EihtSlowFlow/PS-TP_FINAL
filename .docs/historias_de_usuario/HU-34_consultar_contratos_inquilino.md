@@ -66,13 +66,13 @@ para conocer las condiciones pactadas, la vigencia y el estado de cada contrato.
 
 ## Definition of Done
 
-- [ ] El inquilino lista y abre sus contratos.
-- [ ] La ficha muestra las condiciones sin comisión ni datos del propietario.
-- [ ] Los contratos ajenos responden 404.
-- [ ] Estado de cuenta enlaza a la ficha.
-- [ ] Se agrega «Mi contrato» al menú del inquilino.
-- [ ] Se prueban los escenarios y casos de error.
-- [ ] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue.
+- [x] El inquilino lista y abre sus contratos.
+- [x] La ficha muestra las condiciones sin comisión ni datos del propietario.
+- [x] Los contratos ajenos responden 404.
+- [x] Estado de cuenta enlaza a la ficha.
+- [x] Se agrega «Mi contrato» al menú del inquilino.
+- [x] Se prueban los escenarios y casos de error.
+- [ ] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue. (Handoff y registro hechos; falta publicar el comentario en el issue.)
 
 ## Dependencias
 

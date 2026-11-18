@@ -463,6 +463,49 @@ class PropertyModel extends Model
     }
 
     /**
+     * Returns the most recently created properties that are active, approved and available, for the public
+     * landing page (HU-28). Only properties whose owner is also active are returned.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findLatestPublic(int $limit = 6): array
+    {
+        return $this->builder()
+            ->select($this->listingSelect())
+            ->join('users AS public_owner', 'public_owner.id = properties.owner_id')
+            ->where('public_owner.deleted_at', null)
+            ->where('properties.deleted_at', null)
+            ->where('properties.status', self::STATUS_AVAILABLE)
+            ->where('properties.approval_status', self::APPROVAL_APPROVED)
+            ->orderBy('properties.id', 'DESC')
+            ->limit($limit)
+            ->get()
+            ->getResultArray();
+    }
+
+    /**
+     * Finds a single property for public display (HU-29): must be active, approved, available,
+     * and owned by an active owner. Excludes owner identity, contracts and audit fields.
+     *
+     * @return array<string, mixed>|null
+     */
+    public function findPublicDetail(int $id): ?array
+    {
+        $row = $this->builder()
+            ->select($this->listingSelect())
+            ->join('users AS public_owner', 'public_owner.id = properties.owner_id')
+            ->where('properties.id', $id)
+            ->where('public_owner.deleted_at', null)
+            ->where('properties.deleted_at', null)
+            ->where('properties.status', self::STATUS_AVAILABLE)
+            ->where('properties.approval_status', self::APPROVAL_APPROVED)
+            ->get()
+            ->getRowArray();
+
+        return $row ?: null;
+    }
+
+    /**
      * Lists the properties that can be offered for a new contract (HU-10): not deactivated, approved by the
      * administration, in status "available" and owned by an active owner. Ordered by address.
      *

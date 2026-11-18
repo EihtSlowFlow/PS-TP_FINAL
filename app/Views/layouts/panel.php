@@ -112,6 +112,9 @@ $pendingRequestCount  = (int) ($pendingRequestCount ?? 0);
                     <a href="<?= esc(site_url('inquilino/estado-cuenta')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-estado-cuenta' ? ' is-active' : '' ?>">
                         <span>Estado de cuenta</span>
                     </a>
+                    <a href="<?= esc(site_url('inquilino/contratos')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-contratos' ? ' is-active' : '' ?>">
+                        <span>Mi contrato</span>
+                    </a>
                     <a href="<?= esc(site_url('catalogo-inmuebles')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-buscar-inmuebles' ? ' is-active' : '' ?>">
                         <span>Buscar inmuebles</span>
                     </a>

@@ -5,6 +5,7 @@
  * @var array<string, list<array<string, mixed>>> $byStatus
  * @var int $totalCount
  * @var list<string> $statusOrder
+ * @var list<array<string, mixed>> $activeContracts Contracts in force of the tenant (HU-34 Scenario 5)
  */
 use App\Models\InstallmentModel;
 use App\Models\PaymentModel;
@@ -33,6 +34,24 @@ $this->extend('layouts/panel');
                     <p class="panel-subtitle">Tus cuotas, vencimientos, recargos y pagos informados.</p>
                 </div>
             </div>
+
+            <?php if ($activeContracts !== []): ?>
+                <?php /* HU-34 Scenario 5: the way from the account statement to the file of each contract in force. */ ?>
+                <section class="panel-card tenant-contract-card" aria-labelledby="tenant-active-contracts-heading">
+                    <h2 id="tenant-active-contracts-heading" class="section-title"><?= count($activeContracts) === 1 ? 'Tu contrato vigente' : 'Tus contratos vigentes' ?></h2>
+                    <ul class="tenant-contract-list">
+                        <?php foreach ($activeContracts as $activeContract): ?>
+                            <li class="tenant-contract-item" data-contract-id="<?= esc((string) $activeContract['id']) ?>">
+                                <div>
+                                    <span class="cell-title"><?= esc((string) $activeContract['property_address']) ?></span>
+                                    <span class="cell-note">Contrato #<?= esc((string) $activeContract['id']) ?> vigente hasta el <?= esc($formatDate($activeContract['end_date'])) ?></span>
+                                </div>
+                                <a href="<?= esc(site_url('inquilino/contratos/' . (int) $activeContract['id'])) ?>" class="btn btn-secondary btn-sm">Ver contrato digital</a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </section>
+            <?php endif; ?>
 
             <?php if ($totalCount === 0): ?>
                 <section class="panel-card" aria-labelledby="tenant-empty-state">

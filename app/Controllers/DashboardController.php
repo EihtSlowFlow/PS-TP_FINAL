@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Libraries\LateFeeCalculator;
+use App\Models\ContractModel;
 use App\Models\InstallmentModel;
 use App\Models\PaymentModel;
 
@@ -49,7 +50,8 @@ class DashboardController extends BaseController
         $model = model(InstallmentModel::class);
         $model->refreshLateFees($today);
 
-        $installments = $model->findTenantAccount((int) session()->get('user_id'));
+        $tenantId     = (int) session()->get('user_id');
+        $installments = $model->findTenantAccount($tenantId);
         $payments     = model(PaymentModel::class)->findTenantAccountDetails(
             array_map(static fn (array $row): int => (int) $row['id'], $installments)
         );
@@ -69,9 +71,11 @@ class DashboardController extends BaseController
         return view('dashboard/tenant_account_status', array_merge(
             $this->panelContext('Estado de cuenta', 'Estado de cuenta', 'inquilino-estado-cuenta'),
             [
-                'byStatus'    => $byStatus,
-                'totalCount'  => count($installments),
-                'statusOrder' => [
+                // Contracts in force, so the account statement can link to each contract file (HU-34 Scenario 5).
+                'activeContracts' => model(ContractModel::class)->findForTenant($tenantId, ContractModel::STATUS_IN_FORCE),
+                'byStatus'        => $byStatus,
+                'totalCount'      => count($installments),
+                'statusOrder'     => [
                     InstallmentModel::STATUS_PENDING,
                     InstallmentModel::STATUS_OVERDUE,
                     InstallmentModel::STATUS_UNDER_REVIEW,

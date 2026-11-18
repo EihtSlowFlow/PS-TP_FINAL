@@ -72,7 +72,12 @@ class AuthController extends BaseController
             $session->remove(['is_logged_in', 'user_id', 'user_email', 'user_name', 'user_role']);
         }
 
-        return view('auth/register');
+        $roleParam       = (string) $this->request->getGet('role');
+        $preselectedRole = in_array($roleParam, [UserModel::ROLE_OWNER, UserModel::ROLE_TENANT], true) ? $roleParam : '';
+
+        return view('auth/register', [
+            'preselectedRole' => $preselectedRole,
+        ]);
     }
 
     /**

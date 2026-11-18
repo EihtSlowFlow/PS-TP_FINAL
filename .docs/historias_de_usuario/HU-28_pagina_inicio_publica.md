@@ -62,12 +62,12 @@ para entender la plataforma y comenzar a usarla sin conocer sus rutas internas.
 
 ## Definition of Done
 
-- [ ] `/` muestra la página de inicio a los visitantes y redirige a los usuarios autenticados.
-- [ ] Inicio, catálogo y detalle reutilizan el layout público.
-- [ ] Los llamados a la acción llevan a las rutas correspondientes.
-- [ ] El registro permite preseleccionar solo Propietario o Inquilino.
-- [ ] Se reemplaza la prueba actual que exige redirigir a login desde `/` y se prueban los escenarios.
-- [ ] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue.
+- [x] `/` muestra la página de inicio a los visitantes y redirige a los usuarios autenticados.
+- [x] Inicio, catálogo y detalle reutilizan el layout público.
+- [x] Los llamados a la acción llevan a las rutas correspondientes.
+- [x] El registro permite preseleccionar solo Propietario o Inquilino.
+- [x] Se reemplaza la prueba actual que exige redirigir a login desde `/` y se prueban los escenarios.
+- [x] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue.
 
 ## Dependencias
 
