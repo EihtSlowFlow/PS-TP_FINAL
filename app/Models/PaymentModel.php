@@ -207,7 +207,7 @@ class PaymentModel extends Model
     {
         $builder = $this->builder()
             ->select(
-                'payments.id AS payment_id, payments.amount, payments.paid_on, payments.method, payments.status, '
+                'payments.id AS payment_id, payments.amount, payments.paid_on, payments.method, payments.reference_number, payments.status, '
                 . 'payments.rejection_reason, payments.created_at, payments.resolved_at, '
                 . 'installments.id AS installment_id, installments.number AS installment_number, installments.period, '
                 . 'installments.base_amount, installments.late_fee, '
@@ -239,7 +239,7 @@ class PaymentModel extends Model
     {
         $builder = $this->builder()
             ->select(
-                'payments.id AS payment_id, payments.amount, payments.paid_on, payments.method, payments.status, '
+                'payments.id AS payment_id, payments.amount, payments.paid_on, payments.method, payments.reference_number, payments.status, '
                 . 'payments.rejection_reason, payments.created_at, payments.resolved_at, '
                 . 'installments.id AS installment_id, installments.number AS installment_number, installments.period, '
                 . 'installments.base_amount, installments.late_fee, '
@@ -295,56 +295,65 @@ class PaymentModel extends Model
      */
     public function resolvePendingPayment(int $paymentId, int $resolverId, bool $approve, ?string $rejectionReason = null): array
     {
-        $db   = $this->db;
-        $now  = date('Y-m-d H:i:s');
-        $row  = $db->query(
-            'SELECT p.*, i.id AS installment_id, i.status AS installment_status, i.due_date, i.base_amount, i.late_fee '
-            . 'FROM payments p '
-            . 'INNER JOIN installments i ON i.id = p.installment_id '
-            . 'WHERE p.id = ? '
-            . 'FOR UPDATE',
-            [$paymentId]
-        )->getRowArray();
+        $db  = $this->db;
+        $now = date('Y-m-d H:i:s');
 
-        if ($row === null) {
-            return ['ok' => false, 'error' => 'not_found'];
-        }
-
-        if ((string) $row['status'] !== self::STATUS_PENDING_VALIDATION) {
-            return ['ok' => false, 'error' => 'invalid_status'];
-        }
-
-        if ($approve) {
-            $update = [
-                'status'           => self::STATUS_APPROVED,
-                'rejection_reason' => null,
-                'resolved_by'      => $resolverId,
-                'resolved_at'      => $now,
-                'updated_at'       => $now,
-            ];
-            $installmentStatus = InstallmentModel::STATUS_PAID;
-        } else {
-            $reason = trim((string) ($rejectionReason ?? ''));
-
-            if ($reason === '') {
-                return ['ok' => false, 'error' => 'missing_reason'];
-            }
-
-            $update = [
-                'status'           => self::STATUS_REJECTED,
-                'rejection_reason' => $reason,
-                'resolved_by'      => $resolverId,
-                'resolved_at'      => $now,
-                'updated_at'       => $now,
-            ];
-            $installmentStatus = (string) $row['due_date'] < date('Y-m-d')
-                ? InstallmentModel::STATUS_OVERDUE
-                : InstallmentModel::STATUS_PENDING;
-        }
-
+        // The row is locked inside the transaction: under autocommit `FOR UPDATE` is released as soon as the SELECT
+        // ends, so two operators could both read the payment as pending and resolve it twice.
         $db->transBegin();
 
         try {
+            $row = $db->query(
+                'SELECT p.*, i.id AS installment_id, i.status AS installment_status, i.due_date, i.base_amount, i.late_fee '
+                . 'FROM payments p '
+                . 'INNER JOIN installments i ON i.id = p.installment_id '
+                . 'WHERE p.id = ? '
+                . 'FOR UPDATE',
+                [$paymentId]
+            )->getRowArray();
+
+            if ($row === null) {
+                $db->transRollback();
+
+                return ['ok' => false, 'error' => 'not_found'];
+            }
+
+            if ((string) $row['status'] !== self::STATUS_PENDING_VALIDATION) {
+                $db->transRollback();
+
+                return ['ok' => false, 'error' => 'invalid_status'];
+            }
+
+            if ($approve) {
+                $update = [
+                    'status'           => self::STATUS_APPROVED,
+                    'rejection_reason' => null,
+                    'resolved_by'      => $resolverId,
+                    'resolved_at'      => $now,
+                    'updated_at'       => $now,
+                ];
+                $installmentStatus = InstallmentModel::STATUS_PAID;
+            } else {
+                $reason = trim((string) ($rejectionReason ?? ''));
+
+                if ($reason === '') {
+                    $db->transRollback();
+
+                    return ['ok' => false, 'error' => 'missing_reason'];
+                }
+
+                $update = [
+                    'status'           => self::STATUS_REJECTED,
+                    'rejection_reason' => $reason,
+                    'resolved_by'      => $resolverId,
+                    'resolved_at'      => $now,
+                    'updated_at'       => $now,
+                ];
+                $installmentStatus = (string) $row['due_date'] < InstallmentModel::today()
+                    ? InstallmentModel::STATUS_OVERDUE
+                    : InstallmentModel::STATUS_PENDING;
+            }
+
             $updatedPayment = $db->table('payments')
                 ->where('id', $paymentId)
                 ->update($update);

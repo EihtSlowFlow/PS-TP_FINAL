@@ -3,6 +3,12 @@
 use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
+
+// "(:id)" is a database id that fits PHP's signed 64-bit integer (up to 18 digits). Unlike "(:num)" it does not match
+// longer numbers, so a hand-edited URL answers 404 instead of a TypeError (HTTP 500) in the actions that type `$id`
+// as `int`. Use it for every action with an `int` parameter; "(:num)" stays where the action casts the value itself.
+$routes->addPlaceholder('id', '[0-9]{1,18}');
+
 $routes->get('/', 'Home::index');
 $routes->get('catalogo-inmuebles', 'PropertyController::publicIndex');
 $routes->get('catalogo-inmuebles/(:num)', 'PropertyController::publicShow/$1');
@@ -30,26 +36,26 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static fu
     $routes->get('inmuebles', 'PropertyController::index');
     $routes->get('inmuebles/nuevo', 'PropertyController::create');
     $routes->post('inmuebles', 'PropertyController::store');
-    $routes->get('inmuebles/editar/(:num)', 'PropertyController::edit/$1');
-    $routes->post('inmuebles/editar/(:num)', 'PropertyController::update/$1');
-    $routes->post('inmuebles/baja/(:num)', 'PropertyController::deactivate/$1');
+    $routes->get('inmuebles/editar/(:id)', 'PropertyController::edit/$1');
+    $routes->post('inmuebles/editar/(:id)', 'PropertyController::update/$1');
+    $routes->post('inmuebles/baja/(:id)', 'PropertyController::deactivate/$1');
     // Review of the properties published by owners: POST only, behind the CSRF filter (HU-33)
-    $routes->post('inmuebles/(:num)/aprobacion', 'PropertyController::approve/$1');
-    $routes->post('inmuebles/(:num)/rechazo', 'PropertyController::reject/$1');
+    $routes->post('inmuebles/(:id)/aprobacion', 'PropertyController::approve/$1');
+    $routes->post('inmuebles/(:id)/rechazo', 'PropertyController::reject/$1');
 
     // Tenant rental requests tray, file and rejection (HU-31; approval goes through contratos/nuevo?request_id=)
     $routes->get('solicitudes', 'RentalRequestController::adminIndex');
-    $routes->get('solicitudes/(:num)', 'RentalRequestController::adminShow/$1');
-    $routes->post('solicitudes/(:num)/rechazo', 'RentalRequestController::adminReject/$1');
+    $routes->get('solicitudes/(:id)', 'RentalRequestController::adminShow/$1');
+    $routes->post('solicitudes/(:id)/rechazo', 'RentalRequestController::adminReject/$1');
 
     // Lease contracts: creation, listing and contract file (HU-10/11; closing is HU-12)
     $routes->get('contratos', 'ContractController::index');
     $routes->get('contratos/nuevo', 'ContractController::create');
     $routes->post('contratos', 'ContractController::store');
-    $routes->post('contratos/(:num)/finalizar', 'ContractController::finalize/$1');
-    $routes->post('contratos/(:num)/rescindir', 'ContractController::rescind/$1');
-    $routes->post('contratos/(:num)/cerrar', 'ContractController::close/$1');
-    $routes->get('contratos/(:num)', 'ContractController::show/$1');
+    $routes->post('contratos/(:id)/finalizar', 'ContractController::finalize/$1');
+    $routes->post('contratos/(:id)/rescindir', 'ContractController::rescind/$1');
+    $routes->post('contratos/(:id)/cerrar', 'ContractController::close/$1');
+    $routes->get('contratos/(:id)', 'ContractController::show/$1');
 
     // Monthly installment issuing: period and preview, confirmation and report (HU-13)
     $routes->get('cuotas/emitir', 'InstallmentController::emit');
@@ -74,9 +80,9 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin']], static function (R
     $routes->get('usuarios', 'UserController::index');
     $routes->get('usuarios/nuevo', 'UserController::create');
     $routes->post('usuarios', 'UserController::store');
-    $routes->get('usuarios/editar/(:num)', 'UserController::edit/$1');
-    $routes->post('usuarios/editar/(:num)', 'UserController::update/$1');
-    $routes->post('usuarios/baja/(:num)', 'UserController::deactivate/$1');
+    $routes->get('usuarios/editar/(:id)', 'UserController::edit/$1');
+    $routes->post('usuarios/editar/(:id)', 'UserController::update/$1');
+    $routes->post('usuarios/baja/(:id)', 'UserController::deactivate/$1');
 });
 
 // Owner portal routes (HU-01, HU-32)
@@ -86,12 +92,12 @@ $routes->group('propietario', ['filter' => ['auth', 'role:owner']], static funct
     // The owner publishes a property and corrects it until the administration approves it (HU-32)
     $routes->get('inmuebles/nuevo', 'PropertyController::ownerCreate');
     $routes->post('inmuebles', 'PropertyController::ownerStore');
-    $routes->get('inmuebles/editar/(:num)', 'PropertyController::ownerEdit/$1');
-    $routes->post('inmuebles/editar/(:num)', 'PropertyController::ownerUpdate/$1');
+    $routes->get('inmuebles/editar/(:id)', 'PropertyController::ownerEdit/$1');
+    $routes->post('inmuebles/editar/(:id)', 'PropertyController::ownerUpdate/$1');
     // Cancel the request of a pending property or take an approved one down (logical deactivation, HU-09 rules)
-    $routes->post('inmuebles/baja/(:num)', 'PropertyController::ownerDeactivate/$1');
+    $routes->post('inmuebles/baja/(:id)', 'PropertyController::ownerDeactivate/$1');
     $routes->get('contratos', 'ContractController::ownerIndex');
-    $routes->get('contratos/(:num)', 'ContractController::ownerShow/$1');
+    $routes->get('contratos/(:id)', 'ContractController::ownerShow/$1');
 });
 
 // Tenant portal routes (HU-01, HU-16, HU-18, HU-30, HU-34)
@@ -105,9 +111,9 @@ $routes->group('inquilino', ['filter' => ['auth', 'role:tenant']], static functi
     $routes->post('cuotas/(:num)/informar-pago', 'PaymentController::store/$1');
     // Rental requests: apply for an available property, track status and cancel pending requests (HU-30)
     $routes->get('solicitudes', 'RentalRequestController::index');
-    $routes->get('inmuebles/(:num)/solicitar', 'RentalRequestController::create/$1');
-    $routes->post('inmuebles/(:num)/solicitar', 'RentalRequestController::store/$1');
-    $routes->post('solicitudes/(:num)/cancelar', 'RentalRequestController::cancel/$1');
+    $routes->get('inmuebles/(:id)/solicitar', 'RentalRequestController::create/$1');
+    $routes->post('inmuebles/(:id)/solicitar', 'RentalRequestController::store/$1');
+    $routes->post('solicitudes/(:id)/cancelar', 'RentalRequestController::cancel/$1');
 });
 
 // Protected receipt download/preview for owning tenant or admin/employee (HU-16)

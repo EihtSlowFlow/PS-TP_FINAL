@@ -40,7 +40,7 @@ class PaymentController extends BaseController
     }
 
     /**
-     * Shows the review page for a pending payment (HU-17).
+     * Shows the complete payment history for admins and employees, filtered by status and period (HU-18).
      */
     public function history(): string
     {
@@ -60,14 +60,6 @@ class PaymentController extends BaseController
             ],
             'statusOptions' => PaymentModel::STATUS_LABELS,
         ]));
-    }
-
-    /**
-     * Alias for the admin payment history (HU-18).
-     */
-    public function adminHistory(): string
-    {
-        return $this->history();
     }
 
     /**
