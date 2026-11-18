@@ -27,6 +27,13 @@ $formatDate = static function (mixed $value): string {
     return ! empty($value) ? date('d/m/Y', strtotime((string) $value)) : '—';
 };
 
+$formatPercentage = static function (mixed $value): string {
+    $text = (string) $value;
+    $text = str_contains($text, '.') ? rtrim(rtrim($text, '0'), '.') : $text;
+
+    return str_replace('.', ',', $text) . ' %';
+};
+
 // A year typed in the address bar that the selector does not offer is still shown, so the page never lies about it.
 if (ctype_digit($selectedYear) && $selectedYear !== '' && ! in_array((int) $selectedYear, $years, true)) {
     $years[] = (int) $selectedYear;
@@ -201,7 +208,12 @@ $this->extend('layouts/panel');
                                             </div>
                                         </td>
                                         <td class="mono-cell nowrap-cell"><?= esc($formatDate($row['due_date'])) ?></td>
-                                        <td class="mono-cell nowrap-cell text-right"><?= esc($formatMoney($row['monthly_rent'])) ?></td>
+                                        <td class="mono-cell nowrap-cell text-right">
+                                            <?= esc($formatMoney($row['amount'])) ?>
+                                            <?php if ((int) $row['updates'] > 0): ?>
+                                                <br><span class="field-help">Con <?= esc((string) $row['updates']) ?> <?= (int) $row['updates'] === 1 ? 'actualización' : 'actualizaciones' ?> de <?= esc($formatPercentage($row['update_percentage'])) ?></span>
+                                            <?php endif; ?>
+                                        </td>
                                         <td>
                                             <?php if ($isIssued): ?>
                                                 <span class="badge-pill badge-neutral" title="Ya tiene la cuota de este período: se omite sin modificarla">Ya emitida</span>

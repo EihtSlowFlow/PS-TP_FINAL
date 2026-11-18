@@ -1,9 +1,9 @@
 -- InmoGestión 2026 - demo / test data (single source for CodeIgniter and MySQL Workbench)
 --
--- WHAT IT LOADS: 10 users (1 admin, 1 employee, 3 owners, 4 tenants, 1 deactivated), 8 properties
--- (one soft-deleted), 6 contracts (4 in force, 1 finished, 1 rescinded), 24 installments in
+-- WHAT IT LOADS: 10 users (1 admin, 1 employee, 3 owners, 4 tenants, 1 deactivated), 10 properties
+-- (one soft-deleted, one pending approval, one rejected), 6 contracts (4 in force, 1 finished, 1 rescinded), 24 installments in
 -- every state, 19 payments (approved, pending and rejected), 15 settlements (12 transferred,
--- 3 pending) and 7 notifications. All emails end in @example.com.
+-- 3 pending), 7 notifications and 3 rental requests (pending, rejected and cancelled). All emails end in @example.com.
 -- Dates are relative to the day it is loaded (installments of the last 6 months, a contract
 -- expiring in 45 days, overdue installments with their late fee), so it never goes stale.
 -- Payment receipts (payment_receipts) are not loaded: they need real files in
@@ -29,6 +29,7 @@
 --   TRUNCATE TABLE notifications;
 --   TRUNCATE TABLE settlement_installments;
 --   TRUNCATE TABLE settlements;
+--   TRUNCATE TABLE rental_requests;
 --   TRUNCATE TABLE payment_receipts;
 --   TRUNCATE TABLE payments;
 --   TRUNCATE TABLE installments;
@@ -91,11 +92,11 @@ SET @former = (SELECT id FROM users WHERE email = 'former.tenant.demo@example.co
 
 -- Properties (one at a time so LAST_INSERT_ID() is reliable)
 INSERT INTO properties (owner_id, address, city, type, rooms, surface, included_services, base_rent, description, status, created_at, updated_at)
-VALUES (@owner1, 'Av. Siempre Viva 742', 'Cipolletti', 'apartment', 3, 68.50, 'Agua, luz y gas', 250000.00, 'Departamento luminoso en el centro, con balcón.', 'rented', NOW(), NOW());
+VALUES (@owner1, 'Av. Siempre Viva 742', 'Cipolletti', 'apartment', 3, 68.50, 'Gas natural, Agua, Luz', 250000.00, 'Departamento luminoso en el centro, con balcón.', 'rented', NOW(), NOW());
 SET @p1 = LAST_INSERT_ID();
 
 INSERT INTO properties (owner_id, address, city, type, rooms, surface, included_services, base_rent, description, status, created_at, updated_at)
-VALUES (@owner1, 'Los Pinos 120', 'Neuquén', 'house', 4, 120.00, 'Agua, luz y gas', 380000.00, 'Casa con jardín y cochera.', 'rented', NOW(), NOW());
+VALUES (@owner1, 'Los Pinos 120', 'Neuquén', 'house', 4, 120.00, 'Gas natural, Agua, Luz', 380000.00, 'Casa con jardín y cochera.', 'rented', NOW(), NOW());
 SET @p2 = LAST_INSERT_ID();
 
 INSERT INTO properties (owner_id, address, city, type, rooms, surface, included_services, base_rent, description, status, created_at, updated_at)
@@ -103,11 +104,11 @@ VALUES (@owner2, 'San Martín 450', 'Cipolletti', 'commercial', 2, 45.00, NULL, 
 SET @p3 = LAST_INSERT_ID();
 
 INSERT INTO properties (owner_id, address, city, type, rooms, surface, included_services, base_rent, description, status, created_at, updated_at)
-VALUES (@owner2, 'Belgrano 1010 4B', 'Neuquén', 'apartment', 2, 52.00, 'Agua y luz', 210000.00, NULL, 'rented', NOW(), NOW());
+VALUES (@owner2, 'Belgrano 1010 4B', 'Neuquén', 'apartment', 2, 52.00, 'Agua, Luz', 210000.00, NULL, 'rented', NOW(), NOW());
 SET @p4 = LAST_INSERT_ID();
 
 INSERT INTO properties (owner_id, address, city, type, rooms, surface, included_services, base_rent, description, status, created_at, updated_at)
-VALUES (@owner3, 'Mitre 88 Piso 2', 'Neuquén', 'office', 3, 80.00, 'Agua, luz e internet', 420000.00, 'Oficina con tres ambientes y recepción.', 'rented', NOW(), NOW());
+VALUES (@owner3, 'Mitre 88 Piso 2', 'Neuquén', 'office', 3, 80.00, 'Agua, Luz, Internet', 420000.00, 'Oficina con tres ambientes y recepción.', 'rented', NOW(), NOW());
 SET @p5 = LAST_INSERT_ID();
 
 INSERT INTO properties (owner_id, address, city, type, rooms, surface, included_services, base_rent, description, status, created_at, updated_at)
@@ -115,12 +116,20 @@ VALUES (@owner3, 'Ruta 22 km 1210', 'Cipolletti', 'land', NULL, 600.00, NULL, 15
 SET @p6 = LAST_INSERT_ID();
 
 INSERT INTO properties (owner_id, address, city, type, rooms, surface, included_services, base_rent, description, status, created_at, updated_at)
-VALUES (@owner1, 'Alberdi 305', 'Cipolletti', 'house', 3, 95.00, 'Agua, luz y gas', 330000.00, 'Casa a estrenar tras el último contrato.', 'available', NOW(), NOW());
+VALUES (@owner1, 'Alberdi 305', 'Cipolletti', 'house', 3, 95.00, 'Gas natural, Agua, Luz', 330000.00, 'Casa a estrenar tras el último contrato.', 'available', NOW(), NOW());
 SET @p7 = LAST_INSERT_ID();
 
 -- Deactivated property (soft delete) with the employee who removed it.
 INSERT INTO properties (owner_id, address, city, type, rooms, surface, included_services, base_rent, description, status, created_at, updated_at, deleted_at, deleted_by)
 VALUES (@owner2, 'Roca 77', 'Neuquén', 'apartment', 1, 30.00, NULL, 160000.00, 'Dado de baja por venta del inmueble.', 'available', NOW(), NOW(), DATE_SUB(NOW(), INTERVAL 30 DAY), @admin);
+
+-- Properties published by their owners (HU-32): one waits for the review of the administration (HU-33) and
+-- one was sent back with a reason. Neither shows up in the public catalog until it is approved.
+INSERT INTO properties (owner_id, address, city, type, rooms, surface, included_services, base_rent, description, status, approval_status, submitted_by, created_at, updated_at)
+VALUES (@owner3, 'Pasaje Los Álamos 55', 'Cipolletti', 'house', 3, 110.00, 'Gas natural, Agua, Luz', 310000.00, 'Casa con quincho publicada por su propietario, a la espera de la revisión.', 'available', 'pending', @owner3, DATE_SUB(NOW(), INTERVAL 1 DAY), NOW());
+
+INSERT INTO properties (owner_id, address, city, type, rooms, surface, included_services, base_rent, description, status, approval_status, submitted_by, rejection_reason, reviewed_by, reviewed_at, created_at, updated_at)
+VALUES (@owner1, 'Colón 640', 'Neuquén', 'apartment', 1, 28.00, NULL, 140000.00, 'Monoambiente.', 'available', 'rejected', @owner1, 'La descripción es muy breve: agregá los datos que permitan identificar el inmueble.', @admin, DATE_SUB(NOW(), INTERVAL 2 DAY), DATE_SUB(NOW(), INTERVAL 3 DAY), NOW());
 
 -- Contracts (columns: property, tenant, owner, start, end, rent, update %, due day, commission %, late fee daily %, status, closing data)
 INSERT INTO contracts (property_id, tenant_id, owner_id, start_date, end_date, monthly_rent, update_percentage, due_day, commission_percentage, late_fee_daily_percentage, status, closed_at, closing_reason, created_at, updated_at)
@@ -139,6 +148,12 @@ SET @c3 = LAST_INSERT_ID();
 INSERT INTO contracts (property_id, tenant_id, owner_id, start_date, end_date, monthly_rent, update_percentage, due_day, commission_percentage, late_fee_daily_percentage, status, closed_at, closing_reason, created_at, updated_at)
 VALUES (@p5, @tenant4, @owner3, @m4, DATE_SUB(DATE_ADD(@m4, INTERVAL 36 MONTH), INTERVAL 1 DAY), 420000.00, 15.00, 1, 12.00, 0.50, 'in_force', NULL, NULL, NOW(), NOW());
 SET @c4 = LAST_INSERT_ID();
+
+-- Rental requests of tenants (HU-30, HU-31): one pending, one rejected with its reason and one cancelled by the tenant.
+INSERT INTO rental_requests (property_id, tenant_id, desired_start_date, desired_months, contact_phone, message, status, rejection_reason, resolved_by, resolved_at, created_at, updated_at) VALUES
+(@p7, @tenant4, DATE_ADD(CURDATE(), INTERVAL 20 DAY), 24, '2991000024', 'Busco una casa más grande para mi familia.', 'pending', NULL, NULL, NULL, DATE_SUB(NOW(), INTERVAL 1 DAY), NOW()),
+(@p6, @tenant3, DATE_ADD(CURDATE(), INTERVAL 30 DAY), 12, '2991000023', 'Necesito el terreno para guardar mercadería.', 'rejected', 'El terreno no está habilitado para ese uso.', @admin, DATE_SUB(NOW(), INTERVAL 4 DAY), DATE_SUB(NOW(), INTERVAL 6 DAY), NOW()),
+(@p7, @tenant2, DATE_ADD(CURDATE(), INTERVAL 15 DAY), 36, '2991000022', NULL, 'cancelled', NULL, NULL, NULL, DATE_SUB(NOW(), INTERVAL 8 DAY), NOW());
 
 -- Finished contract with a tenant who was later deactivated.
 INSERT INTO contracts (property_id, tenant_id, owner_id, start_date, end_date, monthly_rent, update_percentage, due_day, commission_percentage, late_fee_daily_percentage, status, closed_at, closing_reason, created_at, updated_at)

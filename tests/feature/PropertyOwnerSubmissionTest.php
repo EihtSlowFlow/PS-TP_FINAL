@@ -65,7 +65,7 @@ final class PropertyOwnerSubmissionTest extends CIUnitTestCase
         $this->assertSame('apartment', $row['type']);
         $this->assertSame(3, (int) $row['rooms']);
         $this->assertSame('54.50', $row['surface']);
-        $this->assertSame('Agua, luz', $row['included_services']);
+        $this->assertSame('Agua, Luz', $row['included_services']);
         $this->assertSame('420000.00', $row['base_rent']);
         $this->assertSame('Luminoso, con balcón', $row['description']);
         $this->assertSame('available', $row['status']);

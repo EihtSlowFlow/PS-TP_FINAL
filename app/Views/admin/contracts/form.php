@@ -255,7 +255,7 @@ $this->extend('layouts/panel');
                                     class="form-control<?= isset($errors['update_percentage']) ? ' is-invalid' : '' ?>"
                                     aria-invalid="<?= isset($errors['update_percentage']) ? 'true' : 'false' ?>"
                                 >
-                                <span class="field-help">Entre 0 y 100. Usá 0 si el contrato no se actualiza.</span>
+                                <span class="field-help">Entre 0 y 100. Se aplica cada 12 meses sobre el alquiler del año anterior. Usá 0 si el contrato no se actualiza.</span>
                                 <?php if (isset($errors['update_percentage'])): ?>
                                     <p class="field-error" role="alert"><?= esc((string) $errors['update_percentage']) ?></p>
                                 <?php endif; ?>

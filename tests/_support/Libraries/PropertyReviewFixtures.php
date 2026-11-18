@@ -142,7 +142,7 @@ trait PropertyReviewFixtures
             'type'              => 'apartment',
             'rooms'             => '3',
             'surface'           => '54.5',
-            'included_services' => 'Agua, luz',
+            'included_services' => ['Agua', 'Luz'],
             'base_rent'         => '420000',
             'description'       => 'Luminoso, con balcón',
         ], $overrides);

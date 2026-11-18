@@ -33,6 +33,9 @@ final class AuthAccessControlTest extends CIUnitTestCase
     protected function tearDown(): void
     {
         $_SESSION = [];
+        // withRoutes() empties the shared route collection and leaves stub routes behind (auth/register would keep
+        // answering with the login screen in every later test class); the next request reloads Config/Routes.php.
+        service('routes')->resetRoutes();
 
         parent::tearDown();
     }

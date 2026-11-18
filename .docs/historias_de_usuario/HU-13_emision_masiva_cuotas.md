@@ -18,7 +18,7 @@ para habilitar las obligaciones de cobro a los inquilinos.
 
 **cuando** el administrador confirma la emisión masiva,
 
-**entonces** el sistema genera una cuota por contrato con estado "Pendiente", vencimiento según el día pactado y monto igual al alquiler mensual del contrato.
+**entonces** el sistema genera una cuota por contrato con estado "Pendiente", vencimiento según el día pactado y monto igual al alquiler mensual del contrato, con su actualización anual ya aplicada (ver «Por definir»).
 
 Además, presenta un informe con la cantidad de cuotas emitidas y el monto total a recaudar.
 
@@ -74,8 +74,13 @@ Además, presenta un informe con la cantidad de cuotas emitidas y el monto total
   vigente algún día del mes»), se cambia en `ContractModel::coverageCondition()`.
 - **Numeración correlativa:** el número de la cuota es el siguiente al más alto que ya tenga el contrato (1 si no tiene
   ninguna), en el orden en que se emiten. Si se emite febrero antes que enero, febrero lleva el 1.
-- **Monto:** es el alquiler mensual del contrato (`monthly_rent`). El porcentaje de actualización del contrato no se
-  aplica: el contrato no guarda cada cuánto se actualiza y el criterio dice que el monto es el alquiler mensual.
+- **Monto:** es el alquiler mensual del contrato (`monthly_rent`) con el «incremento por actualización»
+  (`update_percentage`) aplicado cada 12 meses sobre el alquiler del año anterior (interés compuesto). El contrato no
+  guarda cada cuánto se actualiza, así que la regla es esa (decisión del 18/11/2026): las cuotas de los primeros 12
+  meses valen el alquiler del contrato; las de los meses 13 a 24, el alquiler más una actualización; y así. Los meses se
+  cuentan desde el mes en que empieza el contrato hasta el mes del período, así que el monto no depende del orden de
+  emisión. El cálculo está en `App\Libraries\RentUpdateCalculator` (enteros y centavos, redondeo hacia arriba en cada
+  actualización); la vista previa muestra el mismo monto que se emite y cuántas actualizaciones tiene.
 - **Quién emite:** administrador y empleado, igual que contratos e inmuebles (decisión de HU-01, R-7).
 
 ## Definition of Done
@@ -83,6 +88,7 @@ Además, presenta un informe con la cantidad de cuotas emitidas y el monto total
 - [x] El administrador puede emitir cuotas para un período, de forma masiva o para un solo contrato.
 - [x] No se generan cuotas duplicadas.
 - [x] Se informa la cantidad de cuotas emitidas y el monto total.
+- [x] El monto de cada cuota incluye la actualización anual del contrato.
 - [x] Se verifican los permisos de acceso.
 - [x] Se prueban los escenarios de aceptación y los casos de error relevantes.
 

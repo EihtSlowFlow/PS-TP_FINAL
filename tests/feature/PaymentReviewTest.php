@@ -65,7 +65,7 @@ final class PaymentReviewTest extends CIUnitTestCase
         $detail->assertSee('Aprobar pago');
         $detail->assertSee('Rechazar pago');
 
-        $response = $this->withSession($adminSession)->post('admin/pagos/' . $paymentId . '/aprobacion');
+        $response = $this->postAs($adminSession, 'admin/pagos/' . $paymentId . '/aprobacion');
         $response->assertRedirectTo(site_url('admin/pagos'));
         $response->assertSessionHas('success');
 
@@ -87,13 +87,13 @@ final class PaymentReviewTest extends CIUnitTestCase
         $installmentId = $this->insertInstallment($contractId, '2026-11-01', '2026-11-10', InstallmentModel::STATUS_OVERDUE);
         $paymentId = $this->insertPayment($installmentId, PaymentModel::STATUS_PENDING_VALIDATION, $adminId, '2026-11-15', 'deposit', 'DEP-555');
 
-        $withoutReason = $this->withSession($adminSession)->post('admin/pagos/' . $paymentId . '/rechazo', [
+        $withoutReason = $this->postAs($adminSession, 'admin/pagos/' . $paymentId . '/rechazo', [
             'rejection_reason' => '   ',
         ]);
         $withoutReason->assertRedirectTo(site_url('admin/pagos/' . $paymentId));
         $withoutReason->assertSessionHas('error');
 
-        $withReason = $this->withSession($adminSession)->post('admin/pagos/' . $paymentId . '/rechazo', [
+        $withReason = $this->postAs($adminSession, 'admin/pagos/' . $paymentId . '/rechazo', [
             'rejection_reason' => 'Comprobante ilegible',
         ]);
         $withReason->assertRedirectTo(site_url('admin/pagos'));
@@ -137,8 +137,39 @@ final class PaymentReviewTest extends CIUnitTestCase
 
         $filtered = $this->withSession($adminSession)->get('admin/pagos/historial?status=' . PaymentModel::STATUS_REJECTED);
         $filtered->assertStatus(200);
-        $filtered->assertSee('Rechazado');
-        $filtered->assertDontSee('Aprobado');
+        $filtered->assertSee('DEP-888');
+        // The status filter lists every label, so the approved payment is told apart by its reference.
+        $filtered->assertDontSee('TRF-777');
+    }
+
+    public function testAPaymentCanOnlyBeResolvedOnceAndEveryOutcomeClosesItsTransaction(): void
+    {
+        [$tenantId] = $this->createUserSession('tenant');
+        [$adminId]  = $this->createUserSession('admin');
+
+        $contractId    = $this->createContract($tenantId, 'Lavalle 910');
+        $firstInstall  = $this->insertInstallment($contractId, '2026-12-01', '2026-12-10', InstallmentModel::STATUS_PENDING);
+        $secondInstall = $this->insertInstallment($contractId, '2027-01-01', '2027-01-10', InstallmentModel::STATUS_PENDING);
+        $firstPayment  = $this->insertPayment($firstInstall, PaymentModel::STATUS_PENDING_VALIDATION, $adminId, '2026-11-15', 'bank_transfer', 'TRF-1');
+        $secondPayment = $this->insertPayment($secondInstall, PaymentModel::STATUS_PENDING_VALIDATION, $adminId, '2026-11-15', 'bank_transfer', 'TRF-2');
+        $model         = model(PaymentModel::class);
+
+        $this->assertTrue($model->resolvePendingPayment($firstPayment, $adminId, true)['ok']);
+
+        // A second resolution of the same payment is refused and does not undo the first one.
+        $again = $model->resolvePendingPayment($firstPayment, $adminId, false, 'Llegó tarde');
+        $this->assertSame(['ok' => false, 'error' => 'invalid_status'], $again);
+        $this->assertSame(PaymentModel::STATUS_APPROVED, $this->db->table('payments')->where('id', $firstPayment)->get()->getRowArray()['status']);
+        $this->assertSame(InstallmentModel::STATUS_PAID, $this->db->table('installments')->where('id', $firstInstall)->get()->getRowArray()['status']);
+
+        // The refusals roll their transaction back, so the connection keeps working for the next payment.
+        $this->assertSame('not_found', $model->resolvePendingPayment(999999, $adminId, true)['error']);
+        $this->assertSame('missing_reason', $model->resolvePendingPayment($secondPayment, $adminId, false, '  ')['error']);
+        $this->assertSame(PaymentModel::STATUS_PENDING_VALIDATION, $this->db->table('payments')->where('id', $secondPayment)->get()->getRowArray()['status']);
+
+        $rejected = $model->resolvePendingPayment($secondPayment, $adminId, false, 'Monto incorrecto');
+        $this->assertTrue($rejected['ok']);
+        $this->assertSame(PaymentModel::STATUS_REJECTED, $rejected['payment_status']);
     }
 
     public function testTenantCannotAccessOtherTenantReceipt(): void
@@ -157,6 +188,21 @@ final class PaymentReviewTest extends CIUnitTestCase
 
         $response = $this->withSession($tenantSession)->get('comprobantes/' . $receiptId);
         $response->assertStatus(403);
+    }
+
+    /**
+     * Sends a POST with the given session data plus a valid session CSRF token, as the browser forms do.
+     *
+     * @param array<string, mixed> $sessionData
+     * @param array<string, mixed> $postData
+     */
+    private function postAs(array $sessionData, string $uri, array $postData = []): \CodeIgniter\Test\TestResponse
+    {
+        $tokenName = csrf_token();
+        $tokenHash = csrf_hash();
+
+        return $this->withSession(array_merge($sessionData, [$tokenName => $tokenHash]))
+            ->post($uri, array_merge($postData, [$tokenName => $tokenHash]));
     }
 
     /**

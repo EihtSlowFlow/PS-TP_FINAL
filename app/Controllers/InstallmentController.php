@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Libraries\LateFeeCalculator;
+use App\Libraries\RentUpdateCalculator;
 use App\Models\ContractModel;
 use App\Models\InstallmentModel;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -163,6 +164,14 @@ class InstallmentController extends BaseController
         if ($period !== null) {
             foreach (model(ContractModel::class)->findInForceCoveringPeriod($period) as $row) {
                 $row['due_date'] = InstallmentModel::dueDateFor($period, (int) $row['due_day']);
+                // The rent of this period, with the contract's yearly update applied (the same figure the issuing stores).
+                $row['amount']  = RentUpdateCalculator::amountForPeriod(
+                    (string) $row['monthly_rent'],
+                    (string) $row['update_percentage'],
+                    (string) $row['start_date'],
+                    $period
+                );
+                $row['updates'] = RentUpdateCalculator::updatesApplied((string) $row['start_date'], $period);
 
                 if ($row['installment_id'] === null) {
                     $toIssue[] = $row;
@@ -189,7 +198,7 @@ class InstallmentController extends BaseController
             'years'         => $this->selectableYears(),
             'toIssue'       => $toIssue,
             'alreadyIssued' => $alreadyIssued,
-            'totalToIssue'  => InstallmentModel::sumAmounts(array_column($toIssue, 'monthly_rent')),
+            'totalToIssue'  => InstallmentModel::sumAmounts(array_column($toIssue, 'amount')),
             'firstDueDate'  => $dueDates === [] ? null : min($dueDates),
             'lastDueDate'   => $dueDates === [] ? null : max($dueDates),
         ]));

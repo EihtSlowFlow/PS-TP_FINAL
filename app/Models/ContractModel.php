@@ -320,6 +320,9 @@ class ContractModel extends Model
             }
         } catch (Throwable $e) {
             $this->db->transRollback();
+            // A failed query leaves the connection's transaction status "failed", which would make the next
+            // transaction on this connection roll back too.
+            $this->db->resetTransStatus();
             log_message('error', 'Contract closure failed and was rolled back: {message}', ['message' => $e->getMessage()]);
 
             return ['success' => false, 'error' => self::ERROR_PERSISTENCE];
@@ -419,7 +422,7 @@ class ContractModel extends Model
         $users        = $this->db->protectIdentifiers('users', true);
         $installments = $this->db->protectIdentifiers('installments', true);
 
-        $sql = 'SELECT c.id, c.start_date, c.end_date, c.monthly_rent, c.due_day, '
+        $sql = 'SELECT c.id, c.start_date, c.end_date, c.monthly_rent, c.update_percentage, c.due_day, '
             . 'p.address AS property_address, p.city AS property_city, p.type AS property_type, '
             . 'p.rooms AS property_rooms, '
             . 'tenant.first_name AS tenant_first_name, tenant.last_name AS tenant_last_name, '
@@ -437,7 +440,7 @@ class ContractModel extends Model
 
     /**
      * Locks, until the end of the current transaction, the contracts in force that cover a period (or just one of
-     * them) and returns their id, monthly rent and due day, in id order. It must run inside a transaction: the
+     * them) and returns their id, start date, monthly rent, update percentage and due day, in id order. It must run inside a transaction: the
      * installment issuing (HU-13) uses it to keep two simultaneous issuings from creating the same installment or
      * taking the same number.
      *
@@ -451,7 +454,8 @@ class ContractModel extends Model
         $contracts = $this->db->protectIdentifiers('contracts', true);
         $binds     = [$period, $period];
 
-        $sql = "SELECT c.id, c.monthly_rent, c.due_day FROM {$contracts} AS c WHERE " . $this->coverageCondition('c');
+        $sql = "SELECT c.id, c.start_date, c.monthly_rent, c.update_percentage, c.due_day FROM {$contracts} AS c WHERE "
+            . $this->coverageCondition('c');
 
         if ($contractId !== null) {
             $sql    .= ' AND c.id = ?';

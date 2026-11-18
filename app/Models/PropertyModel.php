@@ -44,6 +44,14 @@ class PropertyModel extends Model
     public const ERROR_ALREADY_APPROVED  = 'already_approved';
 
     /**
+     * The services an owner can mark as included. They are stored as text, separated by commas, in
+     * `properties.included_services`, exactly as they are shown to the public.
+     *
+     * @var list<string>
+     */
+    public const SERVICE_OPTIONS = ['Gas natural', 'Agua', 'Luz', 'Internet', 'Cochera', 'Apto mascotas'];
+
+    /**
      * Spanish labels for each property type.
      *
      * @var array<string, string>
@@ -149,6 +157,49 @@ class PropertyModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    /**
+     * Splits a stored or submitted list of services ("Agua, Luz") into its items. Items that match an option up to case
+     * are written as the option; any other text is kept as it comes so the validation can reject it.
+     *
+     * @param array<int|string, mixed>|string|null $services
+     *
+     * @return list<string>
+     */
+    public static function splitServices(array|string|null $services): array
+    {
+        $items = is_array($services) ? $services : explode(',', (string) $services);
+        $known = array_combine(array_map('mb_strtolower', self::SERVICE_OPTIONS), self::SERVICE_OPTIONS);
+        $out   = [];
+
+        foreach ($items as $item) {
+            $item = trim((string) $item);
+
+            if ($item === '') {
+                continue;
+            }
+
+            $item = $known[mb_strtolower($item)] ?? $item;
+
+            if (! in_array($item, $out, true)) {
+                $out[] = $item;
+            }
+        }
+
+        return $out;
+    }
+
+    /**
+     * The items of a list of services that are not one of the options.
+     *
+     * @param array<int|string, mixed>|string|null $services
+     *
+     * @return list<string>
+     */
+    public static function unknownServices(array|string|null $services): array
+    {
+        return array_values(array_diff(self::splitServices($services), self::SERVICE_OPTIONS));
+    }
 
     /**
      * Returns the Spanish label of a property type.

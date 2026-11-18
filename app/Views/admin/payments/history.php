@@ -107,7 +107,12 @@ $this->extend('layouts/panel');
                                         <td><?= esc((string) ($payment['installment_number'] ?? '')) ?> · <?= esc($periodLabel) ?></td>
                                         <td><?= esc((string) ($payment['property_address'] ?? '')) ?><br><span class="field-help"><?= esc((string) ($payment['property_city'] ?? '')) ?></span></td>
                                         <td><?= esc($formatMoney((string) ($payment['amount'] ?? '0.00'))) ?></td>
-                                        <td><?= esc(PaymentModel::labelForMethod((string) ($payment['method'] ?? ''))) ?></td>
+                                        <td>
+                                            <?= esc(PaymentModel::labelForMethod((string) ($payment['method'] ?? ''))) ?>
+                                            <?php if (! empty($payment['reference_number'])): ?>
+                                                <br><span class="field-help">Ref. <?= esc((string) $payment['reference_number']) ?></span>
+                                            <?php endif; ?>
+                                        </td>
                                         <td>
                                             <span class="badge-pill badge-payment-<?= esc($status) ?>"><?= esc(PaymentModel::labelForStatus($status)) ?></span>
                                             <?php if ($status === PaymentModel::STATUS_REJECTED && ! empty($payment['rejection_reason'])): ?>

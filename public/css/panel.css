@@ -349,6 +349,26 @@ summary:focus-visible,
     text-decoration: underline;
 }
 
+/* The logout of the public header is a POST form; its button looks like the links around it. */
+.public-logout-form {
+    margin: 0;
+}
+
+.public-logout-form button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--primary-text);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.public-logout-form button:hover {
+    text-decoration: underline;
+}
+
 .public-catalog-main {
     width: min(calc(100% - 2rem), 1280px);
     margin: 0 auto;
@@ -721,6 +741,21 @@ summary:focus-visible,
     color: var(--text-main);
     cursor: pointer;
     user-select: none;
+}
+
+/* Checkboxes of the included services in the property form. */
+.service-options {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+}
+
+.service-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: 0.65rem 1rem;
+    margin-top: 0.5rem;
 }
 
 .filter-actions {

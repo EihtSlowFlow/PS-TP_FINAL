@@ -27,7 +27,8 @@ $cityValue     = (string) old('city', $isEdit ? (string) $property['city'] : '')
 $typeValue     = (string) old('type', $isEdit ? (string) $property['type'] : PropertyModel::TYPE_APARTMENT);
 $roomsValue    = (string) old('rooms', $isEdit ? (string) ($property['rooms'] ?? '') : '');
 $surfaceValue  = (string) old('surface', $isEdit ? $plainDecimal($property['surface'] ?? '') : '');
-$servicesValue = (string) old('included_services', $isEdit ? (string) ($property['included_services'] ?? '') : '');
+$oldServices      = old('included_services', $isEdit ? (string) ($property['included_services'] ?? '') : '');
+$selectedServices = PropertyModel::splitServices(is_array($oldServices) ? $oldServices : (string) $oldServices);
 $baseRentValue = (string) old('base_rent', $isEdit ? $plainDecimal($property['base_rent']) : '');
 $isLand        = $typeValue === PropertyModel::TYPE_LAND;
 ?>
@@ -136,25 +137,29 @@ $isLand        = $typeValue === PropertyModel::TYPE_LAND;
                                 <?php endif; ?>
                             </div>
 
-                            <div class="form-field">
-                                <div class="form-label-row">
-                                    <label for="included_services" class="form-label">Servicios incluidos</label>
+                            <fieldset class="form-field form-field-full service-options" id="included_services"<?= isset($errors['included_services']) ? ' aria-invalid="true"' : '' ?>>
+                                <legend class="form-label-row">
+                                    <span class="form-label">Servicios incluidos</span>
                                     <span class="optional-tag">Opcional</span>
+                                </legend>
+                                <div class="service-options-grid">
+                                    <?php foreach (PropertyModel::SERVICE_OPTIONS as $index => $service): ?>
+                                        <label class="filter-checkbox-label" for="service-<?= esc((string) $index) ?>">
+                                            <input
+                                                type="checkbox"
+                                                id="service-<?= esc((string) $index) ?>"
+                                                name="included_services[]"
+                                                value="<?= esc($service) ?>"
+                                                <?= in_array($service, $selectedServices, true) ? 'checked' : '' ?>
+                                            >
+                                            <span><?= esc($service) ?></span>
+                                        </label>
+                                    <?php endforeach; ?>
                                 </div>
-                                <input
-                                    type="text"
-                                    id="included_services"
-                                    name="included_services"
-                                    value="<?= esc($servicesValue) ?>"
-                                    maxlength="255"
-                                    class="form-control<?= isset($errors['included_services']) ? ' is-invalid' : '' ?>"
-                                    aria-invalid="<?= isset($errors['included_services']) ? 'true' : 'false' ?>"
-                                >
-                                <span class="field-help">Por ejemplo: agua, luz, gas, internet.</span>
                                 <?php if (isset($errors['included_services'])): ?>
                                     <p class="field-error" role="alert"><?= esc((string) $errors['included_services']) ?></p>
                                 <?php endif; ?>
-                            </div>
+                            </fieldset>
 
                             <div class="form-field form-field-full">
                                 <label for="base_rent" class="form-label">
