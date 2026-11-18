@@ -146,8 +146,9 @@ class InstallmentController extends BaseController
     }
 
     /**
-     * Renders the period form (screen ADM-09a). When a month and a year come in the query string it also shows the
-     * preview: the contracts in force that cover the period and what would happen to each of them.
+     * Renders the period form (screen ADM-09a) and the preview: the contracts in force that cover the period and what
+     * would happen to each of them. The period comes from the query string; when the page is just opened it is the
+     * current month, so the operator sees this month's list straight away and can still pick any other period.
      */
     public function emit(): string
     {
@@ -155,7 +156,15 @@ class InstallmentController extends BaseController
         $yearInput  = $this->request->getGet('year');
         $submitted  = $monthInput !== null || $yearInput !== null;
 
-        $period      = $submitted ? InstallmentModel::buildPeriod($yearInput, $monthInput) : null;
+        if ($submitted) {
+            $period = InstallmentModel::buildPeriod($yearInput, $monthInput);
+        } elseif ($this->hasRejectedPeriodInput()) {
+            // Back from a rejected submission: the selectors show what was sent, without guessing a preview.
+            $period = null;
+        } else {
+            $period = substr(InstallmentModel::today(), 0, 7) . '-01';
+        }
+
         $periodError = $submitted && $period === null ? self::INVALID_PERIOD_MESSAGE : null;
 
         $toIssue       = [];
@@ -358,8 +367,16 @@ class InstallmentController extends BaseController
     }
 
     /**
+     * Whether the page comes back from a rejected issuing (the month or the year sent are kept as old input).
+     */
+    private function hasRejectedPeriodInput(): bool
+    {
+        return old('year') !== null || old('month') !== null;
+    }
+
+    /**
      * The year and month the selectors show: the period being previewed, what the user typed when it was invalid or
-     * came back from a rejected submission, or the next month the first time the form is opened.
+     * came back from a rejected submission, or the next month as a last resort.
      *
      * @return array{0: string, 1: string}
      */

@@ -19,6 +19,7 @@ $flashError           = session()->getFlashdata('error');
 $flashSuccess         = session()->getFlashdata('success');
 $pendingPropertyCount = (int) ($pendingPropertyCount ?? 0);
 $pendingRequestCount  = (int) ($pendingRequestCount ?? 0);
+$pendingPaymentCount  = (int) ($pendingPaymentCount ?? 0);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -91,6 +92,13 @@ $pendingRequestCount  = (int) ($pendingRequestCount ?? 0);
                     </a>
                     <a href="<?= esc(site_url('admin/pagos')) ?>" class="sidebar-link<?= $activeMenu === 'pagos' ? ' is-active' : '' ?>">
                         <span>Pagos</span>
+                        <?php if ($pendingPaymentCount > 0): ?>
+                            <?php /* HU-17: payments reported by tenants that still need review. */ ?>
+                            <span class="sidebar-badge" id="pending-payments-badge" title="Pagos pendientes de revisión">
+                                <?= esc((string) $pendingPaymentCount) ?>
+                                <span class="sr-only"><?= $pendingPaymentCount === 1 ? 'pendiente' : 'pendientes' ?> de revisión</span>
+                            </span>
+                        <?php endif; ?>
                     </a>
                     <a href="<?= esc(site_url('admin/pagos/historial')) ?>" class="sidebar-link<?= $activeMenu === 'pagos-historial' ? ' is-active' : '' ?>">
                         <span>Historial</span>

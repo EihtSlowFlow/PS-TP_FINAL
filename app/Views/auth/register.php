@@ -55,6 +55,7 @@ $selectedRole = old('role', $preselectedRole ?? '');
                     <label for="first_name" class="field-label">Nombre <span class="required-mark" aria-hidden="true">*</span></label>
                     <input type="text" id="first_name" name="first_name" class="auth-input register-input<?= isset($errors['first_name']) ? ' is-invalid' : '' ?>"
                         value="<?= esc(old('first_name', '')) ?>" required minlength="2" maxlength="100" autocomplete="given-name"
+                        pattern="[\p{L}\p{M}' ’.\-]+" title="Solo letras, espacios, apóstrofos, guiones y puntos."
                         <?= isset($errors['first_name']) ? 'aria-invalid="true" aria-describedby="first_name-error"' : '' ?>>
                     <?php if (isset($errors['first_name'])): ?><span id="first_name-error" class="field-error" role="alert"><?= esc($errors['first_name']) ?></span><?php endif; ?>
                 </div>
@@ -63,6 +64,7 @@ $selectedRole = old('role', $preselectedRole ?? '');
                     <label for="last_name" class="field-label">Apellido <span class="required-mark" aria-hidden="true">*</span></label>
                     <input type="text" id="last_name" name="last_name" class="auth-input register-input<?= isset($errors['last_name']) ? ' is-invalid' : '' ?>"
                         value="<?= esc(old('last_name', '')) ?>" required minlength="2" maxlength="100" autocomplete="family-name"
+                        pattern="[\p{L}\p{M}' ’.\-]+" title="Solo letras, espacios, apóstrofos, guiones y puntos."
                         <?= isset($errors['last_name']) ? 'aria-invalid="true" aria-describedby="last_name-error"' : '' ?>>
                     <?php if (isset($errors['last_name'])): ?><span id="last_name-error" class="field-error" role="alert"><?= esc($errors['last_name']) ?></span><?php endif; ?>
                 </div>
@@ -71,6 +73,7 @@ $selectedRole = old('role', $preselectedRole ?? '');
                     <label for="document_number" class="field-label">DNI <span class="required-mark" aria-hidden="true">*</span></label>
                     <input type="text" id="document_number" name="document_number" class="auth-input register-input<?= isset($errors['document_number']) ? ' is-invalid' : '' ?>"
                         value="<?= esc(old('document_number', '')) ?>" required minlength="6" maxlength="20" autocomplete="off"
+                        inputmode="numeric" pattern="[0-9.\-\s]+" title="Solo números; podés usar puntos o guiones."
                         aria-describedby="<?= isset($errors['document_number']) ? 'document_number-error document_number-help' : 'document_number-help' ?>"
                         <?= isset($errors['document_number']) ? 'aria-invalid="true"' : '' ?>>
                     <span id="document_number-help" class="field-help">Podés ingresarlo con puntos o guiones.</span>

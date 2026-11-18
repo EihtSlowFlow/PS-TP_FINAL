@@ -88,8 +88,8 @@ class AuthController extends BaseController
         $rawDni        = trim((string) $this->request->getPost('document_number'));
         $normalizedDni = preg_replace('/[\.\s-]+/', '', $rawDni) ?? $rawDni;
         $input         = [
-            'first_name'      => trim((string) $this->request->getPost('first_name')),
-            'last_name'       => trim((string) $this->request->getPost('last_name')),
+            'first_name'      => self::collapseSpaces((string) $this->request->getPost('first_name')),
+            'last_name'       => self::collapseSpaces((string) $this->request->getPost('last_name')),
             'document_number' => $normalizedDni,
             'email'           => strtolower(trim((string) $this->request->getPost('email'))),
             'phone'           => trim((string) $this->request->getPost('phone')),
@@ -108,28 +108,30 @@ class AuthController extends BaseController
         $rules = [
             'first_name' => [
                 'label'  => 'Nombre',
-                'rules'  => 'required|min_length[2]|max_length[100]',
+                'rules'  => 'required|min_length[2]|max_length[100]|valid_person_name',
                 'errors' => [
                     'required'   => 'Ingresá tu nombre.',
                     'min_length' => 'El nombre debe tener al menos 2 caracteres.',
                     'max_length' => 'El nombre no puede superar los 100 caracteres.',
+                    'valid_person_name' => self::NAME_FORMAT_MESSAGE_FIRST,
                 ],
             ],
             'last_name' => [
                 'label'  => 'Apellido',
-                'rules'  => 'required|min_length[2]|max_length[100]',
+                'rules'  => 'required|min_length[2]|max_length[100]|valid_person_name',
                 'errors' => [
                     'required'   => 'Ingresá tu apellido.',
                     'min_length' => 'El apellido debe tener al menos 2 caracteres.',
                     'max_length' => 'El apellido no puede superar los 100 caracteres.',
+                    'valid_person_name' => self::NAME_FORMAT_MESSAGE_LAST,
                 ],
             ],
             'document_number' => [
                 'label'  => 'DNI',
-                'rules'  => 'required|alpha_numeric|min_length[6]|max_length[20]',
+                'rules'  => 'required|is_natural|min_length[6]|max_length[20]',
                 'errors' => [
                     'required'      => 'Ingresá tu DNI.',
-                    'alpha_numeric' => 'El DNI solo debe contener letras o números, sin símbolos.',
+                    'is_natural'    => self::DNI_FORMAT_MESSAGE,
                     'min_length'    => 'El DNI debe tener al menos 6 caracteres.',
                     'max_length'    => 'El DNI no puede superar los 20 caracteres.',
                 ],

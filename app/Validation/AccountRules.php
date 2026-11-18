@@ -26,6 +26,19 @@ class AccountRules
     }
 
     /**
+     * A first or last name: letters (accents and ñ included), separated by single spaces, apostrophes, hyphens or
+     * periods ("María José", "O'Connor", "Pérez-Gómez", "Inversiones del Sur S.A."). No digits nor other symbols.
+     *
+     * @param mixed $value
+     */
+    public function valid_person_name($value): bool
+    {
+        return is_string($value)
+            && mb_check_encoding($value, 'UTF-8')
+            && preg_match('/\A[\p{L}\p{M}]+(?:[ \'’.\-][\p{L}\p{M}]+)*\.?\z/u', $value) === 1;
+    }
+
+    /**
      * Requires at least one uppercase letter, one number, and one punctuation/symbol character.
      *
      * @param mixed $value

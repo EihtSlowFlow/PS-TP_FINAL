@@ -5,6 +5,7 @@ use App\Database\Seeds\RoleSeeder;
 use App\Filters\AuthFilter;
 use App\Filters\RoleFilter;
 use App\Models\ContractModel;
+use CodeIgniter\I18n\Time;
 use CodeIgniter\Security\Exceptions\SecurityException;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
@@ -140,19 +141,25 @@ final class InstallmentIssuingTest extends CIUnitTestCase
     // Preview
     // ---------------------------------------------------------------------------------------------
 
-    public function testTheFormWithoutAPeriodShowsTheSelectorsAndNoPreview(): void
+    public function testTheFormWithoutAPeriodShowsThePreviewOfTheCurrentMonth(): void
     {
-        $this->createContract();
+        $contractId = $this->createContract();
+        Time::setTestNow('2026-12-18 10:00:00');
 
-        $page = $this->withSession($this->sessionFor('admin'))->get('admin/cuotas/emitir');
+        try {
+            $page = $this->withSession($this->sessionFor('admin'))->get('admin/cuotas/emitir');
+        } finally {
+            Time::setTestNow();
+        }
 
         $page->assertStatus(200);
         $page->assertSee('Emitir cuotas');
-        $page->assertSeeElement('#month');
-        $page->assertSeeElement('#year');
         $page->assertSeeElement('#btn-preview');
-        $page->assertDontSeeElement('#preview-table');
-        $page->assertDontSeeElement('#emit-form');
+        $page->assertSee('Vista previa — Diciembre 2026');
+        $this->assertTrue($this->seeXPath($page, '//select[@id="month"]/option[@value="12"][@selected]'));
+        $this->assertTrue($this->seeXPath($page, '//select[@id="year"]/option[@value="2026"][@selected]'));
+        $this->assertTrue($this->seeXPath($page, '//table[@id="preview-table"]//tr[@data-contract-id="' . $contractId . '"]'));
+        $this->assertTrue($this->seeXPath($page, '//button[@id="btn-emit-all"][not(@disabled)]'));
     }
 
     public function testThePreviewListsTheContractsThatWillBeIssuedWithTheirDataAndTheTotal(): void
@@ -200,18 +207,20 @@ final class InstallmentIssuingTest extends CIUnitTestCase
         $this->assertFalse($this->seeXPath($page, '//form[@id="emit-form"]//button[@name="contract_id"][@value="' . $issued . '"]'));
     }
 
-    public function testThePreviewDisablesTheConfirmationWhenEverythingWasAlreadyIssued(): void
+    public function testThePreviewHidesTheConfirmationWhenEverythingWasAlreadyIssued(): void
     {
         $this->insertInstallment($this->createContract(), '2026-12-01');
 
         $page = $this->withSession($this->sessionFor('admin'))->get('admin/cuotas/emitir?month=12&year=2026');
 
         $page->assertStatus(200);
-        $page->assertSee('ya fueron emitidas');
-        $this->assertTrue($this->seeXPath($page, '//button[@id="btn-emit-all"][@disabled]'));
+        $page->assertSee('ya fueron emitidas', '#emit-nothing-left');
+        $page->assertSeeElement('#preview-table');
+        $page->assertDontSeeElement('#btn-emit-all');
+        $page->assertDontSee('Confirmar emisión');
     }
 
-    public function testThePreviewOfAPeriodWithoutContractsSaysSo(): void
+    public function testThePreviewOfAPeriodWithoutContractsSaysSoWithoutAConfirmation(): void
     {
         $this->createContract(['start_date' => '2026-01-01', 'end_date' => '2026-06-30']);
 
@@ -219,7 +228,9 @@ final class InstallmentIssuingTest extends CIUnitTestCase
 
         $page->assertStatus(200);
         $page->assertSee('No hay contratos vigentes que cubran Diciembre 2026.');
-        $this->assertTrue($this->seeXPath($page, '//button[@id="btn-emit-all"][@disabled]'));
+        $page->assertSeeElement('#emit-nothing-left');
+        $page->assertDontSeeElement('#btn-emit-all');
+        $page->assertDontSee('Confirmar emisión');
     }
 
     public function testThePreviewStillListsAContractWhoseTenantWasDeactivated(): void

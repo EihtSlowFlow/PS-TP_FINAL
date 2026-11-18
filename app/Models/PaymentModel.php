@@ -170,6 +170,21 @@ class PaymentModel extends Model
     }
 
     /**
+     * Counts the payments waiting for review: the number shown next to "Pagos" in the administration menu (HU-17).
+     * Same rows as findPendingValidationQueue(), so the badge always matches the queue.
+     */
+    public function countPendingValidation(): int
+    {
+        return (int) $this->builder()
+            ->join('installments', 'installments.id = payments.installment_id')
+            ->join('contracts', 'contracts.id = installments.contract_id')
+            ->join('users AS tenant', 'tenant.id = contracts.tenant_id')
+            ->join('properties AS property', 'property.id = contracts.property_id')
+            ->where('payments.status', self::STATUS_PENDING_VALIDATION)
+            ->countAllResults();
+    }
+
+    /**
      * Returns the full data needed to review one pending payment.
      *
      * @return array<string, mixed>|null

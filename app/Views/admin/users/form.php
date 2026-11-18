@@ -121,6 +121,8 @@ $this->extend('layouts/panel');
                                     required
                                     minlength="2"
                                     maxlength="100"
+                                    pattern="[\p{L}\p{M}' ’.\-]+"
+                                    title="Solo letras, espacios, apóstrofos, guiones y puntos."
                                     class="form-control<?= isset($errors['first_name']) ? ' is-invalid' : '' ?>"
                                     aria-invalid="<?= isset($errors['first_name']) ? 'true' : 'false' ?>"
                                 >
@@ -141,6 +143,8 @@ $this->extend('layouts/panel');
                                     required
                                     minlength="2"
                                     maxlength="100"
+                                    pattern="[\p{L}\p{M}' ’.\-]+"
+                                    title="Solo letras, espacios, apóstrofos, guiones y puntos."
                                     class="form-control<?= isset($errors['last_name']) ? ' is-invalid' : '' ?>"
                                     aria-invalid="<?= isset($errors['last_name']) ? 'true' : 'false' ?>"
                                 >
@@ -161,12 +165,13 @@ $this->extend('layouts/panel');
                                     required
                                     minlength="6"
                                     maxlength="20"
-                                    pattern="[A-Za-z0-9\.\-\s]+"
-                                    title="Solo letras, números, puntos y guiones (mínimo 6 caracteres)"
+                                    inputmode="numeric"
+                                    pattern="[0-9.\-\s]+"
+                                    title="Solo números; podés usar puntos o guiones (mínimo 6 dígitos)."
                                     class="form-control<?= isset($errors['document_number']) ? ' is-invalid' : '' ?>"
                                     aria-invalid="<?= isset($errors['document_number']) ? 'true' : 'false' ?>"
                                 >
-                                <span class="field-help">Formato estándar argentino sin puntos ni guiones</span>
+                                <span class="field-help">Solo números. Podés escribirlo con puntos o guiones.</span>
                                 <?php if (isset($errors['document_number'])): ?>
                                     <p class="field-error" role="alert"><?= esc((string) $errors['document_number']) ?></p>
                                 <?php endif; ?>

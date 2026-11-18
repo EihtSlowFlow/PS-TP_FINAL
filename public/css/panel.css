@@ -238,8 +238,9 @@ summary:focus-visible,
     border-radius: 999px;
 }
 
+/* 1200px left a wide empty band on large screens and forced a sideways scroll on the wider tables (Usuarios). */
 .panel-content {
-    max-width: 1200px;
+    max-width: 1600px;
     width: 100%;
     padding: 2rem;
     margin: 0 auto;
@@ -938,6 +939,21 @@ select.form-control {
 
 .data-table tbody tr:hover {
     background: var(--row-hover);
+}
+
+/* A long e-mail may break at any point, so one long address does not push the whole table into a sideways scroll. */
+.data-table .cell-email {
+    overflow-wrap: anywhere;
+    min-width: 10rem;
+}
+
+/* On laptop widths the generous cell padding alone pushed eight-column tables past the screen. */
+@media (max-width: 1500px) {
+    .data-table th,
+    .data-table td {
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+    }
 }
 
 .data-table tbody tr.row-deactivated {

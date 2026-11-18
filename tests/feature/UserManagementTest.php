@@ -462,6 +462,56 @@ final class UserManagementTest extends CIUnitTestCase
         $this->assertSame($usersBefore, $this->db->table('users')->countAllResults());
     }
 
+    public function testNamesAcceptOnlyLettersAndTheDniOnlyDigits(): void
+    {
+        $adminSession = $this->createAdminSession();
+
+        $invalid = [
+            'first_name'      => ['Mart1n', UserController::NAME_FORMAT_MESSAGE_FIRST],
+            'last_name'       => ['López_', UserController::NAME_FORMAT_MESSAGE_LAST],
+            'document_number' => ['dddddddd', UserController::DNI_FORMAT_MESSAGE],
+        ];
+
+        foreach ($invalid as $field => [$value, $message]) {
+            $_SESSION = [];
+            $payload  = $this->adminFormPayload('Martín', 'López', '31.222.333', "valido.{$field}@example.com", 'tenant');
+            $payload[$field]    = $value;
+            $payload['password'] = 'ClaveSegura2026!';
+
+            $this->postAsSessionWithCsrf($adminSession, 'admin/usuarios', $payload)
+                ->assertRedirectTo('/admin/usuarios/nuevo');
+
+            $errors = session()->getFlashdata('errors');
+            $this->assertSame($message, $errors[$field] ?? null, "{$field} = {$value} must be rejected");
+        }
+
+        // Accents, apostrophes, hyphens and a DNI written with dots are fine; extra spaces in a name are collapsed.
+        $_SESSION = [];
+        $payload  = $this->adminFormPayload("María   José", "O'Connor-Pérez", '31.222.333', 'maria.jose@example.com', 'tenant');
+        $payload['password'] = 'ClaveSegura2026!';
+
+        $this->postAsSessionWithCsrf($adminSession, 'admin/usuarios', $payload)
+            ->assertRedirectTo('/admin/usuarios');
+
+        $created = $this->db->table('users')->where('email', 'maria.jose@example.com')->get()->getRowArray();
+        $this->assertIsArray($created);
+        $this->assertSame('María José', $created['first_name']);
+        $this->assertSame("O'Connor-Pérez", $created['last_name']);
+        $this->assertSame('31222333', $created['document_number']);
+    }
+
+    public function testUserFormValidatesNamesAndDniInTheBrowserToo(): void
+    {
+        $response = $this->withSession($this->createAdminSession())->get('admin/usuarios/nuevo');
+
+        $response->assertStatus(200);
+        // Test responses come back with HTML entities (’ as &rsquo;): compare against the decoded markup.
+        $body = html_entity_decode((string) $response->getBody(), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $this->assertSame(2, substr_count($body, 'pattern="[\p{L}\p{M}\' ’.\-]+"'));
+        $response->assertSee('pattern="[0-9.\-\s]+"');
+        $response->assertSee('inputmode="numeric"');
+    }
+
     public function testUserFormKeepsNativeBrowserValidationEnabled(): void
     {
         $adminSession = $this->createAdminSession();

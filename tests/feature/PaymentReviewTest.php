@@ -78,6 +78,48 @@ final class PaymentReviewTest extends CIUnitTestCase
         $this->assertSame(InstallmentModel::STATUS_PAID, $installment['status']);
     }
 
+    public function testThePagosMenuEntryShowsHowManyPaymentsWaitForReview(): void
+    {
+        [$tenantId, $tenantSession]     = $this->createUserSession('tenant');
+        [$adminId, $adminSession]       = $this->createUserSession('admin');
+        [, $employeeSession]            = $this->createUserSession('employee');
+
+        $contractId = $this->createContract($tenantId, 'Mitre 845');
+        $first      = $this->insertInstallment($contractId, '2026-11-01', '2026-11-10', InstallmentModel::STATUS_UNDER_REVIEW);
+        $second     = $this->insertInstallment($contractId, '2026-12-01', '2026-12-10', InstallmentModel::STATUS_UNDER_REVIEW);
+        $firstPaymentId = $this->insertPayment($first, PaymentModel::STATUS_PENDING_VALIDATION, $adminId, '2026-11-15', 'bank_transfer', 'TRF-201');
+        $secondPaymentId = $this->insertPayment($second, PaymentModel::STATUS_PENDING_VALIDATION, $adminId, '2026-11-16', 'bank_transfer', 'TRF-202');
+
+        $this->assertSame(2, model(PaymentModel::class)->countPendingValidation());
+
+        // Admins and employees see the number next to "Pagos" on any panel page; a tenant never does.
+        foreach ([$adminSession, $employeeSession] as $session) {
+            $_SESSION = [];
+            $page     = $this->withSession($session)->get('admin/dashboard');
+            $page->assertStatus(200);
+            $page->assertSeeElement('#pending-payments-badge');
+            $this->assertMatchesRegularExpression(
+                '#href="' . preg_quote(site_url('admin/pagos'), '#') . '"[^>]*>\s*<span>Pagos</span>\s*<span class="sidebar-badge" id="pending-payments-badge"[^>]*>\s*2\s*<span class="sr-only">pendientes de revisión</span>#s',
+                $this->decodedBody($page)
+            );
+        }
+
+        $_SESSION = [];
+        $this->withSession($tenantSession)->get('inquilino/estado-cuenta')->assertDontSeeElement('#pending-payments-badge');
+
+        // Once resolved, the payment leaves the count; with nothing left the badge disappears.
+        model(PaymentModel::class)->resolvePendingPayment($firstPaymentId, $adminId, true);
+        $_SESSION = [];
+        $this->assertStringContainsString(
+            '<span class="sr-only">pendiente de revisión</span>',
+            $this->decodedBody($this->withSession($adminSession)->get('admin/pagos'))
+        );
+
+        model(PaymentModel::class)->resolvePendingPayment($secondPaymentId, $adminId, false, 'Comprobante ilegible');
+        $_SESSION = [];
+        $this->withSession($adminSession)->get('admin/pagos')->assertDontSeeElement('#pending-payments-badge');
+    }
+
     public function testRejectRequiresReasonAndReturnsInstallmentToPreviousState(): void
     {
         [$tenantId] = $this->createUserSession('tenant');
@@ -208,6 +250,14 @@ final class PaymentReviewTest extends CIUnitTestCase
     /**
      * @return array{0: int, 1: array<string, mixed>}
      */
+    /**
+     * Test responses come back with HTML entities (ó as &oacute;): the markup as the browser reads it.
+     */
+    private function decodedBody(\CodeIgniter\Test\TestResponse $response): string
+    {
+        return html_entity_decode((string) $response->getBody(), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+
     private function createUserSession(string $roleName): array
     {
         $sequence = ++$this->sequence;
