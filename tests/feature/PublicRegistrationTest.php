@@ -146,6 +146,23 @@ final class PublicRegistrationTest extends CIUnitTestCase
                 'data' => ['role' => 'admin'],
                 'field' => 'role',
             ],
+            // Names take letters only (with spaces, apostrophes, hyphens and periods); the DNI takes digits only.
+            [
+                'data' => ['first_name' => 'Valeria2'],
+                'field' => 'first_name',
+            ],
+            [
+                'data' => ['last_name' => 'Méndez#'],
+                'field' => 'last_name',
+            ],
+            [
+                'data' => ['document_number' => 'ddddddddd'],
+                'field' => 'document_number',
+            ],
+            [
+                'data' => ['document_number' => '38A100203'],
+                'field' => 'document_number',
+            ],
         ];
 
         foreach ($invalidCases as $index => $case) {

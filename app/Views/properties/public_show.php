@@ -7,9 +7,11 @@
  * @var string $pageTitle
  * @var string $activeNav
  * @var array<string, mixed> $property
+ * @var list<array<string, mixed>> $images Its photos, cover first
  * @var bool   $isLoggedIn
  * @var string $userRole
  * @var string $catalogBackUrl
+ * @var bool   $useTenantPanel A signed-in tenant sees the sheet inside their panel ("Buscar inmuebles")
  */
 use App\Models\PropertyModel;
 use App\Models\UserModel;
@@ -22,10 +24,11 @@ $formatMoney = static function (mixed $amount): string {
 
 /** @var \Config\Agency $agency Contact data of the agency (app/Config/Agency.php) */
 $agency = config('Agency');
+$images = $images ?? [];
 
 $waMessage = rawurlencode('Hola, quisiera consultar por el inmueble en ' . $property['address'] . ', ' . $property['city']);
 ?>
-<?= $this->extend('layouts/public') ?>
+<?= $this->extend(($useTenantPanel ?? false) ? 'layouts/panel' : 'layouts/public') ?>
 
 <?= $this->section('content') ?>
 <div class="property-detail-page">
@@ -63,6 +66,35 @@ $waMessage = rawurlencode('Hola, quisiera consultar por el inmueble en ' . $prop
             <div class="property-price-value"><?= esc($formatMoney($property['base_rent'])) ?><span> / mes</span></div>
         </div>
     </header>
+
+    <?php if ($images !== []): ?>
+        <!-- Photos: the cover large and up to four more beside it; each one opens the full picture -->
+        <?php
+        $shown  = array_slice($images, 0, 5);
+        $hidden = count($images) - count($shown);
+        ?>
+        <section class="property-gallery count-<?= esc((string) count($shown)) ?>" aria-label="Fotos del inmueble">
+            <?php foreach ($shown as $index => $image): ?>
+                <?php $isLastWithMore = $hidden > 0 && $index === count($shown) - 1; ?>
+                <a class="property-gallery-item" href="<?= esc(site_url('inmuebles/fotos/' . (int) $image['id'])) ?>" target="_blank" rel="noopener">
+                    <img src="<?= esc(site_url('inmuebles/fotos/' . (int) $image['id'])) ?>"
+                         alt="Foto <?= esc((string) ($index + 1)) ?> de <?= esc(count($images) . ' de ' . (string) $property['address']) ?>"
+                         <?= $index === 0 ? '' : 'loading="lazy"' ?> width="800" height="600">
+                    <?php if ($isLastWithMore): ?>
+                        <span class="property-gallery-more">+<?= esc((string) $hidden) ?> fotos</span>
+                    <?php endif; ?>
+                </a>
+            <?php endforeach; ?>
+        </section>
+        <?php if ($hidden > 0): ?>
+            <p class="property-gallery-all">
+                Todas las fotos:
+                <?php foreach (array_slice($images, 5) as $offset => $image): ?>
+                    <a href="<?= esc(site_url('inmuebles/fotos/' . (int) $image['id'])) ?>" target="_blank" rel="noopener">foto <?= esc((string) ($offset + 6)) ?></a><?= $offset < $hidden - 1 ? ',' : '' ?>
+                <?php endforeach; ?>
+            </p>
+        <?php endif; ?>
+    <?php endif; ?>
 
     <!-- Main Content Grid -->
     <div class="property-detail-grid">

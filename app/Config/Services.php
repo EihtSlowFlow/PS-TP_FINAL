@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Libraries\PropertyImageStorage;
 use App\Libraries\ReceiptStorage;
 use CodeIgniter\Config\BaseService;
 
@@ -30,5 +31,17 @@ class Services extends BaseService
         }
 
         return new ReceiptStorage();
+    }
+
+    /**
+     * Private storage of the photos of the properties. A service so tests can swap the upload machinery.
+     */
+    public static function propertyImageStorage(bool $getShared = true): PropertyImageStorage
+    {
+        if ($getShared) {
+            return static::getSharedInstance('propertyImageStorage');
+        }
+
+        return new PropertyImageStorage();
     }
 }

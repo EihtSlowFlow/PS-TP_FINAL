@@ -2,10 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Libraries\PropertyImageProcessor;
+use App\Models\PropertyImageModel;
 use App\Models\PropertyModel;
 use App\Models\UserModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use CodeIgniter\HTTP\RedirectResponse;
+use Throwable;
 
 /**
  * Property management for administrators and employees (HU-07, HU-08, HU-09): listing, filters, creation, edition and
@@ -48,6 +51,9 @@ class PropertyController extends BaseController
     public const APPROVAL_ERROR_MESSAGE             = 'No pudimos resolver la revisión por un error interno. Intentá nuevamente.';
     public const REJECTION_REASON_REQUIRED_MESSAGE  = 'Ingresá el motivo del rechazo.';
     public const REJECTION_REASON_TOO_LONG_MESSAGE  = 'El motivo del rechazo no puede superar los 255 caracteres.';
+
+    // Photos of the property, loaded from the same forms (shown on the landing, the catalog and the sheet).
+    public const IMAGES_PARTIAL_FAILURE_MESSAGE = 'El inmueble se guardó, pero %d foto(s) no se pudieron guardar. Volvé a subirlas desde «Editar».';
 
     /**
      * Renders the administrator and employee catalog with filters.
@@ -119,14 +125,15 @@ class PropertyController extends BaseController
             $filterData['filters']
         );
 
-        return view('properties/public_catalog', [
+        return view('properties/public_catalog', array_merge([
             'pageTitle'    => 'Propiedades disponibles',
             'activeNav'    => 'catalogo',
             'properties'   => $pagination['items'],
+            'covers'       => model(PropertyImageModel::class)->coversFor(array_column($pagination['items'], 'id')),
             'pagination'   => $pagination,
             'filters'      => $filterData['values'],
             'filterErrors' => $filterData['errors'],
-        ]);
+        ], $this->tenantCatalogPanel('Propiedades disponibles', 'Buscar inmuebles')));
     }
 
     /**
@@ -148,14 +155,38 @@ class PropertyController extends BaseController
         $isLoggedIn = (bool) $session->get('is_logged_in');
         $userRole   = (string) $session->get('user_role', '');
 
-        return view('properties/public_show', [
+        // Inside the tenant panel the address is already in the page's own "Volver al catálogo / {address}" line, so
+        // the topbar breadcrumb stays short enough for a phone.
+        return view('properties/public_show', array_merge([
             'pageTitle'  => $property['address'] . ' - Detalle',
             'activeNav'  => 'catalogo',
             'property'   => $property,
+            'images'     => model(PropertyImageModel::class)->forProperty($propertyId),
             'isLoggedIn' => $isLoggedIn,
             'userRole'   => $userRole,
             'catalogBackUrl' => $this->publicCatalogBackUrl(),
-        ]);
+        ], $this->tenantCatalogPanel($property['address'] . ' - Detalle', 'Buscar inmuebles / Ficha')));
+    }
+
+    /**
+     * A signed-in tenant reaches the catalog from the "Buscar inmuebles" entry of their panel, so the catalog and the
+     * property sheet stay inside that panel (sidebar, topbar) instead of switching to the public layout. Visitors and
+     * the other roles keep the public layout.
+     *
+     * @return array<string, mixed> `useTenantPanel` plus, for a tenant, the data the panel layout needs
+     */
+    private function tenantCatalogPanel(string $pageTitle, string $breadcrumb): array
+    {
+        $session = session();
+
+        if (! $session->get('is_logged_in') || (string) $session->get('user_role') !== UserModel::ROLE_TENANT) {
+            return ['useTenantPanel' => false];
+        }
+
+        return array_merge(
+            $this->panelContext($pageTitle, $breadcrumb, 'inquilino-buscar-inmuebles'),
+            ['useTenantPanel' => true]
+        );
     }
 
     /**
@@ -180,8 +211,13 @@ class PropertyController extends BaseController
      */
     public function store(): RedirectResponse
     {
-        $input  = $this->collectInput();
-        $errors = $this->validateInput($input, null);
+        $input        = $this->collectInput();
+        $errors       = $this->validateInput($input, null);
+        $imageChanges = $this->collectImageChanges();
+
+        if ($imageChanges['error'] !== null) {
+            $errors['images'] = $imageChanges['error'];
+        }
 
         if ($errors !== []) {
             return redirect()->to('/admin/inmuebles/nuevo')
@@ -195,10 +231,10 @@ class PropertyController extends BaseController
         // What the administration loads is approved on the spot; only an owner's own submission waits for review.
         $payload['approval_status'] = PropertyModel::APPROVAL_APPROVED;
 
-        model(PropertyModel::class)->insert($payload);
+        $propertyId = (int) model(PropertyModel::class)->insert($payload);
+        $warning    = $this->applyImageChanges($propertyId, $imageChanges);
 
-        return redirect()->to('/admin/inmuebles')
-            ->with('success', self::PROPERTY_CREATED_MESSAGE);
+        return $this->savedRedirect('/admin/inmuebles', self::PROPERTY_CREATED_MESSAGE, $warning);
     }
 
     /**
@@ -221,6 +257,7 @@ class PropertyController extends BaseController
             'mode'     => 'edit',
             'property' => $property,
             'owners'   => $this->ownerOptions($property),
+            'images'   => model(PropertyImageModel::class)->forProperty($id),
         ]));
     }
 
@@ -237,8 +274,13 @@ class PropertyController extends BaseController
                 ->with('error', self::PROPERTY_NOT_FOUND_MESSAGE);
         }
 
-        $input  = $this->collectInput();
-        $errors = $this->validateInput($input, $existing);
+        $input        = $this->collectInput();
+        $errors       = $this->validateInput($input, $existing);
+        $imageChanges = $this->collectImageChanges($id);
+
+        if ($imageChanges['error'] !== null) {
+            $errors['images'] = $imageChanges['error'];
+        }
 
         if ($errors !== []) {
             return redirect()->to('/admin/inmuebles/editar/' . $id)
@@ -255,9 +297,19 @@ class PropertyController extends BaseController
         }
 
         $propertyModel->update($id, $payload);
+        $warning = $this->applyImageChanges($id, $imageChanges);
 
-        return redirect()->to('/admin/inmuebles')
-            ->with('success', self::PROPERTY_UPDATED_MESSAGE);
+        return $this->savedRedirect('/admin/inmuebles', self::PROPERTY_UPDATED_MESSAGE, $warning);
+    }
+
+    /**
+     * Redirect after saving a property: the success message, plus a warning when some photo could not be stored.
+     */
+    private function savedRedirect(string $to, string $success, ?string $warning): RedirectResponse
+    {
+        $redirect = redirect()->to($to)->with('success', $success);
+
+        return $warning === null ? $redirect : $redirect->with('error', $warning);
     }
 
     /**
@@ -339,9 +391,14 @@ class PropertyController extends BaseController
      */
     public function ownerStore(): RedirectResponse
     {
-        $ownerId = $this->sessionUserId();
-        $input   = $this->collectInput($ownerId);
-        $errors  = $this->validateInput($input, null);
+        $ownerId      = $this->sessionUserId();
+        $input        = $this->collectInput($ownerId);
+        $errors       = $this->validateInput($input, null);
+        $imageChanges = $this->collectImageChanges();
+
+        if ($imageChanges['error'] !== null) {
+            $errors['images'] = $imageChanges['error'];
+        }
 
         if ($errors !== []) {
             return redirect()->to('/propietario/inmuebles/nuevo')
@@ -350,14 +407,17 @@ class PropertyController extends BaseController
                 ->with('error', self::VALIDATION_ERROR_MESSAGE);
         }
 
-        if (model(PropertyModel::class)->submitForApproval($ownerId, $this->buildPayload($input)) === false) {
+        $propertyId = model(PropertyModel::class)->submitForApproval($ownerId, $this->buildPayload($input));
+
+        if ($propertyId === false) {
             return redirect()->to('/propietario/inmuebles/nuevo')
                 ->withInput()
                 ->with('error', self::OWNER_SUBMISSION_ERROR_MESSAGE);
         }
 
-        return redirect()->to('/propietario/inmuebles')
-            ->with('success', self::OWNER_PROPERTY_SUBMITTED_MESSAGE);
+        $warning = $this->applyImageChanges($propertyId, $imageChanges);
+
+        return $this->savedRedirect('/propietario/inmuebles', self::OWNER_PROPERTY_SUBMITTED_MESSAGE, $warning);
     }
 
     /**
@@ -379,6 +439,7 @@ class PropertyController extends BaseController
         ), [
             'mode'     => 'edit',
             'property' => $property,
+            'images'   => model(PropertyImageModel::class)->forProperty($id),
         ]));
     }
 
@@ -395,8 +456,13 @@ class PropertyController extends BaseController
             return $this->ownerApprovedLockedRedirect();
         }
 
-        $input  = $this->collectInput($ownerId);
-        $errors = $this->validateInput($input, $property);
+        $input        = $this->collectInput($ownerId);
+        $errors       = $this->validateInput($input, $property);
+        $imageChanges = $this->collectImageChanges($id);
+
+        if ($imageChanges['error'] !== null) {
+            $errors['images'] = $imageChanges['error'];
+        }
 
         if ($errors !== []) {
             return redirect()->to('/propietario/inmuebles/editar/' . $id)
@@ -417,8 +483,9 @@ class PropertyController extends BaseController
             };
         }
 
-        return redirect()->to('/propietario/inmuebles')
-            ->with('success', self::OWNER_PROPERTY_RESUBMITTED_MESSAGE);
+        $warning = $this->applyImageChanges($id, $imageChanges);
+
+        return $this->savedRedirect('/propietario/inmuebles', self::OWNER_PROPERTY_RESUBMITTED_MESSAGE, $warning);
     }
 
     /**
@@ -601,6 +668,100 @@ class PropertyController extends BaseController
     private function sessionUserId(): int
     {
         return (int) session()->get('user_id', 0);
+    }
+
+    /**
+     * Reads the photos sent with a property form (`images[]`) and the ones marked to be removed (`remove_images[]`),
+     * and checks them before anything is saved: each photo must be a real JPG, PNG or WebP picture and the property
+     * may end up with at most PropertyImageProcessor::MAX_IMAGES_PER_PROPERTY photos.
+     *
+     * @return array{files: list<array{mime_type: string, original_name: string, temp_path: string}>, remove: list<int>, error: string|null}
+     */
+    private function collectImageChanges(int $propertyId = 0): array
+    {
+        $storage = service('propertyImageStorage');
+        $files   = [];
+
+        foreach ($this->request->getFileMultiple('images') ?? [] as $file) {
+            if ($file === null || $file->getError() === UPLOAD_ERR_NO_FILE) {
+                continue;
+            }
+
+            $check = PropertyImageProcessor::validate($file, $storage);
+
+            if (! $check['ok']) {
+                return ['files' => [], 'remove' => [], 'error' => $check['error']];
+            }
+
+            unset($check['ok']);
+            $files[] = $check;
+        }
+
+        $marked   = $this->request->getPost('remove_images');
+        $existing = $propertyId > 0 ? array_map('intval', array_column(model(PropertyImageModel::class)->forProperty($propertyId), 'id')) : [];
+        $remove   = array_values(array_intersect(is_array($marked) ? array_map('intval', $marked) : [], $existing));
+
+        if (count($existing) - count($remove) + count($files) > PropertyImageProcessor::MAX_IMAGES_PER_PROPERTY) {
+            return ['files' => [], 'remove' => [], 'error' => PropertyImageProcessor::TOO_MANY_MESSAGE];
+        }
+
+        return ['files' => $files, 'remove' => $remove, 'error' => null];
+    }
+
+    /**
+     * Applies the photo changes of a property that was just saved: removes the marked photos and stores the new ones
+     * after the existing ones (re-encoded, without metadata).
+     *
+     * @param array{files: list<array{mime_type: string, original_name: string, temp_path: string}>, remove: list<int>, error: string|null} $changes
+     *
+     * @return string|null A warning when some photo could not be stored (the property itself is already saved)
+     */
+    private function applyImageChanges(int $propertyId, array $changes): ?string
+    {
+        $images  = model(PropertyImageModel::class);
+        $storage = service('propertyImageStorage');
+
+        foreach ($images->deleteFromProperty($propertyId, $changes['remove']) as $storedName) {
+            $storage->delete($storedName);
+        }
+
+        $position = $images->nextPosition($propertyId);
+        $failed   = 0;
+
+        foreach ($changes['files'] as $file) {
+            $prepared   = PropertyImageProcessor::prepare($file['temp_path'], $file['mime_type']);
+            $storedName = $prepared === null ? null : PropertyImageProcessor::generateStoredName($prepared['extension']);
+
+            if ($prepared === null || ! $storage->write($storedName, $prepared['contents'])) {
+                $failed++;
+
+                continue;
+            }
+
+            try {
+                $saved = $images->insert([
+                    'property_id'   => $propertyId,
+                    'original_name' => $file['original_name'],
+                    'stored_name'   => $storedName,
+                    'mime_type'     => $prepared['mime_type'],
+                    'size_bytes'    => strlen($prepared['contents']),
+                    'position'      => $position,
+                ]) !== false;
+            } catch (Throwable) {
+                $saved = false;
+            }
+
+            if (! $saved) {
+                $storage->delete($storedName);
+                $failed++;
+
+                continue;
+            }
+
+            $position++;
+        }
+
+        return $failed > 0 ? sprintf(self::IMAGES_PARTIAL_FAILURE_MESSAGE, $failed) : null;
     }
 
     /**

@@ -55,7 +55,7 @@ $this->extend('layouts/panel');
                         <h1 class="panel-title">Emitir cuotas</h1>
                         <span class="badge-pill badge-neutral">Cierre mensual</span>
                     </div>
-                    <p class="panel-subtitle">Generá las cuotas mensuales de los contratos vigentes para un período. Revisá la vista previa antes de confirmar.</p>
+                    <p class="panel-subtitle">Generá las cuotas mensuales de los contratos vigentes para un período. Se muestra el mes en curso; elegí otro mes o año para ver su vista previa.</p>
                 </div>
             </div>
 
@@ -155,7 +155,13 @@ $this->extend('layouts/panel');
                 <section class="panel-card table-card" aria-label="Vista previa de la emisión">
                     <div class="table-card-heading">
                         <h2 class="section-title">Vista previa — <?= esc((string) $periodLabel) ?></h2>
-                        <p class="section-subtitle">Contratos vigentes que cubren el período. Podés emitir todos juntos o solo uno.</p>
+                        <?php if ($toIssueCount > 0): ?>
+                            <p class="section-subtitle">Contratos vigentes que cubren el período. Podés emitir todos juntos o solo uno.</p>
+                        <?php elseif ($totalContracts > 0): ?>
+                            <p class="section-subtitle" id="emit-nothing-left" role="status">Todas las cuotas de <?= esc((string) $periodLabel) ?> ya fueron emitidas: no hay nada para generar. Elegí otro período para emitir.</p>
+                        <?php else: ?>
+                            <p class="section-subtitle" id="emit-nothing-left" role="status">No hay contratos para emitir en este período. Elegí otro período para emitir.</p>
+                        <?php endif; ?>
                     </div>
 
                     <div class="table-responsive">
@@ -246,29 +252,27 @@ $this->extend('layouts/panel');
                     </div>
                 </section>
 
-                <section class="panel-card form-section-card emit-confirm" aria-labelledby="section-emit-confirm">
-                    <div>
-                        <h2 id="section-emit-confirm" class="section-title">Confirmar emisión</h2>
-                        <?php if ($toIssueCount > 0): ?>
+                <?php /* Only when there is something to issue: with everything issued, or no contract at all, the card
+                         had nothing to confirm (the preview heading says why instead). */ ?>
+                <?php if ($toIssueCount > 0): ?>
+                    <section class="panel-card form-section-card emit-confirm" aria-labelledby="section-emit-confirm">
+                        <div>
+                            <h2 id="section-emit-confirm" class="section-title">Confirmar emisión</h2>
                             <p class="section-subtitle">
                                 Se generarán <strong><?= esc((string) $toIssueCount) ?></strong> <?= $toIssueCount === 1 ? 'cuota' : 'cuotas' ?>
                                 «Pendiente» de <?= esc((string) $periodLabel) ?> por un total de <strong><?= esc($formatMoney($totalToIssue)) ?></strong>.
                                 <?= $alreadyCount > 0 ? 'Los contratos que ya tienen cuota de este período no se tocan.' : '' ?>
                             </p>
-                        <?php elseif ($totalContracts > 0): ?>
-                            <p class="section-subtitle">Todas las cuotas de <?= esc((string) $periodLabel) ?> ya fueron emitidas: no hay nada para generar.</p>
-                        <?php else: ?>
-                            <p class="section-subtitle">No hay contratos para emitir en este período.</p>
-                        <?php endif; ?>
-                    </div>
+                        </div>
 
-                    <div class="form-actions-footer">
-                        <a href="<?= esc(site_url('admin/cuotas/emitir')) ?>" class="btn btn-secondary">Cancelar</a>
-                        <button type="submit" class="btn btn-primary" id="btn-emit-all"<?= $toIssueCount === 0 ? ' disabled' : '' ?>>
-                            <?= $toIssueCount === 1 ? 'Emitir 1 cuota' : 'Emitir ' . esc((string) $toIssueCount) . ' cuotas' ?>
-                        </button>
-                    </div>
-                </section>
+                        <div class="form-actions-footer">
+                            <a href="<?= esc(site_url('admin/cuotas/emitir')) ?>" class="btn btn-secondary">Cancelar</a>
+                            <button type="submit" class="btn btn-primary" id="btn-emit-all">
+                                <?= $toIssueCount === 1 ? 'Emitir 1 cuota' : 'Emitir ' . esc((string) $toIssueCount) . ' cuotas' ?>
+                            </button>
+                        </div>
+                    </section>
+                <?php endif; ?>
             </form>
 <?php endif; ?>
 <?php $this->endSection() ?>

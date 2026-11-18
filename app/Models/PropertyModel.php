@@ -535,6 +535,27 @@ class PropertyModel extends Model
     }
 
     /**
+     * Summary shown on the landing: how many properties the public catalog offers and in how many cities. Same
+     * visibility rule as findLatestPublic().
+     *
+     * @return array{properties: int, cities: int}
+     */
+    public function publicSummary(): array
+    {
+        $row = $this->builder()
+            ->select('COUNT(*) AS properties, COUNT(DISTINCT properties.city) AS cities')
+            ->join('users AS public_owner', 'public_owner.id = properties.owner_id')
+            ->where('public_owner.deleted_at', null)
+            ->where('properties.deleted_at', null)
+            ->where('properties.status', self::STATUS_AVAILABLE)
+            ->where('properties.approval_status', self::APPROVAL_APPROVED)
+            ->get()
+            ->getRowArray();
+
+        return ['properties' => (int) ($row['properties'] ?? 0), 'cities' => (int) ($row['cities'] ?? 0)];
+    }
+
+    /**
      * Finds a single property for public display (HU-29): must be active, approved, available,
      * and owned by an active owner. Excludes owner identity, contracts and audit fields.
      *

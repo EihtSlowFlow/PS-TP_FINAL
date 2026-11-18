@@ -237,7 +237,7 @@ $this->extend('layouts/panel');
                                             </div>
                                         </td>
                                         <td class="mono-cell"><?= esc((string) $item['document_number']) ?></td>
-                                        <td><?= esc((string) $item['email']) ?></td>
+                                        <td class="cell-email"><?= esc((string) $item['email']) ?></td>
                                         <td class="mono-cell"><?= esc((string) ($item['phone'] ?: '—')) ?></td>
                                         <td>
                                             <span class="badge-pill <?= esc($roleBadgeClass) ?>">

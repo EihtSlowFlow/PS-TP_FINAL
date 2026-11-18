@@ -43,6 +43,7 @@ erDiagram
     users ||--o{ contracts : "inquilino"
     users ||--o{ contracts : "propietario"
     properties ||--o{ contracts : "se alquila en"
+    properties ||--o{ property_images : "tiene fotos"
     properties ||--o{ rental_requests : "se solicita en"
     users ||--o{ rental_requests : "solicita (tenant_id)"
     users ||--o{ rental_requests : "resuelve (resolved_by)"
@@ -132,6 +133,14 @@ erDiagram
         string mime_type
         int size_bytes
     }
+    property_images {
+        int id PK
+        int property_id FK
+        string stored_name UK
+        string mime_type
+        int size_bytes
+        int position "la menor es la portada"
+    }
     settlements {
         int id PK
         int owner_id FK
@@ -189,6 +198,8 @@ payments(id PK, installment_id FK→installments, amount, paid_on, method, refer
 
 payment_receipts(id PK, payment_id FK→payments, original_name, stored_name UK, mime_type, size_bytes)
 
+property_images(id PK, property_id FK→properties, original_name, stored_name UK, mime_type, size_bytes, position)
+
 settlements(id PK, owner_id FK→users, contract_id FK→contracts, period, gross_amount,
             commission_percentage, commission_amount, net_amount, status,
             transferred_at?, operation_number?, UK(contract_id, period))
@@ -218,6 +229,7 @@ Los valores se guardan en inglés; las etiquetas en español las pone la aplicac
 | `payments.method` | `bank_transfer` transferencia, `deposit` depósito, `digital_gateway` pasarela digital |
 | `payments.status` | `pending_validation` pendiente de validación, `approved` aprobado, `rejected` rechazado |
 | `payment_receipts.mime_type` | `application/pdf`, `image/jpeg`, `image/png` |
+| `property_images.mime_type` | `image/jpeg`, `image/png`, `image/webp` (la aplicación guarda todo como JPEG; los otros dos quedan para un servidor sin GD) |
 | `settlements.status` | `pending_transfer` pendiente de transferencia, `transferred` transferido |
 | `notifications.type` | `payment_submitted`, `payment_approved`, `payment_rejected`, `installment_due_soon`, `contract_expiring` |
 | `notifications.reference_type` | `payment`, `installment`, `contract` |
@@ -246,6 +258,7 @@ Los valores se guardan en inglés; las etiquetas en español las pone la aplicac
 | Neto de la liquidación igual a bruto menos comisión; datos de transferencia obligatorios al transferir y vacíos antes (HU-19, HU-20) | `CHECK` en `settlements` |
 | Referencia de una notificación completa o vacía | `CHECK` sobre `reference_type` y `reference_id` |
 | Nombre de archivo de comprobante único | Único en `payment_receipts.stored_name` |
+| Foto de inmueble de 1 byte a 5 MB, con nombre de archivo único | `CHECK (size_bytes BETWEEN 1 AND 5242880)` y único en `property_images.stored_name` |
 | Token de recuperación único (HU-03b) | Único en `password_resets.token_hash` (solo se guarda el hash) |
 
 **Lo que valida la aplicación** (la base no puede o no debe):
@@ -309,6 +322,7 @@ Otras decisiones tomadas al diseñar:
 | HU-25, HU-26, HU-27 | Consultas sobre todas las tablas anteriores |
 | HU-30, HU-31 | `rental_requests`, `properties`, `users`, `contracts` |
 | HU-32, HU-33 | `properties`, `users` |
+| Fotos de los inmuebles (HU-07, HU-28, HU-29, HU-32) | `property_images`, `properties` |
 | HU-34 | `contracts`, `properties`, `users` |
 
 ---
@@ -399,7 +413,7 @@ php spark db:seed DemoSeeder
 [`inmogestion_schema.sql`](inmogestion_schema.sql) es una copia: **hay que regenerarla cada vez que cambie una migración**. Con la base ya migrada:
 
 ```bash
-mysqldump -u USUARIO -p --no-data --compact --no-tablespaces --set-gtid-purged=OFF inmogestion2026 roles users password_resets properties contracts installments payments payment_receipts settlements settlement_installments notifications rental_requests > esquema_crudo.sql
+mysqldump -u USUARIO -p --no-data --compact --no-tablespaces --set-gtid-purged=OFF inmogestion2026 roles users password_resets properties contracts installments payments payment_receipts settlements settlement_installments notifications rental_requests property_images > esquema_crudo.sql
 ```
 
 Después, reemplazar en el archivo generado `CREATE TABLE ` por `CREATE TABLE IF NOT EXISTS `, y pegar delante el encabezado del archivo actual (incluidas las sentencias `CREATE DATABASE IF NOT EXISTS` y `USE`). Las tablas van en ese orden para respetar las dependencias. Si el cliente avisa de un error de autenticación con `caching_sha2_password`, agregar `--get-server-public-key`.
