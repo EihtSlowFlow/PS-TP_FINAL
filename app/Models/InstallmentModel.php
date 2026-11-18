@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Libraries\LateFeeCalculator;
+use App\Libraries\RentUpdateCalculator;
 use CodeIgniter\Database\BaseBuilder;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
@@ -211,12 +212,19 @@ class InstallmentModel extends Model
                     continue;
                 }
 
+                $baseAmount = RentUpdateCalculator::amountForPeriod(
+                    (string) $contract['monthly_rent'],
+                    (string) $contract['update_percentage'],
+                    (string) $contract['start_date'],
+                    $period
+                );
+
                 $installmentId = $this->insert([
                     'contract_id' => $id,
                     'number'      => ($lastNumbers[$id] ?? 0) + 1,
                     'period'      => $period,
                     'due_date'    => self::dueDateFor($period, (int) $contract['due_day']),
-                    'base_amount' => $contract['monthly_rent'],
+                    'base_amount' => $baseAmount,
                     'late_fee'    => '0.00',
                     'status'      => self::STATUS_PENDING,
                 ]);
@@ -226,7 +234,7 @@ class InstallmentModel extends Model
                 }
 
                 $issuedIds[] = (int) $installmentId;
-                $amounts[]   = $contract['monthly_rent'];
+                $amounts[]   = $baseAmount;
             }
 
             if (! $this->db->transCommit()) {

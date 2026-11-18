@@ -517,6 +517,77 @@ final class InstallmentIssuingTest extends CIUnitTestCase
         }
     }
 
+    public function testTheYearlyUpdateOfTheContractIsAppliedToTheAmountOfEachInstallment(): void
+    {
+        $admin    = $this->sessionFor('admin');
+        $contract = $this->createContract([
+            'start_date'        => '2025-01-15',
+            'end_date'          => '2028-01-14',
+            'monthly_rent'      => '250000.00',
+            'update_percentage' => '10.00',
+            'due_day'           => 20,
+        ]);
+
+        // Issued out of order on purpose: the amount depends on the period, not on how many installments exist.
+        foreach ([['1', '2027'], ['12', '2025'], ['2', '2026'], ['1', '2026'], ['12', '2026']] as [$month, $year]) {
+            $this->postWithSession($admin, 'admin/cuotas/emitir', ['month' => $month, 'year' => $year]);
+        }
+
+        $amounts = [];
+        foreach ($this->db->table('installments')->where('contract_id', $contract)->orderBy('period', 'ASC')->get()->getResult() as $row) {
+            $amounts[$row->period] = $row->base_amount;
+        }
+
+        $this->assertSame([
+            '2025-12-01' => '250000.00', // eleven months after the month the contract started
+            '2026-01-01' => '275000.00', // a year after the start month (January): first update
+            '2026-02-01' => '275000.00',
+            '2026-12-01' => '275000.00',
+            '2027-01-01' => '302500.00', // two years after the start month: second update, over the first
+        ], $amounts);
+    }
+
+    public function testTheSecondUpdateIsAppliedOverTheFirstOne(): void
+    {
+        $admin    = $this->sessionFor('admin');
+        $contract = $this->createContract([
+            'start_date'        => '2026-01-01',
+            'end_date'          => '2028-12-31',
+            'monthly_rent'      => '250000.00',
+            'update_percentage' => '10.00',
+        ]);
+
+        $this->postWithSession($admin, 'admin/cuotas/emitir', ['month' => '1', 'year' => '2028']);
+
+        $row = $this->db->table('installments')->where('contract_id', $contract)->get()->getRow();
+        $this->assertSame('302500.00', $row->base_amount);
+    }
+
+    public function testAContractWithoutUpdatePercentageKeepsItsRentAllTheTerm(): void
+    {
+        $admin    = $this->sessionFor('admin');
+        $contract = $this->createContract(['monthly_rent' => '250000.00', 'update_percentage' => '0.00', 'end_date' => '2028-12-31']);
+
+        $this->postWithSession($admin, 'admin/cuotas/emitir', ['month' => '6', 'year' => '2028']);
+
+        $this->assertSame('250000.00', $this->db->table('installments')->where('contract_id', $contract)->get()->getRow()->base_amount);
+    }
+
+    public function testThePreviewShowsTheUpdatedAmountAndTheTotalAddsIt(): void
+    {
+        $this->createContract(['start_date' => '2026-01-01', 'end_date' => '2028-12-31', 'monthly_rent' => '250000.00', 'update_percentage' => '10.00']);
+        $this->createContract(['start_date' => '2027-01-01', 'end_date' => '2028-12-31', 'monthly_rent' => '100000.00', 'update_percentage' => '10.00']);
+
+        $page = $this->withSession($this->sessionFor('admin'))->get('admin/cuotas/emitir?month=1&year=2027');
+
+        $page->assertStatus(200);
+        $page->assertSee('$ 275.000');
+        $page->assertSee('Con 1 actualización de 10 %');
+        // The second contract starts that month: its rent is still the one of the contract.
+        $page->assertSee('$ 100.000');
+        $page->assertSee('$ 375.000', '#preview-total');
+    }
+
     public function testPastAndFuturePeriodsCanBeIssuedWhenTheContractCoversThem(): void
     {
         $admin    = $this->sessionFor('admin');
