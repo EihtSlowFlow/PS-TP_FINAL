@@ -41,6 +41,7 @@ para ampliar el catálogo y gestionar el inventario de bienes en alquiler.
 - Todo inmueble debe estar vinculado a un usuario con rol propietario activo.
 - El tipo de inmueble pertenece a un conjunto definido (departamento, casa, local comercial, terreno u oficina).
 - La dirección y la ciudad son obligatorias. La superficie y los servicios incluidos son opcionales; si se informa la superficie, debe ser mayor a cero.
+- Los servicios incluidos se eligen con casillas de una lista fija: Gas natural, Agua, Luz, Internet, Cochera y Apto mascotas (`PropertyModel::SERVICE_OPTIONS`). Se guardan como texto separado por comas, en el orden en que llegan del formulario, y cualquier otro valor se rechaza. Los inmuebles cargados antes con texto libre se muestran tal cual y, al editarlos, solo quedan marcados los servicios que coinciden con la lista.
 - El precio base debe ser un valor mayor a cero y los ambientes un entero positivo, obligatorio salvo para terrenos.
 - Las validaciones se realizan en el servidor.
 

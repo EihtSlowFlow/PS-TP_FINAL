@@ -631,7 +631,8 @@ class PropertyController extends BaseController
             'type'              => trim((string) $this->request->getPost('type')),
             'rooms'             => trim((string) $this->request->getPost('rooms')),
             'surface'           => $this->normalizeDecimal((string) $this->request->getPost('surface')),
-            'included_services' => trim((string) $this->request->getPost('included_services')),
+            // The form sends one checkbox per service (`included_services[]`); they are stored as "Agua, Luz".
+            'included_services' => implode(', ', PropertyModel::splitServices($this->request->getPost('included_services'))),
             'base_rent'         => $this->normalizeDecimal((string) $this->request->getPost('base_rent')),
             'description'       => trim((string) $this->request->getPost('description')),
             'status'            => $ownerId !== null ? '' : trim((string) $this->request->getPost('status')),
@@ -725,7 +726,7 @@ class PropertyController extends BaseController
                 'label'  => 'Servicios incluidos',
                 'rules'  => 'permit_empty|max_length[255]',
                 'errors' => [
-                    'max_length' => 'Los servicios incluidos no pueden superar los 255 caracteres.',
+                    'max_length' => 'Elegí los servicios de la lista.',
                 ],
             ],
             'base_rent' => [
@@ -751,6 +752,10 @@ class PropertyController extends BaseController
 
         if (! $this->validateData($input, $rules)) {
             $errors = $this->validator->getErrors();
+        }
+
+        if (! isset($errors['included_services']) && PropertyModel::unknownServices($input['included_services']) !== []) {
+            $errors['included_services'] = 'Elegí los servicios de la lista.';
         }
 
         foreach (['base_rent' => 'El precio base', 'surface' => 'La superficie'] as $field => $label) {

@@ -6,6 +6,7 @@ use App\Filters\AuthFilter;
 use App\Filters\RoleFilter;
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\DatabaseTestTrait;
+use CodeIgniter\Test\DOMParser;
 use CodeIgniter\Test\FeatureTestTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
 
@@ -79,7 +80,7 @@ final class PropertyManagementTest extends CIUnitTestCase
         $this->assertSame($type, $row->type);
         $this->assertSame($rooms === '' ? null : (int) $rooms, $row->rooms === null ? null : (int) $row->rooms);
         $this->assertSame('54.50', $row->surface);
-        $this->assertSame('Agua, luz', $row->included_services);
+        $this->assertSame('Agua, Luz', $row->included_services);
         $this->assertSame('420000.00', $row->base_rent);
         $this->assertSame('Luminoso, con balcón', $row->description);
         $this->assertSame('available', $row->status);
@@ -137,6 +138,62 @@ final class PropertyManagementTest extends CIUnitTestCase
         $this->assertSame('420000.50', $this->db->table('properties')->get()->getRow()->base_rent);
     }
 
+    public function testTheServicesAreCheckboxesOfAFixedListAndTheStoredOnesComeChecked(): void
+    {
+        $admin    = $this->sessionFor('admin');
+        $options  = ['Gas natural', 'Agua', 'Luz', 'Internet', 'Cochera', 'Apto mascotas'];
+        $checkbox = '//input[@type="checkbox"][@name="included_services[]"]';
+
+        $new = (new DOMParser())->withString((string) $this->withSession($admin)->get('admin/inmuebles/nuevo')->getBody());
+        foreach ($options as $option) {
+            $this->assertTrue($new->seeXPath($checkbox . '[@value="' . $option . '"]'), "The form must offer {$option}.");
+        }
+        $this->assertTrue($new->dontSeeXPath($checkbox . '[@checked]'), 'A new property starts with no service checked.');
+        $this->assertTrue($new->dontSeeXPath('//input[@type="text"][@name="included_services"]'), 'The services are not a free text field.');
+
+        $ownerId    = $this->createUser('owner', 'María', 'Gómez', '20111222', 'maria.gomez.hu07@example.com');
+        $propertyId = $this->insertProperty($ownerId, ['included_services' => 'Agua, Cochera']);
+
+        $edit = (new DOMParser())->withString((string) $this->withSession($admin)->get("admin/inmuebles/editar/{$propertyId}")->getBody());
+        foreach ($options as $option) {
+            $expected = in_array($option, ['Agua', 'Cochera'], true);
+            $this->assertSame(
+                $expected,
+                $edit->seeXPath($checkbox . '[@value="' . $option . '"][@checked]'),
+                "{$option} must " . ($expected ? '' : 'not ') . 'come checked.'
+            );
+        }
+    }
+
+    public function testTheCheckedServicesAreStoredInTheOrderOfTheListAndOnlyOnce(): void
+    {
+        $admin   = $this->sessionFor('admin');
+        $ownerId = $this->createUser('owner', 'María', 'Gómez', '20111222', 'maria.gomez.hu07@example.com');
+
+        $this->postWithSession($admin, 'admin/inmuebles', $this->validPayload($ownerId, [
+            'included_services' => ['Cochera', 'internet', 'Cochera', 'Gas natural'],
+        ]))->assertRedirectTo('/admin/inmuebles');
+
+        // Case is normalized, repeated services are dropped and the order is the one the form sent.
+        $this->assertSame('Cochera, Internet, Gas natural', $this->db->table('properties')->get()->getRow()->included_services);
+    }
+
+    public function testAServiceOutsideTheListKeepsTheOthersCheckedInTheForm(): void
+    {
+        $admin   = $this->sessionFor('admin');
+        $ownerId = $this->createUser('owner', 'María', 'Gómez', '20111222', 'maria.gomez.hu07@example.com');
+
+        $this->postWithSession($admin, 'admin/inmuebles', $this->validPayload($ownerId, [
+            'included_services' => ['Agua', 'Sauna'],
+        ]))->assertRedirectTo('/admin/inmuebles/nuevo');
+
+        $this->assertSame('Elegí los servicios de la lista.', session()->getFlashdata('errors')['included_services']);
+        $this->assertSame(0, $this->db->table('properties')->countAllResults());
+
+        $form = (new DOMParser())->withString((string) $this->withSession()->get('admin/inmuebles/nuevo')->getBody());
+        $this->assertTrue($form->seeXPath('//input[@name="included_services[]"][@value="Agua"][@checked]'), 'Agua was checked and must stay so.');
+    }
+
     public function testNewPropertyFormOffersTheTypesAndExplainsTheInitialStatus(): void
     {
         $response = $this->withSession($this->sessionFor('admin'))->get('admin/inmuebles/nuevo');
@@ -180,6 +237,7 @@ final class PropertyManagementTest extends CIUnitTestCase
             'address empty'           => [['address' => ''], 'address'],
             'type invalid'            => [['type' => 'castle'], 'type'],
             'type empty'              => [['type' => ''], 'type'],
+            'service not in the list' => [['included_services' => ['Agua', 'Sauna']], 'included_services'],
             'services too long'       => [['included_services' => str_repeat('a', 256)], 'included_services'],
             'description too long'    => [['description' => str_repeat('a', 1001)], 'description'],
         ];
@@ -697,7 +755,7 @@ final class PropertyManagementTest extends CIUnitTestCase
             'type'              => 'apartment',
             'rooms'             => '3',
             'surface'           => '54.5',
-            'included_services' => 'Agua, luz',
+            'included_services' => ['Agua', 'Luz'],
             'base_rent'         => '420000',
             'description'       => 'Luminoso, con balcón',
         ], $overrides);
