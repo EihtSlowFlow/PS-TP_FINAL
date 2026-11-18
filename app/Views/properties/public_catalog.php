@@ -8,6 +8,7 @@
  * @var array{items: list<array<string, mixed>>, total: int, perPage: int, currentPage: int, totalPages: int, from: int, to: int} $pagination
  * @var array{status: string, type: string, min_price: string, max_price: string, owner_id: string} $filters
  * @var array<string, string> $filterErrors
+ * @var bool $useTenantPanel A signed-in tenant sees the catalog inside their panel ("Buscar inmuebles")
  */
 use App\Models\PropertyModel;
 
@@ -34,7 +35,7 @@ $formatMoney = static function (mixed $amount): string {
 // HU-30: a tenant can ask for the rental straight from the card; everybody else reaches the detail page (HU-29).
 $isTenant = (bool) session()->get('is_logged_in') && (string) session()->get('user_role') === 'tenant';
 ?>
-<?= $this->extend('layouts/public') ?>
+<?= $this->extend(($useTenantPanel ?? false) ? 'layouts/panel' : 'layouts/public') ?>
 
 <?= $this->section('content') ?>
 <div class="page-header">

@@ -10,6 +10,7 @@
  * @var bool   $isLoggedIn
  * @var string $userRole
  * @var string $catalogBackUrl
+ * @var bool   $useTenantPanel A signed-in tenant sees the sheet inside their panel ("Buscar inmuebles")
  */
 use App\Models\PropertyModel;
 use App\Models\UserModel;
@@ -25,7 +26,7 @@ $agency = config('Agency');
 
 $waMessage = rawurlencode('Hola, quisiera consultar por el inmueble en ' . $property['address'] . ', ' . $property['city']);
 ?>
-<?= $this->extend('layouts/public') ?>
+<?= $this->extend(($useTenantPanel ?? false) ? 'layouts/panel' : 'layouts/public') ?>
 
 <?= $this->section('content') ?>
 <div class="property-detail-page">

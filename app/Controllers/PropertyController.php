@@ -119,14 +119,14 @@ class PropertyController extends BaseController
             $filterData['filters']
         );
 
-        return view('properties/public_catalog', [
+        return view('properties/public_catalog', array_merge([
             'pageTitle'    => 'Propiedades disponibles',
             'activeNav'    => 'catalogo',
             'properties'   => $pagination['items'],
             'pagination'   => $pagination,
             'filters'      => $filterData['values'],
             'filterErrors' => $filterData['errors'],
-        ]);
+        ], $this->tenantCatalogPanel('Propiedades disponibles', 'Buscar inmuebles')));
     }
 
     /**
@@ -148,14 +148,37 @@ class PropertyController extends BaseController
         $isLoggedIn = (bool) $session->get('is_logged_in');
         $userRole   = (string) $session->get('user_role', '');
 
-        return view('properties/public_show', [
+        // Inside the tenant panel the address is already in the page's own "Volver al catálogo / {address}" line, so
+        // the topbar breadcrumb stays short enough for a phone.
+        return view('properties/public_show', array_merge([
             'pageTitle'  => $property['address'] . ' - Detalle',
             'activeNav'  => 'catalogo',
             'property'   => $property,
             'isLoggedIn' => $isLoggedIn,
             'userRole'   => $userRole,
             'catalogBackUrl' => $this->publicCatalogBackUrl(),
-        ]);
+        ], $this->tenantCatalogPanel($property['address'] . ' - Detalle', 'Buscar inmuebles / Ficha')));
+    }
+
+    /**
+     * A signed-in tenant reaches the catalog from the "Buscar inmuebles" entry of their panel, so the catalog and the
+     * property sheet stay inside that panel (sidebar, topbar) instead of switching to the public layout. Visitors and
+     * the other roles keep the public layout.
+     *
+     * @return array<string, mixed> `useTenantPanel` plus, for a tenant, the data the panel layout needs
+     */
+    private function tenantCatalogPanel(string $pageTitle, string $breadcrumb): array
+    {
+        $session = session();
+
+        if (! $session->get('is_logged_in') || (string) $session->get('user_role') !== UserModel::ROLE_TENANT) {
+            return ['useTenantPanel' => false];
+        }
+
+        return array_merge(
+            $this->panelContext($pageTitle, $breadcrumb, 'inquilino-buscar-inmuebles'),
+            ['useTenantPanel' => true]
+        );
     }
 
     /**
