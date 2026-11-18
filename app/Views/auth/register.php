@@ -18,8 +18,11 @@ $selectedRole = old('role', $preselectedRole ?? '');
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= esc(base_url('css/tokens.css')) ?>">
     <link rel="stylesheet" href="<?= esc(base_url('css/auth.css')) ?>">
+    <link rel="stylesheet" href="<?= esc(base_url('css/public-nav.css')) ?>">
 </head>
 <body class="auth-page register-page">
+<?php /* Same top bar as the public pages, so the visitor can go back to the landing or the catalog. */ ?>
+<?= view('partials/public_nav', ['activeNav' => 'registrarse']) ?>
     <main class="auth-main register-main">
         <section class="register-card" aria-labelledby="register-heading">
             <header class="register-header">

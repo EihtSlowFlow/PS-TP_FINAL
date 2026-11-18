@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\PropertyImageModel;
 use App\Models\PropertyModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -35,13 +36,16 @@ class Home extends BaseController
             $session->remove(['is_logged_in', 'user_id', 'user_email', 'user_name', 'user_role']);
         }
 
-        // Escenario 1: public landing page with the latest available properties.
-        $properties = model(PropertyModel::class)->findLatestPublic(6);
+        // Escenario 1: public landing page with the latest available properties, with their cover photo.
+        $propertyModel = model(PropertyModel::class);
+        $properties    = $propertyModel->findLatestPublic(6);
 
         return view('home/landing', [
             'pageTitle'  => 'Inicio',
             'activeNav'  => 'inicio',
             'properties' => $properties,
+            'covers'     => model(PropertyImageModel::class)->coversFor(array_column($properties, 'id')),
+            'summary'    => $propertyModel->publicSummary(),
         ]);
     }
 }

@@ -12,6 +12,8 @@ $routes->addPlaceholder('id', '[0-9]{1,18}');
 $routes->get('/', 'Home::index');
 $routes->get('catalogo-inmuebles', 'PropertyController::publicIndex');
 $routes->get('catalogo-inmuebles/(:num)', 'PropertyController::publicShow/$1');
+// Photos of the properties: public once the property is in the catalog, otherwise only for its owner and the staff.
+$routes->get('inmuebles/fotos/(:id)', 'PropertyImageController::show/$1');
 
 // Authentication routes (HU-01, HU-02)
 $routes->group('auth', static function (RouteCollection $routes): void {

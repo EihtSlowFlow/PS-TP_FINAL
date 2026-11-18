@@ -7,6 +7,7 @@
  *
  * @var string                    $mode     'create' or 'edit'
  * @var array<string, mixed>|null $property Property being corrected, or null when publishing a new one
+ * @var list<array<string, mixed>>|null $images Photos already loaded (edit only)
  */
 use App\Models\PropertyModel;
 
@@ -51,7 +52,7 @@ $this->extend('layouts/panel');
             <?php endif; ?>
 
             <div class="form-layout has-sidebar">
-                <form action="<?= esc($formAction) ?>" method="post" id="property-form" class="form-main property-form">
+                <form action="<?= esc($formAction) ?>" method="post" enctype="multipart/form-data" id="property-form" class="form-main property-form">
                     <?= csrf_field() ?>
 
                     <section class="panel-card form-section-card" aria-labelledby="section-property-data">
@@ -66,6 +67,8 @@ $this->extend('layouts/panel');
                     </section>
 
                     <?= $this->include('properties/form_description') ?>
+
+                    <?= $this->include('properties/form_images') ?>
 
                     <div class="form-actions-footer">
                         <a href="<?= esc(site_url('propietario/inmuebles')) ?>" class="btn btn-secondary">Cancelar</a>
@@ -95,4 +98,5 @@ $this->extend('layouts/panel');
 
 <?php $this->section('scripts') ?>
     <script src="<?= esc(base_url('js/properties.js')) ?>"></script>
+    <script src="<?= esc(base_url('js/property-images.js')) ?>"></script>
 <?php $this->endSection() ?>

@@ -181,6 +181,21 @@ final class PublicLandingTest extends CIUnitTestCase
         $response->assertDontSee('contacto@inmogestion2026.com.ar');
     }
 
+    public function testSignInAndSignUpKeepThePublicTopBarToGoBackToTheLanding(): void
+    {
+        foreach (['auth/login' => 'Ingresar', 'auth/register' => 'Registrarse'] as $path => $current) {
+            $_SESSION = [];
+            $response = $this->withSession([])->get($path);
+
+            $response->assertStatus(200);
+            $response->assertSee('class="public-catalog-header"');
+            $response->assertSee(base_url('css/public-nav.css'));
+            $response->assertSee('<a href="' . site_url('/') . '">Inicio</a>');
+            $response->assertSee('<a href="' . site_url('catalogo-inmuebles') . '">Propiedades</a>');
+            $response->assertSee('class="is-active" aria-current="page">' . $current . '</a>');
+        }
+    }
+
     public function testPublicFooterKeepsThePublishLinkOnEveryPublicPage(): void
     {
         $ownerId    = $this->createUser(UserModel::ROLE_OWNER);

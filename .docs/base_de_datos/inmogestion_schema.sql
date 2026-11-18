@@ -304,3 +304,22 @@ CREATE TABLE IF NOT EXISTS `rental_requests` (
   CONSTRAINT `chk_rental_requests_rejection_reason` CHECK (((`status` <> _utf8mb4'rejected') or ((`rejection_reason` is not null) and (`rejection_reason` <> _utf8mb4''))))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE IF NOT EXISTS `property_images` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `property_id` int unsigned NOT NULL,
+  `original_name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `stored_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `mime_type` enum('image/jpeg','image/png','image/webp') COLLATE utf8mb4_general_ci NOT NULL,
+  `size_bytes` int unsigned NOT NULL,
+  `position` smallint unsigned NOT NULL DEFAULT '0',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_property_images_stored_name` (`stored_name`),
+  KEY `idx_property_images_property_position` (`property_id`,`position`),
+  CONSTRAINT `fk_property_images_property_id` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `chk_property_images_size` CHECK ((`size_bytes` between 1 and 5242880))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;

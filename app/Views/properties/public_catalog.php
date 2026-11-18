@@ -8,6 +8,7 @@
  * @var array{items: list<array<string, mixed>>, total: int, perPage: int, currentPage: int, totalPages: int, from: int, to: int} $pagination
  * @var array{status: string, type: string, min_price: string, max_price: string, owner_id: string} $filters
  * @var array<string, string> $filterErrors
+ * @var array<int, int> $covers Property id => id of its cover photo
  * @var bool $useTenantPanel A signed-in tenant sees the catalog inside their panel ("Buscar inmuebles")
  */
 use App\Models\PropertyModel;
@@ -24,12 +25,6 @@ $buildPageUrl = static function (int $targetPage) use ($pagination, $filters): s
     $query['page'] = (string) $targetPage;
 
     return site_url('catalogo-inmuebles') . '?' . http_build_query($query);
-};
-
-$formatMoney = static function (mixed $amount): string {
-    $value = (float) $amount;
-
-    return '$ ' . number_format($value, fmod($value, 1.0) === 0.0 ? 0 : 2, ',', '.');
 };
 
 // HU-30: a tenant can ask for the rental straight from the card; everybody else reaches the detail page (HU-29).
@@ -83,34 +78,11 @@ $isTenant = (bool) session()->get('is_logged_in') && (string) session()->get('us
     <?php else: ?>
         <div class="public-property-grid">
             <?php foreach ($properties as $item): ?>
-                <article class="panel-card public-property-card">
-                    <div class="public-property-card-heading">
-                        <span class="badge-pill badge-neutral"><?= esc(PropertyModel::labelForType((string) $item['type'])) ?></span>
-                        <span class="badge-pill badge-property-available">Disponible</span>
-                    </div>
-                    <h2><a href="<?= esc(site_url('catalogo-inmuebles/' . (int) $item['id'])) ?>"><?= esc((string) $item['address']) ?></a></h2>
-                    <p class="public-property-location"><?= esc((string) $item['city']) ?></p>
-                    <dl class="public-property-details">
-                        <?php if ($item['rooms'] !== null): ?>
-                            <div><dt>Ambientes</dt><dd><?= esc((string) $item['rooms']) ?></dd></div>
-                        <?php endif; ?>
-                        <?php if ($item['surface'] !== null): ?>
-                            <div><dt>Superficie</dt><dd><?= esc((string) $item['surface']) ?> m²</dd></div>
-                        <?php endif; ?>
-                    </dl>
-                    <?php if ((string) ($item['description'] ?? '') !== ''): ?>
-                        <p class="public-property-description"><?= esc((string) $item['description']) ?></p>
-                    <?php endif; ?>
-                    <div class="public-property-footer">
-                        <p class="public-property-price"><?= esc($formatMoney($item['base_rent'])) ?><span> / mes</span></p>
-                        <div class="public-property-actions">
-                            <a href="<?= esc(site_url('catalogo-inmuebles/' . (int) $item['id'])) ?>" class="btn <?= $isTenant ? 'btn-secondary' : 'btn-primary' ?> btn-sm">Ver detalle</a>
-                            <?php if ($isTenant): ?>
-                                <a href="<?= esc(site_url('inquilino/inmuebles/' . (int) $item['id'] . '/solicitar')) ?>" class="btn btn-primary btn-sm">Solicitar alquiler</a>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </article>
+                <?= view('properties/public_card', [
+                    'item'     => $item,
+                    'coverId'  => $covers[(int) $item['id']] ?? null,
+                    'isTenant' => $isTenant,
+                ]) ?>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>

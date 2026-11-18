@@ -1,0 +1,80 @@
+/* --------------------------------------------------------------------------
+ * Top bar of the public pages (views/partials/public_nav.php): landing,
+ * catalog and property sheet (layouts/public), and the sign-in and sign-up
+ * pages, so a visitor can always go back to the landing. Needs tokens.css.
+ * ------------------------------------------------------------------------ */
+.public-catalog-header {
+    min-height: 4rem;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: var(--surface);
+    border-bottom: 2px solid var(--edge);
+}
+
+.public-catalog-brand {
+    color: var(--heading);
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.public-catalog-header nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.public-catalog-header nav a {
+    color: var(--primary-text);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.public-catalog-header nav a:hover {
+    text-decoration: underline;
+}
+
+.public-catalog-header nav a.is-active {
+    color: var(--heading);
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.25rem;
+}
+
+/* The logout of the public header is a POST form; its button looks like the links around it. */
+.public-logout-form {
+    margin: 0;
+}
+
+.public-logout-form button {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--primary-text);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.public-logout-form button:hover {
+    text-decoration: underline;
+}
+
+/* On a phone the links wrap under the brand instead of pushing the page sideways. */
+@media (max-width: 600px) {
+    .public-catalog-header {
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+    }
+
+    .public-catalog-header nav {
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+    }
+}

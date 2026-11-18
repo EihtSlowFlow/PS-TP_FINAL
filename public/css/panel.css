@@ -312,32 +312,7 @@ summary:focus-visible,
     padding: 0;
 }
 
-.public-catalog-header {
-    min-height: 4rem;
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    background: var(--surface);
-    border-bottom: 2px solid var(--edge);
-}
-
-.public-catalog-brand {
-    color: var(--heading);
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.public-catalog-header nav {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.public-catalog-header nav a,
+/* The top bar of the public pages lives in public-nav.css (shared with the sign-in and sign-up pages). */
 .public-catalog-login-link a {
     color: var(--primary-text);
     font-size: 0.9rem;
@@ -345,28 +320,7 @@ summary:focus-visible,
     text-decoration: none;
 }
 
-.public-catalog-header nav a:hover,
 .public-catalog-login-link a:hover {
-    text-decoration: underline;
-}
-
-/* The logout of the public header is a POST form; its button looks like the links around it. */
-.public-logout-form {
-    margin: 0;
-}
-
-.public-logout-form button {
-    padding: 0;
-    border: 0;
-    background: none;
-    color: var(--primary-text);
-    font: inherit;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.public-logout-form button:hover {
     text-decoration: underline;
 }
 
@@ -376,9 +330,10 @@ summary:focus-visible,
     padding: 2rem 0 3rem;
 }
 
+/* auto-fill keeps the column width when there are only one or two properties (auto-fit stretched them, photo included). */
 .public-property-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
     gap: 1rem;
 }
 
@@ -2377,12 +2332,6 @@ select.form-control {
     flex-wrap: wrap;
 }
 
-.public-catalog-header nav a.is-active {
-    color: var(--heading);
-    border-bottom: 2px solid var(--primary);
-    padding-bottom: 0.25rem;
-}
-
 .landing-page {
     display: flex;
     flex-direction: column;
@@ -2431,9 +2380,11 @@ select.form-control {
     padding: 1.5rem 2rem;
 }
 
+/* Two fields and the button in one row. ("repeat(auto-fit, …) auto" is not a valid track list: it fell back to one
+ * column.) Below 700px the grid of the photos section stacks them, see the media query further down. */
 .landing-search-form {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) auto;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
     gap: 1rem;
     align-items: end;
     margin-top: 0.75rem;
@@ -3085,4 +3036,502 @@ a.contact-value:hover {
     flex-wrap: wrap;
     justify-content: flex-end;
     gap: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+ * Photos of the properties: cards with a cover photo (landing and catalog),
+ * the walnut hero of the landing, the gallery of the property sheet and the
+ * "Fotos" block of the property forms. Colours come from tokens.css only.
+ * ------------------------------------------------------------------------ */
+.public-property-card {
+    padding: 0;
+    gap: 0;
+    overflow: hidden;
+}
+
+.public-property-photo {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--surface-muted);
+}
+
+.public-property-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.public-property-card:hover .public-property-photo img {
+    transform: scale(1.03);
+}
+
+.public-property-photo-empty {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    color: var(--primary-text);
+    font-size: 0.85rem;
+    font-weight: 600;
+    background-color: var(--primary-soft);
+    background-image: var(--texture-wood-grain);
+    background-size: var(--texture-size);
+}
+
+.public-property-photo .public-property-card-heading {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    right: 0.75rem;
+}
+
+.public-property-photo .badge-pill {
+    box-shadow: var(--shadow-card);
+}
+
+.public-property-photo .badge-neutral {
+    background: var(--surface);
+    color: var(--heading);
+}
+
+.public-property-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem;
+}
+
+.public-property-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Landing hero: walnut board with the pitch on the left and the latest photos on the right. */
+.landing-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 2.5rem;
+    align-items: center;
+    padding: 3rem 3rem 5.5rem;
+    text-align: left;
+    color: var(--sidebar-text);
+    background-color: var(--sidebar-bg);
+    background-image: var(--texture-wood-grain);
+    background-size: var(--texture-size);
+    border: 0;
+    border-bottom: 3px solid var(--sidebar-edge);
+}
+
+.landing-hero-content {
+    max-width: none;
+    margin: 0;
+}
+
+.landing-hero-eyebrow {
+    display: inline-flex;
+    margin-bottom: 1rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--on-dark-line);
+    border-radius: var(--radius-pill);
+    background: var(--on-dark-faint);
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.landing-hero .landing-hero-title {
+    color: var(--sidebar-text);
+    font-size: clamp(2rem, 4.2vw, 3rem);
+    line-height: 1.15;
+}
+
+.landing-hero .landing-hero-subtitle {
+    color: var(--sidebar-text-muted);
+}
+
+.landing-hero .landing-hero-actions {
+    justify-content: flex-start;
+}
+
+.landing-hero .btn-primary {
+    background: var(--accent);
+    color: var(--on-accent);
+}
+
+.landing-hero .btn-primary:hover {
+    background: var(--primary-soft);
+}
+
+.landing-hero .btn-secondary {
+    background: transparent;
+    color: var(--sidebar-text);
+    border-color: var(--on-dark-line);
+}
+
+.landing-hero .btn-secondary:hover {
+    background: var(--on-dark-faint);
+}
+
+.landing-hero a:focus-visible {
+    outline-color: var(--focus-on-dark);
+}
+
+.landing-hero-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin: 2rem 0 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--on-dark-line);
+}
+
+.landing-hero-summary div {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.15rem;
+}
+
+.landing-hero-summary dt {
+    color: var(--sidebar-text-muted);
+    font-size: 0.85rem;
+}
+
+.landing-hero-summary dd {
+    margin: 0;
+    color: var(--sidebar-text);
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.landing-hero-media {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.75rem;
+    min-height: 340px;
+    height: 100%;
+}
+
+.landing-hero-media.count-1 {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+.landing-hero-media.count-2 {
+    grid-template-rows: 1fr;
+}
+
+.landing-hero-media.count-3 .landing-hero-photo:first-child {
+    grid-row: span 2;
+}
+
+.landing-hero-photo {
+    position: relative;
+    display: block;
+    min-height: 150px;
+    overflow: hidden;
+    border: 1px solid var(--on-dark-line);
+    border-radius: var(--radius-md);
+    color: var(--sidebar-text);
+    text-decoration: none;
+}
+
+.landing-hero-photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.landing-hero-photo:hover img {
+    transform: scale(1.04);
+}
+
+.landing-hero-photo-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    padding: 2rem 0.9rem 0.75rem;
+    background: linear-gradient(to top, var(--overlay), transparent);
+    font-size: 0.8rem;
+}
+
+.landing-hero-photo-caption strong {
+    font-size: 0.95rem;
+}
+
+.landing-hero-features {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.landing-hero-features li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--on-dark-line);
+    border-radius: var(--radius-md);
+    background: var(--on-dark-faint);
+}
+
+.landing-hero-features strong {
+    color: var(--sidebar-text);
+}
+
+.landing-hero-features span {
+    color: var(--sidebar-text-muted);
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+/* The quick search rests on the lower edge of the hero. */
+.landing-search-card {
+    position: relative;
+    z-index: 1;
+    margin: -5.25rem 2rem 0;
+}
+
+/* Gallery of the property sheet: the cover large and up to four more photos beside it. */
+.property-gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: repeat(2, 200px);
+    gap: 0.5rem;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+}
+
+.property-gallery-item {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: var(--surface-muted);
+}
+
+.property-gallery-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.property-gallery-item:hover img {
+    transform: scale(1.03);
+}
+
+.property-gallery-item:first-child {
+    grid-row: span 2;
+}
+
+.property-gallery.count-1 {
+    grid-template-columns: 1fr;
+    grid-template-rows: 420px;
+}
+
+.property-gallery.count-1 .property-gallery-item:first-child,
+.property-gallery.count-2 .property-gallery-item:first-child {
+    grid-row: auto;
+}
+
+.property-gallery.count-2 {
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 380px;
+}
+
+.property-gallery.count-3 {
+    grid-template-columns: 2fr 1fr;
+}
+
+.property-gallery.count-4 .property-gallery-item:last-child {
+    grid-column: span 2;
+}
+
+.property-gallery-more {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--overlay);
+    color: var(--on-primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.property-gallery-all {
+    margin: -0.5rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* "Fotos" block of the property forms. */
+.property-image-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.75rem;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    list-style: none;
+}
+
+.property-image-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+    background: var(--surface-muted);
+}
+
+.property-image-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: opacity 0.2s ease;
+}
+
+.property-image-item:has(input:checked) img {
+    opacity: 0.4;
+}
+
+.property-image-cover {
+    position: absolute;
+    top: 0.4rem;
+    left: 0.4rem;
+}
+
+.property-image-remove {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.6rem;
+    color: var(--text-main);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.property-image-remove:has(input:checked) {
+    background: var(--danger-soft);
+    color: var(--danger-text);
+}
+
+.property-image-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.5rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.property-image-preview li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.property-image-preview img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-sm);
+}
+
+.property-image-preview .property-image-preview-note {
+    grid-column: 1 / -1;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background: var(--warning-soft);
+    color: var(--warning-text);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 900px) {
+    .landing-hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem 1.5rem 5rem;
+    }
+
+    .landing-hero-media {
+        min-height: 260px;
+    }
+
+    .landing-search-card {
+        margin: -4.5rem 1rem 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .landing-search-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .landing-hero-media {
+        min-height: 220px;
+    }
+
+    .landing-hero-summary {
+        gap: 1.5rem;
+    }
+
+    .property-gallery,
+    .property-gallery.count-1,
+    .property-gallery.count-2,
+    .property-gallery.count-3 {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: none;
+        grid-auto-rows: 120px;
+    }
+
+    .property-gallery .property-gallery-item,
+    .property-gallery.count-4 .property-gallery-item:last-child {
+        grid-row: auto;
+        grid-column: auto;
+    }
+
+    .property-gallery .property-gallery-item:first-child {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .public-property-photo img,
+    .landing-hero-photo img,
+    .property-gallery-item img {
+        transition: none;
+    }
 }

@@ -5,25 +5,33 @@
  * @var string $pageTitle
  * @var string $activeNav
  * @var list<array<string, mixed>> $properties
+ * @var array<int, int>            $covers  Property id => id of its cover photo
+ * @var array{properties: int, cities: int} $summary How many properties the catalog offers and in how many cities
  */
 use App\Models\PropertyModel;
 
 /** @var \Config\Agency $agency Contact data of the agency (app/Config/Agency.php) */
 $agency = config('Agency');
 
-$formatMoney = static function (mixed $amount): string {
-    $value = (float) $amount;
+$covers  = $covers ?? [];
+$summary = $summary ?? ['properties' => count($properties), 'cities' => count(array_unique(array_column($properties, 'city')))];
 
-    return '$ ' . number_format($value, fmod($value, 1.0) === 0.0 ? 0 : 2, ',', '.');
-};
+// The hero shows the photos of the latest properties that have one (up to three), each linking to its sheet.
+$heroPhotos = [];
+foreach ($properties as $item) {
+    if (isset($covers[(int) $item['id']]) && count($heroPhotos) < 3) {
+        $heroPhotos[] = ['imageId' => $covers[(int) $item['id']], 'item' => $item];
+    }
+}
 ?>
 <?= $this->extend('layouts/public') ?>
 
 <?= $this->section('content') ?>
 <div class="landing-page">
     <!-- Hero / Value Proposition -->
-    <section class="landing-hero" aria-labelledby="landing-hero-title">
+    <section class="landing-hero<?= $heroPhotos !== [] ? ' has-photos' : '' ?>" aria-labelledby="landing-hero-title">
         <div class="landing-hero-content">
+            <span class="landing-hero-eyebrow">Alquileres administrados de punta a punta</span>
             <h1 id="landing-hero-title" class="landing-hero-title">Gestión transparente y moderna de alquileres</h1>
             <p class="landing-hero-subtitle">
                 Conectamos propietarios e inquilinos en una plataforma segura. Administrá tus propiedades, gestioná contratos, emití y pagá cuotas mensuales con total claridad y seguimiento en tiempo real.
@@ -33,7 +41,39 @@ $formatMoney = static function (mixed $amount): string {
                 <a href="<?= esc(site_url('auth/register?role=owner')) ?>" class="btn btn-secondary" id="btn-hero-publish">Publicar mi inmueble</a>
                 <a href="<?= esc(site_url('auth/register')) ?>" class="btn btn-secondary" id="btn-hero-register">Registrarme</a>
             </div>
+            <?php if ($summary['properties'] > 0): ?>
+                <dl class="landing-hero-summary" aria-label="El catálogo hoy">
+                    <div>
+                        <dt><?= $summary['properties'] === 1 ? 'inmueble disponible' : 'inmuebles disponibles' ?></dt>
+                        <dd><?= esc((string) $summary['properties']) ?></dd>
+                    </div>
+                    <div>
+                        <dt><?= $summary['cities'] === 1 ? 'ciudad' : 'ciudades' ?></dt>
+                        <dd><?= esc((string) $summary['cities']) ?></dd>
+                    </div>
+                </dl>
+            <?php endif; ?>
         </div>
+
+        <?php if ($heroPhotos !== []): ?>
+            <div class="landing-hero-media count-<?= esc((string) count($heroPhotos)) ?>">
+                <?php foreach ($heroPhotos as $photo): ?>
+                    <a class="landing-hero-photo" href="<?= esc(site_url('catalogo-inmuebles/' . (int) $photo['item']['id'])) ?>">
+                        <img src="<?= esc(site_url('inmuebles/fotos/' . (int) $photo['imageId'])) ?>" alt="Foto de <?= esc((string) $photo['item']['address']) ?>, <?= esc((string) $photo['item']['city']) ?>" width="640" height="480">
+                        <span class="landing-hero-photo-caption">
+                            <strong><?= esc((string) $photo['item']['address']) ?></strong>
+                            <span><?= esc((string) $photo['item']['city']) ?> · <?= esc(PropertyModel::labelForType((string) $photo['item']['type'])) ?></span>
+                        </span>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <ul class="landing-hero-features" aria-label="Lo que resuelve InmoGestión">
+                <li><strong>Contratos claros</strong><span>Canon, comisión y actualización anual en un solo lugar.</span></li>
+                <li><strong>Cuotas y mora automáticas</strong><span>Cada mes se emiten solas y el recargo se calcula al día.</span></li>
+                <li><strong>Pagos con comprobante</strong><span>El inquilino informa el pago y la administración lo valida.</span></li>
+            </ul>
+        <?php endif; ?>
     </section>
 
     <!-- Quick Search Bar -->
@@ -78,29 +118,11 @@ $formatMoney = static function (mixed $amount): string {
         <?php else: ?>
             <div class="public-property-grid">
                 <?php foreach ($properties as $item): ?>
-                    <article class="panel-card public-property-card">
-                        <div class="public-property-card-heading">
-                            <span class="badge-pill badge-neutral"><?= esc(PropertyModel::labelForType((string) $item['type'])) ?></span>
-                            <span class="badge-pill badge-property-available">Disponible</span>
-                        </div>
-                        <h2><a href="<?= esc(site_url('catalogo-inmuebles/' . (int) $item['id'])) ?>"><?= esc((string) $item['address']) ?></a></h2>
-                        <p class="public-property-location"><?= esc((string) $item['city']) ?></p>
-                        <dl class="public-property-details">
-                            <?php if ($item['rooms'] !== null): ?>
-                                <div><dt>Ambientes</dt><dd><?= esc((string) $item['rooms']) ?></dd></div>
-                            <?php endif; ?>
-                            <?php if ($item['surface'] !== null): ?>
-                                <div><dt>Superficie</dt><dd><?= esc((string) $item['surface']) ?> m²</dd></div>
-                            <?php endif; ?>
-                        </dl>
-                        <?php if ((string) ($item['description'] ?? '') !== ''): ?>
-                            <p class="public-property-description"><?= esc((string) $item['description']) ?></p>
-                        <?php endif; ?>
-                        <div class="public-property-footer">
-                            <p class="public-property-price"><?= esc($formatMoney($item['base_rent'])) ?><span> / mes</span></p>
-                            <a href="<?= esc(site_url('catalogo-inmuebles/' . (int) $item['id'])) ?>" class="btn btn-primary btn-sm">Ver detalle</a>
-                        </div>
-                    </article>
+                    <?= view('properties/public_card', [
+                        'item'     => $item,
+                        'coverId'  => $covers[(int) $item['id']] ?? null,
+                        'isTenant' => false,
+                    ]) ?>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
