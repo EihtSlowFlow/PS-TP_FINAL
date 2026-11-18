@@ -18,6 +18,7 @@
 $flashError           = session()->getFlashdata('error');
 $flashSuccess         = session()->getFlashdata('success');
 $pendingPropertyCount = (int) ($pendingPropertyCount ?? 0);
+$pendingRequestCount  = (int) ($pendingRequestCount ?? 0);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -69,6 +70,16 @@ $pendingPropertyCount = (int) ($pendingPropertyCount ?? 0);
                             </span>
                         <?php endif; ?>
                     </a>
+                    <a href="<?= esc(site_url('admin/solicitudes')) ?>" class="sidebar-link<?= $activeMenu === 'solicitudes' ? ' is-active' : '' ?>">
+                        <span>Solicitudes</span>
+                        <?php if ($pendingRequestCount > 0): ?>
+                            <?php /* HU-31: the queue of tenant rental requests waiting for review. */ ?>
+                            <span class="sidebar-badge" id="pending-requests-badge" title="Solicitudes de alquiler pendientes">
+                                <?= esc((string) $pendingRequestCount) ?>
+                                <span class="sr-only"><?= $pendingRequestCount === 1 ? 'pendiente' : 'pendientes' ?> de revisión</span>
+                            </span>
+                        <?php endif; ?>
+                    </a>
                     <a href="<?= esc(site_url('admin/contratos')) ?>" class="sidebar-link<?= $activeMenu === 'contratos' ? ' is-active' : '' ?>">
                         <span>Contratos</span>
                     </a>
@@ -100,6 +111,12 @@ $pendingPropertyCount = (int) ($pendingPropertyCount ?? 0);
                 <?php elseif ($userRole === 'tenant'): ?>
                     <a href="<?= esc(site_url('inquilino/estado-cuenta')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-estado-cuenta' ? ' is-active' : '' ?>">
                         <span>Estado de cuenta</span>
+                    </a>
+                    <a href="<?= esc(site_url('catalogo-inmuebles')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-buscar-inmuebles' ? ' is-active' : '' ?>">
+                        <span>Buscar inmuebles</span>
+                    </a>
+                    <a href="<?= esc(site_url('inquilino/solicitudes')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-solicitudes' ? ' is-active' : '' ?>">
+                        <span>Mis solicitudes</span>
                     </a>
                     <a href="<?= esc(site_url('inquilino/mis-pagos')) ?>" class="sidebar-link<?= $activeMenu === 'inquilino-mis-pagos' ? ' is-active' : '' ?>">
                         <span>Mis pagos</span>

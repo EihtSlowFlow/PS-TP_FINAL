@@ -40,6 +40,7 @@ final class SchemaIntegrityTest extends CIUnitTestCase
         $expected = [
             'roles', 'users', 'password_resets', 'properties', 'contracts', 'installments',
             'payments', 'payment_receipts', 'settlements', 'settlement_installments', 'notifications',
+            'rental_requests',
         ];
 
         foreach ($expected as $table) {
@@ -349,6 +350,43 @@ final class SchemaIntegrityTest extends CIUnitTestCase
             'type'           => 'payment_approved',
             'message'        => 'Approved',
             'reference_type' => 'payment',
+        ]);
+    }
+
+    // ------------------------------------------------------------------
+    // Rental requests (HU-30)
+    // ------------------------------------------------------------------
+
+    public function testRentalRequestRequiresPositiveDesiredMonths(): void
+    {
+        [$ownerId, $tenantId, $propertyId] = $this->peopleAndProperty();
+
+        $this->expectException(DatabaseException::class);
+
+        $this->db->table('rental_requests')->insert([
+            'property_id'        => $propertyId,
+            'tenant_id'          => $tenantId,
+            'desired_start_date' => '2026-12-01',
+            'desired_months'     => 0,
+            'contact_phone'      => '2994123456',
+            'status'             => 'pending',
+        ]);
+    }
+
+    public function testRejectedRentalRequestRequiresAReason(): void
+    {
+        [$ownerId, $tenantId, $propertyId] = $this->peopleAndProperty();
+
+        $this->expectException(DatabaseException::class);
+
+        $this->db->table('rental_requests')->insert([
+            'property_id'        => $propertyId,
+            'tenant_id'          => $tenantId,
+            'desired_start_date' => '2026-12-01',
+            'desired_months'     => 24,
+            'contact_phone'      => '2994123456',
+            'status'             => 'rejected',
+            'rejection_reason'   => null,
         ]);
     }
 

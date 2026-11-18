@@ -84,13 +84,13 @@ Agregar al glosario los estados Pendiente, Aprobada, Rechazada y Cancelada.
 
 ## Definition of Done
 
-- [ ] Se puede enviar una solicitud desde un inmueble disponible.
-- [ ] «Mis solicitudes» muestra estados, motivos y contrato aprobado.
-- [ ] No se aceptan solicitudes duplicadas ni sobre inmuebles no disponibles.
-- [ ] El inquilino cancela solicitudes propias y no accede a las ajenas.
-- [ ] El estado vacío ofrece los accesos definidos.
-- [ ] Se prueban los escenarios y casos de error.
-- [ ] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue.
+- [x] Se puede enviar una solicitud desde un inmueble disponible.
+- [x] «Mis solicitudes» muestra estados, motivos y contrato aprobado.
+- [x] No se aceptan solicitudes duplicadas ni sobre inmuebles no disponibles.
+- [x] El inquilino cancela solicitudes propias y no accede a las ajenas.
+- [x] El estado vacío ofrece los accesos definidos.
+- [x] Se prueban los escenarios y casos de error.
+- [x] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue.
 
 ## Dependencias
 

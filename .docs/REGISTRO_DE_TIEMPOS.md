@@ -38,7 +38,9 @@
 | [#14](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/14) | HU-18 | Historial de pagos y comprobantes | joaquincorbalan (Copilot SDK en VS Code) | 2 | 16/11 23:19 | 16/11 23:51 | **32 min** | 32 min | Reconstruido (desde la conversación; sin pausas >10 min registradas) |
 | [#33](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/33) | — | Refactor de las pantallas: identidad visual (madera y melamina) | LauPerisse (con Claude Code) | 5 | 17/11 08:32 | 17/11 10:23 | **44 min** | 45 min | Medido (implementación) y reconstruido (localhost, commit y PR; [pull request #43](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/43)) |
 | [#57](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/57) y [#58](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/58) | HU-32 y HU-33 | Publicar un inmueble propio (propietario) y aprobar o rechazar los publicados (administración). Se hicieron juntos en una rama: el tiempo es conjunto | LauPerisse (con Claude Code) | 8 (5 + 3) | 17/11 19:34 | 17/11 20:12 | **38 min** | 38 min | Medido (implementación y verificación, 36 min) y reconstruido por el registro de la sesión (commit, push y [pull request #63](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/63), 2 min) |
-| **Total registrado** | | | | **82** | | | **14 h 30 min** | **17 h 30 min** | |
+| [#55](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/55) | HU-30 | Solicitar el alquiler de un inmueble (inquilino) | Antigravity | 5 | 17/11 20:36 | 17/11 21:02 | **26 min** | 26 min | Medido |
+| [#56](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/56) | HU-31 | Gestionar solicitudes de alquiler y crear el contrato | Antigravity | 3 | 17/11 21:34 | 17/11 21:49 | **15 min** | 15 min | Medido |
+| **Total registrado** | | | | **90** | | | **15 h 11 min** | **18 h 11 min** | |
 
 Sin registro de tiempo (los hizo otro integrante; que cada responsable complete su fila con el método de la [sección 3](#3-cómo-registrar-el-tiempo-de-cada-issue-de-ahora-en-adelante)):
 

@@ -12,14 +12,18 @@ if (! is_array($errors)) {
 }
 
 $propertyValue = (string) old('property_id', $preselectedProperty);
-$tenantValue   = (string) old('tenant_id', '');
-$startValue    = (string) old('start_date', '');
-$endValue      = (string) old('end_date', '');
+$tenantValue   = (string) old('tenant_id', $preselectedTenant ?? '');
+$startValue    = (string) old('start_date', $suggestedStartDate ?? '');
+$endValue      = (string) old('end_date', $suggestedEndDate ?? '');
 $rentValue     = (string) old('monthly_rent', '');
 $updateValue   = (string) old('update_percentage', '');
 $commissionValue = (string) old('commission_percentage', '');
 $dueDayValue   = (string) old('due_day', '');
 $lateFeeValue  = (string) old('late_fee_daily_percentage', '');
+$rentalRequest = $rentalRequest ?? null;
+$requestIdValue = is_array($rentalRequest) && isset($rentalRequest['id'])
+    ? (string) (int) $rentalRequest['id']
+    : (string) old('request_id', '');
 
 $selectedProperty = null;
 foreach ($properties as $candidate) {
@@ -55,9 +59,23 @@ $this->extend('layouts/panel');
                 </div>
             </section>
 
+            <?php if (is_array($rentalRequest)): ?>
+                <div class="panel-flash panel-flash-warning" role="status" id="request-approval-banner">
+                    <span>
+                        Aprobando la <strong>Solicitud #<?= esc((string) $rentalRequest['id']) ?></strong> de
+                        <strong><?= esc((string) $rentalRequest['tenant_last_name'] . ', ' . (string) $rentalRequest['tenant_first_name']) ?></strong>
+                        para <strong><?= esc((string) $rentalRequest['property_address']) ?></strong>.
+                        Al registrar el contrato, esta solicitud quedará «Aprobada» y las demás solicitudes pendientes sobre el inmueble pasarán a «Rechazada».
+                    </span>
+                </div>
+            <?php endif; ?>
+
             <div class="form-layout has-sidebar">
                 <form action="<?= esc(site_url('admin/contratos')) ?>" method="post" id="contract-form" class="form-main contract-form">
                     <?= csrf_field() ?>
+                    <?php if ($requestIdValue !== ''): ?>
+                        <input type="hidden" name="request_id" value="<?= esc($requestIdValue) ?>">
+                    <?php endif; ?>
 
                     <section class="panel-card form-section-card" aria-labelledby="section-contract-parties">
                         <div class="section-header">

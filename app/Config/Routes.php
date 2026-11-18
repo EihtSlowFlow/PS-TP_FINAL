@@ -36,6 +36,11 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin,employee']], static fu
     $routes->post('inmuebles/(:num)/aprobacion', 'PropertyController::approve/$1');
     $routes->post('inmuebles/(:num)/rechazo', 'PropertyController::reject/$1');
 
+    // Tenant rental requests tray, file and rejection (HU-31; approval goes through contratos/nuevo?request_id=)
+    $routes->get('solicitudes', 'RentalRequestController::adminIndex');
+    $routes->get('solicitudes/(:num)', 'RentalRequestController::adminShow/$1');
+    $routes->post('solicitudes/(:num)/rechazo', 'RentalRequestController::adminReject/$1');
+
     // Lease contracts: creation, listing and contract file (HU-10/11; closing is HU-12)
     $routes->get('contratos', 'ContractController::index');
     $routes->get('contratos/nuevo', 'ContractController::create');
@@ -88,12 +93,17 @@ $routes->group('propietario', ['filter' => ['auth', 'role:owner']], static funct
     $routes->get('contratos/(:num)', 'ContractController::ownerShow/$1');
 });
 
-// Tenant portal routes (HU-01, HU-16, HU-18)
+// Tenant portal routes (HU-01, HU-16, HU-18, HU-30)
 $routes->group('inquilino', ['filter' => ['auth', 'role:tenant']], static function (RouteCollection $routes): void {
     $routes->get('estado-cuenta', 'DashboardController::tenantAccountStatus');
     $routes->get('mis-pagos', 'PaymentController::tenantHistory');
     $routes->get('cuotas/(:num)/informar-pago', 'PaymentController::create/$1');
     $routes->post('cuotas/(:num)/informar-pago', 'PaymentController::store/$1');
+    // Rental requests: apply for an available property, track status and cancel pending requests (HU-30)
+    $routes->get('solicitudes', 'RentalRequestController::index');
+    $routes->get('inmuebles/(:num)/solicitar', 'RentalRequestController::create/$1');
+    $routes->post('inmuebles/(:num)/solicitar', 'RentalRequestController::store/$1');
+    $routes->post('solicitudes/(:num)/cancelar', 'RentalRequestController::cancel/$1');
 });
 
 // Protected receipt download/preview for owning tenant or admin/employee (HU-16)

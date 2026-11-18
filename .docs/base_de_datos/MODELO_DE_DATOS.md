@@ -21,7 +21,7 @@
 
 | Archivo | Para qué sirve |
 |---|---|
-| [`app/Database/Migrations/`](../../app/Database/Migrations/) | Crean las 11 tablas, en orden de dependencias. Es lo que usa `php spark migrate` |
+| [`app/Database/Migrations/`](../../app/Database/Migrations/) | Crean las 12 tablas, en orden de dependencias. Es lo que usa `php spark migrate` |
 | [`app/Database/Seeds/DatabaseSeeder.php`](../../app/Database/Seeds/DatabaseSeeder.php) | Datos base: los cuatro roles y el administrador inicial (clave desde `.env`) |
 | [`app/Database/Seeds/DemoSeeder.php`](../../app/Database/Seeds/DemoSeeder.php) y [`demo_data.sql`](../../app/Database/Seeds/demo_data.sql) | Datos de prueba. El seeder ejecuta el mismo SQL que se puede correr a mano en Workbench |
 | [`inmogestion_schema.sql`](inmogestion_schema.sql) | Esquema completo en SQL, para Workbench (diagrama EER y comparación con la base real) |
@@ -43,6 +43,10 @@ erDiagram
     users ||--o{ contracts : "inquilino"
     users ||--o{ contracts : "propietario"
     properties ||--o{ contracts : "se alquila en"
+    properties ||--o{ rental_requests : "se solicita en"
+    users ||--o{ rental_requests : "solicita (tenant_id)"
+    users ||--o{ rental_requests : "resuelve (resolved_by)"
+    contracts ||--o| rental_requests : "origina (contract_id)"
     contracts ||--o{ installments : "genera"
     installments ||--o{ payments : "recibe"
     users ||--o{ payments : "resuelve (resolved_by)"
@@ -109,6 +113,17 @@ erDiagram
         decimal amount
         string status
         int resolved_by FK
+    }
+    rental_requests {
+        int id PK
+        int property_id FK
+        int tenant_id FK
+        date desired_start_date
+        int desired_months
+        string contact_phone
+        string status
+        int resolved_by FK
+        int contract_id FK
     }
     payment_receipts {
         int id PK
@@ -181,6 +196,10 @@ settlements(id PK, owner_id FK→users, contract_id FK→contracts, period, gros
 settlement_installments(id PK, settlement_id FK→settlements, installment_id FK→installments UK)
 
 notifications(id PK, user_id FK→users, type, message, reference_type?, reference_id?, read_at?)
+
+rental_requests(id PK, property_id FK→properties, tenant_id FK→users, desired_start_date, desired_months,
+                contact_phone, message?, status, rejection_reason?, resolved_by? FK→users, resolved_at?,
+                contract_id? FK→contracts)
 ```
 
 Todas las tablas incluyen `created_at` y `updated_at` (nulos permitidos). Tipos: identificadores `INT UNSIGNED AUTO_INCREMENT`, importes `DECIMAL(12,2)`, porcentajes `DECIMAL(5,2)`, fechas `DATE`, fecha y hora `DATETIME`.
@@ -202,6 +221,7 @@ Los valores se guardan en inglés; las etiquetas en español las pone la aplicac
 | `settlements.status` | `pending_transfer` pendiente de transferencia, `transferred` transferido |
 | `notifications.type` | `payment_submitted`, `payment_approved`, `payment_rejected`, `installment_due_soon`, `contract_expiring` |
 | `notifications.reference_type` | `payment`, `installment`, `contract` |
+| `rental_requests.status` | `pending` pendiente, `approved` aprobada, `rejected` rechazada, `cancelled` cancelada |
 
 ---
 
@@ -287,6 +307,9 @@ Otras decisiones tomadas al diseñar:
 | HU-22 | `notifications` |
 | HU-23, HU-24 | Consultas sobre `installments` y `contracts`; cada alerta se registra en `notifications` |
 | HU-25, HU-26, HU-27 | Consultas sobre todas las tablas anteriores |
+| HU-30, HU-31 | `rental_requests`, `properties`, `users`, `contracts` |
+| HU-32, HU-33 | `properties`, `users` |
+| HU-34 | `contracts`, `properties`, `users` |
 
 ---
 
@@ -376,7 +399,7 @@ php spark db:seed DemoSeeder
 [`inmogestion_schema.sql`](inmogestion_schema.sql) es una copia: **hay que regenerarla cada vez que cambie una migración**. Con la base ya migrada:
 
 ```bash
-mysqldump -u USUARIO -p --no-data --compact --no-tablespaces --set-gtid-purged=OFF inmogestion2026 roles users password_resets properties contracts installments payments payment_receipts settlements settlement_installments notifications > esquema_crudo.sql
+mysqldump -u USUARIO -p --no-data --compact --no-tablespaces --set-gtid-purged=OFF inmogestion2026 roles users password_resets properties contracts installments payments payment_receipts settlements settlement_installments notifications rental_requests > esquema_crudo.sql
 ```
 
 Después, reemplazar en el archivo generado `CREATE TABLE ` por `CREATE TABLE IF NOT EXISTS `, y pegar delante el encabezado del archivo actual (incluidas las sentencias `CREATE DATABASE IF NOT EXISTS` y `USE`). Las tablas van en ese orden para respetar las dependencias. Si el cliente avisa de un error de autenticación con `caching_sha2_password`, agregar `--get-server-public-key`.

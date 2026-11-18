@@ -28,6 +28,10 @@ $formatMoney = static function (mixed $amount): string {
 
     return '$ ' . number_format($value, fmod($value, 1.0) === 0.0 ? 0 : 2, ',', '.');
 };
+
+$flashError   = session()->getFlashdata('error');
+$flashSuccess = session()->getFlashdata('success');
+$isTenant     = (bool) session()->get('is_logged_in') && (string) session()->get('user_role') === 'tenant';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -45,6 +49,10 @@ $formatMoney = static function (mixed $amount): string {
     <header class="public-catalog-header">
         <a class="public-catalog-brand" href="<?= esc(site_url('catalogo-inmuebles')) ?>">InmoGestión</a>
         <nav aria-label="Navegación pública">
+            <?php if ($isTenant): ?>
+                <a href="<?= esc(site_url('inquilino/solicitudes')) ?>">Mis solicitudes</a>
+                <a href="<?= esc(site_url('inquilino/estado-cuenta')) ?>">Estado de cuenta</a>
+            <?php endif; ?>
             <?php /* HU-32: owners publish from their portal; a visitor is asked to sign in first. */ ?>
             <a href="<?= esc(site_url('propietario/inmuebles/nuevo')) ?>" id="publish-property-link">Publicar mi inmueble</a>
             <a href="<?= esc(site_url('auth/login')) ?>">Ingresar</a>
@@ -53,6 +61,18 @@ $formatMoney = static function (mixed $amount): string {
     </header>
 
     <main class="public-catalog-main">
+        <?php if (is_string($flashError) && $flashError !== ''): ?>
+            <div class="panel-flash panel-flash-danger" role="alert">
+                <span><?= esc($flashError) ?></span>
+            </div>
+        <?php endif; ?>
+
+        <?php if (is_string($flashSuccess) && $flashSuccess !== ''): ?>
+            <div class="panel-flash panel-flash-success" role="status">
+                <span><?= esc($flashSuccess) ?></span>
+            </div>
+        <?php endif; ?>
+
         <div class="page-header">
             <div>
                 <h1 class="panel-title">Propiedades disponibles</h1>
@@ -116,7 +136,10 @@ $formatMoney = static function (mixed $amount): string {
                             <?php if ((string) ($item['description'] ?? '') !== ''): ?>
                                 <p class="public-property-description"><?= esc((string) $item['description']) ?></p>
                             <?php endif; ?>
-                            <p class="public-property-price"><?= esc($formatMoney($item['base_rent'])) ?><span> / mes</span></p>
+                            <div class="public-property-footer">
+                                <p class="public-property-price"><?= esc($formatMoney($item['base_rent'])) ?><span> / mes</span></p>
+                                <a href="<?= esc(site_url('inquilino/inmuebles/' . (int) $item['id'] . '/solicitar')) ?>" class="btn btn-primary btn-sm">Solicitar alquiler</a>
+                            </div>
                         </article>
                     <?php endforeach; ?>
                 </div>

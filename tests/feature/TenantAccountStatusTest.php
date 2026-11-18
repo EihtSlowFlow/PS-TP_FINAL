@@ -96,6 +96,10 @@ final class TenantAccountStatusTest extends CIUnitTestCase
 
         $response->assertStatus(200);
         $response->assertSee('Todavía no tenés cuotas emitidas');
+        $response->assertSee('Buscar inmuebles');
+        $response->assertSee('Mis solicitudes');
+        $response->assertSee(site_url('catalogo-inmuebles'));
+        $response->assertSee(site_url('inquilino/solicitudes'));
     }
 
     /**
