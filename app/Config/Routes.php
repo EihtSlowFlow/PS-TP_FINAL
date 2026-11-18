@@ -94,9 +94,12 @@ $routes->group('propietario', ['filter' => ['auth', 'role:owner']], static funct
     $routes->get('contratos/(:num)', 'ContractController::ownerShow/$1');
 });
 
-// Tenant portal routes (HU-01, HU-16, HU-18, HU-30)
+// Tenant portal routes (HU-01, HU-16, HU-18, HU-30, HU-34)
 $routes->group('inquilino', ['filter' => ['auth', 'role:tenant']], static function (RouteCollection $routes): void {
     $routes->get('estado-cuenta', 'DashboardController::tenantAccountStatus');
+    // The tenant's own contracts: list and file, read only (HU-34)
+    $routes->get('contratos', 'ContractController::tenantIndex');
+    $routes->get('contratos/(:num)', 'ContractController::tenantShow/$1');
     $routes->get('mis-pagos', 'PaymentController::tenantHistory');
     $routes->get('cuotas/(:num)/informar-pago', 'PaymentController::create/$1');
     $routes->post('cuotas/(:num)/informar-pago', 'PaymentController::store/$1');
