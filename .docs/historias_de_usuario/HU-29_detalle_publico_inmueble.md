@@ -58,12 +58,12 @@ para decidir si me interesa y saber cómo registrarme, solicitarlo o contactar a
 
 ## Definition of Done
 
-- [ ] Existe `/catalogo-inmuebles/{id}` sin exposición de datos internos.
-- [ ] Los llamados a la acción dependen del rol.
-- [ ] Los inmuebles no disponibles responden 404.
-- [ ] Los enlaces desde el catálogo y la página de inicio llegan al detalle.
-- [ ] Se prueban los escenarios y se verifica que el HTML no exponga datos internos.
-- [ ] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue.
+- [x] Existe `/catalogo-inmuebles/{id}` sin exposición de datos internos.
+- [x] Los llamados a la acción dependen del rol.
+- [x] Los inmuebles no disponibles responden 404.
+- [x] Los enlaces desde el catálogo y la página de inicio llegan al detalle.
+- [x] Se prueban los escenarios y se verifica que el HTML no exponga datos internos.
+- [ ] Handoff en `.docs/exec-plans/` y tiempo registrado en `.docs/REGISTRO_DE_TIEMPOS.md` y en un comentario del issue. (Handoff y registro hechos; falta publicar el comentario en el issue.)
 
 ## Dependencias
 

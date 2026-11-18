@@ -11,9 +11,9 @@
 | **Proyecto** | InmoGestión 2026 |
 | **Historia de usuario / Issue** | HU-28 — Página de inicio pública · [#53](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/53) |
 | **Sprint / Hito** | Sprint 2 / Cursada |
-| **Rama** | `hu-28-pagina-inicio-publica` |
-| **Último commit** | Pendiente de commit |
-| **Pull Request** | Sin PR |
+| **Rama** | `feature/hu-28-29-34-inicio-detalle-y-contratos-inquilino` (antes `hu-28-pagina-inicio-publica`) |
+| **Último commit** | Ver el pull request (implementación original: `3bb5ca9`) |
+| **Pull Request** | [#65](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/65) |
 | **Fecha de cierre** | 2026-11-17 23:10 |
 | **Inicio / Fin** | 2026-11-17 22:49 → 2026-11-17 23:10 |
 | **Tiempo invertido** | 21 min efectivos · 21 min de reloj · Medido · sin pausas |
@@ -51,7 +51,11 @@ Referencia: [`.docs/historias_de_usuario/HU-28_pagina_inicio_publica.md`](../his
 | `[View]` | `app/Views/properties/public_catalog.php` | Modificado | Refactorizado para extender `layouts/public` |
 | `[View]` | `app/Views/auth/register.php` | Modificado | Aplica preselección de rol con fallback a `preselectedRole` |
 | `[CSS]` | `public/css/panel.css` | Modificado | Estilos para la landing page, tarjetas informativas, footer público y buscador |
-| `[Test]` | `tests/feature/PublicLandingTest.php` | Nuevo | 6 pruebas de integración (50 aserciones) cubriendo todos los criterios |
+| `[Test]` | `tests/feature/PublicLandingTest.php` | Nuevo | 6 pruebas de integración (50 aserciones) cubriendo todos los criterios; el 18/11 se sumaron 4 (pasos, contacto desde la configuración, enlace del pie y botón del inquilino): 10 en total |
+| `[Config]` | `app/Config/Agency.php` | Nuevo (18/11) | Datos de contacto de la inmobiliaria (dirección, teléfono, correo, horario, WhatsApp), compartidos con HU-29; las vistas ya no los tienen escritos |
+| `[View]` | `app/Views/layouts/public.php` | Modificado (18/11) | Enlace «Publicar mi inmueble» (`#publish-property-link`, hacia `propietario/inmuebles/nuevo`) en el pie, que la refactorización había quitado |
+| `[View]` | `app/Views/properties/public_catalog.php` | Modificado (18/11) | Botón «Solicitar alquiler» de cada tarjeta para el inquilino con sesión, junto a «Ver detalle» |
+| `[View]` | `app/Views/home/landing.php` | Modificado (18/11) | Las dos tarjetas de «¿Cómo funciona?» pasan a listas numeradas de pasos, como pide el escenario 1 |
 | `[Test]` | `tests/feature/AuthAccessControlTest.php` | Modificado | Actualizada la aserción de `/` para reflejar la landing pública |
 | `[Docs]` | `.docs/historias_de_usuario/HU-28_pagina_inicio_publica.md` | Modificado | Tildados los ítems de Definition of Done |
 | `[Docs]` | `.docs/REGISTRO_DE_TIEMPOS.md` | Modificado | Registrada la fila de tiempo de HU-28 |
@@ -77,7 +81,8 @@ Referencia: [`.docs/historias_de_usuario/HU-28_pagina_inicio_publica.md`](../his
 
 | Verificación | Comando / Método | Resultado |
 |---|---|---|
-| Tests de integración HU-28 | `phpunit --no-coverage tests/feature/PublicLandingTest.php` | ✅ 6 pasan (50 aserciones) |
+| Tests de integración HU-28 | `phpunit --no-coverage tests/feature/PublicLandingTest.php` | ✅ 6 pasan (50 aserciones); 10 pasan (88 aserciones) tras las correcciones del 18/11 |
+| Regresión de la suite completa (18/11) | `phpunit --no-coverage` en copia aislada, en tres corridas paralelas | ✅ 818 pruebas: ninguna falla nueva. Solo fallan 7 que ya fallan en `origin/Sprint-2` (`PaymentReviewTest` ×3, `ProfileManagementTest` ×2 y `RentalRequestAdminTest` ×2); las dos regresiones del catálogo quedaron corregidas |
 | Regresión Control de acceso (HU-01) | `phpunit --no-coverage tests/feature/AuthAccessControlTest.php` | ✅ 24 pasan (146 aserciones) |
 | Regresión Catálogo (HU-08) | `phpunit --no-coverage tests/feature/PropertyCatalogTest.php` | ✅ 7 pasan (51 aserciones) |
 | Estilos | Cumple `tokens.css` sin hex/rgb literales fuera de tokens; responsive | ✅ |
@@ -88,7 +93,9 @@ Referencia: [`.docs/historias_de_usuario/HU-28_pagina_inicio_publica.md`](../his
 
 | ID | Tipo | Descripción | Severidad | Acción sugerida |
 |---|---|---|---|---|
-| R-1 | Deuda | Ficha pública del inmueble (HU-29) pendiente de implementación | Baja | Reutilizar `layouts/public.php` cuando se desarrolle HU-29 |
+| R-1 | Deuda | Ficha pública del inmueble (HU-29) | Baja | ✅ Implementada; ver [`HU-29_handoff.md`](HU-29_handoff.md) |
+| R-2 | Regresión | La refactorización del catálogo sobre `layouts/public.php` quitó el enlace «Publicar mi inmueble» (HU-32) y el botón «Solicitar alquiler» de las tarjetas (HU-30), y rompía `PropertyOwnerSubmissionTest` y `RentalRequestTest`. Este handoff solo corrió 3 archivos de prueba | Media | ✅ Corregido el 18/11/2026: enlace en el pie y botón para el inquilino con sesión; la suite completa se corre antes de cerrar |
+| R-3 | Deuda | Faltaba el comentario «⏱️ Tiempo invertido» en el issue #53 | Baja | ⏳ Publicarlo al mergear |
 
 ---
 
@@ -107,4 +114,5 @@ Referencia: [`.docs/historias_de_usuario/HU-28_pagina_inicio_publica.md`](../his
 
 | Fecha | Autor | Duración | Resumen | Commit / PR |
 |---|---|---|---|---|
-| 2026-11-17 | Antigravity | 15 min | Implementación completa de HU-28, layout público, tests y documentación | Pendiente |
+| 2026-11-17 | Antigravity | 15 min | Implementación completa de HU-28, layout público, tests y documentación | `3bb5ca9` |
+| 2026-11-18 | Joaquín Corbalán (con Claude Code) | 21 min (compartidos con HU-29 y HU-34) | Corrección de la regresión del catálogo (enlace de publicar y botón de solicitar), pasos de la página de inicio, contacto en `Config\Agency` y pruebas nuevas | [#65](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/65) |
