@@ -1,6 +1,6 @@
 # Registro de tiempos por issue — InmoGestión 2026
 
-> Última actualización: 18/11/2026. Acá queda asentado cuánto se tardó en hacer cada issue. Es el complemento de los handoffs ([`exec-plans/`](exec-plans/)): el handoff cuenta **qué** se hizo y este registro **cuánto tiempo** llevó.
+> Última actualización: 24/11/2026. Acá queda asentado cuánto se tardó en hacer cada issue. Es el complemento de los handoffs ([`exec-plans/`](exec-plans/)): el handoff cuenta **qué** se hizo y este registro **cuánto tiempo** llevó.
 >
 > Alcance: tiempo de desarrollo de una persona trabajando con asistencia de IA, desde que se pide el issue hasta su commit. No incluye reuniones, la lectura previa de otros integrantes ni la revisión del pull request.
 
@@ -43,7 +43,8 @@
 | [#54](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/54) | HU-29 | Detalle público de un inmueble | joaquincorbalan (Antigravity + Gemini) | 3 | 17/11 23:35 | 18/11 00:35 | **1 h 00 min** | 1 h 00 min | Medido |
 | [#59](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/59) | HU-34 | Consultar mis contratos (inquilino) | joaquincorbalan (con Claude Code) | 3 | 18/11 08:39 | 18/11 09:14 | **34 min** | 35 min | Reconstruido por el registro de la sesión (sección 4), sin pausas de más de 10 min |
 | [#53](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/53) y [#54](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/54) | HU-28 y HU-29 | Correcciones de la revisión del 18/11: regresión del catálogo, «Volver al catálogo», identificador largo, pasos de la página de inicio, contacto en `Config\Agency`, pruebas y handoff de HU-29. El tiempo es conjunto | joaquincorbalan (con Claude Code) | — | 18/11 09:14 | 18/11 09:35 | **21 min** | 21 min | Reconstruido por el registro de la sesión (sección 4), sin pausas de más de 10 min |
-| **Total registrado** | | | | **99** | | | **17 h 27 min** | **20 h 28 min** | |
+| [#44](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/44) | HU-19 | Liquidación a propietarios con comisión | LauPerisse (con Claude Code) | 8 | 24/11 23:04 | 24/11 23:38 | **34 min** | 34 min | Medido (sin pausas de más de 10 min; incluye la suite completa) |
+| **Total registrado** | | | | **107** | | | **18 h 01 min** | **21 h 02 min** | |
 
 Sin registro de tiempo (los hizo otro integrante; que cada responsable complete su fila con el método de la [sección 3](#3-cómo-registrar-el-tiempo-de-cada-issue-de-ahora-en-adelante)):
 

@@ -103,6 +103,12 @@ $pendingPaymentCount  = (int) ($pendingPaymentCount ?? 0);
                     <a href="<?= esc(site_url('admin/pagos/historial')) ?>" class="sidebar-link<?= $activeMenu === 'pagos-historial' ? ' is-active' : '' ?>">
                         <span>Historial</span>
                     </a>
+                    <?php if ($userRole === 'admin'): ?>
+                        <?php /* HU-19: settlements move money, so only the administrator sees them. */ ?>
+                        <a href="<?= esc(site_url('admin/liquidaciones/generar')) ?>" class="sidebar-link<?= $activeMenu === 'liquidaciones' ? ' is-active' : '' ?>">
+                            <span>Liquidaciones</span>
+                        </a>
+                    <?php endif; ?>
                 <?php elseif ($userRole === 'owner'): ?>
                     <a href="<?= esc(site_url('propietario/dashboard')) ?>" class="sidebar-link<?= $activeMenu === 'propietario-dashboard' ? ' is-active' : '' ?>">
                         <span>Dashboard</span>

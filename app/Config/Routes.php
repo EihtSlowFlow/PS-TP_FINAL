@@ -85,6 +85,11 @@ $routes->group('admin', ['filter' => ['auth', 'role:admin']], static function (R
     $routes->get('usuarios/editar/(:id)', 'UserController::edit/$1');
     $routes->post('usuarios/editar/(:id)', 'UserController::update/$1');
     $routes->post('usuarios/baja/(:id)', 'UserController::deactivate/$1');
+
+    // Owner settlements: collected installments minus the agreed commission (HU-19). Administrator only, because they
+    // move money and the employee's permissions are still to be defined (analysis, section 3).
+    $routes->get('liquidaciones/generar', 'SettlementController::generate');
+    $routes->post('liquidaciones/generar', 'SettlementController::store');
 });
 
 // Owner portal routes (HU-01, HU-32)
