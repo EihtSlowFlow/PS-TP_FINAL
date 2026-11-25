@@ -13,7 +13,7 @@
 | **Sprint / Hito** | Examen final |
 | **Rama** | `feature/hu-19-liquidaciones-propietarios` (base `origin/Sprint-2` en `e36f7bd`) |
 | **Último commit** | Ver el pull request |
-| **Pull Request** | Pendiente |
+| **Pull Request** | [#72](https://github.com/EihtSlowFlow/PS-TP_FINAL/pull/72) |
 | **Fecha de cierre** | 2026-11-24 |
 | **Inicio / Fin** | 2026-11-24 23:04 → 2026-11-24 23:38 |
 | **Tiempo invertido** | 34 min efectivos · 34 min de reloj · Medido (sin pausas de más de 10 min; incluye las corridas de la suite) |
