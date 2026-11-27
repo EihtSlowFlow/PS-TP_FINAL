@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Libraries\LateFeeCalculator;
 use CodeIgniter\I18n\Time;
 use CodeIgniter\Model;
 use DateTimeImmutable;
+use DateTimeZone;
 use RuntimeException;
 use Throwable;
 
@@ -46,6 +48,9 @@ class ContractModel extends Model
 
     /** The contract or the property update could not be stored; nothing was persisted. */
     public const ERROR_PERSISTENCE = 'persistence';
+
+    /** Anticipation window (inclusive, calendar days) for contract expiration alerts (HU-24). */
+    public const EXPIRING_WINDOW_DAYS = 60;
 
     protected $table            = 'contracts';
     protected $primaryKey       = 'id';
@@ -315,6 +320,9 @@ class ContractModel extends Model
                 throw new RuntimeException('The property status could not be reset to available.');
             }
 
+            // HU-24: once a contract is finalized or rescinded, dismiss any unread expiring-contract alerts for it.
+            service('notifications')->markContractExpiringAsRead($contractId, $this->db);
+
             if (! $this->db->transCommit()) {
                 throw new RuntimeException('The transaction could not be committed.');
             }
@@ -329,6 +337,100 @@ class ContractModel extends Model
         }
 
         return ['success' => true, 'error' => null];
+    }
+
+    /**
+     * Today's date ("YYYY-MM-DD") in the application's time zone, so tests can freeze it with `Time::setTestNow()`.
+     */
+    public static function today(): string
+    {
+        return Time::now()->format('Y-m-d');
+    }
+
+    /**
+     * Whole days from `$today` until `$endDate`; 0 on the end date itself and once it has passed.
+     */
+    public static function daysUntilEnd(string $endDate, string $today): int
+    {
+        return LateFeeCalculator::daysUntilDue($endDate, $today);
+    }
+
+    /**
+     * Tells whether a contract row qualifies for an expiring-contract alert (HU-24):
+     * status is in force and end_date falls within [today, today + windowDays] inclusive.
+     *
+     * @param array<string, mixed> $contract
+     */
+    public static function isExpiringSoon(
+        array $contract,
+        string $today,
+        int $windowDays = self::EXPIRING_WINDOW_DAYS
+    ): bool {
+        if ((string) ($contract['status'] ?? '') !== self::STATUS_IN_FORCE) {
+            return false;
+        }
+
+        $endDate = (string) ($contract['end_date'] ?? '');
+
+        if ($endDate === '' || $endDate < $today) {
+            return false;
+        }
+
+        return self::daysUntilEnd($endDate, $today) <= $windowDays;
+    }
+
+    /**
+     * Contracts in force whose end date falls within [today, today + windowDays] inclusive (HU-24).
+     * Uses `idx_contracts_status_end_date`. Pass `$ownerId` to scope strictly to one owner (HU-24 Scenario 3 / HU-26);
+     * omit it for administration (HU-24 / HU-25).
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findExpiringSoon(
+        ?int $ownerId = null,
+        ?string $today = null,
+        int $windowDays = self::EXPIRING_WINDOW_DAYS
+    ): array {
+        if ($windowDays < 0 || ($ownerId !== null && $ownerId <= 0)) {
+            return [];
+        }
+
+        $today ??= self::today();
+        LateFeeCalculator::assertValidDate($today);
+
+        $limitDate = (new DateTimeImmutable($today, new DateTimeZone('UTC')))
+            ->modify('+' . $windowDays . ' days')
+            ->format('Y-m-d');
+
+        $builder = $this->builder()
+            ->select(
+                'contracts.id, contracts.property_id, contracts.owner_id, contracts.tenant_id, '
+                . 'contracts.start_date, contracts.end_date, contracts.status, '
+                . 'properties.address AS property_address, properties.city AS property_city, '
+                . 'tenant.first_name AS tenant_first_name, tenant.last_name AS tenant_last_name'
+            )
+            ->join('properties', 'properties.id = contracts.property_id')
+            ->join('users AS tenant', 'tenant.id = contracts.tenant_id')
+            ->where('contracts.status', self::STATUS_IN_FORCE)
+            ->where('contracts.end_date >=', $today)
+            ->where('contracts.end_date <=', $limitDate);
+
+        if ($ownerId !== null) {
+            $builder->where('contracts.owner_id', $ownerId);
+        }
+
+        $rows = $builder
+            ->orderBy('contracts.end_date', 'ASC')
+            ->orderBy('contracts.id', 'ASC')
+            ->get()
+            ->getResultArray();
+
+        foreach ($rows as &$row) {
+            $row['days_to_end'] = self::daysUntilEnd((string) $row['end_date'], $today);
+        }
+        unset($row);
+
+        return $rows;
     }
 
     /**
