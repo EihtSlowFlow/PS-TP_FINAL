@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\NotificationModel;
 use App\Models\PaymentModel;
 use App\Models\PropertyModel;
 use App\Models\RentalRequestModel;
@@ -81,6 +82,7 @@ abstract class BaseController extends Controller
     protected function panelContext(string $pageTitle, string $breadcrumb, string $activeMenu): array
     {
         $session  = session();
+        $userId   = (int) $session->get('user_id', 0);
         $userRole = (string) $session->get('user_role', '');
         $userName = (string) $session->get('user_name', 'Usuario');
         $isStaff  = in_array($userRole, [UserModel::ROLE_ADMIN, UserModel::ROLE_EMPLOYEE], true);
@@ -90,6 +92,8 @@ abstract class BaseController extends Controller
         if (isset($parts[1][0])) {
             $initials .= mb_strtoupper(mb_substr($parts[1], 0, 1));
         }
+
+        $notificationModel = $userId > 0 ? model(NotificationModel::class) : null;
 
         return [
             'pageTitle'  => $pageTitle,
@@ -102,9 +106,12 @@ abstract class BaseController extends Controller
             'initials'   => $initials,
             // The "Inmuebles", "Solicitudes" and "Pagos" menu entries of the administration show how many items wait
             // for review (HU-31, HU-33, HU-17): a reported payment shows up there as a notice to go and review it.
-            'pendingPropertyCount' => $isStaff ? model(PropertyModel::class)->countPendingApproval() : 0,
-            'pendingRequestCount'  => $isStaff ? model(RentalRequestModel::class)->countPending() : 0,
-            'pendingPaymentCount'  => $isStaff ? model(PaymentModel::class)->countPendingValidation() : 0,
+            'pendingPropertyCount'    => $isStaff ? model(PropertyModel::class)->countPendingApproval() : 0,
+            'pendingRequestCount'     => $isStaff ? model(RentalRequestModel::class)->countPending() : 0,
+            'pendingPaymentCount'     => $isStaff ? model(PaymentModel::class)->countPendingValidation() : 0,
+            // HU-22: unread counter and recent items for the topbar notification bell of every authenticated role.
+            'unreadNotificationCount' => $notificationModel !== null ? $notificationModel->countUnreadForUser($userId) : 0,
+            'recentNotifications'     => $notificationModel !== null ? $notificationModel->findRecentForUser($userId, 5) : [],
         ];
     }
 
