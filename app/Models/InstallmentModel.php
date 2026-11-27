@@ -64,6 +64,9 @@ class InstallmentModel extends Model
     public const MIN_YEAR = 2000;
     public const MAX_YEAR = 2100;
 
+    /** Anticipation window (inclusive) for tenant due-soon installment alerts (HU-23). */
+    public const DUE_SOON_WINDOW_DAYS = 5;
+
     /** No contract in force covers the period (or, for an individual issuing, the chosen contract does not). */
     public const ERROR_NO_ELIGIBLE_CONTRACTS = 'no_eligible_contracts';
 
@@ -501,6 +504,73 @@ class InstallmentModel extends Model
             ->where('contracts.tenant_id', $tenantId)
             ->orderBy('installments.period', 'DESC')
             ->orderBy('installments.number', 'DESC')
+            ->get()
+            ->getResultArray();
+    }
+
+    /**
+     * Tells whether an installment row qualifies for a due-soon alert (HU-23):
+     * pending, on an in-force contract, not past due (`due_date >= $today`), and due within `$windowDays` inclusive.
+     *
+     * @param array<string, mixed> $installment
+     */
+    public static function isDueSoon(array $installment, string $today, int $windowDays = self::DUE_SOON_WINDOW_DAYS): bool
+    {
+        if ((string) ($installment['status'] ?? '') !== self::STATUS_PENDING) {
+            return false;
+        }
+
+        if (isset($installment['contract_status']) && (string) $installment['contract_status'] !== ContractModel::STATUS_IN_FORCE) {
+            return false;
+        }
+
+        $dueDate = (string) ($installment['due_date'] ?? '');
+
+        if ($dueDate === '' || $dueDate < $today) {
+            return false;
+        }
+
+        return LateFeeCalculator::daysUntilDue($dueDate, $today) <= $windowDays;
+    }
+
+    /**
+     * Pending installments of a tenant on in-force contracts whose due date falls within [today, today + windowDays]
+     * inclusive (HU-23). Overdue, paid, under-review, and far-away installments are excluded.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function findDueSoonForTenant(
+        int $tenantId,
+        ?string $today = null,
+        int $windowDays = self::DUE_SOON_WINDOW_DAYS
+    ): array {
+        if ($tenantId <= 0 || $windowDays < 0) {
+            return [];
+        }
+
+        $today ??= self::today();
+        LateFeeCalculator::assertValidDate($today);
+
+        $limitDate = (new \DateTimeImmutable($today, new \DateTimeZone('UTC')))
+            ->modify('+' . $windowDays . ' days')
+            ->format('Y-m-d');
+
+        return $this->builder()
+            ->select(
+                'installments.id, installments.contract_id, installments.number, installments.period, '
+                . 'installments.due_date, installments.base_amount, installments.late_fee, installments.status, '
+                . 'contracts.status AS contract_status, '
+                . 'properties.address AS property_address, properties.city AS property_city'
+            )
+            ->join('contracts', 'contracts.id = installments.contract_id')
+            ->join('properties', 'properties.id = contracts.property_id')
+            ->where('contracts.tenant_id', $tenantId)
+            ->where('contracts.status', ContractModel::STATUS_IN_FORCE)
+            ->where('installments.status', self::STATUS_PENDING)
+            ->where('installments.due_date >=', $today)
+            ->where('installments.due_date <=', $limitDate)
+            ->orderBy('installments.due_date', 'ASC')
+            ->orderBy('installments.id', 'ASC')
             ->get()
             ->getResultArray();
     }

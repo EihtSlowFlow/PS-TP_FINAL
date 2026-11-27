@@ -37,6 +37,9 @@ abstract class BaseController extends Controller
 
     // protected $session;
 
+    /** Guards against syncing on-demand alerts (HU-23, HU-24) more than once per request. */
+    private bool $roleAlertsSynced = false;
+
     /**
      * @return void
      */
@@ -93,6 +96,8 @@ abstract class BaseController extends Controller
             $initials .= mb_strtoupper(mb_substr($parts[1], 0, 1));
         }
 
+        $this->syncRoleAlerts($userId, $userRole);
+
         $notificationModel = $userId > 0 ? model(NotificationModel::class) : null;
 
         return [
@@ -113,6 +118,23 @@ abstract class BaseController extends Controller
             'unreadNotificationCount' => $notificationModel !== null ? $notificationModel->countUnreadForUser($userId) : 0,
             'recentNotifications'     => $notificationModel !== null ? $notificationModel->findRecentForUser($userId, 5) : [],
         ];
+    }
+
+    /**
+     * Detects and persists on-demand alerts once per request (HU-23 due-soon installments for tenants;
+     * ready to plug in HU-24 expiring contracts for staff and owners).
+     */
+    protected function syncRoleAlerts(int $userId, string $userRole): void
+    {
+        if ($this->roleAlertsSynced || $userId <= 0) {
+            return;
+        }
+
+        $this->roleAlertsSynced = true;
+
+        if ($userRole === UserModel::ROLE_TENANT) {
+            service('notifications')->syncDueSoonInstallmentAlertsForTenant($userId);
+        }
     }
 
     /**

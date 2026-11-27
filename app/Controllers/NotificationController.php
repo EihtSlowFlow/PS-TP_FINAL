@@ -18,9 +18,13 @@ class NotificationController extends BaseController
     public function index(): string
     {
         $userId     = (int) session()->get('user_id');
+        $userRole   = (string) session()->get('user_role', '');
         $readFilter = $this->normalizeReadFilter($this->request->getGet('estado'));
         $category   = $this->normalizeCategoryFilter($this->request->getGet('categoria'));
         $model      = model(NotificationModel::class);
+
+        // Sync on-demand alerts (HU-23, HU-24) before querying the notifications list.
+        $this->syncRoleAlerts($userId, $userRole);
 
         $notifications = $model->findForUser($userId, $readFilter, $category);
         $totalCount    = $model->countAllForUser($userId);

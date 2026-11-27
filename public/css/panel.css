@@ -3889,3 +3889,78 @@ a.contact-value:hover {
     background: var(--surface-muted);
     color: var(--text-muted);
 }
+
+/* =========================================================================
+ * HU-23: Due-soon installment alert banner on the tenant account statement
+ * Uses only tokens from tokens.css.
+ * ========================================================================= */
+.due-soon-alert-card {
+    margin-bottom: 1.25rem;
+    padding: 1.15rem 1.25rem;
+    border-left: 4px solid var(--warning);
+    background: var(--warning-soft);
+}
+
+.due-soon-alert-header {
+    margin-bottom: 0.85rem;
+}
+
+.due-soon-alert-heading-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.25rem;
+}
+
+.due-soon-alert-heading-row .section-title {
+    margin: 0;
+}
+
+.due-soon-alert-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.due-soon-alert-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-default);
+    background: var(--surface);
+}
+
+.due-soon-alert-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+}
+
+.due-soon-alert-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.84rem;
+    color: var(--text-muted);
+}
+
+.due-soon-countdown {
+    color: var(--warning-text);
+    font-weight: 600;
+}
+
+.due-soon-row-badge {
+    display: inline-block;
+    margin-top: 0.25rem;
+}
+

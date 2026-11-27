@@ -3,6 +3,7 @@
  * Tenant account statement (HU-15), grouped by installment status.
  *
  * @var array<string, list<array<string, mixed>>> $byStatus
+ * @var list<array<string, mixed>> $dueSoonInstallments Pending installments due within 5 days (HU-23)
  * @var int $totalCount
  * @var list<string> $statusOrder
  * @var list<array<string, mixed>> $activeContracts Contracts in force of the tenant (HU-34 Scenario 5)
@@ -22,6 +23,8 @@ $formatDate = static function (mixed $value): string {
 
 $plural = static fn (int $count, string $one, string $many): string => $count . ' ' . ($count === 1 ? $one : $many);
 
+$dueSoonInstallments = is_array($dueSoonInstallments ?? null) ? $dueSoonInstallments : [];
+
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
@@ -34,6 +37,51 @@ $this->extend('layouts/panel');
                     <p class="panel-subtitle">Tus cuotas, vencimientos, recargos y pagos informados.</p>
                 </div>
             </div>
+
+            <?php if ($dueSoonInstallments !== []): ?>
+                <?php /* HU-23: active alerts for pending installments due within the next 5 days (inclusive). */ ?>
+                <section class="panel-card due-soon-alert-card" id="due-soon-alerts" aria-labelledby="due-soon-alerts-heading">
+                    <div class="due-soon-alert-header">
+                        <div class="due-soon-alert-heading-row">
+                            <span class="badge-pill badge-notification-warning">Próximo vencimiento</span>
+                            <h2 id="due-soon-alerts-heading" class="section-title">
+                                <?= count($dueSoonInstallments) === 1 ? 'Tenés una cuota próxima a vencer' : 'Tenés ' . esc((string) count($dueSoonInstallments)) . ' cuotas próximas a vencer' ?>
+                            </h2>
+                        </div>
+                        <p class="panel-subtitle">Informá tu pago antes de la fecha límite para evitar recargos por mora.</p>
+                    </div>
+                    <ul class="due-soon-alert-list">
+                        <?php foreach ($dueSoonInstallments as $alertItem): ?>
+                            <?php
+                                $alertDays = (int) $alertItem['days_to_due'];
+                                $countdown = match ($alertDays) {
+                                    0       => 'Vence hoy',
+                                    1       => 'Vence mañana',
+                                    default => 'Vence en ' . $plural($alertDays, 'día', 'días'),
+                                };
+                            ?>
+                            <li class="due-soon-alert-item" data-due-soon-installment-id="<?= esc((string) $alertItem['id']) ?>">
+                                <div class="due-soon-alert-info">
+                                    <span class="cell-title">
+                                        <?= esc(InstallmentModel::labelForPeriod((string) $alertItem['period'])) ?>
+                                        · <?= esc((string) $alertItem['property_address']) ?>
+                                    </span>
+                                    <span class="due-soon-alert-meta">
+                                        Fecha de vencimiento: <strong><?= esc($formatDate($alertItem['due_date'])) ?></strong>
+                                        <span aria-hidden="true">·</span>
+                                        <span class="due-soon-countdown"><?= esc($countdown) ?></span>
+                                        <span aria-hidden="true">·</span>
+                                        Total: <strong><?= esc($formatMoney($alertItem['total'])) ?></strong>
+                                    </span>
+                                </div>
+                                <a class="btn btn-primary btn-sm" href="<?= esc(site_url('inquilino/cuotas/' . (int) $alertItem['id'] . '/informar-pago')) ?>">
+                                    Informar pago
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </section>
+            <?php endif; ?>
 
             <?php if ($activeContracts !== []): ?>
                 <?php /* HU-34 Scenario 5: the way from the account statement to the file of each contract in force. */ ?>
@@ -112,6 +160,9 @@ $this->extend('layouts/panel');
                                                     <span class="cell-note text-danger"><?= esc($plural((int) $item['days_late'], 'día', 'días')) ?> de atraso</span>
                                                 <?php elseif ($statusValue === InstallmentModel::STATUS_PENDING): ?>
                                                     <span class="cell-note"><?= $item['days_to_due'] === 0 ? 'Vence hoy' : 'Vence en ' . esc($plural((int) $item['days_to_due'], 'día', 'días')) ?></span>
+                                                    <?php if (! empty($item['is_due_soon'])): ?>
+                                                        <span class="badge-pill badge-notification-warning due-soon-row-badge">Próximo vencimiento</span>
+                                                    <?php endif; ?>
                                                 <?php endif; ?>
                                             </td>
                                             <td class="mono-cell nowrap-cell text-right"><?= esc($formatMoney($item['base_amount'])) ?></td>

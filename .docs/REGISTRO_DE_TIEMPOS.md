@@ -45,7 +45,8 @@
 | [#53](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/53) y [#54](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/54) | HU-28 y HU-29 | Correcciones de la revisión del 18/11: regresión del catálogo, «Volver al catálogo», identificador largo, pasos de la página de inicio, contacto en `Config\Agency`, pruebas y handoff de HU-29. El tiempo es conjunto | joaquincorbalan (con Claude Code) | — | 18/11 09:14 | 18/11 09:35 | **21 min** | 21 min | Reconstruido por el registro de la sesión (sección 4), sin pausas de más de 10 min |
 | [#44](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/44) | HU-19 | Liquidación a propietarios con comisión | LauPerisse (con Claude Code) | 8 | 24/11 23:04 | 24/11 23:38 | **34 min** | 34 min | Medido (sin pausas de más de 10 min; incluye la suite completa) |
 | [#47](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/47) | HU-22 | Notificaciones de pagos y validaciones | EihtSlowFlow (con Antigravity) | 5 | 27/11 15:41 | 27/11 15:52 | **11 min** | 11 min | Medido (sin pausas de más de 10 min) |
-| **Total registrado** | | | | **112** | | | **18 h 12 min** | **21 h 13 min** | |
+| [#48](https://github.com/EihtSlowFlow/PS-TP_FINAL/issues/48) | HU-23 | Alertas de vencimiento de cuotas | EihtSlowFlow (con Antigravity) | 3 | 27/11 16:21 | 27/11 16:29 | **8 min** | 8 min | Medido (sin pausas de más de 10 min) |
+| **Total registrado** | | | | **115** | | | **18 h 20 min** | **21 h 21 min** | |
 
 Sin registro de tiempo (los hizo otro integrante; que cada responsable complete su fila con el método de la [sección 3](#3-cómo-registrar-el-tiempo-de-cada-issue-de-ahora-en-adelante)):
 

@@ -55,7 +55,8 @@ class DashboardController extends BaseController
         $payments     = model(PaymentModel::class)->findTenantAccountDetails(
             array_map(static fn (array $row): int => (int) $row['id'], $installments)
         );
-        $byStatus     = array_fill_keys(array_keys(InstallmentModel::STATUS_LABELS), []);
+        $byStatus            = array_fill_keys(array_keys(InstallmentModel::STATUS_LABELS), []);
+        $dueSoonInstallments = [];
 
         foreach ($installments as $installment) {
             $installment['days_late']   = LateFeeCalculator::daysLate((string) $installment['due_date'], $today);
@@ -64,18 +65,32 @@ class DashboardController extends BaseController
                 $installment['base_amount'],
                 $installment['late_fee'],
             ]);
-            $installment['payment'] = $payments[(int) $installment['id']] ?? null;
+            $installment['payment']     = $payments[(int) $installment['id']] ?? null;
+            $installment['is_due_soon'] = InstallmentModel::isDueSoon($installment, $today);
+
+            if ($installment['is_due_soon']) {
+                $dueSoonInstallments[] = $installment;
+            }
+
             $byStatus[(string) $installment['status']][] = $installment;
         }
+
+        // Show soonest due dates first in the HU-23 alert banner.
+        usort(
+            $dueSoonInstallments,
+            static fn (array $a, array $b): int => strcmp((string) $a['due_date'], (string) $b['due_date'])
+                ?: ((int) $a['id'] <=> (int) $b['id'])
+        );
 
         return view('dashboard/tenant_account_status', array_merge(
             $this->panelContext('Estado de cuenta', 'Estado de cuenta', 'inquilino-estado-cuenta'),
             [
                 // Contracts in force, so the account statement can link to each contract file (HU-34 Scenario 5).
-                'activeContracts' => model(ContractModel::class)->findForTenant($tenantId, ContractModel::STATUS_IN_FORCE),
-                'byStatus'        => $byStatus,
-                'totalCount'      => count($installments),
-                'statusOrder'     => [
+                'activeContracts'     => model(ContractModel::class)->findForTenant($tenantId, ContractModel::STATUS_IN_FORCE),
+                'dueSoonInstallments' => $dueSoonInstallments,
+                'byStatus'            => $byStatus,
+                'totalCount'          => count($installments),
+                'statusOrder'         => [
                     InstallmentModel::STATUS_PENDING,
                     InstallmentModel::STATUS_OVERDUE,
                     InstallmentModel::STATUS_UNDER_REVIEW,
