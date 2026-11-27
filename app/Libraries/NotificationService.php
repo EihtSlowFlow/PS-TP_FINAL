@@ -2,6 +2,7 @@
 
 namespace App\Libraries;
 
+use App\Models\InstallmentModel;
 use App\Models\NotificationModel;
 use App\Models\UserModel;
 use CodeIgniter\Database\BaseConnection;
@@ -207,6 +208,83 @@ class NotificationService
             $paymentId,
             $db
         );
+    }
+
+    /**
+     * HU-23: inspects the tenant's pending installments due within the next 5 days (inclusive)
+     * and persists one notification per installment (never duplicating even if already read).
+     *
+     * @return int Number of newly created notifications.
+     */
+    public function syncDueSoonInstallmentAlertsForTenant(
+        int $tenantId,
+        ?string $today = null,
+        ?BaseConnection $db = null
+    ): int {
+        if ($tenantId <= 0) {
+            return 0;
+        }
+
+        $today ??= InstallmentModel::today();
+        $dueSoon = model(InstallmentModel::class)->findDueSoonForTenant($tenantId, $today);
+        $created = 0;
+
+        foreach ($dueSoon as $installment) {
+            $installmentId   = (int) $installment['id'];
+            $periodLabel     = InstallmentModel::labelForPeriod((string) $installment['period']);
+            $dueDateLabel    = date('d/m/Y', strtotime((string) $installment['due_date']));
+            $propertyAddress = (string) ($installment['property_address'] ?? '');
+
+            $message = sprintf(
+                'Tu cuota de %s del inmueble %s vence el %s. Informá tu pago a término para evitar recargos por mora.',
+                $periodLabel,
+                $propertyAddress,
+                $dueDateLabel
+            );
+
+            if ($this->notifyOnce(
+                $tenantId,
+                NotificationModel::TYPE_INSTALLMENT_DUE_SOON,
+                $message,
+                NotificationModel::REF_INSTALLMENT,
+                $installmentId,
+                $db
+            )) {
+                $created++;
+            }
+        }
+
+        return $created;
+    }
+
+    /**
+     * HU-23: marks any unread due-soon alert for an installment as read once the tenant reports payment,
+     * so the alert stops appearing as pending while preserving notification history.
+     */
+    public function markInstallmentDueSoonAsRead(
+        int $tenantId,
+        int $installmentId,
+        ?BaseConnection $db = null
+    ): int {
+        if ($tenantId <= 0 || $installmentId <= 0) {
+            return 0;
+        }
+
+        $connection = $db ?? Database::connect();
+        $now        = Time::now()->toDateTimeString();
+
+        $connection->table('notifications')
+            ->where('user_id', $tenantId)
+            ->where('type', NotificationModel::TYPE_INSTALLMENT_DUE_SOON)
+            ->where('reference_type', NotificationModel::REF_INSTALLMENT)
+            ->where('reference_id', $installmentId)
+            ->where('read_at', null)
+            ->update([
+                'read_at'    => $now,
+                'updated_at' => $now,
+            ]);
+
+        return $connection->affectedRows();
     }
 
     /**

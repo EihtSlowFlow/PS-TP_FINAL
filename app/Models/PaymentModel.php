@@ -586,14 +586,17 @@ class PaymentModel extends Model
 
             // HU-22: notify active admins and employees atomically with the payment registration.
             // The message data is read without FOR UPDATE so the tenant and property rows are not locked.
-            $context = $this->notificationContextForInstallment($db, $installmentId);
-            service('notifications')->notifyPaymentSubmitted(
+            $context       = $this->notificationContextForInstallment($db, $installmentId);
+            $notifications = service('notifications');
+            $notifications->notifyPaymentSubmitted(
                 $paymentId,
                 $context['tenant_name'],
                 InstallmentModel::labelForPeriod($context['period']),
                 $context['property_address'],
                 $db
             );
+            // HU-23: once the tenant reports payment, any unread due-soon alert for this installment is dismissed.
+            $notifications->markInstallmentDueSoonAsRead($tenantId, $installmentId, $db);
 
             if ($db->transStatus() === false) {
                 throw new RuntimeException('Could not record payment submission notifications.');
