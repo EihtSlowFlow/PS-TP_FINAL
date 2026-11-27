@@ -69,6 +69,8 @@ $this->extend('layouts/panel');
                 <?php endif; ?>
             </div>
 
+            <?= $this->include('partials/expiring_contracts_alert') ?>
+
             <section class="panel-card catalog-filters" aria-labelledby="contract-filters-heading">
                 <h2 id="contract-filters-heading" class="section-title"><?= $isOwner ? 'Filtrar mis contratos' : 'Buscar y filtrar contratos' ?></h2>
                 <form action="<?= esc(site_url($listingBaseUrl)) ?>" method="get" class="catalog-filter-form">
@@ -133,9 +135,10 @@ $this->extend('layouts/panel');
                             <?php else: ?>
                                 <?php foreach ($contracts as $contract): ?>
                                     <?php
-                                    $contractId = (int) $contract['id'];
-                                    $status     = (string) $contract['status'];
-                                    $detailUrl  = $listingBaseUrl . '/' . $contractId;
+                                    $contractId     = (int) $contract['id'];
+                                    $status         = (string) $contract['status'];
+                                    $detailUrl      = $listingBaseUrl . '/' . $contractId;
+                                    $isExpiringSoon = ContractModel::isExpiringSoon($contract, (string) ($contractToday ?? ContractModel::today()));
                                     ?>
                                     <tr>
                                         <td>
@@ -154,11 +157,21 @@ $this->extend('layouts/panel');
                                             <td class="mono-cell"><?= esc($formatMoney($contract['monthly_rent'])) ?></td>
                                             <td class="mono-cell"><?= esc($formatDate($contract['start_date'])) ?> – <?= esc($formatDate($contract['end_date'])) ?></td>
                                             <td class="mono-cell"><?= esc($formatPercentage($contract['commission_percentage'])) ?></td>
-                                            <td><span class="badge-pill badge-contract-<?= esc($status) ?>"><?= esc(ContractModel::labelForStatus($status)) ?></span></td>
+                                            <td>
+                                                <span class="badge-pill badge-contract-<?= esc($status) ?>"><?= esc(ContractModel::labelForStatus($status)) ?></span>
+                                                <?php if ($isExpiringSoon): ?>
+                                                    <span class="badge-pill badge-notification-warning due-soon-row-badge">Por vencer</span>
+                                                <?php endif; ?>
+                                            </td>
                                         <?php else: ?>
                                             <td><?= esc($fullName($contract, 'owner')) ?></td>
                                             <td class="mono-cell"><?= esc($formatDate($contract['start_date'])) ?> – <?= esc($formatDate($contract['end_date'])) ?></td>
-                                            <td><span class="badge-pill badge-contract-<?= esc($status) ?>"><?= esc(ContractModel::labelForStatus($status)) ?></span></td>
+                                            <td>
+                                                <span class="badge-pill badge-contract-<?= esc($status) ?>"><?= esc(ContractModel::labelForStatus($status)) ?></span>
+                                                <?php if ($isExpiringSoon): ?>
+                                                    <span class="badge-pill badge-notification-warning due-soon-row-badge">Por vencer</span>
+                                                <?php endif; ?>
+                                            </td>
                                         <?php endif; ?>
                                         <td class="text-right">
                                             <a href="<?= esc(site_url($detailUrl)) ?>" class="btn btn-secondary">Ver contrato</a>

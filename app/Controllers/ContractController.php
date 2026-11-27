@@ -49,8 +49,12 @@ class ContractController extends BaseController
             breadcrumb: 'Contratos',
             activeMenu: 'contratos'
         ), $listing, [
-            'isOwner'        => false,
-            'listingBaseUrl' => 'admin/contratos',
+            'isOwner'                 => false,
+            'listingBaseUrl'          => 'admin/contratos',
+            'expiringContracts'       => model(ContractModel::class)->findExpiringSoon(),
+            'expiringContractBaseUrl' => 'admin/contratos',
+            'isOwnerExpiringView'     => false,
+            'contractToday'           => ContractModel::today(),
         ]));
     }
 
@@ -59,15 +63,20 @@ class ContractController extends BaseController
      */
     public function ownerIndex(): string
     {
-        $listing = $this->contractListingData((int) session()->get('user_id'));
+        $ownerId = (int) session()->get('user_id');
+        $listing = $this->contractListingData($ownerId);
 
         return view('contracts/index', array_merge($this->panelContext(
             pageTitle: 'Mis contratos',
             breadcrumb: 'Mis contratos',
             activeMenu: 'propietario-contratos'
         ), $listing, [
-            'isOwner'        => true,
-            'listingBaseUrl' => 'propietario/contratos',
+            'isOwner'                 => true,
+            'listingBaseUrl'          => 'propietario/contratos',
+            'expiringContracts'       => model(ContractModel::class)->findExpiringSoon($ownerId),
+            'expiringContractBaseUrl' => 'propietario/contratos',
+            'isOwnerExpiringView'     => true,
+            'contractToday'           => ContractModel::today(),
         ]));
     }
 

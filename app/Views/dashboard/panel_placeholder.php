@@ -12,6 +12,8 @@
 $this->extend('layouts/panel');
 ?>
 <?php $this->section('content') ?>
+            <?= $this->include('partials/expiring_contracts_alert') ?>
+
             <section class="panel-card" aria-labelledby="panel-heading">
                 <h1 id="panel-heading" class="panel-title"><?= esc($heading) ?></h1>
                 <p class="panel-subtitle"><?= esc($subtitle) ?></p>

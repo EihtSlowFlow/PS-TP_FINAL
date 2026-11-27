@@ -24,7 +24,12 @@ class DashboardController extends BaseController
             activeMenu: 'dashboard',
             heading: 'Panel de control',
             subtitle: 'Resumen operativo de administración inmobiliaria.',
-            allowedNote: 'Sección habilitada para los roles Administrador y Empleado.'
+            allowedNote: 'Sección habilitada para los roles Administrador y Empleado.',
+            extraData: [
+                'expiringContracts'       => model(ContractModel::class)->findExpiringSoon(),
+                'expiringContractBaseUrl' => 'admin/contratos',
+                'isOwnerExpiringView'     => false,
+            ]
         );
     }
 
@@ -33,13 +38,20 @@ class DashboardController extends BaseController
      */
     public function ownerDashboard(): string
     {
+        $ownerId = (int) session()->get('user_id');
+
         return $this->renderPanel(
             pageTitle: 'Dashboard del propietario',
             breadcrumb: 'Dashboard',
             activeMenu: 'propietario-dashboard',
             heading: 'Panel del propietario',
             subtitle: 'Resumen de inmuebles administrados, contratos vigentes y liquidaciones.',
-            allowedNote: 'Sección habilitada para el rol Propietario.'
+            allowedNote: 'Sección habilitada para el rol Propietario.',
+            extraData: [
+                'expiringContracts'       => model(ContractModel::class)->findExpiringSoon($ownerId),
+                'expiringContractBaseUrl' => 'propietario/contratos',
+                'isOwnerExpiringView'     => true,
+            ]
         );
     }
 
@@ -100,13 +112,17 @@ class DashboardController extends BaseController
         ));
     }
 
+    /**
+     * @param array<string, mixed> $extraData
+     */
     private function renderPanel(
         string $pageTitle,
         string $breadcrumb,
         string $activeMenu,
         string $heading,
         string $subtitle,
-        string $allowedNote
+        string $allowedNote,
+        array $extraData = []
     ): string {
         return view('dashboard/panel_placeholder', array_merge(
             $this->panelContext($pageTitle, $breadcrumb, $activeMenu),
@@ -114,7 +130,8 @@ class DashboardController extends BaseController
                 'heading'     => $heading,
                 'subtitle'    => $subtitle,
                 'allowedNote' => $allowedNote,
-            ]
+            ],
+            $extraData
         ));
     }
 }

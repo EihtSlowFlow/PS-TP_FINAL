@@ -134,6 +134,10 @@ abstract class BaseController extends Controller
 
         if ($userRole === UserModel::ROLE_TENANT) {
             service('notifications')->syncDueSoonInstallmentAlertsForTenant($userId);
+        } elseif (in_array($userRole, [UserModel::ROLE_ADMIN, UserModel::ROLE_EMPLOYEE], true)) {
+            service('notifications')->syncExpiringContractAlertsForStaff($userId);
+        } elseif ($userRole === UserModel::ROLE_OWNER) {
+            service('notifications')->syncExpiringContractAlertsForOwner($userId);
         }
     }
 

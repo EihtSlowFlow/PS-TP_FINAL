@@ -2,6 +2,7 @@
 
 namespace App\Libraries;
 
+use App\Models\ContractModel;
 use App\Models\InstallmentModel;
 use App\Models\NotificationModel;
 use App\Models\UserModel;
@@ -285,6 +286,115 @@ class NotificationService
             ]);
 
         return $connection->affectedRows();
+    }
+
+    /**
+     * HU-24: syncs expiring-contract notifications (60-day window) for a single staff user (admin or employee).
+     * Persists at most one notification per (user, contract), never duplicating even if already read.
+     *
+     * @return int Number of newly created notifications.
+     */
+    public function syncExpiringContractAlertsForStaff(
+        int $staffUserId,
+        ?string $today = null,
+        ?BaseConnection $db = null
+    ): int {
+        if ($staffUserId <= 0) {
+            return 0;
+        }
+
+        $today ??= ContractModel::today();
+        $contracts = model(ContractModel::class)->findExpiringSoon(null, $today);
+
+        return $this->persistExpiringContractAlerts($staffUserId, $contracts, $db);
+    }
+
+    /**
+     * HU-24: syncs expiring-contract notifications (60-day window) strictly for the contracts of one owner.
+     * Persists at most one notification per (owner, contract), never duplicating even if already read.
+     *
+     * @return int Number of newly created notifications.
+     */
+    public function syncExpiringContractAlertsForOwner(
+        int $ownerId,
+        ?string $today = null,
+        ?BaseConnection $db = null
+    ): int {
+        if ($ownerId <= 0) {
+            return 0;
+        }
+
+        $today ??= ContractModel::today();
+        $contracts = model(ContractModel::class)->findExpiringSoon($ownerId, $today);
+
+        return $this->persistExpiringContractAlerts($ownerId, $contracts, $db);
+    }
+
+    /**
+     * HU-24: marks unread expiring-contract alerts for a contract as read when the contract is closed
+     * (finalized or rescinded), preserving the notification history.
+     */
+    public function markContractExpiringAsRead(int $contractId, ?BaseConnection $db = null): int
+    {
+        if ($contractId <= 0) {
+            return 0;
+        }
+
+        $connection = $db ?? Database::connect();
+        $now        = Time::now()->toDateTimeString();
+
+        $connection->table('notifications')
+            ->where('type', NotificationModel::TYPE_CONTRACT_EXPIRING)
+            ->where('reference_type', NotificationModel::REF_CONTRACT)
+            ->where('reference_id', $contractId)
+            ->where('read_at', null)
+            ->update([
+                'read_at'    => $now,
+                'updated_at' => $now,
+            ]);
+
+        return $connection->affectedRows();
+    }
+
+    /**
+     * @param list<array<string, mixed>> $contracts
+     */
+    private function persistExpiringContractAlerts(
+        int $recipientUserId,
+        array $contracts,
+        ?BaseConnection $db = null
+    ): int {
+        $created = 0;
+
+        foreach ($contracts as $contract) {
+            $contractId      = (int) $contract['id'];
+            $propertyAddress = (string) ($contract['property_address'] ?? '');
+            $tenantName      = trim(
+                (string) ($contract['tenant_first_name'] ?? '') . ' ' . (string) ($contract['tenant_last_name'] ?? '')
+            );
+            $tenantLabel     = $tenantName !== '' ? $tenantName : 'Sin inquilino';
+            $endDateLabel    = date('d/m/Y', strtotime((string) $contract['end_date']));
+
+            $message = sprintf(
+                'El contrato del inmueble %s con el inquilino %s vencerá el %s.',
+                $propertyAddress,
+                $tenantLabel,
+                $endDateLabel
+            );
+
+            if ($this->notifyOnce(
+                $recipientUserId,
+                NotificationModel::TYPE_CONTRACT_EXPIRING,
+                $message,
+                NotificationModel::REF_CONTRACT,
+                $contractId,
+                $db
+            )) {
+                $created++;
+            }
+        }
+
+        return $created;
     }
 
     /**

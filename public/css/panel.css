@@ -3693,6 +3693,22 @@ a.contact-value:hover {
     gap: 0.5rem;
 }
 
+.notification-popover-item-actions button.link-button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.notification-popover-item-actions button.link-button:hover {
+    color: var(--primary-hover);
+}
+
 .notification-popover-footer {
     padding: 0.7rem 1rem;
     text-align: center;
