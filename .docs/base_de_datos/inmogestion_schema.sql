@@ -261,9 +261,9 @@ CREATE TABLE IF NOT EXISTS `settlement_installments` (
 CREATE TABLE IF NOT EXISTS `notifications` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int unsigned NOT NULL,
-  `type` enum('payment_submitted','payment_approved','payment_rejected','installment_due_soon','contract_expiring') COLLATE utf8mb4_general_ci NOT NULL,
+  `type` enum('payment_submitted','payment_approved','payment_rejected','installment_due_soon','contract_expiring','rental_request_submitted','rental_request_approved','rental_request_rejected','property_submitted','property_approved','property_rejected') COLLATE utf8mb4_general_ci NOT NULL,
   `message` varchar(500) COLLATE utf8mb4_general_ci NOT NULL,
-  `reference_type` enum('payment','installment','contract') COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `reference_type` enum('payment','installment','contract','rental_request','property') COLLATE utf8mb4_general_ci DEFAULT NULL,
   `reference_id` int unsigned DEFAULT NULL,
   `read_at` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,

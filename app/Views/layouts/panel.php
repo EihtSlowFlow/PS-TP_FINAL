@@ -15,11 +15,15 @@
  * @var string $initials
  * @var int    $pendingPropertyCount Properties waiting for review (administration menu badge, HU-33)
  */
-$flashError           = session()->getFlashdata('error');
-$flashSuccess         = session()->getFlashdata('success');
-$pendingPropertyCount = (int) ($pendingPropertyCount ?? 0);
-$pendingRequestCount  = (int) ($pendingRequestCount ?? 0);
-$pendingPaymentCount  = (int) ($pendingPaymentCount ?? 0);
+use App\Models\NotificationModel;
+
+$flashError              = session()->getFlashdata('error');
+$flashSuccess            = session()->getFlashdata('success');
+$pendingPropertyCount    = (int) ($pendingPropertyCount ?? 0);
+$pendingRequestCount     = (int) ($pendingRequestCount ?? 0);
+$pendingPaymentCount     = (int) ($pendingPaymentCount ?? 0);
+$unreadNotificationCount = (int) ($unreadNotificationCount ?? 0);
+$recentNotifications     = is_array($recentNotifications ?? null) ? $recentNotifications : [];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -188,6 +192,93 @@ $pendingPaymentCount  = (int) ($pendingPaymentCount ?? 0);
                 </div>
             </div>
             <div class="topbar-meta">
+                <div class="notification-bell-wrapper" id="notification-bell-wrapper">
+                    <a href="<?= esc(site_url('notificaciones')) ?>"
+                       class="notification-bell-btn<?= $activeMenu === 'notificaciones' ? ' is-active' : '' ?>"
+                       id="notification-bell-toggle"
+                       aria-expanded="false"
+                       aria-controls="notification-popover"
+                       aria-label="Notificaciones<?= $unreadNotificationCount > 0 ? ' (' . $unreadNotificationCount . ' sin leer)' : '' ?>"
+                       title="Notificaciones">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                        </svg>
+                        <?php if ($unreadNotificationCount > 0): ?>
+                            <span class="notification-bell-badge" id="unread-notifications-badge">
+                                <?= esc($unreadNotificationCount > 99 ? '99+' : (string) $unreadNotificationCount) ?>
+                                <span class="sr-only"><?= $unreadNotificationCount === 1 ? 'notificación sin leer' : 'notificaciones sin leer' ?></span>
+                            </span>
+                        <?php endif; ?>
+                    </a>
+
+                    <div class="notification-popover" id="notification-popover" role="region" aria-label="Notificaciones recientes" hidden>
+                        <div class="notification-popover-header">
+                            <div class="notification-popover-title-row">
+                                <span class="notification-popover-title">Notificaciones</span>
+                                <?php if ($unreadNotificationCount > 0): ?>
+                                    <span class="badge-pill badge-info"><?= esc((string) $unreadNotificationCount) ?> sin leer</span>
+                                <?php endif; ?>
+                            </div>
+                            <?php if ($unreadNotificationCount > 0): ?>
+                                <form action="<?= esc(site_url('notificaciones/leer-todas')) ?>" method="post" class="inline-action-form">
+                                    <?= csrf_field() ?>
+                                    <input type="hidden" name="origin" value="popover">
+                                    <button type="submit" class="notification-popover-mark-all">Marcar todas</button>
+                                </form>
+                            <?php endif; ?>
+                        </div>
+
+                        <?php if ($recentNotifications === []): ?>
+                            <div class="notification-popover-empty">
+                                No tenés notificaciones registradas.
+                            </div>
+                        <?php else: ?>
+                            <ul class="notification-popover-list">
+                                <?php foreach ($recentNotifications as $item): ?>
+                                    <?php
+                                        $itemId      = (int) $item['id'];
+                                        $itemType    = (string) $item['type'];
+                                        $itemUnread  = empty($item['read_at']);
+                                        $itemTone    = NotificationModel::toneForType($itemType);
+                                        $itemTarget  = NotificationModel::targetPathFor($item, $userRole);
+                                        $itemTime    = ! empty($item['created_at']) ? date('d/m H:i', strtotime((string) $item['created_at'])) : '';
+                                    ?>
+                                    <li class="notification-popover-item<?= $itemUnread ? ' is-unread' : '' ?>">
+                                        <div class="notification-popover-item-head">
+                                            <span class="badge-pill badge-notification-<?= esc($itemTone) ?>"><?= esc(NotificationModel::labelForType($itemType)) ?></span>
+                                            <span class="notification-popover-time"><?= esc($itemTime) ?></span>
+                                        </div>
+                                        <p class="notification-popover-message"><?= esc((string) $item['message']) ?></p>
+                                        <div class="notification-popover-item-actions">
+                                            <?php if ($itemTarget !== null && $itemUnread): ?>
+                                                <form action="<?= esc(site_url('notificaciones/' . $itemId . '/leer')) ?>" method="post" class="inline-action-form">
+                                                    <?= csrf_field() ?>
+                                                    <input type="hidden" name="open_target" value="1">
+                                                    <button type="submit" class="link-button"><?= esc(NotificationModel::actionLabelFor($itemType)) ?></button>
+                                                </form>
+                                            <?php elseif ($itemTarget !== null): ?>
+                                                <a href="<?= esc(site_url($itemTarget)) ?>" class="link-button"><?= esc(NotificationModel::actionLabelFor($itemType)) ?></a>
+                                            <?php endif; ?>
+                                            <?php if ($itemUnread): ?>
+                                                <form action="<?= esc(site_url('notificaciones/' . $itemId . '/leer')) ?>" method="post" class="inline-action-form">
+                                                    <?= csrf_field() ?>
+                                                    <input type="hidden" name="origin" value="popover">
+                                                    <button type="submit" class="notification-popover-mark-one">Marcar leída</button>
+                                                </form>
+                                            <?php endif; ?>
+                                        </div>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+
+                        <div class="notification-popover-footer">
+                            <a href="<?= esc(site_url('notificaciones')) ?>" class="link-button">Ver todas las notificaciones</a>
+                        </div>
+                    </div>
+                </div>
+
                 <span class="role-badge">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>

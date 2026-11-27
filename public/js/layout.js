@@ -103,4 +103,51 @@
             narrow.addListener(onBreakpointChange);
         }
     });
+
+    // HU-22: progressive enhancement for the topbar notification bell popover.
+    // Without JS, clicking the bell navigates directly to /notificaciones.
+    document.addEventListener('DOMContentLoaded', () => {
+        const wrapper = document.getElementById('notification-bell-wrapper');
+        const toggle = document.getElementById('notification-bell-toggle');
+        const popover = document.getElementById('notification-popover');
+
+        if (!wrapper || !toggle || !popover) {
+            return;
+        }
+
+        const closePopover = () => {
+            popover.hidden = true;
+            toggle.setAttribute('aria-expanded', 'false');
+        };
+
+        const openPopover = () => {
+            popover.hidden = false;
+            toggle.setAttribute('aria-expanded', 'true');
+        };
+
+        toggle.addEventListener('click', (event) => {
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+                return;
+            }
+            event.preventDefault();
+            if (popover.hidden) {
+                openPopover();
+            } else {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!popover.hidden && !wrapper.contains(event.target)) {
+                closePopover();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !popover.hidden) {
+                closePopover();
+                toggle.focus();
+            }
+        });
+    });
 })();

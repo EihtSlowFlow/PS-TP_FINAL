@@ -132,3 +132,10 @@ $routes->group('perfil', ['filter' => ['auth', 'role:owner,tenant']], static fun
     $routes->post('contacto', 'ProfileController::updateContact');
     $routes->post('contrasena', 'ProfileController::changePassword');
 });
+
+// In-app notifications center and read-state actions for every authenticated role (HU-22)
+$routes->group('notificaciones', ['filter' => 'auth'], static function (RouteCollection $routes): void {
+    $routes->get('/', 'NotificationController::index');
+    $routes->post('leer-todas', 'NotificationController::markAllRead');
+    $routes->post('(:id)/leer', 'NotificationController::markRead/$1');
+});

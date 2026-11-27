@@ -54,7 +54,14 @@ Además, se incrementa su contador de notificaciones no leídas.
 
 ## Definition of Done
 
-- [ ] Se generan notificaciones ante el envío, la aprobación y el rechazo de pagos.
-- [ ] El contador de no leídas se actualiza correctamente.
-- [ ] Cada usuario solo accede a sus notificaciones.
-- [ ] Se prueban los escenarios de aceptación y los casos de error relevantes.
+- [x] Se generan notificaciones ante el envío, la aprobación y el rechazo de pagos.
+- [x] El contador de no leídas se actualiza correctamente.
+- [x] Cada usuario solo accede a sus notificaciones.
+- [x] Se prueban los escenarios de aceptación y los casos de error relevantes.
+
+## Decisiones tomadas al implementar
+
+- **Migración de tipos:** se ampliaron los `ENUM` `type` y `reference_type` de `notifications` (`2026-11-27-160000_ExpandNotificationTypes.php`) para incluir los eventos de solicitudes de alquiler (`rental_request_*`) y revisión de inmuebles (`property_*`), dejando `NotificationService` listo para HU-23, HU-24 y avisos de HU-30 a HU-33.
+- **Destinatarios de administración:** `NotificationService::notifyStaff()` genera una fila por cada usuario activo (`deleted_at IS NULL`) con rol `admin` o `employee`.
+- **Atomicidad:** las notificaciones de pago (`payment_submitted`, `payment_approved`, `payment_rejected`) se insertan dentro de la misma transacción de `PaymentModel::registerTenantPayment()` y `PaymentModel::resolvePendingPayment()`, de modo que si la operación revierte no quedan notificaciones huérfanas.
+- **Acceso y CSRF:** la campana superior funciona con mejora progresiva (sin JavaScript navega directo a `/notificaciones`; con JavaScript despliega un popover con los últimos 5 avisos). Todas las acciones de cambio de estado (`POST /notificaciones/(:id)/leer` y `POST /notificaciones/leer-todas`) requieren sesión activa, validación de propiedad y token CSRF.

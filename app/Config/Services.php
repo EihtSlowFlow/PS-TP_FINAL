@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Libraries\NotificationService;
 use App\Libraries\PropertyImageStorage;
 use App\Libraries\ReceiptStorage;
 use CodeIgniter\Config\BaseService;
@@ -43,5 +44,17 @@ class Services extends BaseService
         }
 
         return new PropertyImageStorage();
+    }
+
+    /**
+     * In-app notifications service (HU-22 to HU-24).
+     */
+    public static function notifications(bool $getShared = true): NotificationService
+    {
+        if ($getShared) {
+            return static::getSharedInstance('notifications');
+        }
+
+        return new NotificationService();
     }
 }

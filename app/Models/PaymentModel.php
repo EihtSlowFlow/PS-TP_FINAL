@@ -388,6 +388,23 @@ class PaymentModel extends Model
                 throw new RuntimeException('Could not update installment state after payment resolution.');
             }
 
+            // HU-22: notify the tenant inside the same transaction so a rolled-back resolution leaves no notification.
+            // The message data is read without FOR UPDATE: only the payment and installment rows need the lock.
+            $context         = $this->notificationContextForInstallment($db, (int) $row['installment_id']);
+            $periodLabel     = InstallmentModel::labelForPeriod($context['period']);
+            $propertyAddress = $context['property_address'];
+            $tenantId        = $context['tenant_id'];
+
+            if ($approve) {
+                service('notifications')->notifyPaymentApproved($tenantId, $paymentId, $periodLabel, $propertyAddress, $db);
+            } else {
+                service('notifications')->notifyPaymentRejected($tenantId, $paymentId, $periodLabel, $propertyAddress, $reason, $db);
+            }
+
+            if ($db->transStatus() === false) {
+                throw new RuntimeException('Could not record payment resolution notification.');
+            }
+
             $db->transCommit();
 
             return [
@@ -402,6 +419,31 @@ class PaymentModel extends Model
 
             return ['ok' => false, 'error' => 'persistence'];
         }
+    }
+
+    /**
+     * Data needed to word a payment notification (HU-22): tenant, period and property of an installment.
+     * Plain read (no locking read) on the caller's connection, so it runs inside the caller's transaction.
+     *
+     * @return array{tenant_id: int, tenant_name: string, period: string, property_address: string}
+     */
+    private function notificationContextForInstallment(\CodeIgniter\Database\BaseConnection $db, int $installmentId): array
+    {
+        $row = $db->table('installments')
+            ->select('installments.period, contracts.tenant_id, tenant.first_name, tenant.last_name, property.address')
+            ->join('contracts', 'contracts.id = installments.contract_id')
+            ->join('users AS tenant', 'tenant.id = contracts.tenant_id')
+            ->join('properties AS property', 'property.id = contracts.property_id')
+            ->where('installments.id', $installmentId)
+            ->get()
+            ->getRowArray() ?? [];
+
+        return [
+            'tenant_id'        => (int) ($row['tenant_id'] ?? 0),
+            'tenant_name'      => trim((string) ($row['first_name'] ?? '') . ' ' . (string) ($row['last_name'] ?? '')),
+            'period'           => (string) ($row['period'] ?? ''),
+            'property_address' => (string) ($row['address'] ?? ''),
+        ];
     }
 
     public static function amountDifference(string|float $paidAmount, string|float $expectedTotal): string
@@ -540,6 +582,21 @@ class PaymentModel extends Model
 
             if ($updatedInstallment === false || $db->transStatus() === false) {
                 throw new RuntimeException('Could not update installment status to under_review.');
+            }
+
+            // HU-22: notify active admins and employees atomically with the payment registration.
+            // The message data is read without FOR UPDATE so the tenant and property rows are not locked.
+            $context = $this->notificationContextForInstallment($db, $installmentId);
+            service('notifications')->notifyPaymentSubmitted(
+                $paymentId,
+                $context['tenant_name'],
+                InstallmentModel::labelForPeriod($context['period']),
+                $context['property_address'],
+                $db
+            );
+
+            if ($db->transStatus() === false) {
+                throw new RuntimeException('Could not record payment submission notifications.');
             }
 
             $db->transCommit();
